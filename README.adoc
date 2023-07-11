@@ -26,7 +26,7 @@ Provides the jsf based UI-components defining the cuioss-portal
         <groupId>de.cuioss.portal.ui</groupId>
         <artifactId>cui-portal-ui</artifactId>
     </dependency>
-----
+---- 
 
 
 === Further Steps
