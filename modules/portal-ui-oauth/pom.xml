@@ -11,7 +11,7 @@
     <name>Portal UI oauth</name>
     <description>Provides ui infrastructure to use oauth2</description>
     <properties>
-        <version.jakarta.ws.rs-api>2.1.6</version.jakarta.ws.rs-api>
+        <version.jakarta.ws.rs-api>3.1.0</version.jakarta.ws.rs-api>
     </properties>
     <dependencyManagement>
         <dependencies>
