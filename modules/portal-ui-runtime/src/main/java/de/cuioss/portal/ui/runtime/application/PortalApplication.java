@@ -19,10 +19,12 @@ import lombok.RequiredArgsConstructor;
  * specific implementations with the JSF-specific ones. Currently these are:
  * <ul>
  * <li>{@link Application#getProjectStage()}</li>
+ * <li>{@link Application#getDefaultLocale()}</li>
+ * <li>{@link Application#getSupportedLocales()}</li>
  * </ul>
  *
  * @author Oliver Wolff
- * @author Sven Haag, Sven Haag
+ * @author Sven Haag
  */
 @RequiredArgsConstructor
 public class PortalApplication extends ApplicationWrapper {

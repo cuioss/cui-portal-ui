@@ -22,7 +22,7 @@ import lombok.ToString;
  * This listener checks the portal stage configuration. In case the portal stage
  * is 'configuration' it will fire an {@link PortalNotConfiguredException}.
  *
- * @author Sven Haag, Sven Haag
+ * @author Sven Haag
  */
 @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE)
 @Dependent

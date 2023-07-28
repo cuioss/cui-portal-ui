@@ -28,7 +28,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * Defines the locale configuration for the cdi-portal. Instead of using the
+ * Defines the locale configuration for the CUI-portal. Instead of using the
  * built-in mechanics of jsf we use a custom one in order to configure it with
  * our property based configuration system. It consumes the properties
  * {@link PortalConfigurationKeys#LOCALE_DEFAULT} and

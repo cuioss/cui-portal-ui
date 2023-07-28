@@ -15,7 +15,7 @@ public class LoginPagePathProducer {
 
     private static final CuiLogger log = new CuiLogger(LoginPagePathProducer.class);
 
-    /** Default login page based on cdi-portal-oauth faces-config.xml */
+    /** Default login page based on CUI-portal-oauth faces-config.xml */
     private static final String DEFAULT = "/faces/guest/login.xhtml";
 
     @Produces

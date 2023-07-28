@@ -22,7 +22,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * Default {@link HistoryConfiguration} for the CDI-Portal, defaulting to:
+ * Default {@link HistoryConfiguration} for the CUI-portal, defaulting to:
  * <ul>
  * <li>fallbackOutcome = {@link HomePage#OUTCOME}</li>
  * <li>excludeParameter = derived by web.xml with the key

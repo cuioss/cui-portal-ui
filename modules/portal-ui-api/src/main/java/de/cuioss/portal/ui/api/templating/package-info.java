@@ -2,7 +2,7 @@
  * <p>
  * Provides structures enabling / extending the portal for (multi-) templating.
  * </p>
- * <h2>Multi-templating</h2>
+ * <h2>Multi-Templating</h2>
  * <p>
  * The idea of multi-templating is to load template (hierarchies) from the
  * jars/modules/external folders, using a {@link de.cuioss.tools.io.FileLoader},
@@ -28,8 +28,11 @@
  * <li>TEMPLATES: Are the actual templates located under the concrete
  * Template-Directory e.g. "/META-INF/templates/portal/root.xhtml"</li>
  * </ul>
- * <h2>Usage</h2> The usage of multi-templating is straight forward. In your
- * facelet template-client you address it like
+ * <h2>Usage</h2>
+ * <p>
+ * The usage of multi-templating is straight forward. In your facelet
+ * template-client you address it like
+ * </p>
  *
  * <pre>
  * {@code <ui:composition template="/templates/technical_root.xhtml">}
@@ -42,7 +45,10 @@
  * instead of "Give me the content of that path". This approach let us keep the
  * actual source dynamic. The default implementation will resolve them to
  * "/META-INF/templates/portal/technical_root.xhtml"
- * <h2>Implementation Details</h2> While the
+ * <h2>Implementation Details</h2>
+ * 
+ * <p>
+ * While the
  * {@link de.cuioss.portal.ui.api.application.templating.ViewResourceHandler}
  * takes care regarding the delivery of the template the actual logic of which
  * template to choose is implemented within concrete instances of
@@ -54,6 +60,7 @@
  * <p>
  * If a concrete web module wants to to overwrite one or more of the templates,
  * e.g "root.xhtml" it needs to:
+ * </p>
  * <ul>
  * <li>Create a corresponding file, e.g.
  * "/META-INF/templates/concrete/root.xhtml"</li>

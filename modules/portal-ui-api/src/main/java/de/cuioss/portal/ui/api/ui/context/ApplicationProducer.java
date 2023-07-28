@@ -25,7 +25,7 @@ import javax.faces.context.FacesContext;
  * Also see the documentation from Mojarras <a href=
  * "https://github.com/eclipse-ee4j/mojarra/blob/master/impl/src/main/java/javax/faces/application/ApplicationFactory.java">ApplicationFactory</a>.
  *
- * @author Sven Haag, Sven Haag
+ * @author Sven Haag
  */
 @ApplicationScoped
 public class ApplicationProducer {

@@ -8,7 +8,7 @@ import javax.faces.annotation.FacesConfig;
  * an application enables version specific features. In this case, it enables
  * JSF CDI injection and EL resolution using CDI.
  *
- * @author Sven Haag, Sven Haag
+ * @author Sven Haag
  */
 @ApplicationScoped
 @FacesConfig

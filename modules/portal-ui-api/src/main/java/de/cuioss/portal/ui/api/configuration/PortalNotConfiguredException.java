@@ -3,7 +3,7 @@ package de.cuioss.portal.ui.api.configuration;
 /**
  * To be fired if the portal is not configured yet.
  *
- * @author Sven Haag, Sven Haag
+ * @author Sven Haag
  */
 public class PortalNotConfiguredException extends RuntimeException {
 
