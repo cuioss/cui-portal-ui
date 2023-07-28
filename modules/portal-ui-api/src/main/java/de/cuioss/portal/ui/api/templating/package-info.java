@@ -70,7 +70,7 @@
  * <li>Or, <em>preferred</em>, configure the default implementation provided by
  * the portal accordingly by Registering concrete instances of
  * {@link de.cuioss.portal.ui.api.templating.StaticTemplateDescriptor}</li>
- * <ul>
+ * </ul>
  *
  * @author Oliver Wolff
  */

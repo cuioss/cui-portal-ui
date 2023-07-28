@@ -100,11 +100,6 @@ public class StickyMessageProducerBean implements Serializable, StickyMessagePro
         removeMessage((StickyMessage) dismissEvent.getModel());
     }
 
-    @Override
-    public void clearStoredMessages() {
-        messageSet.clear();
-    }
-
     /**
      * @return {@code true} if at least one message is available, {@code false}
      *         otherwise

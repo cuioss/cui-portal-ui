@@ -55,24 +55,6 @@ class StickyMessageProducerBeanTest implements ShouldHandleObjectContracts<Stick
         assertThatNoMessagesStored();
     }
 
-    @Test
-    void shouldSupportToRemoveMessages() {
-        final var messageKey = letterStrings(10, 20).next();
-        final var parameter = letterStrings(10, 20).next();
-        final var expectedInfoMessage = new StickyMessage(true, ContextState.INFO, new DisplayName(messageKey));
-        final var expectedWarningMessage = new StickyMessage(true, ContextState.WARNING, new DisplayName(messageKey));
-        assertThatNoMessagesStored();
-
-        underTest.setInfoMessage(messageKey, parameter);
-        underTest.setWarningMessage(messageKey, parameter);
-
-        assertTrue(underTest.getMessages().contains(expectedInfoMessage));
-        assertTrue(underTest.getMessages().contains(expectedWarningMessage));
-
-        underTest.clearStoredMessages();
-        assertThatNoMessagesStored();
-    }
-
     private StickyMessage addAnyMessageToStorage() {
         final var stickyMessage = new StickyMessage(true, CONTEXT_STATE_GENERATOR.next(),
                 new DisplayName(letterStrings(10, 20).next()));

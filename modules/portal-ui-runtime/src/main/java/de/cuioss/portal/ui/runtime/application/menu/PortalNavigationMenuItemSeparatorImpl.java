@@ -51,11 +51,6 @@ public class PortalNavigationMenuItemSeparatorImpl extends PortalNavigationMenuC
     }
 
     @Override
-    public boolean isDisabled() {
-        return false;
-    }
-
-    @Override
     public int compareTo(final NavigationMenuItem other) {
         return getOrder().compareTo(other.getOrder());
     }

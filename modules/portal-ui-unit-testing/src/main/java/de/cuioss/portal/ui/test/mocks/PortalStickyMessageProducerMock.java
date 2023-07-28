@@ -86,11 +86,6 @@ public class PortalStickyMessageProducerMock implements Serializable, StickyMess
         messages.remove(message);
     }
 
-    @Override
-    public void clearStoredMessages() {
-        messages.clear();
-    }
-
     /**
      * @param messageKey key that should be present in the added
      *                   {@linkplain StickyMessage#getMessage()}s

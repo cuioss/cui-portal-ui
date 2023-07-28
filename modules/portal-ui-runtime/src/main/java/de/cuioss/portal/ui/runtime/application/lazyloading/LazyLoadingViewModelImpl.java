@@ -52,6 +52,8 @@ import lombok.ToString;
 @Dependent
 public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, ErrorController {
 
+    @SuppressWarnings("java:S2245") // owolff: Random no security flaw, because we use it for internal
+    // identification of threads
     private static final Random RANDOM = new Random();
 
     private static final long serialVersionUID = -3343380539839996245L;

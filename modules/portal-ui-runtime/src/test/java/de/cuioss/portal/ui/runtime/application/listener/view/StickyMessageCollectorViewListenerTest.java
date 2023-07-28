@@ -1,7 +1,6 @@
 package de.cuioss.portal.ui.runtime.application.listener.view;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.inject.Inject;
 
@@ -32,10 +31,6 @@ class StickyMessageCollectorViewListenerTest
 
     @Test
     void shouldCollectMessages() {
-
-        stickyMessageProducer.clearStoredMessages();
-
-        assertTrue(stickyMessageProducer.getMessages().isEmpty(), "Expected no message available");
 
         underTest.handleView(null);
 

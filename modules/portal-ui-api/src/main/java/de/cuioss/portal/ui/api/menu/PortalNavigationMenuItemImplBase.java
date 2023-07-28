@@ -39,12 +39,6 @@ public class PortalNavigationMenuItemImplBase extends PortalNavigationMenuConfig
     @Setter
     private String iconStyleClass;
 
-    /** @deprecated use {@link #isRendered()} instead */
-    @Getter
-    @Setter
-    @Deprecated
-    private boolean disabled = false;
-
     @Getter
     @Setter
     private String titleKey;

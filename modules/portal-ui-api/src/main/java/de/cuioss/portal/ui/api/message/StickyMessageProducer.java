@@ -80,13 +80,4 @@ public interface StickyMessageProducer {
         return !getMessages().isEmpty();
     }
 
-    /**
-     * Remove all stored StickyMessages
-     *
-     * @Deprecated because it will delete all messages without filtering. Please
-     *             rethink usage of the {@link StickyMessageProducer} and consider
-     *             using {@link StickyMessageProvider}
-     */
-    @Deprecated
-    void clearStoredMessages();
 }
