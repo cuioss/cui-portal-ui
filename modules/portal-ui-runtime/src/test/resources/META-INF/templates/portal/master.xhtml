@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:o="http://omnifaces.org/ui"
+    xmlns:portal="ttps://cuioss.de/jsf/portal">
+<!-- 
+<documentation>
+	<body>The default master for most of the pages. It provides the
+		container-fluid layout for full screen content.
+		In case you want a
+		centered layout, for less information to be displayed use
+		master_centered.xhtml.
+	</body>
+	<section>
+		<title>Standard Extension Points</title>
+		<body>
+			<ul>
+				<li>&lt;ui:define name="metadata"&gt; The view Metadata. Caution: It
+					is an empty placeholder, therefore
+					the client must define its own
+					&lt;f:metadata /&gt;</li>
+				<li>&lt;ui:define name="title"&gt; Concrete Page Title
+					&lt;/ui:define&gt;
+					defaults to msgs['portal.title']
+				</li>
+                <li>&lt;ui:define name="stickyMessages"&gt; The sticky messages. &lt;/ui:define&gt;
+                    defaults to &lt;cuicdic:stickyMessages /&gt;
+                </li>
+				<li>&lt;ui:define name="content"&gt; The actual content of the
+					page.&lt;/ui:define&gt;
+				</li>
+			</ul>
+		</body>
+	</section>
+	<section>
+		<title>Advanced Extension points</title>
+		<body>
+			<p>While the standard extension points suffice for most normal needs
+				the advanced all other elements can be overwritten
+				as well.
+			</p>
+			<ul>
+				<li>Navigation Menu Content: Although through the dynamic nature of
+					the navigation menu there is usually no need to
+					alter this you can
+					explicitly exclude the navigation menu content by
+					overwriting it
+					with an empty &lt;ui:insert name="portal_navigation"
+					/&gt;</li>
+				<li>ClientTimeout: Although the client timeout mechanism honors
+					transient views you can overwrite it with
+					&lt;ui:insert
+					name="clientTimeout"&gt;</li>
+				<li>GlobalMessage: If you want to disable or overwrite the global
+					growl message for a certain view
+					you can do this by &lt;ui:insert
+					name="messages" &gt;</li>
+				<li>Footer: The footer is implemented as an include: &lt;ui:include
+					src="/templates/layout_footer.xhtml" /&gt; it can be overwritten by
+					configuring the MultitemplateMapper accordingly
+				</li>
+			</ul>
+		</body>
+	</section>
+</documentation>
+ -->
+<ui:composition template="/templates/root.xhtml">
+    <ui:define name="content-area">
+
+        <o:importConstants
+            type="de.cuioss.portal.ui.api.GlobalComponentIds"
+            var="GlobalIds" />
+
+        <h:panelGroup id="#{GlobalIds.MAIN_CONTENT.id}" layout="block"
+            styleClass="container-fluid">
+            <!-- Display sticky messages. The extension point is an &lt;ui:insert name="stickyMessages" &gt;-->
+            <ui:insert name="stickyMessages">
+                <portal:stickyMessages id="stickyMessages" />
+            </ui:insert>
+
+            <ui:insert name="content" />
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.cuioss.portal.ui</groupId>
+        <artifactId>modules</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>portal-ui-runtime</artifactId>
+    <name>Portal UI Runtime</name>
+    <description>Provides the runtime implementations for portal-ui-api</description>
+    <dependencies>
+        <dependency>
+            <groupId>de.cuioss.portal.ui</groupId>
+            <artifactId>portal-ui-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.cuioss.jsf</groupId>
+            <artifactId>cui-jsf-core-components</artifactId>
+        </dependency>
+        <!-- Deltaspike: To be removed-->
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-jsf-module-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-jsf-module-impl</artifactId>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>de.cuioss.portal.ui</groupId>
+            <artifactId>portal-ui-unit-testing</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.cuioss.portal.authentication</groupId>
+            <artifactId>portal-authentication-mock</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-modified-microprofile-config.yaml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/META-INF</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/META-INF</directory>
+                                    <include>microprofile-config.yaml</include>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

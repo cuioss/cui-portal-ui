@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:boot="https://cuioss.de/jsf/bootstrap">
+
+<composite:interface
+    shortDescription="Renders a list of sticky messages">
+</composite:interface>
+
+<composite:implementation>
+    <!-- Displays an error-message if ajax requests have failed, in order to inform the user.-->
+    <boot:notificationBox styleClass="cui-ajax-error-message"
+        style="display:none;" id="ajaxErrorMessage" state="DANGER"
+        contentKey="system.ajax.error" />
+
+    <h:form id="formStickyMsgs"
+        styleClass="sticky-messages-form #{stickyMessageProducer.anyMessageAvailable ? 'sticky-messages':'no-sticky-messages'}">
+        <p:autoUpdate />
+        <p:outputPanel layout="block" id="panel">
+            <ui:repeat id="stickyList" var="stickyMessage"
+                value="#{stickyMessageProducer.messages}">
+                <boot:notificationBox id="stickyBox"
+                    state="#{stickyMessage.state}"
+                    styleClass="single-sticky-message"
+                    contentValue="#{stickyMessage.message}"
+                    dismissible="#{stickyMessage.dismissable}"
+                    model="#{stickyMessage}"
+                    dismissListener="#{stickyMessageProducer.dismissListener}" />
+            </ui:repeat>
+        </p:outputPanel>
+    </h:form>
+
+</composite:implementation>
+
+</html>

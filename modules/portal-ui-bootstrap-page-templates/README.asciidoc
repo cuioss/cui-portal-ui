@@ -1,0 +1,28 @@
+= portal-ui-bootstrap-page-templates
+
+== What is it?
+
+Provides Facelet templates for creating portal pages. It is based on Twitters bootstrap
+
+In addition it provides some JSF-Components for the layouts (previous portal-ui-components)
+
+== Maven Coordinates
+
+[source,xml]
+----
+<dependency>
+     <groupId>de.cuioss.portal.ui</groupId>
+     <artifactId>portal-ui-bootstrap-page-templates</artifactId>
+</dependency>
+----
+
+== Info
+
+Downstream modules like like 
+
+* portal-ui-form-based-login
+* portal-ui-components
+
+rely on these templates.
+
+So if you want / need to replace them, you have to consider them as well

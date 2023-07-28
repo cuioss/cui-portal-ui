@@ -1,0 +1,91 @@
+package de.cuioss.portal.ui.runtime.application.storage;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAXAGE;
+import static de.cuioss.portal.ui.api.PortalCoreBeanNames.CLIENT_STORAGE_BEAN_NAME;
+import static org.omnifaces.util.Faces.addResponseCookie;
+import static org.omnifaces.util.Faces.getRequestCookie;
+import static org.omnifaces.util.Faces.removeResponseCookie;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Priority;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Provider;
+
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.core.servlet.CuiContextPath;
+import de.cuioss.portal.core.storage.ClientStorage;
+import de.cuioss.portal.core.storage.PortalClientStorage;
+import de.cuioss.tools.string.MoreStrings;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+/**
+ * Represents the request scoped runtime representation of
+ * {@link PortalClientStorage}, using cookies theirs
+ * {@link PortalClientStorage}, using cookies as storage.
+ *
+ * @author Matthias Walliczek
+ */
+@PortalClientStorage
+@RequestScoped
+@EqualsAndHashCode
+@ToString
+@Named(CLIENT_STORAGE_BEAN_NAME)
+@Priority(PortalPriorities.PORTAL_CORE_LEVEL)
+public class PortalClientStorageImpl implements ClientStorage {
+
+    private static final long serialVersionUID = 1573344347429735050L;
+
+    private final Map<String, String> cache = new HashMap<>();
+
+    @Inject
+    @ConfigProperty(name = CLIENT_STORAGE_COOKIE_MAXAGE)
+    private String cookieMaxAge;
+
+    @Inject
+    @CuiContextPath
+    private Provider<String> contextPathProvider;
+
+    @Override
+    public String get(final String key) {
+        if (!cache.containsKey(key)) {
+            cache.put(key, getRequestCookie(key));
+        }
+        return cache.get(key);
+    }
+
+    @Override
+    public String get(final String key, final String defaultValue) {
+        final var value = get(key);
+        if (MoreStrings.isEmpty(value)) {
+            return defaultValue;
+        }
+        return value;
+    }
+
+    @Override
+    public void put(final String key, final String object) {
+        addResponseCookie(key, object, contextPathProvider.get(), Integer.parseInt(cookieMaxAge));
+        cache.put(key, object);
+    }
+
+    @Override
+    public String remove(final String key) {
+        final var result = get(key);
+        removeResponseCookie(key, contextPathProvider.get());
+        cache.put(key, null);
+        return result;
+    }
+
+    @Override
+    public boolean containsKey(final String key) {
+        return null != get(key);
+    }
+
+}

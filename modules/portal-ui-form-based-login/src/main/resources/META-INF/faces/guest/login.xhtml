@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:portal="ttps://cuioss.de/jsf/portal"
+    xmlns:cui="https://cuioss.de/jsf/core"
+    xmlns:boot="https://cuioss.de/jsf/bootstrap"
+    xmlns:o="http://omnifaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/templates/root.xhtml">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewAction action="#{loginPageBean.initViewAction}" />
+            <f:viewParam name="errorText"
+                value="#{loginPageBean.errorTextKey}" />
+        </f:metadata>
+    </ui:define>
+    <ui:define name="title">
+        #{msgs['page.login.title']}
+    </ui:define>
+
+    <ui:define name="content-area">
+        <o:importConstants
+            type="de.cuioss.portal.ui.api.GlobalComponentIds"
+            var="GlobalIds" />
+        <h:outputStylesheet library="de.cuioss.portal.ui.oauth"
+            name="login_page.css" id="loginPageStyle" />
+        <div class="vertical-center login-wrapper">
+
+            <portal:stickyMessages id="stickyMessages" />
+
+            <div class="container">
+
+                <div class="logo"></div>
+
+                <h1 class="sr-only">
+                    <h:outputText value="{msgs['page.login.srHeader']}" />
+                </h1>
+
+                <h:form id="loginForm" styleClass="form-login"
+                    role="form">
+
+                    <h2 class="product-name">
+                        <h:outputText id="prodName"
+                            value="#{msgs['portal.solution.title']}" />
+                    </h2>
+
+                    <h3 class="module-name">
+                        <h:outputText id="modName"
+                            value="#{msgs['portal.module.name']}" />
+                    </h3>
+
+                    <cui:messages id="loginMessages" globalOnly="true"
+                        styleClass="login-messages cui-messages" />
+
+                    <boot:notificationBox
+                        styleClass="login-notifications cui-ajax-error-message"
+                        style="display:none;" id="ajaxErrorMessage"
+                        state="DANGER" contentKey="system.ajax.error" />
+
+                    <boot:notificationBox state="danger"
+                        styleClass="noCookie"
+                        contentKey="message.error.cookies.disable" />
+
+                    <boot:labeledContainer id="user_store_select"
+                        labelKey="page.login.field.system"
+                        styleClass="login-userstore"
+                        layoutMode="label_sr_only"
+                        rendered="#{loginPageBean.shouldDisplayUserStoreDropdown}">
+                        <h:selectOneMenu id="input"
+                            value="#{loginPageBean.loginCredentials.userStore}"
+                            tabindex="1">
+                            <f:selectItems
+                                value="#{loginPageBean.availableUserStores}"
+                                var="item"
+                                itemLabel="#{item.displayName}"
+                                itemValue="#{item.name}" />
+                        </h:selectOneMenu>
+                    </boot:labeledContainer>
+
+                    <boot:labeledContainer
+                        id="#{GlobalIds.LOGIN_PAGE_USER_NAME.id}"
+                        layoutMode="label_sr_only"
+                        styleClass="login-username"
+                        labelKey="page.login.field.identifier"
+                        placeholderKey="page.login.field.identifier.placeholder">
+                        <h:inputText id="input"
+                            value="#{loginPageBean.loginCredentials.username}"
+                            required="true" tabindex="2">
+                            <cui:sanitizer strategy="PASSTHROUGH" />
+                            <f:validateLength maximum="128" />
+                        </h:inputText>
+                    </boot:labeledContainer>
+
+                    <boot:labeledContainer
+                        id="#{GlobalIds.LOGIN_PAGE_USER_PASSWORD.id}"
+                        layoutMode="label_sr_only"
+                        styleClass="login-password"
+                        labelKey="page.login.field.secret"
+                        placeholderKey="page.login.field.secret.placeholder">
+                        <h:inputSecret id="input"
+                            value="#{loginPageBean.loginCredentials.password}"
+                            required="true" tabindex="3">
+                            <cui:sanitizer strategy="PASSTHROUGH" />
+                            <f:validateLength maximum="128" />
+                        </h:inputSecret>
+                    </boot:labeledContainer>
+
+                    <boot:labeledContainer id="rememeberMeLabel"
+                        labelKey="page.login.field.remember.me.label"
+                        styleClass="login-remeber-me" layoutMode="plain">
+                        <h:selectBooleanCheckbox id="input"
+                            value="#{loginPageBean.loginCredentials.rememberLoginCredentials}"
+                            tabindex="4" />
+                    </boot:labeledContainer>
+
+                    <boot:commandButton id="submit"
+                        action="#{loginPageBean.login}" tabindex="5"
+                        labelKey="page.login.button.login"
+                        styleClass="btn btn-primary btn-block login-action">
+                        <p:ajax
+                            update="loginMessages username password @this"
+                            process="@form" />
+                        <cui:blockElement />
+                    </boot:commandButton>
+
+                    <p:focus for="#{loginPageBean.focusComponent}" />
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+    <!-- No window scope needed here -->
+    <ui:define name="dsWindowId" />
+
+    <!--  We do not use growl here -->
+    <ui:define name="messages" />
+
+    <!-- We do not need a navigation here -->
+    <ui:define name="portal_navigation" />
+
+    <!-- We use our own ajax error message -->
+    <ui:insert name="ajaxErrorMessage" />
+</ui:composition>
+</html>

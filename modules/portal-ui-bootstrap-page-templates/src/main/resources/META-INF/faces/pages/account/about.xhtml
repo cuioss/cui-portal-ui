@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+<ui:composition template="/templates/master_centered.xhtml">
+
+    <ui:define name="title">#{msgs['page.about.title']}</ui:define>
+
+    <ui:define name="content">
+        <h:outputStylesheet id="pageStyle" library="de.icw.cui.portal"
+            name="about_page.css" />
+        <div class="row about-content">
+            <div class="col-md-offset-2 col-md-8">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2>#{msgs['portal.solution.title']}</h2>
+                        <p class="solution-info">
+                            <h:outputText styleClass="solution-title"
+                                value="#{msgs['portal.title']}" />
+                            <h:outputText styleClass="solution-version"
+                                value="#{msgs['portal.solution.version']}" />
+                        </p>
+                        <p class="modul-info">
+                            #{msgs['page.about.release.prefix']}
+                            #{msgs['appVersion']}
+                            <h:outputText styleClass="app-build-info"
+                                value="#{msgs['appBuildDate']}" />
+                        </p>
+                        <p class="vendor-info">#{msgs['page.about.vendor.info']}</p>
+                        <h3>#{msgs['page.about.company.name']}</h3>
+                        <address>
+                            <h:outputText styleClass="company-street"
+                                value="#{msgs['page.about.company.street']}" />
+                            <br />
+                            <h:outputText styleClass="company-city"
+                                value="#{msgs['page.about.company.city']}" />
+                            <br />
+                            <h:outputText styleClass="company-state"
+                                value="#{msgs['page.about.company.state']}" />
+                            <br />
+                            <h:outputText
+                                styleClass="company-phone-number"
+                                value="#{msgs['page.about.abbr.phone.number']}" />
+                            <br /> <a class="company-email"
+                                href="mailto:#{msgs['page.about.company.email']}">#{msgs['page.about.company.email']}</a><br />
+                            <a class="company-webpage"
+                                href="#{msgs['page.about.company.webpage.url']}"
+                                target="_blank">#{msgs['page.about.company.webpage']}</a>
+                        </address>
+                        <p class="copyright-info">#{msgs['portal.copyright']}</p>
+                    </div>
+                    <div
+                        class="about-content-img-col visible-md visible-lg col-md-4">
+                        <i class="helpImg"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

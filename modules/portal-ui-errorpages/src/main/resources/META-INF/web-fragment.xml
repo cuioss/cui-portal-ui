@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-fragment xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-fragment_4_0.xsd"
+    version="4.0">
+    <distributable />
+    <name>CuiPortalErrorPages</name>
+
+    <error-page>
+        <!-- Error page for Http Code 401: The request requires HTTP authentication -->
+        <error-code>401</error-code>
+        <location>/faces/guest/401.jsf</location>
+    </error-page>
+    <error-page>
+        <!-- Error page for Http Code 403: Access to the specified resource 
+            has been forbidden. -->
+        <error-code>403</error-code>
+        <location>/faces/guest/403.jsf</location>
+    </error-page>
+    <error-page>
+        <!-- Error page for Http Code 404: The requested resource could not 
+            be found. Therefore the user will be redirected to home / login page in case 
+            of the view not found was a jsf view -->
+        <error-code>404</error-code>
+        <location>/faces/guest/404.jsf</location>
+    </error-page>
+    <error-page>
+        <!-- Generic application error: Generic application error -->
+        <error-code>500</error-code>
+        <location>/faces/guest/error.jsf</location>
+    </error-page>
+</web-fragment>

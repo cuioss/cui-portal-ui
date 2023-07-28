@@ -1,0 +1,110 @@
+package de.cuioss.portal.ui.runtime.application.customization;
+
+import static de.cuioss.portal.configuration.util.ConfigurationHelper.resolveConfigProperty;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.TimeZone;
+
+import javax.faces.context.FacesContext;
+
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.configuration.application.PortalProjectStageProducer;
+import de.cuioss.portal.core.cdi.PortalBeanManager;
+import de.cuioss.portal.ui.api.resources.CacheableResource;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.uimodel.application.CuiProjectStage;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+/**
+ * Implementation of a {@link File} based {@link CacheableResource}.
+ *
+ * @author Matthias Walliczek
+ *
+ */
+@ToString(of = "resourceFile", callSuper = false)
+@EqualsAndHashCode(of = "resourceFile", callSuper = false)
+public final class CustomizationResource extends CacheableResource {
+
+    private static final CuiLogger log = new CuiLogger(CustomizationResource.class);
+
+    private static final String HEADER_LAST_MODIFIED = "Last-Modified";
+    private static final String HEADER_EXPIRES = "Expires";
+    private static final String RFC1123_DATE_PATTERN = "EEE, dd MMM yyyy HH:mm:ss zzz";
+    private final TimeZone gmt = TimeZone.getTimeZone("GMT");
+
+    private final File resourceFile;
+
+    /**
+     * @param resourceFile
+     * @param resourceName
+     * @param libraryName
+     * @param contentType
+     */
+    public CustomizationResource(final File resourceFile, final String resourceName, final String libraryName,
+            final String contentType) {
+        this.resourceFile = resourceFile;
+        setResourceName(resourceName);
+        setLibraryName(libraryName);
+        setContentType(contentType);
+    }
+
+    @Override
+    public InputStream getInputStream() throws IOException {
+        return new FileInputStream(resourceFile);
+    }
+
+    @Override
+    public Map<String, String> getResponseHeaders() {
+        final var responseHeaders = super.getResponseHeaders();
+        final var format = new SimpleDateFormat(RFC1123_DATE_PATTERN, Locale.US);
+        format.setTimeZone(gmt);
+        final long expiresTime;
+        final Optional<CuiProjectStage> projectStageBean = PortalBeanManager.resolveBean(CuiProjectStage.class,
+                PortalProjectStageProducer.class);
+        if (projectStageBean.isPresent() && projectStageBean.get().isDevelopment()) {
+            expiresTime = new Date().getTime();
+        } else {
+            final var maxAge = Integer.parseInt(
+                    resolveConfigProperty(PortalConfigurationKeys.RESOURCE_MAXAGE).orElse("10080")) * 60L * 1000L;
+            expiresTime = new Date().getTime() + maxAge;
+        }
+        responseHeaders.put(HEADER_EXPIRES, format.format(new Date(expiresTime)));
+        responseHeaders.put(HEADER_LAST_MODIFIED, format.format(new Date(resourceFile.lastModified())));
+
+        return responseHeaders;
+    }
+
+    @Override
+    protected String getETag() {
+        return "W/\"" + resourceFile.length() + '-' + resourceFile.lastModified() + '"';
+    }
+
+    @Override
+    public String getRequestPath() {
+        final var context = FacesContext.getCurrentInstance();
+        return context.getApplication().getViewHandler().getResourceURL(context, super.determineResourcePath());
+    }
+
+    @Override
+    public URL getURL() {
+        try {
+            return resourceFile.toURI().toURL();
+        } catch (final MalformedURLException e) {
+            log.warn("Portal-145: Customization resource '" + resourceFile.toString()
+                    + "' can not be resolved to an URL", e);
+            throw new IllegalStateException(e);
+        }
+    }
+
+}

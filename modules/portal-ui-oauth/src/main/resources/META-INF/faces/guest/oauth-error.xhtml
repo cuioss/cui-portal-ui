@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<ui:composition template="/templates/http_error_page.xhtml">
+
+    <ui:define name="title">#{msgs['page.error.oauth.title']}</ui:define>
+    <ui:define name="content">
+
+        <h1 class="sr-only">#{msgs['page.error.oauth.srHeader']}</h1>
+        <h2>#{msgs['page.error.oauth.title']}</h2>
+        <ui:fragment rendered="#{errorPageBean.messageAvailable}">
+            <p>
+                <h:outputText
+                    value="#{errorPageBean.message.errorMessage}" />
+            </p>
+            <ui:fragment
+                rendered="#{not empty errorPageBean.message.errorTicket}">
+                <p>
+                    <h:outputText
+                        value="#{msgs['page.error.label.ticket']}: #{errorPageBean.message.errorTicket}" />
+                </p>
+            </ui:fragment>
+        </ui:fragment>
+
+        <ui:fragment rendered="#{!errorPageBean.messageAvailable}">
+            <p>
+                <h:outputText value="#{msgs['page.error.no_error']}" />
+            </p>
+        </ui:fragment>
+        <p>
+            <h:link id="homeLink" outcome="home"
+                value="#{msgs['page.error.home_link']}" />
+            <h:outputText value=" " />
+            <h:link id="logoutLink" outcome="logout"
+                value="#{msgs['page.logout.title']}" />
+        </p>
+    </ui:define>
+</ui:composition>
+</html>

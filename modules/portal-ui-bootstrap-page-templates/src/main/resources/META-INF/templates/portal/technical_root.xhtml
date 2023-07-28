@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ds="http://deltaspike.apache.org/jsf"
+    xmlns:portal="ttps://cuioss.de/jsf/portal"
+    lang="#{view.locale.language}">
+<!--
+<documentation>
+	<body>The technical root is the top-most template. It provides basic
+		configuration for the views and loads additional resources to be
+		used at every view. It is intended to be used by other templates not by
+		views directly.
+	</body>
+	<section>
+		<title>Standard Extension Points</title>
+		<body>
+			<ul>
+				<li>&lt;ui:define name="metadata"&gt; The view Metadata. Caution: It
+					is an empty placeholder, therefore
+					the client must define its own
+					&lt;f:metadata /&gt;</li>
+				<li>&lt;ui:define name="title"&gt; Concrete Page Title
+					&lt;/ui:define&gt;
+					defaults to msgs['portal.title']</li>
+                <li>&lt;ui:define name="cssIncludes"&gt; Includes of all css files used
+                    for this page. Default contains the portal css structure (including
+                    application-themeName.css, vendor.css, fonts.css, icons.css - see below).<br />
+                    Caution: When replacing, some cui components may not work anymore as expected!.</li>
+				<li>&lt;ui:define name="body"&gt; The actual body of the page.</li>
+                <li>&lt;ui:define name="dsWindowId"&gt; Check client window id via javascript (default active).
+                    Can be set to empty to allow overriding the window id &lt;/ui:define&gt;</li>
+			</ul>
+		</body>
+	</section>
+	<section>
+		<title>View Definition</title>
+		<body>
+			<p>It defines some view related definitions:</p>
+			<ul>
+				<li>The view locale will be set to localeProducer.locale where
+					localeProducer is an instance of LocaleProducer.
+					In case of the cui-portal the default implementation is
+					de.cuioss.portal.ui.api.application.locale.PortalLocaleManagerBean</li>
+				<li>The transient state will be set by
+					viewTransientManager.transientView. in case of the cdi-portal
+					the
+					implementation-class is
+					de.cuioss.portal.ui.api.application.view.ViewTransientManagerBean.
+					In order to alter the transientViews use configuration parameter
+					(default: web.xml) with the key 'cui.cdi.portal.view.transient'</li>
+			</ul>
+		</body>
+	</section>
+	<section>
+		<title>Additional Resources</title>
+		<body>
+			<p>There are a number of javascript and css files being loaded for
+				each page:</p>
+			<ul>
+				<li>jquery.js, loaded from primefaces in order to ensure only one
+					script is loaded</li>
+				<li>application-themeName.css, in case of production
+					application-themeName.min.css</li>
+				<li>vendor.css vendor / customer specific extensions, that are not
+					covered by theming</li>
+				<li>fonts.css, icons.css for font based icons</li>
+				<li>Default javascript files: bootstrap.js, jsf.js, cui.jsf</li>
+			</ul>
+		</body>
+	</section>
+</documentation>
+-->
+<f:view transient="#{viewTransientManager.transientView}"
+    locale="#{localeProducer.locale}">
+    <h:head id="head">
+        <!-- This is the placeholder for view:metadata  it can be used by
+		&lt;ui:define name="metadata"&gt; The view Metadata &lt;/ui:define&gt;-->
+        <ui:insert name="metadata" />
+
+        <!-- The title to be defined by the page in the form of &lt;ui:define name="title"&gt; Concrete Page Title &lt;/ui:define&gt;
+		defaults to msgs['portal.title']-->
+        <title><ui:insert name="title">
+                <h:outputText value="#{msgs['portal.title']}" />
+            </ui:insert></title>
+
+        <!-- This meta tag needs to be placed right under the <head> element in order to take effect -->
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <!-- Ensure to load the jquery library for all pages. cui.js relies on it -->
+            <h:outputScript name="jquery/jquery.js" library="primefaces" />
+        </f:facet>
+
+        <!-- Defines view-port -->
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no"></meta>
+
+        <!-- Include the favicon -->
+        <link href="#{resource['vendor:favicon.ico']}"
+            rel="shortcut icon" type="image/x-icon" />
+
+        <ui:insert name="cssIncludes">
+            <!-- The actual icon definitions -->
+            <h:outputStylesheet library="de.cuioss.portal.css"
+                name="icons.css" />
+
+            <!-- The default application level stylesheet. It will be delivered using de.cuioss.jsf.api.application.theme.ThemeResourceHandler
+    		resulting in application-themeName.css. In case of production application-themeName.min.css will be delivered-->
+            <h:outputStylesheet library="de.cuioss.portal.css"
+                name="application.css" />
+
+            <!-- Defines the css needed for the font-based icons. -->
+            <h:outputStylesheet library="de.cuioss.fonts"
+                name="fonts.css" />
+
+            <!-- This css is intended for vendor / customer specific extensions, that are not covered by theming -->
+            <h:outputStylesheet library="vendor" name="vendor.css" />
+
+        </ui:insert>
+
+        <!-- Ensures that bootstrap.js is always loaded -->
+        <h:outputScript library="thirdparty.js" name="bootstrap.js" />
+
+        <!-- Ensures that jsf.js is always loaded -->
+        <h:outputScript library="javax.faces" name="jsf.js" />
+
+        <!-- Ensures that cui.js is always loaded -->
+        <h:outputScript library="de.cuioss.javascript" name="cui.js" />
+
+    </h:head>
+    <h:body id="body" class="#{currentView.shortIdentifier}">
+
+        <!-- Ensures proper separation of windows / tabs with using deltaspike's Multi-Window Handling-->
+        <ui:insert name="dsWindowId">
+            <ds:windowId />
+        </ui:insert>
+
+        <!-- The facelets debug window. Only to be rendered at ProjectStage Development-->
+        <ui:fragment id="debug-fragment"
+            rendered="#{cuiProjectStage.development}">
+            <ui:debug hotkey="y" />
+        </ui:fragment>
+
+        <!-- Ensures that ajax requests are properly tracked for the session-handling-->
+        <p:ajaxStatus id="ajaxStatusSessionTimeout"
+            onstart="Cui.Session.stopLogoutTimeout()"
+            onsuccess="Cui.Session.resetLogoutTimeout()" />
+
+        <ui:insert name="body" />
+
+    </h:body>
+</f:view>
+</html>

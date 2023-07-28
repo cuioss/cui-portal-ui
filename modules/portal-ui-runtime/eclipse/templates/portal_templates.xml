@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="xhtml_new" deleted="false" description="The master for pages with less content, that can be displayed centered. It provides the container-fluid layout for full screen content. In case you want a layout for for more information to be displayed use master.xhtml." enabled="true" name="Portal Master Centered">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;&#13;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&#13;
+   xmlns:f="http://xmlns.jcp.org/jsf/core"&#13;
+   xmlns:h="http://xmlns.jcp.org/jsf/html"&#13;
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"&#13;
+   xmlns:cui="https://cuioss.de/jsf/core"&gt;&#13;
+   xmlns:boot="https://cuioss.de/jsf/bootstrap"&gt;&#13;
+&#13;
+&lt;ui:composition template="/templates/master_centered.xhtml"&gt;&#13;
+&#13;
+   &lt;ui:define name="title"&gt;#{msgs['portal.title']}&lt;/ui:define&gt;&#13;
+&#13;
+   &lt;ui:define name="content"&gt;&#13;
+      ${cursor}&#13;
+   &lt;/ui:define&gt;&#13;
+&lt;/ui:composition&gt;&#13;
+&lt;/html&gt;&#13;
+</template></templates>

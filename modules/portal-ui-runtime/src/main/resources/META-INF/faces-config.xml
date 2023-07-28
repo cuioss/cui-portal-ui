@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.3" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
+    <name>CuiPortalCoreImpl</name>
+    <application>
+        <navigation-handler>de.cuioss.jsf.api.application.history.HistoryNavigationHandler</navigation-handler>
+        <resource-handler>de.cuioss.portal.ui.runtime.application.templating.ViewResourceHandler</resource-handler>
+        <resource-handler>de.cuioss.jsf.api.application.resources.CuiResourceHandler</resource-handler>
+        <resource-handler>de.cuioss.portal.ui.runtime.application.customization.CustomizationResourceHandler</resource-handler>
+        <resource-handler>de.cuioss.jsf.api.application.theme.ThemeResourceHandler</resource-handler>
+        <resource-handler>de.cuioss.jsf.api.application.resources.CuiUnmappedResourceHandler</resource-handler>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+        <message-bundle>de.cuioss.portal.ui.i18n.jsf_messages</message-bundle>
+    </application>
+    <factory>
+        <application-factory>de.cuioss.portal.ui.runtime.application.factory.PortalApplicationFactory</application-factory>
+    </factory>
+
+    <converter>
+        <description>Sanitizes all Html output resolving to a String</description>
+        <display-name>SanitizerConverter</display-name>
+        <converter-for-class>java.lang.String</converter-for-class>
+        <converter-class>de.cuioss.jsf.api.converter.FallbackSanitizingConverter</converter-class>
+    </converter>
+    <converter>
+        <description>Converts java.util.Locale objects</description>
+        <display-name>LocaleConverter</display-name>
+        <converter-for-class>java.util.Locale</converter-for-class>
+        <converter-class>de.cuioss.jsf.components.converter.LocaleConverter</converter-class>
+    </converter>
+</faces-config>

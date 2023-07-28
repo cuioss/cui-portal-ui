@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd">
+    <namespace>ttps://cuioss.de/jsf/portal</namespace>
+    <short-name>portal</short-name>
+    <tag>
+        <description>
+            <![CDATA[
+             <p>
+               Renders a container for the sidebar within portal-context. Actually it renders a div / nav with the style-class 'sidebar'. 
+               The corresponding elements are defined at the root.xhtml template.
+            </p>
+            <h3>Sidebar Left Sample</h3>
+            <pre>
+            <ui:define name="sidebarLeft">
+                <portal:sidebar>
+                    <h1>Some Content in the sidebar</h1>
+                </portal:sidebar>
+            </ui:define>
+            </pre>
+            <h3>Sidebar Right Sample</h3>
+            <pre>
+            <ui:define name="sidebarRight">
+                <portal:sidebar>
+                    <h1>Some Content in the right sidebar</h1>
+                </portal:sidebar>
+            </ui:define>
+            </pre>
+
+             <h3>Styling</h3>
+             <ul>
+                 <li>The marker css class is 'sidebar'</li>             
+             </ul>    
+       ]]>
+        </description>
+        <tag-name>sidebar</tag-name>
+        <component>
+            <component-type>de.icw.cui.portal.sidebar</component-type>
+            <renderer-type>de.icw.cui.portal.sidebar_renderer</renderer-type>
+        </component>
+        <attribute>
+            <description><![CDATA[The component identifier for this component.  This value must be
+                unique within the closest parent component that is a naming
+                container. Caution: The component itself is not a naming container]]>
+            </description>
+            <name>id</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[Flag indicating whether or not this component should be rendered
+                (during Render Response Phase), or processed on any subsequent
+                form submit.  The default value for this property is true.]]>
+            </description>
+            <name>rendered</name>
+            <required>false</required>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>
+                <![CDATA[The htmlElement used for creating the sidebar, defaults to nav]]>
+            </description>
+            <name>htmlElement</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>
+                <![CDATA[Space-separated list of CSS style class(es) to be applied additionally when
+                this element is rendered.]]>
+            </description>
+            <name>styleClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>
+                <![CDATA[CSS style(s) to be applied when this component is rendered. 
+               Caution: The styleClass attribute is always to be preferred.]]>
+            </description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description><![CDATA[
+        <h2>Summary</h2>
+        <p>Renders a list of sticky messages</p>
+        <h2>Assumptions</h2>
+        <ul>
+            <li>An instance of de.cuioss.portal.ui.api.message.StickyMessageProducer being present under the name 'stickyMessageProducer'</li>
+            <li>Available Primefaces</li>
+        </ul>
+        <h2>Behavior</h2>
+        <p>Renders an auto-updatable primefaces output-panel with a form containing the messages to be displayed</p>
+        ]]></description>
+        <tag-name>stickyMessages</tag-name>
+        <component>
+            <resource-id>portal-ui-components/stickyMessages.xhtml</resource-id>
+        </component>
+        <attribute>
+            <description><![CDATA[The component identifier for this component. This value must be
+                unique within the closest parent component that is a naming
+                container. Caution: The component itself is not a naming container]]>
+            </description>
+            <name>id</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[Flag indicating whether or not this component should be rendered
+                (during Render Response Phase), or processed on any subsequent
+                form submit. The default value for this property is true.]]>
+            </description>
+            <name>rendered</name>
+            <required>false</required>
+            <type>boolean</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description><![CDATA[
+        <h2>Summary</h2>
+        <p>Renders a navigation menu. Supports header- and footer-facet Caution: Will soon be replaced</p>
+        ]]></description>
+        <tag-name>navigationMenu</tag-name>
+        <component>
+            <resource-id>portal-ui-components/navigationMenu.xhtml</resource-id>
+        </component>
+        <attribute>
+            <description><![CDATA[The component identifier for this component. This value must be
+                unique within the closest parent component that is a naming
+                container. Caution: The component itself is not a naming container]]>
+            </description>
+            <name>id</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[Flag indicating whether or not this component should be rendered
+                (during Render Response Phase), or processed on any subsequent
+                form submit. The default value for this property is true.]]>
+            </description>
+            <name>rendered</name>
+            <required>false</required>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[List of NavigationMenuItem]]>
+            </description>
+            <name>modelItems</name>
+            <required>true</required>
+            <type>java.util.List</type>
+        </attribute>
+    </tag>
+</facelet-taglib>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+    xmlns:boot="https://cuioss.de/jsf/bootstrap"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!--
+<documentation>
+    <body>The root.xhtml extends technical_root.xhtml and creates the basic
+        html structure used by all portal
+        pages. In addition it provides
+        standard content elements like a growl for
+        global messages, the
+        timeout-mechanism, the default ajax-error handling and some more. The
+        default navigation
+        structure contains the dynamic navigation as well.
+        It is intended to be used by other templates not by views directly.
+    </body>
+    <section>
+        <title>Standard Extension Points</title>
+        <body>
+            <ul>
+                <li>&lt;ui:define name="metadata"&gt; The view Metadata. Caution: It
+                    is an empty placeholder, therefore
+                    the client must define its own
+                    &lt;f:metadata /&gt;.</li>
+                <li>&lt;ui:define name="title"&gt; Concrete Page Title
+                    &lt;/ui:define&gt;
+                    defaults to msgs['portal.title']
+                </li>
+                <li>&lt;ui:define name="sidebarLeft"&gt; Emty placeholder for left side navigation&lt;/ui:define&gt;
+                </li>
+                <li>&lt;ui:define name="content-area"&gt; The actual content of the
+                    page.&lt;/ui:define&gt;
+                </li>
+                <li>&lt;ui:define name="sidebarRight"&gt; Emty placeholder for right side navigation&lt;/ui:define&gt;
+                </li>
+            </ul>
+        </body>
+    </section>
+    <section>
+        <title>Advanced Extension points</title>
+        <body>
+            <p>While the standard extension points suffice for most normal needs
+                the advanced all other elements can be overwritten
+                as well.
+            </p>
+            <ul>
+                <li>Navigation Menu Content: Although through the dynamic nature of
+                    the navigation menu there is usually no need to
+                    alter this you can
+                    explicitly exclude the navigation menu content by
+                    overwriting it
+                    with an empty &lt;ui:insert name="portal_navigation"
+                    /&gt;</li>
+                <li>ClientTimeout: Although the client timeout mechanism honors
+                    transient views you can overwrite it with
+                    &lt;ui:insert
+                    name="clientTimeout"&gt;</li>
+                <li>GlobalMessage: If you want to disable or overwrite the global
+                    growl message for a certain view
+                    you can do this by &lt;ui:insert
+                    name="messages" &gt;</li>
+                <li>Footer: The footer is implemented as an include: &lt;ui:include
+                    src="/templates/layout_footer.xhtml" /&gt; it can be overwritten by
+                    configuring the MultitemplateMapper accordingly
+                </li>
+            </ul>
+        </body>
+    </section>
+</documentation>
+ -->
+<ui:composition template="/templates/technical_root.xhtml">
+    <ui:define name="body">
+
+        <o:importConstants
+            type="de.cuioss.portal.ui.api.GlobalComponentIds"
+            var="GlobalIds" />
+
+        <!-- Provides a combination of primefaces idle-monitor and some cui specific classes / components.
+          In essence it displays a modal dialog to the user if the current window is idle for longer than the session lives.
+          On confirm the page will be reloaded. In case of the session being active the page will be displayed again.
+          Otherwise the user will be redirected to the login-screen. It will only be rendered for non-transient views.
+          if you want to exclude it for other pages you can define an empty &lt;ui:insert name="clientTimeout"&gt;
+          in your consuming page -->
+        <ui:insert name="clientTimeout">
+
+            <h:form id="#{GlobalIds.TIMEOUT_FORM.id}" prependId="false"
+                rendered="#{clientWindowManager.renderTimeoutForm}">
+
+                <p:idleMonitor id="idle"
+                    timeout="#{clientWindowManager.maxInactiveInterval * 1000 * 60}"
+                    onidle="icw.cui.executeOnIdle();" />
+
+                <boot:modalDialog id="confirmDialogTimeout"
+                    closable="false"
+                    headerKey="page.session.expired.dialog.title">
+                    <h:outputText
+                        value="#{msgs['page.session.expired.dialog.text']}" />
+                    <f:facet name="footer">
+                        <boot:button id="confirmButton"
+                            labelKey="common.button.ok" state="primary"
+                            onclick="location.reload();return false" />
+                    </f:facet>
+                </boot:modalDialog>
+
+            </h:form>
+        </ui:insert>
+
+        <!-- Renders the bootstrap based navigation bar at the top of the screen.
+          The nav-bar brand element maps on the property portal.title with the outcome 'home'.
+          This can be overridden via &lt;ui:insert name="portal_home" &gt;.
+          To add elements to the navbar between brand element and navigation &lt;ui:insert name="portal_navbar" &gt;
+          can be used.
+          The extension point for the actual menu is an &lt;ui:insert name="portal_navigation" &gt;.
+          The default implementation queries de.cuioss.portal.ui.api.application.menu.NavigationMenuPageBean
+          whether to display the navigation elements. For the portal they will be rendered if the user is logged in.
+          See de.cuioss.portal.ui.api.menu of cdi-portal-core-spec on details how the dynamic navigation works.
+          The content will be cached during the current session using o:cache. This cache can be disabled with
+          the setting the config key "portal.view.cache.enabled" to "false". -->
+        <nav class="navbar cui-navbar navbar-fixed-top"
+            role="navigation">
+            <o:cache key="header"
+                disabled="#{viewCacheManager.disabled}">
+
+                <h:panelGroup layout="block"
+                    styleClass="container-fluid"
+                    id="#{GlobalIds.NAVIGATION_BAR_TOP.id}">
+                    <div class="navbar-header">
+                        <!-- hamburger menue -->
+                        <button type="button" class="navbar-toggle"
+                            data-toggle="collapse"
+                            data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle
+                                navigation</span> <span class="icon-bar"></span>
+                            <span class="icon-bar"></span> <span
+                                class="icon-bar"></span>
+                        </button>
+                        <ui:insert name="portal_home">
+                            <h:link
+                                id="#{GlobalIds.NAVIGATION_BAR_TOP_HOME.id}"
+                                class="navbar-brand" outcome="home">
+                                <h:outputText
+                                    value="#{msgs['portal.title']}"
+                                    styleClass="portal-title" />
+                            </h:link>
+                        </ui:insert>
+                    </div>
+
+                    <ui:insert name="portal_navbar" />
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><p:ajaxStatus id="ajaxStatusPanel"
+                                    styleClass="navbar-text">
+                                    <f:facet name="start">
+                                        <span
+                                            class="cui-spin cui-icon cui-icon-refresh"></span>
+                                    </f:facet>
+                                    <f:facet name="complete">
+                                    </f:facet>
+                                </p:ajaxStatus></li>
+                            <ui:insert name="portal_navigation">
+                                <ui:repeat var="menuModel" id="navMenu"
+                                    rendered="#{navigationMenuPageBean.displayMenu}"
+                                    value="#{navigationMenuPageBean.navigationMenuItems}">
+                                    <boot:navigationMenu
+                                        model="#{menuModel}"
+                                        id="navMenuItem"
+                                        rendered="#{navigationMenuPageBean.displayMenu}" />
+                                </ui:repeat>
+                            </ui:insert>
+                        </ul>
+                    </div>
+                </h:panelGroup>
+            </o:cache>
+        </nav>
+
+        <!-- Display global messages as a primefaces growl. The extension point is an &lt;ui:insert name="messages" &gt;-->
+        <ui:insert name="messages">
+            <p:growl id="#{GlobalIds.GLOBAL_PAGE_MESSAGES.id}"
+                widgetVar="globalPageMessages" escape="false"
+                redisplay="false" life="10000" sticky="false"
+                globalOnly="true">
+                <p:autoUpdate />
+            </p:growl>
+        </ui:insert>
+
+        <ui:insert name="sidebarLeft" />
+
+        <!-- The placeholder for the actual content of the page-->
+        <ui:insert name="content-area" />
+
+        <!-- Loads the footer as a component.-->
+        <ui:include src="/templates/layout_footer.xhtml" />
+
+        <ui:insert name="sidebarRight" />
+
+    </ui:define>
+</ui:composition>
+</html>
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:boot="https://cuioss.de/jsf/bootstrap">
+
+<composite:interface shortDescription="Renders a navigation menu">
+    <composite:attribute name="modelItems" required="true"
+        type="java.util.List"
+        shortDescription="List of NavigationMenuItem" />
+</composite:interface>
+
+<composite:implementation>
+    <nav class="sidebar">
+        <composite:renderFacet name="header" />
+        <ul class="sidebar-nav">
+            <ui:repeat var="menuModel" id="sidebarNavMenu"
+                value="#{cc.attrs.modelItems}">
+                <boot:navigationMenu model="#{menuModel}"
+                    id="sidebarNavMenuItem" />
+            </ui:repeat>
+        </ul>
+        <composite:renderFacet name="footer" />
+    </nav>
+</composite:implementation>
+
+</html>

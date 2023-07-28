@@ -1,0 +1,30 @@
+package de.cuioss.portal.ui.runtime.application.storage;
+
+import static de.cuioss.portal.ui.api.PortalCoreBeanNames.SESSION_STORAGE_BEAN_NAME;
+
+import java.io.Serializable;
+
+import javax.annotation.Priority;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
+import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.core.storage.PortalSessionStorage;
+import de.cuioss.portal.core.storage.SessionStorage;
+import de.cuioss.portal.core.storage.impl.MapStorageImpl;
+
+/**
+ * Represents the session scoped runtime representation of
+ * {@link PortalSessionStorage}
+ *
+ * @author Oliver Wolff
+ */
+@PortalSessionStorage
+@Priority(PortalPriorities.PORTAL_CORE_LEVEL)
+@SessionScoped
+@Named(SESSION_STORAGE_BEAN_NAME)
+public class PortalSessionStorageImpl extends MapStorageImpl<Serializable, Serializable> implements SessionStorage {
+
+    private static final long serialVersionUID = 1573344347429735050L;
+
+}

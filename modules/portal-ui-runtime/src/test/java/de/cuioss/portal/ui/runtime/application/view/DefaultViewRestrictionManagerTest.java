@@ -1,0 +1,126 @@
+package de.cuioss.portal.ui.runtime.application.view;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.VIEW_ROLE_RESTRICTION_PREFIX;
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Collections;
+
+import javax.inject.Inject;
+
+import org.junit.jupiter.api.Test;
+
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
+import de.cuioss.portal.configuration.PortalConfigurationSource;
+import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
+import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
+import de.cuioss.portal.ui.api.ui.pages.HomePage;
+import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
+import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import lombok.Getter;
+
+@EnablePortalUiEnvironment
+class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<DefaultViewRestrictionManager> {
+
+    private static final String ROLE_CONTENT = "content_manager";
+    private static final String ROLE_ADMIN = "admin";
+
+    private static final ViewDescriptor ANY_GUEST = new ViewDescriptorImpl("/faces/guest/any.jsf",
+            "/faces/guest/any.xhtml", Collections.emptyList());
+
+    private static final ViewDescriptor ANY_CONTENT = new ViewDescriptorImpl("/faces/content/any.jsf",
+            "/faces/content/any.xhtml", Collections.emptyList());
+
+    private static final ViewDescriptor ADMIN_CONTENT = new ViewDescriptorImpl("/faces/content/admin.jsf",
+            "/faces/content/admin.xhtml", Collections.emptyList());
+
+    @Inject
+    @Getter
+    @PortalViewRestrictionManager
+    private DefaultViewRestrictionManager underTest;
+
+    @Inject
+    private PortalTestUserProducer portalUserProducerMock;
+
+    @Inject
+    @PortalConfigurationSource
+    private PortalTestConfiguration configuration;
+
+    @Test
+    void shouldHandleEmptyConfiguration() {
+        assertTrue(underTest.getRequiredRolesForView(ANY_GUEST).isEmpty());
+        assertTrue(underTest.getRequiredRolesForView(ANY_CONTENT).isEmpty());
+
+        assertTrue(underTest.isUserAuthorized(ANY_GUEST));
+        assertTrue(underTest.isUserAuthorized(ANY_CONTENT));
+    }
+
+    @Test
+    void shouldRestrictSingleContent() {
+        configuration.fireEvent(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/faces/content/");
+
+        portalUserProducerMock.roles(immutableList(ROLE_CONTENT));
+
+        assertTrue(underTest.isUserAuthorized(ANY_GUEST));
+        assertTrue(underTest.isUserAuthorized(ANY_CONTENT));
+
+        assertTrue(underTest.getRequiredRolesForView(ANY_GUEST).isEmpty());
+
+        assertEquals(1, underTest.getRequiredRolesForView(ANY_CONTENT).size());
+        assertTrue(underTest.getRequiredRolesForView(ANY_CONTENT).contains(ROLE_CONTENT));
+    }
+
+    @Test
+    void shouldRestrictMultipleRoles() {
+        configuration.fireEvent(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/faces/content/",
+                VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/faces/content/admin");
+
+        portalUserProducerMock.roles(immutableList(ROLE_CONTENT, ROLE_ADMIN));
+
+        assertTrue(underTest.getRequiredRolesForView(ANY_GUEST).isEmpty());
+        assertEquals(1, underTest.getRequiredRolesForView(ANY_CONTENT).size());
+        assertTrue(underTest.getRequiredRolesForView(ANY_CONTENT).contains(ROLE_CONTENT));
+        assertTrue(underTest.isUserAuthorized(ANY_GUEST));
+
+        assertEquals(2, underTest.getRequiredRolesForView(ADMIN_CONTENT).size());
+        assertTrue(underTest.getRequiredRolesForView(ADMIN_CONTENT).contains(ROLE_CONTENT));
+        assertTrue(underTest.getRequiredRolesForView(ADMIN_CONTENT).contains(ROLE_ADMIN));
+
+        assertTrue(underTest.isUserAuthorized(ADMIN_CONTENT));
+    }
+
+    @Test
+    void shouldNotMatchRoleConfiguredDirectoryToAnyPage() {
+        configuration.fireEvent(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/faces/content/admin/",
+                VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/faces/content/");
+
+        ViewDescriptor pageMatchedToDirectoryPath = new ViewDescriptorImpl("faces/content/administrationPage.jsf",
+                "/faces/content/administrationPage.xhtml", Collections.emptyList());
+
+        portalUserProducerMock.roles(immutableList(ROLE_CONTENT));
+        assertEquals(1, underTest.getRequiredRolesForView(pageMatchedToDirectoryPath).size(),
+                "The role admin defines the restriction on directory which have to end with '/', it shouldn't matched to any page's name");
+        assertTrue(underTest.getRequiredRolesForView(pageMatchedToDirectoryPath).contains(ROLE_CONTENT));
+
+        assertTrue(underTest.isUserAuthorized(pageMatchedToDirectoryPath));
+    }
+
+    @Test
+    void shouldHandleOutcomes() {
+        configuration.fireEvent(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/faces/");
+
+        assertFalse(underTest.isUserAuthorizedForViewOutcome(HomePage.OUTCOME));
+    }
+
+    @Test
+    void shouldFailToLookupNotExistingOutcome() {
+        assertThrows(IllegalStateException.class, () -> {
+            underTest.isUserAuthorizedForViewOutcome("notthere");
+        });
+    }
+}

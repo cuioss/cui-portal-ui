@@ -1,0 +1,84 @@
+package de.cuioss.portal.ui.runtime.page;
+
+import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_REMEMBER_ME;
+import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERNAME;
+import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERSTORE;
+import static java.util.Objects.requireNonNull;
+
+import java.io.Serializable;
+import java.util.function.Supplier;
+
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
+import de.cuioss.portal.core.storage.ClientStorage;
+import de.cuioss.portal.core.storage.PortalClientStorage;
+import de.cuioss.portal.ui.api.ui.pages.LoginPage;
+import de.cuioss.portal.ui.api.ui.pages.LoginPageClientStorage;
+import de.cuioss.uimodel.application.LoginCredentials;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+/**
+ * {@linkplain LoginPageClientStorageImpl} is a decorator for
+ * {@linkplain ClientStorage} which provide shortcut methods for login page
+ * specific interaction
+ *
+ * @author i000576
+ */
+@RequestScoped
+@ToString
+@EqualsAndHashCode
+public class LoginPageClientStorageImpl implements LoginPageClientStorage, Serializable {
+
+    private static final long serialVersionUID = 5017201224201952867L;
+
+    @SuppressWarnings("cdi-ambiguous-dependency")
+    @Inject
+    @PortalClientStorage
+    private ClientStorage clientStorage;
+
+    /**
+     * {@linkplain Supplier} use {@linkplain ClientStorage} to extract
+     * {@linkplain LoginPage#KEY_USERSTORE}, {@linkplain LoginPage#KEY_USERNAME} and
+     * {@linkplain LoginPage#KEY_REMEMBER_ME}. The retrieved
+     * {@linkplain LoginCredentials} could be still empty if no data is available
+     * but never {@code null}
+     *
+     * @return {@linkplain LoginCredentials}
+     */
+    @Override
+    public Supplier<LoginCredentials> extractFromClientStorage() {
+        return () -> LoginCredentials.builder()
+                .rememberLoginCredentials(Boolean.parseBoolean(this.clientStorage.get(KEY_REMEMBER_ME)))
+                .userStore(clientStorage.get(KEY_USERSTORE)).username(clientStorage.get(KEY_USERNAME)).build();
+    }
+
+    /**
+     * Update local stored login credentials according passed throw parameter
+     *
+     * @param loginCredentials {@linkplain LoginCredentials} must not be
+     *                         {@code null}
+     * @throws NullPointerException if parameter is {@code null}
+     */
+    @Override
+    public void updateLocalStored(final LoginCredentials loginCredentials) {
+        requireNonNull(loginCredentials, "LoginCredentials must not be null");
+
+        this.clientStorage.put(KEY_USERSTORE, loginCredentials.getUserStore());
+
+        if (loginCredentials.isRememberLoginCredentials()) {
+            this.clientStorage.put(KEY_USERNAME, loginCredentials.getUsername());
+            this.clientStorage.put(KEY_REMEMBER_ME, Boolean.TRUE.toString());
+        } else {
+            this.clientStorage.remove(KEY_USERNAME);
+            this.clientStorage.remove(KEY_REMEMBER_ME);
+        }
+    }
+
+    @Override
+    public ClientStorage getWrapped() {
+        return clientStorage;
+    }
+
+}

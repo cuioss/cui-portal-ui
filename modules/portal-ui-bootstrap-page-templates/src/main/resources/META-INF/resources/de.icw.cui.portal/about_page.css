@@ -1,0 +1,26 @@
+/* hide empty element */
+
+.about-content span:empty {
+    display: none;
+}
+
+.about-content p:empty {
+    display: none;
+}
+
+.about-content div:empty {
+    display: none;
+}
+
+.company-phone-number,
+.company-phone-number + br,
+.company-email,
+.company-email + br {
+    display: none;
+}
+
+.solution-title {
+    margin-right: 3px;
+}
+
+

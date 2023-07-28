@@ -1,0 +1,141 @@
+.guest_login {
+    min-height: 450px;
+}
+
+.login-wrapper .container {
+    max-width: 340px;
+}
+
+.product-name, .module-name {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-login {
+    max-width: 320px;
+    color: white;
+    background-color: rgba(80, 80, 80, 0.8);
+    padding: 15px 15px 30px;
+}
+
+.guest_login .navbar {
+    display: none;
+}
+
+/* adapt layout of sticky-messages on login page */
+.login-wrapper .sticky-messages .single-sticky-message {
+    margin-bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.login-wrapper .sticky-messages {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.login-wrapper .sticky-messages + .container .logo {
+    display: none;
+}
+
+@media screen and (min-height: 600px) and (max-height: 720px) {
+    .form-login {
+        position: fixed;
+        width: 100%;
+        bottom: 5%;
+    }
+}
+
+@media screen and (max-height: 599px) {
+    .logo {
+        display: none;
+    }
+}
+
+/* xs media definition */
+@media screen and (min-width: 350px) and (max-width: 767px) {
+    .login-wrapper .container {
+        width: 95%;
+    }
+}
+
+/* xxs media definition */
+@media screen and (min-width: 200px) and (max-width: 349px) {
+    .login-wrapper .container {
+        width: 95%;
+        margin-right: 1%;
+    }
+
+    .form-login {
+        width: 100%;
+    }
+
+    .login-wrapper + .page-footer {
+        background-color: rgba(80, 80, 80, 0.8);
+        color: white;
+        min-height: 25px;
+    }
+
+    .login-wrapper + .page-footer p {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+/* mobile device adaptation  */
+@media screen and (orientation: landscape) and (max-width: 767px) {
+    .login-wrapper .container {
+        padding-top: 10px;
+    }
+
+    .login-wrapper .logo {
+        display: none;
+    }
+
+    .form-login {
+        padding-bottom: 15px;
+    }
+
+    .form-login .product-name {
+        margin-top: 0;
+        font-size: 16px;
+    }
+
+    .form-login .module-name {
+        margin-bottom: 10px;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    .form-login .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-login hr ~ a:before {
+        clear: both;
+    }
+
+    .form-login hr ~ a:last-of-type {
+        margin-top: 0;
+    }
+
+    .form-login hr ~ a.btn-block {
+        width: 49%;
+        display: inline-block;
+        position: static;
+    }
+
+    .login-wrapper + .page-footer {
+        background-color: rgba(80, 80, 80, 0.8);
+        color: white;
+        min-height: 25px;
+    }
+
+    .login-wrapper + .page-footer p {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
