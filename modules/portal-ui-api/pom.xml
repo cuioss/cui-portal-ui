@@ -29,5 +29,10 @@
             <groupId>de.cuioss.portal.core</groupId>
             <artifactId>portal-core</artifactId>
         </dependency>
+        <!-- Test -->
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+        </dependency>
     </dependencies>
 </project>

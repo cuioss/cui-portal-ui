@@ -38,7 +38,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Implementation of a {@link LazyLoadingThreadModel <T>} using the
+ * Implementation of a {@link LazyLoadingThreadModel} using the
  * {@link ThreadManager} to retrieve the result and errors from the request.
  *
  * Will wait max
