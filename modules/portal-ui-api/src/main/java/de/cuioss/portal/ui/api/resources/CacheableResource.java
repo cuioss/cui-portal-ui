@@ -13,9 +13,9 @@ import javax.faces.context.FacesContext;
  */
 public abstract class CacheableResource extends CuiResource {
 
-    private static final String HEADER_E_TAG = "ETag";
+    static final String HEADER_E_TAG = "ETag";
 
-    private static final String HEADER_IF_NONE_MATCH = "If-None-Match";
+    static final String HEADER_IF_NONE_MATCH = "If-None-Match";
 
     /**
      * Generate a unique string for the current resource file version.
@@ -37,7 +37,8 @@ public abstract class CacheableResource extends CuiResource {
     public boolean userAgentNeedsUpdate(final FacesContext context) {
         final var requestHeaders = context.getExternalContext().getRequestHeaderMap();
 
-        return (!requestHeaders.containsKey(HEADER_IF_NONE_MATCH) || !getETag().equals(requestHeaders.get(HEADER_IF_NONE_MATCH)));
+        return (!requestHeaders.containsKey(HEADER_IF_NONE_MATCH)
+                || !getETag().equals(requestHeaders.get(HEADER_IF_NONE_MATCH)));
     }
 
     /**

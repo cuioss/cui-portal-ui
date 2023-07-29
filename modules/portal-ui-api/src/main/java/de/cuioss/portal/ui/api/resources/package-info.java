@@ -1,6 +1,5 @@
 /**
- * FIXME owolff -> Move to core-jsf: Only reason for JSF-dependency on spec
- * module
+ * Base-classes for modeling {@link javax.faces.application.Resource}s
  *
  * @author Matthias Walliczek
  */

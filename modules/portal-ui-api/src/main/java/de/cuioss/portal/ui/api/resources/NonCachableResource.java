@@ -12,14 +12,16 @@ import javax.faces.context.FacesContext;
  */
 public abstract class NonCachableResource extends CuiResource {
 
-    private static final String HEADER_ACCEPT = "Accept";
-    private static final String HEADER_CACHE_CONTROL = "Cache-Control";
+    static final String MAX_AGE_0 = "max-age=0";
+    static final String PUBLIC = "public";
+    static final String HEADER_ACCEPT = "Accept";
+    static final String HEADER_CACHE_CONTROL = "Cache-Control";
 
     @Override
     public Map<String, String> getResponseHeaders() {
         Map<String, String> responseHeaders = new HashMap<>();
-        responseHeaders.put(HEADER_ACCEPT, "public");
-        responseHeaders.put(HEADER_CACHE_CONTROL, "max-age=0");
+        responseHeaders.put(HEADER_ACCEPT, PUBLIC);
+        responseHeaders.put(HEADER_CACHE_CONTROL, MAX_AGE_0);
         return responseHeaders;
     }
 
