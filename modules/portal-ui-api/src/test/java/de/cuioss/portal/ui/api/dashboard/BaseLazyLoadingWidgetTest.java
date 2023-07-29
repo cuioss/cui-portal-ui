@@ -13,7 +13,7 @@ import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHash
 import lombok.Getter;
 
 @EnableAutoWeld
-@AddBeanClasses({ SupportProducer.class })
+@AddBeanClasses({ LazyLoadingTestSupportProducer.class })
 class BaseLazyLoadingWidgetTest
         implements ShouldBeNotNull<TestLazyLoadingWidget>, ShouldImplementEqualsAndHashCode<TestLazyLoadingWidget> {
 

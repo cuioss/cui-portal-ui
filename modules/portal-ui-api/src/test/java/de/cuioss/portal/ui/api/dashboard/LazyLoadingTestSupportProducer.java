@@ -14,7 +14,7 @@ import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
 
 @ApplicationScoped
-class SupportProducer {
+public class LazyLoadingTestSupportProducer {
 
     @Produces
     @Dependent
@@ -24,7 +24,7 @@ class SupportProducer {
     @Dependent
     private LazyLoadingThreadModel<String> threadModell;
 
-    public SupportProducer() {
+    public LazyLoadingTestSupportProducer() {
         viewController = request -> {
             // TODO Auto-generated method stub
 
