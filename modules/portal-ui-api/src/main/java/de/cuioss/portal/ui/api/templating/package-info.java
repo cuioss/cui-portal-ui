@@ -56,7 +56,7 @@
  * to be registered as managed-bean under the key
  * {@value de.cuioss.portal.ui.api.PortalCoreBeanNames#MULTI_TEMPLATING_MAPPER_BEAN_NAME}
  * </p>
- * <h3>Overriding Existing templates</h3>
+ * <h3>Overriding Existing Templates</h3>
  * <p>
  * If a concrete web module wants to to overwrite one or more of the templates,
  * e.g "root.xhtml" it needs to:
