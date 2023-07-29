@@ -1,10 +1,9 @@
-package de.cuioss.portal.ui.runtime.application.factory;
+package de.cuioss.portal.ui.runtime.application;
 
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationFactory;
 import javax.faces.application.ApplicationWrapper;
 
-import de.cuioss.portal.ui.runtime.application.PortalApplication;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +17,7 @@ public class PortalApplicationFactory extends ApplicationFactory {
 
     @Getter
     private final ApplicationFactory wrapped;
-    private volatile Application application;
+    private Application application;
 
     /**
      * Returns an instance of {@link PortalApplication} which wraps the original
@@ -49,7 +48,7 @@ public class PortalApplicationFactory extends ApplicationFactory {
     private Application createPortalApplication(final Application application) {
         synchronized (PortalApplicationFactory.class) {
             var toBeWrapped = application;
-            while (!(toBeWrapped instanceof PortalApplication) && toBeWrapped instanceof ApplicationWrapper) {
+            while (!(toBeWrapped instanceof PortalApplication) && (toBeWrapped instanceof ApplicationWrapper)) {
                 toBeWrapped = ((ApplicationWrapper) toBeWrapped).getWrapped();
             }
 

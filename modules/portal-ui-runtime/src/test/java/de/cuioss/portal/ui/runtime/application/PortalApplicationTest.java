@@ -21,7 +21,6 @@ import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.configuration.impl.producer.PortalProjectStageImpl;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
-import de.cuioss.portal.ui.runtime.application.factory.PortalApplicationFactory;
 import de.cuioss.portal.ui.runtime.support.EnablePortalCoreEnvironment;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;

@@ -1,6 +1,6 @@
-package de.cuioss.portal.ui.runtime.application.factory;
+package de.cuioss.portal.ui.runtime.application;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.faces.FactoryFinder;
@@ -8,7 +8,6 @@ import javax.faces.application.ApplicationFactory;
 
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.ui.runtime.application.PortalApplication;
 import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
@@ -31,7 +30,7 @@ class PortalApplicationFactoryTest implements JsfEnvironmentConsumer {
 
         var wrapped = factory.getApplication();
 
-        assertEquals(PortalApplication.class, wrapped.getClass());
+        assertInstanceOf(PortalApplication.class, wrapped);
     }
 
     @Test
@@ -44,7 +43,7 @@ class PortalApplicationFactoryTest implements JsfEnvironmentConsumer {
 
         var wrapped = factory.getApplication();
 
-        assertEquals(PortalApplication.class, wrapped.getClass());
+        assertInstanceOf(PortalApplication.class, wrapped);
     }
 
 }

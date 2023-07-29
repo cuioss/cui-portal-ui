@@ -17,7 +17,7 @@
         <message-bundle>de.cuioss.portal.ui.i18n.jsf_messages</message-bundle>
     </application>
     <factory>
-        <application-factory>de.cuioss.portal.ui.runtime.application.factory.PortalApplicationFactory</application-factory>
+        <application-factory>de.cuioss.portal.ui.runtime.application.PortalApplicationFactory</application-factory>
     </factory>
 
     <converter>

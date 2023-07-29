@@ -1,6 +1,5 @@
 /**
- * Provides theming related identifier. See
- * com.icw.ehf.cui.core.api.application.theme on how theming works within cui
+ * Provides theming related identifier.
  *
  * @author Oliver Wolff
  */

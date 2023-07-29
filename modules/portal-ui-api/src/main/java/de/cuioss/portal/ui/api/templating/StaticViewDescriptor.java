@@ -5,8 +5,8 @@ import java.util.List;
 
 /**
  * Utilized for statically extending the default {@link MultiViewMapper} defined
- * by cui-portal-core-cdi-impl. Provides information which views are to be
- * handled by which concrete faces-Directory, see package-info for details.
+ * by portal-ui-api. Provides information which views are to be handled by which
+ * concrete faces-Directory, see package-info for details.
  *
  * @author Oliver Wolff
  */
