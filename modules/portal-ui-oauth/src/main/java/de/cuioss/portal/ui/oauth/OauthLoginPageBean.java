@@ -27,7 +27,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Page Bean for the Oauth2 Login Page Bean. Supports two mode:<br />
+ * Page Bean for the Oauth2 Login Page Bean. Supports two mode:
  * <ul>
  * <li>Pseudo login page bean: The login page bean consists only of the view
  * action directly redirecting either to the oauth server or into the
@@ -36,7 +36,7 @@ import lombok.ToString;
  * server login page. When using deep linking, this page is skipped.</li>
  * </ul>
  * In both mode it is checked if page is accessed via redirect from oauth server
- * with matching parameters. <br />
+ * with matching parameters.
  *
  * @author Matthias Walliczek
  */
