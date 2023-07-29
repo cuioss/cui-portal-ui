@@ -45,7 +45,6 @@ import lombok.Setter;
  * An instance of {@link PortalTestConfiguration} is accessible as protected
  * field {@code configuration}
  * </p>
- * <p>
  * It implements to actual tests:
  * <ul>
  * <li>{@code verifyBeanProperties()}: It will be run if the test-class is
@@ -58,8 +57,7 @@ import lombok.Setter;
  * compared to previous variants. If you want a full blown test use
  * {@link ValueObjectTest} directly. If you want to adapt the test you must
  * override it. Previous annotation will not work.</li>
- * <ul>
- * </p>
+ * </ul>
  *
  * @author Oliver Wolff
  *

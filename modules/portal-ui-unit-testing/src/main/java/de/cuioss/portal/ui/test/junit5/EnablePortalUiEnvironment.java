@@ -40,8 +40,8 @@ import de.cuioss.test.jsf.producer.JsfObjectsProducers;
  * <li>{@link EnableAutoWeld}</li>
  * <li>{@link EnablePortalConfiguration}</li>
  * <li>{@link EnableJsfEnvironment}</li>
- * <li>{@link JsfTestConfiguration} with {@link BasicApplicationConfiguration}</
- * li>
+ * <li>{@link JsfTestConfiguration} with
+ * {@link BasicApplicationConfiguration}</li>
  * </ul>
  * <p>
  * In addition it adds the {@link JsfObjectsProducers},
@@ -51,11 +51,12 @@ import de.cuioss.test.jsf.producer.JsfObjectsProducers;
  * </p>
  * <p>
  * It explicitly activates the Scopes:
+ * <ul>
  * <li>{@link RequestScoped}</li>
  * <li>{@link SessionScoped}</li>
  * <li>{@link ConversationScoped}</li>
  * <li>{@link ViewScoped}</li>
- * </p>
+ * </ul>
  * <p>
  * As a result it bootstraps a fully enabled cdi / portal / jsf container that
  * handles configuration as well.
