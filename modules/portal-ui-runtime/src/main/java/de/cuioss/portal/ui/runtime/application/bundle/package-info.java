@@ -10,7 +10,8 @@
  * {@link de.icw.cui.portal.configuration.application.bundle.PortalResourceBundleBean}
  * It is of type {@link java.util.ResourceBundle} and unifies all configured
  * {@link java.util.ResourceBundle}s for the portal. In order to use it within a
- * bean use
+ * bean use:
+ * </p>
  *
  * <pre>
  *
@@ -26,7 +27,6 @@
  * {@code #(msgs['page.dashboard.title'])}
  * </pre>
  *
- * </p>
  * <h2>Configuration</h2>
  * <p>
  * Extending the {@link java.util.ResourceBundle}s is quite easy on a module
@@ -34,7 +34,7 @@
  * {@link de.cuioss.portal.ui.api.cdi.api.bundle.PortalResourceBundleDescriptor}
  * annotated with
  * {@link de.cuioss.portal.ui.api.cdi.api.bundle.ResourceBundleDescripor}. The
- * actual configuration will be done withn
+ * actual configuration will be done with
  * {@link de.icw.cui.portal.configuration.bundles.impl.ResourceBundleRegistryImpl}
  * </p>
  */

@@ -7,7 +7,6 @@
  * {@link de.icw.cui.portal.configuration.PortalConfigurationKeys#PORTAL_CUSTOMIZATION_DIR}.
  * </p>
  *
- * <p>
  * Within this folder a specific structure is expected:
  * <ul>
  * <li>/i18n: To customize message properties</li>
@@ -18,11 +17,6 @@
  * cui-portal as /faces/guest/login.xhtml). implicit conventions : overwrite
  * only possible up from /faces folder!</li>
  * </ul>
- * </p>
- * <p>
- * See also:
- * <a href="https://wiki.icw.int/display/CUI/CUI+Customization+concept">CUI
- * Customization concept</a>
  *
  */
 package de.cuioss.portal.ui.runtime.application.customization;

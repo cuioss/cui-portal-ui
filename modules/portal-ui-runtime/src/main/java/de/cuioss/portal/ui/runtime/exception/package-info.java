@@ -1,7 +1,6 @@
 /**
  * Provides the deltaspike based exception handler for the portal, dealing with
  * the following exceptions:
- * <p>
  * {@link de.cuioss.portal.ui.api.exception.ViewRelatedExceptionHandler}:
  * <ul>
  * <li>{@link javax.faces.application.ViewExpiredException}</li>
@@ -12,7 +11,6 @@
  * {@link de.cuioss.portal.ui.api.ui.pages.HomePage#OUTCOME} or
  * {@link de.cuioss.portal.ui.api.ui.pages.LoginPage#OUTCOME} depending on
  * {@link de.cuioss.portal.authentication.AuthenticatedUserInfo#isAuthenticated()}
- * </p>
  * <p>
  * {@link de.cuioss.portal.ui.api.exception.FallBackExceptionHandler}: Last line
  * of defense displaying the error page for all exceptions that are not handled.

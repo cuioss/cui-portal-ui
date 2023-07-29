@@ -24,11 +24,11 @@
  * fires an {@link de.cuioss.portal.ui.api.locale.LocaleChangeEvent} on changing
  * of the locale. If you want to listen to this event, the listener can be
  * implemented like:
+ * </p>
  *
  * <pre>
  * {@code void actOnLocaleChangeEven(@Observes @LocaleChangeEvent Locale newLocale)}
  * </pre>
  *
- * </p>
  */
 package de.cuioss.portal.ui.runtime.application.locale;
