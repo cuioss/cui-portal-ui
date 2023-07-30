@@ -1,5 +1,7 @@
 package de.cuioss.portal.ui.oauth;
 
+import java.io.Serializable;
+
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -23,9 +25,11 @@ import lombok.ToString;
  */
 @RequestScoped
 @Named
-@EqualsAndHashCode(of = "servletRequest", doNotUseGetters = true)
-@ToString(of = "servletRequest", doNotUseGetters = true)
-public class OauthIFrameLogoutPageBean {
+@EqualsAndHashCode(of = "authenticatedUserInfo", doNotUseGetters = true)
+@ToString(of = "authenticatedUserInfo", doNotUseGetters = true)
+public class OauthIFrameLogoutPageBean implements Serializable {
+
+    private static final long serialVersionUID = 7139554877749164888L;
 
     @Inject
     @PortalAuthenticationFacade

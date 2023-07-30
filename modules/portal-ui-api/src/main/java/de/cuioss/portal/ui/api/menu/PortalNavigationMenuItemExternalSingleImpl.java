@@ -4,12 +4,14 @@ import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemExternalSingle;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Oliver Wolff
  *
  */
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class PortalNavigationMenuItemExternalSingleImpl extends PortalNavigationMenuItemImplBase
         implements NavigationMenuItemExternalSingle {
 

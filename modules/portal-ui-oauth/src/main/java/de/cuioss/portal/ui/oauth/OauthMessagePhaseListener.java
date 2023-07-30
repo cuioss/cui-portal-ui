@@ -58,8 +58,9 @@ public class OauthMessagePhaseListener implements PhaseListener {
             log.trace("committed: {}", response.isCommitted());
         }
         if (CheckContextState.isResponseNotComplete(context) && !response.isCommitted()
-                && null != servletRequestProvider.get().getSession(false)
-                && null != servletRequestProvider.get().getSession().getAttribute(MESSAGES_IDENTIFIER)) {
+                && (null != servletRequestProvider.get().getSession(false))
+                && (null != servletRequestProvider.get().getSession().getAttribute(MESSAGES_IDENTIFIER))) {
+            @SuppressWarnings("unchecked")
             var messages = (List<FacesMessage>) servletRequestProvider.get().getSession()
                     .getAttribute(MESSAGES_IDENTIFIER);
             log.trace("restore messages: {}", messages);
