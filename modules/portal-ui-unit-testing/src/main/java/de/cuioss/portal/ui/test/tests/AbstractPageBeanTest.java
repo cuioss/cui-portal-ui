@@ -15,7 +15,6 @@ import org.junit.platform.commons.support.AnnotationSupport;
 
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.generator.junit.EnableGeneratorController;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
@@ -38,8 +37,7 @@ import lombok.Setter;
 /**
  * Base class for testing Page / Backing beans.
  * <p>
- * It uses {@link EnablePortalUiEnvironment} for environment setup and acts as
- * {@link JsfEnvironmentConsumer}.
+ * It acts as {@link JsfEnvironmentConsumer}.
  * </p>
  * <p>
  * An instance of {@link PortalTestConfiguration} is accessible as protected

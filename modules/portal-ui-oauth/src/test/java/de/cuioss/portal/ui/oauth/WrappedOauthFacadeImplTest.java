@@ -12,7 +12,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAlternatives;
@@ -21,7 +20,6 @@ import org.junit.jupiter.api.Test;
 
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.LoginPagePath;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
@@ -62,9 +60,6 @@ class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeIm
     @LoginPagePath
     private String loginUrl = "login.jsf";
 
-    @Produces
-    HttpServletRequest servletRequest;
-
     @Inject
     @PortalAuthenticationFacade
     private Oauth2AuthenticationFacadeMock oauth2AuthenticationFacadeMock;
@@ -79,7 +74,6 @@ class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeIm
 
     @BeforeEach
     void beforeTest() {
-        servletRequest = ServletAdapterUtil.getRequest(getFacesContext());
         configuration.fireEvent();
     }
 

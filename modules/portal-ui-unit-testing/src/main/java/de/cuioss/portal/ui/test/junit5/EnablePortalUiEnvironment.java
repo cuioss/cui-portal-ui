@@ -30,6 +30,7 @@ import de.cuioss.test.jsf.config.JsfTestConfiguration;
 import de.cuioss.test.jsf.defaults.BasicApplicationConfiguration;
 import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
 import de.cuioss.test.jsf.producer.JsfObjectsProducers;
+import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducers;
 
 /**
  * Using this annotations at type-level of a junit 5 test defines the basic
@@ -74,7 +75,7 @@ import de.cuioss.test.jsf.producer.JsfObjectsProducers;
         PortalNavigationConfiguration.class })
 @AddBeanClasses({ PortalProjectStageImpl.class, PortalMirrorResourceBundle.class, PortalLocaleProducerMock.class,
         PortalStickyMessageProducerMock.class, PortalMessageProducerMock.class, JsfObjectsProducers.class,
-        CurrentViewProducer.class, NavigationHandlerProducer.class })
+        ServletObjectsFromJSFContextProducers.class, CurrentViewProducer.class, NavigationHandlerProducer.class })
 @ActivateScopes({ RequestScoped.class, SessionScoped.class, ConversationScoped.class, ViewScoped.class })
 public @interface EnablePortalUiEnvironment {
 }
