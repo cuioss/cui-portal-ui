@@ -22,15 +22,11 @@ Provides the jsf based UI-components defining the cuioss-portal
 
 [source,xml]
 ----
-    <dependency>
-        <groupId>de.cuioss.portal.ui</groupId>
-        <artifactId>cui-portal-ui</artifactId>
-    </dependency>
+<dependency>
+    <groupId>de.cuioss.portal.ui</groupId>
+    <artifactId>bom</artifactId>
+    <version>VERSION</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
 ---- 
-
-
-=== Further Steps
-
-* `src/site/asciidoc/about.adoc`: Adjust content
-* Review / Add Collaborators
-* Add (link) the resulting maven-documentation: https://github.com/cuioss/cuioss.github.io/edit/main/README.md[github.io-documentation] 
