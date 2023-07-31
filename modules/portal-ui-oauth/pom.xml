@@ -10,19 +10,6 @@
     <artifactId>portal-ui-oauth</artifactId>
     <name>Portal UI oauth</name>
     <description>Provides ui infrastructure to use oauth2</description>
-    <properties>
-        <version.jakarta.ws.rs-api>2.1.6</version.jakarta.ws.rs-api>
-    </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>jakarta.ws.rs</groupId>
-                <artifactId>jakarta.ws.rs-api</artifactId>
-                <version>${version.jakarta.ws.rs-api}</version>
-                <scope>provided</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>de.cuioss.portal.ui</groupId>

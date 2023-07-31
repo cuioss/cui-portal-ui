@@ -1,6 +1,5 @@
 package de.cuioss.portal.ui.runtime.application;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static de.cuioss.portal.ui.api.PortalCoreBeanNames.STICKY_MESSAGE_BEAN_NAME;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 import static java.text.MessageFormat.format;
@@ -74,7 +73,7 @@ public class StickyMessageProducerBean implements Serializable, StickyMessagePro
 
     @Override
     public void setMessageAsString(final String messageString, final ContextState severity, final Object... parameter) {
-        if (newArrayList(parameter).isEmpty()) {
+        if (mutableList(parameter).isEmpty()) {
             addMessage(new StickyMessage(true, severity, new DisplayName(messageString)));
         } else {
             addMessage(new StickyMessage(true, severity, new DisplayName(format(messageString, parameter))));
