@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
-import de.cuioss.portal.ui.api.exceptions.DefaultErrorMessage;
+import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 

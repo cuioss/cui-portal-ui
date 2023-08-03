@@ -1,4 +1,4 @@
-package de.cuioss.portal.ui.api.exceptions;
+package de.cuioss.portal.ui.api.exception;
 
 import java.io.Serializable;
 

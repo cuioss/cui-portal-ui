@@ -21,7 +21,7 @@ import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.configuration.application.PortalProjectStageProducer;
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
-import de.cuioss.portal.ui.api.exceptions.DefaultErrorMessage;
+import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
 import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
 import de.cuioss.portal.ui.api.ui.pages.ErrorPage;

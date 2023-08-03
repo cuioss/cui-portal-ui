@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
-import de.cuioss.portal.ui.api.exceptions.DefaultErrorMessage;
+import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
 import lombok.Getter;

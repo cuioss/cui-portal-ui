@@ -16,7 +16,7 @@ import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
-import de.cuioss.portal.ui.api.exceptions.DefaultErrorMessage;
+import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.runtime.support.MockExceptionEvent;

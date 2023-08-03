@@ -19,7 +19,7 @@ import de.cuioss.portal.authentication.oauth.OauthAuthenticationException;
 import de.cuioss.portal.core.bundle.PortalResourceBundle;
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
-import de.cuioss.portal.ui.api.exceptions.DefaultErrorMessage;
+import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
 import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;

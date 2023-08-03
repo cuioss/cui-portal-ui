@@ -3,7 +3,7 @@ package de.cuioss.portal.ui.api.ui.pages;
 import java.io.Serializable;
 
 import de.cuioss.portal.core.storage.PortalSessionStorage;
-import de.cuioss.portal.ui.api.exceptions.DefaultErrorMessage;
+import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 
 /**
  * Specifies the page bean backing the error page.

@@ -3,4 +3,4 @@
  *
  * @author Oliver Wolff
  */
-package de.cuioss.portal.ui.api.exceptions;
+package de.cuioss.portal.ui.api.exception;
