@@ -46,7 +46,7 @@
  * actual source dynamic. The default implementation will resolve them to
  * "/META-INF/templates/portal/technical_root.xhtml"
  * <h2>Implementation Details</h2>
- * 
+ *
  * <p>
  * While the
  * {@link de.cuioss.portal.ui.api.application.templating.ViewResourceHandler}

@@ -20,12 +20,12 @@ public class ExceptionAsEvent implements Serializable {
 
     public ExceptionAsEvent(Throwable exception) {
         this.exception = exception;
-        this.outcome = HandleOutcome.NO_OP;
+        outcome = HandleOutcome.NO_OP;
     }
 
     /**
      * Sets the outcome of the handler
-     * 
+     *
      * @param outcome must not be null
      * @return the object itself
      */

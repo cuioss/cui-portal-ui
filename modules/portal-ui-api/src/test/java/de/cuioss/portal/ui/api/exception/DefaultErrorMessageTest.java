@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import de.cuioss.portal.core.storage.impl.MapStorageImpl;
-import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.test.valueobjects.ValueObjectTest;
 import de.cuioss.test.valueobjects.api.contracts.VerifyConstructor;
 
