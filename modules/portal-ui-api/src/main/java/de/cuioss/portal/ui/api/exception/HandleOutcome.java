@@ -1,7 +1,7 @@
 package de.cuioss.portal.ui.api.exception;
 
 /**
- * Defines the possible outcome of the concrete {@link SingleExceptionHandler}
+ * Defines the possible outcome of the concrete {@link PortalExceptionHandler}
  */
 public enum HandleOutcome {
 
@@ -9,6 +9,12 @@ public enum HandleOutcome {
      * Indicates, that the event was solely logged
      */
     LOGGED,
+
+    /**
+     * Indicates, that the exception was thrown again, usually in context of
+     * development
+     */
+    RE_THROWN,
 
     /**
      * Indicates, that a user-message was created / added
@@ -21,7 +27,7 @@ public enum HandleOutcome {
     NO_OP,
 
     /**
-     * The handler executes a redirect
+     * The handler executed a redirect
      */
     REDIRECT;
 

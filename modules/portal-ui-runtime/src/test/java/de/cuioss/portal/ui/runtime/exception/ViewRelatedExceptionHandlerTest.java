@@ -21,13 +21,13 @@ import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthenticatedException;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthorizedException;
+import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.history.PortalHistoryManager;
 import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
 import de.cuioss.portal.ui.runtime.application.view.ViewSuppressedException;
-import de.cuioss.portal.ui.runtime.support.MockExceptionEvent;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
 import de.cuioss.portal.ui.test.mocks.PortalMessageProducerMock;
@@ -72,16 +72,15 @@ class ViewRelatedExceptionHandlerTest
     @PortalViewRestrictionManager
     private PortalViewRestrictionManagerMock viewRestrictionManagerMock;
 
-    private static final ViewDescriptor DESCRIPTOR_SUPRRESSED_VIEW = ViewDescriptorImpl.builder()
-            .withViewId("suppressedViewId").withLogicalViewId("suppressedViewId").build();
+    static final ViewDescriptor DESCRIPTOR_SUPRRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")
+            .withLogicalViewId("suppressedViewId").build();
 
     @Test
     void shouldHandleViewSuppressedExceptionForLoggedInUser() {
-        final var event = new MockExceptionEvent<>(
-                new ViewSuppressedException(DESCRIPTOR_SUPRRESSED_VIEW));
+        final var event = new ExceptionAsEvent(new ViewSuppressedException(DESCRIPTOR_SUPRRESSED_VIEW));
 
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
-        underTest.handleViewSupressedException(event);
+        underTest.handle(event);
         assertTrue(event.isHandled());
         assertRedirect(VIEW_HOME_LOGICAL_VIEW_ID);
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_SUPPRESSED_KEY);
@@ -89,11 +88,10 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldHandleViewSuppressedExceptionForLoggedOutUser() {
-        final var event = new MockExceptionEvent<>(
-                new ViewSuppressedException(DESCRIPTOR_SUPRRESSED_VIEW));
+        final var event = new ExceptionAsEvent(new ViewSuppressedException(DESCRIPTOR_SUPRRESSED_VIEW));
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         portalUserProducerMock.authenticated(false);
-        underTest.handleViewSupressedException(event);
+        underTest.handle(event);
         assertTrue(event.isHandled());
         assertRedirect(VIEW_LOGIN_LOGICAL_VIEW_ID);
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_SUPPRESSED_KEY);
@@ -101,8 +99,7 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldHandleViewExpiredExceptionForLoggedInUser() {
-        final var event = new MockExceptionEvent<>(
-                new ViewExpiredException(VIEW_PREFERENCES_LOGICAL_VIEW_ID));
+        final var event = new ExceptionAsEvent(new ViewExpiredException(VIEW_PREFERENCES_LOGICAL_VIEW_ID));
         // Prepare history manager
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         // go to another page without notifying the historManger: Needed because
@@ -110,7 +107,7 @@ class ViewRelatedExceptionHandlerTest
         historyManagerMock.addCurrentUriToHistory(DESCRIPTOR_PREFERENCES);
 
         getRequestConfigDecorator().setViewId(VIEW_HOME_LOGICAL_VIEW_ID);
-        underTest.handleViewExpiredException(event);
+        underTest.handle(event);
         assertTrue(event.isHandled());
         assertRedirect(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_EXPIRED_KEY);
@@ -118,10 +115,10 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldRedirectToLoginOnNotAuthenticatedUser() {
-        final var event = new MockExceptionEvent<>(new UserNotAuthenticatedException());
+        final var event = new ExceptionAsEvent(new UserNotAuthenticatedException());
         // Prepare history manager
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
-        underTest.handleUserNotAuthenticatedException(event);
+        underTest.handle(event);
         assertRedirect(VIEW_LOGIN_LOGICAL_VIEW_ID);
         // Preferences should be put on top of the navigation for redirect over
         // login.
@@ -130,12 +127,12 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldHandleNotAuthorizedExceptionWithRedirectToHome() {
-        final var event = new MockExceptionEvent<>(
+        final var event = new ExceptionAsEvent(
                 new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
                         Collections.emptyList(), Collections.emptyList()));
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
 
-        underTest.handleUserNotAuthorizedException(event);
+        underTest.handle(event);
 
         LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, WARNING_KEY_PORTAL_002);
 
@@ -150,12 +147,12 @@ class ViewRelatedExceptionHandlerTest
 
         viewRestrictionManagerMock.setAuthorized(false);
 
-        final var event = new MockExceptionEvent<>(
+        final var event = new ExceptionAsEvent(
                 new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
                         Collections.emptyList(), Collections.emptyList()));
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
 
-        underTest.handleUserNotAuthorizedException(event);
+        underTest.handle(event);
 
         LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, WARNING_KEY_PORTAL_002);
         assertTrue(event.isHandled());
@@ -167,12 +164,11 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldHandleViewExpiredExceptionForLoggedOutUser() {
-        final var event = new MockExceptionEvent<>(
-                new ViewExpiredException(VIEW_PREFERENCES_LOGICAL_VIEW_ID));
+        final var event = new ExceptionAsEvent(new ViewExpiredException(VIEW_PREFERENCES_LOGICAL_VIEW_ID));
         // Prepare history manager
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         portalUserProducerMock.authenticated(false);
-        underTest.handleViewExpiredException(event);
+        underTest.handle(event);
         assertTrue(event.isHandled());
         assertRedirect(VIEW_LOGIN_LOGICAL_VIEW_ID);
     }

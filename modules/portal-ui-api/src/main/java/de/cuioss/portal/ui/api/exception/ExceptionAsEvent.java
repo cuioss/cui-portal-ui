@@ -6,6 +6,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+/**
+ * Simplified version of deltaspikes ExceptionToCatchEvent
+ */
 @EqualsAndHashCode
 @ToString
 public class ExceptionAsEvent implements Serializable {

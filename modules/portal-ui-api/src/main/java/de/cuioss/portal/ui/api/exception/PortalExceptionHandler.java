@@ -4,7 +4,7 @@ package de.cuioss.portal.ui.api.exception;
  * A Successor of deltaspikes ExcpetionHandler. Not that elegant but works
  * anyway. In essence it defines a handler for specific / single exception;
  */
-public interface SingleExceptionHandler {
+public interface PortalExceptionHandler {
 
     /**
      * @param exceptionEvent the exception that may be handled. If this Handler

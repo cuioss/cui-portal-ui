@@ -8,12 +8,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Provider;
-
-import org.apache.deltaspike.core.api.exception.control.ExceptionHandler;
-import org.apache.deltaspike.core.api.exception.control.Handles;
-import org.apache.deltaspike.core.api.exception.control.event.ExceptionEvent;
 
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.jsf.api.common.util.CheckContextState;
@@ -22,6 +17,8 @@ import de.cuioss.portal.configuration.application.PortalProjectStageProducer;
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
+import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
+import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
 import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
 import de.cuioss.portal.ui.api.ui.pages.ErrorPage;
@@ -38,12 +35,10 @@ import de.cuioss.uimodel.application.CuiProjectStage;
  *
  * @author Oliver Wolff
  */
-@ExceptionHandler
-@Named
 @RequestScoped
 public class FallBackExceptionHandler implements Serializable {
 
-    private static final CuiLogger log = new CuiLogger(FallBackExceptionHandler.class);
+    private static final CuiLogger LOGGER = new CuiLogger(FallBackExceptionHandler.class);
 
     private static final long serialVersionUID = -1197300817644970750L;
 
@@ -53,13 +48,13 @@ public class FallBackExceptionHandler implements Serializable {
 
     private static final String UNSPECIFIED_EXCEPTION_SUFFIX = ", errorTicket=";
 
-    private static final String UNSPECIFIED_EXCEPTION_WITHOUT_VIEW = "Portal-112: An unspecified exception has been caught and handled by fallback strategy";
+    static final String UNSPECIFIED_EXCEPTION_WITHOUT_VIEW = "Portal-112: An unspecified exception has been caught and handled by fallback strategy";
 
     private static final String EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_SESSION = "Portal-113: Detected an invalidated session, trying to recreate, reason={}";
 
     private static final String EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_NEW_SESSION = "Portal-502: Unable to recreate session, reason={}";
 
-    private static final String PORTAL_130_ERROR_ON_ERROR_PAGE = "Portal-130: Previous error occurs on error page. This will lead to damaged output and is a sign of corrupted deployment";
+    static final String PORTAL_130_ERROR_ON_ERROR_PAGE = "Portal-130: Previous error occurs on error page. This will lead to damaged output and is a sign of corrupted deployment";
 
     @Inject
     @PortalSessionStorage
@@ -80,22 +75,28 @@ public class FallBackExceptionHandler implements Serializable {
     /**
      * Actual handler, see class documentation for details.
      *
-     * @param evt to be handled
+     * @param exceptionEvent to be handled
+     * @throws IllegalStateException in cased of prijectStage being Development
      */
-    void handleFallBack(@Handles final ExceptionEvent<Throwable> evt) {
-        if (projectStage.isDevelopment()) {
-            log.debug("Fallback exception handling omitted due to development stage.");
-            evt.throwOriginal();
+    public void handleFallBack(final ExceptionAsEvent exceptionEvent) {
+        if (exceptionEvent.isHandled()) {
+            LOGGER.debug("Given event '%s' already handled, nothing to do here", exceptionEvent);
             return;
         }
+        if (projectStage.isDevelopment()) {
+            LOGGER.debug("Fallback exception handling omitted due to development stage.");
+            exceptionEvent.handled(HandleOutcome.RE_THROWN);
+            throw new IllegalStateException(exceptionEvent.getException());
+        }
 
-        final var throwable = evt.getException();
+        final var throwable = exceptionEvent.getException();
         final var msg = null != throwable.getMessage() ? throwable.getMessage() : throwable.toString();
         final var facesContext = FacesContext.getCurrentInstance();
         if (CheckContextState.isResponseNotComplete(facesContext)
                 && !facesContext.getExternalContext().isResponseCommitted()) {
             var errorTicket = UUID.randomUUID().toString();
-            log.error(UNSPECIFIED_EXCEPTION + currentView + UNSPECIFIED_EXCEPTION_SUFFIX + errorTicket, throwable);
+            LOGGER.error(UNSPECIFIED_EXCEPTION + currentView + UNSPECIFIED_EXCEPTION_SUFFIX + errorTicket, throwable);
+            exceptionEvent.handled(HandleOutcome.LOGGED);
             final var errorMessage = new DefaultErrorMessage(SYSTEM_ERROR, errorTicket,
                     throwable.getClass().getCanonicalName() + ": " + msg, "");
             var sessionStorage = checkSessionStorage(facesContext);
@@ -105,14 +106,15 @@ public class FallBackExceptionHandler implements Serializable {
 
             if (redirectWasNotDoneFromErrorPage(facesContext)) {
                 navigationHandler.handleNavigation(facesContext, null, ErrorPage.OUTCOME);
+                exceptionEvent.handled(HandleOutcome.REDIRECT);
             } else {
-                log.error(PORTAL_130_ERROR_ON_ERROR_PAGE);
+                LOGGER.error(PORTAL_130_ERROR_ON_ERROR_PAGE);
             }
 
         } else {
-            log.error(UNSPECIFIED_EXCEPTION_WITHOUT_VIEW, throwable);
+            LOGGER.error(UNSPECIFIED_EXCEPTION_WITHOUT_VIEW, throwable);
+            exceptionEvent.handled(HandleOutcome.LOGGED);
         }
-        evt.handled();
     }
 
     private boolean redirectWasNotDoneFromErrorPage(final FacesContext facesContext) {
@@ -127,7 +129,7 @@ public class FallBackExceptionHandler implements Serializable {
             sessionStorage.containsKey("testKey");
             return Optional.of(sessionStorage);
         } catch (RuntimeException e) {
-            log.warn(EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_SESSION, e.getMessage());
+            LOGGER.warn(EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_SESSION, e.getMessage());
             facesContext.getExternalContext().getSession(true);
             MapStorage<Serializable, Serializable> sessionStorage;
             try {
@@ -135,7 +137,7 @@ public class FallBackExceptionHandler implements Serializable {
                 sessionStorage.containsKey("testKey");
                 return Optional.of(sessionStorage);
             } catch (RuntimeException e1) {
-                log.error(EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_NEW_SESSION, e1.getMessage());
+                LOGGER.error(EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_NEW_SESSION, e1.getMessage());
             }
             return Optional.empty();
         }
