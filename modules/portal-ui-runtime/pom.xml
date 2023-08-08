@@ -19,23 +19,6 @@
             <groupId>de.cuioss.jsf</groupId>
             <artifactId>cui-jsf-core-components</artifactId>
         </dependency>
-        <!-- Deltaspike: To be removed-->
-        <dependency>
-            <groupId>org.apache.deltaspike.core</groupId>
-            <artifactId>deltaspike-core-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.deltaspike.core</groupId>
-            <artifactId>deltaspike-core-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.deltaspike.modules</groupId>
-            <artifactId>deltaspike-jsf-module-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.deltaspike.modules</groupId>
-            <artifactId>deltaspike-jsf-module-impl</artifactId>
-        </dependency>
 
         <!-- Test -->
         <dependency>

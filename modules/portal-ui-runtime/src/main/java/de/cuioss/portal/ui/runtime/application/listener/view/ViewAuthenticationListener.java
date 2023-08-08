@@ -3,12 +3,10 @@ package de.cuioss.portal.ui.runtime.application.listener.view;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_AUTHENTICATION;
 
 import javax.annotation.Priority;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-import javax.inject.Provider;
 
-import org.apache.deltaspike.core.api.exception.control.event.ExceptionToCatchEvent;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
@@ -16,6 +14,7 @@ import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.configuration.common.PortalPriorities;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthenticatedException;
+import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.api.listener.view.ViewListener;
@@ -34,7 +33,7 @@ import lombok.ToString;
  * @author Oliver Wolff
  */
 @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE)
-@Dependent
+@RequestScoped
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @EqualsAndHashCode(of = "viewConfiguration")
 @ToString(of = "viewConfiguration")
@@ -48,11 +47,11 @@ public class ViewAuthenticationListener implements ViewListener {
     private ViewConfiguration viewConfiguration;
 
     @Inject
-    private Event<ExceptionToCatchEvent> catchEvent;
+    private Event<ExceptionAsEvent> catchEvent;
 
     @Inject
     @PortalUser
-    private Provider<AuthenticatedUserInfo> userInfoProvider;
+    private AuthenticatedUserInfo userInfo;
 
     @Getter
     @Inject
@@ -64,11 +63,10 @@ public class ViewAuthenticationListener implements ViewListener {
         if (!viewConfiguration.getNonSecuredViewMatcher().match(viewDescriptor)) {
             // The user info must be accessed dynamically because of the scoping
             // of the Listener
-            final var userInfo = userInfoProvider.get();
             if (!userInfo.isAuthenticated()) {
                 log.debug("Try to access '" + viewDescriptor.getLogicalViewId() + "' which does not match '"
                         + viewConfiguration.getNonSecuredViewMatcher() + "' -> UserNotAuthenticatedException");
-                catchEvent.fire(new ExceptionToCatchEvent(new UserNotAuthenticatedException()));
+                catchEvent.fire(new ExceptionAsEvent(new UserNotAuthenticatedException()));
             }
         }
     }

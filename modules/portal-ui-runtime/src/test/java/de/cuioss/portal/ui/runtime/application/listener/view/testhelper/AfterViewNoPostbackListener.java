@@ -6,7 +6,6 @@ import javax.enterprise.context.RequestScoped;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 
-@SuppressWarnings("javadoc")
 @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE_EXCLUDE_POSTBACK)
 @Priority(1)
 @RequestScoped

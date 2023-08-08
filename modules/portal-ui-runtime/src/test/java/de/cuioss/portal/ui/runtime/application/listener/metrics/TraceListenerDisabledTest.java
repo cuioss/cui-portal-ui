@@ -1,4 +1,4 @@
-package de.cuioss.portal.ui.runtime.application.metrics;
+package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_TRACE_ENABLED;
 

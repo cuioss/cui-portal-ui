@@ -5,6 +5,7 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Instance;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
@@ -12,8 +13,6 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.inject.Inject;
 import javax.inject.Provider;
-
-import org.apache.deltaspike.jsf.api.listener.phase.JsfPhaseListener;
 
 import de.cuioss.jsf.api.common.util.CheckContextState;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
@@ -32,14 +31,14 @@ import lombok.ToString;
  *
  * @author Oliver Wolff
  */
-@JsfPhaseListener
+@RequestScoped
 @EqualsAndHashCode(of = { "sortedAfterListeners", "sortedAfterNonPostbackListeners", "sortedBeforeListeners" })
 @ToString(of = { "sortedAfterListeners", "sortedAfterNonPostbackListeners", "sortedBeforeListeners" })
-public class PortalRestoreViewPhaseListener implements PhaseListener {
+public class PortalCDIViewListener implements PhaseListener {
 
     private static final long serialVersionUID = 7620545331100921567L;
 
-    private static final CuiLogger log = new CuiLogger(PortalRestoreViewPhaseListener.class);
+    private static final CuiLogger log = new CuiLogger(PortalCDIViewListener.class);
 
     @Inject
     @PortalRestoreViewListener(PhaseExecution.BEFORE_PHASE)

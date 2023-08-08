@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.inject.Inject;
 
-import org.apache.deltaspike.core.api.scope.WindowScoped;
-import org.jboss.weld.junit5.auto.ActivateScopes;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +16,6 @@ import lombok.Getter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
-@ActivateScopes(WindowScoped.class)
 class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManagerBean> {
 
     @Inject

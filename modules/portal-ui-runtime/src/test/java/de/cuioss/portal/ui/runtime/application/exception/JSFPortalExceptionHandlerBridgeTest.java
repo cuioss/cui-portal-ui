@@ -32,7 +32,7 @@ import lombok.Setter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ CurrentViewProducer.class, NavigationHandlerProducer.class, PortalUiExceptionHandler.class,
-        ViewRelatedExceptionHandler.class })
+        ViewRelatedExceptionHandler.class, PortalTestUserProducer.class })
 class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
 
     static final ViewDescriptor DESCRIPTOR_SUPRRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")
@@ -53,9 +53,6 @@ class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
     @Inject
     @PortalViewRestrictionManager
     private PortalViewRestrictionManagerMock viewRestrictionManagerMock;
-
-    @Inject
-    private PortalTestUserProducer portalUserProducerMock;
 
     private MockExceptionHandler mockExceptionHandler;
 

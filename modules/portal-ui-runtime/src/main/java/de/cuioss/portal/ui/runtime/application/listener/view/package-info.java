@@ -1,6 +1,6 @@
 /**
  * The
- * {@link de.icw.cui.portal.configuration.application.listener.view.PortalRestoreViewPhaseListener}
+ * {@link de.cuioss.portal.ui.runtime.application.listener.view.PortalCDIViewListener}
  * is the central element of this package. For some checks, like authentication
  * and page suppression it is needed to be run before the phase
  * {@link javax.faces.event.PhaseId#RESTORE_VIEW} in order to prevent building

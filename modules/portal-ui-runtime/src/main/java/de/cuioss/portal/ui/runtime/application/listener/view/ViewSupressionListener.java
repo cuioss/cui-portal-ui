@@ -3,15 +3,15 @@ package de.cuioss.portal.ui.runtime.application.listener.view;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_VIEW_SUPRESSION;
 
 import javax.annotation.Priority;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
-import org.apache.deltaspike.core.api.exception.control.event.ExceptionToCatchEvent;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.api.listener.view.ViewListener;
@@ -30,7 +30,7 @@ import lombok.ToString;
 @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE)
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL + 1)
 // Must be called before AuthenticatationListener
-@Dependent
+@RequestScoped
 @EqualsAndHashCode(of = "viewConfiguration")
 @ToString(of = "viewConfiguration")
 public class ViewSupressionListener implements ViewListener {
@@ -41,18 +41,18 @@ public class ViewSupressionListener implements ViewListener {
     private ViewConfiguration viewConfiguration;
 
     @Inject
-    private Event<ExceptionToCatchEvent> catchEvent;
-
-    @Override
-    public void handleView(final ViewDescriptor viewDescriptor) {
-        if (this.viewConfiguration.getSuppressedViewMatcher().match(viewDescriptor)) {
-            this.catchEvent.fire(new ExceptionToCatchEvent(new ViewSuppressedException(viewDescriptor)));
-        }
-    }
+    private Event<ExceptionAsEvent> catchEvent;
 
     @Getter
     @Inject
     @ConfigProperty(name = PORTAL_LISTENER_VIEW_SUPRESSION)
     private boolean enabled;
+
+    @Override
+    public void handleView(final ViewDescriptor viewDescriptor) {
+        if (this.viewConfiguration.getSuppressedViewMatcher().match(viewDescriptor)) {
+            this.catchEvent.fire(new ExceptionAsEvent(new ViewSuppressedException(viewDescriptor)));
+        }
+    }
 
 }

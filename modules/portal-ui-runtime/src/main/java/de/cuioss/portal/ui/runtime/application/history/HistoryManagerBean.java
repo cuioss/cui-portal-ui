@@ -2,12 +2,11 @@ package de.cuioss.portal.ui.runtime.application.history;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Priority;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
-
-import org.apache.deltaspike.core.api.scope.WindowScoped;
 
 import de.cuioss.jsf.api.application.history.HistoryManager;
 import de.cuioss.jsf.api.application.history.impl.HistoryManagerImpl;
@@ -22,10 +21,12 @@ import lombok.experimental.Delegate;
  * The implementation utilizes a stack to store the history. The actual work is
  * done by {@link HistoryManagerImpl}.
  *
+ * FIXME: User WindowScope again if on jsf 4
+ * 
  * @author Oliver Wolff
  */
 @PortalHistoryManager
-@WindowScoped
+@SessionScoped
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @Named(HistoryManagerImpl.BEAN_NAME)
 @EqualsAndHashCode(exclude = "delegate")

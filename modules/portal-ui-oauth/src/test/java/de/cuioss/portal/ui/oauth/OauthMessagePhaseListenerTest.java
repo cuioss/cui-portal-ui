@@ -10,10 +10,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
@@ -32,9 +32,13 @@ class OauthMessagePhaseListenerTest implements ShouldBeNotNull<OauthMessagePhase
     @Getter
     private JsfEnvironmentHolder environmentHolder;
 
-    @Inject
     @Getter
     private OauthMessagePhaseListener underTest;
+
+    @BeforeEach
+    void beforeEach() {
+        underTest = new OauthMessagePhaseListener();
+    }
 
     @Test
     void shouldRestoreMessagesIfAllConditionsAreMet() {

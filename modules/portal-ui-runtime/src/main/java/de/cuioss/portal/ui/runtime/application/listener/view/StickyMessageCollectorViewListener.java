@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.Priority;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
@@ -34,7 +34,7 @@ import lombok.ToString;
  * @author i000576
  */
 @PortalRestoreViewListener(PhaseExecution.BEFORE_PHASE)
-@Dependent
+@RequestScoped
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @ToString
 @EqualsAndHashCode

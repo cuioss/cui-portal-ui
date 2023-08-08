@@ -1,7 +1,7 @@
-package de.cuioss.portal.ui.runtime.application.metrics;
+package de.cuioss.portal.ui.runtime.application.listener;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_TRACE_ENABLED;
-import static de.cuioss.portal.ui.runtime.application.metrics.RequestTracer.PROCESSING_IDENTIFIER;
+import static de.cuioss.portal.ui.runtime.application.listener.metrics.RequestTracer.PROCESSING_IDENTIFIER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.concurrent.TimeUnit;
@@ -12,35 +12,40 @@ import javax.inject.Inject;
 
 import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.microprofile.PortalTestMetricRegistry;
+import de.cuioss.portal.ui.runtime.application.listener.metrics.RequestTracer;
+import de.cuioss.portal.ui.runtime.application.listener.metrics.TraceListener;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 @EnablePortalUiEnvironment
-@EnableTestLogger(rootLevel = TestLogLevel.DEBUG, debug = RequestTracer.class)
-@AddBeanClasses({ RequestTracer.class, PortalTestMetricRegistry.class })
+@EnableTestLogger(debug = { TraceListener.class, RequestTracer.class })
+@AddBeanClasses({ RequestTracer.class, PortalTestMetricRegistry.class, TraceListener.class })
 @EnablePortalConfiguration(configuration = PORTAL_LISTENER_TRACE_ENABLED + ":true")
-class TraceListenerTest implements ShouldBeNotNull<TraceListener>, JsfEnvironmentConsumer {
+class TraceListenerAdapterTest implements JsfEnvironmentConsumer {
 
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
 
-    @Inject
-    @Getter
-    private TraceListener underTest;
+    private TraceListenerAdapter underTest;
+
+    @BeforeEach
+    void setTraceListener() {
+        underTest = new TraceListenerAdapter();
+    }
 
     @Inject
     @PortalConfigurationSource
@@ -71,4 +76,5 @@ class TraceListenerTest implements ShouldBeNotNull<TraceListener>, JsfEnvironmen
     private PhaseEvent phaseEvent(PhaseId id) {
         return new PhaseEvent(getFacesContext(), id, new MockLifecycle());
     }
+
 }

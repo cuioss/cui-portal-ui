@@ -3,11 +3,10 @@ package de.cuioss.portal.ui.runtime.application.listener.view;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_HISTORYMANAGER;
 
 import javax.annotation.Priority;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -32,7 +31,7 @@ import lombok.ToString;
  * @author Oliver Wolff
  */
 @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE_EXCLUDE_POSTBACK)
-@Dependent
+@RequestScoped
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @EqualsAndHashCode
 @ToString
@@ -42,7 +41,7 @@ public class HistoryManagerListener implements ViewListener {
 
     @Inject
     @PortalHistoryManager
-    private Provider<HistoryManager> historyManagerProvider;
+    private HistoryManager historyManager;
 
     @Inject
     private Event<PageRefreshEvent> event;
@@ -56,15 +55,12 @@ public class HistoryManagerListener implements ViewListener {
     public void handleView(final ViewDescriptor viewDescriptor) {
 
         if (requestWasPageReload()) {
-            historyManagerProvider.get().setPageReload(true);
+            historyManager.setPageReload(true);
             event.fire(new PageRefreshEvent(viewDescriptor.getViewId()));
         } else {
-            historyManagerProvider.get().setPageReload(false);
+            historyManager.setPageReload(false);
         }
-
-        // The HistoryManager info must be accessed dynamically because of the
-        // scoping of the Listener
-        historyManagerProvider.get().addCurrentUriToHistory(viewDescriptor);
+        historyManager.addCurrentUriToHistory(viewDescriptor);
     }
 
     private boolean requestWasPageReload() {
@@ -72,12 +68,10 @@ public class HistoryManagerListener implements ViewListener {
         var reload = false;
         if (!context.isPostback()) {
 
-            final var manager = historyManagerProvider.get();
-
             final var current = ViewIdentifier.getFromViewDesciptor(NavigationUtils.getCurrentView(context),
-                    manager.getParameterFilter());
+                    historyManager.getParameterFilter());
             if (null != current) {
-                reload = current.equals(manager.getCurrentView());
+                reload = current.equals(historyManager.getCurrentView());
             }
         }
         return reload;

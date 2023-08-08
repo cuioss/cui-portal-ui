@@ -1,4 +1,4 @@
-package de.cuioss.portal.ui.runtime.application.metrics;
+package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
 import static java.util.Objects.requireNonNull;
 

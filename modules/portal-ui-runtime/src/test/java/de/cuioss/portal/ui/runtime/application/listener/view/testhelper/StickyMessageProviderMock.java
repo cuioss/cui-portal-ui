@@ -1,4 +1,4 @@
-package de.cuioss.portal.ui.runtime.application.listener.view;
+package de.cuioss.portal.ui.runtime.application.listener.view.testhelper;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +17,6 @@ import lombok.Data;
  *
  * @author i000576
  */
-@SuppressWarnings("javadoc")
 @Data
 @Dependent
 public class StickyMessageProviderMock implements StickyMessageProvider {

@@ -29,7 +29,7 @@ import lombok.Setter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ CurrentViewProducer.class, AfterViewListener.class })
-class PortalBeforeRestoreViewPhaseListenerTest implements ShouldHandleObjectContracts<PortalRestoreViewPhaseListener>,
+class PortalCDIViewListenerTest implements ShouldHandleObjectContracts<PortalCDIViewListener>,
         JsfEnvironmentConsumer, RequestConfigurator {
 
     @Setter
@@ -38,7 +38,7 @@ class PortalBeforeRestoreViewPhaseListenerTest implements ShouldHandleObjectCont
 
     @Inject
     @Getter
-    private PortalRestoreViewPhaseListener underTest;
+    private PortalCDIViewListener underTest;
 
     @Inject
     @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE)

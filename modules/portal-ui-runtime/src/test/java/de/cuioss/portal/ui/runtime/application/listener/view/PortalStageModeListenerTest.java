@@ -8,7 +8,6 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import org.apache.deltaspike.core.api.exception.control.event.ExceptionToCatchEvent;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +15,7 @@ import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.configuration.application.ProjectStage;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.configuration.PortalNotConfiguredException;
+import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
@@ -37,15 +37,18 @@ class PortalStageModeListenerTest implements ShouldHandleObjectContracts<PortalS
 
     @Test
     void shouldThrowPortalNotConfiguredException() {
-        getUnderTest().handleView(DESCRIPTOR_LOGIN);
-        assertFalse(exceptionWasThrown); // default is production
-
         configuration.setPortalProjectStage(ProjectStage.CONFIGURATION);
         getUnderTest().handleView(DESCRIPTOR_LOGIN);
         assertTrue(exceptionWasThrown);
     }
 
-    void actOnExceptionToCatchEvent(@Observes final ExceptionToCatchEvent catchEvent) {
+    @Test
+    void shouldNotThrowPortalNotConfiguredException() {
+        getUnderTest().handleView(DESCRIPTOR_LOGIN);
+        assertFalse(exceptionWasThrown); // default is production
+    }
+
+    void actOnExceptionToCatchEvent(@Observes final ExceptionAsEvent catchEvent) {
         final var exception = catchEvent.getException();
         exceptionWasThrown = exception instanceof PortalNotConfiguredException;
     }

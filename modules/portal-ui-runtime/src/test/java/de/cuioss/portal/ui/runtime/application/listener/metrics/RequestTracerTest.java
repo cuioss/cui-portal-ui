@@ -1,8 +1,8 @@
-package de.cuioss.portal.ui.runtime.application.metrics;
+package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
 import static de.cuioss.portal.configuration.MetricsConfigKeys.PORTAL_METRICS_ENABLED;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_TRACE_ENABLED;
-import static de.cuioss.portal.ui.runtime.application.metrics.RequestTracer.PROCESSING_IDENTIFIER;
+import static de.cuioss.portal.ui.runtime.application.listener.metrics.RequestTracer.PROCESSING_IDENTIFIER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.concurrent.TimeUnit;

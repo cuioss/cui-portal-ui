@@ -5,6 +5,7 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
     <name>CuiPortalCoreImpl</name>
     <application>
+
         <navigation-handler>de.cuioss.jsf.api.application.history.HistoryNavigationHandler</navigation-handler>
         <resource-handler>de.cuioss.portal.ui.runtime.application.templating.ViewResourceHandler</resource-handler>
         <resource-handler>de.cuioss.jsf.api.application.resources.CuiResourceHandler</resource-handler>
@@ -21,6 +22,11 @@
         <application-factory>de.cuioss.portal.ui.runtime.application.PortalApplicationFactory</application-factory>
         <exception-handler-factory>de.cuioss.portal.ui.runtime.application.exception.JSFPortalExceptionHandlerBridgeFactory</exception-handler-factory>
     </factory>
+
+    <lifecycle>
+        <phase-listener>de.cuioss.portal.ui.runtime.application.listener.TraceListenerAdapter</phase-listener>
+        <phase-listener>de.cuioss.portal.ui.runtime.application.listener.PortalViewListenerAdapter</phase-listener>
+    </lifecycle>
 
     <converter>
         <description>Sanitizes all Html output resolving to a String</description>

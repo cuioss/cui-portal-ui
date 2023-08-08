@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import org.apache.deltaspike.core.api.exception.control.event.ExceptionToCatchEvent;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthenticatedException;
+import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.runtime.application.configuration.ViewConfiguration;
@@ -57,7 +57,7 @@ class ViewAuthenticationListenerTest implements ShouldHandleObjectContracts<View
         assertNotNull(authenticatedException);
     }
 
-    void actOnExceptionToCatchEvent(@Observes final ExceptionToCatchEvent catchEvent) {
+    void actOnExceptionToCatchEvent(@Observes final ExceptionAsEvent catchEvent) {
         final var exception = catchEvent.getException();
         authenticatedException = exception instanceof UserNotAuthenticatedException
                 ? (UserNotAuthenticatedException) exception

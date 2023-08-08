@@ -1,4 +1,4 @@
-package de.cuioss.portal.ui.runtime.application.metrics;
+package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
 import static de.cuioss.portal.configuration.MetricsConfigKeys.PORTAL_METRICS_ENABLED;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
@@ -32,7 +32,7 @@ import de.cuioss.tools.logging.CuiLogger;
 @RequestScoped
 public class RequestTracer implements Serializable {
 
-    static final String PROCESSING_IDENTIFIER = "Processing of view '";
+    public static final String PROCESSING_IDENTIFIER = "Processing of view '";
 
     static final String NO_TRACING_INFORMATION_AVAILABLE = "No tracing information available";
 

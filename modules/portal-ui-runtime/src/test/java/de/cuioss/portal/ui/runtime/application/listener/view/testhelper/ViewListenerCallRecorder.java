@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-@SuppressWarnings("javadoc")
 @EqualsAndHashCode
 @ToString
 public class ViewListenerCallRecorder implements ViewListener {
