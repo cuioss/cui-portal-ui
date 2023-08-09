@@ -2,9 +2,8 @@ package de.cuioss.portal.ui.api.ui.context;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
-import javax.faces.application.Application;
 import javax.faces.application.NavigationHandler;
-import javax.inject.Inject;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -15,9 +14,6 @@ import javax.inject.Named;
 @ApplicationScoped
 public class NavigationHandlerProducer {
 
-    @Inject
-    private Application application;
-
     /**
      * @return the derived {@link NavigationHandler}
      */
@@ -26,6 +22,6 @@ public class NavigationHandlerProducer {
     @ApplicationScoped
     @Named
     NavigationHandler getNavigationHandler() {
-        return application.getNavigationHandler();
+        return FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
     }
 }
