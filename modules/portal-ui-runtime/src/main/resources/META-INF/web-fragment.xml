@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-fragment xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-fragment_4_0.xsd"
-              version="4.0">
+<web-fragment xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-fragment_4_0.xsd"
+    version="4.0">
     <distributable />
-    <name>CuiPortalCDIConfiguration</name>
+    <name>PortalUIRuntimeConfiguration</name>
 
     <!-- Default Configuration -->
     <context-param>
@@ -63,45 +64,7 @@
         <param-name>javax.faces.SERIALIZE_SERVER_STATE</param-name>
         <param-value>true</param-value>
     </context-param>
-    <context-param>
-        <description>In addition to serializeServerState this
-		flag forces to compress the serialized output with GZip. This results in
-		using more CPU and less memory </description>
-        <param-name>com.sun.faces.compressViewState</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <context-param>
-        <description>If
-		true, makes it so every session attribute is touched in for every request
-		through the lifecycle. This makes it much harder to make mistakes that cause
-		session replication to fail. Although not a performance flag itself, it may
-		lead to reduced memory size at cost of CPU. The session replication safety
-		is itself a good idea to prevent problems with session scoping showing
-		to late (in production) </description>
-        <param-name>com.sun.faces.enableAgressiveSessionDirtying</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <context-param>
-        <description>Logical views are subviews
-		of a top-level view. For example, if you have a page that includes multiple
-		frames then each frame is a logical view. If you have a simple application
-		then the default of 15 views or 15 logical views might be too large. In this
-		case, you should consider reducing the allowable number of views and logical
-		views to conserve memory. Conversely, a more complex application might require
-		more than 15 views or logical views to be saved in a session. Because we
-		still have some includes we should not reduce to less
-		than 5. </description>
-        <param-name>com.sun.faces.numberOfLogicalViews</param-name>
-        <param-value>5</param-value>
-    </context-param>
-    <context-param>
-        <description>Specifies
-		the number of views that are stored in the session when Server-Side State
-		Saving is used. The default for this parameter is 15. Because our application
-		allows tabs we do not use 1 or 2 but 5 </description>
-        <param-name>com.sun.faces.numberOfViewsInSession</param-name>
-        <param-value>5</param-value>
-    </context-param>
+
     <context-param>
         <description>When a page is requested, what interval in seconds should the compiler check for changes.
         If you don't want the compiler to check for changes once the page is compiled, then use a value of -1.
@@ -109,29 +72,8 @@
         <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
         <param-value>-1</param-value>
     </context-param>
-    <!-- Application Validation -->
-    <context-param>
-        <description>When
-		set to true, tag library XML files and faces configuration XML files using
-		schema are validated during application start. </description>
-        <param-name>com.sun.faces.validateXml</param-name>
-        <param-value>true</param-value>
-    </context-param>
+
     <!-- Correctness -->
-    <context-param>
-        <description>Fix
-		for Duplicated "javax.faces.ViewState" as id for each h:form element. Documentation
-		from Oracle: If true, the view state hidden field will be rendered with both
-		the id and name attributes having the value of "javax.faces.ViewState". This
-		is what the spec requires, however, if there are multiple forms within a
-		view and the response content-type is XHTML, the result will be XHTML that
-		will fail validation due to multiple ID attributes with the same value: javax.faces.ViewState.
-		Setting this parameter to false will result in the ID attribute not being
-		rendered. Keep in mind however, that doing this may break integration with
-		AJAX frameworks that get the state field via ID. </description>
-        <param-name>com.sun.faces.enableViewStateIdRendering</param-name>
-        <param-value>true</param-value>
-    </context-param>
     <context-param>
         <description>If this param is set, and calling toLowerCase().equals("true") on a String representation of its value
         returns true, any implementation of UIInput.validate() must take the following additional action.
@@ -162,21 +104,7 @@
         <param-value>true</param-value>
     </context-param>
     <!-- Security -->
-    <context-param>
-        <description>Disable
-		Powered By Header</description>
-        <param-name>com.sun.faces.sendPoweredByHeader</param-name>
-        <param-value>false</param-value>
-    </context-param>
-    <context-param>
-        <description>If
-		true then all web configuration information (context initialization parameters
-		and environment entries) will be written to the log. This is useful during
-		development to confirm your application is configured as expected. Valid
-		values for this parameter are true and false </description>
-        <param-name>com.sun.faces.displayConfiguration</param-name>
-        <param-value>false</param-value>
-    </context-param>
+
     <context-param>
         <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
         <param-value>true</param-value>

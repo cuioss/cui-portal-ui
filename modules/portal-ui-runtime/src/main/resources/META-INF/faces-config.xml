@@ -3,9 +3,13 @@
     xmlns="http://xmlns.jcp.org/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
-    <name>CuiPortalCoreImpl</name>
+    <name>PortalUIRuntime</name>
+    <ordering>
+        <after>
+            <name>omnifaces</name>
+        </after>
+    </ordering>
     <application>
-
         <navigation-handler>de.cuioss.jsf.api.application.history.HistoryNavigationHandler</navigation-handler>
         <resource-handler>de.cuioss.portal.ui.runtime.application.templating.ViewResourceHandler</resource-handler>
         <resource-handler>de.cuioss.jsf.api.application.resources.CuiResourceHandler</resource-handler>

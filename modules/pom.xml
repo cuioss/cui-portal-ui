@@ -18,6 +18,7 @@
         <module>portal-ui-form-based-login</module>
         <module>portal-ui-unit-testing</module>
         <module>portal-ui-bootstrap-page-templates</module>
+        <module>portal-ui-quarkus-extension</module>
     </modules>
     <dependencyManagement>
         <dependencies>
