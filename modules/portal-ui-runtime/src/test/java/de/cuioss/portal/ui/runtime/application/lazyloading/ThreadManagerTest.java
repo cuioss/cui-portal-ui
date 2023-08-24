@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cuioss.portal.ui.runtime.application.lazyloading;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,8 +67,10 @@ class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
     }
 
     @Test
-    @Disabled("fails on CI because retrie(1) returns: "
-            + "FutureHandle(future=java.util.concurrent.FutureTask@3ea4cfe0, context=A, timestamp=1625729207137)")
+    @Disabled("""
+            fails on CI because retrie(1) returns: \
+            FutureHandle(future=java.util.concurrent.FutureTask@3ea4cfe0, context=A, timestamp=1625729207137)\
+            """)
     void handleTimeout() throws InterruptedException {
         configuration.fireEvent(PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT, "1");
         underTest.initialize();

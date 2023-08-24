@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cuioss.portal.ui.runtime.exception;
 
 import javax.enterprise.context.RequestScoped;
@@ -62,8 +77,10 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
 
     private static final String PORTAL_103 = "Portal-103: View '{}' requires the roles '{}', but user '{}' only has the roles: '{}'";
 
-    private static final String NAV_LOOP_ERROR_MSG = "Portal-505: The view '{}' is suppressed but is the designated navigation target at the same time."
-            + " This would result in a loop. The error page is displayed therefore instead.";
+    private static final String NAV_LOOP_ERROR_MSG = """
+            Portal-505: The view '{}' is suppressed but is the designated navigation target at the same time.\
+             This would result in a loop. The error page is displayed therefore instead.\
+            """;
 
     @Inject
     @CuiNavigationHandler
@@ -118,7 +135,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
     private void handleViewSupressedException(ExceptionAsEvent event) {
         messageProducer.setGlobalErrorMessage(VIEW_SUPPRESSED_KEY);
         var outcome = HomePage.OUTCOME;
-        ViewSuppressedException exception = (ViewSuppressedException) event.getException();
+        var exception = (ViewSuppressedException) event.getException();
         if (!authenticatedUserInfo.isAuthenticated()) {
             outcome = LoginPage.OUTCOME;
         } else if (null != exception.getSuppressedViewDescriptor()
@@ -173,7 +190,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
      */
     private void handleUserNotAuthorizedException(ExceptionAsEvent event) {
 
-        UserNotAuthorizedException exception = (UserNotAuthorizedException) event.getException();
+        var exception = (UserNotAuthorizedException) event.getException();
 
         LOGGER.warn(PORTAL_103, exception.getRequestedView().getLogicalViewId(), exception.getRequiredRoles(),
                 authenticatedUserInfo.getDisplayName(), exception.getUserRoles());

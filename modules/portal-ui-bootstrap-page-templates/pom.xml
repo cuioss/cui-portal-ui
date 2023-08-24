@@ -11,7 +11,11 @@
     <name>Portal UI Bootstrap Page Templates</name>
     <description>Provides Facelet templates for creating portal pages. It is
         based on Twitters bootstrap</description>
-     <dependencies>
+    <properties>
+        <maven.jar.plugin.automatic.module.name>
+            de.cuioss.portal.ui.pagetemplates</maven.jar.plugin.automatic.module.name>
+    </properties>
+    <dependencies>
         <dependency>
             <groupId>de.cuioss.portal.ui</groupId>
             <artifactId>portal-ui-api</artifactId>

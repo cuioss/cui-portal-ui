@@ -1,11 +1,23 @@
+/*
+ * Copyright 2023 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cuioss.portal.ui.runtime.application.exception;
-
-import java.util.Iterator;
 
 import javax.faces.FacesException;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerWrapper;
-import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
 
 import de.cuioss.portal.core.cdi.PortalBeanManager;
@@ -23,7 +35,7 @@ public class JSFPortalExceptionHandlerBridge extends ExceptionHandlerWrapper {
 
     /**
      * Default constructor to delegate to {@link ExceptionHandlerWrapper}
-     * 
+     *
      * @param delegate must not be null
      */
     public JSFPortalExceptionHandlerBridge(ExceptionHandler delegate) {
@@ -32,19 +44,18 @@ public class JSFPortalExceptionHandlerBridge extends ExceptionHandlerWrapper {
 
     @Override
     public void handle() throws FacesException {
-        PortalUiExceptionHandler uiExceptionHandler = PortalBeanManager
-                .resolveBean(PortalUiExceptionHandler.class, null)
+        var uiExceptionHandler = PortalBeanManager.resolveBean(PortalUiExceptionHandler.class, null)
                 .orElseThrow(() -> new IllegalStateException("Unable to access needed PortalUiExceptionHandler"));
-        final Iterator<ExceptionQueuedEvent> queue = getUnhandledExceptionQueuedEvents().iterator();
+        final var queue = getUnhandledExceptionQueuedEvents().iterator();
         while (queue.hasNext()) {
-            ExceptionQueuedEvent item = queue.next();
-            ExceptionQueuedEventContext exceptionQueuedEventContext = (ExceptionQueuedEventContext) item.getSource();
+            var item = queue.next();
+            var exceptionQueuedEventContext = (ExceptionQueuedEventContext) item.getSource();
 
             try {
-                Throwable throwable = exceptionQueuedEventContext.getException();
+                var throwable = exceptionQueuedEventContext.getException();
                 LOGGER.trace("Handling Throwable '%s'", throwable);
 
-                ExceptionAsEvent exceptionEvent = new ExceptionAsEvent(throwable);
+                var exceptionEvent = new ExceptionAsEvent(throwable);
                 // We should catch The IllegalStateException eventually to be thrown by the
                 // FallBackExceptionHandler and queue it again
                 uiExceptionHandler.handle(exceptionEvent);

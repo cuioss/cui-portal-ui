@@ -10,21 +10,29 @@
     <artifactId>portal-ui-form-based-login</artifactId>
     <name>Portal UI Form-based Login</name>
     <description>Provides a form based login and logout page</description>
-    <dependencies>
-        <dependency>
-            <groupId>de.cuioss.portal.ui</groupId>
-            <artifactId>portal-ui-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>de.cuioss.portal.ui</groupId>
-            <artifactId>portal-ui-runtime</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <!-- Test-->
-        <dependency>
-            <groupId>de.cuioss.portal.ui</groupId>
-            <artifactId>portal-ui-unit-testing</artifactId>
-        </dependency>
+    <properties>
+        <maven.jar.plugin.automatic.module.name>
+            de.cuioss.portal.ui.formbasedlogin</maven.jar.plugin.automatic.module.name>
+    </properties>
+  <dependencies>
+    <dependency>
+      <groupId>de.cuioss.portal.ui</groupId>
+      <artifactId>portal-ui-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.cuioss.portal.ui</groupId>
+      <artifactId>portal-ui-runtime</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <!-- Test-->
+    <dependency>
+      <groupId>de.cuioss.portal.ui</groupId>
+      <artifactId>portal-ui-unit-testing</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.inject</groupId>
+      <artifactId>jakarta.inject-api</artifactId>
+    </dependency>
         <dependency>
             <groupId>de.cuioss.portal.test</groupId>
             <artifactId>portal-core-unit-testing</artifactId>

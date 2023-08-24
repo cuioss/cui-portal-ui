@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cuioss.portal.ui.runtime.application.menu;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
@@ -90,8 +105,7 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
         var iterator = navigationMenuRoots.listIterator();
         while (iterator.hasNext()) {
             var topLevelItem = iterator.next();
-            if (topLevelItem instanceof NavigationMenuItemContainer) {
-                var container = (NavigationMenuItemContainer) topLevelItem;
+            if (topLevelItem instanceof NavigationMenuItemContainer container) {
                 var renderedChildren = container.getChildren().size();
                 if (renderedChildren > 0) {
                     Collections.sort(container.getChildren());
@@ -105,8 +119,8 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
         Collections.sort(navigationMenuRoots);
 
         navigationMenuRoots.forEach(navigationMenuItem -> {
-            if (navigationMenuItem instanceof NavigationMenuItemContainer) {
-                var children = ((NavigationMenuItemContainer) navigationMenuItem).getChildren();
+            if (navigationMenuItem instanceof NavigationMenuItemContainer container) {
+                var children = container.getChildren();
                 while (children.get(children.size() - 1) instanceof NavigationMenuItemSeparator) {
                     children.remove(children.size() - 1);
                 }
@@ -181,13 +195,13 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
             final List<NavigationMenuItem> noRoots) {
         final List<NavigationMenuItemContainer> result = new ArrayList<>();
         for (final NavigationMenuItem item : roots) {
-            if (item instanceof NavigationMenuItemContainer) {
-                result.add((NavigationMenuItemContainer) item);
+            if (item instanceof NavigationMenuItemContainer container) {
+                result.add(container);
             }
         }
         for (final NavigationMenuItem item : noRoots) {
-            if (item instanceof NavigationMenuItemContainer) {
-                result.add((NavigationMenuItemContainer) item);
+            if (item instanceof NavigationMenuItemContainer container) {
+                result.add(container);
             }
         }
         return result;
@@ -195,7 +209,7 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
 
     private void insertSeparatorMenuItem(final PortalNavigationMenuItemSeparatorImpl separatorMenuItem) {
         final var topLevelItem = getContainerMenuItemById(separatorMenuItem.getParentId());
-        if (!topLevelItem.isPresent()) {
+        if (topLevelItem.isEmpty()) {
             return;
         }
         topLevelItem.get().getChildren().add(separatorMenuItem);
@@ -238,7 +252,7 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
     @Override
     public Optional<NavigationMenuItemContainer> getContainerMenuItemById(String id) {
         var item = getMenuItemById(id);
-        if (!item.isPresent() || !(item.get() instanceof NavigationMenuItemContainer)) {
+        if (item.isEmpty() || !(item.get() instanceof NavigationMenuItemContainer)) {
             return Optional.empty();
         }
         return Optional.of((NavigationMenuItemContainer) item.get());

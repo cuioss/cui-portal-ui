@@ -10,26 +10,34 @@
     <artifactId>portal-ui-errorpages</artifactId>
     <name>Portal UI Error-Pages</name>
     <description>Provides some default error-pages</description>
-    <dependencies>
-        <dependency>
-            <groupId>de.cuioss.portal.ui</groupId>
-            <artifactId>portal-ui-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>de.cuioss.portal.ui</groupId>
-            <artifactId>portal-ui-runtime</artifactId>
-        </dependency>
-        <!-- JSF -->
-        <dependency>
-            <groupId>de.cuioss.jsf</groupId>
-            <artifactId>cui-jsf-api</artifactId>
-        </dependency>
+    <properties>
+        <maven.jar.plugin.automatic.module.name>
+            de.cuioss.portal.ui.errorpages</maven.jar.plugin.automatic.module.name>
+    </properties>
+  <dependencies>
+    <dependency>
+      <groupId>de.cuioss.portal.ui</groupId>
+      <artifactId>portal-ui-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.cuioss.portal.ui</groupId>
+      <artifactId>portal-ui-runtime</artifactId>
+    </dependency>
+    <!-- JSF -->
+    <dependency>
+      <groupId>de.cuioss.jsf</groupId>
+      <artifactId>cui-jsf-api</artifactId>
+    </dependency>
 
-        <!-- Test-->
-        <dependency>
-            <groupId>de.cuioss.portal.ui</groupId>
-            <artifactId>portal-ui-unit-testing</artifactId>
-        </dependency>
+    <!-- Test-->
+    <dependency>
+      <groupId>de.cuioss.portal.ui</groupId>
+      <artifactId>portal-ui-unit-testing</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.inject</groupId>
+      <artifactId>jakarta.inject-api</artifactId>
+    </dependency>
         <dependency>
             <groupId>de.cuioss.portal.authentication</groupId>
             <artifactId>portal-authentication-mock</artifactId>

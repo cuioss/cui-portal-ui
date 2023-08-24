@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cuioss.portal.ui.runtime.application.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,13 +60,15 @@ class PortalClientStorageImplTest implements ShouldHandleObjectContracts<PortalC
     String contextPath = "context";
 
     @Test
-    @Disabled("org.apache.myfaces.test.mock.MockExternalContext20#addResponseCookie doesn't know the cookie key "
-            + " (myfaces-test23-1.0.8-sources.jar!/org/apache/myfaces/test/mock/MockExternalContext20.java:346)"
-            + "'httpOnly' added by 'omnifaces-3.1.jar!/org/omnifaces/util/FacesLocal.class:758' and throws "
-            + "an Exception therefore. " + "See: https://issues.apache.org/jira/browse/MYFACESTEST-72"
-            + "deltaspike-jsf-module-api 1.8.1 uses myfaces-test20, see: "
-            + "deltaspike-jsf-module-api-1.8.1-sources.jar!/META-INF/maven/org.apache.deltaspike.modules/deltaspike-jsf-module-api/pom.xml:55"
-            + "So: omnifaces-3.1 doesn't go with myfaces-2.3")
+    @Disabled("""
+            org.apache.myfaces.test.mock.MockExternalContext20#addResponseCookie doesn't know the cookie key\s\
+             (myfaces-test23-1.0.8-sources.jar!/org/apache/myfaces/test/mock/MockExternalContext20.java:346)\
+            'httpOnly' added by 'omnifaces-3.1.jar!/org/omnifaces/util/FacesLocal.class:758' and throws\s\
+            an Exception therefore.\s\
+            See: https://issues.apache.org/jira/browse/MYFACESTEST-72\
+            deltaspike-jsf-module-api 1.8.1 uses myfaces-test20, see:\s\
+            deltaspike-jsf-module-api-1.8.1-sources.jar!/META-INF/maven/org.apache.deltaspike.modules/deltaspike-jsf-module-api/pom.xml:55\
+            So: omnifaces-3.1 doesn't go with myfaces-2.3""")
     void testRoundTrip() {
         configuration.fireEvent(PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAXAGE, "666");
 

@@ -10,4 +10,8 @@
     <artifactId>portal-ui-quarkus-extension</artifactId>
     <name>Portal UI Quarkus Extension</name>
     <description>Provides adaption for running the cui portal within quarkus</description>
+    <properties>
+        <maven.jar.plugin.automatic.module.name>
+            de.cuioss.portal.ui.quarkus</maven.jar.plugin.automatic.module.name>
+    </properties>
 </project>
