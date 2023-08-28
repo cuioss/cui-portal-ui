@@ -42,6 +42,16 @@ class EnablePortalUiEnvironmentTest {
     }
 ----
 
+=== Module Consistency Test
+
+A consistent module must be deployable within a CDI-Context. It must define all dependencies. This is checked by `de.cuioss.portal.ui.test.tests.BaseModuleConsistencyTest`.
+
+[source,java]
+----
+class ModuleConsistencyTest extends BaseUIModuleConsistencyTest {
+}
+----
+
 If you want to access views / navigation with the standard portal views like login, preferences and so on you can add:
 
 [source,java]
