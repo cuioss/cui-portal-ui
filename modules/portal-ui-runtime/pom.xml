@@ -44,7 +44,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>copy-modified-microprofile-config.yaml</id>
+                        <id>copy-modified-microprofile-config.properties</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>resources</goal>
@@ -55,7 +55,7 @@
                             <resources>
                                 <resource>
                                     <directory>src/main/resources/META-INF</directory>
-                                    <include>microprofile-config.yaml</include>
+                                    <include>microprofile-config.properties</include>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
