@@ -59,11 +59,11 @@ public class UserMenuItem extends PortalNavigationMenuItemContainerImpl {
 
     @Inject
     @PortalUser
-    private AuthenticatedUserInfo userInfo;
+    AuthenticatedUserInfo userInfo;
 
     @Inject
     @PortalResourceBundle
-    private ResourceBundle resourceBundle;
+    ResourceBundle resourceBundle;
 
     /**
      * Initializes the user by setting label-value and Title-value

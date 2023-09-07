@@ -28,7 +28,7 @@ public abstract class BaseLazyLoadingRequest<T> implements LazyLoadingRequest<T>
 
     @Getter
     @Inject
-    private LazyLoadingThreadModel<T> viewModel;
+    LazyLoadingThreadModel<T> viewModel;
 
     @Override
     public long getRequestId() {

@@ -44,7 +44,7 @@ public class PortalNavigationMenuItemImplBase extends PortalNavigationMenuConfig
     @Inject
     @ConfigAsFilteredMap(startsWith = MENU_BASE, stripPrefix = true)
     @Getter(value = AccessLevel.PROTECTED)
-    private Map<String, String> menuConfig;
+    Map<String, String> menuConfig;
 
     @Getter
     @Setter

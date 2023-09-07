@@ -34,10 +34,10 @@ public abstract class BaseLazyLoadingWidget<T> extends BaseWidget implements Laz
     private static final long serialVersionUID = -3234472642651082710L;
 
     @Inject
-    private LazyLoadingThreadModel<T> viewModel;
+    LazyLoadingThreadModel<T> viewModel;
 
     @Inject
-    private LazyLoadingViewController viewController;
+    LazyLoadingViewController viewController;
 
     @Override
     public void startInitialize() {
