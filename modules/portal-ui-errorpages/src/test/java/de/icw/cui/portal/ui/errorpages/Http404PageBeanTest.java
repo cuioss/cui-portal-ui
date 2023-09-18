@@ -32,8 +32,7 @@ import lombok.Getter;
 @EnablePortalUiEnvironment
 class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
 
-    private static final String FACES_VIEW_JSF = "/faces/view.jsf";
-    private static final String NON_FACES_VIEW_JSF = "/some/view.html";
+    private static final String FACES_VIEW_JSF = "/view.jsf";
 
     @Inject
     @Getter
@@ -49,26 +48,14 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
         getRequestConfigDecorator().setViewId(FACES_VIEW_JSF).setRequestAttribute(JAVAX_SERVLET_ERROR_REQUEST_URI,
                 FACES_VIEW_JSF);
         underTest.initView();
-        assertTrue(underTest.isJsfView());
         assertTrue(underTest.isRequestUriAvailable());
         assertTrue(underTest.isShouldRedirect());
-    }
-
-    @Test
-    void shouldDetectNonFacesView() {
-        getRequestConfigDecorator().setViewId(NON_FACES_VIEW_JSF).setRequestAttribute(JAVAX_SERVLET_ERROR_REQUEST_URI,
-                NON_FACES_VIEW_JSF);
-        underTest.initView();
-        assertFalse(underTest.isJsfView());
-        assertTrue(underTest.isRequestUriAvailable());
-        assertFalse(underTest.isShouldRedirect());
     }
 
     @Test
     void shouldDetectEmptyView() {
         getRequestConfigDecorator().setViewId("").setRequestAttribute(JAVAX_SERVLET_ERROR_REQUEST_URI, "");
         underTest.initView();
-        assertFalse(underTest.isJsfView());
         assertFalse(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
     }
@@ -77,7 +64,6 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
     void shouldHandleNotSetView() {
         getRequestConfigDecorator().setViewId(null);
         underTest.initView();
-        assertFalse(underTest.isJsfView());
         assertFalse(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
     }
@@ -90,7 +76,6 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
         getRequestConfigDecorator().setViewId(null);
         getExternalContext().setRequest(null);
         underTest.initView();
-        assertFalse(underTest.isJsfView());
         assertFalse(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
     }
@@ -102,7 +87,6 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
         getRequestConfigDecorator().setViewId(FACES_VIEW_JSF).setRequestAttribute(JAVAX_SERVLET_ERROR_REQUEST_URI,
                 FACES_VIEW_JSF);
         underTest.initView();
-        assertTrue(underTest.isJsfView());
         assertTrue(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
     }

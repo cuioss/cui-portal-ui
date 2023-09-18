@@ -15,15 +15,15 @@
  */
 package de.cuioss.portal.ui.api.templating;
 
-import java.io.Serializable;
 import java.net.URL;
+import java.util.Optional;
 
 /**
  * See package-info for description.
  *
  * @author Matthias Walliczek
  */
-public interface MultiViewMapper extends Serializable {
+public interface MultiViewMapper {
 
     /**
      * @param requestedResource must not be null. Represents a concrete view e.g.
@@ -34,5 +34,5 @@ public interface MultiViewMapper extends Serializable {
      *         as external file or as classpath resource, e.g. portal/root.xhtml or
      *         portal/subdirectory/component.xhtml respectively
      */
-    URL resolveViewPath(String requestedResource);
+    Optional<URL> resolveViewPath(String requestedResource);
 }

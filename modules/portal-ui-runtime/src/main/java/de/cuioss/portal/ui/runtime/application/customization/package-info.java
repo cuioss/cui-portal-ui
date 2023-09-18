@@ -14,7 +14,7 @@
  * components...</li>
  * <li>/templates: To customize templates like master_centered.xhtml</li>
  * <li>/views: To customize views like guest/login.xhtml (which is maintained in
- * cui-portal as /faces/guest/login.xhtml). implicit conventions : overwrite
+ * cui-portal as /guest/login.xhtml). implicit conventions : overwrite
  * only possible up from /faces folder!</li>
  * </ul>
  *

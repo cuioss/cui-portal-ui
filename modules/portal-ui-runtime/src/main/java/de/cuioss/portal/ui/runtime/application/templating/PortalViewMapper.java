@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Priority;
@@ -59,8 +60,6 @@ import lombok.ToString;
 @EqualsAndHashCode(of = "viewMap")
 @ToString(of = "viewMap")
 public class PortalViewMapper implements MultiViewMapper {
-
-    private static final long serialVersionUID = -8398917391620682636L;
 
     private static final CuiLogger log = new CuiLogger(PortalViewMapper.class);
 
@@ -117,9 +116,9 @@ public class PortalViewMapper implements MultiViewMapper {
     }
 
     @Override
-    public URL resolveViewPath(final String requestedResource) {
-        return viewMap.computeIfAbsent(requestedResource,
-                key -> FileLoaderUtility.getLoaderForPath("classpath:/META-INF/faces/" + key).getURL());
+    public Optional<URL> resolveViewPath(final String requestedResource) {
+        return Optional.ofNullable(viewMap.computeIfAbsent(requestedResource,
+                key -> FileLoaderUtility.getLoaderForPath("classpath:/META-INF/" + key).getURL()));
     }
 
     /**

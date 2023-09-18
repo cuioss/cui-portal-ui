@@ -15,8 +15,11 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.net.URL;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -30,9 +33,9 @@ import lombok.Getter;
 @EnableAutoWeld
 class PortalViewMapperSimpleTest implements ShouldHandleObjectContracts<PortalViewMapper> {
 
-    public static final String PORTAL = "/META-INF/faces/";
+    public static final String PORTAL = "/META-INF/";
 
-    public static final String INDEX = "pages/index.xhtml";
+    public static final String INDEX = "faces/pages/index.xhtml";
 
     public static final String NOT_THERE = "not.there.xhtml";
 
@@ -43,14 +46,14 @@ class PortalViewMapperSimpleTest implements ShouldHandleObjectContracts<PortalVi
 
     @Test
     void shouldInitCorrectly() {
-        assertTrue(underTest.resolveViewPath(INDEX).getPath().endsWith(PORTAL + INDEX));
+        Optional<URL> resolveViewPath = underTest.resolveViewPath(INDEX);
+        assertTrue(resolveViewPath.isPresent());
+        assertTrue(resolveViewPath.get().getPath().endsWith(PORTAL + INDEX));
     }
 
     @Test
-    void shouldFailOnNoneExistingResource() {
-        assertThrows(NullPointerException.class, () -> {
-            assertTrue(underTest.resolveViewPath(NOT_THERE).getPath().endsWith(PORTAL + NOT_THERE));
-        });
+    void shouldHAndleNoneExistingResource() {
+        assertFalse(underTest.resolveViewPath(NOT_THERE).isPresent());
     }
 
 }

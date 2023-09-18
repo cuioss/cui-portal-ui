@@ -16,6 +16,7 @@
 package de.cuioss.portal.ui.runtime.application.templating.support;
 
 import java.net.URL;
+import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
@@ -26,21 +27,18 @@ import de.cuioss.tools.io.FileLoaderUtility;
 import lombok.Getter;
 import lombok.Setter;
 
-@SuppressWarnings("javadoc")
 @PortalMultiViewMapper
 @Alternative
 @ApplicationScoped
 public class MockViewMapper implements MultiViewMapper {
-
-    private static final long serialVersionUID = -155012364802045126L;
 
     @Getter
     @Setter
     private String basePath;
 
     @Override
-    public URL resolveViewPath(final String requestedResource) {
-        return FileLoaderUtility.getLoaderForPath(basePath + requestedResource).getURL();
+    public Optional<URL> resolveViewPath(final String requestedResource) {
+        return Optional.ofNullable(FileLoaderUtility.getLoaderForPath(basePath + requestedResource).getURL());
     }
 
 }

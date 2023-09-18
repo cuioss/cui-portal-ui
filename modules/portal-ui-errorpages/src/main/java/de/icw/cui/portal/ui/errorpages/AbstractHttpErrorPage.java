@@ -24,7 +24,6 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.servlet.http.HttpServletRequest;
 
-import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.tools.logging.CuiLogger;
 import lombok.AccessLevel;
@@ -54,10 +53,6 @@ public abstract class AbstractHttpErrorPage implements Serializable {
     @Getter
     private String requestUri;
 
-    /** boolean indicating whether the requested view is jsf view or not. */
-    @Getter
-    private boolean jsfView;
-
     /**
      * Initializes the view by determining the requestedUri and logging the
      * errorCode at warn-level
@@ -68,10 +63,8 @@ public abstract class AbstractHttpErrorPage implements Serializable {
         var context = facesContextProvider.get();
         var request = ServletAdapterUtil.getRequest(context);
         requestUri = determineRequestUri(request);
-        jsfView = requestUri.startsWith(NavigationUtils.FACES_VIEW_PREFIX);
         ServletAdapterUtil.getResponse(context).setStatus(getErrorCode());
-        log.warn("Portal-137: Http-Error '{}' for requested-uri '{}' was raised, jsfView='{}'", getErrorCode(),
-                requestUri, jsfView);
+        log.warn("Portal-137: Http-Error '{}' for requested-uri '{}' was raised", getErrorCode(), requestUri);
         return null;
     }
 

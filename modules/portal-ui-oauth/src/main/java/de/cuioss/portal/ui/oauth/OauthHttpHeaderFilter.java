@@ -39,7 +39,7 @@ public class OauthHttpHeaderFilter {
 
     static final String ORIGIN = "Origin";
 
-    static final String FACES_GUEST_LOGIN_JSF = "/faces/guest/login.jsf";
+    static final String FACES_GUEST_LOGIN_JSF = "/guest/login.jsf";
 
     @Inject
     private Provider<HttpServletRequest> requestProvider;

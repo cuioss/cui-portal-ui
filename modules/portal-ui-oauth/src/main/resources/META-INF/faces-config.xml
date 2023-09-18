@@ -11,7 +11,7 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>login</from-outcome>
-            <to-view-id>/faces/guest/login.xhtml</to-view-id>
+            <to-view-id>/guest/login.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
@@ -20,7 +20,7 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>logout</from-outcome>
-            <to-view-id>/faces/guest/logout.xhtml</to-view-id>
+            <to-view-id>/guest/logout.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
@@ -29,7 +29,7 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>oauth-error</from-outcome>
-            <to-view-id>/faces/guest/oauth-error.xhtml</to-view-id>
+            <to-view-id>/guest/oauth-error.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>

@@ -15,6 +15,9 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import javax.inject.Inject;
 
 import org.jboss.weld.junit5.auto.EnableAlternatives;
@@ -30,7 +33,6 @@ import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
-import io.smallrye.common.constraint.Assert;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -65,8 +67,8 @@ class ViewResourceHandlerTest implements ShouldBeNotNull<ViewResourceHandler>, J
     @Test
     void shouldPassThroughUnmapped() {
         var result = underTest.createViewResource(getFacesContext(), "dummy");
-        Assert.assertNotNull(result);
-        Assert.assertTrue(result.getURL().toString().startsWith(CuiMockResourceHandler.DUMMY_URL));
+        assertNotNull(result);
+        assertTrue(result.getURL().toString().startsWith(CuiMockResourceHandler.DUMMY_URL));
     }
 
     @Test
@@ -74,16 +76,16 @@ class ViewResourceHandlerTest implements ShouldBeNotNull<ViewResourceHandler>, J
         templateMapper.setBasePath(TEMPLATES_BASE_BATH);
 
         var result = underTest.createViewResource(getFacesContext(), "/templates/dummy.xhtml");
-        Assert.assertNotNull(result);
-        Assert.assertTrue(result.getURL().toString().endsWith(TEMPLATES_BASE_BATH + "dummy.xhtml"));
+        assertNotNull(result);
+        assertTrue(result.getURL().toString().endsWith(TEMPLATES_BASE_BATH + "dummy.xhtml"));
     }
 
     @Test
     void shouldMapViews() {
         viewMapper.setBasePath(VIEWS_BASE_PATH);
         var result = underTest.createViewResource(getFacesContext(), "/faces/dummy.xhtml");
-        Assert.assertNotNull(result);
-        Assert.assertTrue(result.getURL().toString().endsWith(VIEWS_BASE_PATH + "dummy.xhtml"));
+        assertNotNull(result);
+        assertTrue(result.getURL().toString().endsWith(VIEWS_BASE_PATH + "dummy.xhtml"));
     }
 
 }

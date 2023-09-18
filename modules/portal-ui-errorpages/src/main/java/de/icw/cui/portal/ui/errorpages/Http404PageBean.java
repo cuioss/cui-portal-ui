@@ -48,7 +48,7 @@ public class Http404PageBean extends AbstractHttpErrorPage {
     @Override
     public String initView() {
         super.initView();
-        if (BooleanOperations.isAnyTrue(!isJsfView(), !shouldRedirect, !isRequestUriAvailable())) {
+        if (BooleanOperations.isAnyTrue(!shouldRedirect, !isRequestUriAvailable())) {
             shouldRedirect = false;
         }
         return null;

@@ -52,7 +52,7 @@ class DefaultHistoryConfigurationTest implements ShouldHandleObjectContracts<Def
         final var configuration = underTest.get();
         assertNotNull(configuration);
         assertTrue(configuration.isExcludeFacesParameter());
-        assertEquals(3, configuration.getExcludeParameter().size());
+        assertEquals(2, configuration.getExcludeParameter().size());
         assertNull(configuration.getFallback());
         assertEquals(HomePage.OUTCOME, configuration.getFallbackOutcome());
         assertTrue(configuration.getExcludeFromHistoryMatcher().match(DESCRIPTOR_LOGIN));

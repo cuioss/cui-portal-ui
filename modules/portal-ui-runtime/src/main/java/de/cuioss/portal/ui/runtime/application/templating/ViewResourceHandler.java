@@ -51,7 +51,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ViewResourceHandler extends ResourceHandlerWrapper {
 
-    private static final String RESOURCE_PREFIX_FACES_VIEW = "/faces/";
+    private static final String RESOURCE_PREFIX_FACES_VIEW = "/";
 
     private static final String RESOURCE_PREFIX_TEMPLATES = "/templates/";
 
@@ -85,11 +85,11 @@ public class ViewResourceHandler extends ResourceHandlerWrapper {
      */
     URL computeURL(final String resourceName) {
         checkMapper();
-        if (resourceName.startsWith(RESOURCE_PREFIX_FACES_VIEW)) {
-            return multiViewMapper.resolveViewPath(removePrefix(resourceName));
+        if (resourceName.startsWith(RESOURCE_PREFIX_TEMPLATES)) {
+            // A request for a template
+            return multiTemplatingMapper.resolveTemplatePath(removePrefix(resourceName));
         }
-        // A request for a template;
-        return multiTemplatingMapper.resolveTemplatePath(removePrefix(resourceName));
+        return multiViewMapper.resolveViewPath(removePrefix(resourceName)).orElse(null);
     }
 
     private void checkMapper() {
@@ -111,14 +111,14 @@ public class ViewResourceHandler extends ResourceHandlerWrapper {
         List<String> list = mutableList(Splitter.on("/").omitEmptyStrings().splitToList(resourceName));
         if (list.size() < 2) {
             throw new IllegalStateException(
-                    "Expected identifier in form of '/faces/xyz.xhtml' or '/templates/xyz.xhtml', actually: "
-                            + resourceName);
+                    "Expected identifier in form of '/xyz.xhtml' or '/templates/xyz.xhtml', actually: " + resourceName);
         }
         return Joiner.on('/').join(list.subList(1, list.size()));
     }
 
     private static boolean shouldHandleResource(final String resourceName) {
         var safeResource = nullToEmpty(resourceName);
+        // FIXME owolff: Review effects of removing prefix mapping
         return safeResource.startsWith(RESOURCE_PREFIX_FACES_VIEW)
                 || safeResource.startsWith(RESOURCE_PREFIX_TEMPLATES);
     }
