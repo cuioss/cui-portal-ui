@@ -38,20 +38,13 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * This resource Handler has two purposes.
- * <ul>
- * <li>Loading views from classpath: Classpath views are expected at
- * /META-INF/faces.</li>
- * <li>Implementation of Multitemplating: see package-doc
- * com.icw.ehf.cui.application.templating for details</li>
- * </ul>
+ * Implementation of Multitemplating: see package-doc
+ * com.icw.ehf.cui.application.templating for details
  *
  * @author Oliver Wolff
  */
 @RequiredArgsConstructor
 public class ViewResourceHandler extends ResourceHandlerWrapper {
-
-    private static final String RESOURCE_PREFIX_FACES_VIEW = "/";
 
     private static final String RESOURCE_PREFIX_TEMPLATES = "/templates/";
 
@@ -117,9 +110,6 @@ public class ViewResourceHandler extends ResourceHandlerWrapper {
     }
 
     private static boolean shouldHandleResource(final String resourceName) {
-        var safeResource = nullToEmpty(resourceName);
-        // FIXME owolff: Review effects of removing prefix mapping
-        return safeResource.startsWith(RESOURCE_PREFIX_FACES_VIEW)
-                || safeResource.startsWith(RESOURCE_PREFIX_TEMPLATES);
+        return nullToEmpty(resourceName).startsWith(RESOURCE_PREFIX_TEMPLATES);
     }
 }

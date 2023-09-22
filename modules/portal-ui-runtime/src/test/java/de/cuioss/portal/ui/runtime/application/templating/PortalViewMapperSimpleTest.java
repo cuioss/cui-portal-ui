@@ -16,10 +16,6 @@
 package de.cuioss.portal.ui.runtime.application.templating;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.net.URL;
-import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -35,21 +31,12 @@ class PortalViewMapperSimpleTest implements ShouldHandleObjectContracts<PortalVi
 
     public static final String PORTAL = "/META-INF/";
 
-    public static final String INDEX = "faces/pages/index.xhtml";
-
     public static final String NOT_THERE = "not.there.xhtml";
 
     @Inject
     @PortalMultiViewMapper
     @Getter
     private PortalViewMapper underTest;
-
-    @Test
-    void shouldInitCorrectly() {
-        Optional<URL> resolveViewPath = underTest.resolveViewPath(INDEX);
-        assertTrue(resolveViewPath.isPresent());
-        assertTrue(resolveViewPath.get().getPath().endsWith(PORTAL + INDEX));
-    }
 
     @Test
     void shouldHAndleNoneExistingResource() {

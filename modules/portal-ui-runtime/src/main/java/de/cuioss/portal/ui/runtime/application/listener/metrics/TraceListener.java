@@ -44,7 +44,7 @@ public class TraceListener implements PhaseListener {
 
     private static final long serialVersionUID = -3549927752283027321L;
 
-    private static final CuiLogger log = new CuiLogger(TraceListener.class);
+    private static final CuiLogger LOGGER = new CuiLogger(TraceListener.class);
 
     @Inject
     @ConfigProperty(name = PORTAL_LISTENER_TRACE_ENABLED)
@@ -58,7 +58,7 @@ public class TraceListener implements PhaseListener {
         if (enabled) {
             requestTracer.start(event.getPhaseId());
         } else {
-            log.trace(DISABLED_BY_CONFIGURATION);
+            LOGGER.trace(DISABLED_BY_CONFIGURATION);
         }
     }
 
@@ -70,7 +70,7 @@ public class TraceListener implements PhaseListener {
                 requestTracer.writeStatistics();
             }
         } else {
-            log.trace(DISABLED_BY_CONFIGURATION);
+            LOGGER.trace(DISABLED_BY_CONFIGURATION);
         }
 
     }

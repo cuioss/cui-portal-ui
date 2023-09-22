@@ -53,7 +53,7 @@ public class PortalCDIViewListener implements PhaseListener {
 
     private static final long serialVersionUID = 7620545331100921567L;
 
-    private static final CuiLogger log = new CuiLogger(PortalCDIViewListener.class);
+    private static final CuiLogger LOGGER = new CuiLogger(PortalCDIViewListener.class);
 
     @Inject
     @PortalRestoreViewListener(PhaseExecution.BEFORE_PHASE)
@@ -85,12 +85,16 @@ public class PortalCDIViewListener implements PhaseListener {
         sortedBeforeListeners = PortalPriorities.sortByPriority(mutableList(beforeListeners));
         sortedAfterListeners = PortalPriorities.sortByPriority(mutableList(afterListeners));
         sortedAfterNonPostbackListeners = PortalPriorities.sortByPriority(mutableList(afterListenersNonPostback));
+        LOGGER.debug("sortedBeforeListeners='%s'", sortedBeforeListeners);
+        LOGGER.debug("sortedAfterListeners='%s'", sortedAfterListeners);
+        LOGGER.debug("sortedAfterNonPostbackListeners='%s'", sortedAfterNonPostbackListeners);
 
     }
 
     @Override
     public void afterPhase(final PhaseEvent event) {
         if (sortedAfterListeners.isEmpty() && sortedAfterNonPostbackListeners.isEmpty()) {
+            LOGGER.debug("No afterPhaseListener present");
             return;
         }
         final var context = event.getFacesContext();
@@ -101,13 +105,14 @@ public class PortalCDIViewListener implements PhaseListener {
                 handleListener(sortedAfterNonPostbackListeners, context, currentView);
             }
         } else {
-            log.warn("Unable to determine view.");
+            LOGGER.warn("Unable to determine view.");
         }
     }
 
     private void handleListener(List<ViewListener> listeners, FacesContext context, ViewDescriptor currentView) {
         for (final ViewListener listener : listeners) {
             if (CheckContextState.isResponseNotComplete(context) && listener.isEnabled()) {
+                LOGGER.trace("Executing Listener '%s' on view '%s'", listener, currentView);
                 listener.handleView(currentView);
             }
         }
@@ -121,11 +126,12 @@ public class PortalCDIViewListener implements PhaseListener {
             if (currentView.isViewDefined()) {
                 for (final ViewListener listener : sortedBeforeListeners) {
                     if (CheckContextState.isResponseNotComplete(context) && listener.isEnabled()) {
+                        LOGGER.trace("Executing Listener '%s' on view '%s'", listener, currentView);
                         listener.handleView(currentView);
                     }
                 }
             } else {
-                log.warn("Unable to determine view.");
+                LOGGER.warn("Unable to determine view.");
             }
         }
     }

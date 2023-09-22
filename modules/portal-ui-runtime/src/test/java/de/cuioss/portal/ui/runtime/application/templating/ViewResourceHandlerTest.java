@@ -44,8 +44,6 @@ class ViewResourceHandlerTest implements ShouldBeNotNull<ViewResourceHandler>, J
     @Getter
     private JsfEnvironmentHolder environmentHolder;
 
-    private static final String VIEWS_BASE_PATH = "META-INF/faces/test/";
-
     private static final String TEMPLATES_BASE_BATH = "META-INF/templates/test/";
 
     @Getter
@@ -78,14 +76,6 @@ class ViewResourceHandlerTest implements ShouldBeNotNull<ViewResourceHandler>, J
         var result = underTest.createViewResource(getFacesContext(), "/templates/dummy.xhtml");
         assertNotNull(result);
         assertTrue(result.getURL().toString().endsWith(TEMPLATES_BASE_BATH + "dummy.xhtml"));
-    }
-
-    @Test
-    void shouldMapViews() {
-        viewMapper.setBasePath(VIEWS_BASE_PATH);
-        var result = underTest.createViewResource(getFacesContext(), "/faces/dummy.xhtml");
-        assertNotNull(result);
-        assertTrue(result.getURL().toString().endsWith(VIEWS_BASE_PATH + "dummy.xhtml"));
     }
 
 }
