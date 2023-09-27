@@ -19,20 +19,27 @@ import javax.faces.application.Application;
 import javax.faces.application.ApplicationFactory;
 import javax.faces.application.ApplicationWrapper;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import de.cuioss.tools.logging.CuiLogger;
 
 /**
  * Factory for creating / wrapping an existing {@link ApplicationFactory}
  *
  * @author Oliver Wolff
  */
-@RequiredArgsConstructor
 public class PortalApplicationFactory extends ApplicationFactory {
 
-    @Getter
-    private final ApplicationFactory wrapped;
     private Application application;
+
+    private static final CuiLogger LOGGER = new CuiLogger(PortalApplicationFactory.class);
+
+    /**
+     * Construct a new OPortalApplicationFactory around the given wrapped factory.
+     * 
+     * @param wrapped The wrapped factory.
+     */
+    public PortalApplicationFactory(ApplicationFactory wrapped) {
+        super(wrapped);
+    }
 
     /**
      * Returns an instance of {@link PortalApplication} which wraps the original
@@ -40,7 +47,7 @@ public class PortalApplicationFactory extends ApplicationFactory {
      */
     @Override
     public Application getApplication() {
-        return application == null ? createPortalApplication(wrapped.getApplication()) : application;
+        return application == null ? createPortalApplication(getWrapped().getApplication()) : application;
     }
 
     /**
@@ -51,7 +58,7 @@ public class PortalApplicationFactory extends ApplicationFactory {
      */
     @Override
     public void setApplication(final Application application) {
-        wrapped.setApplication(createPortalApplication(application));
+        getWrapped().setApplication(createPortalApplication(application));
     }
 
     /**
@@ -62,13 +69,16 @@ public class PortalApplicationFactory extends ApplicationFactory {
      */
     private Application createPortalApplication(final Application application) {
         synchronized (PortalApplicationFactory.class) {
+            LOGGER.debug("Initializing with given application", application.getClass().getName());
             var toBeWrapped = application;
-            while (!(toBeWrapped instanceof PortalApplication) && toBeWrapped instanceof ApplicationWrapper) {
+            while (!(toBeWrapped instanceof PortalApplication) && (toBeWrapped instanceof ApplicationWrapper)) {
+                LOGGER.debug("Found wrapped application", toBeWrapped.getClass().getName());
                 toBeWrapped = ((ApplicationWrapper) toBeWrapped).getWrapped();
             }
 
             if (!(toBeWrapped instanceof PortalApplication)) {
-                toBeWrapped = new PortalApplication(toBeWrapped);
+                LOGGER.debug("Wrapping application", application.getClass().getName());
+                toBeWrapped = new PortalApplication(application);
             }
             this.application = toBeWrapped;
             return this.application;
