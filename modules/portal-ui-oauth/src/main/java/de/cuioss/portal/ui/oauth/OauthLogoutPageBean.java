@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static de.cuioss.portal.configuration.OAuthConfigKeys.OPEN_ID_CLIENT_POST_LOGOUT_REDIRECT_URI;
+import static de.cuioss.portal.authentication.oauth.OAuthConfigKeys.OPEN_ID_CLIENT_POST_LOGOUT_REDIRECT_URI;
 import static de.cuioss.tools.string.MoreStrings.isBlank;
 import static de.cuioss.tools.string.MoreStrings.isPresent;
 
@@ -38,9 +38,9 @@ import de.cuioss.portal.authentication.PortalLoginEvent;
 import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.LoginPagePath;
+import de.cuioss.portal.authentication.oauth.OAuthConfigKeys;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
-import de.cuioss.portal.configuration.OAuthConfigKeys;
 import de.cuioss.portal.configuration.common.PortalPriorities;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
 import de.cuioss.portal.ui.api.ui.pages.LogoutPage;

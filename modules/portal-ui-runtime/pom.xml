@@ -23,6 +23,10 @@
             <groupId>de.cuioss.jsf</groupId>
             <artifactId>cui-jsf-core-components</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.metrics</groupId>
+            <artifactId>microprofile-metrics-api</artifactId>
+        </dependency>
 
         <!-- Test -->
         <dependency>
