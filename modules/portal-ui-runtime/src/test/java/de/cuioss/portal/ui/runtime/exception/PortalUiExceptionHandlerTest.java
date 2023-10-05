@@ -37,7 +37,6 @@ import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
 import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
@@ -77,7 +76,6 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
     private PortalTestConfiguration configuration;
 
     @Inject
-    @PortalHistoryManager
     private PortalHistoryManagerMock historyManagerMock;
 
     @Inject

@@ -15,18 +15,91 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 
-import de.cuioss.jsf.test.mock.application.HistoryManagerMock;
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
+import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.portal.ui.api.history.HistoryManager;
+import de.cuioss.tools.collect.CollectionLiterals;
+import de.cuioss.tools.net.ParameterFilter;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Oliver Wolff
  */
-@PortalHistoryManager
 @ApplicationScoped
-public class PortalHistoryManagerMock extends HistoryManagerMock {
+public class PortalHistoryManagerMock implements HistoryManager {
 
     private static final long serialVersionUID = -3934691506290620858L;
+
+    /** The home navigation view */
+    public static final String VIEW_HOME = "/portal/home.jsf";
+
+    /**
+     * {@link ViewIdentifier}, representing home navigation.
+     */
+    public static final ViewIdentifier IDENTIFIER_HOME = new ViewIdentifier(VIEW_HOME, "home", new ArrayList<>());
+
+    @Getter
+    @Setter
+    private boolean pageReload = false;
+
+    /** The storage for the history. */
+    private List<ViewIdentifier> history;
+
+    @Getter
+    @Setter
+    private ViewIdentifier currentView;
+
+    @Getter
+    @Setter
+    private ParameterFilter parameterFilter;
+
+    /**
+     * Initializes the bean. See class documentation for expected result.
+     */
+    public PortalHistoryManagerMock() {
+        history = new ArrayList<>();
+        currentView = IDENTIFIER_HOME;
+        history.add(IDENTIFIER_HOME);
+        parameterFilter = new ParameterFilter(CollectionLiterals.immutableList("sessionid", "jfwid"), true);
+    }
+
+    @Override
+    public Iterator<ViewIdentifier> iterator() {
+        return history.iterator();
+    }
+
+    @Override
+    public void addCurrentUriToHistory(final ViewDescriptor viewIdentifier) {
+        final var currentViewIdentifier = ViewIdentifier.getFromViewDesciptor(viewIdentifier, parameterFilter);
+        var oldCurrentView = getCurrentView();
+        // Ensure that reloading the page will not duplicate history entries
+        if ((null != oldCurrentView) && !oldCurrentView.equals(currentViewIdentifier)) {
+            history.add(oldCurrentView);
+        }
+        currentView = currentViewIdentifier;
+    }
+
+    @Override
+    public ViewIdentifier popPrevious() {
+        if (history.size() > 1) {
+            return history.remove(history.size() - 1);
+        }
+        return IDENTIFIER_HOME;
+    }
+
+    @Override
+    public ViewIdentifier peekPrevious() {
+        if (history.size() > 1) {
+            return history.get(history.size() - 1);
+        }
+        return IDENTIFIER_HOME;
+    }
 
 }

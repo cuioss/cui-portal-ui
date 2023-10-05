@@ -28,6 +28,10 @@ import java.util.Collections;
 import javax.faces.application.ViewExpiredException;
 import javax.inject.Inject;
 
+import de.cuioss.portal.ui.api.history.HistoryManager;
+import de.cuioss.portal.ui.runtime.application.history.DefaultHistoryConfiguration;
+import de.cuioss.portal.ui.runtime.application.history.HistoryManagerBean;
+import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +41,6 @@ import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthenticatedException;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthorizedException;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
 import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
@@ -58,7 +61,7 @@ import lombok.Setter;
 
 @EnablePortalUiEnvironment
 @EnableTestLogger
-@AddBeanClasses({ CurrentViewProducer.class, NavigationHandlerProducer.class })
+@AddBeanClasses({ CurrentViewProducer.class, NavigationHandlerProducer.class, HistoryManagerBean.class, DefaultHistoryConfiguration.class,  ViewMatcherProducer.class })
 class ViewRelatedExceptionHandlerTest
         implements ShouldHandleObjectContracts<ViewRelatedExceptionHandler>, JsfEnvironmentConsumer {
 
@@ -76,8 +79,7 @@ class ViewRelatedExceptionHandlerTest
     private ViewRelatedExceptionHandler underTest;
 
     @Inject
-    @PortalHistoryManager
-    private PortalHistoryManagerMock historyManagerMock;
+    private HistoryManager historyManagerMock;
 
     @Inject
     @PortalMessageProducer

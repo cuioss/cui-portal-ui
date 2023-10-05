@@ -15,6 +15,9 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
+import static de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock.VIEW_HOME;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.inject.Inject;
@@ -22,21 +25,45 @@ import javax.inject.Inject;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
+import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import lombok.Getter;
 
 @EnableAutoWeld
 class PortalHistoryManagerMockTest implements ShouldBeNotNull<PortalHistoryManagerMock> {
 
+    public static final String CURRENT_VIEW_XHTML = "current/view.jsf";
+
+    private final ViewDescriptorImpl currentView = ViewDescriptorImpl.builder().withViewId(CURRENT_VIEW_XHTML)
+            .withLogicalViewId(CURRENT_VIEW_XHTML).build();
+
+    public static final String OTHER_VIEW_XHTML = "current/other.jsf";
+
+    private final ViewDescriptorImpl otherView = ViewDescriptorImpl.builder().withViewId(OTHER_VIEW_XHTML)
+            .withLogicalViewId(OTHER_VIEW_XHTML).build();
+
     @Getter
     @Inject
-    @PortalHistoryManager
     private PortalHistoryManagerMock underTest;
 
     @Test
     void shouldDefaultSensibly() {
         assertNotNull(underTest.getCurrentView());
+        assertDoesNotThrow(() -> underTest.addCurrentUriToHistory(currentView));
+        assertNotNull(underTest.iterator());
+        assertNotNull(underTest.peekPrevious());
+        assertNotNull(underTest.popPrevious());
+    }
+
+    @Test
+    void shouldHandleStack() {
+        underTest.addCurrentUriToHistory(otherView);
+        underTest.addCurrentUriToHistory(currentView);
+        assertEquals(OTHER_VIEW_XHTML, underTest.peekPrevious().getViewId());
+        assertEquals(OTHER_VIEW_XHTML, underTest.popPrevious().getViewId());
+
+        assertEquals(VIEW_HOME, underTest.peekPrevious().getViewId());
+        assertEquals(VIEW_HOME, underTest.popPrevious().getViewId());
     }
 
 }

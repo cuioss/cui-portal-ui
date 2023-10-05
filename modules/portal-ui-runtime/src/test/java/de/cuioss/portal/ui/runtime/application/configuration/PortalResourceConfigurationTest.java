@@ -36,7 +36,7 @@ import de.cuioss.tools.string.MoreStrings;
 import lombok.Getter;
 
 @EnableAutoWeld
-@EnablePortalConfiguration
+@EnablePortalConfiguration(configuration = RESOURCE_VERSION + ":1.0")
 class PortalResourceConfigurationTest implements ShouldHandleObjectContracts<PortalResourceConfiguration> {
 
     private final TypedGenerator<String> strings = letterStrings(1, 11);

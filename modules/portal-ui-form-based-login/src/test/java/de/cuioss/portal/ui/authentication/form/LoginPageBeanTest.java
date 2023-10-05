@@ -52,7 +52,6 @@ import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
 import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
 import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.pages.HomePage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
@@ -99,7 +98,6 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     private PortalMessageProducerMock messageProducerMock;
 
     @Inject
-    @PortalHistoryManager
     private PortalHistoryManagerMock portalHistoryManagerMock;
 
     @Inject

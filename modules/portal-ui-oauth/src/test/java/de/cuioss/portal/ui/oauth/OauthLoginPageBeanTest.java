@@ -39,7 +39,6 @@ import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.LoginPagePath;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
 import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
 import de.cuioss.portal.ui.runtime.application.view.HttpHeaderFilterImpl;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
@@ -67,7 +66,6 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
     private Oauth2ConfigurationProducerMock oauth2ConfigurationProducerMock;
 
     @Inject
-    @PortalHistoryManager
     private PortalHistoryManagerMock portalHistoryManagerMock;
 
     @Produces

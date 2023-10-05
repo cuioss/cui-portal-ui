@@ -28,13 +28,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import de.cuioss.jsf.api.application.history.HistoryManager;
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.LoginEvent;
 import de.cuioss.portal.authentication.PortalLoginEvent;
 import de.cuioss.portal.authentication.UserChangeEvent;
 import de.cuioss.portal.authentication.facade.AuthenticationResults;
+import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.ui.pages.HomePage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
 import de.cuioss.tools.logging.CuiLogger;

@@ -21,7 +21,6 @@ import javax.faces.application.ViewExpiredException;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import de.cuioss.jsf.api.application.history.HistoryManager;
 import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
@@ -32,7 +31,7 @@ import de.cuioss.portal.ui.api.authentication.UserNotAuthorizedException;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.exception.PortalExceptionHandler;
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
+import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
 import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
@@ -98,7 +97,6 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
     private AuthenticatedUserInfo authenticatedUserInfo;
 
     @Inject
-    @PortalHistoryManager
     private HistoryManager historyManager;
 
     @Inject
@@ -138,8 +136,8 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
         var exception = (ViewSuppressedException) event.getException();
         if (!authenticatedUserInfo.isAuthenticated()) {
             outcome = LoginPage.OUTCOME;
-        } else if (null != exception.getSuppressedViewDescriptor()
-                && null != exception.getSuppressedViewDescriptor().getLogicalViewId()
+        } else if ((null != exception.getSuppressedViewDescriptor())
+                && (null != exception.getSuppressedViewDescriptor().getLogicalViewId())
                 && exception.getSuppressedViewDescriptor().getLogicalViewId()
                         .equals(NavigationUtils.lookUpToLogicalViewIdBy(facesContext, outcome))) {
             LOGGER.error(NAV_LOOP_ERROR_MSG, exception.getSuppressedViewDescriptor().getLogicalViewId());

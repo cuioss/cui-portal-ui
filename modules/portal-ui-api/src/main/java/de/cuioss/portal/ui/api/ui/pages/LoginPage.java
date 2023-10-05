@@ -20,9 +20,9 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 
-import de.cuioss.jsf.api.application.history.HistoryManager;
 import de.cuioss.portal.authentication.model.UserStore;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.uimodel.application.LoginCredentials;
 
 /**

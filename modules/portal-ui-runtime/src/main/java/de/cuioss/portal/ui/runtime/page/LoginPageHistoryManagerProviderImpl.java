@@ -26,9 +26,8 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import de.cuioss.jsf.api.application.history.HistoryManager;
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
+import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.ui.pages.LoginPageHistoryManagerProvider;
 import de.cuioss.tools.net.UrlParameter;
 import de.cuioss.tools.string.MoreStrings;
@@ -50,9 +49,7 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
 
     private static final long serialVersionUID = 6346481935899028211L;
 
-    @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
-    @PortalHistoryManager
     private Provider<HistoryManager> historyManagerProvider;
 
     /**
@@ -81,7 +78,7 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
             }
         }
 
-        if (null != extractedUserStore || null != extractedUserName) {
+        if ((null != extractedUserStore) || (null != extractedUserName)) {
             return Optional
                     .of(LoginCredentials.builder().userStore(extractedUserStore).username(extractedUserName).build());
         }
@@ -97,8 +94,7 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
     @Override
     public ViewIdentifier getCurrentViewExcludeUserStoreAndUserName() {
         var currentView = getWrapped().getCurrentView();
-        final var newParams = currentView.getUrlParameters().stream()
-                .filter(excludeUserStoreAndUserName()).toList();
+        final var newParams = currentView.getUrlParameters().stream().filter(excludeUserStoreAndUserName()).toList();
         return new ViewIdentifier(currentView.getViewId(), currentView.getOutcome(), newParams);
     }
 

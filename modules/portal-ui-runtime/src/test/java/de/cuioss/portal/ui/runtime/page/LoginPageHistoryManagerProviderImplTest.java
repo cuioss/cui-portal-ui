@@ -15,33 +15,30 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.jsf.api.application.history.HistoryManager;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
+import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
+import de.cuioss.portal.ui.runtime.application.history.DefaultHistoryConfiguration;
+import de.cuioss.portal.ui.runtime.application.history.HistoryManagerBean;
+import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
 import de.cuioss.tools.net.UrlParameter;
 import de.cuioss.uimodel.application.LoginCredentials;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalHistoryManagerMock.class })
+@AddBeanClasses({ HistoryManagerBean.class, DefaultHistoryConfiguration.class,  ViewMatcherProducer.class })
 class LoginPageHistoryManagerProviderImplTest extends AbstractPageBeanTest<LoginPageHistoryManagerProviderImpl> {
 
     @Inject
@@ -49,7 +46,6 @@ class LoginPageHistoryManagerProviderImplTest extends AbstractPageBeanTest<Login
     private LoginPageHistoryManagerProviderImpl underTest;
 
     @Inject
-    @PortalHistoryManager
     private Provider<HistoryManager> historyManagerProvider;
 
     @Test

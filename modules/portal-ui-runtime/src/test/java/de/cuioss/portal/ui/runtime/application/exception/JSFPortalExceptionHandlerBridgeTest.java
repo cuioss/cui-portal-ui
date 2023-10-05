@@ -28,7 +28,6 @@ import org.junit.jupiter.api.Test;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
 import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
@@ -62,7 +61,6 @@ class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
     private PortalMessageProducerMock messageProducerMock;
 
     @Inject
-    @PortalHistoryManager
     private PortalHistoryManagerMock historyManagerMock;
 
     @Inject

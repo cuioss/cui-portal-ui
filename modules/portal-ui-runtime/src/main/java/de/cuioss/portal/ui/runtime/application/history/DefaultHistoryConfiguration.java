@@ -18,16 +18,14 @@ package de.cuioss.portal.ui.runtime.application.history;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_EXCLUDE_PARAMETER;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_VIEW_EXCLUDE_PARAMETER;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import de.cuioss.jsf.api.application.history.HistoryConfiguration;
-import de.cuioss.jsf.api.application.history.impl.HistoryConfigurationImpl;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.ui.api.configuration.types.ConfigAsViewMatcher;
@@ -37,12 +35,12 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * Default {@link HistoryConfiguration} for the CUI-portal, defaulting to:
+ * Configuration for {@link de.cuioss.portal.ui.api.history.HistoryManager}, defaulting to:
  * <ul>
  * <li>fallbackOutcome = {@link HomePage#OUTCOME}</li>
- * <li>excludeParameter = derived by web.xml with the key
+ * <li>excludeParameter = derived by configuration
  * {@link PortalConfigurationKeys#HISTORY_EXCLUDE_PARAMETER}</li>
- * <li>excludeFromHistoryMatcher = derived by web.xml with the key
+ * <li>excludeFromHistoryMatcher = derived by the configuration
  * {@link PortalConfigurationKeys#HISTORY_VIEW_EXCLUDE_PARAMETER}</li>
  * <li>historySize=10</li>
  * <li>excludeFacesParameter=true</li>
@@ -50,13 +48,17 @@ import lombok.ToString;
  *
  * @author Oliver Wolff
  */
-@Dependent
-@Named(HistoryConfigurationImpl.BEAN_NAME)
+@ApplicationScoped
 @EqualsAndHashCode
 @ToString
-public class DefaultHistoryConfiguration implements HistoryConfiguration {
+public class DefaultHistoryConfiguration implements Serializable {
 
     private static final long serialVersionUID = 8178547799619418410L;
+
+    /**
+     * The default size for the history-size
+     */
+    static final int DEFAULT_HISTORY_SIZE = 10;
 
     @Getter
     private String fallback;
@@ -65,7 +67,7 @@ public class DefaultHistoryConfiguration implements HistoryConfiguration {
     private final String fallbackOutcome = HomePage.OUTCOME;
 
     @Getter
-    private final int historySize = HistoryConfigurationImpl.DEFAULT_HISTORY_SIZE;
+    private final int historySize = DEFAULT_HISTORY_SIZE;
 
     @Getter
     private final boolean excludeFacesParameter = true;

@@ -23,10 +23,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-import de.cuioss.jsf.api.application.history.HistoryManager;
-import de.cuioss.jsf.api.application.history.impl.HistoryManagerImpl;
 import de.cuioss.portal.configuration.common.PortalPriorities;
-import de.cuioss.portal.ui.api.history.PortalHistoryManager;
+import de.cuioss.portal.ui.api.history.HistoryManager;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Delegate;
@@ -40,7 +38,6 @@ import lombok.experimental.Delegate;
  *
  * @author Oliver Wolff
  */
-@PortalHistoryManager
 @SessionScoped
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @Named(HistoryManagerImpl.BEAN_NAME)
