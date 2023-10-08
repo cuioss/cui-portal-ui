@@ -26,24 +26,24 @@ import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
 import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
-import de.cuioss.test.jsf.producer.JsfObjectsProducers;
+import de.cuioss.test.jsf.producer.JsfObjectsProducer;
 
 @EnableJsfEnvironment
 @EnableAutoWeld
-@AddBeanClasses({ NavigationHandlerProducer.class, JsfObjectsProducers.class })
+@AddBeanClasses({ NavigationHandlerProducer.class, JsfObjectsProducer.class })
 class NavigationHandlerProducerTest {
 
-    @Inject
-    @CuiNavigationHandler
-    private Provider<NavigationHandler> handlerProvider;
+	@Inject
+	@CuiNavigationHandler
+	private Provider<NavigationHandler> handlerProvider;
 
-    @Inject
-    private NavigationHandlerProducer navigationHandlerProducer;
+	@Inject
+	private NavigationHandlerProducer navigationHandlerProducer;
 
-    @Test
-    void shouldProduce() {
-        assertInstanceOf(NavigationHandler.class, handlerProvider.get());
-        assertInstanceOf(NavigationHandler.class, navigationHandlerProducer.getNavigationHandler());
-    }
+	@Test
+	void shouldProduce() {
+		assertInstanceOf(NavigationHandler.class, handlerProvider.get());
+		assertInstanceOf(NavigationHandler.class, navigationHandlerProducer.getNavigationHandler());
+	}
 
 }

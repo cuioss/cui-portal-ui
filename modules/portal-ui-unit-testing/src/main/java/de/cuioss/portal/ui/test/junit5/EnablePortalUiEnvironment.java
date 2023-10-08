@@ -44,8 +44,8 @@ import de.cuioss.portal.ui.test.mocks.PortalStickyMessageProducerMock;
 import de.cuioss.test.jsf.config.JsfTestConfiguration;
 import de.cuioss.test.jsf.defaults.BasicApplicationConfiguration;
 import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
-import de.cuioss.test.jsf.producer.JsfObjectsProducers;
-import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducers;
+import de.cuioss.test.jsf.producer.JsfObjectsProducer;
+import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
 
 /**
  * Using this annotations at type-level of a junit 5 test defines the basic
@@ -60,7 +60,7 @@ import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducers;
  * {@link BasicApplicationConfiguration}</li>
  * </ul>
  * <p>
- * In addition it adds the {@link JsfObjectsProducers},
+ * In addition it adds the {@link JsfObjectsProducer},
  * {@link PortalProjectStageImpl}, {@link PortalStickyMessageProducerMock},
  * {@link PortalMessageProducerMock} and {@link PortalMirrorResourceBundle}
  * using {@link AddBeanClasses}
@@ -87,10 +87,10 @@ import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducers;
 @EnablePortalConfiguration
 @EnableJsfEnvironment
 @JsfTestConfiguration({ BasicApplicationConfiguration.class, MirrorCuiRessourcBundle.class,
-        PortalNavigationConfiguration.class })
+		PortalNavigationConfiguration.class })
 @AddBeanClasses({ PortalProjectStageImpl.class, PortalMirrorResourceBundle.class, PortalLocaleProducerMock.class,
-        PortalStickyMessageProducerMock.class, PortalMessageProducerMock.class, JsfObjectsProducers.class,
-        ServletObjectsFromJSFContextProducers.class, CurrentViewProducer.class, NavigationHandlerProducer.class })
+		PortalStickyMessageProducerMock.class, PortalMessageProducerMock.class, JsfObjectsProducer.class,
+		ServletObjectsFromJSFContextProducer.class, CurrentViewProducer.class, NavigationHandlerProducer.class })
 @ActivateScopes({ RequestScoped.class, SessionScoped.class, ConversationScoped.class, ViewScoped.class })
 public @interface EnablePortalUiEnvironment {
 }
