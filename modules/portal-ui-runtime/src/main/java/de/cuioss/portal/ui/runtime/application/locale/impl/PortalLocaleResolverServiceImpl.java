@@ -56,76 +56,72 @@ import lombok.ToString;
 @ToString(of = { "locale", "availableLocales" }, doNotUseGetters = true)
 public class PortalLocaleResolverServiceImpl implements LocaleResolverService, Serializable {
 
-    private static final long serialVersionUID = 2745227675026232302L;
+	private static final long serialVersionUID = 2745227675026232302L;
 
-    private Locale locale;
+	private Locale locale;
 
-    @Getter
-    private List<Locale> availableLocales;
+	@Getter
+	private List<Locale> availableLocales;
 
-    @Inject
-    private Provider<FacesContext> facesContextProvider;
+	@Inject
+	private Provider<FacesContext> facesContextProvider;
 
-    @Inject
-    private LocaleConfiguration localeConfiguration;
+	@Inject
+	private LocaleConfiguration localeConfiguration;
 
-    @Inject
-    @PortalClientStorage
-    private ClientStorage clientStorage;
+	@Inject
+	@PortalClientStorage
+	private ClientStorage clientStorage;
 
-    /**
-     * Initializer method for the bean
-     */
-    @PostConstruct
-    public void initBean() {
-        availableLocales = localeConfiguration.getAvailableLocales();
-    }
+	/**
+	 * Initializer method for the bean
+	 */
+	@PostConstruct
+	public void initBean() {
+		availableLocales = localeConfiguration.getAvailableLocales();
+	}
 
-    @Override
-    public void saveUserLocale(final Locale localeValue) {
-        if (!getAvailableLocales().contains(localeValue)) {
-            throw new IllegalArgumentException(
-                    "Locale must be one of " + getAvailableLocales() + ", but was " + this.locale);
-        }
-        this.clientStorage.put(LOCALE_DEFAULT, localeValue.toLanguageTag());
-        this.locale = null;
-    }
+	@Override
+	public void saveUserLocale(final Locale localeValue) {
+		if (!getAvailableLocales().contains(localeValue))
+			throw new IllegalArgumentException(
+					"Locale must be one of " + getAvailableLocales() + ", but was " + locale);
+		clientStorage.put(LOCALE_DEFAULT, localeValue.toLanguageTag());
+		locale = null;
+	}
 
-    @Override
-    public Locale getLocale() {
-        if (null == locale) {
+	@Override
+	public Locale resolveUserLocale() {
+		if (null == locale) {
 
-            final var localeFromClientStorage = extractFromClientStorage();
-            if (localeFromClientStorage.isPresent()) {
-                this.locale = localeFromClientStorage.get();
-            } else {
-                final var localeFromViewRoot = extractFromViewRoot();
-                if (localeFromViewRoot.isEmpty()) {
-                    // do not persist "dirty" result in this session scoped bean
-                    return localeConfiguration.getDefaultLocale();
-                }
-                this.locale = localeFromViewRoot.get();
-            }
-        }
-        return locale;
-    }
+			final var localeFromClientStorage = extractFromClientStorage();
+			if (localeFromClientStorage.isPresent()) {
+				locale = localeFromClientStorage.get();
+			} else {
+				final var localeFromViewRoot = extractFromViewRoot();
+				if (localeFromViewRoot.isEmpty())
+					// do not persist "dirty" result in this session scoped bean
+					return localeConfiguration.getDefaultLocale();
+				locale = localeFromViewRoot.get();
+			}
+		}
+		return locale;
+	}
 
-    private Optional<Locale> extractFromViewRoot() {
-        var facesContext = facesContextProvider.get();
-        if (!facesContext.isReleased()) {
-            return Optional.ofNullable(facesContext.getApplication().getViewHandler().calculateLocale(facesContext));
-        }
-        return Optional.empty();
-    }
+	private Optional<Locale> extractFromViewRoot() {
+		var facesContext = facesContextProvider.get();
+		if (!facesContext.isReleased())
+			return Optional.ofNullable(facesContext.getApplication().getViewHandler().calculateLocale(facesContext));
+		return Optional.empty();
+	}
 
-    private Optional<Locale> extractFromClientStorage() {
-        if (clientStorage.containsKey(LOCALE_DEFAULT)) {
-            final var storedLocale = Locale.forLanguageTag(this.clientStorage.get(LOCALE_DEFAULT));
-            if (getAvailableLocales().contains(storedLocale)) {
-                return Optional.of(storedLocale);
-            }
-        }
-        return Optional.empty();
-    }
+	private Optional<Locale> extractFromClientStorage() {
+		if (clientStorage.containsKey(LOCALE_DEFAULT)) {
+			final var storedLocale = Locale.forLanguageTag(clientStorage.get(LOCALE_DEFAULT));
+			if (getAvailableLocales().contains(storedLocale))
+				return Optional.of(storedLocale);
+		}
+		return Optional.empty();
+	}
 
 }

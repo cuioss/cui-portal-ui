@@ -26,11 +26,8 @@ import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Provider;
 
-import de.cuioss.jsf.api.application.locale.LocaleProducer;
-import de.cuioss.jsf.api.application.locale.LocaleProducerImpl;
 import de.cuioss.portal.core.locale.PortalLocale;
 import de.cuioss.portal.ui.api.locale.LocaleChangeEvent;
 import de.cuioss.portal.ui.api.locale.LocaleResolverService;
@@ -49,64 +46,63 @@ import lombok.ToString;
  * behavior. In addition it provides a producer method for {@link PortalLocale}
  * To put in other words: This bean provides a session-scoped cache for locale,
  * the used service is agnostic of state or bean specific types. In addition it
- * acts as an implementation of {@link LocaleProducer}: <em>Caution:</em>:
- * Within CDI-beans the only way to access the locale is injecting
+ * acts as an producer of {@link PortalLocale}: <em>Caution:</em>: Within
+ * CDI-beans the only way to access the locale is injecting
  * {@link PortalLocale}. The producer is only meant as legacy bridge.
  *
  * @author Oliver Wolff
  */
-@Named(LocaleProducerImpl.BEAN_NAME)
 @SessionScoped
 @EqualsAndHashCode(of = "locale")
 @ToString(of = "locale")
 public class PortalLocaleManagerBean implements Serializable, LocaleResolverService {
 
-    private static final long serialVersionUID = -3555387539352353982L;
+	private static final long serialVersionUID = -3555387539352353982L;
 
-    @Inject
-    @PortalLocaleResolver
-    private LocaleResolverService resolverService;
+	@Inject
+	@PortalLocaleResolver
+	private LocaleResolverService resolverService;
 
-    private Locale locale;
+	private Locale locale;
 
-    @Inject
-    @LocaleChangeEvent
-    private Event<Locale> localeChangeEvent;
+	@Inject
+	@LocaleChangeEvent
+	private Event<Locale> localeChangeEvent;
 
-    @Inject
-    private Provider<FacesContext> facesContextProvider;
+	@Inject
+	private Provider<FacesContext> facesContextProvider;
 
-    /**
-     * Producer method for {@link Locale} identified by {@link PortalLocale}
-     *
-     * @return the corresponding user specific locale.
-     */
-    @Produces
-    @PortalLocale
-    @Dependent
-    Locale produceClientLocale() {
-        return getLocale();
-    }
+	/**
+	 * Producer method for {@link Locale} identified by {@link PortalLocale}
+	 *
+	 * @return the corresponding user specific locale.
+	 */
+	@Produces
+	@PortalLocale
+	@Dependent
+	Locale produceClientLocale() {
+		return resolveUserLocale();
+	}
 
-    @Override
-    public List<Locale> getAvailableLocales() {
-        return this.resolverService.getAvailableLocales();
-    }
+	@Override
+	public List<Locale> getAvailableLocales() {
+		return resolverService.getAvailableLocales();
+	}
 
-    @Override
-    public void saveUserLocale(final Locale localeValue) {
-        this.locale = localeValue;
-        this.facesContextProvider.get().getViewRoot().setLocale(this.locale);
-        this.resolverService.saveUserLocale(this.locale);
-        this.localeChangeEvent.fire(this.locale);
-    }
+	@Override
+	public void saveUserLocale(final Locale localeValue) {
+		locale = localeValue;
+		facesContextProvider.get().getViewRoot().setLocale(locale);
+		resolverService.saveUserLocale(locale);
+		localeChangeEvent.fire(locale);
+	}
 
-    @Override
-    public Locale getLocale() {
-        if (null == locale) {
-            this.locale = this.resolverService.getLocale();
-        }
-        return locale;
-    }
+	@Override
+	public Locale resolveUserLocale() {
+		if (null == locale) {
+			locale = resolverService.resolveUserLocale();
+		}
+		return locale;
+	}
 
 }
