@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.cuioss</groupId>
         <artifactId>cui-java-parent</artifactId>
-        <version>0.4.1</version>
+        <version>0.4.2</version>
         <relativePath />
     </parent>
     <groupId>de.cuioss.portal.ui</groupId>
@@ -28,7 +28,7 @@
         <system>GitHub Issues</system>
     </issueManagement>
     <properties>
-        <version.cui.parent>0.4.1</version.cui.parent>
+        <version.cui.parent>0.4.2</version.cui.parent>
         <version.cui.jsf.components>1.0.0-SNAPSHOT</version.cui.jsf.components>
         <version.cui.portal.core>1.0.0-SNAPSHOT</version.cui.portal.core>
     </properties>
