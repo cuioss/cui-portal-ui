@@ -30,15 +30,14 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.cuioss.jsf.api.application.theme.ThemeConfiguration;
 import de.cuioss.portal.configuration.common.PortalPriorities;
 import de.cuioss.portal.core.bundle.PortalResourceBundle;
-import de.cuioss.portal.ui.api.theme.PortalThemeConfiguration;
 import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
 import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesPreferences;
 import de.cuioss.portal.ui.api.ui.pages.PreferencesPage;
 import de.cuioss.portal.ui.runtime.application.locale.PortalLocaleManagerBean;
-import de.cuioss.portal.ui.runtime.application.theme.PortalThemeManager;
+import de.cuioss.portal.ui.runtime.application.theme.PortalThemeConfiguration;
+import de.cuioss.portal.ui.runtime.application.theme.UserThemeBean;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -57,79 +56,78 @@ import lombok.ToString;
 @ToString(of = { "selectedLocale", "selectedTheme" }, doNotUseGetters = true)
 public class PreferencesPageBean implements PreferencesPage {
 
-    private static final long serialVersionUID = -1270494557240741123L;
+	private static final long serialVersionUID = -1270494557240741123L;
 
-    private static final String LOCALE_KEY_PREFIX = "common.locale.";
+	private static final String LOCALE_KEY_PREFIX = "common.locale.";
 
-    @Inject
-    private PortalThemeManager portalThemeManager;
+	@Inject
+	private UserThemeBean userThemeBean;
 
-    @Inject
-    @PortalThemeConfiguration
-    private ThemeConfiguration themeConfiguration;
+	@Inject
+	private PortalThemeConfiguration themeConfiguration;
 
-    @Inject
-    private PortalLocaleManagerBean localeManagerBean;
+	@Inject
+	private PortalLocaleManagerBean localeManagerBean;
 
-    @Getter
-    private List<String> availableThemes;
+	@Getter
+	private List<String> availableThemes;
 
-    @Getter
-    @Setter
-    private String selectedTheme;
+	@Getter
+	@Setter
+	private String selectedTheme;
 
-    @Getter
-    private List<SelectItem> availableLocales;
+	@Getter
+	private List<SelectItem> availableLocales;
 
-    @Getter
-    @Setter
-    private Locale selectedLocale;
+	@Getter
+	@Setter
+	private Locale selectedLocale;
 
-    @Inject
-    @PortalResourceBundle
-    private ResourceBundle resourceBundle;
+	@Inject
+	@PortalResourceBundle
+	private ResourceBundle resourceBundle;
 
-    @Inject
-    private FacesContext facesContext;
+	@Inject
+	private FacesContext facesContext;
 
-    @Inject
-    @CuiNavigationHandler
-    private NavigationHandler navigationHandler;
+	@Inject
+	@CuiNavigationHandler
+	private NavigationHandler navigationHandler;
 
-    /**
-     * Initializes the lists for the drop-down menus.
-     */
-    @PostConstruct
-    public void initBean() {
-        this.availableThemes = this.themeConfiguration.getAvailableThemes();
-        this.selectedTheme = this.portalThemeManager.getTheme();
-        this.availableLocales = new ArrayList<>();
-        for (final Locale locale : this.localeManagerBean.getAvailableLocales()) {
-            this.availableLocales.add(new SelectItem(locale, this.resourceBundle
-                    .getString(new StringBuilder(LOCALE_KEY_PREFIX).append(locale.getLanguage()).toString())));
-        }
-        this.selectedLocale = this.localeManagerBean.getLocale();
-    }
+	/**
+	 * Initializes the lists for the drop-down menus.
+	 */
+	@PostConstruct
+	public void initBean() {
+		availableThemes = themeConfiguration.getAvailableThemes();
+		selectedTheme = userThemeBean.getTheme();
+		availableLocales = new ArrayList<>();
+		for (final Locale locale : localeManagerBean.getAvailableLocales()) {
+			availableLocales.add(new SelectItem(locale, resourceBundle
+					.getString(new StringBuilder(LOCALE_KEY_PREFIX).append(locale.getLanguage()).toString())));
+		}
+		selectedLocale = localeManagerBean.getLocale();
+	}
 
-    /**
-     * To be called on valueChange for the theme-selection
-     *
-     * @param changeEvent
-     */
-    public void themeChangeListener(final ValueChangeEvent changeEvent) {
-        this.selectedTheme = (String) changeEvent.getNewValue();
-        this.portalThemeManager.saveTheme(this.selectedTheme);
-        this.navigationHandler.handleNavigation(this.facesContext, null, PreferencesPage.OUTCOME);
-    }
+	/**
+	 * To be called on valueChange for the theme-selection
+	 *
+	 * @param changeEvent
+	 */
+	public void themeChangeListener(final ValueChangeEvent changeEvent) {
+		selectedTheme = (String) changeEvent.getNewValue();
+		userThemeBean.saveTheme(selectedTheme);
+		navigationHandler.handleNavigation(facesContext, null, PreferencesPage.OUTCOME);
+	}
 
-    /**
-     * To be called on valueChange for the locale-selection
-     *
-     * @param changeEvent
-     */
-    public void localeChangeListener(final ValueChangeEvent changeEvent) {
-        this.selectedLocale = (Locale) changeEvent.getNewValue();
-        this.localeManagerBean.saveUserLocale(this.selectedLocale);
-        this.navigationHandler.handleNavigation(this.facesContext, null, PreferencesPage.OUTCOME);
-    }
+	/**
+	 * To be called on valueChange for the locale-selection
+	 *
+	 * @param changeEvent
+	 */
+	public void localeChangeListener(final ValueChangeEvent changeEvent) {
+		selectedLocale = (Locale) changeEvent.getNewValue();
+		localeManagerBean.saveUserLocale(selectedLocale);
+		navigationHandler.handleNavigation(facesContext, null, PreferencesPage.OUTCOME);
+	}
 }
