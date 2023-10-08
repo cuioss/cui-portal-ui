@@ -28,11 +28,11 @@ import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 @EnableJsfEnvironment
 @EnablePortalConfiguration
 class PortalNavigationMenuItemExternalSingleImplTest
-		implements ShouldHandleObjectContracts<PortalNavigationMenuItemExternalSingleImpl> {
+        implements ShouldHandleObjectContracts<PortalNavigationMenuItemExternalSingleImpl> {
 
-	@Override
-	public PortalNavigationMenuItemExternalSingleImpl getUnderTest() {
-		return new PortalNavigationMenuItemExternalSingleImpl();
-	}
+    @Override
+    public PortalNavigationMenuItemExternalSingleImpl getUnderTest() {
+        return new PortalNavigationMenuItemExternalSingleImpl();
+    }
 
 }

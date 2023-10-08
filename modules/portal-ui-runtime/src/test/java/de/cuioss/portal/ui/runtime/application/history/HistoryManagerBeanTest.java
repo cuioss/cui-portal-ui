@@ -15,6 +15,16 @@
  */
 package de.cuioss.portal.ui.runtime.application.history;
 
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_VIEW_EXCLUDE_PARAMETER;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import javax.inject.Inject;
+
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
@@ -26,15 +36,6 @@ import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import lombok.Getter;
 import lombok.Setter;
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
-import javax.inject.Inject;
-
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_VIEW_EXCLUDE_PARAMETER;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
@@ -55,7 +56,6 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
     private static final String FIRST_NAVIGATION = "/current/view3.jsf";
 
     public static final String CURRENT_VIEW_XHTML = "current/view.jsf";
-
 
     public static final String FALLBACK_VIEW = "/portal/home.jsf";
 

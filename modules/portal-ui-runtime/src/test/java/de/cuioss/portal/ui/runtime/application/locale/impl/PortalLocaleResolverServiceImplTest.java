@@ -36,30 +36,30 @@ import lombok.Getter;
 @AddBeanClasses({ LocaleConfiguration.class, PortalClientStorageMock.class })
 class PortalLocaleResolverServiceImplTest implements ShouldHandleObjectContracts<PortalLocaleResolverServiceImpl> {
 
-	@Inject
-	@PortalLocaleResolver
-	@Getter
-	private PortalLocaleResolverServiceImpl underTest;
+    @Inject
+    @PortalLocaleResolver
+    @Getter
+    private PortalLocaleResolverServiceImpl underTest;
 
-	@Test
-	void shouldProvideCorrectLocales() {
-		assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
-		assertEquals(3, underTest.getAvailableLocales().size());
-	}
+    @Test
+    void shouldProvideCorrectLocales() {
+        assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
+        assertEquals(3, underTest.getAvailableLocales().size());
+    }
 
-	@Test
-	void shouldSaveLocaleCorrectly() {
-		assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
-		underTest.saveUserLocale(Locale.GERMAN);
-		assertEquals(Locale.GERMAN, underTest.resolveUserLocale());
-	}
+    @Test
+    void shouldSaveLocaleCorrectly() {
+        assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
+        underTest.saveUserLocale(Locale.GERMAN);
+        assertEquals(Locale.GERMAN, underTest.resolveUserLocale());
+    }
 
-	@Test
-	void shouldFailOnSavingInvalidLocale() {
-		assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
-		assertThrows(IllegalArgumentException.class, () -> {
-			underTest.saveUserLocale(Locale.SIMPLIFIED_CHINESE);
-		});
-	}
+    @Test
+    void shouldFailOnSavingInvalidLocale() {
+        assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
+        assertThrows(IllegalArgumentException.class, () -> {
+            underTest.saveUserLocale(Locale.SIMPLIFIED_CHINESE);
+        });
+    }
 
 }

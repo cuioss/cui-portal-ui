@@ -25,59 +25,59 @@ import lombok.Setter;
 @AddBeanClasses({ DefaultHistoryConfiguration.class, HistoryManagerBean.class, ViewMatcherProducer.class })
 class HistoryNavigationHandlerTest implements JsfEnvironmentConsumer {
 
-	public static final String PORTAL_HOME_JSF = "/portal/home.jsf";
-	private HistoryNavigationHandler underTest;
+    public static final String PORTAL_HOME_JSF = "/portal/home.jsf";
+    private HistoryNavigationHandler underTest;
 
-	@Setter
-	@Getter
-	private JsfEnvironmentHolder environmentHolder;
+    @Setter
+    @Getter
+    private JsfEnvironmentHolder environmentHolder;
 
-	@Inject
-	private HistoryManager historyManager;
+    @Inject
+    private HistoryManager historyManager;
 
-	@BeforeEach
-	void setupUnderTest() {
-		underTest = new HistoryNavigationHandler(
-				(ConfigurableNavigationHandler) getApplication().getNavigationHandler());
-		historyManager.addCurrentUriToHistory(CURRENT_VIEW);
-		historyManager.addCurrentUriToHistory(SECOND_VIEW);
-	}
+    @BeforeEach
+    void setupUnderTest() {
+        underTest = new HistoryNavigationHandler(
+                (ConfigurableNavigationHandler) getApplication().getNavigationHandler());
+        historyManager.addCurrentUriToHistory(CURRENT_VIEW);
+        historyManager.addCurrentUriToHistory(SECOND_VIEW);
+    }
 
-	@Test
-	void shouldHandleDefaultNavigation() {
-		assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId());
-		underTest.handleNavigation(getFacesContext(), null, HomePage.OUTCOME);
-		assertNavigatedWithOutcome(HomePage.OUTCOME);
-		assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId(),
-				"Should not change history");
-	}
+    @Test
+    void shouldHandleDefaultNavigation() {
+        assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId());
+        underTest.handleNavigation(getFacesContext(), null, HomePage.OUTCOME);
+        assertNavigatedWithOutcome(HomePage.OUTCOME);
+        assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId(),
+                "Should not change history");
+    }
 
-	@Test
-	void shouldHandleBackNavigation() {
-		assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId());
-		underTest.handleNavigation(getFacesContext(), null, "back");
+    @Test
+    void shouldHandleBackNavigation() {
+        assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId());
+        underTest.handleNavigation(getFacesContext(), null, "back");
 
-		assertRedirect(CURRENT_VIEW.getViewId());
-		assertEquals(PORTAL_HOME_JSF, historyManager.peekPrevious().getViewId(), "Should change history");
-	}
+        assertRedirect(CURRENT_VIEW.getViewId());
+        assertEquals(PORTAL_HOME_JSF, historyManager.peekPrevious().getViewId(), "Should change history");
+    }
 
-	@Test
-	void shouldHandleDefaultNavigationCase() {
-		assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId());
-		var navigationCase = underTest.getNavigationCase(getFacesContext(), null, HomePage.OUTCOME);
-		assertNotNull(navigationCase);
-		assertEquals(PORTAL_HOME_JSF, navigationCase.getToViewId(getFacesContext()));
-		assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId(),
-				"Should not change history");
-	}
+    @Test
+    void shouldHandleDefaultNavigationCase() {
+        assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId());
+        var navigationCase = underTest.getNavigationCase(getFacesContext(), null, HomePage.OUTCOME);
+        assertNotNull(navigationCase);
+        assertEquals(PORTAL_HOME_JSF, navigationCase.getToViewId(getFacesContext()));
+        assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId(),
+                "Should not change history");
+    }
 
-	@Test
-	void shouldHandleBackNavigationCase() {
-		assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId());
-		var navigationCase = underTest.getNavigationCase(getFacesContext(), null, "back");
-		assertNotNull(navigationCase);
-		assertEquals(CURRENT_VIEW.getLogicalViewId(), navigationCase.getToViewId(getFacesContext()));
-		assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId(),
-				"Should not change history");
-	}
+    @Test
+    void shouldHandleBackNavigationCase() {
+        assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId());
+        var navigationCase = underTest.getNavigationCase(getFacesContext(), null, "back");
+        assertNotNull(navigationCase);
+        assertEquals(CURRENT_VIEW.getLogicalViewId(), navigationCase.getToViewId(getFacesContext()));
+        assertEquals(CURRENT_VIEW.getLogicalViewId(), historyManager.peekPrevious().getViewId(),
+                "Should not change history");
+    }
 }

@@ -78,7 +78,7 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
             }
         }
 
-        if ((null != extractedUserStore) || (null != extractedUserName)) {
+        if (null != extractedUserStore || null != extractedUserName) {
             return Optional
                     .of(LoginCredentials.builder().userStore(extractedUserStore).username(extractedUserName).build());
         }

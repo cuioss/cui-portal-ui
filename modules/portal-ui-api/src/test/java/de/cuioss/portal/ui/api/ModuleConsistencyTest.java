@@ -25,9 +25,9 @@ import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
 
 class ModuleConsistencyTest extends BaseModuleConsistencyTest {
 
-	@Override
-	protected Weld modifyWeldContainer(Weld weld) {
-		return weld.addBeanClasses(ServletObjectsFromJSFContextProducer.class, JsfObjectsProducer.class,
-				PortalAuthenticationFacadeMock.class, PortalResourceBundleMock.class);
-	}
+    @Override
+    protected Weld modifyWeldContainer(Weld weld) {
+        return weld.addBeanClasses(ServletObjectsFromJSFContextProducer.class, JsfObjectsProducer.class,
+                PortalAuthenticationFacadeMock.class, PortalResourceBundleMock.class);
+    }
 }

@@ -58,8 +58,8 @@ public class MissingScopesErrorDecoder implements ResponseExceptionMapper<Missin
             }
             log.trace("www-authenticate found: {}", wwwAuthenticate);
 
-            var wwwAuthenticateEntries = wwwAuthenticate.stream().map(value -> value.split(","))
-                    .flatMap(Arrays::stream).map(String::trim).toList();
+            var wwwAuthenticateEntries = wwwAuthenticate.stream().map(value -> value.split(",")).flatMap(Arrays::stream)
+                    .map(String::trim).toList();
             if (wwwAuthenticateEntries.stream().anyMatch(entry -> entry.equalsIgnoreCase("error=\"insufficient_scope\"")
                     || entry.equalsIgnoreCase("Bearer error=\"insufficient_scope\""))) {
                 var missingScopesEntry = wwwAuthenticateEntries.stream()

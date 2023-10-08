@@ -35,7 +35,8 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * Configuration for {@link de.cuioss.portal.ui.api.history.HistoryManager}, defaulting to:
+ * Configuration for {@link de.cuioss.portal.ui.api.history.HistoryManager},
+ * defaulting to:
  * <ul>
  * <li>fallbackOutcome = {@link HomePage#OUTCOME}</li>
  * <li>excludeParameter = derived by configuration

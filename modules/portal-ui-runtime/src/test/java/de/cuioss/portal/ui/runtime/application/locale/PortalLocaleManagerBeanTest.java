@@ -42,38 +42,38 @@ import lombok.Getter;
 @ExcludeBeanClasses(PortalLocaleProducerMock.class)
 class PortalLocaleManagerBeanTest implements ShouldHandleObjectContracts<PortalLocaleManagerBean> {
 
-	@Inject
-	@Getter
-	private PortalLocaleManagerBean underTest;
+    @Inject
+    @Getter
+    private PortalLocaleManagerBean underTest;
 
-	private Locale changeEventResult;
+    private Locale changeEventResult;
 
-	@Test
-	void shouldProvideCorrectLocales() {
-		assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
-		assertEquals(2, underTest.getAvailableLocales().size());
-	}
+    @Test
+    void shouldProvideCorrectLocales() {
+        assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
+        assertEquals(2, underTest.getAvailableLocales().size());
+    }
 
-	@Test
-	void shouldSaveLocaleCorrectly() {
-		assertNull(changeEventResult);
-		assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
-		underTest.saveUserLocale(Locale.GERMAN);
-		assertEquals(Locale.GERMAN, changeEventResult);
-		assertEquals(Locale.GERMAN, underTest.resolveUserLocale());
-		underTest.saveUserLocale(Locale.ENGLISH);
-		assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
-	}
+    @Test
+    void shouldSaveLocaleCorrectly() {
+        assertNull(changeEventResult);
+        assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
+        underTest.saveUserLocale(Locale.GERMAN);
+        assertEquals(Locale.GERMAN, changeEventResult);
+        assertEquals(Locale.GERMAN, underTest.resolveUserLocale());
+        underTest.saveUserLocale(Locale.ENGLISH);
+        assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
+    }
 
-	@Test
-	void shouldFailOnSavingInvalidLocale() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			underTest.saveUserLocale(Locale.SIMPLIFIED_CHINESE);
-		});
-	}
+    @Test
+    void shouldFailOnSavingInvalidLocale() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            underTest.saveUserLocale(Locale.SIMPLIFIED_CHINESE);
+        });
+    }
 
-	void actOnLocaleChangeEven(@Observes @LocaleChangeEvent final Locale newLocale) {
-		changeEventResult = newLocale;
-	}
+    void actOnLocaleChangeEven(@Observes @LocaleChangeEvent final Locale newLocale) {
+        changeEventResult = newLocale;
+    }
 
 }

@@ -47,45 +47,45 @@ import lombok.Getter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ NavigationHandlerProducer.class, PortalThemeConfiguration.class, UserThemeBean.class,
-		PortalLocaleResolverServiceMock.class, PortalClientStorageMock.class })
+        PortalLocaleResolverServiceMock.class, PortalClientStorageMock.class })
 @EnableAlternatives({ PortalLocaleResolverServiceMock.class })
 @ExcludeBeanClasses({ PortalLocaleProducerMock.class })
 class PreferencesPageBeanTest extends AbstractPageBeanTest<PreferencesPageBean> {
 
-	@Inject
-	@PortalCorePagesPreferences
-	@Getter
-	private PreferencesPageBean underTest;
+    @Inject
+    @PortalCorePagesPreferences
+    @Getter
+    private PreferencesPageBean underTest;
 
-	private Locale changeEventResult;
+    private Locale changeEventResult;
 
-	/**
-	 * Mock Configuration provides 2 locales and 2 themes
-	 */
-	@Test
-	void shouldConfigureCorrectly() {
-		assertNotNull(underTest);
-		assertEquals(2, underTest.getAvailableLocales().size());
-		assertEquals(2, underTest.getAvailableThemes().size());
-	}
+    /**
+     * Mock Configuration provides 2 locales and 2 themes
+     */
+    @Test
+    void shouldConfigureCorrectly() {
+        assertNotNull(underTest);
+        assertEquals(2, underTest.getAvailableLocales().size());
+        assertEquals(2, underTest.getAvailableThemes().size());
+    }
 
-	@Test
-	void shouldRedirectOnThemeChange() {
-		underTest.themeChangeListener(new ValueChangeEvent(new DummyComponent(), PortalThemeConfigurationTest.DEFAULT,
-				PortalThemeConfigurationTest.HIGH_CONTRAST));
-		assertNavigatedWithOutcome(PreferencesPage.OUTCOME);
-	}
+    @Test
+    void shouldRedirectOnThemeChange() {
+        underTest.themeChangeListener(new ValueChangeEvent(new DummyComponent(), PortalThemeConfigurationTest.DEFAULT,
+                PortalThemeConfigurationTest.HIGH_CONTRAST));
+        assertNavigatedWithOutcome(PreferencesPage.OUTCOME);
+    }
 
-	@Test
-	void shouldRedirectOnLocaleChange() {
-		assertNull(changeEventResult);
-		underTest.localeChangeListener(new ValueChangeEvent(new DummyComponent(), Locale.GERMAN, Locale.ENGLISH));
-		assertNavigatedWithOutcome(PreferencesPage.OUTCOME);
-		assertEquals(Locale.ENGLISH, changeEventResult);
-	}
+    @Test
+    void shouldRedirectOnLocaleChange() {
+        assertNull(changeEventResult);
+        underTest.localeChangeListener(new ValueChangeEvent(new DummyComponent(), Locale.GERMAN, Locale.ENGLISH));
+        assertNavigatedWithOutcome(PreferencesPage.OUTCOME);
+        assertEquals(Locale.ENGLISH, changeEventResult);
+    }
 
-	void actOnLocaleChangeEven(@Observes @LocaleChangeEvent final Locale newLocale) {
-		changeEventResult = newLocale;
-	}
+    void actOnLocaleChangeEven(@Observes @LocaleChangeEvent final Locale newLocale) {
+        changeEventResult = newLocale;
+    }
 
 }

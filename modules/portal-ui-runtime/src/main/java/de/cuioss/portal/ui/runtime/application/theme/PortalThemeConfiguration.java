@@ -43,47 +43,47 @@ import lombok.ToString;
 @ToString(of = { "availableThemes", "defaultTheme" }, doNotUseGetters = true)
 public class PortalThemeConfiguration implements Serializable {
 
-	private static final long serialVersionUID = 3077568114159593192L;
+    private static final long serialVersionUID = 3077568114159593192L;
 
-	private ThemeManager themeManager;
+    private ThemeManager themeManager;
 
-	/** The (configured) list of available themes. */
-	@Inject
-	@ConfigAsList(name = THEME_AVAILABLE)
-	@Getter
-	private List<String> availableThemes;
+    /** The (configured) list of available themes. */
+    @Inject
+    @ConfigAsList(name = THEME_AVAILABLE)
+    @Getter
+    private List<String> availableThemes;
 
-	/**
-	 * the (configured default theme). It must be one of
-	 * {@link #getAvailableThemes()}
-	 */
-	@Inject
-	@ConfigProperty(name = THEME_DEFAULT)
-	@Getter
-	private String defaultTheme;
+    /**
+     * the (configured default theme). It must be one of
+     * {@link #getAvailableThemes()}
+     */
+    @Inject
+    @ConfigProperty(name = THEME_DEFAULT)
+    @Getter
+    private String defaultTheme;
 
-	/**
-	 * The name of the css to be looked for. Caution: it is assumed to end with
-	 * ".css". The portal/styling assumes the name to be 'application.css'
-	 */
-	public static final String CSS_NAME = "application.css";
+    /**
+     * The name of the css to be looked for. Caution: it is assumed to end with
+     * ".css". The portal/styling assumes the name to be 'application.css'
+     */
+    public static final String CSS_NAME = "application.css";
 
-	/**
-	 * The name of the library where the css files are located in. The portal
-	 * styling assumes 'de.cuioss.portal.css'
-	 */
-	public static final String CSS_LIBRARY = "de.cuioss.portal.css";
+    /**
+     * The name of the library where the css files are located in. The portal
+     * styling assumes 'de.cuioss.portal.css'
+     */
+    public static final String CSS_LIBRARY = "de.cuioss.portal.css";
 
-	/**
-	 * Initializes the bean, see class documentation for details
-	 */
-	@PostConstruct
-	public void initBean() {
-		themeManager = new ThemeManager(this);
-	}
+    /**
+     * Initializes the bean, see class documentation for details
+     */
+    @PostConstruct
+    public void initBean() {
+        themeManager = new ThemeManager(this);
+    }
 
-	public String getCssForThemeName(final String themeName) {
-		return themeManager.getCssForThemeName(themeName);
-	}
+    public String getCssForThemeName(final String themeName) {
+        return themeManager.getCssForThemeName(themeName);
+    }
 
 }

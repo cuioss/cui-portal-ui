@@ -34,7 +34,7 @@ public class PortalApplicationFactory extends ApplicationFactory {
 
     /**
      * Construct a new OPortalApplicationFactory around the given wrapped factory.
-     * 
+     *
      * @param wrapped The wrapped factory.
      */
     public PortalApplicationFactory(ApplicationFactory wrapped) {
@@ -71,7 +71,7 @@ public class PortalApplicationFactory extends ApplicationFactory {
         synchronized (PortalApplicationFactory.class) {
             LOGGER.debug("Initializing with given application", application.getClass().getName());
             var toBeWrapped = application;
-            while (!(toBeWrapped instanceof PortalApplication) && (toBeWrapped instanceof ApplicationWrapper)) {
+            while (!(toBeWrapped instanceof PortalApplication) && toBeWrapped instanceof ApplicationWrapper) {
                 LOGGER.debug("Found wrapped application", toBeWrapped.getClass().getName());
                 toBeWrapped = ((ApplicationWrapper) toBeWrapped).getWrapped();
             }

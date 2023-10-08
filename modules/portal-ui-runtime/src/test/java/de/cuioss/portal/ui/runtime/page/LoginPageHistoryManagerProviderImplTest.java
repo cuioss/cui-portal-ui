@@ -15,6 +15,19 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.portal.ui.api.history.HistoryManager;
@@ -27,18 +40,9 @@ import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
 import de.cuioss.tools.net.UrlParameter;
 import de.cuioss.uimodel.application.LoginCredentials;
 import lombok.Getter;
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ HistoryManagerBean.class, DefaultHistoryConfiguration.class,  ViewMatcherProducer.class })
+@AddBeanClasses({ HistoryManagerBean.class, DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
 class LoginPageHistoryManagerProviderImplTest extends AbstractPageBeanTest<LoginPageHistoryManagerProviderImpl> {
 
     @Inject

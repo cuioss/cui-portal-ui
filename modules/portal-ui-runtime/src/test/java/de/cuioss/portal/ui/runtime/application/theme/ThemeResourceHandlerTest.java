@@ -32,49 +32,49 @@ import lombok.Setter;
 @AddBeanClasses({ PortalThemeConfiguration.class, PortalClientStorageMock.class, UserThemeBean.class })
 class ThemeResourceHandlerTest implements ShouldBeNotNull<ThemeResourceHandler>, JsfEnvironmentConsumer {
 
-	@Getter
-	private ThemeResourceHandler underTest;
+    @Getter
+    private ThemeResourceHandler underTest;
 
-	private ResourceHandlerMock resourceHandlerMock;
+    private ResourceHandlerMock resourceHandlerMock;
 
-	private static final String LIBRARY_NAME = "de.cuioss.portal.css";
-	private static final String OTHER_LIBRARY_NAME = "de.cuioss.portal.other";
+    private static final String LIBRARY_NAME = "de.cuioss.portal.css";
+    private static final String OTHER_LIBRARY_NAME = "de.cuioss.portal.other";
 
-	private static final String STYLE_CSS = "application.css";
+    private static final String STYLE_CSS = "application.css";
 
-	private static final String STYLE_OTHER = "other.css";
-	@Setter
-	@Getter
-	private JsfEnvironmentHolder environmentHolder;
+    private static final String STYLE_OTHER = "other.css";
+    @Setter
+    @Getter
+    private JsfEnvironmentHolder environmentHolder;
 
-	@BeforeEach
-	void setUpTest() {
-		resourceHandlerMock = new ResourceHandlerMock(getApplication().getResourceHandler());
-		underTest = new ThemeResourceHandler(resourceHandlerMock);
-	}
+    @BeforeEach
+    void setUpTest() {
+        resourceHandlerMock = new ResourceHandlerMock(getApplication().getResourceHandler());
+        underTest = new ThemeResourceHandler(resourceHandlerMock);
+    }
 
-	@Test
-	void shouldReturnDefaultTheme() {
-		underTest.createResource(STYLE_CSS, LIBRARY_NAME);
-		resourceHandlerMock.assertResourceCreated(PortalThemeConfigurationTest.APPLICATION_DEFAULT_CSS, LIBRARY_NAME);
-	}
+    @Test
+    void shouldReturnDefaultTheme() {
+        underTest.createResource(STYLE_CSS, LIBRARY_NAME);
+        resourceHandlerMock.assertResourceCreated(PortalThemeConfigurationTest.APPLICATION_DEFAULT_CSS, LIBRARY_NAME);
+    }
 
-	@Test
-	void shouldPassOnNonApplicationCssCalls() {
-		underTest.createResource(STYLE_OTHER, LIBRARY_NAME);
-		resourceHandlerMock.assertResourceCreated(STYLE_OTHER, LIBRARY_NAME);
-	}
+    @Test
+    void shouldPassOnNonApplicationCssCalls() {
+        underTest.createResource(STYLE_OTHER, LIBRARY_NAME);
+        resourceHandlerMock.assertResourceCreated(STYLE_OTHER, LIBRARY_NAME);
+    }
 
-	@Test
-	void shouldPassOnOtherLibraryCalls() {
-		underTest.createResource(STYLE_CSS, OTHER_LIBRARY_NAME);
-		resourceHandlerMock.assertResourceCreated(STYLE_CSS, OTHER_LIBRARY_NAME);
-	}
+    @Test
+    void shouldPassOnOtherLibraryCalls() {
+        underTest.createResource(STYLE_CSS, OTHER_LIBRARY_NAME);
+        resourceHandlerMock.assertResourceCreated(STYLE_CSS, OTHER_LIBRARY_NAME);
+    }
 
-	@Test
-	void shouldPassOnOtherCall() {
-		underTest.createResource(STYLE_OTHER, OTHER_LIBRARY_NAME);
-		resourceHandlerMock.assertResourceCreated(STYLE_OTHER, OTHER_LIBRARY_NAME);
-	}
+    @Test
+    void shouldPassOnOtherCall() {
+        underTest.createResource(STYLE_OTHER, OTHER_LIBRARY_NAME);
+        resourceHandlerMock.assertResourceCreated(STYLE_OTHER, OTHER_LIBRARY_NAME);
+    }
 
 }

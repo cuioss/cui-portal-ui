@@ -136,8 +136,8 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
         var exception = (ViewSuppressedException) event.getException();
         if (!authenticatedUserInfo.isAuthenticated()) {
             outcome = LoginPage.OUTCOME;
-        } else if ((null != exception.getSuppressedViewDescriptor())
-                && (null != exception.getSuppressedViewDescriptor().getLogicalViewId())
+        } else if (null != exception.getSuppressedViewDescriptor()
+                && null != exception.getSuppressedViewDescriptor().getLogicalViewId()
                 && exception.getSuppressedViewDescriptor().getLogicalViewId()
                         .equals(NavigationUtils.lookUpToLogicalViewIdBy(facesContext, outcome))) {
             LOGGER.error(NAV_LOOP_ERROR_MSG, exception.getSuppressedViewDescriptor().getLogicalViewId());

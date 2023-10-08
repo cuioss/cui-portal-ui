@@ -123,8 +123,8 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
         Map<String, Serializable> result = new HashMap<>();
         var servletRequest = servletRequestProvider.get();
         try {
-            if ((null != servletRequest.getSession(false))
-                    && (null != servletRequest.getSession().getAttribute(PARAMETER_IDENTIFIER))) {
+            if (null != servletRequest.getSession(false)
+                    && null != servletRequest.getSession().getAttribute(PARAMETER_IDENTIFIER)) {
                 result = (Map<String, Serializable>) servletRequest.getSession().getAttribute(PARAMETER_IDENTIFIER);
                 servletRequest.getSession().removeAttribute(PARAMETER_IDENTIFIER);
                 if (null != servletRequest.getSession().getAttribute(MESSAGES_IDENTIFIER)) {
@@ -146,8 +146,8 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
         log.trace("retrieveTargetView from historyManager.getCurrentView(): {}", targetView);
         var servletRequest = servletRequestProvider.get();
         try {
-            if ((null != servletRequest.getSession(false))
-                    && (null != servletRequest.getSession().getAttribute(VIEW_IDENTIFIER))) {
+            if (null != servletRequest.getSession(false)
+                    && null != servletRequest.getSession().getAttribute(VIEW_IDENTIFIER)) {
                 targetView = (ViewIdentifier) servletRequest.getSession().getAttribute(VIEW_IDENTIFIER);
                 log.trace("retrieveTargetView servletRequest.getSession().getAttribute(VIEW_IDENTIFIER): {}",
                         targetView);
@@ -165,8 +165,8 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
         log.trace("preserveCurrentView");
         var servletRequest = servletRequestProvider.get();
         try {
-            if ((null != servletRequest.getSession(false))
-                    && (null == servletRequest.getSession(false).getAttribute(VIEW_IDENTIFIER))) {
+            if (null != servletRequest.getSession(false)
+                    && null == servletRequest.getSession(false).getAttribute(VIEW_IDENTIFIER)) {
                 preserveCurrentView(servletRequest);
             }
         } catch (IllegalStateException e) {

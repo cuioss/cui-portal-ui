@@ -44,21 +44,21 @@ import lombok.ToString;
 @ToString
 public class PortalLocaleProducerMock implements Serializable {
 
-	private static final long serialVersionUID = 901932913924354093L;
+    private static final long serialVersionUID = 901932913924354093L;
 
-	@Getter
-	@Setter
-	@Produces
-	@Dependent
-	@PortalLocale
-	private Locale locale = Locale.ENGLISH;
+    @Getter
+    @Setter
+    @Produces
+    @Dependent
+    @PortalLocale
+    private Locale locale = Locale.ENGLISH;
 
-	@Getter
-	@Setter
-	private List<Locale> availableLocales = immutableList(Locale.GERMAN, Locale.ENGLISH);
+    @Getter
+    @Setter
+    private List<Locale> availableLocales = immutableList(Locale.GERMAN, Locale.ENGLISH);
 
-	@Inject
-	@LocaleChangeEvent
-	Event<Locale> localeChangeEvent;
+    @Inject
+    @LocaleChangeEvent
+    Event<Locale> localeChangeEvent;
 
 }

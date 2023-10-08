@@ -34,27 +34,27 @@ import lombok.Getter;
 @EnablePortalConfiguration
 public class PortalThemeConfigurationTest implements ShouldHandleObjectContracts<PortalThemeConfiguration> {
 
-	@Inject
-	@Getter
-	private PortalThemeConfiguration underTest;
+    @Inject
+    @Getter
+    private PortalThemeConfiguration underTest;
 
-	@Inject
-	@PortalConfigurationSource
-	private PortalTestConfiguration configuration;
+    @Inject
+    @PortalConfigurationSource
+    private PortalTestConfiguration configuration;
 
-	public static final String APPLICATION_DEFAULT_CSS = "application-default.css";
+    public static final String APPLICATION_DEFAULT_CSS = "application-default.css";
 
-	public static final String DEFAULT = "Default";
+    public static final String DEFAULT = "Default";
 
-	public static final String HIGH_CONTRAST = "High-Contrast";
+    public static final String HIGH_CONTRAST = "High-Contrast";
 
-	@Test
-	void shouldProvideDefaultConfiguration() {
-		assertEquals(PortalThemeConfigurationTest.DEFAULT, underTest.getDefaultTheme());
-		assertTrue(underTest.getAvailableThemes().containsAll(
-				immutableList(PortalThemeConfigurationTest.DEFAULT, PortalThemeConfigurationTest.HIGH_CONTRAST)));
-		assertEquals(PortalThemeConfigurationTest.APPLICATION_DEFAULT_CSS,
-				underTest.getCssForThemeName(underTest.getDefaultTheme()));
-	}
+    @Test
+    void shouldProvideDefaultConfiguration() {
+        assertEquals(PortalThemeConfigurationTest.DEFAULT, underTest.getDefaultTheme());
+        assertTrue(underTest.getAvailableThemes().containsAll(
+                immutableList(PortalThemeConfigurationTest.DEFAULT, PortalThemeConfigurationTest.HIGH_CONTRAST)));
+        assertEquals(PortalThemeConfigurationTest.APPLICATION_DEFAULT_CSS,
+                underTest.getCssForThemeName(underTest.getDefaultTheme()));
+    }
 
 }

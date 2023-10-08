@@ -80,7 +80,7 @@ public class PortalHistoryManagerMock implements HistoryManager {
         final var currentViewIdentifier = ViewIdentifier.getFromViewDesciptor(viewIdentifier, parameterFilter);
         var oldCurrentView = getCurrentView();
         // Ensure that reloading the page will not duplicate history entries
-        if ((null != oldCurrentView) && !oldCurrentView.equals(currentViewIdentifier)) {
+        if (null != oldCurrentView && !oldCurrentView.equals(currentViewIdentifier)) {
             history.add(oldCurrentView);
         }
         currentView = currentViewIdentifier;

@@ -31,31 +31,31 @@ import de.cuioss.tools.logging.CuiLogger;
  */
 public class ThemeResourceHandler extends ResourceHandlerWrapper {
 
-	private static final CuiLogger LOGER = new CuiLogger(ThemeResourceHandler.class);
+    private static final CuiLogger LOGER = new CuiLogger(ThemeResourceHandler.class);
 
-	/**
-	 * Constructor.
-	 *
-	 * @param wrapped handler
-	 */
-	public ThemeResourceHandler(ResourceHandler wrapped) {
-		super(wrapped);
-	}
+    /**
+     * Constructor.
+     *
+     * @param wrapped handler
+     */
+    public ThemeResourceHandler(ResourceHandler wrapped) {
+        super(wrapped);
+    }
 
-	@Override
-	public Resource createResource(String resourceName, String libraryName) {
+    @Override
+    public Resource createResource(String resourceName, String libraryName) {
 
-		if (isRequestForTheme(resourceName, libraryName)) {
-			var userThemeBean = PortalBeanManager.resolveBeanOrThrowIllegalStateException(UserThemeBean.class, null);
-			var themeName = userThemeBean.resolveFinalThemeCssName();
-			LOGER.debug("Resolved cssname = %s", themeName);
-			return getWrapped().createResource(themeName, libraryName);
-		}
-		return getWrapped().createResource(resourceName, libraryName);
-	}
+        if (isRequestForTheme(resourceName, libraryName)) {
+            var userThemeBean = PortalBeanManager.resolveBeanOrThrowIllegalStateException(UserThemeBean.class, null);
+            var themeName = userThemeBean.resolveFinalThemeCssName();
+            LOGER.debug("Resolved cssname = %s", themeName);
+            return getWrapped().createResource(themeName, libraryName);
+        }
+        return getWrapped().createResource(resourceName, libraryName);
+    }
 
-	private boolean isRequestForTheme(String resourceName, String libraryName) {
-		return PortalThemeConfiguration.CSS_LIBRARY.equals(libraryName)
-				&& PortalThemeConfiguration.CSS_NAME.equals(resourceName);
-	}
+    private boolean isRequestForTheme(String resourceName, String libraryName) {
+        return PortalThemeConfiguration.CSS_LIBRARY.equals(libraryName)
+                && PortalThemeConfiguration.CSS_NAME.equals(resourceName);
+    }
 }

@@ -41,66 +41,67 @@ import lombok.ToString;
 @ToString
 public class ThemeManager implements Serializable {
 
-	private static final long serialVersionUID = 2368337948482686947L;
+    private static final long serialVersionUID = 2368337948482686947L;
 
-	private static final CuiLogger log = new CuiLogger(ThemeManager.class);
+    private static final CuiLogger log = new CuiLogger(ThemeManager.class);
 
-	private static final String CSS_SUFFIX = ".css";
+    private static final String CSS_SUFFIX = ".css";
 
-	static final String CSS_PREFEXI_NAME = Splitter.on('.').splitToList(PortalThemeConfiguration.CSS_NAME).iterator()
-			.next() + "-";
+    static final String CSS_PREFEXI_NAME = Splitter.on('.').splitToList(PortalThemeConfiguration.CSS_NAME).iterator()
+            .next() + "-";
 
-	private final Map<String, String> themeNameCssMapping;
+    private final Map<String, String> themeNameCssMapping;
 
-	private final List<String> availableThemes;
+    private final List<String> availableThemes;
 
-	private final String defaultTheme;
+    private final String defaultTheme;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param themeConfiguration must not be null
-	 */
-	public ThemeManager(final PortalThemeConfiguration themeConfiguration) {
-		availableThemes = themeConfiguration.getAvailableThemes();
-		defaultTheme = themeConfiguration.getDefaultTheme();
-		// Set default and set implementation to immutable.
-		checkThemeNameContract(themeConfiguration.getAvailableThemes(), themeConfiguration.getDefaultTheme());
-		var mapBuilder = new MapBuilder<String, String>();
-		for (String themeName : themeConfiguration.getAvailableThemes())
-			mapBuilder.put(themeName,
-					new StringBuilder(CSS_PREFEXI_NAME).append(themeName.toLowerCase()).append(CSS_SUFFIX).toString());
-		themeNameCssMapping = mapBuilder.toImmutableMap();
-	}
+    /**
+     * Constructor.
+     *
+     * @param themeConfiguration must not be null
+     */
+    public ThemeManager(final PortalThemeConfiguration themeConfiguration) {
+        availableThemes = themeConfiguration.getAvailableThemes();
+        defaultTheme = themeConfiguration.getDefaultTheme();
+        // Set default and set implementation to immutable.
+        checkThemeNameContract(themeConfiguration.getAvailableThemes(), themeConfiguration.getDefaultTheme());
+        var mapBuilder = new MapBuilder<String, String>();
+        for (String themeName : themeConfiguration.getAvailableThemes()) {
+            mapBuilder.put(themeName,
+                    new StringBuilder(CSS_PREFEXI_NAME).append(themeName.toLowerCase()).append(CSS_SUFFIX).toString());
+        }
+        themeNameCssMapping = mapBuilder.toImmutableMap();
+    }
 
-	/**
-	 * Actual 'business' method for getting a concrete application.css from
-	 *
-	 * @param themeName to be looked up. If it is null, empty or not part of
-	 *                  {@link PortalThemeConfiguration#getAvailableThemes()} it
-	 *                  returns the configured
-	 *                  {@link PortalThemeConfiguration#getDefaultTheme()}
-	 * @return the corresponding css name.
-	 */
-	public String getCssForThemeName(final String themeName) {
-		return themeNameCssMapping.get(verifyThemeName(themeName));
-	}
+    /**
+     * Actual 'business' method for getting a concrete application.css from
+     *
+     * @param themeName to be looked up. If it is null, empty or not part of
+     *                  {@link PortalThemeConfiguration#getAvailableThemes()} it
+     *                  returns the configured
+     *                  {@link PortalThemeConfiguration#getDefaultTheme()}
+     * @return the corresponding css name.
+     */
+    public String getCssForThemeName(final String themeName) {
+        return themeNameCssMapping.get(verifyThemeName(themeName));
+    }
 
-	private String verifyThemeName(final String themeName) {
-		var themeLookupName = themeName;
-		if (isBlank(themeName) || !availableThemes.contains(themeName)) {
-			themeLookupName = defaultTheme;
-			log.debug("No configured theme found for {}, using default theme.", themeLookupName);
-		}
-		return themeLookupName;
-	}
+    private String verifyThemeName(final String themeName) {
+        var themeLookupName = themeName;
+        if (isBlank(themeName) || !availableThemes.contains(themeName)) {
+            themeLookupName = defaultTheme;
+            log.debug("No configured theme found for {}, using default theme.", themeLookupName);
+        }
+        return themeLookupName;
+    }
 
-	private static void checkThemeNameContract(final List<String> availableThemes, final String defaultTheme) {
-		checkArgument(!isEmpty(availableThemes), "no availableThemes provided");
-		requireNotEmpty(defaultTheme, "defaultTheme");
-		checkState(availableThemes.contains(defaultTheme), "Default theme: '%s' can not be found within '%s'",
-				defaultTheme, availableThemes);
+    private static void checkThemeNameContract(final List<String> availableThemes, final String defaultTheme) {
+        checkArgument(!isEmpty(availableThemes), "no availableThemes provided");
+        requireNotEmpty(defaultTheme, "defaultTheme");
+        checkState(availableThemes.contains(defaultTheme), "Default theme: '%s' can not be found within '%s'",
+                defaultTheme, availableThemes);
 
-	}
+    }
 
 }

@@ -46,56 +46,56 @@ import lombok.ToString;
 @ToString
 public class UserThemeBean implements Serializable {
 
-	private static final long serialVersionUID = 5242120351578770611L;
+    private static final long serialVersionUID = 5242120351578770611L;
 
-	@Inject
-	private PortalThemeConfiguration themeConfiguration;
+    @Inject
+    private PortalThemeConfiguration themeConfiguration;
 
-	@Getter
-	private String theme;
+    @Getter
+    private String theme;
 
-	@Inject
-	@PortalClientStorage
-	private Provider<ClientStorage> clientStorage;
+    @Inject
+    @PortalClientStorage
+    private Provider<ClientStorage> clientStorage;
 
-	/**
-	 * Initializer method for the bean
-	 */
-	@PostConstruct
-	public void init() {
-		theme = themeConfiguration.getDefaultTheme();
-		if (clientStorage.get().containsKey(THEME_DEFAULT)) {
-			final var storedTheme = clientStorage.get().get(THEME_DEFAULT);
-			if (themeConfiguration.getAvailableThemes().contains(storedTheme)) {
-				theme = storedTheme;
-			}
-		}
-	}
+    /**
+     * Initializer method for the bean
+     */
+    @PostConstruct
+    public void init() {
+        theme = themeConfiguration.getDefaultTheme();
+        if (clientStorage.get().containsKey(THEME_DEFAULT)) {
+            final var storedTheme = clientStorage.get().get(THEME_DEFAULT);
+            if (themeConfiguration.getAvailableThemes().contains(storedTheme)) {
+                theme = storedTheme;
+            }
+        }
+    }
 
-	/**
-	 * Saves the theme if a user has selected a new one in the preferences. The
-	 * Service must store it accordingly.
-	 *
-	 * @param newTheme to be set, must be one of
-	 *                 {@link ThemeConfiguration#getAvailableThemes()}. The
-	 *                 implementation must ensure this.
-	 */
-	public void saveTheme(final String newTheme) {
-		checkArgument(themeConfiguration.getAvailableThemes().contains(newTheme),
-				"Given theme '%s' must be one of '%s' ", newTheme, themeConfiguration.getAvailableThemes());
-		theme = newTheme;
-		clientStorage.get().put(THEME_DEFAULT, newTheme);
-	}
+    /**
+     * Saves the theme if a user has selected a new one in the preferences. The
+     * Service must store it accordingly.
+     *
+     * @param newTheme to be set, must be one of
+     *                 {@link ThemeConfiguration#getAvailableThemes()}. The
+     *                 implementation must ensure this.
+     */
+    public void saveTheme(final String newTheme) {
+        checkArgument(themeConfiguration.getAvailableThemes().contains(newTheme),
+                "Given theme '%s' must be one of '%s' ", newTheme, themeConfiguration.getAvailableThemes());
+        theme = newTheme;
+        clientStorage.get().put(THEME_DEFAULT, newTheme);
+    }
 
-	/**
-	 * Shorthand for calling
-	 * {@link PortalThemeConfiguration#getCssForThemeName(String)} with the
-	 * contained themename for the user.
-	 *
-	 * @return the resolved css name
-	 */
-	public String resolveFinalThemeCssName() {
-		return themeConfiguration.getCssForThemeName(theme);
-	}
+    /**
+     * Shorthand for calling
+     * {@link PortalThemeConfiguration#getCssForThemeName(String)} with the
+     * contained themename for the user.
+     *
+     * @return the resolved css name
+     */
+    public String resolveFinalThemeCssName() {
+        return themeConfiguration.getCssForThemeName(theme);
+    }
 
 }

@@ -57,52 +57,52 @@ import lombok.ToString;
 @ToString(of = "locale")
 public class PortalLocaleManagerBean implements Serializable, LocaleResolverService {
 
-	private static final long serialVersionUID = -3555387539352353982L;
+    private static final long serialVersionUID = -3555387539352353982L;
 
-	@Inject
-	@PortalLocaleResolver
-	private LocaleResolverService resolverService;
+    @Inject
+    @PortalLocaleResolver
+    private LocaleResolverService resolverService;
 
-	private Locale locale;
+    private Locale locale;
 
-	@Inject
-	@LocaleChangeEvent
-	private Event<Locale> localeChangeEvent;
+    @Inject
+    @LocaleChangeEvent
+    private Event<Locale> localeChangeEvent;
 
-	@Inject
-	private Provider<FacesContext> facesContextProvider;
+    @Inject
+    private Provider<FacesContext> facesContextProvider;
 
-	/**
-	 * Producer method for {@link Locale} identified by {@link PortalLocale}
-	 *
-	 * @return the corresponding user specific locale.
-	 */
-	@Produces
-	@PortalLocale
-	@Dependent
-	Locale produceClientLocale() {
-		return resolveUserLocale();
-	}
+    /**
+     * Producer method for {@link Locale} identified by {@link PortalLocale}
+     *
+     * @return the corresponding user specific locale.
+     */
+    @Produces
+    @PortalLocale
+    @Dependent
+    Locale produceClientLocale() {
+        return resolveUserLocale();
+    }
 
-	@Override
-	public List<Locale> getAvailableLocales() {
-		return resolverService.getAvailableLocales();
-	}
+    @Override
+    public List<Locale> getAvailableLocales() {
+        return resolverService.getAvailableLocales();
+    }
 
-	@Override
-	public void saveUserLocale(final Locale localeValue) {
-		locale = localeValue;
-		facesContextProvider.get().getViewRoot().setLocale(locale);
-		resolverService.saveUserLocale(locale);
-		localeChangeEvent.fire(locale);
-	}
+    @Override
+    public void saveUserLocale(final Locale localeValue) {
+        locale = localeValue;
+        facesContextProvider.get().getViewRoot().setLocale(locale);
+        resolverService.saveUserLocale(locale);
+        localeChangeEvent.fire(locale);
+    }
 
-	@Override
-	public Locale resolveUserLocale() {
-		if (null == locale) {
-			locale = resolverService.resolveUserLocale();
-		}
-		return locale;
-	}
+    @Override
+    public Locale resolveUserLocale() {
+        if (null == locale) {
+            locale = resolverService.resolveUserLocale();
+        }
+        return locale;
+    }
 
 }

@@ -45,11 +45,11 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
     private static final String ROLE_CONTENT = "content_manager";
     private static final String ROLE_ADMIN = "admin";
 
-    private static final ViewDescriptor ANY_GUEST = new ViewDescriptorImpl("/guest/any.jsf",
-            "/guest/any.xhtml", Collections.emptyList());
+    private static final ViewDescriptor ANY_GUEST = new ViewDescriptorImpl("/guest/any.jsf", "/guest/any.xhtml",
+            Collections.emptyList());
 
-    private static final ViewDescriptor ANY_CONTENT = new ViewDescriptorImpl("/content/any.jsf",
-            "/content/any.xhtml", Collections.emptyList());
+    private static final ViewDescriptor ANY_CONTENT = new ViewDescriptorImpl("/content/any.jsf", "/content/any.xhtml",
+            Collections.emptyList());
 
     private static final ViewDescriptor ADMIN_CONTENT = new ViewDescriptorImpl("/content/admin.jsf",
             "/content/admin.xhtml", Collections.emptyList());

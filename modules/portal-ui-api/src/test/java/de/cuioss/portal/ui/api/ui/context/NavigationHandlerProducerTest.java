@@ -33,17 +33,17 @@ import de.cuioss.test.jsf.producer.JsfObjectsProducer;
 @AddBeanClasses({ NavigationHandlerProducer.class, JsfObjectsProducer.class })
 class NavigationHandlerProducerTest {
 
-	@Inject
-	@CuiNavigationHandler
-	private Provider<NavigationHandler> handlerProvider;
+    @Inject
+    @CuiNavigationHandler
+    private Provider<NavigationHandler> handlerProvider;
 
-	@Inject
-	private NavigationHandlerProducer navigationHandlerProducer;
+    @Inject
+    private NavigationHandlerProducer navigationHandlerProducer;
 
-	@Test
-	void shouldProduce() {
-		assertInstanceOf(NavigationHandler.class, handlerProvider.get());
-		assertInstanceOf(NavigationHandler.class, navigationHandlerProducer.getNavigationHandler());
-	}
+    @Test
+    void shouldProduce() {
+        assertInstanceOf(NavigationHandler.class, handlerProvider.get());
+        assertInstanceOf(NavigationHandler.class, navigationHandlerProducer.getNavigationHandler());
+    }
 
 }

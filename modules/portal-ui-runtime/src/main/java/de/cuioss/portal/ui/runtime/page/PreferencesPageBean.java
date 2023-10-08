@@ -56,78 +56,78 @@ import lombok.ToString;
 @ToString(of = { "selectedLocale", "selectedTheme" }, doNotUseGetters = true)
 public class PreferencesPageBean implements PreferencesPage {
 
-	private static final long serialVersionUID = -1270494557240741123L;
+    private static final long serialVersionUID = -1270494557240741123L;
 
-	private static final String LOCALE_KEY_PREFIX = "common.locale.";
+    private static final String LOCALE_KEY_PREFIX = "common.locale.";
 
-	@Inject
-	private UserThemeBean userThemeBean;
+    @Inject
+    private UserThemeBean userThemeBean;
 
-	@Inject
-	private PortalThemeConfiguration themeConfiguration;
+    @Inject
+    private PortalThemeConfiguration themeConfiguration;
 
-	@Inject
-	private PortalLocaleManagerBean localeManagerBean;
+    @Inject
+    private PortalLocaleManagerBean localeManagerBean;
 
-	@Getter
-	private List<String> availableThemes;
+    @Getter
+    private List<String> availableThemes;
 
-	@Getter
-	@Setter
-	private String selectedTheme;
+    @Getter
+    @Setter
+    private String selectedTheme;
 
-	@Getter
-	private List<SelectItem> availableLocales;
+    @Getter
+    private List<SelectItem> availableLocales;
 
-	@Getter
-	@Setter
-	private Locale selectedLocale;
+    @Getter
+    @Setter
+    private Locale selectedLocale;
 
-	@Inject
-	@PortalResourceBundle
-	private ResourceBundle resourceBundle;
+    @Inject
+    @PortalResourceBundle
+    private ResourceBundle resourceBundle;
 
-	@Inject
-	private FacesContext facesContext;
+    @Inject
+    private FacesContext facesContext;
 
-	@Inject
-	@CuiNavigationHandler
-	private NavigationHandler navigationHandler;
+    @Inject
+    @CuiNavigationHandler
+    private NavigationHandler navigationHandler;
 
-	/**
-	 * Initializes the lists for the drop-down menus.
-	 */
-	@PostConstruct
-	public void initBean() {
-		availableThemes = themeConfiguration.getAvailableThemes();
-		selectedTheme = userThemeBean.getTheme();
-		availableLocales = new ArrayList<>();
-		for (final Locale locale : localeManagerBean.getAvailableLocales()) {
-			availableLocales.add(new SelectItem(locale, resourceBundle
-					.getString(new StringBuilder(LOCALE_KEY_PREFIX).append(locale.getLanguage()).toString())));
-		}
-		selectedLocale = localeManagerBean.resolveUserLocale();
-	}
+    /**
+     * Initializes the lists for the drop-down menus.
+     */
+    @PostConstruct
+    public void initBean() {
+        availableThemes = themeConfiguration.getAvailableThemes();
+        selectedTheme = userThemeBean.getTheme();
+        availableLocales = new ArrayList<>();
+        for (final Locale locale : localeManagerBean.getAvailableLocales()) {
+            availableLocales.add(new SelectItem(locale, resourceBundle
+                    .getString(new StringBuilder(LOCALE_KEY_PREFIX).append(locale.getLanguage()).toString())));
+        }
+        selectedLocale = localeManagerBean.resolveUserLocale();
+    }
 
-	/**
-	 * To be called on valueChange for the theme-selection
-	 *
-	 * @param changeEvent
-	 */
-	public void themeChangeListener(final ValueChangeEvent changeEvent) {
-		selectedTheme = (String) changeEvent.getNewValue();
-		userThemeBean.saveTheme(selectedTheme);
-		navigationHandler.handleNavigation(facesContext, null, PreferencesPage.OUTCOME);
-	}
+    /**
+     * To be called on valueChange for the theme-selection
+     *
+     * @param changeEvent
+     */
+    public void themeChangeListener(final ValueChangeEvent changeEvent) {
+        selectedTheme = (String) changeEvent.getNewValue();
+        userThemeBean.saveTheme(selectedTheme);
+        navigationHandler.handleNavigation(facesContext, null, PreferencesPage.OUTCOME);
+    }
 
-	/**
-	 * To be called on valueChange for the locale-selection
-	 *
-	 * @param changeEvent
-	 */
-	public void localeChangeListener(final ValueChangeEvent changeEvent) {
-		selectedLocale = (Locale) changeEvent.getNewValue();
-		localeManagerBean.saveUserLocale(selectedLocale);
-		navigationHandler.handleNavigation(facesContext, null, PreferencesPage.OUTCOME);
-	}
+    /**
+     * To be called on valueChange for the locale-selection
+     *
+     * @param changeEvent
+     */
+    public void localeChangeListener(final ValueChangeEvent changeEvent) {
+        selectedLocale = (Locale) changeEvent.getNewValue();
+        localeManagerBean.saveUserLocale(selectedLocale);
+        navigationHandler.handleNavigation(facesContext, null, PreferencesPage.OUTCOME);
+    }
 }

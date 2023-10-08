@@ -46,29 +46,30 @@ import lombok.ToString;
 @ToString
 public class PortalLocaleResolverServiceMock implements LocaleResolverService {
 
-	@Setter
-	private Locale locale = Locale.ENGLISH;
+    @Setter
+    private Locale locale = Locale.ENGLISH;
 
-	@Getter
-	@Setter
-	private List<Locale> availableLocales = immutableList(Locale.GERMAN, Locale.ENGLISH);
+    @Getter
+    @Setter
+    private List<Locale> availableLocales = immutableList(Locale.GERMAN, Locale.ENGLISH);
 
-	@Inject
-	@LocaleChangeEvent
-	Event<Locale> localeChangeEvent;
+    @Inject
+    @LocaleChangeEvent
+    Event<Locale> localeChangeEvent;
 
-	@Override
-	public void saveUserLocale(final Locale newLocale) {
-		if (!availableLocales.contains(newLocale))
-			throw new IllegalArgumentException();
-		locale = newLocale;
-		FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
-		localeChangeEvent.fire(locale);
-	}
+    @Override
+    public void saveUserLocale(final Locale newLocale) {
+        if (!availableLocales.contains(newLocale)) {
+            throw new IllegalArgumentException();
+        }
+        locale = newLocale;
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+        localeChangeEvent.fire(locale);
+    }
 
-	@Override
-	public Locale resolveUserLocale() {
-		return locale;
-	}
+    @Override
+    public Locale resolveUserLocale() {
+        return locale;
+    }
 
 }

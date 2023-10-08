@@ -26,23 +26,23 @@ import java.util.Locale;
  */
 public interface LocaleResolverService {
 
-	/**
-	 * @return the list of available locales for the current user.
-	 */
+    /**
+     * @return the list of available locales for the current user.
+     */
 
-	List<Locale> getAvailableLocales();
+    List<Locale> getAvailableLocales();
 
-	/**
-	 * Saves the locale changed by user interaction
-	 *
-	 * @param locale to be updated. Must be one of {@link #getAvailableLocales()}.
-	 *               Otherwise it will throws an {@link IllegalArgumentException}
-	 */
-	void saveUserLocale(Locale locale);
+    /**
+     * Saves the locale changed by user interaction
+     *
+     * @param locale to be updated. Must be one of {@link #getAvailableLocales()}.
+     *               Otherwise it will throws an {@link IllegalArgumentException}
+     */
+    void saveUserLocale(Locale locale);
 
-	/**
-	 * @return The currently acitve user-locale
-	 *
-	 */
-	Locale resolveUserLocale();
+    /**
+     * @return The currently acitve user-locale
+     *
+     */
+    Locale resolveUserLocale();
 }

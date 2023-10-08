@@ -87,10 +87,10 @@ import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
 @EnablePortalConfiguration
 @EnableJsfEnvironment
 @JsfTestConfiguration({ BasicApplicationConfiguration.class, MirrorCuiRessourcBundle.class,
-		PortalNavigationConfiguration.class })
+        PortalNavigationConfiguration.class })
 @AddBeanClasses({ PortalProjectStageImpl.class, PortalMirrorResourceBundle.class, PortalLocaleProducerMock.class,
-		PortalStickyMessageProducerMock.class, PortalMessageProducerMock.class, JsfObjectsProducer.class,
-		ServletObjectsFromJSFContextProducer.class, CurrentViewProducer.class, NavigationHandlerProducer.class })
+        PortalStickyMessageProducerMock.class, PortalMessageProducerMock.class, JsfObjectsProducer.class,
+        ServletObjectsFromJSFContextProducer.class, CurrentViewProducer.class, NavigationHandlerProducer.class })
 @ActivateScopes({ RequestScoped.class, SessionScoped.class, ConversationScoped.class, ViewScoped.class })
 public @interface EnablePortalUiEnvironment {
 }

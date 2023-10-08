@@ -28,10 +28,6 @@ import java.util.Collections;
 import javax.faces.application.ViewExpiredException;
 import javax.inject.Inject;
 
-import de.cuioss.portal.ui.api.history.HistoryManager;
-import de.cuioss.portal.ui.runtime.application.history.DefaultHistoryConfiguration;
-import de.cuioss.portal.ui.runtime.application.history.HistoryManagerBean;
-import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
@@ -41,13 +37,16 @@ import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthenticatedException;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthorizedException;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
+import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
+import de.cuioss.portal.ui.runtime.application.history.DefaultHistoryConfiguration;
+import de.cuioss.portal.ui.runtime.application.history.HistoryManagerBean;
 import de.cuioss.portal.ui.runtime.application.view.ViewSuppressedException;
+import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
 import de.cuioss.portal.ui.test.mocks.PortalMessageProducerMock;
 import de.cuioss.portal.ui.test.mocks.PortalViewRestrictionManagerMock;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
@@ -61,7 +60,8 @@ import lombok.Setter;
 
 @EnablePortalUiEnvironment
 @EnableTestLogger
-@AddBeanClasses({ CurrentViewProducer.class, NavigationHandlerProducer.class, HistoryManagerBean.class, DefaultHistoryConfiguration.class,  ViewMatcherProducer.class })
+@AddBeanClasses({ CurrentViewProducer.class, NavigationHandlerProducer.class, HistoryManagerBean.class,
+        DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
 class ViewRelatedExceptionHandlerTest
         implements ShouldHandleObjectContracts<ViewRelatedExceptionHandler>, JsfEnvironmentConsumer {
 

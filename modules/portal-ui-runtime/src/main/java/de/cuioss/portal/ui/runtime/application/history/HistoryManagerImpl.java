@@ -88,7 +88,7 @@ class HistoryManagerImpl implements HistoryManager {
         currentView = null;
 
         historySize = historyConfiguration.getHistorySize();
-        if ((historySize < 2) || (historySize > 99)) {
+        if (historySize < 2 || historySize > 99) {
             throw new IllegalStateException(
                     "Sensible default is 10 It must be in the range 1 < historySize < 100, but was " + historySize);
         }
@@ -132,7 +132,7 @@ class HistoryManagerImpl implements HistoryManager {
                 viewIdentifier);
         var oldCurrentView = getCurrentView();
         // Ensure that reloading the page will not duplicate history entries
-        if ((null != oldCurrentView) && !oldCurrentView.equals(viewIdentifier)) {
+        if (null != oldCurrentView && !oldCurrentView.equals(viewIdentifier)) {
             ensureCapacity();
             getHistory().add(oldCurrentView);
         }
@@ -194,7 +194,7 @@ class HistoryManagerImpl implements HistoryManager {
         }
 
         var fallbackIdentifier = new ViewIdentifier(fallback, fallbackOutcome, Collections.emptyList());
-        if ((null == emptyToNull(fallback)) && (null != emptyToNull(fallbackOutcome))) {
+        if (null == emptyToNull(fallback) && null != emptyToNull(fallbackOutcome)) {
             fallbackIdentifier = NavigationUtils.lookUpToViewIdentifierBy(FacesContext.getCurrentInstance(),
                     fallbackOutcome);
             log.debug("fallback was calculated to : ['{}']", fallbackIdentifier);

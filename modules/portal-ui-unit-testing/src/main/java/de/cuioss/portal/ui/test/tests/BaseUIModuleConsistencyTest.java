@@ -12,8 +12,8 @@ import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
  */
 public class BaseUIModuleConsistencyTest extends BaseModuleConsistencyTest {
 
-	@Override
-	protected Weld modifyWeldContainer(Weld weld) {
-		return weld.addBeanClasses(ServletObjectsFromJSFContextProducer.class, JsfObjectsProducer.class);
-	}
+    @Override
+    protected Weld modifyWeldContainer(Weld weld) {
+        return weld.addBeanClasses(ServletObjectsFromJSFContextProducer.class, JsfObjectsProducer.class);
+    }
 }

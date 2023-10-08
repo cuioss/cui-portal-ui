@@ -65,9 +65,8 @@ public class PortalNavigationMenuItemSingleImpl extends PortalNavigationMenuItem
      */
     @Override
     public boolean isActive() {
-        return currentViewProvider.get().getViewId().contains(getOutcome())
-                || (!getActiveForAdditionalViewId().isEmpty()
-                        && getActiveForAdditionalViewId().contains(currentViewProvider.get().getViewId()));
+        return currentViewProvider.get().getViewId().contains(getOutcome()) || !getActiveForAdditionalViewId().isEmpty()
+                && getActiveForAdditionalViewId().contains(currentViewProvider.get().getViewId());
     }
 
 }
