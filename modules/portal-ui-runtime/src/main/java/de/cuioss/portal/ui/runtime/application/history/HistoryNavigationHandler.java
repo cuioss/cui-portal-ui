@@ -15,44 +15,43 @@
  */
 package de.cuioss.portal.ui.runtime.application.history;
 
+import javax.faces.application.ConfigurableNavigationHandler;
+import javax.faces.application.ConfigurableNavigationHandlerWrapper;
 import javax.faces.application.NavigationCase;
-import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 
-import de.cuioss.jsf.api.application.navigation.BaseDelegatingNavigationHandler;
 import de.cuioss.portal.core.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 
 /**
  * @author Oliver Wolff
  */
-public class HistoryNavigationHandler extends BaseDelegatingNavigationHandler {
+public class HistoryNavigationHandler extends ConfigurableNavigationHandlerWrapper {
 
-    private static final String BACK = "back";
+	private static final String BACK = "back";
 
-    /**
-     * @param wrapped
-     */
-    public HistoryNavigationHandler(final NavigationHandler wrapped) {
-        super(wrapped);
-    }
+	/**
+	 * @param wrapped
+	 */
+	public HistoryNavigationHandler(final ConfigurableNavigationHandler wrapped) {
+		super(wrapped);
+	}
 
-    @Override
-    public void handleNavigation(final FacesContext context, final String from, final String outcome) {
-        if (BACK.equals(outcome)) {
-            PortalBeanManager.resolveBeanOrThrowIllegalStateException(HistoryManager.class, null).popPrevious()
-                    .redirect(context);
-        } else {
-            super.handleNavigation(context, from, outcome);
-        }
-    }
+	@Override
+	public void handleNavigation(final FacesContext context, final String from, final String outcome) {
+		if (BACK.equals(outcome)) {
+			PortalBeanManager.resolveBeanOrThrowIllegalStateException(HistoryManager.class, null).popPrevious()
+					.redirect(context);
+		} else {
+			super.handleNavigation(context, from, outcome);
+		}
+	}
 
-    @Override
-    public NavigationCase getNavigationCase(final FacesContext context, final String fromAction, final String outcome) {
-        if (BACK.equals(outcome)) {
-            return PortalBeanManager.resolveBeanOrThrowIllegalStateException(HistoryManager.class, null).peekPrevious()
-                    .toBackNavigationCase();
-        }
-        return super.getNavigationCase(context, fromAction, outcome);
-    }
+	@Override
+	public NavigationCase getNavigationCase(final FacesContext context, final String fromAction, final String outcome) {
+		if (BACK.equals(outcome))
+			return PortalBeanManager.resolveBeanOrThrowIllegalStateException(HistoryManager.class, null).peekPrevious()
+					.toBackNavigationCase();
+		return super.getNavigationCase(context, fromAction, outcome);
+	}
 }
