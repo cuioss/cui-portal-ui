@@ -43,7 +43,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@SuppressWarnings("javadoc")
 @PortalAuthenticationFacade
 @ApplicationScoped
 @EqualsAndHashCode

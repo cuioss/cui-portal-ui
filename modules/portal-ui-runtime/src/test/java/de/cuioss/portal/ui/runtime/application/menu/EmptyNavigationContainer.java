@@ -18,7 +18,6 @@ package de.cuioss.portal.ui.runtime.application.menu;
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemContainerImpl;
 
-@SuppressWarnings("javadoc")
 @PortalMenuItem
 public class EmptyNavigationContainer extends PortalNavigationMenuItemContainerImpl {
 

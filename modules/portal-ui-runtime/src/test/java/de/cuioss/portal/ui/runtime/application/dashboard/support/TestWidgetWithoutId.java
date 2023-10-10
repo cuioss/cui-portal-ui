@@ -21,7 +21,6 @@ import de.cuioss.portal.ui.api.dashboard.PortalDashboardWidget;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
 
-@SuppressWarnings("javadoc")
 @PortalDashboardWidget
 @Dependent
 public class TestWidgetWithoutId extends AbstractTestWidget {

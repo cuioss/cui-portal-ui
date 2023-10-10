@@ -32,7 +32,6 @@ import de.cuioss.uimodel.result.ResultState;
 import lombok.Getter;
 import lombok.Setter;
 
-@SuppressWarnings({ "javadoc" })
 @RequestScoped
 public class TestLoginPage extends AbstractLoginPageBean {
 

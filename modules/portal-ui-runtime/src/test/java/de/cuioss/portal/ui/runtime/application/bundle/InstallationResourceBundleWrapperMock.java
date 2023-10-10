@@ -27,7 +27,6 @@ import de.cuioss.portal.configuration.common.PortalPriorities;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@SuppressWarnings("javadoc")
 @SessionScoped
 @Priority(PortalPriorities.PORTAL_INSTALLATION_LEVEL)
 @ToString

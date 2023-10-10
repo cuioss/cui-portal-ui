@@ -21,7 +21,6 @@ import de.cuioss.test.valueobjects.ValueObjectTest;
 import de.cuioss.test.valueobjects.api.contracts.VerifyBuilder;
 import de.cuioss.test.valueobjects.api.generator.PropertyGenerator;
 
-@SuppressWarnings("javadoc")
 @PropertyGenerator(IDisplayNameProviderTypedGenerator.class)
 @VerifyBuilder(required = { "state", "message" })
 class StickyMessageTest extends ValueObjectTest<StickyMessage> {

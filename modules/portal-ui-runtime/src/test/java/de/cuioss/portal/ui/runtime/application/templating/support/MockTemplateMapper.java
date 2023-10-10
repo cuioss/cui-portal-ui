@@ -29,7 +29,6 @@ import lombok.Setter;
 @PortalMultiTemplatingMapper
 @ApplicationScoped
 @Alternative
-@SuppressWarnings("javadoc")
 public class MockTemplateMapper implements MultiTemplatingMapper {
 
     private static final long serialVersionUID = 5885265658897055337L;
