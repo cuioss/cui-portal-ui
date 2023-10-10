@@ -21,7 +21,6 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.configuration.application.PortalProjectStageProducer;
 import de.cuioss.portal.configuration.common.PortalPriorities;
 import de.cuioss.portal.ui.api.configuration.PortalNotConfiguredException;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
@@ -48,7 +47,6 @@ public class PortalStageModeListener implements ViewListener {
     private static final long serialVersionUID = 8427405526881056257L;
 
     @Inject
-    @PortalProjectStageProducer
     private CuiProjectStage stageProducer;
 
     @Inject
@@ -57,7 +55,7 @@ public class PortalStageModeListener implements ViewListener {
     @Override
     public void handleView(final ViewDescriptor viewDescriptor) {
         if (stageProducer.isConfiguration()) {
-            this.catchEvent.fire(new ExceptionAsEvent(new PortalNotConfiguredException()));
+            catchEvent.fire(new ExceptionAsEvent(new PortalNotConfiguredException()));
         }
     }
 

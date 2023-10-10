@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.cuioss.portal.ui.runtime.application.configuration;
+package de.cuioss.portal.ui.runtime.application.resources;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HANDLED_LIBRARIES;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HANDLED_SUFFIXES;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_VERSION;
 import static de.cuioss.test.generator.Generators.letterStrings;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,27 +52,5 @@ class PortalResourceConfigurationTest implements ShouldHandleObjectContracts<Por
         assertNotNull(MoreStrings.emptyToNull(underTest.getVersion()));
         assertEquals(5, underTest.getHandledLibraries().size());
         assertEquals(6, underTest.getHandledSuffixes().size());
-    }
-
-    @Test
-    void shouldReconfigure() {
-        // Ensure initialization
-
-        // Should detect changed version
-        final var version = strings.next();
-        configuration.fireEvent(RESOURCE_VERSION, version);
-        assertEquals(version, underTest.getVersion());
-
-        // Should detect changed libraries
-        configuration.fireEvent(RESOURCE_HANDLED_LIBRARIES, strings.next());
-        assertEquals(1, underTest.getHandledLibraries().size());
-        assertEquals(version, underTest.getVersion());
-
-        // Should detect changed suffixes
-        configuration.fireEvent(RESOURCE_HANDLED_SUFFIXES, strings.next());
-        assertEquals(1, underTest.getHandledLibraries().size());
-        assertEquals(version, underTest.getVersion());
-        assertEquals(1, underTest.getHandledSuffixes().size());
-
     }
 }

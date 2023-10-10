@@ -28,7 +28,6 @@ import javax.inject.Provider;
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.jsf.api.common.util.CheckContextState;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.configuration.application.PortalProjectStageProducer;
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
@@ -84,7 +83,6 @@ public class FallBackExceptionHandler implements Serializable {
     private ViewDescriptor currentView;
 
     @Inject
-    @PortalProjectStageProducer
     private CuiProjectStage projectStage;
 
     /**

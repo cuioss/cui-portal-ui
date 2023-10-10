@@ -18,13 +18,14 @@ package de.cuioss.portal.ui.api.resources;
 import java.util.Objects;
 
 import javax.faces.application.Resource;
+import javax.faces.application.ResourceHandler;
 import javax.faces.context.FacesContext;
 
-import de.cuioss.jsf.api.application.resources.util.ResourceUtil;
 import lombok.ToString;
 
 /**
- * Base Resource using {@link ResourceUtil} to calculate
+ * Base Resource using
+ * {{@link #calculateRequestPath(String, String, FacesContext)}} to calculate
  * {@link #getRequestPath()} and {@link #getURL()}.
  *
  * @author Matthias Walliczek
@@ -34,8 +35,7 @@ public abstract class CuiResource extends Resource {
 
     @Override
     public String getRequestPath() {
-        return ResourceUtil.calculateRequestPath(getResourceName(), getLibraryName(),
-                FacesContext.getCurrentInstance());
+        return calculateRequestPath(getResourceName(), getLibraryName(), FacesContext.getCurrentInstance());
     }
 
     @Override
@@ -45,10 +45,27 @@ public abstract class CuiResource extends Resource {
 
     @Override
     public boolean equals(final Object obj) {
-        if (obj instanceof final CuiResource other) {
+        if (obj instanceof final CuiResource other)
             return Objects.equals(getResourceName(), other.getResourceName())
                     && Objects.equals(getLibraryName(), other.getLibraryName());
-        }
         return false;
+    }
+
+    /**
+     * Calculate the request path to a given resource to be used a link target.
+     *
+     * @param resourceName
+     * @param libraryName
+     * @param context
+     * @return the request path (relative, without host name)
+     */
+    public static String calculateRequestPath(String resourceName, String libraryName, FacesContext context) {
+        String uri;
+
+        uri = ResourceHandler.RESOURCE_IDENTIFIER + '/' + resourceName;
+        if (null != libraryName) {
+            uri += "?ln=" + libraryName;
+        }
+        return context.getApplication().getViewHandler().getResourceURL(context, uri);
     }
 }

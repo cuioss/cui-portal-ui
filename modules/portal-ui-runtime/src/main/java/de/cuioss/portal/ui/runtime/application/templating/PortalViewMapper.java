@@ -33,7 +33,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-import de.cuioss.portal.configuration.application.PortalProjectStageProducer;
 import de.cuioss.portal.configuration.common.PortalPriorities;
 import de.cuioss.portal.ui.api.templating.MultiViewMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiViewMapper;
@@ -70,7 +69,6 @@ public class PortalViewMapper implements MultiViewMapper {
     private Instance<StaticViewDescriptor> descriptors;
 
     @Inject
-    @PortalProjectStageProducer
     private Provider<CuiProjectStage> projectStageProvider;
 
     /**

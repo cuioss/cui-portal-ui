@@ -33,7 +33,6 @@ import javax.inject.Named;
 import javax.inject.Provider;
 
 import de.cuioss.jsf.api.application.bundle.ResourceBundleWrapper;
-import de.cuioss.portal.configuration.application.PortalProjectStageProducer;
 import de.cuioss.portal.configuration.bundles.PortalResourceBundleRegistry;
 import de.cuioss.portal.configuration.bundles.ResourceBundleRegistry;
 import de.cuioss.portal.configuration.common.PortalPriorities;
@@ -75,7 +74,6 @@ public class PortalResourceBundleWrapper implements ResourceBundleWrapper {
     private transient List<ResourceBundle> resolvedBundles;
 
     @Inject
-    @PortalProjectStageProducer
     private Provider<CuiProjectStage> projectStage;
 
     @Inject
@@ -88,17 +86,15 @@ public class PortalResourceBundleWrapper implements ResourceBundleWrapper {
     public String getMessage(final String key) {
 
         for (final ResourceBundle bundle : getResolvedBundles()) {
-            if (bundle.containsKey(key)) {
+            if (bundle.containsKey(key))
                 return bundle.getString(key);
-            }
         }
 
         final var errMsg = "Portal-003 : No key '" + key + "' defined within any of the configured bundles: "
                 + resourceBundleRegistry.getResolvedPaths();
 
-        if (projectStage.get().isDevelopment()) {
+        if (projectStage.get().isDevelopment())
             throw new MissingResourceException(errMsg, "ResourceBundleWrapperImpl", key);
-        }
 
         log.warn(errMsg);
         return "??" + key + "??";

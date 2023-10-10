@@ -22,10 +22,9 @@ import javax.faces.application.Application;
 import javax.faces.application.ApplicationWrapper;
 import javax.faces.application.ProjectStage;
 
-import de.cuioss.portal.configuration.application.PortalProjectStage;
 import de.cuioss.portal.core.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
-import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.uimodel.application.CuiProjectStage;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -44,58 +43,36 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PortalApplication extends ApplicationWrapper {
 
-    private static final CuiLogger log = new CuiLogger(PortalApplication.class);
-
-    private static final String PORTAL_105 = "Portal-105: Unable to load PortalBeanManager CDI-context. Defaults to ProjectStage.Production.";
-
     @Getter
     private final Application wrapped;
 
-    private PortalProjectStage portalProjectStage;
+    @Getter(lazy = true)
+    private final CuiProjectStage portalProjectStage = PortalBeanManager.resolveRequiredBean(CuiProjectStage.class);
 
-    private LocaleConfiguration localeConfiguration;
+    @Getter(lazy = true)
+    private final LocaleConfiguration portalLocaleConfiguration = PortalBeanManager
+            .resolveRequiredBean(LocaleConfiguration.class);
 
     @Override
     public ProjectStage getProjectStage() {
-        if (null == portalProjectStage) {
-            try {
-                portalProjectStage = PortalBeanManager.resolveBean(PortalProjectStage.class, null)
-                        .orElseThrow(() -> new IllegalArgumentException(
-                                PortalBeanManager.createErrorMessage(PortalProjectStage.class, null)));
-            } catch (IllegalStateException | IllegalArgumentException e) {
-                log.warn(PORTAL_105, e);
-            }
-        }
-
-        if (null == portalProjectStage) {
-            return ProjectStage.Production;
-        }
-        if (portalProjectStage.getProjectStage().isDevelopment()) {
+        var stage = getPortalProjectStage();
+        if (stage.isDevelopment()) {
             return ProjectStage.Development;
         }
-        if (portalProjectStage.getProjectStage().isTest()) {
+        if (stage.isTest()) {
             return ProjectStage.SystemTest;
         }
-
         return ProjectStage.Production;
-    }
-
-    private LocaleConfiguration getLocaleConfiguration() {
-        if (null == localeConfiguration) {
-            localeConfiguration = PortalBeanManager.resolveBean(LocaleConfiguration.class, null)
-                    .orElseThrow(() -> new IllegalStateException("Locale configuration not available"));
-        }
-        return localeConfiguration;
     }
 
     @Override
     public Locale getDefaultLocale() {
-        return getLocaleConfiguration().getDefaultLocale();
+        return getPortalLocaleConfiguration().getDefaultLocale();
     }
 
     @Override
     public Iterator<Locale> getSupportedLocales() {
-        return getLocaleConfiguration().getAvailableLocales().iterator();
+        return getPortalLocaleConfiguration().getAvailableLocales().iterator();
     }
 
 }

@@ -43,7 +43,6 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import de.cuioss.portal.configuration.PortalConfigurationChangeEvent;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.application.PortalProjectStageProducer;
 import de.cuioss.portal.configuration.schedule.FileChangedEvent;
 import de.cuioss.portal.configuration.schedule.FileWatcherService;
 import de.cuioss.portal.configuration.schedule.PortalFileWatcherService;
@@ -75,7 +74,6 @@ public class CustomizationResourceProducer implements ResourceProducer {
     public static final String RESOURCES_DIRECTORY = "resources";
 
     @Inject
-    @PortalProjectStageProducer
     private Provider<CuiProjectStage> projectStageProvider;
 
     @Inject
@@ -106,17 +104,15 @@ public class CustomizationResourceProducer implements ResourceProducer {
             determineResources();
         }
 
-        if (foundResources.containsKey(libraryName) && foundResources.get(libraryName).contains(resourceName)) {
+        if (foundResources.containsKey(libraryName) && foundResources.get(libraryName).contains(resourceName))
             return createCustomizationResource(resourceName, libraryName);
-        }
 
         if (libraryName == null && !MoreStrings.isEmpty(resourceName)) {
             for (final String libName : foundResources.keySet()) {
                 final var libNameAsPrefix = libName + "/";
-                if (resourceName.startsWith(libNameAsPrefix)) {
+                if (resourceName.startsWith(libNameAsPrefix))
                     // recursion
                     return retrieveResource(resourceName.substring(libNameAsPrefix.length()), libName);
-                }
             }
         }
         return null;
@@ -128,9 +124,8 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
         log.trace("create customization resource: libraryName {}, resourceName {}", libraryName, resourceName);
         // during development create each time new resource
-        if (projectStageProvider.get().isDevelopment()) {
+        if (projectStageProvider.get().isDevelopment())
             return new CustomizationResource(resourceFile, resourceName, libraryName, determineMimeType(resourceFile));
-        }
 
         if (!resourcesCache.containsKey(resourceFile)) {
             final var mimeType = determineMimeType(resourceFile);
@@ -147,9 +142,8 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
             final var resourceNameMinified = createResourceNameInMinifiedSytle(resourceName);
 
-            if (null != resourceNameMinified && foundResources.get(libraryName).contains(resourceNameMinified)) {
+            if (null != resourceNameMinified && foundResources.get(libraryName).contains(resourceNameMinified))
                 return resourcePath.toPath().resolve(libraryName).resolve(resourceNameMinified).toFile();
-            }
         }
 
         return resourcePath.toPath().resolve(libraryName).resolve(resourceName).toFile();
@@ -157,9 +151,8 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
     private static String createResourceNameInMinifiedSytle(final String resourceName) {
         final var parts = Splitter.on('.').trimResults().limit(2).splitToList(resourceName);
-        if (!parts.isEmpty() && parts.size() > 1) {
+        if (!parts.isEmpty() && parts.size() > 1)
             return parts.get(0) + ".min." + parts.get(1);
-        }
         return null;
     }
 
@@ -209,9 +202,8 @@ public class CustomizationResourceProducer implements ResourceProducer {
     private static File lookupResourceDirectory(final Path customizationPath) {
         if (null != customizationPath) {
             final var resourcesDir = customizationPath.resolve(RESOURCES_DIRECTORY).toFile();
-            if (resourcesDir.exists() && resourcesDir.isDirectory()) {
+            if (resourcesDir.exists() && resourcesDir.isDirectory())
                 return resourcesDir;
-            }
         }
         log.info(
                 "No installation specific customization detected, using defaults. If this is intentional you can ignore this message");
@@ -239,9 +231,8 @@ public class CustomizationResourceProducer implements ResourceProducer {
             log.warn(e, "Portal-122 : access denied to: {}", path.toFile().getName());
         }
 
-        if (null == filesInDirectory) {
+        if (null == filesInDirectory)
             return Collections.emptyList();
-        }
 
         return Arrays.stream(filesInDirectory).map(File::getName).toList();
     }

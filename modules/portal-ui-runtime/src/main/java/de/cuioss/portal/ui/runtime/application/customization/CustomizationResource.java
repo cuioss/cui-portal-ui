@@ -33,7 +33,6 @@ import java.util.TimeZone;
 import javax.faces.context.FacesContext;
 
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.application.PortalProjectStageProducer;
 import de.cuioss.portal.core.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.resources.CacheableResource;
 import de.cuioss.tools.logging.CuiLogger;
@@ -85,8 +84,7 @@ public final class CustomizationResource extends CacheableResource {
         final var format = new SimpleDateFormat(RFC1123_DATE_PATTERN, Locale.US);
         format.setTimeZone(gmt);
         final long expiresTime;
-        final Optional<CuiProjectStage> projectStageBean = PortalBeanManager.resolveBean(CuiProjectStage.class,
-                PortalProjectStageProducer.class);
+        final Optional<CuiProjectStage> projectStageBean = PortalBeanManager.resolveBean(CuiProjectStage.class, null);
         if (projectStageBean.isPresent() && projectStageBean.get().isDevelopment()) {
             expiresTime = new Date().getTime();
         } else {

@@ -32,7 +32,6 @@ import javax.inject.Named;
 import javax.inject.Provider;
 
 import de.cuioss.jsf.api.application.bundle.ResourceBundleWrapper;
-import de.cuioss.portal.configuration.application.PortalProjectStageProducer;
 import de.cuioss.portal.configuration.common.PortalPriorities;
 import de.cuioss.portal.core.bundle.PortalResourceBundle;
 import de.cuioss.tools.collect.CollectionBuilder;
@@ -71,24 +70,21 @@ public class PortalResourceBundleBean extends ResourceBundle implements Serializ
     private String allBundleNames;
 
     @Inject
-    @PortalProjectStageProducer
     private Provider<CuiProjectStage> projectStageProducer;
 
     @Override
     protected Object handleGetObject(final String key) {
 
         for (final ResourceBundleWrapper wrapper : getSortedBundleWrapper()) {
-            if (wrapper.keySet().contains(key)) {
+            if (wrapper.keySet().contains(key))
                 return wrapper.getMessage(key);
-            }
         }
 
         final var errMsg = "Portal-104: No key '" + key + "' defined within any of the configured bundles: "
                 + allBundleNames;
 
-        if (projectStageProducer.get().isDevelopment()) {
+        if (projectStageProducer.get().isDevelopment())
             throw new MissingResourceException(errMsg, "ResourceBundleWrapperImpl", key);
-        }
 
         log.warn(errMsg);
 

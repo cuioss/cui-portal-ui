@@ -56,26 +56,37 @@ class PortalApplicationTest implements ShouldBeNotNull<PortalApplication>, JsfEn
     private PortalTestConfiguration configuration;
 
     @Test
-    void shouldHandleProjectStage() {
+    void shouldHandleProjectProductionStage() {
+        configuration.production();
         var wrapped = createFromFactory();
-
         assertEquals(ProjectStage.Production, wrapped.getProjectStage());
+    }
 
+    @Test
+    void shouldHandleProjectDevelopmentStage() {
         configuration.development();
+        var wrapped = createFromFactory();
         assertEquals(ProjectStage.Development, wrapped.getProjectStage());
     }
 
     @Test
-    void shouldHandleSupportedLocales() {
+    void shouldHandleProjectTestStage() {
+        configuration.setPortalProjectStage(de.cuioss.portal.configuration.application.ProjectStage.TEST);
         var wrapped = createFromFactory();
+        assertEquals(ProjectStage.SystemTest, wrapped.getProjectStage());
+    }
+
+    @Test
+    void shouldHandleSupportedLocales() {
         configuration.fireEvent(PortalConfigurationKeys.LOCALES_AVAILABLE, "de");
+        var wrapped = createFromFactory();
         assertEquals(mutableList(Locale.GERMAN), mutableList(wrapped.getSupportedLocales()));
     }
 
     @Test
     void shouldHandleDefaultLocale() {
-        var wrapped = createFromFactory();
         configuration.fireEvent(PortalConfigurationKeys.LOCALE_DEFAULT, "fr");
+        var wrapped = createFromFactory();
         assertEquals(Locale.FRENCH, wrapped.getDefaultLocale());
     }
 
