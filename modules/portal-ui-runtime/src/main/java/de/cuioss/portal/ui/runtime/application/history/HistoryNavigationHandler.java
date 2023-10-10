@@ -22,7 +22,6 @@ import javax.faces.context.FacesContext;
 
 import de.cuioss.portal.core.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.history.HistoryManager;
-import lombok.Getter;
 
 /**
  * @author Oliver Wolff
@@ -30,9 +29,6 @@ import lombok.Getter;
 public class HistoryNavigationHandler extends ConfigurableNavigationHandlerWrapper {
 
     private static final String BACK = "back";
-
-    @Getter(lazy = true)
-    private final HistoryManager historyManager = PortalBeanManager.resolveRequiredBean(HistoryManager.class);
 
     /**
      * @param wrapped
@@ -44,7 +40,7 @@ public class HistoryNavigationHandler extends ConfigurableNavigationHandlerWrapp
     @Override
     public void handleNavigation(final FacesContext context, final String from, final String outcome) {
         if (BACK.equals(outcome)) {
-            getHistoryManager().popPrevious().redirect(context);
+            PortalBeanManager.resolveRequiredBean(HistoryManager.class).popPrevious().redirect(context);
         } else {
             super.handleNavigation(context, from, outcome);
         }
@@ -53,7 +49,7 @@ public class HistoryNavigationHandler extends ConfigurableNavigationHandlerWrapp
     @Override
     public NavigationCase getNavigationCase(final FacesContext context, final String fromAction, final String outcome) {
         if (BACK.equals(outcome)) {
-            return getHistoryManager().peekPrevious().toBackNavigationCase();
+            return PortalBeanManager.resolveRequiredBean(HistoryManager.class).peekPrevious().toBackNavigationCase();
         }
         return super.getNavigationCase(context, fromAction, outcome);
     }
