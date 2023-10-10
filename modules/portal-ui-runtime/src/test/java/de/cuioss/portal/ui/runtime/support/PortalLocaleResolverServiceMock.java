@@ -28,7 +28,6 @@ import javax.inject.Inject;
 
 import de.cuioss.portal.ui.api.locale.LocaleChangeEvent;
 import de.cuioss.portal.ui.api.locale.LocaleResolverService;
-import de.cuioss.portal.ui.api.locale.PortalLocaleResolver;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,7 +38,6 @@ import lombok.ToString;
  *
  * @author Oliver Wolff
  */
-@PortalLocaleResolver
 @ApplicationScoped
 @Alternative
 @EqualsAndHashCode

@@ -5,11 +5,9 @@
  * implementation at portal level is a fixed (CDI-) scoped bean.
  * <p>
  * In order to change behavior the extension point is an implementation of
- * {@link de.cuioss.portal.ui.api.locale.LocaleResolverService} defined as an
- * {@link de.cuioss.portal.ui.api.cdi.api.PortalOverride} for
- * {@link de.cuioss.portal.ui.api.locale.PortalLocaleResolver}. The default
+ * {@link de.cuioss.portal.ui.api.locale.LocaleResolverService} The default
  * implementation
- * {@link de.icw.cui.portal.configuration.application.locale.impl.PortalLocaleResolverServiceImpl}
+ * {@link de.cuioss.portal.ui.runtime.application.locale.impl.PortalLocaleResolverServiceImpl}
  * uses the jsf based in standard behavior.
  * </p>
  * <p>

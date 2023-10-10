@@ -34,7 +34,6 @@ import de.cuioss.portal.configuration.common.PortalPriorities;
 import de.cuioss.portal.core.storage.ClientStorage;
 import de.cuioss.portal.core.storage.PortalClientStorage;
 import de.cuioss.portal.ui.api.locale.LocaleResolverService;
-import de.cuioss.portal.ui.api.locale.PortalLocaleResolver;
 import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -48,7 +47,6 @@ import lombok.ToString;
  *
  * @author Oliver Wolff
  */
-@PortalLocaleResolver
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @Named
 @SessionScoped

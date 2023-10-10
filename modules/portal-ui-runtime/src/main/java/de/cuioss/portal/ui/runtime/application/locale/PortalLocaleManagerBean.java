@@ -31,7 +31,6 @@ import javax.inject.Provider;
 import de.cuioss.portal.core.locale.PortalLocale;
 import de.cuioss.portal.ui.api.locale.LocaleChangeEvent;
 import de.cuioss.portal.ui.api.locale.LocaleResolverService;
-import de.cuioss.portal.ui.api.locale.PortalLocaleResolver;
 import de.cuioss.portal.ui.runtime.application.locale.impl.PortalLocaleResolverServiceImpl;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -55,12 +54,11 @@ import lombok.ToString;
 @SessionScoped
 @EqualsAndHashCode(of = "locale")
 @ToString(of = "locale")
-public class PortalLocaleManagerBean implements Serializable, LocaleResolverService {
+public class PortalLocaleManagerBean implements Serializable {
 
     private static final long serialVersionUID = -3555387539352353982L;
 
     @Inject
-    @PortalLocaleResolver
     private LocaleResolverService resolverService;
 
     private Locale locale;
@@ -84,12 +82,12 @@ public class PortalLocaleManagerBean implements Serializable, LocaleResolverServ
         return resolveUserLocale();
     }
 
-    @Override
+    /** @see PortalLocaleResolverServiceImpl#getAvailableLocales() */
     public List<Locale> getAvailableLocales() {
         return resolverService.getAvailableLocales();
     }
 
-    @Override
+    /** @see PortalLocaleResolverServiceImpl#saveUserLocale(Locale) */
     public void saveUserLocale(final Locale localeValue) {
         locale = localeValue;
         facesContextProvider.get().getViewRoot().setLocale(locale);
@@ -97,7 +95,7 @@ public class PortalLocaleManagerBean implements Serializable, LocaleResolverServ
         localeChangeEvent.fire(locale);
     }
 
-    @Override
+    /** @see PortalLocaleResolverServiceImpl#resolveUserLocale() */
     public Locale resolveUserLocale() {
         if (null == locale) {
             locale = resolverService.resolveUserLocale();
