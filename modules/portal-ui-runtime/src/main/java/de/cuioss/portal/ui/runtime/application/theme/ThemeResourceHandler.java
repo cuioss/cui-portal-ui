@@ -21,7 +21,6 @@ import javax.faces.application.ResourceHandlerWrapper;
 
 import de.cuioss.portal.core.cdi.PortalBeanManager;
 import de.cuioss.tools.logging.CuiLogger;
-import lombok.Getter;
 
 /**
  * Handles the resolving of the correct theme css. It filters for libraryName=
@@ -33,9 +32,6 @@ import lombok.Getter;
 public class ThemeResourceHandler extends ResourceHandlerWrapper {
 
     private static final CuiLogger LOGER = new CuiLogger(ThemeResourceHandler.class);
-
-    @Getter(lazy = true)
-    private final UserThemeBean userThemeBean = PortalBeanManager.resolveRequiredBean(UserThemeBean.class);
 
     /**
      * Constructor.
@@ -50,7 +46,7 @@ public class ThemeResourceHandler extends ResourceHandlerWrapper {
     public Resource createResource(String resourceName, String libraryName) {
 
         if (isRequestForTheme(resourceName, libraryName)) {
-            var themeName = getUserThemeBean().resolveFinalThemeCssName();
+            var themeName = PortalBeanManager.resolveRequiredBean(UserThemeBean.class).resolveFinalThemeCssName();
             LOGER.debug("Resolved cssname = %s", themeName);
             return getWrapped().createResource(themeName, libraryName);
         }
