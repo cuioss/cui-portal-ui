@@ -37,15 +37,13 @@ public class CuiResourceHandler extends AbstractVersionResourceHandler {
 
     @Getter(lazy = true)
     private final PortalResourceConfiguration configuration = PortalBeanManager
-            .resolveBeanOrThrowIllegalStateException(PortalResourceConfiguration.class, null);
+            .resolveRequiredBean(PortalResourceConfiguration.class);
 
     @Getter(lazy = true)
-    private final CuiResourceManager resourceManager = PortalBeanManager
-            .resolveBeanOrThrowIllegalStateException(CuiResourceManager.class, null);
+    private final CuiResourceManager resourceManager = PortalBeanManager.resolveRequiredBean(CuiResourceManager.class);
 
     @Getter(lazy = true)
-    private final CuiProjectStage projectStage = PortalBeanManager
-            .resolveBeanOrThrowIllegalStateException(CuiProjectStage.class, null);
+    private final CuiProjectStage projectStage = PortalBeanManager.resolveRequiredBean(CuiProjectStage.class);
 
     public CuiResourceHandler(final ResourceHandler wrapped) {
         super(wrapped);
@@ -80,8 +78,9 @@ public class CuiResourceHandler extends AbstractVersionResourceHandler {
      *         the given resource Request
      */
     private boolean shouldHandle(final String resourceName, final String libraryName) {
-        if (getProjectStage().isDevelopment())
+        if (getProjectStage().isDevelopment()) {
             return false;
+        }
         var structuredFilename = new StructuredFilename(resourceName);
         var config = getConfiguration();
         return config.getHandledLibraries().contains(libraryName)
