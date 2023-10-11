@@ -28,7 +28,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import de.cuioss.portal.core.locale.PortalLocale;
+import de.cuioss.portal.common.locale.PortalLocale;
 import de.cuioss.portal.ui.api.locale.LocaleChangeEvent;
 import de.cuioss.portal.ui.api.locale.LocaleResolverService;
 import de.cuioss.portal.ui.runtime.application.locale.impl.PortalLocaleResolverServiceImpl;

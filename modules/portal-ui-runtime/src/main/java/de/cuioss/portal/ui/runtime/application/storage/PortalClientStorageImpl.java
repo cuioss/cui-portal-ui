@@ -32,7 +32,7 @@ import javax.inject.Provider;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.core.servlet.CuiContextPath;
 import de.cuioss.portal.core.storage.ClientStorage;
 import de.cuioss.portal.core.storage.PortalClientStorage;

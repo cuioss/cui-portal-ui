@@ -40,11 +40,11 @@ import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import de.cuioss.portal.common.locale.PortalLocale;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.configuration.schedule.FileChangedEvent;
 import de.cuioss.portal.configuration.schedule.FileWatcherService;
 import de.cuioss.portal.configuration.schedule.PortalFileWatcherService;
-import de.cuioss.portal.core.locale.PortalLocale;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.support.FileWatcherServiceMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;

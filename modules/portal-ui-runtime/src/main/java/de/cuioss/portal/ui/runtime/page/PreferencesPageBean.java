@@ -30,8 +30,8 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.cuioss.portal.configuration.common.PortalPriorities;
-import de.cuioss.portal.core.bundle.PortalResourceBundle;
+import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
 import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesPreferences;
 import de.cuioss.portal.ui.api.ui.pages.PreferencesPage;
@@ -84,7 +84,7 @@ public class PreferencesPageBean implements PreferencesPage {
     private Locale selectedLocale;
 
     @Inject
-    @PortalResourceBundle
+    @UnifiedResourceBundle
     private ResourceBundle resourceBundle;
 
     @Inject

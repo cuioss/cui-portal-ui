@@ -21,7 +21,7 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.configuration.PortalNotConfiguredException;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;

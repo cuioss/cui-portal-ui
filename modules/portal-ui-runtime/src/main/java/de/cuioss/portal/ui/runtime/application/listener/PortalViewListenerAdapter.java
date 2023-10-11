@@ -19,7 +19,7 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
-import de.cuioss.portal.core.cdi.PortalBeanManager;
+import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.runtime.application.listener.view.PortalCDIViewListener;
 

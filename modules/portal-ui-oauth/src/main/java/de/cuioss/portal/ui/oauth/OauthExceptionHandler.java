@@ -25,7 +25,7 @@ import javax.inject.Inject;
 
 import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.core.bundle.PortalResourceBundle;
+import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
@@ -64,7 +64,7 @@ public class OauthExceptionHandler implements PortalExceptionHandler {
     private MapStorage<Serializable, Serializable> sessionStorage;
 
     @Inject
-    @PortalResourceBundle
+    @UnifiedResourceBundle
     private ResourceBundle resourceBundle;
 
     protected DefaultErrorMessage createErrorMessage(final String messageKey) {

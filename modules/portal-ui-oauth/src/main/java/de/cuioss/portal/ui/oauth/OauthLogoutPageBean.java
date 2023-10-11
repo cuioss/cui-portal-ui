@@ -41,7 +41,7 @@ import de.cuioss.portal.authentication.oauth.LoginPagePath;
 import de.cuioss.portal.authentication.oauth.OAuthConfigKeys;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
-import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
 import de.cuioss.portal.ui.api.ui.pages.LogoutPage;
 import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesLogout;

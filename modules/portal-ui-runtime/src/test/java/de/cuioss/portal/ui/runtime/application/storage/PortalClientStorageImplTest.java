@@ -26,9 +26,9 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import de.cuioss.portal.common.bundle.ResourceBundleRegistryImpl;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
-import de.cuioss.portal.configuration.impl.bundles.ResourceBundleRegistryImpl;
 import de.cuioss.portal.core.servlet.CuiContextPath;
 import de.cuioss.portal.core.storage.PortalClientStorage;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;

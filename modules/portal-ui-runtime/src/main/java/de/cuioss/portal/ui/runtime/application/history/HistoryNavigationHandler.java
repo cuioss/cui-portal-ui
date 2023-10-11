@@ -20,7 +20,7 @@ import javax.faces.application.ConfigurableNavigationHandlerWrapper;
 import javax.faces.application.NavigationCase;
 import javax.faces.context.FacesContext;
 
-import de.cuioss.portal.core.cdi.PortalBeanManager;
+import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 
 /**

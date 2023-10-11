@@ -26,7 +26,7 @@ import javax.faces.application.ResourceHandlerWrapper;
 import javax.faces.application.ViewResource;
 import javax.faces.context.FacesContext;
 
-import de.cuioss.portal.core.cdi.PortalBeanManager;
+import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.templating.MultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
 import de.cuioss.tools.logging.CuiLogger;

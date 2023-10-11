@@ -16,7 +16,7 @@
  * <pre>
  *
  * &#064;Inject
- * &#064;PortalResourceBundle
+ * &#064;UnifiedResourceBundle
  * private ResourceBundle resourceBundle;
  * </pre>
  *
@@ -35,7 +35,7 @@
  * annotated with
  * {@link de.cuioss.portal.ui.api.cdi.api.bundle.ResourceBundleDescripor}. The
  * actual configuration will be done with
- * {@link de.icw.cui.portal.configuration.bundles.impl.ResourceBundleRegistryImpl}
+ * {@link de.cuioss.portal.common.bundle.icw.cui.portal.configuration.bundles.impl.ResourceBundleRegistryImpl}
  * </p>
  */
 package de.cuioss.portal.ui.runtime.application.bundle;

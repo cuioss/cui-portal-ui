@@ -22,7 +22,7 @@ import javax.faces.application.Application;
 import javax.faces.application.ApplicationWrapper;
 import javax.faces.application.ProjectStage;
 
-import de.cuioss.portal.core.cdi.PortalBeanManager;
+import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
 import de.cuioss.uimodel.application.CuiProjectStage;
 import lombok.Getter;

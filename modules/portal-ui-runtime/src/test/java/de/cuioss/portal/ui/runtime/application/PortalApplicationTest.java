@@ -71,7 +71,7 @@ class PortalApplicationTest implements ShouldBeNotNull<PortalApplication>, JsfEn
 
     @Test
     void shouldHandleProjectTestStage() {
-        configuration.setPortalProjectStage(de.cuioss.portal.configuration.application.ProjectStage.TEST);
+        configuration.setPortalProjectStage(de.cuioss.portal.common.stage.ProjectStage.TEST);
         var wrapped = createFromFactory();
         assertEquals(ProjectStage.SystemTest, wrapped.getProjectStage());
     }

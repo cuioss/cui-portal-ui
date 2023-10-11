@@ -26,7 +26,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
-import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;

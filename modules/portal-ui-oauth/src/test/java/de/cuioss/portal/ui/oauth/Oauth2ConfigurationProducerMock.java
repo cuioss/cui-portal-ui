@@ -22,7 +22,7 @@ import javax.enterprise.inject.Produces;
 
 import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
 import de.cuioss.portal.authentication.oauth.impl.Oauth2ConfigurationImpl;
-import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

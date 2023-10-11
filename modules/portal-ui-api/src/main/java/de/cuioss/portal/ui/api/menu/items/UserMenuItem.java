@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemContainerImpl;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.PortalUser;
-import de.cuioss.portal.core.bundle.PortalResourceBundle;
+import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemContainerImpl;
 import lombok.EqualsAndHashCode;
@@ -62,7 +62,7 @@ public class UserMenuItem extends PortalNavigationMenuItemContainerImpl {
     AuthenticatedUserInfo userInfo;
 
     @Inject
-    @PortalResourceBundle
+    @UnifiedResourceBundle
     ResourceBundle resourceBundle;
 
     /**

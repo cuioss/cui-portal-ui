@@ -24,9 +24,9 @@ import java.lang.annotation.Target;
 
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 
+import de.cuioss.portal.common.bundle.ResourceBundleRegistryImpl;
 import de.cuioss.portal.configuration.impl.bundles.PortalDefaultResourceBundleLocator;
 import de.cuioss.portal.configuration.impl.bundles.PortalVendorResourceBundleLocator;
-import de.cuioss.portal.configuration.impl.bundles.ResourceBundleRegistryImpl;
 import de.cuioss.portal.ui.runtime.application.bundle.PortalResourceBundleBean;
 import de.cuioss.portal.ui.runtime.application.bundle.PortalResourceBundleWrapper;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;

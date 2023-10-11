@@ -29,7 +29,7 @@ import de.cuioss.portal.authentication.PortalLoginEvent;
 import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.authentication.facade.AuthenticationFacade;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
-import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
 import de.cuioss.portal.ui.api.ui.pages.LogoutPage;
 import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesLogout;

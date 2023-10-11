@@ -31,8 +31,8 @@ import javax.inject.Inject;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
+import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
-import de.cuioss.portal.core.bundle.PortalResourceBundle;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.locale.LocaleChangeEvent;
 import de.cuioss.portal.ui.runtime.support.EnablePortalCoreEnvironment;
@@ -51,7 +51,7 @@ class PortalResourceBundleBeanTest implements ShouldHandleObjectContracts<Portal
     private PortalTestConfiguration configuration;
 
     @Inject
-    @PortalResourceBundle
+    @UnifiedResourceBundle
     @Getter
     private PortalResourceBundleBean underTest;
 

@@ -18,7 +18,7 @@ package de.cuioss.portal.ui.runtime.application.resources;
 import javax.faces.application.Resource;
 import javax.faces.application.ResourceHandler;
 
-import de.cuioss.portal.core.cdi.PortalBeanManager;
+import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.tools.io.StructuredFilename;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.application.CuiProjectStage;

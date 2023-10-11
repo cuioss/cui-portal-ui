@@ -23,7 +23,7 @@ import javax.annotation.Priority;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.core.storage.SessionStorage;
 import de.cuioss.portal.core.storage.impl.MapStorageImpl;

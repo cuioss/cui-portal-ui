@@ -12,7 +12,7 @@
  * </p>
  * <p>
  * In addition it provides a producer method for
- * {@link de.icw.cui.portal.locale.PortalLocale} To put in other words: This
+ * {@link de.cuioss.portal.common.locale.icw.cui.portal.locale.PortalLocale} To put in other words: This
  * bean provides a session-scoped cache for locale, the used service is agnostic
  * of state or bean specific types.
  * </p>

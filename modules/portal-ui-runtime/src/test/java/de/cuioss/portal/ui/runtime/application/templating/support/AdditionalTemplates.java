@@ -22,7 +22,7 @@ import java.util.List;
 import javax.annotation.Priority;
 import javax.inject.Named;
 
-import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
 import de.cuioss.portal.ui.api.templating.StaticTemplateDescriptor;
 import lombok.EqualsAndHashCode;

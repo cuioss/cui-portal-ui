@@ -23,7 +23,7 @@ import javax.annotation.Priority;
 import javax.enterprise.context.SessionScoped;
 
 import de.cuioss.jsf.api.application.bundle.ResourceBundleWrapper;
-import de.cuioss.portal.configuration.common.PortalPriorities;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

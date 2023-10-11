@@ -32,8 +32,8 @@ import javax.inject.Named;
 import javax.inject.Provider;
 
 import de.cuioss.jsf.api.application.bundle.ResourceBundleWrapper;
-import de.cuioss.portal.configuration.common.PortalPriorities;
-import de.cuioss.portal.core.bundle.PortalResourceBundle;
+import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.tools.collect.CollectionBuilder;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.Joiner;
@@ -47,7 +47,7 @@ import lombok.ToString;
  * @author Oliver Wolff
  */
 @Named(PortalResourceBundleBean.BEAN_NAME)
-@PortalResourceBundle
+@UnifiedResourceBundle
 @Dependent
 @EqualsAndHashCode(callSuper = false)
 @ToString

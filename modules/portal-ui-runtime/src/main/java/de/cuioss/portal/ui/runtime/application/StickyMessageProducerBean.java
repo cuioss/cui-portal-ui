@@ -32,7 +32,7 @@ import javax.inject.Named;
 
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.events.ModelPayloadEvent;
-import de.cuioss.portal.core.bundle.PortalResourceBundle;
+import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
 import de.cuioss.portal.ui.api.message.PortalStickyMessageProducer;
 import de.cuioss.portal.ui.api.message.StickyMessage;
 import de.cuioss.portal.ui.api.message.StickyMessageProducer;
@@ -55,7 +55,7 @@ public class StickyMessageProducerBean implements Serializable, StickyMessagePro
     private final Set<StickyMessage> messageSet = new HashSet<>();
 
     @Inject
-    @PortalResourceBundle
+    @UnifiedResourceBundle
     private ResourceBundle resourceBundle;
 
     /**

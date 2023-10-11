@@ -40,13 +40,13 @@ import javax.inject.Provider;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import de.cuioss.jsf.api.application.bundle.ResourceBundleWrapper;
+import de.cuioss.portal.common.locale.PortalLocale;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.configuration.PortalConfigurationChangeEvent;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.common.PortalPriorities;
 import de.cuioss.portal.configuration.schedule.FileChangedEvent;
 import de.cuioss.portal.configuration.schedule.FileWatcherService;
 import de.cuioss.portal.configuration.schedule.PortalFileWatcherService;
-import de.cuioss.portal.core.locale.PortalLocale;
 import de.cuioss.tools.io.MorePaths;
 import de.cuioss.tools.logging.CuiLogger;
 import lombok.EqualsAndHashCode;

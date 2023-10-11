@@ -31,9 +31,9 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.configuration.PortalConfigurationChangeEvent;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.common.PortalPriorities;
 import de.cuioss.portal.configuration.types.ConfigAsLocale;
 import de.cuioss.portal.configuration.types.ConfigAsLocaleList;
 import de.cuioss.tools.collect.MoreCollections;

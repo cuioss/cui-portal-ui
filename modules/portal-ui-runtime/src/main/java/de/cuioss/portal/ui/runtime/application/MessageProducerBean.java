@@ -15,8 +15,8 @@ import javax.inject.Provider;
 
 import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.application.message.MessageProducerImpl;
-import de.cuioss.portal.configuration.common.PortalPriorities;
-import de.cuioss.portal.core.bundle.PortalResourceBundle;
+import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
+import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.tools.collect.MoreCollections;
 import de.cuioss.tools.string.TextSplitter;
@@ -58,7 +58,7 @@ public class MessageProducerBean implements MessageProducer {
     private static final long serialVersionUID = 4405826619024002836L;
 
     @Inject
-    @PortalResourceBundle
+    @UnifiedResourceBundle
     private ResourceBundle resourceBundle;
 
     @Inject

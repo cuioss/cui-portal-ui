@@ -24,7 +24,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 import de.cuioss.jsf.api.application.bundle.CuiResourceBundle;
-import de.cuioss.portal.core.bundle.PortalResourceBundle;
+import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -36,7 +36,7 @@ import lombok.ToString;
  * @author Oliver Wolff
  */
 @Named("msgs")
-@PortalResourceBundle
+@UnifiedResourceBundle
 @Dependent
 @EqualsAndHashCode(callSuper = false)
 @ToString
