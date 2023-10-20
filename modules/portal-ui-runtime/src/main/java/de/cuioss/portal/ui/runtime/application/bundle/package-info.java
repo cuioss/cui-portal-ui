@@ -7,7 +7,7 @@
  * <h2>Usage</h2>
  * <p>
  * The central element is
- * {@link de.icw.cui.portal.configuration.application.bundle.PortalResourceBundleBean}
+ * {@link de.cuioss.portal.common.bundle.icw.cui.portal.configuration.application.bundle.PortalResourceBundleBean}
  * It is of type {@link java.util.ResourceBundle} and unifies all configured
  * {@link java.util.ResourceBundle}s for the portal. In order to use it within a
  * bean use:
@@ -35,7 +35,7 @@
  * annotated with
  * {@link de.cuioss.portal.ui.api.cdi.api.bundle.ResourceBundleDescripor}. The
  * actual configuration will be done with
- * {@link de.cuioss.portal.common.bundle.icw.cui.portal.configuration.bundles.impl.ResourceBundleRegistryImpl}
+ * {@link de.cuioss.portal.common.bundle.ResourceBundleRegistry.cui.portal.configuration.bundles.impl.ResourceBundleRegistryImpl}
  * </p>
  */
 package de.cuioss.portal.ui.runtime.application.bundle;

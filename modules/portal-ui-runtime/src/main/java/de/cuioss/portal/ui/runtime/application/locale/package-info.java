@@ -19,7 +19,7 @@
  * <p>
  * The
  * {@link de.icw.cui.portal.configuration.application.locale.PortalLocaleManagerBean}
- * fires an {@link de.cuioss.portal.ui.api.locale.LocaleChangeEvent} on changing
+ * fires an {@link de.cuioss.portal.common.locale.LocaleChangeEvent} on changing
  * of the locale. If you want to listen to this event, the listener can be
  * implemented like:
  * </p>

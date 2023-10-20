@@ -14,29 +14,29 @@
         <maven.jar.plugin.automatic.module.name>
             de.cuioss.portal.ui.api</maven.jar.plugin.automatic.module.name>
     </properties>
-  <dependencies>
-    <!-- JSF -->
-    <dependency>
-      <groupId>de.cuioss.jsf</groupId>
-      <artifactId>cui-jsf-api</artifactId>
-    </dependency>
-    <!-- Portal Core -->
-    <dependency>
-      <groupId>de.cuioss.portal.configuration</groupId>
-      <artifactId>portal-configuration-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.cuioss.portal.authentication</groupId>
-      <artifactId>portal-authentication-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.cuioss.portal.core</groupId>
-      <artifactId>portal-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.inject</groupId>
-      <artifactId>jakarta.inject-api</artifactId>
-    </dependency>
+    <dependencies>
+        <!-- JSF -->
+        <dependency>
+            <groupId>de.cuioss.jsf</groupId>
+            <artifactId>cui-jsf-api</artifactId>
+        </dependency>
+        <!-- Portal Core -->
+        <dependency>
+            <groupId>de.cuioss.portal.configuration</groupId>
+            <artifactId>portal-configuration-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.cuioss.portal.authentication</groupId>
+            <artifactId>portal-authentication-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.cuioss.portal.core</groupId>
+            <artifactId>portal-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+        </dependency>
         <!-- Test -->
         <dependency>
             <groupId>org.easymock</groupId>

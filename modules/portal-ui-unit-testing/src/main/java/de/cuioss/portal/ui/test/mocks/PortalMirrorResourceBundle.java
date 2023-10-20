@@ -15,42 +15,47 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.enterprise.context.Dependent;
-import javax.inject.Named;
 
-import de.cuioss.jsf.api.application.bundle.CuiResourceBundle;
-import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Mock variant of {@link CuiResourceBundle}. Simulate
+ * Mock variant of {@link ResourceBundleWrapper}. Simulate
  * {@link #getString(String)} (={@link #getObject(String)}) by simply returning
  * the key {@link #getKeys()} will return an empty list.
  *
  * @author Oliver Wolff
  */
-@Named("msgs")
-@UnifiedResourceBundle
 @Dependent
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class PortalMirrorResourceBundle extends ResourceBundle implements Serializable {
+public class PortalMirrorResourceBundle implements ResourceBundleWrapper {
 
     private static final long serialVersionUID = 3953649686127640297L;
 
     @Override
-    protected Object handleGetObject(final String key) {
+    public Enumeration<String> getKeys() {
+        return Collections.emptyEnumeration();
+    }
+
+    @Override
+    public String getString(String key) {
         return key;
     }
 
     @Override
-    public Enumeration<String> getKeys() {
-        return Collections.emptyEnumeration();
+    public Set<String> keySet() {
+        return Collections.emptySet();
+    }
+
+    @Override
+    public String getBundleContent() {
+        return getClass().getName();
     }
 }

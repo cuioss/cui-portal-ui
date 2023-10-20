@@ -23,7 +23,6 @@ import static java.util.Objects.requireNonNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.enterprise.context.SessionScoped;
@@ -32,8 +31,7 @@ import javax.inject.Named;
 
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.events.ModelPayloadEvent;
-import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
-import de.cuioss.portal.ui.api.message.PortalStickyMessageProducer;
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.ui.api.message.StickyMessage;
 import de.cuioss.portal.ui.api.message.StickyMessageProducer;
 import de.cuioss.uimodel.nameprovider.DisplayName;
@@ -45,7 +43,6 @@ import lombok.ToString;
  */
 @Named(STICKY_MESSAGE_BEAN_NAME)
 @SessionScoped
-@PortalStickyMessageProducer
 @EqualsAndHashCode(of = "messageSet", doNotUseGetters = true)
 @ToString(of = "messageSet", doNotUseGetters = true)
 public class StickyMessageProducerBean implements Serializable, StickyMessageProducer {
@@ -55,8 +52,7 @@ public class StickyMessageProducerBean implements Serializable, StickyMessagePro
     private final Set<StickyMessage> messageSet = new HashSet<>();
 
     @Inject
-    @UnifiedResourceBundle
-    private ResourceBundle resourceBundle;
+    private ResourceBundleWrapper resourceBundle;
 
     /**
      * @return the sticky messages as list.

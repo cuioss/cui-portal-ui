@@ -27,8 +27,8 @@ import javax.enterprise.event.Event;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
+import de.cuioss.portal.common.locale.LocaleChangeEvent;
 import de.cuioss.portal.common.locale.PortalLocale;
-import de.cuioss.portal.ui.api.locale.LocaleChangeEvent;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

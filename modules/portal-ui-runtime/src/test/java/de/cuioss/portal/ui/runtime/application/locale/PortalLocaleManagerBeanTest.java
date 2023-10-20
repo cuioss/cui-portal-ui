@@ -29,7 +29,7 @@ import org.jboss.weld.junit5.auto.EnableAlternatives;
 import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.ui.api.locale.LocaleChangeEvent;
+import de.cuioss.portal.common.locale.LocaleChangeEvent;
 import de.cuioss.portal.ui.runtime.support.PortalLocaleResolverServiceMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;

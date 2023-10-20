@@ -26,7 +26,7 @@ import javax.enterprise.inject.Alternative;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import de.cuioss.portal.ui.api.locale.LocaleChangeEvent;
+import de.cuioss.portal.common.locale.LocaleChangeEvent;
 import de.cuioss.portal.ui.api.locale.LocaleResolverService;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

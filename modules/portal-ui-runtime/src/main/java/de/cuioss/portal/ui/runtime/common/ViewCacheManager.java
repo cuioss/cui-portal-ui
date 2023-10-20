@@ -32,8 +32,8 @@ import org.omnifaces.util.cache.CacheFactory;
 
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.UserChangeEvent;
+import de.cuioss.portal.common.locale.LocaleChangeEvent;
 import de.cuioss.portal.ui.api.events.PageRefreshEvent;
-import de.cuioss.portal.ui.api.locale.LocaleChangeEvent;
 import lombok.ToString;
 
 /**

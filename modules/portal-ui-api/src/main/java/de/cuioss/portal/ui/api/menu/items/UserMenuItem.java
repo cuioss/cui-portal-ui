@@ -15,8 +15,6 @@
  */
 package de.cuioss.portal.ui.api.menu.items;
 
-import java.util.ResourceBundle;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -24,7 +22,7 @@ import javax.inject.Inject;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemContainerImpl;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.PortalUser;
-import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemContainerImpl;
 import lombok.EqualsAndHashCode;
@@ -62,8 +60,7 @@ public class UserMenuItem extends PortalNavigationMenuItemContainerImpl {
     AuthenticatedUserInfo userInfo;
 
     @Inject
-    @UnifiedResourceBundle
-    ResourceBundle resourceBundle;
+    ResourceBundleWrapper resourceBundle;
 
     /**
      * Initializes the user by setting label-value and Title-value

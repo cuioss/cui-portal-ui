@@ -26,22 +26,22 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.common.bundle.ResourceBundleRegistryImpl;
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
+import de.cuioss.portal.common.bundle.ResourceBundleRegistry;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.servlet.CuiContextPath;
 import de.cuioss.portal.core.storage.PortalClientStorage;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.bundle.InstallationResourceBundleWrapperMock;
-import de.cuioss.portal.ui.runtime.application.bundle.PortalResourceBundleWrapper;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import lombok.Getter;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalClientStorageImpl.class, PortalLocaleProducerMock.class, PortalResourceBundleWrapper.class,
-        InstallationResourceBundleWrapperMock.class, ResourceBundleRegistryImpl.class })
+@AddBeanClasses({ PortalClientStorageImpl.class, PortalLocaleProducerMock.class, ResourceBundleWrapper.class,
+        InstallationResourceBundleWrapperMock.class, ResourceBundleRegistry.class })
 class PortalClientStorageImplTest implements ShouldHandleObjectContracts<PortalClientStorageImpl> {
 
     private static final String testKey = "testKey";

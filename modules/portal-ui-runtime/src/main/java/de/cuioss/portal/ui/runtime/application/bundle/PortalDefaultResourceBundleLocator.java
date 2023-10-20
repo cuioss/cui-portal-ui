@@ -15,42 +15,34 @@
  */
 package de.cuioss.portal.ui.runtime.application.bundle;
 
-import static de.cuioss.tools.collect.CollectionLiterals.mutableSet;
-
-import java.util.Set;
+import java.util.Optional;
 
 import javax.annotation.Priority;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 
-import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
+import de.cuioss.portal.common.bundle.ResourceBundleLocator;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@SessionScoped
-@Priority(PortalPriorities.PORTAL_INSTALLATION_LEVEL)
-@ToString
+/**
+ * Defines the base bundles to be defined within a portal application:
+ * "de.cuioss.portal.ui.i18n.portal-messages"
+ *
+ * @author Matthias Walliczek
+ */
+@Priority(PortalPriorities.PORTAL_CORE_LEVEL)
+@ApplicationScoped
 @EqualsAndHashCode
-public class InstallationResourceBundleWrapperMock implements ResourceBundleWrapper {
+@ToString
+public class PortalDefaultResourceBundleLocator implements ResourceBundleLocator {
 
-    private static final long serialVersionUID = 8403682810059890158L;
+    private static final long serialVersionUID = -8478481710191113463L;
 
-    @Override
-    public String getString(final String key) {
-        if ("page.error.title".equals(key)) {
-            return "Test";
-        }
-        throw new IllegalStateException();
-    }
+    private static final String PATH = "de.cuioss.portal.ui.i18n.portal-messages";
 
     @Override
-    public Set<String> keySet() {
-        return mutableSet("page.error.title");
+    public Optional<String> getBundlePath() {
+        return Optional.of(PATH);
     }
-
-    @Override
-    public String getBundleContent() {
-        return toString();
-    }
-
 }

@@ -41,6 +41,10 @@
             <groupId>de.cuioss.portal.authentication</groupId>
             <artifactId>portal-authentication-mock</artifactId>
         </dependency>
+        <dependency>
+            <groupId>de.cuioss.jsf</groupId>
+            <artifactId>cui-jsf-test</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

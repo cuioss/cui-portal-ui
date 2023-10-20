@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.omnifaces.cdi.Param;
 
-import de.cuioss.jsf.api.application.message.DisplayNameProviderMessageProducer;
+import de.cuioss.jsf.api.application.message.DisplayNameMessageProducer;
 import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
@@ -45,7 +45,6 @@ import de.cuioss.portal.authentication.facade.FormBasedAuthenticationFacade;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.model.UserStore;
 import de.cuioss.portal.common.priority.PortalPriorities;
-import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.pages.HomePage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPageClientStorage;
@@ -81,12 +80,12 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
     @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
     @Param
-    private String username;
+    String username;
 
     @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
     @Param
-    private String userstore;
+    String userstore;
 
     @Getter
     private List<UserStore> availableUserStores;
@@ -94,31 +93,33 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
     @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
     @PortalAuthenticationFacade
-    private FormBasedAuthenticationFacade authenticationFacade;
+    FormBasedAuthenticationFacade authenticationFacade;
 
     @Inject
-    private LoginPageHistoryManagerProvider historyManagerProvider;
+    LoginPageHistoryManagerProvider historyManagerProvider;
 
     @Inject
-    private LoginPageClientStorage localStorage;
+    LoginPageClientStorage localStorage;
 
     @Inject
-    @PortalMessageProducer
-    private MessageProducer messageProducer;
+    MessageProducer messageProducer;
+
+    @Inject
+    DisplayNameMessageProducer displayNameMessageProducer;
 
     @Inject
     @PortalUser
-    private AuthenticatedUserInfo userInfo;
+    AuthenticatedUserInfo userInfo;
 
     @Inject
-    private Provider<FacesContext> facesContextProvider;
+    Provider<FacesContext> facesContextProvider;
 
     @Inject
-    private PortalPagesConfiguration pagesConfiguration;
+    PortalPagesConfiguration pagesConfiguration;
 
     @Inject
     @ConfigProperty(name = PAGES_LOGIN_DEFAULT_USERSTORE)
-    private Optional<String> defaultConfiguredUserStore;
+    Optional<String> defaultConfiguredUserStore;
 
     @Getter
     @Setter
@@ -223,8 +224,7 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
         // messageProducer.setGlobalErrorMessage("message.error.cookies.disable");
         // }
         if (null != reason) {
-            new DisplayNameProviderMessageProducer(messageProducer).showAsGlobalMessage(reason,
-                    FacesMessage.SEVERITY_ERROR);
+            displayNameMessageProducer.showAsGlobalMessage(reason, FacesMessage.SEVERITY_ERROR);
         }
     }
 

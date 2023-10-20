@@ -35,11 +35,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.omnifaces.cdi.Param;
 
-import de.cuioss.jsf.api.application.bundle.CuiResourceBundle;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.jsf.api.converter.nameprovider.LabeledKeyConverter;
-import de.cuioss.jsf.test.mock.application.MirrorCuiRessourcBundle;
+import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.authentication.LoginEvent;
 import de.cuioss.portal.authentication.PortalLoginEvent;
 import de.cuioss.portal.authentication.facade.AuthenticationResults;
@@ -52,7 +51,6 @@ import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
 import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
-import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.pages.HomePage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPageStrategy;
@@ -63,11 +61,8 @@ import de.cuioss.portal.ui.runtime.page.PortalPagesConfiguration;
 import de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
-import de.cuioss.portal.ui.test.mocks.PortalMessageProducerMock;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
-import de.cuioss.test.jsf.config.BeanConfigurator;
 import de.cuioss.test.jsf.config.ComponentConfigurator;
-import de.cuioss.test.jsf.config.decorator.BeanConfigDecorator;
 import de.cuioss.test.jsf.config.decorator.ComponentConfigDecorator;
 import de.cuioss.tools.net.UrlParameter;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
@@ -76,7 +71,7 @@ import lombok.Getter;
 @EnablePortalUiEnvironment
 @AddBeanClasses({ PortalPagesConfiguration.class, PortalTestUserProducer.class, PortalClientStorageMock.class,
         LoginPageClientStorageImpl.class, LoginPageHistoryManagerProviderImpl.class })
-class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements ComponentConfigurator, BeanConfigurator {
+class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements ComponentConfigurator {
 
     private static final String SOME_ERROR_KEY = "some.error";
 
@@ -94,8 +89,7 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     private PortalAuthenticationFacadeMock authenticationFacadeMock;
 
     @Inject
-    @PortalMessageProducer
-    private PortalMessageProducerMock messageProducerMock;
+    private MessageProducerMock messageProducerMock;
 
     @Inject
     private PortalHistoryManagerMock portalHistoryManagerMock;
@@ -252,12 +246,6 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     @Override
     public void configureComponents(final ComponentConfigDecorator decorator) {
         decorator.registerConverter(LabeledKeyConverter.class, LabeledKey.class);
-    }
-
-    @Override
-    public void configureBeans(final BeanConfigDecorator decorator) {
-        decorator.register(new MirrorCuiRessourcBundle(), CuiResourceBundle.BEAN_NAME);
-
     }
 
     void onLoginEventListener(@Observes @PortalLoginEvent final LoginEvent givenEvent) {

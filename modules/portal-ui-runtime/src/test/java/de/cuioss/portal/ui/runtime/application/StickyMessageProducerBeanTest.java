@@ -28,7 +28,6 @@ import org.junit.jupiter.api.Test;
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.events.ModelPayloadEvent;
 import de.cuioss.jsf.api.components.support.DummyComponent;
-import de.cuioss.portal.ui.api.message.PortalStickyMessageProducer;
 import de.cuioss.portal.ui.api.message.StickyMessage;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalStickyMessageProducerMock;
@@ -43,7 +42,6 @@ class StickyMessageProducerBeanTest implements ShouldHandleObjectContracts<Stick
 
     private static final TypedGenerator<ContextState> CONTEXT_STATE_GENERATOR = enumValues(ContextState.class);
 
-    @PortalStickyMessageProducer
     @Inject
     @Getter
     private StickyMessageProducerBean underTest;

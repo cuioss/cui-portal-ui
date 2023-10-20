@@ -32,7 +32,6 @@ import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.api.listener.view.ViewListener;
-import de.cuioss.portal.ui.api.message.PortalStickyMessageProducer;
 import de.cuioss.portal.ui.api.message.StickyMessage;
 import de.cuioss.portal.ui.api.message.StickyMessageProducer;
 import de.cuioss.portal.ui.api.message.StickyMessageProvider;
@@ -61,7 +60,6 @@ public class StickyMessageCollectorViewListener implements ViewListener {
     private Instance<StickyMessageProvider> providers;
 
     @Inject
-    @PortalStickyMessageProducer
     private StickyMessageProducer stickyMessageProducer;
 
     @Getter

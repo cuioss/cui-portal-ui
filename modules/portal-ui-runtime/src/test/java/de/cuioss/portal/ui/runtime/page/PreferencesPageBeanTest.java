@@ -31,8 +31,8 @@ import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
 import org.junit.jupiter.api.Test;
 
 import de.cuioss.jsf.api.components.support.DummyComponent;
+import de.cuioss.portal.common.locale.LocaleChangeEvent;
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
-import de.cuioss.portal.ui.api.locale.LocaleChangeEvent;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesPreferences;
 import de.cuioss.portal.ui.api.ui.pages.PreferencesPage;

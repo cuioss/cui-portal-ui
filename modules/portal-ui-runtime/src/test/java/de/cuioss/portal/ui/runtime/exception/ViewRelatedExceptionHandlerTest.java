@@ -33,12 +33,12 @@ import org.junit.jupiter.api.Test;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
+import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthenticatedException;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthorizedException;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.history.HistoryManager;
-import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
@@ -47,7 +47,6 @@ import de.cuioss.portal.ui.runtime.application.history.HistoryManagerBean;
 import de.cuioss.portal.ui.runtime.application.view.ViewSuppressedException;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.portal.ui.test.mocks.PortalMessageProducerMock;
 import de.cuioss.portal.ui.test.mocks.PortalViewRestrictionManagerMock;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
@@ -82,8 +81,7 @@ class ViewRelatedExceptionHandlerTest
     private HistoryManager historyManagerMock;
 
     @Inject
-    @PortalMessageProducer
-    private PortalMessageProducerMock messageProducerMock;
+    private MessageProducerMock messageProducerMock;
 
     @Inject
     @PortalViewRestrictionManager

@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
+import de.cuioss.jsf.api.application.message.MessageProducerBean;
 import de.cuioss.portal.authentication.oauth.OauthAuthenticationException;
 import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
@@ -31,7 +32,7 @@ import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeSerializable;
 import lombok.Getter;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalSessionStorageMock.class })
+@AddBeanClasses({ PortalSessionStorageMock.class, MessageProducerBean.class })
 class OauthExceptionHandlerTest implements ShouldBeSerializable<OauthExceptionHandler> {
 
     @Inject

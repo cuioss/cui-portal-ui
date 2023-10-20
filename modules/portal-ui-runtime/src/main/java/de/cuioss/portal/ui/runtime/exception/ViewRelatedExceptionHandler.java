@@ -32,7 +32,6 @@ import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.exception.PortalExceptionHandler;
 import de.cuioss.portal.ui.api.history.HistoryManager;
-import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
 import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
 import de.cuioss.portal.ui.api.ui.pages.ErrorPage;
@@ -89,7 +88,6 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
     private FacesContext facesContext;
 
     @Inject
-    @PortalMessageProducer
     private MessageProducer messageProducer;
 
     @Inject

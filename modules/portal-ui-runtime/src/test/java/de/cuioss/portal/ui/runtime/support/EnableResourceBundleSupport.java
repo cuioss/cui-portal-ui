@@ -24,11 +24,11 @@ import java.lang.annotation.Target;
 
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 
-import de.cuioss.portal.common.bundle.ResourceBundleRegistryImpl;
-import de.cuioss.portal.configuration.impl.bundles.PortalDefaultResourceBundleLocator;
+import de.cuioss.portal.common.bundle.PortalResourceBundleBean;
+import de.cuioss.portal.common.bundle.ResourceBundleRegistry;
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.configuration.impl.bundles.PortalVendorResourceBundleLocator;
-import de.cuioss.portal.ui.runtime.application.bundle.PortalResourceBundleBean;
-import de.cuioss.portal.ui.runtime.application.bundle.PortalResourceBundleWrapper;
+import de.cuioss.portal.ui.runtime.application.bundle.PortalDefaultResourceBundleLocator;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
 
 /**
@@ -40,7 +40,7 @@ import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
 @Retention(RUNTIME)
 @Target(TYPE)
 @AddBeanClasses({ PortalDefaultResourceBundleLocator.class, PortalResourceBundleBean.class,
-        PortalVendorResourceBundleLocator.class, ResourceBundleRegistryImpl.class, PortalResourceBundleWrapper.class,
+        PortalVendorResourceBundleLocator.class, ResourceBundleRegistry.class, ResourceBundleWrapper.class,
         PortalLocaleProducerMock.class })
 public @interface EnableResourceBundleSupport {
 }

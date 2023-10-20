@@ -31,14 +31,12 @@ import org.jboss.weld.junit5.auto.ActivateScopes;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 
-import de.cuioss.jsf.test.mock.application.MirrorCuiRessourcBundle;
 import de.cuioss.portal.configuration.impl.producer.PortalProjectStageImpl;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
-import de.cuioss.portal.ui.test.mocks.PortalMessageProducerMock;
 import de.cuioss.portal.ui.test.mocks.PortalMirrorResourceBundle;
 import de.cuioss.portal.ui.test.mocks.PortalStickyMessageProducerMock;
 import de.cuioss.test.jsf.config.JsfTestConfiguration;
@@ -61,9 +59,8 @@ import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
  * </ul>
  * <p>
  * In addition it adds the {@link JsfObjectsProducer},
- * {@link PortalProjectStageImpl}, {@link PortalStickyMessageProducerMock},
- * {@link PortalMessageProducerMock} and {@link PortalMirrorResourceBundle}
- * using {@link AddBeanClasses}
+ * {@link PortalProjectStageImpl}, and {@link PortalMirrorResourceBundle} using
+ * {@link AddBeanClasses}
  * </p>
  * <p>
  * It explicitly activates the Scopes:
@@ -86,11 +83,10 @@ import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
 @EnableAutoWeld
 @EnablePortalConfiguration
 @EnableJsfEnvironment
-@JsfTestConfiguration({ BasicApplicationConfiguration.class, MirrorCuiRessourcBundle.class,
-        PortalNavigationConfiguration.class })
+@JsfTestConfiguration({ BasicApplicationConfiguration.class, PortalNavigationConfiguration.class })
 @AddBeanClasses({ PortalProjectStageImpl.class, PortalMirrorResourceBundle.class, PortalLocaleProducerMock.class,
-        PortalStickyMessageProducerMock.class, PortalMessageProducerMock.class, JsfObjectsProducer.class,
-        ServletObjectsFromJSFContextProducer.class, CurrentViewProducer.class, NavigationHandlerProducer.class })
+        PortalStickyMessageProducerMock.class, JsfObjectsProducer.class, ServletObjectsFromJSFContextProducer.class,
+        CurrentViewProducer.class, NavigationHandlerProducer.class })
 @ActivateScopes({ RequestScoped.class, SessionScoped.class, ConversationScoped.class, ViewScoped.class })
 public @interface EnablePortalUiEnvironment {
 }

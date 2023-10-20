@@ -28,19 +28,17 @@ import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import de.cuioss.jsf.api.application.message.DisplayNameProviderMessageProducer;
-import de.cuioss.jsf.api.application.message.MessageProducer;
+import de.cuioss.jsf.api.application.message.DisplayNameMessageProducer;
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
 import de.cuioss.jsf.api.components.model.resultContent.ErrorController;
 import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.initializer.PortalInitializer;
-import de.cuioss.portal.ui.api.message.PortalMessageProducer;
-import de.cuioss.portal.ui.api.message.PortalStickyMessageProducer;
 import de.cuioss.portal.ui.api.message.StickyMessageProducer;
 import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingErrorHandler;
 import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingRequest;
@@ -77,19 +75,17 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
 
     @Inject
     @PortalInitializer
-    private ThreadManager threadManager;
+    ThreadManager threadManager;
 
     @Inject
     @ConfigProperty(name = PORTAL_LAZYLOADING_REQUEST_RETRIEVE_TIMEOUT)
-    private int requestRetrieveTimeout;
-
-    @PortalMessageProducer
-    @Inject
-    private MessageProducer messageProducer;
+    int requestRetrieveTimeout;
 
     @Inject
-    @PortalStickyMessageProducer
-    private StickyMessageProducer stickyMessageProducer;
+    Provider<DisplayNameMessageProducer> displayNameMessageProducer;
+
+    @Inject
+    StickyMessageProducer stickyMessageProducer;
 
     @Getter
     private IDisplayNameProvider<?> notificationBoxValue;
@@ -149,12 +145,12 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
 
     @Override
     public void addGlobalFacesMessage(IDisplayNameProvider<?> value, FacesMessage.Severity severity) {
-        new DisplayNameProviderMessageProducer(messageProducer).showAsGlobalMessage(value, severity);
+        displayNameMessageProducer.get().showAsGlobalMessage(value, severity);
     }
 
     @Override
     public void addStickyMessage(IDisplayNameProvider<?> value, ContextState state) {
-        stickyMessageProducer.setMessageAsString(DisplayNameProviderMessageProducer.resolve(value), state);
+        stickyMessageProducer.setMessageAsString(DisplayNameMessageProducer.resolve(value), state);
     }
 
     @Override

@@ -27,8 +27,8 @@ import org.junit.jupiter.api.Test;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
+import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
-import de.cuioss.portal.ui.api.message.PortalMessageProducer;
 import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
@@ -37,7 +37,6 @@ import de.cuioss.portal.ui.runtime.exception.PortalUiExceptionHandler;
 import de.cuioss.portal.ui.runtime.exception.ViewRelatedExceptionHandler;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
-import de.cuioss.portal.ui.test.mocks.PortalMessageProducerMock;
 import de.cuioss.portal.ui.test.mocks.PortalViewRestrictionManagerMock;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
@@ -46,7 +45,7 @@ import lombok.Setter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ CurrentViewProducer.class, NavigationHandlerProducer.class, PortalUiExceptionHandler.class,
-        ViewRelatedExceptionHandler.class, PortalTestUserProducer.class })
+        ViewRelatedExceptionHandler.class, PortalTestUserProducer.class, PortalHistoryManagerMock.class })
 class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
 
     static final ViewDescriptor DESCRIPTOR_SUPRRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")
@@ -57,11 +56,7 @@ class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
     private JsfEnvironmentHolder environmentHolder;
 
     @Inject
-    @PortalMessageProducer
-    private PortalMessageProducerMock messageProducerMock;
-
-    @Inject
-    private PortalHistoryManagerMock historyManagerMock;
+    private MessageProducerMock messageProducerMock;
 
     @Inject
     @PortalViewRestrictionManager

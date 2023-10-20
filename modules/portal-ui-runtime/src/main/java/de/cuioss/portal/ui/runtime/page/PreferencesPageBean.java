@@ -18,7 +18,6 @@ package de.cuioss.portal.ui.runtime.page;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Priority;
@@ -30,7 +29,7 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.cuioss.portal.common.bundle.UnifiedResourceBundle;
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
 import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesPreferences;
@@ -84,8 +83,7 @@ public class PreferencesPageBean implements PreferencesPage {
     private Locale selectedLocale;
 
     @Inject
-    @UnifiedResourceBundle
-    private ResourceBundle resourceBundle;
+    private ResourceBundleWrapper resourceBundle;
 
     @Inject
     private FacesContext facesContext;

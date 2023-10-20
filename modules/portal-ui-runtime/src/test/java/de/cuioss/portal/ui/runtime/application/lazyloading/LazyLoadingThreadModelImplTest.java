@@ -31,13 +31,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.configuration.initializer.PortalInitializer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingRequest;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.portal.ui.test.mocks.PortalMessageProducerMock;
 import de.cuioss.portal.ui.test.mocks.PortalStickyMessageProducerMock;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
@@ -49,8 +49,7 @@ import de.cuioss.uimodel.result.ResultState;
 
 @SuppressWarnings("rawtypes")
 @EnablePortalUiEnvironment
-@AddBeanClasses({ LazyLoadingViewModelImpl.class, PortalMessageProducerMock.class,
-        PortalStickyMessageProducerMock.class })
+@AddBeanClasses({ LazyLoadingViewModelImpl.class, MessageProducerMock.class, PortalStickyMessageProducerMock.class })
 @EnableTestLogger(trace = { LazyLoadingViewModelImpl.class, ThreadManager.class })
 class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<LazyLoadingViewModelImpl> {
 

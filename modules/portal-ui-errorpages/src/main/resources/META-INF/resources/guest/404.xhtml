@@ -17,12 +17,6 @@
     <ui:define name="content">
         <h1 class="sr-only">#{msgs['page.404.srHeader']}</h1>
         <h2>#{msgs['page.404.title']}</h2>
-        <ui:fragment rendered="#{!http404PageBean.jsfView}">
-            <ui:fragment
-                rendered="#{http404PageBean.requestUriAvailable}">
-                <p>#{http404PageBean.requestUri}</p>
-            </ui:fragment>
-        </ui:fragment>
         <h:link outcome="home" id="link"
             value="#{msgs['page.error.home_link']}" />
         <ui:fragment rendered="#{http404PageBean.shouldRedirect}">

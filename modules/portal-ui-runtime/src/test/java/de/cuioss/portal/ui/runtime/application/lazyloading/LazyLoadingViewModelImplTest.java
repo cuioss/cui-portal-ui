@@ -24,8 +24,8 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
 import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
+import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.portal.ui.test.mocks.PortalMessageProducerMock;
 import de.cuioss.portal.ui.test.mocks.PortalStickyMessageProducerMock;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import de.cuioss.uimodel.nameprovider.DisplayName;
@@ -35,7 +35,7 @@ import de.cuioss.uimodel.result.ResultState;
 import lombok.Getter;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalMessageProducerMock.class, PortalStickyMessageProducerMock.class })
+@AddBeanClasses({ MessageProducerMock.class, PortalStickyMessageProducerMock.class })
 class LazyLoadingViewModelImplTest implements ShouldHandleObjectContracts<LazyLoadingViewModelImpl<String>> {
 
     @Inject

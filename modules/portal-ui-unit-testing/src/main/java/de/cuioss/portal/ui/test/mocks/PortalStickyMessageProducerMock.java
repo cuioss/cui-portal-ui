@@ -27,7 +27,6 @@ import javax.inject.Named;
 
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.events.ModelPayloadEvent;
-import de.cuioss.portal.ui.api.message.PortalStickyMessageProducer;
 import de.cuioss.portal.ui.api.message.StickyMessage;
 import de.cuioss.portal.ui.api.message.StickyMessageProducer;
 import de.cuioss.uimodel.nameprovider.DisplayName;
@@ -43,7 +42,6 @@ import lombok.ToString;
 @Named(STICKY_MESSAGE_BEAN_NAME)
 @ApplicationScoped
 @EqualsAndHashCode
-@PortalStickyMessageProducer
 @ToString
 public class PortalStickyMessageProducerMock implements Serializable, StickyMessageProducer {
 
