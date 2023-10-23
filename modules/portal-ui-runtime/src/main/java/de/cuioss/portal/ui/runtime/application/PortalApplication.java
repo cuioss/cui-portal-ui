@@ -17,13 +17,17 @@ package de.cuioss.portal.ui.runtime.application;
 
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationWrapper;
 import javax.faces.application.ProjectStage;
+import javax.faces.context.FacesContext;
 
+import de.cuioss.portal.common.bundle.PortalResourceBundleBean;
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
+import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.application.CuiProjectStage;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +46,8 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public class PortalApplication extends ApplicationWrapper {
+
+    private static final CuiLogger LOGGER = new CuiLogger(PortalApplication.class);
 
     @Getter
     private final Application wrapped;
@@ -73,6 +79,15 @@ public class PortalApplication extends ApplicationWrapper {
     @Override
     public Iterator<Locale> getSupportedLocales() {
         return getPortalLocaleConfiguration().getAvailableLocales().iterator();
+    }
+
+    @Override
+    public ResourceBundle getResourceBundle(FacesContext ctx, String name) {
+        if (PortalResourceBundleBean.BUNDLE_NAME.equals(name)) {
+            LOGGER.debug("Requesting PortalResourceBundleBean");
+            return PortalBeanManager.resolveRequiredBean(PortalResourceBundleBean.class);
+        }
+        return super.getResourceBundle(ctx, name);
     }
 
 }
