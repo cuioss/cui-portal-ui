@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.api;
 
+import de.cuioss.portal.common.locale.PortalLocale;
 import de.cuioss.portal.core.storage.ClientStorage;
 import de.cuioss.portal.core.storage.SessionStorage;
 import de.cuioss.portal.ui.api.message.StickyMessageProducer;
@@ -56,4 +57,7 @@ public class PortalCoreBeanNames {
      * Bean name for looking up instances of {@link MultiViewMapper}.
      */
     public static final String MULTI_VIEW_MAPPER_BEAN_NAME = "multiViewMapper";
+
+    /** Name for producer-bean of {@link PortalLocale} */
+    public static final String PORTAL_LOCALE_MANAGER = "portalLocaleManager";
 }

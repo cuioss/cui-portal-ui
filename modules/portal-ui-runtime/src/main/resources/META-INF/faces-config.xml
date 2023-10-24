@@ -12,10 +12,10 @@
     <application>
         <navigation-handler>de.cuioss.portal.ui.runtime.application.history.HistoryNavigationHandler</navigation-handler>
         <resource-handler>de.cuioss.portal.ui.runtime.application.templating.ViewResourceHandler</resource-handler>
-        <resource-handler>de.cuioss.jsf.api.application.resources.CuiResourceHandler</resource-handler>
+        <resource-handler>de.cuioss.portal.ui.runtime.application.resources.CuiResourceHandler</resource-handler>
         <resource-handler>de.cuioss.portal.ui.runtime.application.customization.CustomizationResourceHandler</resource-handler>
         <resource-handler>de.cuioss.portal.ui.runtime.application.theme.ThemeResourceHandler</resource-handler>
-        <resource-handler>de.cuioss.jsf.api.application.resources.CuiUnmappedResourceHandler</resource-handler>
+        <resource-handler>de.cuioss.portal.ui.runtime.application.resources.CuiUnmappedResourceHandler</resource-handler>
         <locale-config>
             <default-locale>en</default-locale>
             <supported-locale>en</supported-locale>

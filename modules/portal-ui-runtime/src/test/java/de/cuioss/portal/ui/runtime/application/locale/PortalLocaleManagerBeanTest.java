@@ -50,19 +50,19 @@ class PortalLocaleManagerBeanTest implements ShouldHandleObjectContracts<PortalL
 
     @Test
     void shouldProvideCorrectLocales() {
-        assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
+        assertEquals(Locale.ENGLISH, underTest.getUserLocale());
         assertEquals(2, underTest.getAvailableLocales().size());
     }
 
     @Test
     void shouldSaveLocaleCorrectly() {
         assertNull(changeEventResult);
-        assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
+        assertEquals(Locale.ENGLISH, underTest.getUserLocale());
         underTest.saveUserLocale(Locale.GERMAN);
         assertEquals(Locale.GERMAN, changeEventResult);
-        assertEquals(Locale.GERMAN, underTest.resolveUserLocale());
+        assertEquals(Locale.GERMAN, underTest.getUserLocale());
         underTest.saveUserLocale(Locale.ENGLISH);
-        assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
+        assertEquals(Locale.ENGLISH, underTest.getUserLocale());
     }
 
     @Test

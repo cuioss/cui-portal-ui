@@ -26,10 +26,12 @@ import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Provider;
 
 import de.cuioss.portal.common.locale.LocaleChangeEvent;
 import de.cuioss.portal.common.locale.PortalLocale;
+import de.cuioss.portal.ui.api.PortalCoreBeanNames;
 import de.cuioss.portal.ui.api.locale.LocaleResolverService;
 import de.cuioss.portal.ui.runtime.application.locale.impl.PortalLocaleResolverServiceImpl;
 import lombok.EqualsAndHashCode;
@@ -52,6 +54,7 @@ import lombok.ToString;
  * @author Oliver Wolff
  */
 @SessionScoped
+@Named(PortalCoreBeanNames.PORTAL_LOCALE_MANAGER)
 @EqualsAndHashCode(of = "locale")
 @ToString(of = "locale")
 public class PortalLocaleManagerBean implements Serializable {
@@ -59,16 +62,16 @@ public class PortalLocaleManagerBean implements Serializable {
     private static final long serialVersionUID = -3555387539352353982L;
 
     @Inject
-    private LocaleResolverService resolverService;
+    LocaleResolverService resolverService;
 
     private Locale locale;
 
     @Inject
     @LocaleChangeEvent
-    private Event<Locale> localeChangeEvent;
+    Event<Locale> localeChangeEvent;
 
     @Inject
-    private Provider<FacesContext> facesContextProvider;
+    Provider<FacesContext> facesContextProvider;
 
     /**
      * Producer method for {@link Locale} identified by {@link PortalLocale}
@@ -79,7 +82,7 @@ public class PortalLocaleManagerBean implements Serializable {
     @PortalLocale
     @Dependent
     Locale produceClientLocale() {
-        return resolveUserLocale();
+        return getUserLocale();
     }
 
     /** @see PortalLocaleResolverServiceImpl#getAvailableLocales() */
@@ -96,7 +99,7 @@ public class PortalLocaleManagerBean implements Serializable {
     }
 
     /** @see PortalLocaleResolverServiceImpl#resolveUserLocale() */
-    public Locale resolveUserLocale() {
+    public Locale getUserLocale() {
         if (null == locale) {
             locale = resolverService.resolveUserLocale();
         }
