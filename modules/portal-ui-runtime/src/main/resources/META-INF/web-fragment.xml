@@ -42,12 +42,6 @@
 
     <!-- Primefaces Configuration -->
     <context-param>
-        <description>the css styles and images package to include found in
-		the resources library primefaces-"param-value"</description>
-        <param-name>primefaces.THEME</param-name>
-        <param-value>cui-mapping</param-value>
-    </context-param>
-    <context-param>
         <description>This parameter forces the primefaces upload component to use the servlet 3.x api for
         file uploads instead of commons-upload</description>
         <param-name>primefaces.UPLOADER</param-name>

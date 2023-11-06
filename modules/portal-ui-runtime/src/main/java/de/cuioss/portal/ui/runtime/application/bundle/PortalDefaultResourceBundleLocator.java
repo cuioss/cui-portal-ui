@@ -23,7 +23,6 @@ import javax.enterprise.context.ApplicationScoped;
 import de.cuioss.portal.common.bundle.ResourceBundleLocator;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * Defines the base bundles to be defined within a portal application:
@@ -34,7 +33,6 @@ import lombok.ToString;
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @ApplicationScoped
 @EqualsAndHashCode
-@ToString
 public class PortalDefaultResourceBundleLocator implements ResourceBundleLocator {
 
     private static final long serialVersionUID = -8478481710191113463L;
@@ -44,5 +42,10 @@ public class PortalDefaultResourceBundleLocator implements ResourceBundleLocator
     @Override
     public Optional<String> getBundlePath() {
         return Optional.of(PATH);
+    }
+
+    @Override
+    public String toString() {
+        return "%s: Path='%s'".formatted(getClass().getName(), PATH);
     }
 }

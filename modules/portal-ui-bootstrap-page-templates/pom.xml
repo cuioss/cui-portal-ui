@@ -14,6 +14,14 @@
     <properties>
         <maven.jar.plugin.automatic.module.name>
             de.cuioss.portal.ui.pagetemplates</maven.jar.plugin.automatic.module.name>
+
+        <bootstrap.target>
+            ${project.build.directory}/classes/META-INF/resources/bootstrap</bootstrap.target>
+
+        <build.dependency.unpack>
+            ${project.build.directory}/unpack</build.dependency.unpack>
+        <version.webjar.bootstrap>3.4.1</version.webjar.bootstrap>
+
     </properties>
     <dependencies>
         <dependency>
@@ -36,4 +44,59 @@
             <artifactId>portal-ui-unit-testing</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+                        <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-thirdparty</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifact>
+                                    <groupId>org.webjars</groupId>
+                                    <artifactId>bootstrap</artifactId>
+                                    <version>${version.webjar.bootstrap}</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${build.dependency.unpack}</outputDirectory>
+                                    <includes>**/webjars/**/*</includes>
+                                </artifact>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-files</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${bootstrap.target}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>
+                                        ${build.dependency.unpack}/META-INF/resources/webjars/bootstrap/${version.webjar.bootstrap}/</directory>
+                                    <includes>
+                                        <include>**/jquery*</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
