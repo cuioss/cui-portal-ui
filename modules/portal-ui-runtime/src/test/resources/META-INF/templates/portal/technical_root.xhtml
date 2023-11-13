@@ -30,8 +30,6 @@
                     application-themeName.css, vendor.css, fonts.css, icons.css - see below).<br />
                     Caution: When replacing, some cui components may not work anymore as expected!.</li>
 				<li>&lt;ui:define name="body"&gt; The actual body of the page.</li>
-                <li>&lt;ui:define name="dsWindowId"&gt; Check client window id via javascript (default active).
-                    Can be set to empty to allow overriding the window id &lt;/ui:define&gt;</li>
 			</ul>
 		</body>
 	</section>
@@ -131,11 +129,6 @@
 
     </h:head>
     <h:body id="body" class="#{currentView.shortIdentifier}">
-
-        <!-- Ensures proper separation of windows / tabs with using deltaspike's Multi-Window Handling-->
-        <ui:insert name="dsWindowId">
-            <ds:windowId />
-        </ui:insert>
 
         <!-- The facelets debug window. Only to be rendered at ProjectStage Development-->
         <ui:fragment id="debug-fragment"

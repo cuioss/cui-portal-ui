@@ -46,10 +46,10 @@ public class NavigationMenuPageBean implements Serializable {
 
     @PortalUser
     @Inject
-    private AuthenticatedUserInfo userInfo;
+    AuthenticatedUserInfo userInfo;
 
     @Inject
-    private NavigationMenuProvider menuProvider;
+    NavigationMenuProvider menuProvider;
 
     @Getter
     private boolean displayMenu = false;

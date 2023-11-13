@@ -44,6 +44,7 @@ import de.cuioss.portal.configuration.types.ConfigAsFilteredMap;
 import de.cuioss.portal.ui.api.menu.NavigationMenuProvider;
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.tools.collect.CollectionBuilder;
+import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.MoreStrings;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -72,14 +73,15 @@ import lombok.ToString;
 public class NavigationMenuProviderImpl implements NavigationMenuProvider {
 
     private static final long serialVersionUID = 8780699386708876208L;
+    private static final CuiLogger LOGGER = new CuiLogger(NavigationMenuProviderImpl.class);
 
     @Inject
     @PortalMenuItem
-    private Instance<NavigationMenuItem> injectedItems;
+    Instance<NavigationMenuItem> injectedItems;
 
     @Inject
     @ConfigAsFilteredMap(startsWith = MENU_BASE, stripPrefix = true)
-    private Map<String, String> menuConfig;
+    Map<String, String> menuConfig;
 
     @Getter
     private List<NavigationMenuItem> navigationMenuRoots = new ArrayList<>();
@@ -101,7 +103,7 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
 
         handleMenuSeparator();
 
-        // sort top level container children
+        LOGGER.debug("sort top level container children");
         var iterator = navigationMenuRoots.listIterator();
         while (iterator.hasNext()) {
             var topLevelItem = iterator.next();
@@ -115,7 +117,7 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
             }
         }
 
-        // sort top level items
+        LOGGER.debug("sort top level items");
         Collections.sort(navigationMenuRoots);
 
         navigationMenuRoots.forEach(navigationMenuItem -> {
@@ -151,27 +153,27 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
         final List<NavigationMenuItem> workList = injectedItems.stream().filter(NavigationMenuItem::isRendered)
                 .filter(item -> item.getOrder() > 0).collect(Collectors.toCollection(ArrayList::new));
         renderedMenuItems = immutableList(workList);
+        LOGGER.debug("Rendered navigation-items: %s", renderedMenuItems);
 
         List<NavigationMenuItem> noNavigationMenuRoots = workList.stream()
                 .filter(item -> MoreStrings.isEmpty(item.getParentId()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        // Remove all un-rooted
+        LOGGER.debug("Remove all un-rooted");
         workList.removeAll(noNavigationMenuRoots);
 
-        // Filter NavigationMenu-Roots items
+        LOGGER.debug("Filter NavigationMenu-Roots items");
         navigationMenuRoots = workList.stream()
                 .filter(item -> PortalConfigurationKeys.MENU_TOP_IDENTIFIER.equals(item.getParentId()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        // remove all roots
+        LOGGER.debug("remove all roots");
         workList.removeAll(navigationMenuRoots);
 
-        // Create a combined list with all NavigationMenuItemContainer that may contain
-        // a child
+        LOGGER.debug("Create a combined list with all NavigationMenuItemContainer that may contain a child");
         final var activeContainer = createCombinedContainerList(navigationMenuRoots, noNavigationMenuRoots);
 
-        // Add sub items to top-level container items
+        LOGGER.debug("Add sub items to top-level container items");
         var iterator = workList.listIterator();
         while (iterator.hasNext()) {
             var item = iterator.next();
