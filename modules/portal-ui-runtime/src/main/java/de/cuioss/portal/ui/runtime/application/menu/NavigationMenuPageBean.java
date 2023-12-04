@@ -27,6 +27,7 @@ import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.ui.api.menu.NavigationMenuProvider;
+import de.cuioss.tools.logging.CuiLogger;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -43,6 +44,8 @@ import lombok.ToString;
 public class NavigationMenuPageBean implements Serializable {
 
     private static final long serialVersionUID = 2241686723846198192L;
+
+    private static final CuiLogger LOGGER = new CuiLogger(NavigationMenuPageBean.class);
 
     @PortalUser
     @Inject
@@ -63,6 +66,8 @@ public class NavigationMenuPageBean implements Serializable {
     @PostConstruct
     public void initBean() {
         displayMenu = userInfo.isAuthenticated();
+        LOGGER.debug("Setting displayMenu to '%s'", displayMenu);
         navigationMenuItems = menuProvider.getNavigationMenuRoots();
+        LOGGER.trace("Resolved Navigation-Items. '%s'", navigationMenuItems);
     }
 }

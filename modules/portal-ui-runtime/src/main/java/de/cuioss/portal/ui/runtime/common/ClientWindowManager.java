@@ -28,6 +28,7 @@ import javax.inject.Provider;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import de.cuioss.portal.ui.runtime.application.view.ViewTransientManagerBean;
+import de.cuioss.tools.logging.CuiLogger;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -42,6 +43,8 @@ import lombok.ToString;
 @ToString(of = "maxInactiveInterval", doNotUseGetters = true)
 public class ClientWindowManager implements Serializable {
 
+    private static final CuiLogger LOGGER = new CuiLogger(ClientWindowManager.class);
+
     /**
      * Bean name for looking up instances using EL.
      */
@@ -51,14 +54,14 @@ public class ClientWindowManager implements Serializable {
 
     @Inject
     @ConfigProperty(name = PORTAL_SESSION_MAX_INACTIVE_INTERVAL)
-    private Integer maxInactiveInterval;
+    Integer maxInactiveInterval;
 
     @Inject
     @ConfigProperty(name = PORTAL_SESSION_TIMEOUT)
-    private Integer sessionTimeout;
+    Integer sessionTimeout;
 
     @Inject
-    private Provider<ViewTransientManagerBean> viewTransientManagerProvider;
+    Provider<ViewTransientManagerBean> viewTransientManagerProvider;
 
     /**
      * @return boolean indicating whether to render the timeout-form
@@ -73,8 +76,10 @@ public class ClientWindowManager implements Serializable {
      */
     public int getMaxInactiveInterval() {
         if (maxInactiveInterval > -1) {
+            LOGGER.debug("Returning maxInactiveInterval='%s'", maxInactiveInterval);
             return maxInactiveInterval;
         }
+        LOGGER.debug("Returning sessionTimeout='%s'", sessionTimeout);
         return sessionTimeout;
     }
 }
