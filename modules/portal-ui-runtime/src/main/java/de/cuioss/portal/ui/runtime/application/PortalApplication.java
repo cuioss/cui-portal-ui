@@ -85,7 +85,7 @@ public class PortalApplication extends ApplicationWrapper {
     public ResourceBundle getResourceBundle(FacesContext ctx, String name) {
         if (PortalResourceBundleBean.BUNDLE_NAME.equals(name)) {
             LOGGER.debug("Requesting PortalResourceBundleBean");
-            return PortalBeanManager.resolveRequiredBean(PortalResourceBundleBean.class);
+            return PortalResourceBundleBean.resolveFromCDIContext();
         }
         return super.getResourceBundle(ctx, name);
     }
