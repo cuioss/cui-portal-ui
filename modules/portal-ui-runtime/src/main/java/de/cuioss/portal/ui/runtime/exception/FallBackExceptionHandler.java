@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.exception;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Optional;
 import java.util.UUID;
@@ -54,6 +55,7 @@ public class FallBackExceptionHandler implements Serializable {
 
     private static final CuiLogger LOGGER = new CuiLogger(FallBackExceptionHandler.class);
 
+    @Serial
     private static final long serialVersionUID = -1197300817644970750L;
 
     private static final String SYSTEM_ERROR = "System error";
@@ -125,7 +127,7 @@ public class FallBackExceptionHandler implements Serializable {
             }
 
         } else {
-            LOGGER.error(UNSPECIFIED_EXCEPTION_WITHOUT_VIEW, throwable);
+            LOGGER.error(throwable, UNSPECIFIED_EXCEPTION_WITHOUT_VIEW);
             exceptionEvent.handled(HandleOutcome.LOGGED);
         }
     }
