@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:portal="ttps://cuioss.de/jsf/portal"
-    lang="#{view.locale.language}">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:portal="ttps://cuioss.de/jsf/portal"
+      lang="#{view.locale.language}">
 <!--
 <documentation>
 	<body>The technical root is the top-most template. It provides basic
@@ -71,76 +71,75 @@
 </documentation>
 -->
 <f:view transient="#{viewTransientManager.transientView}"
-    locale="#{portalLocaleManager.userLocale}">
+        locale="#{portalLocaleManager.userLocale}">
+    <!-- This is the placeholder for view:metadata  it can be used by
+    &lt;ui:define name="metadata"&gt; The view Metadata &lt;/ui:define&gt;-->
+    <ui:insert name="metadata"/>
     <h:head id="head">
-        <!-- This is the placeholder for view:metadata  it can be used by
-		&lt;ui:define name="metadata"&gt; The view Metadata &lt;/ui:define&gt;-->
-        <ui:insert name="metadata" />
-
-        <!-- The title to be defined by the page in the form of &lt;ui:define name="title"&gt; Concrete Page Title &lt;/ui:define&gt;
-		defaults to msgs['portal.title']-->
-        <title><ui:insert name="title">
-                <h:outputText value="#{msgs['portal.title']}" />
-            </ui:insert></title>
-
         <!-- This meta tag needs to be placed right under the <head> element in order to take effect -->
         <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
             <!-- Ensure to load the jquery library for all pages. cui.js relies on it -->
-            <h:outputScript name="jquery/jquery.js" library="primefaces" />
+            <h:outputScript name="jquery/jquery.js" library="primefaces"/>
         </f:facet>
+
+        <!-- The title to be defined by the page in the form of &lt;ui:define name="title"&gt; Concrete Page Title &lt;/ui:define&gt;
+        defaults to msgs['portal.title']-->
+        <title><ui:insert name="title">
+            <h:outputText value="#{msgs['portal.title']}"/>
+        </ui:insert></title>
 
         <!-- Defines view-port -->
         <meta name="viewport"
-            content="width=device-width, initial-scale=1.0, user-scalable=no"></meta>
+              content="width=device-width, initial-scale=1.0, user-scalable=no"></meta>
 
         <!-- Include the favicon -->
         <link href="#{resource['vendor:favicon.ico']}"
-            rel="shortcut icon" type="image/x-icon" />
+              rel="shortcut icon" type="image/x-icon"/>
 
         <ui:insert name="cssIncludes">
             <!-- The actual icon definitions -->
             <h:outputStylesheet library="de.cuioss.portal.css"
-                name="icons.css" />
+                                name="icons.css"/>
 
             <!-- The default application level stylesheet. It will be delivered using de.cuioss.portal.ui.runtime.application.theme.ThemeResourceHandler
     		resulting in application-themeName.css. In case of production application-themeName.min.css will be delivered-->
             <h:outputStylesheet library="de.cuioss.portal.css"
-                name="application.css" />
+                                name="application.css"/>
 
             <!-- Defines the css needed for the font-based icons. -->
             <h:outputStylesheet library="de.cuioss.fonts"
-                name="fonts.css" />
+                                name="fonts.css"/>
 
             <!-- This css is intended for vendor / customer specific extensions, that are not covered by theming -->
-			<!--             <h:outputStylesheet library="vendor" name="vendor.css" /> -->
+            <!--             <h:outputStylesheet library="vendor" name="vendor.css" /> -->
 
-		</ui:insert>
+        </ui:insert>
 
         <!-- Ensures that bootstrap.js is always loaded -->
-        <h:outputScript library="thirdparty.js" name="bootstrap.js" />
+        <h:outputScript library="thirdparty.js" name="bootstrap.js"/>
 
         <!-- Ensures that jsf.js is always loaded -->
-        <h:outputScript library="javax.faces" name="jsf.js" />
+        <h:outputScript library="javax.faces" name="jsf.js"/>
 
         <!-- Ensures that cui.js is always loaded -->
-        <h:outputScript library="de.cuioss.javascript" name="cui.js" />
+        <h:outputScript library="de.cuioss.javascript" name="cui.js"/>
 
     </h:head>
     <h:body id="body" class="#{currentView.shortIdentifier}">
 
         <!-- The facelets debug window. Only to be rendered at ProjectStage Development-->
         <ui:fragment id="debug-fragment"
-            rendered="#{cuiProjectStage.development}">
-            <ui:debug hotkey="y" />
+                     rendered="#{cuiProjectStage.development}">
+            <ui:debug hotkey="y"/>
         </ui:fragment>
 
         <!-- Ensures that ajax requests are properly tracked for the session-handling-->
         <p:ajaxStatus id="ajaxStatusSessionTimeout"
-            onstart="Cui.Session.stopLogoutTimeout()"
-            onsuccess="Cui.Session.resetLogoutTimeout()" />
+                      onstart="Cui.Session.stopLogoutTimeout()"
+                      onsuccess="Cui.Session.resetLogoutTimeout()"/>
 
-        <ui:insert name="body" />
+        <ui:insert name="body"/>
 
     </h:body>
 </f:view>
