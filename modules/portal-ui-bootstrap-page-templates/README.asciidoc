@@ -4,7 +4,7 @@
 
 Provides Facelet templates for creating portal pages. It is based on Twitters bootstrap
 
-In addition it provides some JSF-Components for the layouts (previous portal-ui-components)
+In addition, it provides some JSF-Components for the layouts (previous portal-ui-components)
 
 == Maven Coordinates
 
@@ -18,7 +18,7 @@ In addition it provides some JSF-Components for the layouts (previous portal-ui-
 
 == Info
 
-Downstream modules like like 
+Downstream modules like
 
 * portal-ui-form-based-login
 * portal-ui-components

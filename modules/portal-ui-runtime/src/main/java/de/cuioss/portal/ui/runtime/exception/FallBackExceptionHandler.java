@@ -44,8 +44,8 @@ import de.cuioss.uimodel.application.CuiProjectStage;
  * Defines the last line of defense, saying displaying the error page with the
  * general message An exception occurred. "Should" not happen often. Every time
  * this happens, a bug should be filed accordingly. This handler is only active
- * if the {@link ProjectStage} is {@link ProjectStage#Production}. on
- * {@link ProjectStage#Development} the default jsf error page will be shown. In
+ * if the {@link CuiProjectStage} is {@link CuiProjectStage#isProduction()}. on
+ * {@link CuiProjectStage#isDevelopment()} the default jsf error page will be shown. In
  * case there is no view related to the exception, only logging will occur.
  *
  * @author Oliver Wolff
