@@ -40,10 +40,6 @@
             <artifactId>jakarta.inject-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>de.cuioss.portal.authentication</groupId>
             <artifactId>portal-authentication-mock</artifactId>
         </dependency>

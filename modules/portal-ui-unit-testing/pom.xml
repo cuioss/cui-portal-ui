@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>de.cuioss.portal.ui</groupId>
@@ -10,10 +10,12 @@
     <artifactId>portal-ui-unit-testing</artifactId>
     <name>Portal UI Unit-Testing</name>
     <description>Extension to portal-core-unit-testing that covers aspects from
-        portal-ui </description>
+        portal-ui
+    </description>
     <properties>
         <maven.jar.plugin.automatic.module.name>
-            de.cuioss.portal.ui.unittesting</maven.jar.plugin.automatic.module.name>
+            de.cuioss.portal.ui.unittesting
+        </maven.jar.plugin.automatic.module.name>
     </properties>
     <dependencies>
         <dependency>
@@ -39,10 +41,6 @@
             <groupId>org.jboss.weld</groupId>
             <artifactId>weld-junit5</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
         </dependency>
         <dependency>
             <groupId>de.cuioss.portal.test</groupId>

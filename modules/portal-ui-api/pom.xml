@@ -34,10 +34,6 @@
             <groupId>de.cuioss.portal.core</groupId>
             <artifactId>portal-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>jakarta.inject</groupId>
-            <artifactId>jakarta.inject-api</artifactId>
-        </dependency>
         <!-- Test -->
         <dependency>
             <groupId>org.easymock</groupId>
