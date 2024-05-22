@@ -17,15 +17,17 @@ package de.icw.cui.portal.ui.errorpages;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Priority;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletResponse;
 
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;

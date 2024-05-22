@@ -20,8 +20,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.faces.event.PhaseId;
-import javax.inject.Qualifier;
+import jakarta.faces.event.PhaseId;
+import jakarta.inject.Qualifier;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 

@@ -18,12 +18,13 @@ package de.cuioss.portal.ui.runtime.application.menu;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
+
+import jakarta.annotation.PostConstruct;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.ui.api.menu.NavigationMenuProvider;

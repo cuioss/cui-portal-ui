@@ -18,7 +18,7 @@ package de.cuioss.portal.ui.test.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingRequest;
 import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingViewController;

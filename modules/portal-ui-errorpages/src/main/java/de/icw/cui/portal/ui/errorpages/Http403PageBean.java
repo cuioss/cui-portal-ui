@@ -15,9 +15,9 @@
  */
 package de.icw.cui.portal.ui.errorpages;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Page Bean for the error-code 403 (Forbidden)

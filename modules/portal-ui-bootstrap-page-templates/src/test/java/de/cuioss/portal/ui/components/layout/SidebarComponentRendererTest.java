@@ -15,8 +15,8 @@
  */
 package de.cuioss.portal.ui.components.layout;
 
-import javax.faces.component.UIComponent;
-import javax.faces.component.html.HtmlOutputText;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.html.HtmlOutputText;
 
 import org.junit.jupiter.api.Test;
 

@@ -15,8 +15,8 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import javax.faces.application.Resource;
-import javax.faces.application.ResourceHandler;
+import jakarta.faces.application.Resource;
+import jakarta.faces.application.ResourceHandler;
 
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.tools.io.StructuredFilename;

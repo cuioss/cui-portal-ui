@@ -15,10 +15,10 @@
  */
 package de.cuioss.portal.ui.runtime.application.view.matcher;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 
 import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;

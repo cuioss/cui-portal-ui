@@ -15,20 +15,18 @@
  */
 package de.cuioss.portal.ui.api.resources;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
+import jakarta.faces.context.FacesContext;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 
-import javax.faces.context.FacesContext;
-
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnableJsfEnvironment
 class CuiResourceTest implements ShouldBeNotNull<CuiResource>, ShouldImplementEqualsAndHashCode<CuiResource> {
@@ -64,7 +62,7 @@ class CuiResourceTest implements ShouldBeNotNull<CuiResource>, ShouldImplementEq
 
     @Test
     void shouldComputeRequestPath() {
-        assertEquals("null/javax.faces.resource/resource?ln=library", getUnderTest().getRequestPath());
+        assertEquals("null/jakarta.faces.resource/resource?ln=library", getUnderTest().getRequestPath());
     }
 
 }

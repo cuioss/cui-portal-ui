@@ -15,11 +15,12 @@
  */
 package de.cuioss.portal.ui.api.menu.items;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemContainerImpl;
+
+import jakarta.annotation.PostConstruct;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.common.bundle.ResourceBundleWrapper;

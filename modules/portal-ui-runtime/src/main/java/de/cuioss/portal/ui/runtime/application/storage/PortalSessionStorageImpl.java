@@ -19,11 +19,12 @@ import static de.cuioss.portal.ui.api.PortalCoreBeanNames.SESSION_STORAGE_BEAN_N
 
 import java.io.Serializable;
 
-import javax.annotation.Priority;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 
 import de.cuioss.portal.common.priority.PortalPriorities;
+
+import jakarta.annotation.Priority;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.core.storage.SessionStorage;
 import de.cuioss.portal.core.storage.impl.MapStorageImpl;

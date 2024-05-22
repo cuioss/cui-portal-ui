@@ -17,9 +17,9 @@ package de.cuioss.portal.ui.api.ui.context;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
-import javax.faces.application.NavigationHandler;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.faces.application.NavigationHandler;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;

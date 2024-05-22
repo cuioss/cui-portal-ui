@@ -23,13 +23,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
+
+import jakarta.annotation.PostConstruct;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcherImpl;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;

@@ -21,10 +21,10 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESS
 import java.io.Serializable;
 import java.util.function.Supplier;
 
-import javax.enterprise.event.Event;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.enterprise.event.Event;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 

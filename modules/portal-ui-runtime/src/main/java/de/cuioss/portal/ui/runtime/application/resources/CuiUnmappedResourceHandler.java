@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import javax.faces.application.Resource;
-import javax.faces.application.ResourceHandler;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.Resource;
+import jakarta.faces.application.ResourceHandler;
+import jakarta.faces.context.FacesContext;
 
 import org.omnifaces.resourcehandler.UnmappedResourceHandler;
 import org.omnifaces.util.FacesLocal;
@@ -41,14 +41,14 @@ import de.cuioss.tools.string.Splitter;
  * <p>
  * <code>
  *         &lt;context-param&gt;<br>
- *         &lt;param-name&gt;javax.faces.RESOURCE_EXCLUDES&lt;/param-name&gt;<br>
+ *         &lt;param-name&gt;jakarta.faces.RESOURCE_EXCLUDES&lt;/param-name&gt;<br>
  *         &lt;param-value&gt;.class .jsp .jspx .properties .xhtml .groovy&lt;/param-value&gt;<br>
  *         &lt;/context-param&gt;
  *      </code>
  * </p>
  *
  * TODO : could be replaced by original after
- * https://github.com/omnifaces/omnifaces/issues/481 is solved. See CUI-915
+ * <a href="https://github.com/omnifaces/omnifaces/issues/481">...</a> is solved. See CUI-915
  *
  * @author Eugen Fischer
  */
@@ -117,11 +117,11 @@ public class CuiUnmappedResourceHandler extends UnmappedResourceHandler {
 
     /**
      * Lookup web.xml context-param
-     * {@link javax.faces.application.ResourceHandler#RESOURCE_EXCLUDES_PARAM_NAME}.<br>
+     * {@link jakarta.faces.application.ResourceHandler#RESOURCE_EXCLUDES_PARAM_NAME}.<br>
      * If exists use as space separated configuration list,<br>
      * otherwise fallback to
-     * {@link javax.faces.application.ResourceHandler#RESOURCE_EXCLUDES_DEFAULT_VALUE}
-     * FIXME owollf: Load from microprofile-config
+     * {@link jakarta.faces.application.ResourceHandler#RESOURCE_EXCLUDES_DEFAULT_VALUE}
+     * FIXME owolff: Load from microprofile-config
      */
     private static List<String> configuredExclusions() {
         final var exclusions = Optional.ofNullable(getContextParameter())

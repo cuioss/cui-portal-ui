@@ -23,8 +23,8 @@ import static java.util.Objects.requireNonNull;
 import java.io.Serializable;
 import java.util.function.Supplier;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
 import de.cuioss.portal.core.storage.ClientStorage;
 import de.cuioss.portal.core.storage.PortalClientStorage;

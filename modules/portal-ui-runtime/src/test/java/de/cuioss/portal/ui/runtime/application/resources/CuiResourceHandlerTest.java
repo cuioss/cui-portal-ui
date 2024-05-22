@@ -15,21 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_VERSION;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
@@ -41,11 +26,21 @@ import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.tools.string.MoreStrings;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_VERSION;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalResourceConfiguration.class, CuiResourceManager.class })
+@AddBeanClasses({PortalResourceConfiguration.class, CuiResourceManager.class})
 @EnablePortalConfiguration(configuration = RESOURCE_VERSION + ":1.0")
 class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
 
@@ -86,7 +81,7 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
         availableResources.put(CSS_LIBRARY + "-style.css", prepareResource(STYLE_CSS, CSS_LIBRARY));
         availableResources.put(CSS_LIBRARY + "-style.min.css", prepareResource(STYLE_MIN_CSS, CSS_LIBRARY));
         availableResources.put(CSS_LIBRARY + "-application.css",
-                prepareResource(APPLICATION_CSS, CSS_LIBRARY, "1.0.0"));
+            prepareResource(APPLICATION_CSS, CSS_LIBRARY, "1.0.0"));
         availableResources.put("alien_lib-any_unknown.jpg", prepareResource(ANY_UNKNOWN_JPG, ALIEN_LIB));
         mockResourceHandler.setAvailableResouces(availableResources);
     }
@@ -100,9 +95,9 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
         mockResource.setResourceName(name);
         mockResource.setLibraryName(lib);
         if (MoreStrings.isBlank(versionInfo)) {
-            mockResource.setRequestPath("/javax.faces.resource/" + name + "?ln=" + lib);
+            mockResource.setRequestPath("/jakarta.faces.resource/" + name + "?ln=" + lib);
         } else {
-            mockResource.setRequestPath("/javax.faces.resource/" + name + "?ln=" + lib + "&v=" + versionInfo);
+            mockResource.setRequestPath("/jakarta.faces.resource/" + name + "?ln=" + lib + "&v=" + versionInfo);
         }
         return mockResource;
     }
@@ -137,10 +132,10 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
         var applicationCssResource = underTest.createResource(APPLICATION_CSS, CSS_LIBRARY);
         assertTrue(applicationCssResource.getRequestPath().endsWith("1.0.0"), "version information was not found");
         assertFalse(applicationCssResource.getRequestPath().endsWith(expectedVersionInfo),
-                "unexpected version information found");
+            "unexpected version information found");
 
         var alienResource = underTest.createResource(ANY_UNKNOWN_JPG, ALIEN_LIB);
         assertFalse(alienResource.getRequestPath().endsWith(expectedVersionInfo),
-                "unexpected version information found");
+            "unexpected version information found");
     }
 }

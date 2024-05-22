@@ -18,8 +18,8 @@ package de.cuioss.portal.ui.runtime.common;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.Test;
 import org.omnifaces.util.cache.CacheFactory;

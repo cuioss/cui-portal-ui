@@ -20,13 +20,15 @@ import static de.cuioss.tools.base.Preconditions.checkArgument;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Priority;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import de.cuioss.portal.common.priority.PortalPriorities;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+
 import de.cuioss.portal.core.storage.ClientStorage;
 import de.cuioss.portal.core.storage.PortalClientStorage;
 import lombok.EqualsAndHashCode;

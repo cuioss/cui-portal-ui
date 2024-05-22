@@ -15,10 +15,10 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.portal.authentication.oauth.OauthRedirector;

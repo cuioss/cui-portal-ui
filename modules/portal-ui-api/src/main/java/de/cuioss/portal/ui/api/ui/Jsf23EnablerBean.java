@@ -15,8 +15,8 @@
  */
 package de.cuioss.portal.ui.api.ui;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.annotation.FacesConfig;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.annotation.FacesConfig;
 
 /**
  * The presence of the @FacesConfig annotation on a managed bean deployed within

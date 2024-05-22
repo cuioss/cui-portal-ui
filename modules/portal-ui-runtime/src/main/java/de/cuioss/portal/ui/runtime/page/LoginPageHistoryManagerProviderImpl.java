@@ -22,9 +22,9 @@ import java.io.Serializable;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.ui.api.history.HistoryManager;

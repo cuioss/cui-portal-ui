@@ -15,12 +15,13 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import javax.annotation.Priority;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Produces;
 
 import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
+
+import jakarta.annotation.Priority;
 import de.cuioss.portal.authentication.oauth.impl.Oauth2ConfigurationImpl;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import lombok.EqualsAndHashCode;

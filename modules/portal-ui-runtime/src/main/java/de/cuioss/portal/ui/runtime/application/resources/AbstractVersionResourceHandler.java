@@ -15,10 +15,10 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import javax.faces.application.Resource;
-import javax.faces.application.ResourceHandler;
-import javax.faces.application.ResourceHandlerWrapper;
-import javax.faces.application.ResourceWrapper;
+import jakarta.faces.application.Resource;
+import jakarta.faces.application.ResourceHandler;
+import jakarta.faces.application.ResourceHandlerWrapper;
+import jakarta.faces.application.ResourceWrapper;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -15,8 +15,8 @@
  */
 package de.cuioss.portal.ui.runtime.application.exception;
 
-import javax.faces.context.ExceptionHandler;
-import javax.faces.context.ExceptionHandlerFactory;
+import jakarta.faces.context.ExceptionHandler;
+import jakarta.faces.context.ExceptionHandlerFactory;
 
 import de.cuioss.tools.logging.CuiLogger;
 

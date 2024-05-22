@@ -18,7 +18,7 @@ package de.cuioss.portal.ui.api.ui.pages;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 import de.cuioss.portal.authentication.model.UserStore;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;

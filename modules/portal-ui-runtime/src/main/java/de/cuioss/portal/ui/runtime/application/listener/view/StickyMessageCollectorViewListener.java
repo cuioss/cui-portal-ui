@@ -20,11 +20,11 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LIST
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.Priority;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 
+import jakarta.annotation.Priority;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;

@@ -15,8 +15,8 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
-import javax.faces.event.ActionEvent;
-import javax.inject.Inject;
+import jakarta.faces.event.ActionEvent;
+import jakarta.inject.Inject;
 
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;

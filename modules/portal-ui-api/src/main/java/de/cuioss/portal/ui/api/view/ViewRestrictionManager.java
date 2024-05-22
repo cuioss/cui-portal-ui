@@ -18,7 +18,7 @@ package de.cuioss.portal.ui.api.view;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 

@@ -15,9 +15,9 @@
  */
 package de.cuioss.portal.ui.runtime.application;
 
-import javax.faces.application.Application;
-import javax.faces.application.ApplicationFactory;
-import javax.faces.application.ApplicationWrapper;
+import jakarta.faces.application.Application;
+import jakarta.faces.application.ApplicationFactory;
+import jakarta.faces.application.ApplicationWrapper;
 
 import de.cuioss.tools.logging.CuiLogger;
 

@@ -15,19 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener;
 
-import javax.faces.event.PhaseEvent;
-import javax.faces.event.PhaseId;
-import javax.faces.event.PhaseListener;
-
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.runtime.application.listener.metrics.TraceListener;
+import jakarta.faces.event.PhaseEvent;
+import jakarta.faces.event.PhaseId;
+import jakarta.faces.event.PhaseListener;
+
+import java.io.Serial;
 
 /**
- * Replacement for deltaspike phase listener. In essence it routes the
+ * Replacement for deltaspike phase listener. In essence, it routes the
  * corresponding calls to {@link TraceListener}
  */
 public class TraceListenerAdapter implements PhaseListener {
 
+    @Serial
     private static final long serialVersionUID = -7081872463546867289L;
 
     private static final String UNABLE_TO_ACCESS_TRACE_LISTENER = "Unable to access TraceListener";
@@ -35,14 +37,14 @@ public class TraceListenerAdapter implements PhaseListener {
     @Override
     public void afterPhase(PhaseEvent event) {
         PortalBeanManager.resolveBean(TraceListener.class, null)
-                .orElseThrow(() -> new IllegalStateException(UNABLE_TO_ACCESS_TRACE_LISTENER)).afterPhase(event);
+            .orElseThrow(() -> new IllegalStateException(UNABLE_TO_ACCESS_TRACE_LISTENER)).afterPhase(event);
 
     }
 
     @Override
     public void beforePhase(PhaseEvent event) {
         PortalBeanManager.resolveBean(TraceListener.class, null)
-                .orElseThrow(() -> new IllegalStateException(UNABLE_TO_ACCESS_TRACE_LISTENER)).beforePhase(event);
+            .orElseThrow(() -> new IllegalStateException(UNABLE_TO_ACCESS_TRACE_LISTENER)).beforePhase(event);
 
     }
 

@@ -15,15 +15,17 @@
  */
 package de.cuioss.portal.ui.runtime.application.history;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Priority;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Provider;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Provider;
 
 import de.cuioss.portal.common.priority.PortalPriorities;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

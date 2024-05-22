@@ -17,8 +17,8 @@ package de.cuioss.portal.ui.oauth;
 
 import java.util.Optional;
 
-import javax.faces.component.FacesComponent;
-import javax.faces.component.UINamingContainer;
+import jakarta.faces.component.FacesComponent;
+import jakarta.faces.component.UINamingContainer;
 
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;

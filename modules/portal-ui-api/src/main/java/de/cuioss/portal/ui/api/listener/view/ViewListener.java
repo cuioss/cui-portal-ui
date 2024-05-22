@@ -17,7 +17,7 @@ package de.cuioss.portal.ui.api.listener.view;
 
 import java.io.Serializable;
 
-import javax.faces.event.PhaseId;
+import jakarta.faces.event.PhaseId;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 

@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.api.ui.lazyloading;
 
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.FacesContext;
 
 import de.cuioss.uimodel.result.ResultDetail;
 import de.cuioss.uimodel.result.ResultObject;

@@ -17,7 +17,7 @@ package de.cuioss.portal.ui.test.tests.support;
 
 import java.io.Serializable;
 
-import javax.faces.view.ViewScoped;
+import jakarta.faces.view.ViewScoped;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

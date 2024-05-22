@@ -25,10 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.event.PhaseId;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.event.PhaseId;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.metrics.MetricRegistry;

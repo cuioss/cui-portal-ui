@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>de.cuioss.portal.ui</groupId>
@@ -10,16 +10,20 @@
     <artifactId>portal-ui-bootstrap-page-templates</artifactId>
     <name>Portal UI Bootstrap Page Templates</name>
     <description>Provides Facelet templates for creating portal pages. It is
-        based on Twitters bootstrap</description>
+        based on Twitters bootstrap
+    </description>
     <properties>
         <maven.jar.plugin.automatic.module.name>
-            de.cuioss.portal.ui.pagetemplates</maven.jar.plugin.automatic.module.name>
+            de.cuioss.portal.ui.pagetemplates
+        </maven.jar.plugin.automatic.module.name>
 
         <bootstrap.target>
-            ${project.build.directory}/classes/META-INF/resources/bootstrap</bootstrap.target>
+            ${project.build.directory}/classes/META-INF/resources/bootstrap
+        </bootstrap.target>
 
         <build.dependency.unpack>
-            ${project.build.directory}/unpack</build.dependency.unpack>
+            ${project.build.directory}/unpack
+        </build.dependency.unpack>
         <version.webjar.bootstrap>3.4.1</version.webjar.bootstrap>
 
     </properties>
@@ -46,7 +50,7 @@
     </dependencies>
     <build>
         <plugins>
-                        <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
@@ -86,7 +90,8 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${build.dependency.unpack}/META-INF/resources/webjars/bootstrap/${version.webjar.bootstrap}/</directory>
+                                        ${build.dependency.unpack}/META-INF/resources/webjars/bootstrap/${version.webjar.bootstrap}/
+                                    </directory>
                                     <includes>
                                         <include>**/jquery*</include>
                                     </includes>

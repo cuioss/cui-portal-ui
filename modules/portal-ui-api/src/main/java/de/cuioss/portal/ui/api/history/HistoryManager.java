@@ -17,13 +17,14 @@ package de.cuioss.portal.ui.api.history;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
-import javax.faces.event.PhaseListener;
-import javax.faces.event.PostAddToViewEvent;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.ComponentSystemEvent;
+import jakarta.faces.event.PhaseListener;
+import jakarta.faces.event.PostAddToViewEvent;
 
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
+
+import jakarta.annotation.PostConstruct;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.tools.net.ParameterFilter;
 

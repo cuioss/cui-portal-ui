@@ -24,9 +24,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.faces.event.PhaseId;
-import javax.faces.event.PhaseListener;
-import javax.inject.Qualifier;
+import jakarta.faces.event.PhaseId;
+import jakarta.faces.event.PhaseListener;
+import jakarta.inject.Qualifier;
 
 /**
  * Marker identifying concrete instances of {@link ViewListener}, that are to be
@@ -42,8 +42,8 @@ public @interface PortalRestoreViewListener {
     /**
      * @return {@link PhaseExecution} indicating whether a concrete Portal-listener
      *         is to be fired
-     *         {@link PhaseListener#beforePhase(javax.faces.event.PhaseEvent)} of
-     *         {@link PhaseListener#afterPhase(javax.faces.event.PhaseEvent)}
+     *         {@link PhaseListener#beforePhase(jakarta.faces.event.PhaseEvent)} of
+     *         {@link PhaseListener#afterPhase(jakarta.faces.event.PhaseEvent)}
      */
     PhaseExecution value();
 }

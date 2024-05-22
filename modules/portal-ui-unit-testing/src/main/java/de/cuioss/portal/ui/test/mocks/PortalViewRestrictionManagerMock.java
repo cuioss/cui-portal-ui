@@ -20,8 +20,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;

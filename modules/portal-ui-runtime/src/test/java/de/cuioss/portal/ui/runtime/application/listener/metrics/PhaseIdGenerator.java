@@ -17,7 +17,7 @@ package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
 import static de.cuioss.test.generator.Generators.fixedValues;
 
-import javax.faces.event.PhaseId;
+import jakarta.faces.event.PhaseId;
 
 import de.cuioss.test.generator.TypedGenerator;
 

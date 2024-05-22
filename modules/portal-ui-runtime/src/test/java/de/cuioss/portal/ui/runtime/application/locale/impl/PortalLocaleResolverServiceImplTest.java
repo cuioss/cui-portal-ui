@@ -15,24 +15,22 @@
  */
 package de.cuioss.portal.ui.runtime.application.locale.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.Locale;
-
-import javax.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
 import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import java.util.Locale;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ LocaleConfiguration.class, PortalClientStorageMock.class })
+@AddBeanClasses({LocaleConfiguration.class, PortalClientStorageMock.class})
 class PortalLocaleResolverServiceImplTest implements ShouldHandleObjectContracts<PortalLocaleResolverServiceImpl> {
 
     @Inject
@@ -42,7 +40,7 @@ class PortalLocaleResolverServiceImplTest implements ShouldHandleObjectContracts
     @Test
     void shouldProvideCorrectLocales() {
         assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
-        assertEquals(3, underTest.getAvailableLocales().size());
+        assertEquals(2, underTest.getAvailableLocales().size());
     }
 
     @Test

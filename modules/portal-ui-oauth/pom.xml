@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>de.cuioss.portal.ui</groupId>
@@ -12,46 +12,51 @@
     <description>Provides ui infrastructure to use oauth2</description>
     <properties>
         <maven.jar.plugin.automatic.module.name>
-            de.cuioss.portal.ui.oauth</maven.jar.plugin.automatic.module.name>
+            de.cuioss.portal.ui.oauth
+        </maven.jar.plugin.automatic.module.name>
     </properties>
-  <dependencies>
-    <dependency>
-      <groupId>de.cuioss.portal.ui</groupId>
-      <artifactId>portal-ui-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.cuioss.portal.ui</groupId>
-      <artifactId>portal-ui-runtime</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>de.cuioss.portal.authentication</groupId>
-      <artifactId>portal-authentication-oauth</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.microprofile.rest.client</groupId>
-      <artifactId>microprofile-rest-client-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jaxb</groupId>
-      <artifactId>jaxb-runtime</artifactId>
-      <version>2.3.8</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.ws.rs</groupId>
-      <artifactId>jakarta.ws.rs-api</artifactId>
-    </dependency>
-    <!-- Test-->
-    <dependency>
-      <groupId>de.cuioss.portal.ui</groupId>
-      <artifactId>portal-ui-unit-testing</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.inject</groupId>
-      <artifactId>jakarta.inject-api</artifactId>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>de.cuioss.portal.ui</groupId>
+            <artifactId>portal-ui-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.cuioss.portal.ui</groupId>
+            <artifactId>portal-ui-runtime</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.cuioss.portal.authentication</groupId>
+            <artifactId>portal-authentication-oauth</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.rest.client</groupId>
+            <artifactId>microprofile-rest-client-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>4.0.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+        </dependency>
+        <!-- Test-->
+        <dependency>
+            <groupId>de.cuioss.portal.ui</groupId>
+            <artifactId>portal-ui-unit-testing</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>de.cuioss.portal.test</groupId>
             <artifactId>portal-core-unit-testing</artifactId>

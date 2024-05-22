@@ -6,21 +6,9 @@
  * adding a cache-buster to the resource request.
  * </p>
  * <p>
- * In order to work it needs the corresponding beans available:
- * {@link de.cuioss.portal.ui.runtime.application.resources.CuiResourceManager}
- * with the name
- * {@link de.cuioss.portal.ui.runtime.application.resources.CuiResourceManager#BEAN_NAME}
- * and an implementation of
- * {@link de.cuioss.portal.ui.runtime.application.resources.CuiResourceConfiguration}
- * with the name
- * {@link de.cuioss.portal.ui.runtime.application.resources.impl.CuiResourceConfigurationImpl#BEAN_NAME}
- * </p>
- * <p>
- * The
- * {@link de.cuioss.portal.ui.runtime.application.resources.CuiResourceManager}
- * registers itself as an {@link javax.faces.bean.ApplicationScoped} bean
+ * The {@link de.cuioss.portal.ui.runtime.application.resources.CuiResourceManager}
+ * registers itself as an {@link jakarta.enterprise.context.ApplicationScoped} bean
  *
  * @author Oliver Wolff
- *
  */
 package de.cuioss.portal.ui.runtime.application.resources;

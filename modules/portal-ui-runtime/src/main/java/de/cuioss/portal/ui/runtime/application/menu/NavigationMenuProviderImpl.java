@@ -28,14 +28,16 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Priority;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemContainer;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemSeparator;
 import de.cuioss.portal.common.priority.PortalPriorities;

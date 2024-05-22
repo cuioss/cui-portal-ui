@@ -17,7 +17,7 @@ package de.icw.cui.portal.ui.errorpages;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.Test;
 

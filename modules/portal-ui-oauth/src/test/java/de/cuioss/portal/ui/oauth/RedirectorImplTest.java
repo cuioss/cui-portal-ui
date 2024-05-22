@@ -17,7 +17,7 @@ package de.cuioss.portal.ui.oauth;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.Test;
 

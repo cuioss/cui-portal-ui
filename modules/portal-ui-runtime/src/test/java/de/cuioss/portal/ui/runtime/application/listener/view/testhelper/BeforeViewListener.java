@@ -15,10 +15,11 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view.testhelper;
 
-import javax.annotation.Priority;
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
+
+import jakarta.annotation.Priority;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 
 @PortalRestoreViewListener(PhaseExecution.BEFORE_PHASE)

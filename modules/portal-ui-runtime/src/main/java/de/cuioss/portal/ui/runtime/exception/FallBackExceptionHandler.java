@@ -20,11 +20,11 @@ import java.io.Serializable;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.NavigationHandler;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.NavigationHandler;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.jsf.api.common.util.CheckContextState;

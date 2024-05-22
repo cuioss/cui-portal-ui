@@ -17,10 +17,11 @@ package de.cuioss.portal.ui.runtime.application.bundle;
 
 import java.util.Optional;
 
-import javax.annotation.Priority;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import de.cuioss.portal.common.bundle.ResourceBundleLocator;
+
+import jakarta.annotation.Priority;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import lombok.EqualsAndHashCode;
 

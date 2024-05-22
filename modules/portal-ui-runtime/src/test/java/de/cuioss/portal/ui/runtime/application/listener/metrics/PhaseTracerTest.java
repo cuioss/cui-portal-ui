@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.faces.event.PhaseId;
+import jakarta.faces.event.PhaseId;
 
 import org.junit.jupiter.api.Test;
 

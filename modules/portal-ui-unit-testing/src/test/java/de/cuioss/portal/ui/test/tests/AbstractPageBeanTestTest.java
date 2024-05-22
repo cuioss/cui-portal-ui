@@ -17,7 +17,7 @@ package de.cuioss.portal.ui.test.tests;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.Test;
 

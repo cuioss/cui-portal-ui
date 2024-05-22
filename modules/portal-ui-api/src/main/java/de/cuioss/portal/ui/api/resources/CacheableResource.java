@@ -18,8 +18,8 @@ package de.cuioss.portal.ui.api.resources;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.faces.application.ResourceHandler;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.ResourceHandler;
+import jakarta.faces.context.FacesContext;
 
 /**
  * Abstract resource allowing basic caching functionality.

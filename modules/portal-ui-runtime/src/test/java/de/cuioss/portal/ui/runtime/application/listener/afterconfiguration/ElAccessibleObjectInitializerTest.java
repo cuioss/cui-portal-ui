@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.afterconfiguration;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;

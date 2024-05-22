@@ -24,13 +24,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Instance;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.inject.Instance;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import de.cuioss.jsf.api.components.model.widget.DashboardWidgetModel;
+
+import jakarta.annotation.PostConstruct;
 import de.cuioss.jsf.api.components.model.widget.WidgetModel;
 import de.cuioss.portal.configuration.types.ConfigAsFilteredMap;
 import de.cuioss.portal.ui.api.dashboard.PortalDashboardWidget;

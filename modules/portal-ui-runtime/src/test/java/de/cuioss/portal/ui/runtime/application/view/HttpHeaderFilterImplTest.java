@@ -15,15 +15,15 @@
  */
 package de.cuioss.portal.ui.runtime.application.view;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.HTTP_HEADER_BASE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
-
+import de.cuioss.portal.configuration.PortalConfigurationSource;
+import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
+import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
+import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.Getter;
 import org.apache.myfaces.test.mock.MockHttpServletRequest;
 import org.apache.myfaces.test.mock.MockHttpServletResponse;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
@@ -31,30 +31,20 @@ import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.configuration.PortalConfigurationSource;
-import de.cuioss.portal.configuration.initializer.PortalInitializer;
-import de.cuioss.portal.core.listener.literal.ServletInitialized;
-import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
-import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
-import lombok.Getter;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.HTTP_HEADER_BASE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnableAutoWeld
 @EnablePortalConfiguration
-@AddBeanClasses({ ViewMatcherProducer.class })
+@AddBeanClasses({ViewMatcherProducer.class})
 class HttpHeaderFilterImplTest implements ShouldHandleObjectContracts<HttpHeaderFilterImpl> {
 
-    private static final String TEST_URI = "testURI";
+    static final String TEST_URI = "testURI";
 
     @Getter
     @Inject
-    @PortalInitializer
     private HttpHeaderFilterImpl underTest;
-
-    @Inject
-    @ServletInitialized
-    private Event<HttpServletResponse> servletResponseEvent;
 
     @Inject
     @PortalConfigurationSource
@@ -71,6 +61,15 @@ class HttpHeaderFilterImplTest implements ShouldHandleObjectContracts<HttpHeader
 
     @Test
     void testCustomConfig() {
+        configureFilter(configuration);
+
+        HttpServletResponse response = new MockHttpServletResponse();
+        getUnderTest().onCreate(servletRequest, response);
+        assertEquals("vwx:z", response.getHeader("def"));
+        assertNull(response.getHeader("mno"));
+    }
+
+    static void configureFilter(PortalTestConfiguration configuration) {
         configuration.put(HTTP_HEADER_BASE + "abc.enabled", "true");
         configuration.put(HTTP_HEADER_BASE + "abc.content", "def: ghi");
 
@@ -82,11 +81,6 @@ class HttpHeaderFilterImplTest implements ShouldHandleObjectContracts<HttpHeader
         configuration.put(HTTP_HEADER_BASE + "stu.views", "testURI");
 
         configuration.fireEvent();
-
-        HttpServletResponse reponse = new MockHttpServletResponse();
-        servletResponseEvent.fire(reponse);
-        assertEquals("vwx:z", reponse.getHeader("def"));
-        assertNull(reponse.getHeader("mno"));
     }
 
 }

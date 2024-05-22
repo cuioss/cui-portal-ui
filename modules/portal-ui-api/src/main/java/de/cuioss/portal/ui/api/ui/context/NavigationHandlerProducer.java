@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.api.ui.context;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.faces.application.NavigationHandler;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.faces.application.NavigationHandler;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
 
 /**
  * Produces a applicationScoped {@link NavigationHandler} instance

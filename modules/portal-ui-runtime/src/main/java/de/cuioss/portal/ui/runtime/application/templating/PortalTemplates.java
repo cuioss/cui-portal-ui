@@ -19,11 +19,12 @@ import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 
 import java.util.List;
 
-import javax.annotation.Priority;
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 
 import de.cuioss.portal.common.priority.PortalPriorities;
+
+import jakarta.annotation.Priority;
 import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
 import de.cuioss.portal.ui.api.templating.StaticTemplateDescriptor;
 import lombok.EqualsAndHashCode;

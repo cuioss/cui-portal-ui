@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
 import de.cuioss.jsf.api.components.support.LabelResolver;

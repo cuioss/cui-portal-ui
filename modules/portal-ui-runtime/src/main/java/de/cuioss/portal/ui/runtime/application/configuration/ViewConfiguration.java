@@ -22,13 +22,14 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.TRANSIENT_V
 import java.io.Serializable;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
+
+import jakarta.annotation.PostConstruct;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
 import de.cuioss.portal.configuration.PortalConfigurationChangeEvent;
 import de.cuioss.portal.ui.api.configuration.types.ConfigAsViewMatcher;

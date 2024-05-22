@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.api.menu;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 @Dependent
 public class MockPortalNavigationMenuItemImplBase extends PortalNavigationMenuItemImplBase {

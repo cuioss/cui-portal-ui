@@ -27,8 +27,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.faces.application.Resource;
-import javax.inject.Inject;
+import jakarta.faces.application.Resource;
+import jakarta.inject.Inject;
 
 import org.apache.myfaces.test.mock.MockServletContext;
 import org.jboss.weld.junit5.auto.AddBeanClasses;

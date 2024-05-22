@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-fragment xmlns="https://jakarta.ee/xml/ns/jakartaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-fragment_5_0.xsd"
+    version="5.0">
+    <distributable />
+    <name>PortalUIOauth</name>
+
+    <filter>
+        <filter-name>oauthHttpHeaderFilter</filter-name>
+        <filter-class>de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>oauthHttpHeaderFilter</filter-name>
+        <url-pattern>/guest/login</url-pattern>
+    </filter-mapping>
+
+</web-fragment>

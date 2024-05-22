@@ -17,7 +17,7 @@ package de.cuioss.portal.ui.test.mocks;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.easymock.EasyMock;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;

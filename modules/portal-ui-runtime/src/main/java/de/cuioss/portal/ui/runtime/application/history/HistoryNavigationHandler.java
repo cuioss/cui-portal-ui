@@ -15,10 +15,10 @@
  */
 package de.cuioss.portal.ui.runtime.application.history;
 
-import javax.faces.application.ConfigurableNavigationHandler;
-import javax.faces.application.ConfigurableNavigationHandlerWrapper;
-import javax.faces.application.NavigationCase;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.ConfigurableNavigationHandler;
+import jakarta.faces.application.ConfigurableNavigationHandlerWrapper;
+import jakarta.faces.application.NavigationCase;
+import jakarta.faces.context.FacesContext;
 
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.history.HistoryManager;

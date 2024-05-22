@@ -20,7 +20,7 @@ import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

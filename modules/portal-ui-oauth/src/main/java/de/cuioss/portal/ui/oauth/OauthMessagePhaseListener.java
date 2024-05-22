@@ -18,15 +18,15 @@ package de.cuioss.portal.ui.oauth;
 import static de.cuioss.jsf.api.application.navigation.NavigationUtils.getCurrentView;
 import static de.cuioss.jsf.api.servlet.ServletAdapterUtil.getResponse;
 import static de.cuioss.portal.ui.oauth.WrappedOauthFacadeImpl.MESSAGES_IDENTIFIER;
-import static javax.faces.event.PhaseId.RENDER_RESPONSE;
+import static jakarta.faces.event.PhaseId.RENDER_RESPONSE;
 
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.event.PhaseEvent;
-import javax.faces.event.PhaseId;
-import javax.faces.event.PhaseListener;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.event.PhaseEvent;
+import jakarta.faces.event.PhaseId;
+import jakarta.faces.event.PhaseListener;
+import jakarta.servlet.http.HttpServletRequest;
 
 import de.cuioss.jsf.api.common.util.CheckContextState;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;

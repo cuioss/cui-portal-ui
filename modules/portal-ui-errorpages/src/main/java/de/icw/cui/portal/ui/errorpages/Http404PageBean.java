@@ -15,10 +15,10 @@
  */
 package de.icw.cui.portal.ui.errorpages;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 

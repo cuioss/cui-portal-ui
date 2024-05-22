@@ -19,10 +19,10 @@ import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
 import java.io.Serializable;
 
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import jakarta.servlet.http.HttpServletRequest;
 
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.tools.logging.CuiLogger;

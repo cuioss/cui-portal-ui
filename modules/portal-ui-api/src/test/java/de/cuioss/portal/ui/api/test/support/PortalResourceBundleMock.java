@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Set;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import lombok.EqualsAndHashCode;

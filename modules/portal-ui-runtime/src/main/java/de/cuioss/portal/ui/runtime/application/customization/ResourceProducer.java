@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.customization;
 
-import javax.faces.application.Resource;
+import jakarta.faces.application.Resource;
 
 /**
  * To be used by {@link CustomizationResourceHandler}.

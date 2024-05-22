@@ -20,7 +20,7 @@ import static de.cuioss.test.generator.Generators.enumValues;
 import static de.cuioss.test.generator.Generators.letterStrings;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
 import org.junit.jupiter.api.Test;

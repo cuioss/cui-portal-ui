@@ -20,8 +20,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.faces.application.NavigationHandler;
-import javax.inject.Qualifier;
+import jakarta.faces.application.NavigationHandler;
+import jakarta.inject.Qualifier;
 
 /**
  * Identifier for the {@link NavigationHandler}

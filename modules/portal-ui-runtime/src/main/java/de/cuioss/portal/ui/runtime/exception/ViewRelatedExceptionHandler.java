@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.runtime.exception;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.NavigationHandler;
-import javax.faces.application.ViewExpiredException;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.NavigationHandler;
+import jakarta.faces.application.ViewExpiredException;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 
 import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;

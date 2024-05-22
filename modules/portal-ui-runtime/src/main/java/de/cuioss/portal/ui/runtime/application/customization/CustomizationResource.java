@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TimeZone;
 
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.FacesContext;
 
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;

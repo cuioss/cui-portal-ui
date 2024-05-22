@@ -21,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Locale;
 
-import javax.enterprise.event.Observes;
-import javax.faces.event.ValueChangeEvent;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Observes;
+import jakarta.faces.event.ValueChangeEvent;
+import jakarta.inject.Inject;
 
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAlternatives;

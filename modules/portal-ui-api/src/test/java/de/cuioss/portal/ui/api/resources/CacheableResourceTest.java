@@ -15,18 +15,6 @@
  */
 package de.cuioss.portal.ui.api.resources;
 
-import static de.cuioss.portal.ui.api.resources.CacheableResource.HEADER_IF_NONE_MATCH;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.test.generator.Generators;
 import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
@@ -35,10 +23,19 @@ import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
+import static de.cuioss.portal.ui.api.resources.CacheableResource.HEADER_IF_NONE_MATCH;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnableJsfEnvironment
 class CacheableResourceTest implements ShouldBeNotNull<CacheableResource>,
-        ShouldImplementEqualsAndHashCode<CacheableResource>, JsfEnvironmentConsumer {
+    ShouldImplementEqualsAndHashCode<CacheableResource>, JsfEnvironmentConsumer {
 
     @Setter
     @Getter
@@ -76,7 +73,7 @@ class CacheableResourceTest implements ShouldBeNotNull<CacheableResource>,
     }
 
     @Test
-    void shouldDetectWheterUANeedsNoUpdate() {
+    void shouldDetectWhetherUANeedsNoUpdate() {
         var resource = getUnderTest();
         assertTrue(resource.userAgentNeedsUpdate(environmentHolder.getFacesContext()));
 
@@ -86,7 +83,7 @@ class CacheableResourceTest implements ShouldBeNotNull<CacheableResource>,
     }
 
     @Test
-    void shouldDetectWheterUANeedsUpdate() {
+    void shouldDetectWhetherUATNeedsUpdate() {
         var resource = getUnderTest();
 
         environmentHolder.getRequestConfigDecorator().setRequestHeader(HEADER_IF_NONE_MATCH, etag);
@@ -95,7 +92,7 @@ class CacheableResourceTest implements ShouldBeNotNull<CacheableResource>,
     }
 
     @Test
-    void shoultHandleEtagIfPresent() {
+    void shouldHandleEtagIfPresent() {
         var resource = getUnderTest();
         var header = resource.getResponseHeaders();
         assertTrue(header.containsKey(CacheableResource.HEADER_E_TAG));
@@ -104,8 +101,8 @@ class CacheableResourceTest implements ShouldBeNotNull<CacheableResource>,
     }
 
     @Test
-    void shouldDetermineresourcePath() {
-        assertEquals("/javax.faces.resource/library/resource", getUnderTest().determineResourcePath());
+    void shouldDetermineResourcePath() {
+        assertEquals("/jakarta.faces.resource/library/resource", getUnderTest().determineResourcePath());
     }
 
     @Test

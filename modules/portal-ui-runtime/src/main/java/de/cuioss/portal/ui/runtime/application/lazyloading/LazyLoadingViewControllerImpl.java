@@ -17,8 +17,8 @@ package de.cuioss.portal.ui.runtime.application.lazyloading;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 
 import de.cuioss.portal.configuration.initializer.PortalInitializer;
 import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingRequest;

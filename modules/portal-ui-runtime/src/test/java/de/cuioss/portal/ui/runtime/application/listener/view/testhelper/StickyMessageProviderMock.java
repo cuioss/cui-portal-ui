@@ -18,10 +18,11 @@ package de.cuioss.portal.ui.runtime.application.listener.view.testhelper;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 import de.cuioss.jsf.api.components.css.ContextState;
+
+import jakarta.annotation.PostConstruct;
 import de.cuioss.portal.ui.api.message.StickyMessage;
 import de.cuioss.portal.ui.api.message.StickyMessageProvider;
 import de.cuioss.uimodel.nameprovider.DisplayName;

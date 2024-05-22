@@ -19,10 +19,11 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableSet;
 
 import java.util.Set;
 
-import javax.annotation.Priority;
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
+
+import jakarta.annotation.Priority;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

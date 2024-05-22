@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-fragment xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<web-fragment xmlns="https://jakarta.ee/xml/ns/jakartaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-fragment_4_0.xsd"
-    version="4.0">
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-fragment_5_0.xsd"
+    version="5.0">
     <distributable />
     <name>PortalUIRuntimeConfiguration</name>
 
     <!-- Default Configuration -->
     <context-param>
-        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-name>jakarta.faces.DEFAULT_SUFFIX</param-name>
         <param-value>.xhtml</param-value>
     </context-param>
 
@@ -22,9 +22,20 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+
+    <filter>
+        <filter-name>headerServletFilter</filter-name>
+        <filter-class>de.cuioss.portal.ui.runtime.application.view.HeaderServletFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>headerServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
         <multipart-config>
             <location />
@@ -35,7 +46,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/javax.faces.resource/*</url-pattern>
+        <url-pattern>/jakarta.faces.resource/*</url-pattern>
         <url-pattern>*.xhtml</url-pattern>
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
@@ -49,14 +60,14 @@
     </context-param>
     <!-- Performance related -->
     <context-param>
-        <param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
+        <param-name>jakarta.faces.PARTIAL_STATE_SAVING</param-name>
         <param-value>true</param-value>
     </context-param>
     <context-param>
         <description>Serialization of Server state: if true it uses more cpu and less memory. Defaults to false
 		Caution: This may lead to serialization issues like client side state saving.
         </description>
-        <param-name>javax.faces.SERIALIZE_SERVER_STATE</param-name>
+        <param-name>jakarta.faces.SERIALIZE_SERVER_STATE</param-name>
         <param-value>true</param-value>
     </context-param>
 
@@ -64,7 +75,7 @@
         <description>When a page is requested, what interval in seconds should the compiler check for changes.
         If you don't want the compiler to check for changes once the page is compiled, then use a value of -1.
         Setting a low refresh period helps during development to be able to edit pages in a running application.</description>
-        <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+        <param-name>jakarta.faces.FACELETS_REFRESH_PERIOD</param-name>
         <param-value>-1</param-value>
     </context-param>
 
@@ -72,13 +83,13 @@
     <context-param>
         <description>If this param is set, and calling toLowerCase().equals("true") on a String representation of its value
         returns true, any implementation of UIInput.validate() must take the following additional action.
-        If the javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL context parameter value is
+        If the jakarta.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL context parameter value is
         true (ignoring case), and UIInput.getSubmittedValue() returns a zero-length String call
         UIInput.setSubmittedValue(null) and continue processing using null as the current submitted value
         11-4 JavaServer Faces Specification . June 2009
         Workaround for empty url parameter. If the parameter is false the converters
         will be called with empty strings. With this flag we have a centralized solution</description>
-        <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+        <param-name>jakarta.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
         <param-value>true</param-value>
     </context-param>
     <context-param>
@@ -89,19 +100,19 @@
         If so, the runtime must proceed as if the value gtrueh had been specified.
         If JSR-303 Beans Validation is not present in the current environment, the runtime most proceed as if the value "false" had been specified.
         If the param is not set, the system must behave as if the param was set with the value gautoh. </description>
-        <param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
+        <param-name>jakarta.faces.VALIDATE_EMPTY_FIELDS</param-name>
         <param-value>false</param-value>
     </context-param>
     <context-param>
         <description>Setting this parameter to true will have the effect of disabling the automatic installation of Bean Validation to every input component
         in every view in the application, though manual installation is still possible.</description>
-        <param-name>javax.faces.validator.DISABLE_DEFAULT_BEAN_VALIDATOR</param-name>
+        <param-name>jakarta.faces.validator.DISABLE_DEFAULT_BEAN_VALIDATOR</param-name>
         <param-value>true</param-value>
     </context-param>
     <!-- Security -->
 
     <context-param>
-        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-name>jakarta.faces.FACELETS_SKIP_COMMENTS</param-name>
         <param-value>true</param-value>
     </context-param>
 

@@ -17,7 +17,7 @@ package de.cuioss.portal.ui.runtime.application.exception;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
-import javax.faces.context.ExceptionHandlerWrapper;
+import jakarta.faces.context.ExceptionHandlerWrapper;
 
 import org.junit.jupiter.api.Test;
 

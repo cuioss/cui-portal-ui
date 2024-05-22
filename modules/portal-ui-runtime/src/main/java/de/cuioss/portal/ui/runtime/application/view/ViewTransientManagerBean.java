@@ -17,13 +17,14 @@ package de.cuioss.portal.ui.runtime.application.view;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Provider;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Provider;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
+
+import jakarta.annotation.PostConstruct;
 import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
 import de.cuioss.portal.ui.runtime.application.configuration.ViewConfiguration;
 import lombok.EqualsAndHashCode;

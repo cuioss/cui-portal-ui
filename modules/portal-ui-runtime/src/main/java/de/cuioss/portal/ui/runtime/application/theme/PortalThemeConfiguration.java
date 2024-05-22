@@ -21,10 +21,10 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_DEFAU
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
+import jakarta.annotation.PostConstruct;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import de.cuioss.portal.configuration.types.ConfigAsList;

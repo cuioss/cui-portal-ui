@@ -14,7 +14,7 @@
  * </p>
  * <p>
  * {@link de.cuioss.portal.ui.runtime.application.theme.ThemeResourceHandler} Is
- * the actual {@link javax.faces.application.ResourceHandler} delivering the css
+ * the actual {@link jakarta.faces.application.ResourceHandler} delivering the css
  * to the client. In order to do so it needs instances of
  * {@link de.cuioss.portal.ui.runtime.application.theme.UserThemeBean} to be
  * present. It defines which theme to be loaded and creates the actual name of

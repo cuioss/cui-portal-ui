@@ -18,8 +18,8 @@ package de.cuioss.portal.ui.runtime.application;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import javax.faces.FactoryFinder;
-import javax.faces.application.ApplicationFactory;
+import jakarta.faces.FactoryFinder;
+import jakarta.faces.application.ApplicationFactory;
 
 import org.junit.jupiter.api.Test;
 

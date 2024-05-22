@@ -19,9 +19,9 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LIST
 
 import java.util.concurrent.TimeUnit;
 
-import javax.faces.event.PhaseEvent;
-import javax.faces.event.PhaseId;
-import javax.inject.Inject;
+import jakarta.faces.event.PhaseEvent;
+import jakarta.faces.event.PhaseId;
+import jakarta.inject.Inject;
 
 import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
 import org.jboss.weld.junit5.auto.AddBeanClasses;

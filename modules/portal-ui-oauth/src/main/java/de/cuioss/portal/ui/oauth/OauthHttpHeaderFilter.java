@@ -15,23 +15,19 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import de.cuioss.jsf.api.application.navigation.NavigationUtils;
-import de.cuioss.portal.core.listener.literal.ServletInitialized;
 import de.cuioss.tools.string.MoreStrings;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 
 /**
  * Enable the token renewing by setting the cors header for the login page to be
  * accessed via indirect Ajax call through oauth server.
  */
-@RequestScoped
-public class OauthHttpHeaderFilter {
+public class OauthHttpHeaderFilter implements Filter {
 
     static final String ACCESS_CONTROL_ALLOW_CREDENTIALS = "Access-Control-Allow-Credentials";
 
@@ -41,19 +37,14 @@ public class OauthHttpHeaderFilter {
 
     static final String FACES_GUEST_LOGIN_JSF = "/guest/login.jsf";
 
-    @Inject
-    private Provider<HttpServletRequest> requestProvider;
-
-    /**
-     * @param response
-     */
-    public void onCreate(@Observes @ServletInitialized final HttpServletResponse response) {
-        var request = requestProvider.get();
-        var foundId = NavigationUtils.extractRequestUri(request);
-        if (FACES_GUEST_LOGIN_JSF.endsWith(foundId) && !MoreStrings.isEmpty(requestProvider.get().getHeader(ORIGIN))) {
-            response.setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, requestProvider.get().getHeader(ORIGIN));
-            response.setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        String origin = ((HttpServletRequest) request).getHeader(ORIGIN);
+        if (!MoreStrings.isEmpty(origin)) {
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            httpResponse.setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+            httpResponse.setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
         }
-
+        chain.doFilter(request, response);
     }
 }

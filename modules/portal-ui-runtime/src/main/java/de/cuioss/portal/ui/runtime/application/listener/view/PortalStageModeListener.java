@@ -15,12 +15,13 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view;
 
-import javax.annotation.Priority;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
+
+import jakarta.annotation.Priority;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.configuration.PortalNotConfiguredException;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;

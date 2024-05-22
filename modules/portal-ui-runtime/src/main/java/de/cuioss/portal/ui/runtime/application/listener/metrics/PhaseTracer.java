@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.faces.event.PhaseId;
+import jakarta.faces.event.PhaseId;
 
 import de.cuioss.tools.concurrent.StopWatch;
 import de.cuioss.tools.logging.CuiLogger;

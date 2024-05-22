@@ -1,5 +1,5 @@
 /**
- * Base-classes for modeling {@link javax.faces.application.Resource}s
+ * Base-classes for modeling {@link jakarta.faces.application.Resource}s
  *
  * @author Matthias Walliczek
  */

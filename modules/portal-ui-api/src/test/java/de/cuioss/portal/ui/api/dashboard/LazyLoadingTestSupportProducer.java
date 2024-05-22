@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.ActionEvent;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
+import jakarta.faces.event.AbortProcessingException;
+import jakarta.faces.event.ActionEvent;
 
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
