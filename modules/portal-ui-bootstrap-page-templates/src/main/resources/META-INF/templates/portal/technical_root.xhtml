@@ -4,7 +4,6 @@
       xmlns:ui="jakarta.faces.facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="jakarta.faces.core"
-      xmlns:portal="ttps://cuioss.de/jsf/portal"
       lang="#{view.locale.language}">
 <!--
 <documentation>
@@ -64,7 +63,7 @@
 				<li>vendor.css vendor / customer specific extensions, that are not
 					covered by theming</li>
 				<li>fonts.css, icons.css for font based icons</li>
-				<li>Default javascript files: bootstrap.js, jsf.js, cui.jsf</li>
+				<li>Default javascript files: bootstrap.js, faces.js, cui.jsf</li>
 			</ul>
 		</body>
 	</section>
@@ -119,8 +118,8 @@
         <!-- Ensures that bootstrap.js is always loaded -->
         <h:outputScript library="thirdparty.js" name="bootstrap.js"/>
 
-        <!-- Ensures that jsf.js is always loaded -->
-        <h:outputScript library="jakarta.faces" name="jsf.js"/>
+        <!-- Ensures that faces.js is always loaded -->
+        <h:outputScript library="jakarta.faces" name="faces.js"/>
 
         <!-- Ensures that cui.js is always loaded -->
         <h:outputScript library="de.cuioss.javascript" name="cui.js"/>
