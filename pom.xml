@@ -32,7 +32,6 @@
         <version.cui.parent>0.6-SNAPSHOT</version.cui.parent>
         <version.cui.jsf.components>1.0.0-SNAPSHOT</version.cui.jsf.components>
         <version.cui.portal.core>1.0.0-SNAPSHOT</version.cui.portal.core>
-        <version.cui.test.jsf.basic>4.0-SNAPSHOT</version.cui.test.jsf.basic>
     </properties>
     <modules>
         <module>bom</module>
