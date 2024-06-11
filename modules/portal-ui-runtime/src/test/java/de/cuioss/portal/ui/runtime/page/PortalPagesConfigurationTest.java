@@ -44,20 +44,4 @@ class PortalPagesConfigurationTest extends AbstractPageBeanTest<PortalPagesConfi
         assertNotNull(underTest);
         assertEquals(LoginPageStrategy.GOTO_HOME, underTest.getLoginPageStrategy());
     }
-
-    @Test
-    void shouldReconfigure() {
-
-        // Should not reconfigure
-        configuration.fireEvent();
-        assertEquals(LoginPageStrategy.GOTO_HOME, underTest.getLoginPageStrategy());
-
-        // Should not reconfigure
-        configuration.fireEvent(PortalConfigurationKeys.PAGES_LOGIN_ENTER_STRATEGY, LoginPageStrategy.GOTO_HOME.name());
-        assertEquals(LoginPageStrategy.GOTO_HOME, underTest.getLoginPageStrategy());
-
-        // Should reconfigure
-        configuration.fireEvent(PortalConfigurationKeys.PAGES_LOGIN_ENTER_STRATEGY, LoginPageStrategy.LOGOUT.name());
-        assertEquals(LoginPageStrategy.LOGOUT, underTest.getLoginPageStrategy());
-    }
 }

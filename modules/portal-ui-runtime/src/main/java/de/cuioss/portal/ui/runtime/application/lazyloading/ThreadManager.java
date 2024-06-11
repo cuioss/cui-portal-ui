@@ -15,7 +15,14 @@
  */
 package de.cuioss.portal.ui.runtime.application.lazyloading;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT;
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.configuration.initializer.ApplicationInitializer;
+import de.cuioss.portal.configuration.initializer.PortalInitializer;
+import de.cuioss.tools.logging.CuiLogger;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,18 +31,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import de.cuioss.portal.configuration.PortalConfigurationChangeEvent;
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.initializer.ApplicationInitializer;
-import de.cuioss.portal.configuration.initializer.PortalInitializer;
-import de.cuioss.tools.logging.CuiLogger;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT;
 
 /**
  * Manages FutureHandle based requests and executes them via
@@ -113,7 +109,7 @@ public class ThreadManager implements ApplicationInitializer {
         log.debug("Starting ThreadManager");
         if (null == requestHandleTimeoutProvider || null == requestHandleTimeoutProvider.get()) {
             throw new IllegalStateException(
-                    "Invalid configuration, please check property " + PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT);
+                "Invalid configuration, please check property " + PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT);
         }
         requestHandleTimeout = requestHandleTimeoutProvider.get();
         log.trace("requestHandleTimeout={}", requestHandleTimeout);
@@ -136,15 +132,6 @@ public class ThreadManager implements ApplicationInitializer {
         return ApplicationInitializer.ORDER_LATE;
     }
 
-    void configurationChangeEventListener(
-            @Observes @PortalConfigurationChangeEvent final Map<String, String> deltaMap) {
-        if (deltaMap.containsKey(PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT)) {
-            requestHandleTimeout = Integer.parseInt(deltaMap.get(PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT));
-            log.debug("Portal-011: Changed configuration of '{}' found, new value is '{}', reconfigure",
-                    PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT, requestHandleTimeout);
-        }
-    }
-
     private Runnable cleanupExecutor() {
         return () -> {
             while (executorRunning) {
@@ -159,7 +146,7 @@ public class ThreadManager implements ApplicationInitializer {
                 synchronized (registry) {
                     for (final Map.Entry<Long, FutureHandle> entry : registry.entrySet()) {
                         if ((System.currentTimeMillis() - entry.getValue().getTimestamp())
-                                / 1000 > requestHandleTimeout) {
+                            / 1000 > requestHandleTimeout) {
 
                             log.debug("timeout. terminating id={}, future={}", entry.getKey(), entry.getValue());
 

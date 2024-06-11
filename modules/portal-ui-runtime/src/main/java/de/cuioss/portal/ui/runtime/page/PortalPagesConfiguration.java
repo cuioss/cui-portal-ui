@@ -15,26 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PAGES_LOGIN_ENTER_STRATEGY;
-
-import java.io.Serializable;
-import java.util.Map;
-
+import de.cuioss.portal.ui.api.ui.pages.LoginPageStrategy;
+import de.cuioss.tools.logging.CuiLogger;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Provider;
-
-import jakarta.annotation.PostConstruct;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import de.cuioss.portal.configuration.PortalConfigurationChangeEvent;
-import de.cuioss.portal.ui.api.ui.pages.LoginPageStrategy;
-import de.cuioss.tools.logging.CuiLogger;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import java.io.Serializable;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PAGES_LOGIN_ENTER_STRATEGY;
 
 /**
  * Provides configurable behavior of pages, e.g. {@link LoginPageStrategy}
@@ -66,18 +61,5 @@ public class PortalPagesConfiguration implements Serializable {
         loginPageStrategy = LoginPageStrategy.getFromString(loginPageStrategyProvider.get());
     }
 
-    /**
-     * Listener for {@link PortalConfigurationChangeEvent}s. Reconfigures the
-     * default-pages-configuration
-     *
-     * @param deltaMap
-     */
-    void configurationChangeEventListener(
-            @Observes @PortalConfigurationChangeEvent final Map<String, String> deltaMap) {
-        if (deltaMap.containsKey(PAGES_LOGIN_ENTER_STRATEGY)) {
-            log.debug("Setting Reloading to {}", loginPageStrategyProvider.get());
-            initBean();
-        }
-    }
 
 }

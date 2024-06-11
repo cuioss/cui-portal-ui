@@ -15,28 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.customization;
 
-import static de.cuioss.test.generator.Generators.letterStrings;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import jakarta.enterprise.event.Event;
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.jboss.weld.junit5.auto.EnableAlternatives;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.configuration.schedule.FileChangedEvent;
@@ -50,11 +28,28 @@ import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChangedType;
 import de.cuioss.portal.ui.runtime.support.FileWatcherServiceMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.jboss.weld.junit5.auto.EnableAlternatives;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static de.cuioss.test.generator.Generators.letterStrings;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ FileWatcherServiceMock.class })
-@EnableAlternatives({ FileWatcherServiceMock.class })
+@AddBeanClasses({FileWatcherServiceMock.class})
+@EnableAlternatives({FileWatcherServiceMock.class})
 class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<CustomizationViewResourcesDescriptor> {
 
     private static final String TEMPLATES_FOLDER = "templates";
@@ -128,30 +123,6 @@ class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<Custom
     }
 
     @Test
-    void shouldHandleConfigChanges() {
-        templatesEventWasFired = false;
-        viewsEventWasFired = false;
-
-        configuration.fireEvent(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, "");
-        underTest.initialize();
-        assertNull(underTest.getTemplatePath());
-        assertNotNull(underTest.getHandledTemplates());
-        assertTrue(underTest.getHandledTemplates().isEmpty());
-        assertNull(underTest.getViewPath());
-        assertNotNull(underTest.getHandledViews());
-        assertTrue(underTest.getHandledViews().isEmpty());
-
-        configuration.fireEvent(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, BASE_CUSTOMIZATION.toString());
-
-        assertEquals(BASE_CUSTOMIZATION.resolve(TEMPLATES_FOLDER).toString(), underTest.getTemplatePath());
-        assertEquals(2, underTest.getHandledTemplates().size());
-        assertTrue(templatesEventWasFired);
-        assertEquals(BASE_CUSTOMIZATION.resolve(VIEWS_FOLDER).toString(), underTest.getViewPath());
-        assertEquals(1, underTest.getHandledViews().size());
-        assertTrue(viewsEventWasFired);
-    }
-
-    @Test
     void shouldHandleNewFiles() throws Exception {
         templatesEventWasFired = false;
         viewsEventWasFired = false;
@@ -193,7 +164,7 @@ class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<Custom
     }
 
     void providerChangeEventListener(
-            @Observes @PortalViewResourcesConfigChanged final PortalViewResourcesConfigChangedType type) {
+        @Observes @PortalViewResourcesConfigChanged final PortalViewResourcesConfigChangedType type) {
         if (PortalViewResourcesConfigChangedType.TEMPLATES == type) {
             templatesEventWasFired = true;
         }

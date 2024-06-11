@@ -15,9 +15,27 @@
  */
 package de.cuioss.portal.ui.runtime.application.customization;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import de.cuioss.portal.common.priority.PortalPriorities;
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.configuration.schedule.FileChangedEvent;
+import de.cuioss.portal.configuration.schedule.FileWatcherService;
+import de.cuioss.portal.configuration.schedule.PortalFileWatcherService;
+import de.cuioss.portal.ui.api.templating.*;
+import de.cuioss.tools.io.MorePaths;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.tools.string.MoreStrings;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Provider;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,45 +43,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Event;
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import jakarta.inject.Provider;
-
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import de.cuioss.portal.common.priority.PortalPriorities;
-import de.cuioss.portal.configuration.PortalConfigurationChangeEvent;
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.schedule.FileChangedEvent;
-import de.cuioss.portal.configuration.schedule.FileWatcherService;
-import de.cuioss.portal.configuration.schedule.PortalFileWatcherService;
-import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
-import de.cuioss.portal.ui.api.templating.PortalViewDescriptor;
-import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChanged;
-import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChangedType;
-import de.cuioss.portal.ui.api.templating.StaticTemplateDescriptor;
-import de.cuioss.portal.ui.api.templating.StaticViewDescriptor;
-import de.cuioss.tools.io.MorePaths;
-import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.tools.string.MoreStrings;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
  * Descriptor to handle customized views and templates.
- *
+ * <p>
  * Searches for templates and views inside of
  * {@value PortalConfigurationKeys#PORTAL_CUSTOMIZATION_DIR}.
- *
+ * <p>
  * In {@link ProjectStage#DEVELOPMENT} the folders are monitored and new created
  * / deleted files will result in a reset of the corresponding file lists.
  *
@@ -74,8 +64,8 @@ import lombok.ToString;
 @ApplicationScoped
 @Priority(PortalPriorities.PORTAL_INSTALLATION_LEVEL)
 @Named
-@ToString(exclude = { "fileWatcherService", "viewResourcesConfigChangedEvent" })
-@EqualsAndHashCode(exclude = { "fileWatcherService", "viewResourcesConfigChangedEvent" })
+@ToString(exclude = {"fileWatcherService", "viewResourcesConfigChangedEvent"})
+@EqualsAndHashCode(exclude = {"fileWatcherService", "viewResourcesConfigChangedEvent"})
 public class CustomizationViewResourcesDescriptor implements StaticTemplateDescriptor, StaticViewDescriptor {
 
     private static final CuiLogger log = new CuiLogger(CustomizationViewResourcesDescriptor.class);
@@ -141,7 +131,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
             templatePath = currentTemplatePath.toString();
             handledTemplates = retrieveViewResources(currentTemplatePath, "");
             log.debug("Found custom templates folder {} and registered these templates: {}", templatePath,
-                    handledTemplates.toString());
+                handledTemplates.toString());
             fileWatcherService.register(currentTemplatePath);
         } else {
             log.debug("TEMPLATES folder {} does not exists", templatePath);
@@ -165,7 +155,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
                     result.add(prefix.concat(pathname.toFile().getName()));
                 } else if (pathname.toFile().isDirectory()) {
                     result.addAll(retrieveViewResources(currentTemplatePath.resolve(pathname.toFile().getName()),
-                            prefix.concat(pathname.toFile().getName() + "/")));
+                        prefix.concat(pathname.toFile().getName() + "/")));
                 }
             }
         } catch (IOException ex) {
@@ -174,22 +164,9 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
         return result;
     }
 
-    /**
-     * Listener for {@link PortalConfigurationChangeEvent}s. Reconfigures the
-     * project-stage-configuration
-     *
-     * @param deltaMap changed configuration properties
-     */
-    void portalConfigurationChangeEventListener(
-            @Observes @PortalConfigurationChangeEvent final Map<String, String> deltaMap) {
-        if (deltaMap.containsKey(PORTAL_CUSTOMIZATION_ENABLED) || deltaMap.containsKey(PORTAL_CUSTOMIZATION_DIR)) {
-            reloadAndFireEvents();
-        }
-    }
-
     void fileChangeListener(@Observes @FileChangedEvent final Path newPath) {
         if (null != templatePath && MorePaths.isSameFile(Paths.get(templatePath), newPath)
-                || null != viewPath && MorePaths.isSameFile(Paths.get(viewPath), newPath)) {
+            || null != viewPath && MorePaths.isSameFile(Paths.get(viewPath), newPath)) {
             reloadAndFireEvents();
         }
     }
@@ -202,7 +179,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
         var oldHandledViews = handledViews;
         initialize();
         if (!MoreStrings.nullToEmpty(templatePath).equals(oldTemplatePath)
-                || !handledTemplates.equals(oldHandledTemplates)) {
+            || !handledTemplates.equals(oldHandledTemplates)) {
             viewResourcesConfigChangedEvent.fire(PortalViewResourcesConfigChangedType.TEMPLATES);
         }
         if (!MoreStrings.nullToEmpty(viewPath).equals(oldViewPath) || !handledViews.equals(oldHandledViews)) {

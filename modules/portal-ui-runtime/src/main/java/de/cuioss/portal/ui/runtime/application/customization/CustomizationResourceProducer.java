@@ -15,33 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.customization;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_STAGE;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.inject.Instance;
-import jakarta.faces.application.Resource;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import de.cuioss.portal.configuration.PortalConfigurationChangeEvent;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.schedule.FileChangedEvent;
 import de.cuioss.portal.configuration.schedule.FileWatcherService;
@@ -51,7 +24,24 @@ import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.MoreStrings;
 import de.cuioss.tools.string.Splitter;
 import de.cuioss.uimodel.application.CuiProjectStage;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.faces.application.Resource;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import lombok.Synchronized;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED;
 
 /**
  * Allow overriding {@link Resource}s for customization at the file system. Will
@@ -130,7 +120,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
         if (!resourcesCache.containsKey(resourceFile)) {
             final var mimeType = determineMimeType(resourceFile);
             resourcesCache.put(resourceFile, new CachedCustomizationResource(
-                    new CustomizationResource(resourceFile, resourceName, libraryName, mimeType)));
+                new CustomizationResource(resourceFile, resourceName, libraryName, mimeType)));
         }
 
         return resourcesCache.get(resourceFile);
@@ -169,7 +159,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
         prepareFileWatcherService();
 
         customizationDirProvider.get()
-                .ifPresent(customizationDir -> resourcePath = lookupResourceDirectory(Paths.get(customizationDir)));
+            .ifPresent(customizationDir -> resourcePath = lookupResourceDirectory(Paths.get(customizationDir)));
 
         if (null != resourcePath) {
 
@@ -186,7 +176,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
                         final var pathName = path.toFile().getName();
 
                         final var filesInDirectory = findFilesInDirectory(
-                                resourcePath.toPath().resolve(path.getFileName()));
+                            resourcePath.toPath().resolve(path.getFileName()));
 
                         foundResources.put(pathName, filesInDirectory);
                     }
@@ -206,7 +196,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
                 return resourcesDir;
         }
         log.info(
-                "No installation specific customization detected, using defaults. If this is intentional you can ignore this message");
+            "No installation specific customization detected, using defaults. If this is intentional you can ignore this message");
         return null;
     }
 
@@ -239,20 +229,6 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
     void fileChangeListener(@Observes @FileChangedEvent final Path newPath) {
         if (null != resourcePath && MorePaths.isSameFile(resourcePath.toPath(), newPath)) {
-            forceDetermineResources();
-        }
-    }
-
-    /**
-     * Listener for {@link PortalConfigurationChangeEvent}s. Reconfigures the
-     * project-stage-configuration
-     *
-     * @param deltaMap changed configuration properties
-     */
-    void portalConfigurationChangeEventListener(
-            @Observes @PortalConfigurationChangeEvent final Map<String, String> deltaMap) {
-        if (deltaMap.containsKey(PORTAL_STAGE) || deltaMap.containsKey(PORTAL_CUSTOMIZATION_ENABLED)
-                || deltaMap.containsKey(PORTAL_CUSTOMIZATION_DIR)) {
             forceDetermineResources();
         }
     }

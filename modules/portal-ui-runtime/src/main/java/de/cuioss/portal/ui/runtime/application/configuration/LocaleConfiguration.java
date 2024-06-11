@@ -15,34 +15,27 @@
  */
 package de.cuioss.portal.ui.runtime.application.configuration;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALES_AVAILABLE;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALE_DEFAULT;
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
+import de.cuioss.portal.common.priority.PortalPriorities;
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.configuration.types.ConfigAsLocale;
+import de.cuioss.portal.configuration.types.ConfigAsLocaleList;
+import de.cuioss.tools.logging.CuiLogger;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import de.cuioss.portal.common.priority.PortalPriorities;
-
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-
-import de.cuioss.portal.configuration.PortalConfigurationChangeEvent;
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.types.ConfigAsLocale;
-import de.cuioss.portal.configuration.types.ConfigAsLocaleList;
-import de.cuioss.tools.collect.MoreCollections;
-import de.cuioss.tools.logging.CuiLogger;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALES_AVAILABLE;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALE_DEFAULT;
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 
 /**
  * Defines the locale configuration for the CUI-portal. Instead of using the
@@ -55,8 +48,8 @@ import lombok.ToString;
  */
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @ApplicationScoped
-@EqualsAndHashCode(of = { "defaultLocale", "availableLocales" })
-@ToString(of = { "defaultLocale", "availableLocales" })
+@EqualsAndHashCode(of = {"defaultLocale", "availableLocales"})
+@ToString(of = {"defaultLocale", "availableLocales"})
 public class LocaleConfiguration implements Serializable {
 
     private static final long serialVersionUID = 4249111201638474035L;
@@ -97,17 +90,4 @@ public class LocaleConfiguration implements Serializable {
         }
     }
 
-    /**
-     * Listener for {@link PortalConfigurationChangeEvent}s. Reconfigures the
-     * locale-configuration
-     *
-     * @param deltaMap
-     */
-    void configurationChangeEventListener(
-            @Observes @PortalConfigurationChangeEvent final Map<String, String> deltaMap) {
-        if (MoreCollections.containsKey(deltaMap, LOCALE_DEFAULT, LOCALES_AVAILABLE)) {
-            log.debug("Reloading locale Configuration");
-            init();
-        }
-    }
 }

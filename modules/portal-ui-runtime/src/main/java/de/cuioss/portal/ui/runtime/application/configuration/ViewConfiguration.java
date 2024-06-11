@@ -15,29 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.application.configuration;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.NON_SECURED_VIEWS;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.SUPPRESSED_VIEWS;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.TRANSIENT_VIEWS;
-
-import java.io.Serializable;
-import java.util.Map;
-
+import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
+import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
+import de.cuioss.portal.ui.api.configuration.types.ConfigAsViewMatcher;
+import de.cuioss.tools.logging.CuiLogger;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
-
-import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
-
-import jakarta.annotation.PostConstruct;
-import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
-import de.cuioss.portal.configuration.PortalConfigurationChangeEvent;
-import de.cuioss.portal.ui.api.configuration.types.ConfigAsViewMatcher;
-import de.cuioss.tools.collect.MoreCollections;
-import de.cuioss.tools.logging.CuiLogger;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.io.Serializable;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.*;
 
 /**
  * Reads the View specific configuration from the web.xml and provides
@@ -46,8 +38,8 @@ import lombok.ToString;
  * @author Oliver Wolff
  */
 @ApplicationScoped
-@EqualsAndHashCode(of = { "nonSecuredViewMatcher", "transientViewMatcher", "suppressedViewMatcher" })
-@ToString(of = { "nonSecuredViewMatcher", "transientViewMatcher", "suppressedViewMatcher" })
+@EqualsAndHashCode(of = {"nonSecuredViewMatcher", "transientViewMatcher", "suppressedViewMatcher"})
+@ToString(of = {"nonSecuredViewMatcher", "transientViewMatcher", "suppressedViewMatcher"})
 public class ViewConfiguration implements Serializable {
 
     private static final long serialVersionUID = -2477375866558117201L;
@@ -55,7 +47,7 @@ public class ViewConfiguration implements Serializable {
     private static final CuiLogger log = new CuiLogger(ViewConfiguration.class);
 
     /**
-     * {@link ViewMatcher} checking for non secured views, defined with
+     * {@link ViewMatcher} checking for non-secured views, defined with
      * {@link #NON_SECURED_VIEWS}
      */
     @Getter
@@ -77,7 +69,7 @@ public class ViewConfiguration implements Serializable {
     private Provider<ViewMatcher> transientViewMatcherProvider;
 
     /**
-     * {@link ViewMatcher} checking for non secured views, defined with
+     * {@link ViewMatcher} checking for non-secured views, defined with
      * {@link #SUPPRESSED_VIEWS}
      */
     @Getter
@@ -99,23 +91,10 @@ public class ViewConfiguration implements Serializable {
         nonSecuredViewMatcher = nonSecuredViewMatcherProvider.get();
         if (nonSecuredViewMatcher instanceof EmptyViewMatcher) {
             log.warn("The configuration of " + NON_SECURED_VIEWS
-                    + " results in all views of the application being only accessible for authorized user. If this is intentional you can ignore this warning");
+                + " results in all views of the application being only accessible for authorized user. If this is intentional you can ignore this warning");
         }
         transientViewMatcher = transientViewMatcherProvider.get();
         suppressedViewMatcher = suppressedViewMatcherProvider.get();
     }
 
-    /**
-     * Listener for {@link PortalConfigurationChangeEvent}s. Reconfigures the
-     * default-resource-configuration
-     *
-     * @param deltaMap
-     */
-    void configurationChangeEventListener(
-            @Observes @PortalConfigurationChangeEvent final Map<String, String> deltaMap) {
-        if (MoreCollections.containsKey(deltaMap, NON_SECURED_VIEWS, TRANSIENT_VIEWS, SUPPRESSED_VIEWS)) {
-            log.debug("Change in view configuration found, reconfigure");
-            doConfigure();
-        }
-    }
 }

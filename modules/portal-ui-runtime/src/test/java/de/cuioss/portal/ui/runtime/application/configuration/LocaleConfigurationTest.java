@@ -26,9 +26,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALES_AVAILABLE;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALE_DEFAULT;
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnableAutoWeld
@@ -47,33 +44,5 @@ class LocaleConfigurationTest implements ShouldHandleObjectContracts<LocaleConfi
     void shouldProvideDefaultConfiguration() {
         assertEquals(Locale.GERMAN, underTest.getDefaultLocale());
         assertEquals(2, underTest.getAvailableLocales().size());
-    }
-
-    @Test
-    void shouldReconfigureOnEvent() {
-
-        configuration.fireEvent(LOCALE_DEFAULT, Locale.JAPANESE.getLanguage(), LOCALES_AVAILABLE,
-            Locale.JAPANESE.getLanguage());
-
-        assertEquals(Locale.JAPANESE, underTest.getDefaultLocale());
-        assertEquals(immutableList(Locale.JAPANESE), underTest.getAvailableLocales());
-
-        configuration.fireEvent(LOCALE_DEFAULT, Locale.FRENCH.getLanguage(), LOCALES_AVAILABLE,
-            Locale.JAPANESE.getLanguage());
-
-        assertEquals(Locale.FRENCH, underTest.getDefaultLocale());
-        assertEquals(immutableList(Locale.JAPANESE), underTest.getAvailableLocales());
-    }
-
-    @Test
-    void defaultsToEnglishOnFailure() {
-        configuration.fireEvent(LOCALE_DEFAULT, "b00m", LOCALES_AVAILABLE, "b00m");
-
-        assertEquals(Locale.ENGLISH, underTest.getDefaultLocale());
-        assertEquals(immutableList(Locale.ENGLISH), underTest.getAvailableLocales());
-
-        configuration.fireEvent(LOCALE_DEFAULT, "de");
-        assertEquals(Locale.GERMAN, underTest.getDefaultLocale());
-        assertEquals(immutableList(Locale.GERMAN), underTest.getAvailableLocales());
     }
 }
