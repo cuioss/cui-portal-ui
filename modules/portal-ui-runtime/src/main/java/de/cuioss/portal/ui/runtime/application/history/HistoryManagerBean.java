@@ -19,6 +19,7 @@ import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Priority;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.lifecycle.ClientWindowScoped;
 import jakarta.inject.Inject;
@@ -35,11 +36,11 @@ import java.io.Serial;
  * The implementation utilizes a stack to store the history. The actual work is
  * done by {@link HistoryManagerImpl}.
  * <p>
- * FIXME: User WindowScope again if on jsf 4
+ * FIXME: Use WindowScope again if on jsf 4. Update: ClientWindow failed with quarkus
  *
  * @author Oliver Wolff
  */
-@ClientWindowScoped
+@SessionScoped
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @Named(HistoryManagerImpl.BEAN_NAME)
 @EqualsAndHashCode(exclude = "delegate")
