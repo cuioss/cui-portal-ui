@@ -16,19 +16,14 @@
 package de.cuioss.portal.ui.oauth;
 
 import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_ORIGIN;
-import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.FACES_GUEST_LOGIN_JSF;
 import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ORIGIN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import jakarta.inject.Inject;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.myfaces.test.mock.MockHttpServletRequest;
 import org.easymock.EasyMock;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
@@ -55,7 +50,7 @@ class OauthHttpHeaderFilterTest implements ShouldBeNotNull<OauthHttpHeaderFilter
     private JsfEnvironmentHolder environmentHolder;
 
     @Getter
-    private OauthHttpHeaderFilter underTest = new OauthHttpHeaderFilter();
+    private final OauthHttpHeaderFilter underTest = new OauthHttpHeaderFilter();
 
     private final FilterChain filterChain= EasyMock.createNiceMock(FilterChain.class);
 

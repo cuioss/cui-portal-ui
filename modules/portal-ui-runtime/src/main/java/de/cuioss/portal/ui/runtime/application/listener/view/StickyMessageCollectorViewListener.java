@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.application.listener.view;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_STICKYMESSAGES;
 
+import java.io.Serial;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,6 +55,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class StickyMessageCollectorViewListener implements ViewListener {
 
+    @Serial
     private static final long serialVersionUID = 1106398052992964929L;
 
     @Inject

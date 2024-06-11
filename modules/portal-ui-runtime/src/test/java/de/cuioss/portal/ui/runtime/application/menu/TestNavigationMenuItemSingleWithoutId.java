@@ -20,10 +20,13 @@ import jakarta.enterprise.context.Dependent;
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemSingleImpl;
 
+import java.io.Serial;
+
 @Dependent
 @PortalMenuItem
 public class TestNavigationMenuItemSingleWithoutId extends PortalNavigationMenuItemSingleImpl {
 
+    @Serial
     private static final long serialVersionUID = 1233230578256255603L;
 
     public TestNavigationMenuItemSingleWithoutId() {

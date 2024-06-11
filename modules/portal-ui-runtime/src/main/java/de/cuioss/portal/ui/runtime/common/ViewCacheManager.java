@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.common;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.ENABLE_CACHE;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -46,6 +47,7 @@ import lombok.ToString;
 @ToString(of = "enabled")
 public class ViewCacheManager implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -7261263947597749229L;
 
     private static final CuiLogger LOGGER = new CuiLogger(ViewCacheManager.class);

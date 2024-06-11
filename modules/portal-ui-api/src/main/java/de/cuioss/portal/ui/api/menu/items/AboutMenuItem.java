@@ -23,6 +23,8 @@ import de.cuioss.portal.ui.api.ui.pages.AboutPage;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * <p>
  * Default representation of the help menu item. The order is 48. It references
@@ -38,6 +40,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class AboutMenuItem extends PortalNavigationMenuItemSingleImpl {
 
+    @Serial
     private static final long serialVersionUID = 1452093785009425867L;
 
     /** The label Key for this component. */
@@ -46,7 +49,7 @@ public class AboutMenuItem extends PortalNavigationMenuItemSingleImpl {
     /** The icon for this component. */
     public static final String ICON = "cui-icon-circle_question_mark";
 
-    /** The string based id for this menu item. */
+    /** The string-based id for this menu item. */
     public static final String MENU_ID = "aboutMenuItem";
 
     /**

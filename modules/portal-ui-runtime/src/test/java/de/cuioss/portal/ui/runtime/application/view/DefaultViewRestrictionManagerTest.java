@@ -15,19 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.view;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.VIEW_ROLE_RESTRICTION_PREFIX;
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Collections;
-
-import jakarta.inject.Inject;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
@@ -37,7 +24,15 @@ import de.cuioss.portal.ui.api.ui.pages.HomePage;
 import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.junit.jupiter.api.Test;
+
+import java.util.Collections;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.VIEW_ROLE_RESTRICTION_PREFIX;
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<DefaultViewRestrictionManager> {
@@ -46,13 +41,13 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
     private static final String ROLE_ADMIN = "admin";
 
     private static final ViewDescriptor ANY_GUEST = new ViewDescriptorImpl("/guest/any.jsf", "/guest/any.xhtml",
-            Collections.emptyList());
+        Collections.emptyList());
 
     private static final ViewDescriptor ANY_CONTENT = new ViewDescriptorImpl("/content/any.jsf", "/content/any.xhtml",
-            Collections.emptyList());
+        Collections.emptyList());
 
     private static final ViewDescriptor ADMIN_CONTENT = new ViewDescriptorImpl("/content/admin.jsf",
-            "/content/admin.xhtml", Collections.emptyList());
+        "/content/admin.xhtml", Collections.emptyList());
 
     @Inject
     @Getter
@@ -93,7 +88,7 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
     @Test
     void shouldRestrictMultipleRoles() {
         configuration.fireEvent(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/",
-                VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/content/admin");
+            VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/content/admin");
 
         portalUserProducerMock.roles(immutableList(ROLE_CONTENT, ROLE_ADMIN));
 
@@ -112,14 +107,14 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
     @Test
     void shouldNotMatchRoleConfiguredDirectoryToAnyPage() {
         configuration.fireEvent(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/content/admin/",
-                VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/");
+            VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/");
 
         ViewDescriptor pageMatchedToDirectoryPath = new ViewDescriptorImpl("faces/content/administrationPage.jsf",
-                "/content/administrationPage.xhtml", Collections.emptyList());
+            "/content/administrationPage.xhtml", Collections.emptyList());
 
         portalUserProducerMock.roles(immutableList(ROLE_CONTENT));
         assertEquals(1, underTest.getRequiredRolesForView(pageMatchedToDirectoryPath).size(),
-                "The role admin defines the restriction on directory which have to end with '/', it shouldn't matched to any page's name");
+            "The role admin defines the restriction on directory which have to end with '/', it shouldn't matched to any page's name");
         assertTrue(underTest.getRequiredRolesForView(pageMatchedToDirectoryPath).contains(ROLE_CONTENT));
 
         assertTrue(underTest.isUserAuthorized(pageMatchedToDirectoryPath));
@@ -134,8 +129,6 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
 
     @Test
     void shouldFailToLookupNotExistingOutcome() {
-        assertThrows(IllegalStateException.class, () -> {
-            underTest.isUserAuthorizedForViewOutcome("notthere");
-        });
+        assertThrows(IllegalStateException.class, () -> underTest.isUserAuthorizedForViewOutcome("not-there"));
     }
 }

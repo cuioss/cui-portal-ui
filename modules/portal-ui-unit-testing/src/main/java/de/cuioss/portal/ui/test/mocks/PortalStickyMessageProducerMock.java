@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.test.mocks;
 import static de.cuioss.portal.ui.api.PortalCoreBeanNames.STICKY_MESSAGE_BEAN_NAME;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ import lombok.ToString;
 @ToString
 public class PortalStickyMessageProducerMock implements Serializable, StickyMessageProducer {
 
+    @Serial
     private static final long serialVersionUID = -7985606463263784288L;
 
     @Getter
@@ -101,7 +103,7 @@ public class PortalStickyMessageProducerMock implements Serializable, StickyMess
 
     /**
      * @param messageKey key that should be present in the added
-     *                   {@linkplain StickyMessage#getMessage()}s
+     *                   {@linkplain StickyMessage#message()}s
      *                   {@linkplain IDisplayNameProvider#getContent()} string.
      */
     public void assertThatKeyIsPresent(final String messageKey) {

@@ -28,7 +28,7 @@ import de.cuioss.jsf.api.common.view.ViewDescriptor;
 /**
  * Identifier for the current jsf view, the representation is
  * {@link ViewDescriptor}.
- *
+ * <p>
  * <em>Caution: </em> The scope is RequestScoped, therefore you must not inject
  * this before {@link PhaseId#RESTORE_VIEW}
  *

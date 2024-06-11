@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.view;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
@@ -28,6 +29,7 @@ import lombok.Data;
 @Data
 class HttpHeader implements Serializable, Comparable<HttpHeader> {
 
+    @Serial
     private static final long serialVersionUID = -8089609030535127942L;
 
     private String key;

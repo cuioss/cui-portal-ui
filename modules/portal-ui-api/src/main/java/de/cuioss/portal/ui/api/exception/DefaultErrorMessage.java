@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.api.exception;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import de.cuioss.portal.core.storage.MapStorage;
@@ -42,6 +43,7 @@ public class DefaultErrorMessage implements Serializable {
     public static final String LOOKUP_KEY = "defaultErrorMessage";
 
     /** Serial version UID. */
+    @Serial
     private static final long serialVersionUID = 5486339618618279597L;
 
     /** The error code. */
@@ -69,8 +71,8 @@ public class DefaultErrorMessage implements Serializable {
      * @param errorMessage must not be null
      * @param storage      m,sut not be null
      */
-    public static final void addErrorMessageToSessionStorage(final DefaultErrorMessage errorMessage,
-            final MapStorage<Serializable, Serializable> storage) {
+    public static void addErrorMessageToSessionStorage(final DefaultErrorMessage errorMessage,
+                                                       final MapStorage<Serializable, Serializable> storage) {
         storage.put(LOOKUP_KEY, errorMessage);
     }
 

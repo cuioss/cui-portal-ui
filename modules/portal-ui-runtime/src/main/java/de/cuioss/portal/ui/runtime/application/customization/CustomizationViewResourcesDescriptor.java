@@ -38,6 +38,7 @@ import lombok.ToString;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,6 +74,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
     private static final String TEMPLATES_DIRECTORY = "templates";
     private static final String VIEWS_DIRECTORY = "views";
 
+    @Serial
     private static final long serialVersionUID = 2575347911928721019L;
 
     @Inject
@@ -118,7 +120,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
         handledTemplates = Collections.emptyList();
         viewPath = null;
         handledViews = Collections.emptyList();
-        if (!customizationEnabledProvider.get().booleanValue()) {
+        if (!customizationEnabledProvider.get()) {
             return;
         }
         final var customizationDirectory = customizationDir.get();

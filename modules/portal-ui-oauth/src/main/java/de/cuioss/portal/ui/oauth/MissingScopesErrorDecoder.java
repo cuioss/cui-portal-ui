@@ -31,7 +31,7 @@ import de.cuioss.tools.logging.CuiLogger;
 
 /**
  * To detect and handle the error "missing scopes"
- * (https://tools.ietf.org/html/rfc6750)
+ * (<a href="https://tools.ietf.org/html/rfc6750">...</a>)
  */
 public class MissingScopesErrorDecoder implements ResponseExceptionMapper<MissingScopesException> {
 

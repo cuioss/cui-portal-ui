@@ -23,6 +23,8 @@ import de.cuioss.portal.ui.api.ui.pages.PreferencesPage;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * <p>
  * Default representation of the preferences menu-item. The order is 20. It
@@ -38,6 +40,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class PreferencesMenuItem extends PortalNavigationMenuItemSingleImpl {
 
+    @Serial
     private static final long serialVersionUID = 1452093785009425867L;
 
     /** The label Key for this component. */

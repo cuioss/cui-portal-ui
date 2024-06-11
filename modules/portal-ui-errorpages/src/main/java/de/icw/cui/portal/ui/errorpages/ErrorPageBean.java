@@ -15,6 +15,7 @@
  */
 package de.icw.cui.portal.ui.errorpages;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -55,6 +56,7 @@ import lombok.ToString;
 @ToString(of = "message", doNotUseGetters = true)
 public class ErrorPageBean implements ErrorPage {
 
+    @Serial
     private static final long serialVersionUID = -3785494532638995890L;
 
     @Inject

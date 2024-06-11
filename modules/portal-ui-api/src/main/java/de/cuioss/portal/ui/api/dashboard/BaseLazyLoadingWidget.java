@@ -27,10 +27,13 @@ import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serial;
+
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public abstract class BaseLazyLoadingWidget<T> extends BaseWidget implements LazyLoadingRequest<T> {
 
+    @Serial
     private static final long serialVersionUID = -3234472642651082710L;
 
     @Inject

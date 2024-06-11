@@ -20,9 +20,12 @@ import jakarta.enterprise.context.Dependent;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
 
+import java.io.Serial;
+
 @Dependent
 class TestLazyLoadingWidget extends BaseLazyLoadingWidget<String> {
 
+    @Serial
     private static final long serialVersionUID = -8322319620282555449L;
 
     @Override

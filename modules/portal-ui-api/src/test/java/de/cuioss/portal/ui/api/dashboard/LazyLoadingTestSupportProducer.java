@@ -28,6 +28,8 @@ import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingViewController;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
 
+import java.io.Serial;
+
 @ApplicationScoped
 public class LazyLoadingTestSupportProducer {
 
@@ -37,15 +39,16 @@ public class LazyLoadingTestSupportProducer {
 
     @Produces
     @Dependent
-    private LazyLoadingThreadModel<String> threadModell;
+    private LazyLoadingThreadModel<String> threadModel;
 
     public LazyLoadingTestSupportProducer() {
         viewController = request -> {
             // TODO Auto-generated method stub
 
         };
-        threadModell = new LazyLoadingThreadModel<>() {
+        threadModel = new LazyLoadingThreadModel<>() {
 
+            @Serial
             private static final long serialVersionUID = -4738933238569640453L;
 
             @Override

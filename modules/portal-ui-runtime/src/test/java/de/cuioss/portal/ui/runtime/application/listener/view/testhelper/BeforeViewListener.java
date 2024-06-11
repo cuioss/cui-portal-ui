@@ -22,11 +22,14 @@ import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import jakarta.annotation.Priority;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 
+import java.io.Serial;
+
 @PortalRestoreViewListener(PhaseExecution.BEFORE_PHASE)
 @Priority(1)
 @RequestScoped
 public class BeforeViewListener extends ViewListenerCallRecorder {
 
+    @Serial
     private static final long serialVersionUID = -6341878146268681299L;
 
 }

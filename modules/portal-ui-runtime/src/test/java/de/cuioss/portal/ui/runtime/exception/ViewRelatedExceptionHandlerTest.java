@@ -15,22 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.exception;
 
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_PREFERENCES;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGOUT_LOGICAL_VIEW_ID;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Collections;
-
-import jakarta.faces.application.ViewExpiredException;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.jsf.test.MessageProducerMock;
@@ -54,15 +38,28 @@ import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.faces.application.ViewExpiredException;
+import jakarta.faces.lifecycle.ClientWindowScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.ActivateScopes;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import java.util.Collections;
+
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
 @EnableTestLogger
-@AddBeanClasses({ CurrentViewProducer.class, NavigationHandlerProducer.class, HistoryManagerBean.class,
-        DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
+@AddBeanClasses({CurrentViewProducer.class, NavigationHandlerProducer.class, HistoryManagerBean.class,
+    DefaultHistoryConfiguration.class, ViewMatcherProducer.class})
+@ActivateScopes(ClientWindowScoped.class)
 class ViewRelatedExceptionHandlerTest
-        implements ShouldHandleObjectContracts<ViewRelatedExceptionHandler>, JsfEnvironmentConsumer {
+    implements ShouldHandleObjectContracts<ViewRelatedExceptionHandler>, JsfEnvironmentConsumer {
 
     private static final String WARNING_KEY_PORTAL_002 = "Portal-103";
 
@@ -88,7 +85,7 @@ class ViewRelatedExceptionHandlerTest
     private PortalViewRestrictionManagerMock viewRestrictionManagerMock;
 
     static final ViewDescriptor DESCRIPTOR_SUPRRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")
-            .withLogicalViewId("suppressedViewId").build();
+        .withLogicalViewId("suppressedViewId").build();
 
     @Test
     void shouldHandleViewSuppressedExceptionForLoggedInUser() {
@@ -143,8 +140,8 @@ class ViewRelatedExceptionHandlerTest
     @Test
     void shouldHandleNotAuthorizedExceptionWithRedirectToHome() {
         final var event = new ExceptionAsEvent(
-                new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
-                        Collections.emptyList(), Collections.emptyList()));
+            new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
+                Collections.emptyList(), Collections.emptyList()));
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
 
         underTest.handle(event);
@@ -154,7 +151,7 @@ class ViewRelatedExceptionHandlerTest
         assertTrue(event.isHandled());
         assertRedirect(VIEW_HOME_LOGICAL_VIEW_ID);
         messageProducerMock
-                .assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_INSUFFICIENT_PERMISSIONS_KEY);
+            .assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_INSUFFICIENT_PERMISSIONS_KEY);
     }
 
     @Test
@@ -163,8 +160,8 @@ class ViewRelatedExceptionHandlerTest
         viewRestrictionManagerMock.setAuthorized(false);
 
         final var event = new ExceptionAsEvent(
-                new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
-                        Collections.emptyList(), Collections.emptyList()));
+            new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
+                Collections.emptyList(), Collections.emptyList()));
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
 
         underTest.handle(event);
@@ -174,7 +171,7 @@ class ViewRelatedExceptionHandlerTest
 
         assertRedirect(VIEW_LOGOUT_LOGICAL_VIEW_ID);
         messageProducerMock
-                .assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_INSUFFICIENT_PERMISSIONS_KEY);
+            .assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_INSUFFICIENT_PERMISSIONS_KEY);
     }
 
     @Test

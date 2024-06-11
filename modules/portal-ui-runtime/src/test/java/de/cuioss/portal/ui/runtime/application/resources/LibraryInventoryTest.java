@@ -35,8 +35,6 @@ class LibraryInventoryTest {
     @BeforeEach
     void setUp() {
         lib = new LibraryInventory(libraryName);
-        // lib = new LibraryInventory(null);
-        // lib = new LibraryInventory("");
     }
 
     @Test

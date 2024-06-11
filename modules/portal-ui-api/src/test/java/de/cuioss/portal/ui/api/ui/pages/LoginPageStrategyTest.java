@@ -37,9 +37,7 @@ class LoginPageStrategyTest {
 
     @Test
     void shouldFailOnInvalidName() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            LoginPageStrategy.getFromString("NoThere");
-        });
+        assertThrows(IllegalArgumentException.class, () -> LoginPageStrategy.getFromString("NoThere"));
     }
 
 }

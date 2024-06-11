@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.history;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_EXCLUDE_PARAMETER;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_VIEW_EXCLUDE_PARAMETER;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -54,6 +55,7 @@ import lombok.ToString;
 @ToString
 public class DefaultHistoryConfiguration implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 8178547799619418410L;
 
     /**

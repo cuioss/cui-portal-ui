@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.oauth;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -44,6 +45,7 @@ import lombok.ToString;
 @ToString(of = "authenticatedUserInfo", doNotUseGetters = true)
 public class OauthIFrameLogoutPageBean implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 7139554877749164888L;
 
     @Inject

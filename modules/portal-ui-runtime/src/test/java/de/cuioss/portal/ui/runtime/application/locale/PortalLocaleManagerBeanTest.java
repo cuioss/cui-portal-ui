@@ -67,9 +67,7 @@ class PortalLocaleManagerBeanTest implements ShouldHandleObjectContracts<PortalL
 
     @Test
     void shouldFailOnSavingInvalidLocale() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            underTest.saveUserLocale(Locale.SIMPLIFIED_CHINESE);
-        });
+        assertThrows(IllegalArgumentException.class, () -> underTest.saveUserLocale(Locale.SIMPLIFIED_CHINESE));
     }
 
     void actOnLocaleChangeEven(@Observes @LocaleChangeEvent final Locale newLocale) {

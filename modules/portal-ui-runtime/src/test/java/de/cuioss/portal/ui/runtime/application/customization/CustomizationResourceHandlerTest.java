@@ -15,13 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.customization;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -48,6 +41,8 @@ import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import de.cuioss.tools.io.IOStreams;
 import lombok.Getter;
 import lombok.Setter;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ CustomizationResourceProducer.class })
@@ -92,7 +87,7 @@ class CustomizationResourceHandlerTest
     void shouldIgnoreNotHandledResources() {
         final var resolved = getUnderTest().createResource(TEST_RESOURCE, MOCK_LIB);
         assertNotNull(resolved);
-        assertTrue(resolved instanceof CuiMockResource);
+        assertInstanceOf(CuiMockResource.class, resolved);
     }
 
     @Test
@@ -123,7 +118,7 @@ class CustomizationResourceHandlerTest
 
     private static void checkResource(final Resource resolved) throws IOException {
         assertNotNull(resolved, "Resource is null");
-        assertTrue(resolved instanceof CacheableResource, "Resource should be instance of CacheableResource");
+        assertInstanceOf(CacheableResource.class, resolved, "Resource should be instance of CacheableResource");
         assertNotNull(resolved.getContentType(), "Resource ContentType is missing");
         assertNotNull(resolved.getResourceName(), "Resource ResourceName is missing");
         assertNotNull(resolved.getLibraryName(), "Resource LibraryName is missing");

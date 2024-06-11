@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.bundle;
 
+import java.io.Serial;
 import java.util.Optional;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -36,6 +37,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class PortalDefaultResourceBundleLocator implements ResourceBundleLocator {
 
+    @Serial
     private static final long serialVersionUID = -8478481710191113463L;
 
     private static final String PATH = "de.cuioss.portal.ui.i18n.portal-messages";

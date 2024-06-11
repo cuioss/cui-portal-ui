@@ -130,7 +130,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
         if (!projectStageProvider.get().isDevelopment()) {
 
-            final var resourceNameMinified = createResourceNameInMinifiedSytle(resourceName);
+            final var resourceNameMinified = createResourceNameInMinifiedStyle(resourceName);
 
             if (null != resourceNameMinified && foundResources.get(libraryName).contains(resourceNameMinified))
                 return resourcePath.toPath().resolve(libraryName).resolve(resourceNameMinified).toFile();
@@ -139,7 +139,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
         return resourcePath.toPath().resolve(libraryName).resolve(resourceName).toFile();
     }
 
-    private static String createResourceNameInMinifiedSytle(final String resourceName) {
+    private static String createResourceNameInMinifiedStyle(final String resourceName) {
         final var parts = Splitter.on('.').trimResults().limit(2).splitToList(resourceName);
         if (!parts.isEmpty() && parts.size() > 1)
             return parts.get(0) + ".min." + parts.get(1);

@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -57,6 +58,7 @@ import lombok.ToString;
 @ToString(of = { "selectedLocale", "selectedTheme" }, doNotUseGetters = true)
 public class PreferencesPageBean implements PreferencesPage {
 
+    @Serial
     private static final long serialVersionUID = -1270494557240741123L;
 
     private static final String LOCALE_KEY_PREFIX = "common.locale.";
@@ -104,7 +106,7 @@ public class PreferencesPageBean implements PreferencesPage {
         availableLocales = new ArrayList<>();
         for (final Locale locale : localeManagerBean.getAvailableLocales()) {
             availableLocales.add(new SelectItem(locale, resourceBundle
-                    .getString(new StringBuilder(LOCALE_KEY_PREFIX).append(locale.getLanguage()).toString())));
+                    .getString(LOCALE_KEY_PREFIX + locale.getLanguage())));
         }
         selectedLocale = localeManagerBean.getUserLocale();
     }

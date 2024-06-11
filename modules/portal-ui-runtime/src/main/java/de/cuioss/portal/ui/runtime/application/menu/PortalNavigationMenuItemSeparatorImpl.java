@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.menu;
 
+import java.io.Serial;
 import java.util.Map;
 
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
@@ -32,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class PortalNavigationMenuItemSeparatorImpl extends PortalNavigationMenuConfigParser
         implements NavigationMenuItemSeparator {
 
+    @Serial
     private static final long serialVersionUID = -4539137375412075634L;
 
     @Getter

@@ -37,7 +37,7 @@ public class OauthRenewComponent extends UINamingContainer {
     private static final CuiLogger log = new CuiLogger(OauthRenewComponent.class);
 
     @Getter
-    private String loginUrl;
+    private final String loginUrl;
 
     @Getter
     private final String renewUrl;

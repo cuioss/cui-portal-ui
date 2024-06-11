@@ -46,7 +46,7 @@ import lombok.ToString;
  * @author Matthias Walliczek
  *
  */
-@ToString(of = "resourceFile", callSuper = false)
+@ToString(of = "resourceFile")
 @EqualsAndHashCode(of = "resourceFile", callSuper = false)
 public final class CustomizationResource extends CacheableResource {
 
@@ -114,7 +114,7 @@ public final class CustomizationResource extends CacheableResource {
         try {
             return resourceFile.toURI().toURL();
         } catch (final MalformedURLException e) {
-            log.warn("Portal-145: Customization resource '" + resourceFile.toString()
+            log.warn("Portal-145: Customization resource '" + resourceFile
                     + "' can not be resolved to an URL", e);
             throw new IllegalStateException(e);
         }

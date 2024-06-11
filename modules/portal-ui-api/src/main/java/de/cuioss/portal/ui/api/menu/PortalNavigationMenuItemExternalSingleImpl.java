@@ -21,6 +21,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * @author Oliver Wolff
  *
@@ -30,6 +32,7 @@ import lombok.ToString;
 public class PortalNavigationMenuItemExternalSingleImpl extends PortalNavigationMenuItemImplBase
         implements NavigationMenuItemExternalSingle {
 
+    @Serial
     private static final long serialVersionUID = -1489949340663388532L;
 
     @Getter

@@ -21,10 +21,13 @@ import de.cuioss.portal.ui.api.dashboard.PortalDashboardWidget;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
 
+import java.io.Serial;
+
 @PortalDashboardWidget
 @Dependent
 public class TestWidgetWithoutId extends AbstractTestWidget {
 
+    @Serial
     private static final long serialVersionUID = -9071842882930432524L;
 
     @Override

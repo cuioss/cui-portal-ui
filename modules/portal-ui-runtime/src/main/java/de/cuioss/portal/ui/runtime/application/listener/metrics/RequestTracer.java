@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.listener.metrics;
 import static de.cuioss.portal.configuration.MetricsConfigKeys.PORTAL_METRICS_ENABLED;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
@@ -53,6 +54,7 @@ public class RequestTracer implements Serializable {
 
     private static final CuiLogger log = new CuiLogger(RequestTracer.class);
 
+    @Serial
     private static final long serialVersionUID = 2706209506496310554L;
 
     private final Map<Integer, PhaseTracer> tracerMap = new HashMap<>();

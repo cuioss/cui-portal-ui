@@ -136,8 +136,6 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
     @Test
     void testNoConfig() {
         oauth2ConfigurationProducerMock.setConfiguration(null);
-        assertThrows(WeldException.class, () -> {
-            underTest.testLoginViewAction();
-        });
+        assertThrows(WeldException.class, () -> underTest.testLoginViewAction());
     }
 }

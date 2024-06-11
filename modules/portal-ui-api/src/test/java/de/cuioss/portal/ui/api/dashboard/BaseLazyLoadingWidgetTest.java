@@ -42,13 +42,13 @@ class BaseLazyLoadingWidgetTest
     void shouldDelegateHappyCase() {
         var underTest = getUnderTest();
 
-        assertDoesNotThrow(() -> underTest.startInitialize());
+        assertDoesNotThrow(underTest::startInitialize);
         assertDoesNotThrow(() -> underTest.processAction(null));
-        assertDoesNotThrow(() -> underTest.getRequestId());
-        assertDoesNotThrow(() -> underTest.getNotificationBoxState());
-        assertDoesNotThrow(() -> underTest.getNotificationBoxValue());
-        assertDoesNotThrow(() -> underTest.isInitialized());
-        assertDoesNotThrow(() -> underTest.isRenderContent());
+        assertDoesNotThrow(underTest::getRequestId);
+        assertDoesNotThrow(underTest::getNotificationBoxState);
+        assertDoesNotThrow(underTest::getNotificationBoxValue);
+        assertDoesNotThrow(underTest::isInitialized);
+        assertDoesNotThrow(underTest::isRenderContent);
     }
 
     @Test

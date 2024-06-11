@@ -48,7 +48,7 @@ public enum GlobalComponentIds {
     GLOBAL_PAGE_MESSAGES("globalPageMessages"),
 
     /**
-     * Main container identifer
+     * Main container identifier
      */
     MAIN_CONTENT("container"),
 

@@ -19,6 +19,7 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HA
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HANDLED_SUFFIXES;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_VERSION;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -38,7 +39,7 @@ import lombok.ToString;
  * {@link CuiResourceHandler}. Usually this are version information (for the
  * cache-buster-functionality) and library names that are to be under version
  * control.
- *
+ * <p>
  * The default implementation reads the Resource related configuration from the
  * configuration-sub-system, the keys are described at
  * {@link PortalConfigurationKeys}
@@ -50,6 +51,7 @@ import lombok.ToString;
 @ToString
 public class PortalResourceConfiguration implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -4555046242472132960L;
 
     @Inject

@@ -28,6 +28,8 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.tools.logging.CuiLogger;
 
+import java.io.Serial;
+
 /**
  * This feature is enabled by the configuration of the key
  * {@link PortalConfigurationKeys#PORTAL_LISTENER_TRACE_ENABLED}. In order to
@@ -42,6 +44,7 @@ public class TraceListener implements PhaseListener {
 
     private static final String DISABLED_BY_CONFIGURATION = "Disabled by configuration";
 
+    @Serial
     private static final long serialVersionUID = -3549927752283027321L;
 
     private static final CuiLogger LOGGER = new CuiLogger(TraceListener.class);

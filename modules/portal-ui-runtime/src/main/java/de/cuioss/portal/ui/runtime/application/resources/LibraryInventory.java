@@ -15,13 +15,14 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import java.io.Serializable;
-import java.util.concurrent.ConcurrentHashMap;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Helper class keeping track of the resources provided by concrete / theme /
@@ -34,25 +35,28 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class LibraryInventory implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -3201509823036422970L;
 
-    /** The library/theme name this Inventory object is related to. */
+    /**
+     * The library/theme name this Inventory object is related to.
+     */
     @Getter
     private final String libraryName;
 
     /**
-     * The currently used resouceNames / mapping. The resourceName is a key. The
-     * value can either be the resourcename or the min-variant if configured this
-     * way.
+     * The currently used resourceNames / mapping.
+     * The resourceName is a key.
+     * The value can either be the resource name or the min-variant if configured this way.
      */
     private final ConcurrentHashMap<String, String> resourceNameMapping = new ConcurrentHashMap<>();
 
     /**
      * Computes the library for a given resource.
      *
-     * @param resourceName identifying the resource, must not be null
+     * @param resourceName identifying the resource must not be null
      * @return The given resourceName or the min-variant if mapped within
-     *         resourceNameMapping.
+     * resourceNameMapping.
      */
     public String getResourceMapping(String resourceName) {
         return resourceNameMapping.get(resourceName);
@@ -60,7 +64,7 @@ public class LibraryInventory implements Serializable {
 
     /**
      * @param resourceName to be checked
-     * @return boolean indicating whether a mapping for this elements is available
+     * @return boolean indicating whether a mapping for this element is available
      */
     public boolean containsMapping(String resourceName) {
         return resourceNameMapping.containsKey(resourceName);

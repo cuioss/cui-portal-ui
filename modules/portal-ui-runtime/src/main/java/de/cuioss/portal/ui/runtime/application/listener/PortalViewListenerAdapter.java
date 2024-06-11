@@ -23,6 +23,8 @@ import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.runtime.application.listener.view.PortalCDIViewListener;
 
+import java.io.Serial;
+
 /**
  * Replacement for deltaspike phase listener. In essence it routes the
  * corresponding calls to {@link PortalRestoreViewListener}
@@ -30,6 +32,7 @@ import de.cuioss.portal.ui.runtime.application.listener.view.PortalCDIViewListen
 public class PortalViewListenerAdapter implements PhaseListener {
 
     private static final String UNABLE_TO_ACCESS_PORTAL_CDI_VIEW_LISTENER = "Unable to access PortalCDIViewListener";
+    @Serial
     private static final long serialVersionUID = -4417626731612443835L;
 
     @Override

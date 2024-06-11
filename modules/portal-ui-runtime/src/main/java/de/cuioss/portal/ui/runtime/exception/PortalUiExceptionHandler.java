@@ -29,7 +29,7 @@ import de.cuioss.tools.logging.CuiLogger;
 /**
  * CDI side of exceptionHandler, see {@link JSFPortalExceptionHandlerBridge} for
  * the other side.
- *
+ * <p>
  * The handle method is defined for being directly called by said bridge and
  * being listener, {@link Observes}, for {@link ExceptionAsEvent}
  */

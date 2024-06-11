@@ -34,7 +34,8 @@ import lombok.ToString;
 
 /**
  * Mock implementation of {@link FileWatcherService} that is solely capable of
- * managing paths. It is defiend as an {@link Alternative}, therefore you need
+ * managing paths.
+ * It is defined as an {@link Alternative}, therefore, you need
  * to activate it like <code><pre>
  *  &#64;ActivatedAlternatives(FileWatcherServiceMock.class)</pre></code>
  * <p>

@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.view;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -47,6 +48,7 @@ public class ViewTransientManagerBean implements Serializable {
      */
     static final String BEAN_NAME = "viewTransientManager";
 
+    @Serial
     private static final long serialVersionUID = -8225392922526412945L;
 
     @Getter

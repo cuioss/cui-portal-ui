@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.api.message;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import de.cuioss.jsf.api.components.css.ContextState;
@@ -34,6 +35,7 @@ import lombok.NonNull;
 @AllArgsConstructor
 public class StickyMessage implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -3226075374956046365L;
 
     /**

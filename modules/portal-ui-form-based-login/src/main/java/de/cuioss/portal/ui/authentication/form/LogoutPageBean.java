@@ -37,6 +37,8 @@ import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesLogout;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * @author Oliver Wolff
  */
@@ -48,6 +50,7 @@ import lombok.ToString;
 @ToString(doNotUseGetters = true)
 public class LogoutPageBean implements LogoutPage {
 
+    @Serial
     private static final long serialVersionUID = -3588577094632702649L;
 
     @Inject

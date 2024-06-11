@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.menu;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -44,6 +45,7 @@ import lombok.ToString;
 @ToString(of = { "displayMenu", "navigationMenuItems" })
 public class NavigationMenuPageBean implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 2241686723846198192L;
 
     private static final CuiLogger LOGGER = new CuiLogger(NavigationMenuPageBean.class);

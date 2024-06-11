@@ -17,28 +17,13 @@ package de.cuioss.portal.ui.runtime.application.lazyloading;
 
 import java.util.concurrent.Future;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-
 /**
  * DTO to store and retrieve {@link Future}s in {@link ThreadManager}.
+ *
+ * @param future    The {@link Future} to store.
+ * @param context   A context.
+ * @param timestamp Timestamp of creation in milliseconds.
  */
-@Data
-@RequiredArgsConstructor
-class FutureHandle {
+record FutureHandle(Future<?> future, Object context, long timestamp) {
 
-    /**
-     * The {@link Future} to store.
-     */
-    private final Future<?> future;
-
-    /**
-     * A context.
-     */
-    private final Object context;
-
-    /**
-     * Timestamp of creation in milliseconds.
-     */
-    private final long timestamp;
 }

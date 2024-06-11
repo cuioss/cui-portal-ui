@@ -41,6 +41,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * This listener checks the authorization status of a given request. It uses
  * {@link DefaultViewRestrictionManager} to determine the corresponding
@@ -57,6 +59,7 @@ import lombok.ToString;
 @ToString(of = "viewConfiguration")
 public class ViewAuthorizationListener implements ViewListener {
 
+    @Serial
     private static final long serialVersionUID = 8427405526881056257L;
 
     @Inject

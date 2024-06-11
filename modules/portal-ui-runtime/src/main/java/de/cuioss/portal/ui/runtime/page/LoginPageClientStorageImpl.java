@@ -20,6 +20,7 @@ import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERNAME;
 import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERSTORE;
 import static java.util.Objects.requireNonNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.function.Supplier;
 
@@ -46,6 +47,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class LoginPageClientStorageImpl implements LoginPageClientStorage, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 5017201224201952867L;
 
     @SuppressWarnings("cdi-ambiguous-dependency")

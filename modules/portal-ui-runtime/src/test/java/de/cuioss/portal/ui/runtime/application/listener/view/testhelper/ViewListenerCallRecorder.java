@@ -21,10 +21,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
+
 @EqualsAndHashCode
 @ToString
 public class ViewListenerCallRecorder implements ViewListener {
 
+    @Serial
     private static final long serialVersionUID = -7770258964826877169L;
 
     @Getter

@@ -44,6 +44,6 @@ public enum HandleOutcome {
     /**
      * The handler executed a redirect
      */
-    REDIRECT;
+    REDIRECT
 
 }

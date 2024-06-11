@@ -106,7 +106,7 @@ class CacheableResourceTest implements ShouldBeNotNull<CacheableResource>,
     }
 
     @Test
-    void shoultHandleEtagIfMotPresent() {
+    void shouldHandleEtagIfMotPresent() {
         var resource = new CacheableResource() {
 
             @Override

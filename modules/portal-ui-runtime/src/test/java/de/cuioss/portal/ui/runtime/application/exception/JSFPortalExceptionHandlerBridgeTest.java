@@ -48,7 +48,7 @@ import lombok.Setter;
         ViewRelatedExceptionHandler.class, PortalTestUserProducer.class, PortalHistoryManagerMock.class })
 class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
 
-    static final ViewDescriptor DESCRIPTOR_SUPRRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")
+    static final ViewDescriptor DESCRIPTOR_SUPPRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")
             .withLogicalViewId("suppressedViewId").build();
 
     @Setter
@@ -74,7 +74,7 @@ class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
 
     @Test
     void shouldHandleHappyCase() {
-        final var exception = new ViewSuppressedException(DESCRIPTOR_SUPRRESSED_VIEW);
+        final var exception = new ViewSuppressedException(DESCRIPTOR_SUPPRESSED_VIEW);
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         mockExceptionHandler.addUnhandledException(exception);
         underTest.handle();
@@ -82,6 +82,6 @@ class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_SUPPRESSED_KEY);
         mockExceptionHandler.assertHandleCalled();
         assertTrue(mockExceptionHandler.getUnhandledExceptionQueuedEvents().isEmpty(),
-                "Unhandled Excetpions should be empty");
+                "Unhandled Exceptions should be empty");
     }
 }

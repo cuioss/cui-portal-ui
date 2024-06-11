@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.application.bundle;
 
 import static de.cuioss.tools.collect.CollectionLiterals.mutableSet;
 
+import java.io.Serial;
 import java.util.Set;
 
 import jakarta.enterprise.context.SessionScoped;
@@ -34,6 +35,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class InstallationResourceBundleWrapperMock implements ResourceBundleWrapper {
 
+    @Serial
     private static final long serialVersionUID = 8403682810059890158L;
 
     @Override

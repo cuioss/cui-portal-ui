@@ -27,6 +27,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PAGES_LOGIN_ENTER_STRATEGY;
@@ -42,6 +43,7 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PAGES_LOGIN
 @ToString(of = "loginPageStrategy")
 public class PortalPagesConfiguration implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 6752537251543880784L;
 
     private static final CuiLogger log = new CuiLogger(PortalPagesConfiguration.class);

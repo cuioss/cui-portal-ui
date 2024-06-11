@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -39,6 +40,7 @@ import lombok.Getter;
 @EqualsAndHashCode(of = { "phaseOrdinal", "phaseName", "didRun" })
 public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
 
+    @Serial
     private static final long serialVersionUID = -8784042523143046556L;
 
     private static final CuiLogger log = new CuiLogger(PhaseTracer.class);

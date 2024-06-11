@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.api.menu;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 public class PortalNavigationMenuItemImplBase extends PortalNavigationMenuConfigParser implements NavigationMenuItem {
 
+    @Serial
     private static final long serialVersionUID = -7137939377092965593L;
 
     @Inject

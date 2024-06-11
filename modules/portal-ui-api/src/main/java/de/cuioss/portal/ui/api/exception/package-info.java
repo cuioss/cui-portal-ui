@@ -1,8 +1,8 @@
 /**
  * Provides methods and structure user for handling of exceptions.
- *
+ * <p>
  * In general it is a simplified variant of deltaspikes exception-handling
- *
+ * <p>
  * The preferred way of exception handling is:
  * <ul>
  * <li>Fire an event of type

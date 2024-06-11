@@ -36,6 +36,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * Checks whether the current page is to be suppressed and fires an
  * {@link ViewSuppressedException} if so.
@@ -50,6 +52,7 @@ import lombok.ToString;
 @ToString(of = "viewConfiguration")
 public class ViewSupressionListener implements ViewListener {
 
+    @Serial
     private static final long serialVersionUID = -1757867591272259164L;
 
     @Inject

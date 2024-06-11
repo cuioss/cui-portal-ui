@@ -34,7 +34,7 @@ class AbstractLoginPageBeanTest extends AbstractPageBeanTest<TestLoginPage> {
     @Getter
     private TestLoginPage underTest;
 
-    private PortalAuthenticationFacadeMock facadeMock = new PortalAuthenticationFacadeMock();
+    private final PortalAuthenticationFacadeMock facadeMock = new PortalAuthenticationFacadeMock();
 
     @BeforeEach
     void before() {

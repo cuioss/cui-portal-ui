@@ -39,6 +39,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * This listener checks the authorization status of a given request. In case the
  * injected {@link ViewConfiguration#getNonSecuredViewMatcher()} returns false
@@ -54,6 +56,7 @@ import lombok.ToString;
 @ToString(of = "viewConfiguration")
 public class ViewAuthenticationListener implements ViewListener {
 
+    @Serial
     private static final long serialVersionUID = 8427405526881056257L;
 
     private static final CuiLogger log = new CuiLogger(ViewAuthenticationListener.class);

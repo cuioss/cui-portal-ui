@@ -20,8 +20,10 @@ import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfigurati
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import jakarta.faces.lifecycle.ClientWindowScoped;
 import jakarta.inject.Inject;
 
+import org.jboss.weld.junit5.auto.ActivateScopes;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +41,7 @@ import lombok.Setter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
+@ActivateScopes(ClientWindowScoped.class)
 class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManagerBean>, JsfEnvironmentConsumer {
 
     @Inject

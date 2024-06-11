@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.theme;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_AVAILABLE;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_DEFAULT;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -43,6 +44,7 @@ import lombok.ToString;
 @ToString(of = { "availableThemes", "defaultTheme" }, doNotUseGetters = true)
 public class PortalThemeConfiguration implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 3077568114159593192L;
 
     private ThemeManager themeManager;

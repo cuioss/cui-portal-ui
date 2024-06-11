@@ -21,6 +21,7 @@ import static org.omnifaces.util.Faces.addResponseCookie;
 import static org.omnifaces.util.Faces.getRequestCookie;
 import static org.omnifaces.util.Faces.removeResponseCookie;
 
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,6 +56,7 @@ import lombok.ToString;
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 public class PortalClientStorageImpl implements ClientStorage {
 
+    @Serial
     private static final long serialVersionUID = 1573344347429735050L;
 
     private final Map<String, String> cache = new HashMap<>();

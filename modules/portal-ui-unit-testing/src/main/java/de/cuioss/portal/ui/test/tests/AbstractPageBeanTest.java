@@ -74,7 +74,7 @@ import lombok.Setter;
  *
  * @author Oliver Wolff
  *
- * @param <T> the actual bean under test, must be at least {@link Serializable}
+ * @param <T> the actual bean under test must be at least {@link Serializable}
  */
 @EnableGeneratorController
 public abstract class AbstractPageBeanTest<T extends Serializable>

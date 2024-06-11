@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.dashboard;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.DASHBOARD_WIDGET;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
@@ -46,6 +47,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class DashboardWidgetRegistration implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -8229255432062229719L;
 
     @Getter

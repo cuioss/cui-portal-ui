@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.application.templating;
 
 import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 
+import java.io.Serial;
 import java.util.List;
 
 import jakarta.enterprise.context.Dependent;
@@ -44,6 +45,7 @@ import lombok.ToString;
 @ToString
 public class PortalTemplates implements StaticTemplateDescriptor {
 
+    @Serial
     private static final long serialVersionUID = 1933293647595996193L;
 
     @Getter

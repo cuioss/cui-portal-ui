@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.common;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_MAX_INACTIVE_INTERVAL;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.enterprise.context.SessionScoped;
@@ -50,6 +51,7 @@ public class ClientWindowManager implements Serializable {
      */
     public static final String BEAN_NAME = "clientWindowManager";
 
+    @Serial
     private static final long serialVersionUID = 8603571267932838043L;
 
     @Inject

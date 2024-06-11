@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.test.tests.support;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.faces.view.ViewScoped;
@@ -29,6 +30,7 @@ import lombok.ToString;
 @ToString
 public class ViewBean implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1979191939901287141L;
 
     @Getter

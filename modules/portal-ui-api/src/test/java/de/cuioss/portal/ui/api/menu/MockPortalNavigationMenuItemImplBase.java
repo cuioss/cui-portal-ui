@@ -17,10 +17,13 @@ package de.cuioss.portal.ui.api.menu;
 
 import jakarta.enterprise.context.Dependent;
 
+import java.io.Serial;
+
 @Dependent
 public class MockPortalNavigationMenuItemImplBase extends PortalNavigationMenuItemImplBase {
 
     public static final String ID = "mock";
+    @Serial
     private static final long serialVersionUID = 4979985201723205870L;
 
     @Override

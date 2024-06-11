@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.api.authentication;
 
+import java.io.Serial;
 import java.util.Collection;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
@@ -32,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserNotAuthorizedException extends RuntimeException {
 
+    @Serial
     private static final long serialVersionUID = -2144266323935586941L;
 
     /** The view that is requested */

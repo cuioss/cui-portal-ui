@@ -20,6 +20,7 @@ import static de.cuioss.jsf.api.servlet.ServletAdapterUtil.getResponse;
 import static de.cuioss.portal.ui.oauth.WrappedOauthFacadeImpl.MESSAGES_IDENTIFIER;
 import static jakarta.faces.event.PhaseId.RENDER_RESPONSE;
 
+import java.io.Serial;
 import java.util.List;
 
 import jakarta.faces.application.FacesMessage;
@@ -45,6 +46,7 @@ import lombok.ToString;
 @ToString
 public class OauthMessagePhaseListener implements PhaseListener {
 
+    @Serial
     private static final long serialVersionUID = 837984685534479200L;
 
     private static final CuiLogger log = new CuiLogger(OauthMessagePhaseListener.class);

@@ -15,6 +15,7 @@
  */
 package de.icw.cui.portal.ui.errorpages;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -39,6 +40,7 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = true)
 public class Http401PageBean extends AbstractHttpErrorPage {
 
+    @Serial
     private static final long serialVersionUID = -2216275532091092216L;
 
     @Inject

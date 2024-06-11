@@ -91,7 +91,7 @@ public class FallBackExceptionHandler implements Serializable {
      * Actual handler, see class documentation for details.
      *
      * @param exceptionEvent to be handled
-     * @throws IllegalStateException in cased of prijectStage being Development
+     * @throws IllegalStateException in cased of projectStage being Development
      */
     public void handleFallBack(final ExceptionAsEvent exceptionEvent) {
         if (exceptionEvent.isHandled()) {

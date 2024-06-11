@@ -22,9 +22,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.faces.lifecycle.ClientWindowScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 
+import org.jboss.weld.junit5.auto.ActivateScopes;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +45,7 @@ import lombok.Getter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ HistoryManagerBean.class, DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
+@ActivateScopes(ClientWindowScoped.class)
 class LoginPageHistoryManagerProviderImplTest extends AbstractPageBeanTest<LoginPageHistoryManagerProviderImpl> {
 
     @Inject

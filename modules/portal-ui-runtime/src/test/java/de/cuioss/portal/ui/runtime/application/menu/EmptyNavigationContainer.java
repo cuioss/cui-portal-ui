@@ -18,9 +18,12 @@ package de.cuioss.portal.ui.runtime.application.menu;
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemContainerImpl;
 
+import java.io.Serial;
+
 @PortalMenuItem
 public class EmptyNavigationContainer extends PortalNavigationMenuItemContainerImpl {
 
+    @Serial
     private static final long serialVersionUID = 5073024579976343083L;
 
     public static final String LABEL_KEY = "portal.runtime.configuration.settings.menu.label";

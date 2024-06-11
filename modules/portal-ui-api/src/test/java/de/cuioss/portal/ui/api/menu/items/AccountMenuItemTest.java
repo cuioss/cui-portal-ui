@@ -28,7 +28,7 @@ import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 @EnableAutoWeld
 @AddBeanClasses(AccountMenuItem.class)
 @EnablePortalConfiguration
-class AcountMenuItemTest implements ShouldHandleObjectContracts<AccountMenuItem> {
+class AccountMenuItemTest implements ShouldHandleObjectContracts<AccountMenuItem> {
 
     @Inject
     @PortalMenuItem

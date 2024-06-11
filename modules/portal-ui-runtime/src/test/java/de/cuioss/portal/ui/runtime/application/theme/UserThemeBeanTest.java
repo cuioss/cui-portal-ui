@@ -45,9 +45,7 @@ class UserThemeBeanTest implements ShouldHandleObjectContracts<UserThemeBean> {
     @Test
     void shouldFailOnSavingInvalidThemeName() {
         var next = Generators.strings().next();
-        assertThrows(IllegalArgumentException.class, () -> {
-            underTest.saveTheme(next);
-        });
+        assertThrows(IllegalArgumentException.class, () -> underTest.saveTheme(next));
     }
 
     @Test

@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.api.menu;
 
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,10 +35,11 @@ import lombok.ToString;
  * configuration.
  */
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = false, doNotUseGetters = true)
+@ToString(doNotUseGetters = true)
 public class PortalNavigationMenuItemSingleImpl extends PortalNavigationMenuItemImplBase
         implements NavigationMenuItemSingle {
 
+    @Serial
     private static final long serialVersionUID = -4639141255087105993L;
 
     @Inject

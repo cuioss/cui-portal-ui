@@ -32,9 +32,12 @@ import de.cuioss.uimodel.result.ResultState;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+
 @RequestScoped
 public class TestLoginPage extends AbstractLoginPageBean {
 
+    @Serial
     private static final long serialVersionUID = -3147741576450873465L;
 
     @Getter

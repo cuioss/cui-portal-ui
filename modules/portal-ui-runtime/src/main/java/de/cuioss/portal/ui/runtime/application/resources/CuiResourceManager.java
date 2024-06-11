@@ -15,15 +15,15 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
+import jakarta.enterprise.context.ApplicationScoped;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 
 /**
  * A central application-scoped bean containing the computed information about
@@ -36,18 +36,19 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class CuiResourceManager implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -3598150198738923569L;
 
     private final ConcurrentHashMap<String, LibraryInventory> libraries = new ConcurrentHashMap<>();
 
     /**
-     * @param librayname defining the desired {@link LibraryInventory}. Must not be
-     *                   null.
+     * @param libraryName defining the desired {@link LibraryInventory}.
+     *                    Must not be null.
      * @return the found {@link LibraryInventory}. If there is no corresponding
-     *         library there it will create one.
+     * library there, it will create one.
      */
-    public LibraryInventory getLibraryInventory(String librayname) {
-        requireNotEmpty(librayname);
-        return libraries.computeIfAbsent(librayname, v -> new LibraryInventory(librayname));
+    public LibraryInventory getLibraryInventory(String libraryName) {
+        requireNotEmpty(libraryName);
+        return libraries.computeIfAbsent(libraryName, v -> new LibraryInventory(libraryName));
     }
 }

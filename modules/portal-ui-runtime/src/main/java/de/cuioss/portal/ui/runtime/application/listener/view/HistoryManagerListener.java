@@ -38,6 +38,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * Listener that calls
  * {@link HistoryManager#addCurrentUriToHistory(ViewDescriptor)}
@@ -51,6 +53,7 @@ import lombok.ToString;
 @ToString
 public class HistoryManagerListener implements ViewListener {
 
+    @Serial
     private static final long serialVersionUID = 6342018758236517336L;
 
     @Inject

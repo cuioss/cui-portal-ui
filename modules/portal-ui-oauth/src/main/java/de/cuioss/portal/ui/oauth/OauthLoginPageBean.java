@@ -42,6 +42,8 @@ import de.cuioss.uimodel.result.ResultObject;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * Page Bean for the Oauth2 Login Page Bean. Supports two mode:
  * <ul>
@@ -64,6 +66,7 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
 
     private static final CuiLogger log = new CuiLogger(OauthLoginPageBean.class);
 
+    @Serial
     private static final long serialVersionUID = 5261664290647994366L;
 
     @Inject

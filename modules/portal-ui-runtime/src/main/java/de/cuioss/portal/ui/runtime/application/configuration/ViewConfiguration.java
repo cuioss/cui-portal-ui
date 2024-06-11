@@ -27,6 +27,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.*;
@@ -42,6 +43,7 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.*;
 @ToString(of = {"nonSecuredViewMatcher", "transientViewMatcher", "suppressedViewMatcher"})
 public class ViewConfiguration implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -2477375866558117201L;
 
     private static final CuiLogger log = new CuiLogger(ViewConfiguration.class);

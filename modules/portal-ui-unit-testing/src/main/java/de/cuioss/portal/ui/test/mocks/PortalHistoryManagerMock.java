@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,6 +36,7 @@ import lombok.Setter;
 @ApplicationScoped
 public class PortalHistoryManagerMock implements HistoryManager {
 
+    @Serial
     private static final long serialVersionUID = -3934691506290620858L;
 
     /** The home navigation view */
@@ -50,7 +52,7 @@ public class PortalHistoryManagerMock implements HistoryManager {
     private boolean pageReload = false;
 
     /** The storage for the history. */
-    private List<ViewIdentifier> history;
+    private final List<ViewIdentifier> history;
 
     @Getter
     @Setter

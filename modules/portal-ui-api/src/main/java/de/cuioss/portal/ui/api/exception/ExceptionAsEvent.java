@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.api.exception;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import lombok.EqualsAndHashCode;
@@ -22,19 +23,20 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * Simplified version of deltaspikes ExceptionToCatchEvent
+ * Simplified version of deltaspike's ExceptionToCatchEvent
  */
 @EqualsAndHashCode
 @ToString
 public class ExceptionAsEvent implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -1422214652443353900L;
 
     @Getter
     private HandleOutcome outcome;
 
     @Getter
-    private Throwable exception;
+    private final Throwable exception;
 
     public ExceptionAsEvent(Throwable exception) {
         this.exception = exception;

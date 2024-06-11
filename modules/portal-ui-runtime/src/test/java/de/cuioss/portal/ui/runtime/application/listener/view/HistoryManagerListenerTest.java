@@ -23,8 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import jakarta.faces.lifecycle.ClientWindowScoped;
 import jakarta.inject.Inject;
 
+import org.jboss.weld.junit5.auto.ActivateScopes;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +45,7 @@ import lombok.Setter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ HistoryManagerBean.class, DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
+@ActivateScopes(ClientWindowScoped.class)
 class HistoryManagerListenerTest
         implements ShouldHandleObjectContracts<HistoryManagerListener>, JsfEnvironmentConsumer {
 

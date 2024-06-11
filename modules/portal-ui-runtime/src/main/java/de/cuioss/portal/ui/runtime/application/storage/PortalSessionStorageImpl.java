@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.application.storage;
 
 import static de.cuioss.portal.ui.api.PortalCoreBeanNames.SESSION_STORAGE_BEAN_NAME;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.enterprise.context.SessionScoped;
@@ -41,6 +42,7 @@ import de.cuioss.portal.core.storage.impl.MapStorageImpl;
 @Named(SESSION_STORAGE_BEAN_NAME)
 public class PortalSessionStorageImpl extends MapStorageImpl<Serializable, Serializable> implements SessionStorage {
 
+    @Serial
     private static final long serialVersionUID = 1573344347429735050L;
 
 }

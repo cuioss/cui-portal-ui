@@ -19,11 +19,14 @@ import de.cuioss.tools.logging.CuiLogger;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+
 public class MissingScopesException extends RuntimeException {
 
     /**
      *
      */
+    @Serial
     private static final long serialVersionUID = 8581994138550480544L;
 
     private static final CuiLogger log = new CuiLogger(MissingScopesException.class);

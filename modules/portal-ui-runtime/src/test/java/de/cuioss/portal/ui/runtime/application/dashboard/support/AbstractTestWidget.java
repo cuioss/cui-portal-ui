@@ -15,17 +15,19 @@
  */
 package de.cuioss.portal.ui.runtime.application.dashboard.support;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import de.cuioss.jsf.api.components.model.widget.BaseDeferredLoadingWidget;
 import de.cuioss.jsf.api.components.model.widget.ListItem;
 import de.cuioss.jsf.api.components.model.widget.ListItemWidgetModel;
 import de.cuioss.tools.string.MoreStrings;
 
-public abstract class AbstractTestWidget extends BaseDeferredLoadingWidget<ArrayList<ListItem>>
-        implements ListItemWidgetModel {
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.List;
 
+public abstract class AbstractTestWidget extends BaseDeferredLoadingWidget<ArrayList<ListItem>>
+    implements ListItemWidgetModel {
+
+    @Serial
     private static final long serialVersionUID = 8583462862065649466L;
 
     @Override
@@ -34,10 +36,11 @@ public abstract class AbstractTestWidget extends BaseDeferredLoadingWidget<Array
     }
 
     /**
-     * @return the id of the in this module defined composite component that should
-     *         be used as default for this implementations of this abstract widget
-     *         class. May be overridden by a different id of a more specific
-     *         composite component.
+     * @return the id of the within this module defined composite component that should
+     * be used as default for this implementation of this abstract widget
+     * class.
+     * May be overridden by a different id of a more specific
+     * composite component.
      */
     @Override
     public String getCompositeComponentId() {

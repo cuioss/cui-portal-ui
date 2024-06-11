@@ -29,6 +29,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
@@ -38,9 +39,10 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALE_DEFA
 import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 
 /**
- * Defines the locale configuration for the CUI-portal. Instead of using the
- * built-in mechanics of jsf we use a custom one in order to configure it with
- * our property based configuration system. It consumes the properties
+ * Defines the locale configuration for the CUI portal.
+ * Instead of using the built-in mechanics of jsf we use a custom one to configure it with
+ * our property-based configuration system.
+ * It consumes the properties
  * {@link PortalConfigurationKeys#LOCALE_DEFAULT} and
  * {@link PortalConfigurationKeys#LOCALES_AVAILABLE}
  *
@@ -52,6 +54,7 @@ import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 @ToString(of = {"defaultLocale", "availableLocales"})
 public class LocaleConfiguration implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 4249111201638474035L;
 
     private static final CuiLogger log = new CuiLogger(LocaleConfiguration.class);

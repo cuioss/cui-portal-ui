@@ -120,7 +120,7 @@ _Caution_: it will check less detailed compared to previous variants. If you wan
 
 === Testing with PortalMessageProducer
 
-If you experience: `Could not load bean of type MessageProducer and name #{messageProducer}`
+If you experience: `Could not load bean of type MessageProducer and name 'messageProducer'
 setup your test class as following:
 
 [source,java]

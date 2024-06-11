@@ -21,6 +21,7 @@ import static de.cuioss.tools.collect.MoreCollections.isEmpty;
 import static de.cuioss.tools.string.MoreStrings.isBlank;
 import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,7 @@ import lombok.ToString;
 @ToString
 public class ThemeManager implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 2368337948482686947L;
 
     private static final CuiLogger log = new CuiLogger(ThemeManager.class);
@@ -69,7 +71,7 @@ public class ThemeManager implements Serializable {
         var mapBuilder = new MapBuilder<String, String>();
         for (String themeName : themeConfiguration.getAvailableThemes()) {
             mapBuilder.put(themeName,
-                    new StringBuilder(CSS_PREFEXI_NAME).append(themeName.toLowerCase()).append(CSS_SUFFIX).toString());
+                CSS_PREFEXI_NAME + themeName.toLowerCase() + CSS_SUFFIX);
         }
         themeNameCssMapping = mapBuilder.toImmutableMap();
     }

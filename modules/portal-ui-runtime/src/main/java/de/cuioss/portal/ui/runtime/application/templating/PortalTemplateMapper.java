@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.templating;
 import static de.cuioss.portal.ui.api.PortalCoreBeanNames.MULTI_TEMPLATING_MAPPER_BEAN_NAME;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
+import java.io.Serial;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +62,7 @@ import lombok.ToString;
 @ToString(of = "templateMap")
 public class PortalTemplateMapper implements MultiTemplatingMapper {
 
+    @Serial
     private static final long serialVersionUID = -8398917391620682636L;
 
     private static final CuiLogger log = new CuiLogger(PortalTemplateMapper.class);

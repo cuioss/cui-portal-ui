@@ -23,6 +23,8 @@ import de.cuioss.portal.ui.api.ui.pages.LogoutPage;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * <p>
  * Default representation of the logout menu item. The order is 48. It has
@@ -38,6 +40,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class LogoutMenuItem extends PortalNavigationMenuItemSingleImpl {
 
+    @Serial
     private static final long serialVersionUID = -1265061305901788409L;
 
     /** The label Key for this component. */

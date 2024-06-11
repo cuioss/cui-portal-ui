@@ -17,6 +17,8 @@ package de.cuioss.portal.ui.api.authentication;
 
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 
+import java.io.Serial;
+
 /**
  * To be fired if a user is not authenticated. It will be derived from
  * {@link AuthenticatedUserInfo#isAuthenticated()}
@@ -25,6 +27,7 @@ import de.cuioss.portal.authentication.AuthenticatedUserInfo;
  */
 public class UserNotAuthenticatedException extends RuntimeException {
 
+    @Serial
     private static final long serialVersionUID = -587461529456917746L;
 
 }

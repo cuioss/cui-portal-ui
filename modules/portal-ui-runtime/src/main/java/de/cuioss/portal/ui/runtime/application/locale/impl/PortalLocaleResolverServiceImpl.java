@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.application.locale.impl;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALE_DEFAULT;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
@@ -56,6 +57,7 @@ import lombok.ToString;
 @ToString(of = { "locale", "availableLocales" }, doNotUseGetters = true)
 public class PortalLocaleResolverServiceImpl implements LocaleResolverService, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 2745227675026232302L;
 
     private Locale locale;
@@ -64,14 +66,14 @@ public class PortalLocaleResolverServiceImpl implements LocaleResolverService, S
     private List<Locale> availableLocales;
 
     @Inject
-    private Provider<FacesContext> facesContextProvider;
+    Provider<FacesContext> facesContextProvider;
 
     @Inject
-    private LocaleConfiguration localeConfiguration;
+    LocaleConfiguration localeConfiguration;
 
     @Inject
     @PortalClientStorage
-    private ClientStorage clientStorage;
+    ClientStorage clientStorage;
 
     /**
      * Initializer method for the bean

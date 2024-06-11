@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.page;
 import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERNAME;
 import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERSTORE;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -47,6 +48,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryManagerProvider, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 6346481935899028211L;
 
     @Inject

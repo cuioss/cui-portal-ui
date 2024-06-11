@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.locale;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
@@ -59,6 +60,7 @@ import lombok.ToString;
 @ToString(of = "locale")
 public class PortalLocaleManagerBean implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -3555387539352353982L;
 
     @Inject

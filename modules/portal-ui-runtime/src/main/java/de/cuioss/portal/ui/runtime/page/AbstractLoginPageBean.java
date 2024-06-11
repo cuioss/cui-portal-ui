@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.page;
 import static de.cuioss.jsf.api.application.navigation.NavigationUtils.getCurrentView;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.function.Supplier;
 
@@ -51,6 +52,7 @@ public abstract class AbstractLoginPageBean implements Serializable {
 
     private static final CuiLogger LOGGER = new CuiLogger(AbstractLoginPageBean.class);
 
+    @Serial
     private static final long serialVersionUID = 4152088404239660075L;
 
     private static final LabeledKey UNABLE_TO_LOGIN_MSG = new LabeledKey(AuthenticationResults.KEY_UNABLE_TO_LOGIN);
@@ -68,7 +70,7 @@ public abstract class AbstractLoginPageBean implements Serializable {
     private Event<LoginEvent> loginEvent;
 
     /**
-     * Trigger the login action, e.g. after clicking at the "login" button.
+     * Trigger the login action, e.g., after clicking at the "login" button.
      *
      * @param targetSupplier the target to redirect to after successful login, e.g.
      *                       {@link HistoryManager#getCurrentView}. To handle

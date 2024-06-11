@@ -17,6 +17,7 @@ package de.icw.cui.portal.ui.errorpages;
 
 import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.faces.context.FacesContext;
@@ -44,6 +45,7 @@ public abstract class AbstractHttpErrorPage implements Serializable {
     private static final String UNKNOWN = "?";
     static final String JAVAX_SERVLET_ERROR_REQUEST_URI = "javax.servlet.error.request_uri";
 
+    @Serial
     private static final long serialVersionUID = -6617663225820801072L;
 
     @Inject

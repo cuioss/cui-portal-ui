@@ -29,6 +29,8 @@ import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemContainerImpl;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * <p>
  * Default representation of the user menu.
@@ -46,6 +48,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class UserMenuItem extends PortalNavigationMenuItemContainerImpl {
 
+    @Serial
     private static final long serialVersionUID = 1452093785009425867L;
 
     private static final String USER_MENU_TITLE_KEY = "com.icw.ehf.commons.portal.menu.user.title";

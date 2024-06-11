@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.api.test.support;
 
+import java.io.Serial;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Set;
@@ -38,6 +39,7 @@ import lombok.ToString;
 @ToString
 public class PortalResourceBundleMock implements ResourceBundleWrapper {
 
+    @Serial
     private static final long serialVersionUID = 3953649686127640297L;
 
     @Override

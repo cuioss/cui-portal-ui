@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.history;
 import static de.cuioss.tools.string.MoreStrings.emptyToNull;
 import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
+import java.io.Serial;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -39,7 +40,7 @@ import lombok.ToString;
 
 /**
  * Bean keeping track of the view history. For configuration see package-info
- * The implementation utilizes a stack to store the history.
+ * The implementation uses a stack to store the history.
  *
  * @author Oliver Wolff
  */
@@ -47,6 +48,7 @@ import lombok.ToString;
 @ToString
 class HistoryManagerImpl implements HistoryManager {
 
+    @Serial
     private static final long serialVersionUID = 2205593126500409010L;
 
     private static final CuiLogger log = new CuiLogger(HistoryManagerImpl.class);

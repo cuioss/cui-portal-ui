@@ -20,6 +20,7 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 import static java.text.MessageFormat.format;
 import static java.util.Objects.requireNonNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
@@ -47,6 +48,7 @@ import lombok.ToString;
 @ToString(of = "messageSet", doNotUseGetters = true)
 public class StickyMessageProducerBean implements Serializable, StickyMessageProducer {
 
+    @Serial
     private static final long serialVersionUID = -7985606463263784288L;
 
     private final Set<StickyMessage> messageSet = new HashSet<>();

@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.test.mocks;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.Serial;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,6 +45,7 @@ import lombok.ToString;
 @ToString
 public class PortalViewRestrictionManagerMock implements ViewRestrictionManager {
 
+    @Serial
     private static final long serialVersionUID = 5290360665409615415L;
 
     /**

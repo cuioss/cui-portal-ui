@@ -20,6 +20,7 @@ import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -74,6 +75,7 @@ import lombok.ToString;
 @ToString(of = { "navigationMenuRoots" })
 public class NavigationMenuProviderImpl implements NavigationMenuProvider {
 
+    @Serial
     private static final long serialVersionUID = 8780699386708876208L;
     private static final CuiLogger LOGGER = new CuiLogger(NavigationMenuProviderImpl.class);
 

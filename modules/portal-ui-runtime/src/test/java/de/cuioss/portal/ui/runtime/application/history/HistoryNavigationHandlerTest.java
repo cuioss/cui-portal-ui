@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import jakarta.faces.application.ConfigurableNavigationHandler;
+import jakarta.faces.lifecycle.ClientWindowScoped;
 import jakarta.inject.Inject;
 
+import org.jboss.weld.junit5.auto.ActivateScopes;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,7 @@ import lombok.Setter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ DefaultHistoryConfiguration.class, HistoryManagerBean.class, ViewMatcherProducer.class })
+@ActivateScopes(ClientWindowScoped.class)
 class HistoryNavigationHandlerTest implements JsfEnvironmentConsumer {
 
     public static final String PORTAL_HOME_JSF = "/portal/home.jsf";

@@ -29,6 +29,8 @@ import de.cuioss.uimodel.result.ResultObject;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+
 /**
  * @author Oliver Wolff
  * @param <T>
@@ -37,6 +39,7 @@ import lombok.Setter;
 @Dependent
 public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadModel<T> {
 
+    @Serial
     private static final long serialVersionUID = 8611619042199216440L;
 
     private static final CuiLogger log = new CuiLogger(PortalLazyLoadingThreadModelMock.class);

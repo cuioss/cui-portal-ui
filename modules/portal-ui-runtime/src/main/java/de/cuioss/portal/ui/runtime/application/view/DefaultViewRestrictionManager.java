@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.view;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.CONTEXT_PARAM_SEPARATOR;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.VIEW_ROLE_RESTRICTION_PREFIX;
 
+import java.io.Serial;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -59,6 +60,7 @@ import lombok.ToString;
 @ToString(of = "roleMatcherMap")
 public class DefaultViewRestrictionManager implements ViewRestrictionManager {
 
+    @Serial
     private static final long serialVersionUID = -3987276415425723519L;
 
     @Inject

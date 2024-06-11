@@ -69,9 +69,7 @@ public class PortalNavigationMenuItemsTest {
     public List<NavigationMenuItem> getFilteredInstances() {
         Optional<VetoType> vetoAnnotationOptional = MoreReflection.extractAnnotation(this.getClass(), VetoType.class);
         final List<Class<?>> vetoedClasses = mutableList();
-        if (vetoAnnotationOptional.isPresent()) {
-            vetoedClasses.addAll(mutableList(vetoAnnotationOptional.get().value()));
-        }
+        vetoAnnotationOptional.ifPresent(vetoType -> vetoedClasses.addAll(mutableList(vetoType.value())));
         return instances.stream().filter(item -> !vetoedClasses.contains(item.getClass())).toList();
     }
 }

@@ -145,12 +145,12 @@ public class ThreadManager implements ApplicationInitializer {
 
                 synchronized (registry) {
                     for (final Map.Entry<Long, FutureHandle> entry : registry.entrySet()) {
-                        if ((System.currentTimeMillis() - entry.getValue().getTimestamp())
+                        if ((System.currentTimeMillis() - entry.getValue().timestamp())
                             / 1000 > requestHandleTimeout) {
 
                             log.debug("timeout. terminating id={}, future={}", entry.getKey(), entry.getValue());
 
-                            entry.getValue().getFuture().cancel(true);
+                            entry.getValue().future().cancel(true);
                             registry.remove(entry.getKey());
                             break;
                         }

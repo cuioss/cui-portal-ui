@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view.testhelper;
 
+import java.io.Serial;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,6 +38,7 @@ import lombok.Data;
 @Dependent
 public class StickyMessageProviderMock implements StickyMessageProvider {
 
+    @Serial
     private static final long serialVersionUID = -2569248357894675575L;
 
     private Set<StickyMessage> messages = new HashSet<>(0);

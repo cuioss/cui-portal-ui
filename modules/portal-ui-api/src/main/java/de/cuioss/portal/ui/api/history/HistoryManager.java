@@ -15,18 +15,16 @@
  */
 package de.cuioss.portal.ui.api.history;
 
-import java.io.Serializable;
-
+import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.tools.net.ParameterFilter;
+import jakarta.annotation.PostConstruct;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.ComponentSystemEvent;
 import jakarta.faces.event.PhaseListener;
 import jakarta.faces.event.PostAddToViewEvent;
 
-import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
-
-import jakarta.annotation.PostConstruct;
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.tools.net.ParameterFilter;
+import java.io.Serializable;
 
 /**
  * Implementations will keep track of the client side history
@@ -37,8 +35,8 @@ public interface HistoryManager extends Serializable, Iterable<ViewIdentifier> {
 
     /**
      * @return the current view, that is not put history yet. If no navigation done
-     *         before, the default "home" configured {@linkplain ViewIdentifier}
-     *         will be retrieved
+     * before, the default "home" configured {@linkplain ViewIdentifier}
+     * will be retrieved
      */
     ViewIdentifier getCurrentView();
 
@@ -84,16 +82,17 @@ public interface HistoryManager extends Serializable, Iterable<ViewIdentifier> {
     ParameterFilter getParameterFilter();
 
     /**
-     * @return the previous page. If there is none found it returns the defaultpage.
-     *         The found ViewIdentifer, if it is not the fallback, will be
-     *         <em>removed</em> from the history
+     * @return the previous page.
+     * If there is none found, it returns the default page.
+     * The found ViewIdentifier, if it is not the fallback, will be
+     * <em>removed</em> from the history
      */
     ViewIdentifier popPrevious();
 
     /**
      * @return the previous page. If there is none found it returns the default
-     *         page. The found ViewIdentifer, if it is not the fallback, will be
-     *         <em>kept</em> from the history
+     * page. The found ViewIdentifer, if it is not the fallback, will be
+     * <em>kept</em> from the history
      */
     ViewIdentifier peekPrevious();
 

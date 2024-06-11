@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.application.lazyloading;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_RETRIEVE_TIMEOUT;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Random;
 import java.util.concurrent.CancellationException;
@@ -53,7 +54,7 @@ import lombok.ToString;
 /**
  * Implementation of a {@link LazyLoadingThreadModel} using the
  * {@link ThreadManager} to retrieve the result and errors from the request.
- *
+ * <p>
  * Will wait max
  * {@link PortalConfigurationKeys#PORTAL_LAZYLOADING_REQUEST_RETRIEVE_TIMEOUT}
  * for the request to return, otherwise it will be terminated.
@@ -69,6 +70,7 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
     // identification of threads
     private static final Random RANDOM = new Random();
 
+    @Serial
     private static final long serialVersionUID = -3343380539839996245L;
 
     private static final CuiLogger log = new CuiLogger(LazyLoadingViewModelImpl.class);
@@ -101,11 +103,11 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
     private boolean initialized;
 
     @Getter
-    private long requestId = RANDOM.nextLong();
+    private final long requestId = RANDOM.nextLong();
 
     /**
      * Will be called by the ajax call to update the lazy loading content.
-     *
+     * <p>
      * Tries to retrieve the result of the backend call and handles errors.
      *
      * @param actionEvent dummy.
@@ -120,9 +122,9 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
             initialized = true;
             return;
         }
-        var request = (LazyLoadingRequest<T>) handle.getContext();
+        var request = (LazyLoadingRequest<T>) handle.context();
         try {
-            var result = (ResultObject<T>) handle.getFuture().get(requestRetrieveTimeout, TimeUnit.SECONDS);
+            var result = (ResultObject<T>) handle.future().get(requestRetrieveTimeout, TimeUnit.SECONDS);
             log.trace("result of {}: {}", requestId, result);
             handleRequestResult(result, request.getErrorHandler());
             request.handleResult(result.getResult());

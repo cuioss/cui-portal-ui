@@ -21,6 +21,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * To be thrown at if a view needs to be supressed.
  *
@@ -28,9 +30,10 @@ import lombok.ToString;
  */
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@ToString(callSuper = false)
+@ToString()
 public class ViewSuppressedException extends RuntimeException {
 
+    @Serial
     private static final long serialVersionUID = 7490217437815485262L;
 
     @Getter

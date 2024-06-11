@@ -42,7 +42,7 @@ public abstract class PortalNavigationMenuConfigParser {
 
     /**
      * Evaluates the order to sort the menu items.
-     *
+     * <p>
      * See also
      * {@link de.icw.cui.portal.configuration.PortalConfigurationKeys#MENU_BASE}.
      *
@@ -68,10 +68,10 @@ public abstract class PortalNavigationMenuConfigParser {
 
     /**
      * Evaluates the rendered attributes
-     *
+     * <p>
      * Defaults to true if the .order config key is set and .enabled config key is
      * not set or set to true.
-     *
+     * <p>
      * See also
      * {@link de.icw.cui.portal.configuration.PortalConfigurationKeys#MENU_BASE}.
      *

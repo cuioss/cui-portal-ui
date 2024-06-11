@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.theme;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_DEFAULT;
 import static de.cuioss.tools.base.Preconditions.checkArgument;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.enterprise.context.SessionScoped;
@@ -48,6 +49,7 @@ import lombok.ToString;
 @ToString
 public class UserThemeBean implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 5242120351578770611L;
 
     @Inject

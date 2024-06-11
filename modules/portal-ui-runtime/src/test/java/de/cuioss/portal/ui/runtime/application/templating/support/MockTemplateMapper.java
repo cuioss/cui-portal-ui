@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating.support;
 
+import java.io.Serial;
 import java.net.URL;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -31,6 +32,7 @@ import lombok.Setter;
 @Alternative
 public class MockTemplateMapper implements MultiTemplatingMapper {
 
+    @Serial
     private static final long serialVersionUID = 5885265658897055337L;
 
     @Getter

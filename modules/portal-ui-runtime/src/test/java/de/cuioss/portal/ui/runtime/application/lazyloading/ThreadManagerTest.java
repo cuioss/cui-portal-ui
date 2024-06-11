@@ -60,9 +60,9 @@ class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
         assertNull(underTest.retrieve(2));
         var handle = underTest.retrieve(1);
         assertNotNull(handle);
-        assertEquals("A", handle.getContext());
-        assertNotNull(handle.getFuture());
-        assertEquals("Test", handle.getFuture().get());
+        assertEquals("A", handle.context());
+        assertNotNull(handle.future());
+        assertEquals("Test", handle.future().get());
         assertNull(underTest.retrieve(1));
     }
 

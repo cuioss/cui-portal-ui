@@ -19,6 +19,7 @@ import static de.cuioss.portal.authentication.oauth.OAuthConfigKeys.OPEN_ID_CLIE
 import static de.cuioss.tools.string.MoreStrings.isBlank;
 import static de.cuioss.tools.string.MoreStrings.isPresent;
 
+import java.io.Serial;
 import java.util.Optional;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -67,6 +68,7 @@ import lombok.ToString;
 @ToString
 public class OauthLogoutPageBean implements LogoutPage {
 
+    @Serial
     private static final long serialVersionUID = -3588577094632702649L;
 
     private static final CuiLogger LOGGER = new CuiLogger(OauthLogoutPageBean.class);

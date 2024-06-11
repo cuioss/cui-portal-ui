@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.lazyloading;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.enterprise.context.Dependent;
@@ -36,6 +37,7 @@ import lombok.ToString;
 @ToString(exclude = { "threadManager" })
 public class LazyLoadingViewControllerImpl implements LazyLoadingViewController, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 4698361355745984370L;
 
     private static final CuiLogger log = new CuiLogger(LazyLoadingViewControllerImpl.class);

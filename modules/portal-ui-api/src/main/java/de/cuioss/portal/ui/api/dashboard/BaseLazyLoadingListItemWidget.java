@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
+import java.io.Serial;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,13 +32,14 @@ public abstract class BaseLazyLoadingListItemWidget<T> extends BaseLazyLoadingWi
         implements ListItemWidgetModel, DashboardWidgetModel {
 
     /**
-     * the id of the in this module defined composite component that should be used
-     * as default for this implementations of this abstract widget class. May be
-     * overridden by a different id of a more specific composite component.
+     * The id of the within this module defined composite component that should be used
+     * as default for this implementation of this abstract widget class.
+     * May be overridden by a different id of a more specific composite component.
      */
     @Getter
-    private String compositeComponentId = "cui-composite:listItemWidget";
+    private final String compositeComponentId = "cui-composite:listItemWidget";
 
+    @Serial
     private static final long serialVersionUID = -9216862082387228019L;
 
     @Getter

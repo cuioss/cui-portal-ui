@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
+import java.io.Serial;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import de.cuioss.uimodel.result.ResultObject;
 
 class TestLazyLoadingListItemWidget extends BaseLazyLoadingListItemWidget<String> {
 
+    @Serial
     private static final long serialVersionUID = 5105699369583115904L;
 
     @Override

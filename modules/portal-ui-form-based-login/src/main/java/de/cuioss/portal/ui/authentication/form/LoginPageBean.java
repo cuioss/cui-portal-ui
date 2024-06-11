@@ -20,6 +20,7 @@ import static de.cuioss.portal.ui.api.GlobalComponentIds.LOGIN_PAGE_USER_NAME;
 import static de.cuioss.portal.ui.api.GlobalComponentIds.LOGIN_PAGE_USER_PASSWORD;
 import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,8 +62,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Page bean for the login. it is {@link RequestScoped} in order to be used with
- * non-transient views.
+ * Page bean for the login.
+ * It is {@link RequestScoped} in order to be used with non-transient views.
  */
 @PortalCorePagesLogin
 @Named(LoginPage.BEAN_NAME)
@@ -72,6 +73,7 @@ import lombok.ToString;
 @ToString(of = { "loginCredentials", "availableUserStores" }, doNotUseGetters = true)
 public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
 
+    @Serial
     private static final long serialVersionUID = 8709729494565906154L;
 
     @Getter

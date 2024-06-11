@@ -53,9 +53,7 @@ class PortalLocaleResolverServiceImplTest implements ShouldHandleObjectContracts
     @Test
     void shouldFailOnSavingInvalidLocale() {
         assertEquals(Locale.ENGLISH, underTest.resolveUserLocale());
-        assertThrows(IllegalArgumentException.class, () -> {
-            underTest.saveUserLocale(Locale.SIMPLIFIED_CHINESE);
-        });
+        assertThrows(IllegalArgumentException.class, () -> underTest.saveUserLocale(Locale.SIMPLIFIED_CHINESE));
     }
 
 }

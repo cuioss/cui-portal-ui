@@ -19,6 +19,8 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.Serial;
+
 /**
  * Page Bean for the error-code 403 (Forbidden)
  *
@@ -29,6 +31,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Named
 public class Http403PageBean extends AbstractHttpErrorPage {
 
+    @Serial
     private static final long serialVersionUID = -2216275532091092216L;
 
     @Override
