@@ -15,34 +15,28 @@
  */
 package de.cuioss.portal.ui.authentication.form;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.authentication.LoginEvent;
 import de.cuioss.portal.authentication.PortalLoginEvent;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
-import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesLogout;
 import de.cuioss.portal.ui.runtime.page.PortalPagesConfiguration;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalPagesConfiguration.class, PortalTestUserProducer.class })
+@AddBeanClasses({PortalPagesConfiguration.class, PortalTestUserProducer.class})
 class LogoutPageBeanTest extends AbstractPageBeanTest<LogoutPageBean> {
 
     @Inject
-    @PortalCorePagesLogout
     @Getter
     private LogoutPageBean underTest;
 

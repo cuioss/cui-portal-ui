@@ -15,15 +15,7 @@
  */
 package de.cuioss.portal.ui.authentication.form;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.event.Event;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
-
-import jakarta.annotation.Priority;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.LoginEvent;
 import de.cuioss.portal.authentication.PortalLoginEvent;
@@ -33,7 +25,12 @@ import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
 import de.cuioss.portal.ui.api.ui.pages.LogoutPage;
-import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesLogout;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -42,7 +39,6 @@ import java.io.Serial;
 /**
  * @author Oliver Wolff
  */
-@PortalCorePagesLogout
 @Named(LogoutPage.BEAN_NAME)
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @RequestScoped

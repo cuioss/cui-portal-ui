@@ -15,26 +15,6 @@
  */
 package de.cuioss.portal.ui.authentication.form;
 
-import static de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock.DEFAULT_USER_STORE;
-import static de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock.SOME_LDAP_USER_STORE;
-import static de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock.SOME_OTHER_LDAP_USER_STORE;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.inject.Produces;
-import jakarta.enterprise.inject.spi.InjectionPoint;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.omnifaces.cdi.Param;
-
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.jsf.api.converter.nameprovider.LabeledKeyConverter;
@@ -45,16 +25,13 @@ import de.cuioss.portal.authentication.facade.AuthenticationResults;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
-import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
-import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
 import de.cuioss.portal.ui.api.ui.pages.HomePage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPageStrategy;
-import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesLogin;
 import de.cuioss.portal.ui.runtime.page.LoginPageClientStorageImpl;
 import de.cuioss.portal.ui.runtime.page.LoginPageHistoryManagerProviderImpl;
 import de.cuioss.portal.ui.runtime.page.PortalPagesConfiguration;
@@ -66,11 +43,23 @@ import de.cuioss.test.jsf.config.ComponentConfigurator;
 import de.cuioss.test.jsf.config.decorator.ComponentConfigDecorator;
 import de.cuioss.tools.net.UrlParameter;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.omnifaces.cdi.Param;
+
+import static de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock.*;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalPagesConfiguration.class, PortalTestUserProducer.class, PortalClientStorageMock.class,
-        LoginPageClientStorageImpl.class, LoginPageHistoryManagerProviderImpl.class })
+@AddBeanClasses({PortalPagesConfiguration.class, PortalTestUserProducer.class, PortalClientStorageMock.class,
+    LoginPageClientStorageImpl.class, LoginPageHistoryManagerProviderImpl.class})
 class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements ComponentConfigurator {
 
     private static final String SOME_ERROR_KEY = "some.error";
@@ -80,7 +69,6 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     private static final String TEST_USER_NAME = "testUserName";
 
     @Inject
-    @PortalCorePagesLogin
     @Getter
     private LoginPageBean underTest;
 
@@ -95,15 +83,11 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     private PortalHistoryManagerMock portalHistoryManagerMock;
 
     @Inject
-    @PortalSessionStorage
-    private PortalSessionStorageMock mapStorage;
-
-    @Inject
     @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     private String username;
-    private String userstore;
+    private String userStore;
 
     private LoginEvent event;
 
@@ -116,9 +100,9 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
 
         final var name = injectionPoint.getMember().getName();
         return switch (name) {
-        case LoginPage.KEY_USERNAME -> username;
-        case LoginPage.KEY_USERSTORE -> userstore;
-        default -> null;
+            case LoginPage.KEY_USERNAME -> username;
+            case LoginPage.KEY_USERSTORE -> userStore;
+            default -> null;
         };
 
     }
@@ -126,10 +110,10 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     @Test
     void shouldUseUrlParameter() {
         username = TEST_USER_NAME;
-        userstore = TEST_USER_STORE;
+        userStore = TEST_USER_STORE;
 
         assertEquals(username, underTest.getLoginCredentials().getUsername());
-        assertEquals(userstore, underTest.getLoginCredentials().getUserStore());
+        assertEquals(userStore, underTest.getLoginCredentials().getUserStore());
     }
 
     @Test
@@ -140,10 +124,10 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
 
         // Mimic that Preferences was initially called
         final ViewDescriptor newDescriptor = ViewDescriptorImpl.builder()
-                .withViewId(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID)
-                .withUrlParameter(mutableList(new UrlParameter(LoginPage.KEY_USERNAME, TEST_USER_NAME),
-                        new UrlParameter(LoginPage.KEY_USERSTORE, TEST_USER_STORE)))
-                .withLogicalViewId(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID).build();
+            .withViewId(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID)
+            .withUrlParameter(mutableList(new UrlParameter(LoginPage.KEY_USERNAME, TEST_USER_NAME),
+                new UrlParameter(LoginPage.KEY_USERSTORE, TEST_USER_STORE)))
+            .withLogicalViewId(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID).build();
         portalHistoryManagerMock.addCurrentUriToHistory(newDescriptor);
 
         assertEquals(TEST_USER_NAME, underTest.getLoginCredentials().getUsername());
@@ -212,7 +196,7 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
         assertFalse(underTest.isShouldDisplayUserStoreDropdown(), "User store drop-down should be hidden");
 
         assertEquals(DEFAULT_USER_STORE.getName(), underTest.getLoginCredentials().getUserStore(),
-                "On single user store the first must be selected as default");
+            "On single user store the first must be selected as default");
     }
 
     @Test
@@ -228,19 +212,21 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(SOME_ERROR_KEY);
     }
 
+    @Test
     void viewActionShouldLogoutOnLogoutStrategy() {
         configuration.put(PortalConfigurationKeys.PAGES_LOGIN_ENTER_STRATEGY,
-                LoginPageStrategy.LOGOUT.getStrategyName());
+            LoginPageStrategy.LOGOUT.getStrategyName());
         configuration.fireEvent();
         assertNull(underTest.initViewAction());
         authenticationFacadeMock.assertAuthenticated(false);
     }
 
     @Test
-    @Disabled // No idea here
+    @Disabled
+        // No idea here
     void shouldUseConfiguredUserStoreAsDefault() {
         assertEquals(underTest.getLoginCredentials().getUserStore(), SOME_OTHER_LDAP_USER_STORE.getName(),
-                "Wrong selected user store");
+            "Wrong selected user store");
     }
 
     @Override

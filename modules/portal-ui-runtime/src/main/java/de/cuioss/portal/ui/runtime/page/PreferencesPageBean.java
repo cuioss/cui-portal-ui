@@ -15,11 +15,15 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import java.io.Serial;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
+import de.cuioss.portal.common.priority.PortalPriorities;
+import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
+import de.cuioss.portal.ui.api.ui.pages.PreferencesPage;
+import de.cuioss.portal.ui.runtime.application.locale.PortalLocaleManagerBean;
+import de.cuioss.portal.ui.runtime.application.theme.PortalThemeConfiguration;
+import de.cuioss.portal.ui.runtime.application.theme.UserThemeBean;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.NavigationHandler;
 import jakarta.faces.context.FacesContext;
@@ -27,23 +31,15 @@ import jakarta.faces.event.ValueChangeEvent;
 import jakarta.faces.model.SelectItem;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
-import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
-
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-
-import de.cuioss.portal.common.priority.PortalPriorities;
-import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
-import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesPreferences;
-import de.cuioss.portal.ui.api.ui.pages.PreferencesPage;
-import de.cuioss.portal.ui.runtime.application.locale.PortalLocaleManagerBean;
-import de.cuioss.portal.ui.runtime.application.theme.PortalThemeConfiguration;
-import de.cuioss.portal.ui.runtime.application.theme.UserThemeBean;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Default Portal Preference Page Bean
@@ -53,9 +49,8 @@ import lombok.ToString;
 @RequestScoped
 @Named(PreferencesPage.BEAN_NAME)
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
-@PortalCorePagesPreferences
-@EqualsAndHashCode(of = { "selectedLocale", "selectedTheme" }, doNotUseGetters = true)
-@ToString(of = { "selectedLocale", "selectedTheme" }, doNotUseGetters = true)
+@EqualsAndHashCode(of = {"selectedLocale", "selectedTheme"}, doNotUseGetters = true)
+@ToString(of = {"selectedLocale", "selectedTheme"}, doNotUseGetters = true)
 public class PreferencesPageBean implements PreferencesPage {
 
     @Serial
@@ -106,7 +101,7 @@ public class PreferencesPageBean implements PreferencesPage {
         availableLocales = new ArrayList<>();
         for (final Locale locale : localeManagerBean.getAvailableLocales()) {
             availableLocales.add(new SelectItem(locale, resourceBundle
-                    .getString(LOCALE_KEY_PREFIX + locale.getLanguage())));
+                .getString(LOCALE_KEY_PREFIX + locale.getLanguage())));
         }
         selectedLocale = localeManagerBean.getUserLocale();
     }

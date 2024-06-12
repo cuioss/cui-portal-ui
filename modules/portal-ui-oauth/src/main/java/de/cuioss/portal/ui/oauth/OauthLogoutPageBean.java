@@ -15,24 +15,7 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static de.cuioss.portal.authentication.oauth.OAuthConfigKeys.OPEN_ID_CLIENT_POST_LOGOUT_REDIRECT_URI;
-import static de.cuioss.tools.string.MoreStrings.isBlank;
-import static de.cuioss.tools.string.MoreStrings.isPresent;
-
-import java.io.Serial;
-import java.util.Optional;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.event.Event;
-import jakarta.enterprise.inject.Alternative;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import jakarta.servlet.http.HttpServletRequest;
-
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
-
-import jakarta.annotation.Priority;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.LoginEvent;
@@ -46,20 +29,33 @@ import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
 import de.cuioss.portal.ui.api.ui.pages.LogoutPage;
-import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesLogout;
 import de.cuioss.tools.collect.CollectionBuilder;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.net.UrlParameter;
 import de.cuioss.tools.string.MoreStrings;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.util.Optional;
+
+import static de.cuioss.portal.authentication.oauth.OAuthConfigKeys.OPEN_ID_CLIENT_POST_LOGOUT_REDIRECT_URI;
+import static de.cuioss.tools.string.MoreStrings.isBlank;
+import static de.cuioss.tools.string.MoreStrings.isPresent;
 
 /**
  * Oauth Logout Page Bean to redirect to the oauth server logout page.
  *
  * @author Matthias Walliczek
  */
-@PortalCorePagesLogout
 @Named(LogoutPage.BEAN_NAME)
 @Alternative
 @Priority(PortalPriorities.PORTAL_MODULE_LEVEL)
@@ -113,7 +109,7 @@ public class OauthLogoutPageBean implements LogoutPage {
         }
 
         var idpLogoutUrl = authenticationFacade.retrieveClientLogoutUrl(
-                CollectionBuilder.<UrlParameter>copyFrom().add(getPostLogoutRedirectUriParam()).toImmutableSet());
+            CollectionBuilder.<UrlParameter>copyFrom().add(getPostLogoutRedirectUriParam()).toImmutableSet());
         LOGGER.debug("Redirecting to IDP logout URL: {}", idpLogoutUrl);
 
         // Actually wrong if strictly sticking to rp-initiated-logout specification,
@@ -135,9 +131,9 @@ public class OauthLogoutPageBean implements LogoutPage {
 
     /**
      * @return url parameter for post_logout_redirect_uri. the value is obtained
-     *         from {@link Oauth2Configuration#getPostLogoutRedirectUri()} or, if
-     *         not present, constructed from external context path and
-     *         {@link #loginUrl}.
+     * from {@link Oauth2Configuration#getPostLogoutRedirectUri()} or, if
+     * not present, constructed from external context path and
+     * {@link #loginUrl}.
      */
     private Optional<UrlParameter> getPostLogoutRedirectUriParam() {
 
@@ -145,7 +141,7 @@ public class OauthLogoutPageBean implements LogoutPage {
         if (isPresent(postLogoutRedirectUri)) {
             if (isBlank(configuration.getLogoutRedirectParamName())) {
                 LOGGER.warn("postLogoutRedirectUri set, but no url-parameter name. Set via: {}",
-                        OAuthConfigKeys.OPEN_ID_CLIENT_LOGOUT_REDIRECT_PARAMETER);
+                    OAuthConfigKeys.OPEN_ID_CLIENT_LOGOUT_REDIRECT_PARAMETER);
                 return Optional.empty();
             }
 

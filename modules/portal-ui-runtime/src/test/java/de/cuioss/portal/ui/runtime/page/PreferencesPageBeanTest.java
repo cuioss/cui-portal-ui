@@ -15,26 +15,10 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import java.util.Locale;
-
-import jakarta.enterprise.event.Observes;
-import jakarta.faces.event.ValueChangeEvent;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.jboss.weld.junit5.auto.EnableAlternatives;
-import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.components.support.DummyComponent;
 import de.cuioss.portal.common.locale.LocaleChangeEvent;
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
 import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
-import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesPreferences;
 import de.cuioss.portal.ui.api.ui.pages.PreferencesPage;
 import de.cuioss.portal.ui.runtime.application.theme.PortalThemeConfiguration;
 import de.cuioss.portal.ui.runtime.application.theme.PortalThemeConfigurationTest;
@@ -43,17 +27,27 @@ import de.cuioss.portal.ui.runtime.support.PortalLocaleResolverServiceMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import jakarta.enterprise.event.Observes;
+import jakarta.faces.event.ValueChangeEvent;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.jboss.weld.junit5.auto.EnableAlternatives;
+import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import java.util.Locale;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ NavigationHandlerProducer.class, PortalThemeConfiguration.class, UserThemeBean.class,
-        PortalLocaleResolverServiceMock.class, PortalClientStorageMock.class })
-@EnableAlternatives({ PortalLocaleResolverServiceMock.class })
-@ExcludeBeanClasses({ PortalLocaleProducerMock.class })
+@AddBeanClasses({NavigationHandlerProducer.class, PortalThemeConfiguration.class, UserThemeBean.class,
+    PortalLocaleResolverServiceMock.class, PortalClientStorageMock.class})
+@EnableAlternatives({PortalLocaleResolverServiceMock.class})
+@ExcludeBeanClasses({PortalLocaleProducerMock.class})
 class PreferencesPageBeanTest extends AbstractPageBeanTest<PreferencesPageBean> {
 
     @Inject
-    @PortalCorePagesPreferences
     @Getter
     private PreferencesPageBean underTest;
 
@@ -72,7 +66,7 @@ class PreferencesPageBeanTest extends AbstractPageBeanTest<PreferencesPageBean> 
     @Test
     void shouldRedirectOnThemeChange() {
         underTest.themeChangeListener(new ValueChangeEvent(new DummyComponent(), PortalThemeConfigurationTest.DEFAULT,
-                PortalThemeConfigurationTest.HIGH_CONTRAST));
+            PortalThemeConfigurationTest.HIGH_CONTRAST));
         assertNavigatedWithOutcome(PreferencesPage.OUTCOME);
     }
 

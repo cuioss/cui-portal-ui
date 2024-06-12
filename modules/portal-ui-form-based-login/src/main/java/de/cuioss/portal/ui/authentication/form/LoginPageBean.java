@@ -50,7 +50,6 @@ import de.cuioss.portal.ui.api.ui.pages.HomePage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPageClientStorage;
 import de.cuioss.portal.ui.api.ui.pages.LoginPageHistoryManagerProvider;
-import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesLogin;
 import de.cuioss.portal.ui.runtime.page.AbstractLoginPageBean;
 import de.cuioss.portal.ui.runtime.page.PortalPagesConfiguration;
 import de.cuioss.uimodel.application.LoginCredentials;
@@ -65,7 +64,6 @@ import lombok.ToString;
  * Page bean for the login.
  * It is {@link RequestScoped} in order to be used with non-transient views.
  */
-@PortalCorePagesLogin
 @Named(LoginPage.BEAN_NAME)
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @RequestScoped

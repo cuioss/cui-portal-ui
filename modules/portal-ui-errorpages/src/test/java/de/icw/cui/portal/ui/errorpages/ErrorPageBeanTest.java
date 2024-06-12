@@ -18,7 +18,6 @@ package de.icw.cui.portal.ui.errorpages;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
-import de.cuioss.portal.ui.api.ui.pages.PortalCorePagesError;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
 import jakarta.inject.Inject;
@@ -35,7 +34,6 @@ class ErrorPageBeanTest extends AbstractPageBeanTest<ErrorPageBean> {
     private PortalSessionStorageMock mapStorage;
 
     @Inject
-    @PortalCorePagesError
     @Getter
     private ErrorPageBean underTest;
 
