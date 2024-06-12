@@ -59,17 +59,17 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
     private static final CuiLogger LOGGER = new CuiLogger(ViewRelatedExceptionHandler.class);
 
     /**
-     * Key for message to be displayed on {@link ViewSuppressedException}
+     * Key for the message to be displayed on {@link ViewSuppressedException}
      */
     public static final String VIEW_SUPPRESSED_KEY = "system.exception.view.suppressed";
 
     /**
-     * Key for message to be displayed on {@link ViewExpiredException}
+     * Key for the message to be displayed on {@link ViewExpiredException}
      */
     public static final String VIEW_EXPIRED_KEY = "system.exception.view.expired";
 
     /**
-     * Key for message to be displayed on {@link UserNotAuthorizedException}
+     * Key for the message to be displayed on {@link UserNotAuthorizedException}
      */
     public static final String VIEW_INSUFFICIENT_PERMISSIONS_KEY = "system.exception.view.insufficient.permissions";
 
@@ -109,7 +109,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
     public void handle(ExceptionAsEvent exceptionEvent) {
         if (exceptionEvent.getException() instanceof ViewSuppressedException) {
             LOGGER.debug(HANDLING_S_AS_S, exceptionEvent, ViewSuppressedException.class);
-            handleViewSupressedException(exceptionEvent);
+            handleViewSuppressedException(exceptionEvent);
         } else if (exceptionEvent.getException() instanceof ViewExpiredException) {
             LOGGER.debug(HANDLING_S_AS_S, exceptionEvent, ViewExpiredException.class);
             handleViewExpiredException(exceptionEvent);
@@ -128,7 +128,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
      *
      * @param event to be handled
      */
-    private void handleViewSupressedException(ExceptionAsEvent event) {
+    private void handleViewSuppressedException(ExceptionAsEvent event) {
         messageProducer.setGlobalErrorMessage(VIEW_SUPPRESSED_KEY);
         var outcome = HomePage.OUTCOME;
         var exception = (ViewSuppressedException) event.getException();
@@ -146,9 +146,9 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
     }
 
     /**
-     * Handles {@link ViewExpiredException}. In case the user is still authenticated
+     * Handles {@link ViewExpiredException}. In case the user is still authenticated,
      * the previous page will be reloaded and an according message will be
-     * displayed. Otherwise the user will be redirected to the login-page.
+     * displayed. Otherwise, the user will be redirected to the login-page.
      *
      * @param event to be handled
      */
@@ -180,7 +180,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
     /**
      * Handles {@link UserNotAuthorizedException}. The user will be redirected to
      * the home-page if he has sufficient views, otherwise to the logout-page. In
-     * both cases a corresponding global-error message will be queued for display.
+     * both cases, a corresponding global-error message will be queued for display.
      *
      * @param event to be handled
      */

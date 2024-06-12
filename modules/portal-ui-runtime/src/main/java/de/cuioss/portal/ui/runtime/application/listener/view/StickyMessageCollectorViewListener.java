@@ -15,19 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_STICKYMESSAGES;
-
-import java.io.Serial;
-import java.util.HashSet;
-import java.util.Set;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.inject.Instance;
-import jakarta.inject.Inject;
-
-import jakarta.annotation.Priority;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
@@ -36,15 +23,26 @@ import de.cuioss.portal.ui.api.listener.view.ViewListener;
 import de.cuioss.portal.ui.api.message.StickyMessage;
 import de.cuioss.portal.ui.api.message.StickyMessageProducer;
 import de.cuioss.portal.ui.api.message.StickyMessageProvider;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import java.io.Serial;
+import java.util.HashSet;
+import java.util.Set;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_STICKY_MESSAGES;
 
 /**
- * View Listener act on each page. The listener collect new available sticky
- * messages for all registered StickyMessageProviders and put them to
- * StickyMessageProducer. Expected is that StickyMessageProducer is a session
- * scoped bean.
+ * {@link ViewListener} act on each page.
+ * This listener collects new available sticky
+ * messages for all registered StickyMessageProviders and puts them to StickyMessageProducer.
+ * Expected is that StickyMessageProducer is a session scoped bean.
  *
  * @author i000576
  */
@@ -66,7 +64,7 @@ public class StickyMessageCollectorViewListener implements ViewListener {
 
     @Getter
     @Inject
-    @ConfigProperty(name = PORTAL_LISTENER_STICKYMESSAGES)
+    @ConfigProperty(name = PORTAL_LISTENER_STICKY_MESSAGES)
     private boolean enabled;
 
     @Override

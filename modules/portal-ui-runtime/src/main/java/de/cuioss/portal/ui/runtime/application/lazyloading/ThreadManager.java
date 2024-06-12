@@ -31,13 +31,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT;
 
 /**
  * Manages FutureHandle based requests and executes them via
  * {@link Executors#newCachedThreadPool()}. All requests that were not retrieved
  * after
- * {@link PortalConfigurationKeys#PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT}
+ * {@link PortalConfigurationKeys#PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT}
  * seconds are canceled and removed.
  */
 @ApplicationScoped
@@ -52,7 +52,7 @@ public class ThreadManager implements ApplicationInitializer {
     private static final CuiLogger log = new CuiLogger(ThreadManager.class);
 
     @Inject
-    @ConfigProperty(name = PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT)
+    @ConfigProperty(name = PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT)
     private Provider<Integer> requestHandleTimeoutProvider;
 
     private int requestHandleTimeout;
@@ -109,7 +109,7 @@ public class ThreadManager implements ApplicationInitializer {
         log.debug("Starting ThreadManager");
         if (null == requestHandleTimeoutProvider || null == requestHandleTimeoutProvider.get()) {
             throw new IllegalStateException(
-                "Invalid configuration, please check property " + PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT);
+                "Invalid configuration, please check property " + PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT);
         }
         requestHandleTimeout = requestHandleTimeoutProvider.get();
         log.trace("requestHandleTimeout={}", requestHandleTimeout);

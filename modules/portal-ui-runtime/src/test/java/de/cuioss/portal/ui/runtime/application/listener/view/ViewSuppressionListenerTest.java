@@ -41,12 +41,12 @@ import lombok.Getter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ ViewMatcherProducer.class })
-class ViewSupressionListenerTest implements ShouldHandleObjectContracts<ViewSupressionListener> {
+class ViewSuppressionListenerTest implements ShouldHandleObjectContracts<ViewSuppressionListener> {
 
     @Inject
     @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE)
     @Getter
-    private ViewSupressionListener underTest;
+    private ViewSuppressionListener underTest;
 
     @Inject
     @PortalConfigurationSource

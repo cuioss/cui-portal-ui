@@ -15,22 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.lazyloading;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.concurrent.TimeUnit;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
@@ -46,6 +30,16 @@ import de.cuioss.uimodel.nameprovider.DisplayName;
 import de.cuioss.uimodel.result.ResultDetail;
 import de.cuioss.uimodel.result.ResultObject;
 import de.cuioss.uimodel.result.ResultState;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("rawtypes")
 @EnablePortalUiEnvironment
@@ -86,8 +80,8 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
     @Test
     void testGoodCase() {
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT, "30");
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
+        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
+        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
         configuration.fireEvent();
 
         threadManager.initialize();
@@ -107,8 +101,8 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
     @Test
     void testError() {
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT, "30");
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
+        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
+        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
         configuration.fireEvent();
 
         threadManager.initialize();
@@ -128,8 +122,8 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
     @Test
     void testTimeoutRetrieve() {
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT, "30");
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
+        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
+        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
         configuration.fireEvent();
 
         threadManager.initialize();
@@ -165,8 +159,8 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
     @Test
     void testTimeoutHandle() {
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_HANDLE_TIMEOUT, "1");
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
+        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "1");
+        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
         configuration.fireEvent();
 
         threadManager.initialize();

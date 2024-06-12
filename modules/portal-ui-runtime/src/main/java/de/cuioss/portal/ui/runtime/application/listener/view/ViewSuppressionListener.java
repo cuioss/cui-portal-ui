@@ -15,15 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_VIEW_SUPRESSION;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.event.Event;
-import jakarta.inject.Inject;
-
-import jakarta.annotation.Priority;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
@@ -32,11 +23,18 @@ import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.api.listener.view.ViewListener;
 import de.cuioss.portal.ui.runtime.application.configuration.ViewConfiguration;
 import de.cuioss.portal.ui.runtime.application.view.ViewSuppressedException;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.Serial;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_VIEW_SUPPRESSION;
 
 /**
  * Checks whether the current page is to be suppressed and fires an
@@ -46,11 +44,11 @@ import java.io.Serial;
  */
 @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE)
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL + 1)
-// Must be called before AuthenticatationListener
+// Must be called before AuthenticationListener
 @RequestScoped
 @EqualsAndHashCode(of = "viewConfiguration")
 @ToString(of = "viewConfiguration")
-public class ViewSupressionListener implements ViewListener {
+public class ViewSuppressionListener implements ViewListener {
 
     @Serial
     private static final long serialVersionUID = -1757867591272259164L;
@@ -63,7 +61,7 @@ public class ViewSupressionListener implements ViewListener {
 
     @Getter
     @Inject
-    @ConfigProperty(name = PORTAL_LISTENER_VIEW_SUPRESSION)
+    @ConfigProperty(name = PORTAL_LISTENER_VIEW_SUPPRESSION)
     private boolean enabled;
 
     @Override

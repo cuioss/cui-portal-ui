@@ -15,19 +15,8 @@
  */
 package de.cuioss.portal.ui.runtime.application.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.enterprise.inject.Produces;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.common.bundle.ResourceBundleRegistry;
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.servlet.CuiContextPath;
@@ -37,11 +26,18 @@ import de.cuioss.portal.ui.runtime.application.bundle.InstallationResourceBundle
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalClientStorageImpl.class, PortalLocaleProducerMock.class, ResourceBundleWrapper.class,
-        InstallationResourceBundleWrapperMock.class, ResourceBundleRegistry.class })
+@AddBeanClasses({PortalClientStorageImpl.class, PortalLocaleProducerMock.class, ResourceBundleWrapper.class,
+    InstallationResourceBundleWrapperMock.class, ResourceBundleRegistry.class})
 class PortalClientStorageImplTest implements ShouldHandleObjectContracts<PortalClientStorageImpl> {
 
     private static final String testKey = "testKey";
@@ -70,7 +66,7 @@ class PortalClientStorageImplTest implements ShouldHandleObjectContracts<PortalC
         deltaspike-jsf-module-api-1.8.1-sources.jar!/META-INF/maven/org.apache.deltaspike.modules/deltaspike-jsf-module-api/pom.xml:55\
         So: omnifaces-3.1 doesn't go with myfaces-2.3""")
     void testRoundTrip() {
-        configuration.fireEvent(PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAXAGE, "666");
+        configuration.fireEvent(PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAX_AGE, "666");
 
         underTest.remove(testKey);
 

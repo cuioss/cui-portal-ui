@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.storage;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAXAGE;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAX_AGE;
 import static de.cuioss.portal.ui.api.PortalCoreBeanNames.CLIENT_STORAGE_BEAN_NAME;
 import static org.omnifaces.util.Faces.addResponseCookie;
 import static org.omnifaces.util.Faces.getRequestCookie;
@@ -62,7 +62,7 @@ public class PortalClientStorageImpl implements ClientStorage {
     private final Map<String, String> cache = new HashMap<>();
 
     @Inject
-    @ConfigProperty(name = CLIENT_STORAGE_COOKIE_MAXAGE)
+    @ConfigProperty(name = CLIENT_STORAGE_COOKIE_MAX_AGE)
     private String cookieMaxAge;
 
     @Inject

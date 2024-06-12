@@ -15,28 +15,6 @@
  */
 package de.cuioss.portal.ui.authentication.form;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PAGES_LOGIN_DEFAULT_USERSTORE;
-import static de.cuioss.portal.ui.api.GlobalComponentIds.LOGIN_PAGE_USER_NAME;
-import static de.cuioss.portal.ui.api.GlobalComponentIds.LOGIN_PAGE_USER_PASSWORD;
-import static de.cuioss.tools.string.MoreStrings.isEmpty;
-
-import java.io.Serial;
-import java.util.List;
-import java.util.Optional;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import jakarta.inject.Provider;
-import jakarta.servlet.http.HttpServletRequest;
-
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.omnifaces.cdi.Param;
-
 import de.cuioss.jsf.api.application.message.DisplayNameMessageProducer;
 import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
@@ -55,10 +33,30 @@ import de.cuioss.portal.ui.runtime.page.PortalPagesConfiguration;
 import de.cuioss.uimodel.application.LoginCredentials;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Provider;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.omnifaces.cdi.Param;
+
+import java.io.Serial;
+import java.util.List;
+import java.util.Optional;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PAGES_LOGIN_DEFAULT_USER_STORE;
+import static de.cuioss.portal.ui.api.GlobalComponentIds.LOGIN_PAGE_USER_NAME;
+import static de.cuioss.portal.ui.api.GlobalComponentIds.LOGIN_PAGE_USER_PASSWORD;
+import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
 /**
  * Page bean for the login.
@@ -118,7 +116,7 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
     PortalPagesConfiguration pagesConfiguration;
 
     @Inject
-    @ConfigProperty(name = PAGES_LOGIN_DEFAULT_USERSTORE)
+    @ConfigProperty(name = PAGES_LOGIN_DEFAULT_USER_STORE)
     Optional<String> defaultConfiguredUserStore;
 
     @Getter

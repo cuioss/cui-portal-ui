@@ -15,16 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_HISTORYMANAGER;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.event.Event;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-
-import jakarta.annotation.Priority;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
@@ -34,11 +24,19 @@ import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.api.listener.view.ViewListener;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.Serial;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_HISTORY_MANAGER;
 
 /**
  * Listener that calls
@@ -64,7 +62,7 @@ public class HistoryManagerListener implements ViewListener {
 
     @Getter
     @Inject
-    @ConfigProperty(name = PORTAL_LISTENER_HISTORYMANAGER)
+    @ConfigProperty(name = PORTAL_LISTENER_HISTORY_MANAGER)
     private boolean enabled;
 
     @Override

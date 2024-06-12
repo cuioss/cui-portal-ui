@@ -95,7 +95,7 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     @Param
     public String getParameter(final InjectionPoint injectionPoint) {
 
-        configuration.put(PortalConfigurationKeys.PAGES_LOGIN_DEFAULT_USERSTORE, SOME_OTHER_LDAP_USER_STORE.getName());
+        configuration.put(PortalConfigurationKeys.PAGES_LOGIN_DEFAULT_USER_STORE, SOME_OTHER_LDAP_USER_STORE.getName());
         configuration.fireEvent();
 
         final var name = injectionPoint.getMember().getName();

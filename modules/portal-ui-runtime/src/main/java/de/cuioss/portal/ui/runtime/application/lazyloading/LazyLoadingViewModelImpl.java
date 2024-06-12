@@ -15,24 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.lazyloading;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZYLOADING_REQUEST_RETRIEVE_TIMEOUT;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Random;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
-import jakarta.enterprise.context.Dependent;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.event.ActionEvent;
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import de.cuioss.jsf.api.application.message.DisplayNameMessageProducer;
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
@@ -46,23 +28,39 @@ import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingRequest;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.event.ActionEvent;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Random;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT;
 
 /**
  * Implementation of a {@link LazyLoadingThreadModel} using the
  * {@link ThreadManager} to retrieve the result and errors from the request.
  * <p>
  * Will wait max
- * {@link PortalConfigurationKeys#PORTAL_LAZYLOADING_REQUEST_RETRIEVE_TIMEOUT}
+ * {@link PortalConfigurationKeys#PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT}
  * for the request to return, otherwise it will be terminated.
  *
  * @param <T> should implement {@link Serializable}
  */
-@EqualsAndHashCode(of = { "requestId" })
-@ToString(of = { "requestId", "initialized", "renderContent", "notificationBoxValue" })
+@EqualsAndHashCode(of = {"requestId"})
+@ToString(of = {"requestId", "initialized", "renderContent", "notificationBoxValue"})
 @Dependent
 public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, ErrorController {
 
@@ -80,7 +78,7 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
     ThreadManager threadManager;
 
     @Inject
-    @ConfigProperty(name = PORTAL_LAZYLOADING_REQUEST_RETRIEVE_TIMEOUT)
+    @ConfigProperty(name = PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT)
     int requestRetrieveTimeout;
 
     @Inject
@@ -166,7 +164,7 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
         var resultDetail = result.getResultDetail();
         if (resultDetail.isPresent()) {
             errorHandler.handleResultDetail(result.getState(), resultDetail.get(), result.getErrorCode().orElse(null),
-                    this, log);
+                this, log);
         } else {
             setRenderContent(true);
         }
