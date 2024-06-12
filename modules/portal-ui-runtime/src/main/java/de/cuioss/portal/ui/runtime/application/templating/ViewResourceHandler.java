@@ -37,7 +37,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Implementation of Multitemplating: see package-doc
+ * Implementation of Multi-Templating: see package-doc
  * de.cuioss.portal.ui.api.templating for details
  *
  * @author Oliver Wolff
@@ -73,8 +73,8 @@ public class ViewResourceHandler extends ResourceHandlerWrapper {
     /**
      * Computes a corresponding classpath related url.
      *
-     * @param resourceName
-     * @return
+     * @param resourceName must not be null
+     * @return hte computed URL
      */
     URL computeURL(final String resourceName) {
         checkMapper();

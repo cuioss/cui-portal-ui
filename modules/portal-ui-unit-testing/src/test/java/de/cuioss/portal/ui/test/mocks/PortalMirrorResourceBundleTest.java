@@ -15,15 +15,13 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.inject.Inject;
-
+import lombok.Getter;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
-import lombok.Getter;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnableAutoWeld
 class PortalMirrorResourceBundleTest implements ShouldBeNotNull<PortalMirrorResourceBundle> {
@@ -34,7 +32,7 @@ class PortalMirrorResourceBundleTest implements ShouldBeNotNull<PortalMirrorReso
 
     @Test
     void shouldDefaultSensibly() {
-        assertNotNull("123", underTest.getString("123"));
+        assertEquals("123", underTest.getString("123"));
     }
 
 }
