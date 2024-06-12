@@ -44,7 +44,7 @@ public class AccountMenuItem extends PortalNavigationMenuItemSingleImpl {
     private static final long serialVersionUID = 1452093785009425867L;
 
     /** The label Key for this component. */
-    public static final String LABEL_KEY = "com.icw.ehf.commons.portal.menu.account.label";
+    public static final String LABEL_KEY = "cui.commons.portal.menu.account.label";
 
     /** The icon for this component. */
     public static final String ICON = "cui-icon-keys";

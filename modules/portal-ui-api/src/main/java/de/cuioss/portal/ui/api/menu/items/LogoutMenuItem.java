@@ -44,10 +44,10 @@ public class LogoutMenuItem extends PortalNavigationMenuItemSingleImpl {
     private static final long serialVersionUID = -1265061305901788409L;
 
     /** The label Key for this component. */
-    public static final String LABEL_KEY = "com.icw.ehf.commons.portal.menu.logout.label";
+    public static final String LABEL_KEY = "cui.commons.portal.menu.logout.label";
 
     /** The title Key for this component. */
-    public static final String TITLE_KEY = "com.icw.ehf.commons.portal.menu.logout.title";
+    public static final String TITLE_KEY = "cui.commons.portal.menu.logout.title";
 
     /** The icon for this component. */
     public static final String ICON = "cui-icon-power";

@@ -44,10 +44,10 @@ public class PreferencesMenuItem extends PortalNavigationMenuItemSingleImpl {
     private static final long serialVersionUID = 1452093785009425867L;
 
     /** The label Key for this component. */
-    public static final String LABEL_KEY = "com.icw.ehf.commons.portal.menu.preferences.label";
+    public static final String LABEL_KEY = "cui.commons.portal.menu.preferences.label";
 
     /** The title Key for this component. */
-    public static final String TITLE_KEY = "com.icw.ehf.commons.portal.menu.preferences.title";
+    public static final String TITLE_KEY = "cui.commons.portal.menu.preferences.title";
 
     /** The icon for this component. */
     public static final String ICON = "cui-icon-settings";
