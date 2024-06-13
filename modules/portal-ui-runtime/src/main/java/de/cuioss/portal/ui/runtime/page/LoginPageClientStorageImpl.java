@@ -15,9 +15,9 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_REMEMBER_ME;
-import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERNAME;
-import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERSTORE;
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_REMEMBER_ME;
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERNAME;
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERSTORE;
 import static java.util.Objects.requireNonNull;
 
 import java.io.Serial;
@@ -29,8 +29,8 @@ import jakarta.inject.Inject;
 
 import de.cuioss.portal.core.storage.ClientStorage;
 import de.cuioss.portal.core.storage.PortalClientStorage;
-import de.cuioss.portal.ui.api.ui.pages.LoginPage;
-import de.cuioss.portal.ui.api.ui.pages.LoginPageClientStorage;
+import de.cuioss.portal.ui.api.pages.LoginPage;
+import de.cuioss.portal.ui.api.pages.LoginPageClientStorage;
 import de.cuioss.uimodel.application.LoginCredentials;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

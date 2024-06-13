@@ -20,7 +20,7 @@ import de.cuioss.portal.authentication.PortalLoginEvent;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
-import de.cuioss.portal.ui.api.ui.pages.LoginPage;
+import de.cuioss.portal.ui.api.pages.LoginPage;
 import de.cuioss.portal.ui.runtime.page.PortalPagesConfiguration;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;

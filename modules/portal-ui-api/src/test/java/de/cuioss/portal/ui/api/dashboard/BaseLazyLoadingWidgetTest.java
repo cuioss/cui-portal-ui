@@ -24,7 +24,7 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingErrorHandler;
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingErrorHandler;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
 import lombok.Getter;

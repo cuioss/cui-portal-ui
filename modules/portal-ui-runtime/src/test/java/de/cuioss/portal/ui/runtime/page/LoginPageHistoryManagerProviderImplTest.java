@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.portal.ui.api.history.HistoryManager;
-import de.cuioss.portal.ui.api.ui.pages.LoginPage;
+import de.cuioss.portal.ui.api.pages.LoginPage;
 import de.cuioss.portal.ui.runtime.application.history.DefaultHistoryConfiguration;
 import de.cuioss.portal.ui.runtime.application.history.HistoryManagerBean;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;

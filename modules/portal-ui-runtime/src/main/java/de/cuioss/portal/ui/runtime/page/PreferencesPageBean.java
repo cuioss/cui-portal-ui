@@ -17,8 +17,8 @@ package de.cuioss.portal.ui.runtime.page;
 
 import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.common.priority.PortalPriorities;
-import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
-import de.cuioss.portal.ui.api.ui.pages.PreferencesPage;
+import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
+import de.cuioss.portal.ui.api.pages.PreferencesPage;
 import de.cuioss.portal.ui.runtime.application.locale.PortalLocaleManagerBean;
 import de.cuioss.portal.ui.runtime.application.theme.PortalThemeConfiguration;
 import de.cuioss.portal.ui.runtime.application.theme.UserThemeBean;

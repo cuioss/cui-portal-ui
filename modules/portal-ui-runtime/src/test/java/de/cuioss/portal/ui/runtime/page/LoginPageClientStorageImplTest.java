@@ -15,9 +15,9 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_REMEMBER_ME;
-import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERNAME;
-import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERSTORE;
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_REMEMBER_ME;
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERNAME;
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERSTORE;
 import static de.cuioss.test.generator.Generators.strings;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

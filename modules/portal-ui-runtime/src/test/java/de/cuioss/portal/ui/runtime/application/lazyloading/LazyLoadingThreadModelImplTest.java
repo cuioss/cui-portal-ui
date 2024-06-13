@@ -20,7 +20,7 @@ import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.configuration.initializer.PortalInitializer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingRequest;
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalStickyMessageProducerMock;
 import de.cuioss.test.juli.junit5.EnableTestLogger;

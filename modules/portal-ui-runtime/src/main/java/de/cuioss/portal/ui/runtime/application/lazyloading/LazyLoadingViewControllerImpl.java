@@ -22,8 +22,8 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 import de.cuioss.portal.configuration.initializer.PortalInitializer;
-import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingRequest;
-import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingViewController;
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingViewController;
 import de.cuioss.tools.logging.CuiLogger;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

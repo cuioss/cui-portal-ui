@@ -19,7 +19,7 @@ import jakarta.enterprise.context.Dependent;
 
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemSingleImpl;
-import de.cuioss.portal.ui.api.ui.pages.PreferencesPage;
+import de.cuioss.portal.ui.api.pages.PreferencesPage;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
+import de.cuioss.portal.ui.api.context.CurrentViewProducer;
 import de.cuioss.portal.ui.runtime.application.view.ViewTransientManagerBean;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;

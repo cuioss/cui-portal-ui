@@ -15,8 +15,8 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERNAME;
-import static de.cuioss.portal.ui.api.ui.pages.LoginPage.KEY_USERSTORE;
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERNAME;
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERSTORE;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -29,7 +29,7 @@ import jakarta.inject.Provider;
 
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.ui.api.history.HistoryManager;
-import de.cuioss.portal.ui.api.ui.pages.LoginPageHistoryManagerProvider;
+import de.cuioss.portal.ui.api.pages.LoginPageHistoryManagerProvider;
 import de.cuioss.tools.net.UrlParameter;
 import de.cuioss.tools.string.MoreStrings;
 import de.cuioss.uimodel.application.LoginCredentials;

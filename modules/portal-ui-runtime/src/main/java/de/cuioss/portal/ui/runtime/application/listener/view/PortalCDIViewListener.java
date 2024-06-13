@@ -21,7 +21,7 @@ import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.api.listener.view.ViewListener;
-import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;

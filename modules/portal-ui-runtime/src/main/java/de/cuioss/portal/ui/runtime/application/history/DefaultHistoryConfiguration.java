@@ -30,7 +30,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.ui.api.configuration.types.ConfigAsViewMatcher;
-import de.cuioss.portal.ui.api.ui.pages.HomePage;
+import de.cuioss.portal.ui.api.pages.HomePage;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

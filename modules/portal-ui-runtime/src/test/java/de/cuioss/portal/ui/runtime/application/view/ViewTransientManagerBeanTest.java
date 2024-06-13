@@ -25,7 +25,7 @@ import jakarta.inject.Inject;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
+import de.cuioss.portal.ui.api.context.CurrentViewProducer;
 import de.cuioss.portal.ui.runtime.application.configuration.ViewConfiguration;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;

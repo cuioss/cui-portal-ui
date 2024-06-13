@@ -19,11 +19,11 @@ import java.util.Collections;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
-import de.cuioss.portal.ui.api.ui.pages.ErrorPage;
-import de.cuioss.portal.ui.api.ui.pages.HomePage;
-import de.cuioss.portal.ui.api.ui.pages.LoginPage;
-import de.cuioss.portal.ui.api.ui.pages.LogoutPage;
-import de.cuioss.portal.ui.api.ui.pages.PreferencesPage;
+import de.cuioss.portal.ui.api.pages.ErrorPage;
+import de.cuioss.portal.ui.api.pages.HomePage;
+import de.cuioss.portal.ui.api.pages.LoginPage;
+import de.cuioss.portal.ui.api.pages.LogoutPage;
+import de.cuioss.portal.ui.api.pages.PreferencesPage;
 import de.cuioss.test.jsf.config.ApplicationConfigurator;
 import de.cuioss.test.jsf.config.decorator.ApplicationConfigDecorator;
 

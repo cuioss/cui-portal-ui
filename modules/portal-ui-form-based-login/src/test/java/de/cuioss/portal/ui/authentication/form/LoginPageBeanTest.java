@@ -29,9 +29,9 @@ import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacad
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
-import de.cuioss.portal.ui.api.ui.pages.HomePage;
-import de.cuioss.portal.ui.api.ui.pages.LoginPage;
-import de.cuioss.portal.ui.api.ui.pages.LoginPageStrategy;
+import de.cuioss.portal.ui.api.pages.HomePage;
+import de.cuioss.portal.ui.api.pages.LoginPage;
+import de.cuioss.portal.ui.api.pages.LoginPageStrategy;
 import de.cuioss.portal.ui.runtime.page.LoginPageClientStorageImpl;
 import de.cuioss.portal.ui.runtime.page.LoginPageHistoryManagerProviderImpl;
 import de.cuioss.portal.ui.runtime.page.PortalPagesConfiguration;

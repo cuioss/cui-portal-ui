@@ -22,7 +22,7 @@ import jakarta.inject.Inject;
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
 import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
-import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingRequest;
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;

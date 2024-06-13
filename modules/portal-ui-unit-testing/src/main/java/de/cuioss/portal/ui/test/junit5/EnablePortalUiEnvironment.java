@@ -33,8 +33,8 @@ import org.jboss.weld.junit5.auto.EnableAutoWeld;
 
 import de.cuioss.portal.configuration.impl.producer.PortalProjectStageImpl;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
-import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
-import de.cuioss.portal.ui.api.ui.context.NavigationHandlerProducer;
+import de.cuioss.portal.ui.api.context.CurrentViewProducer;
+import de.cuioss.portal.ui.api.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
 import de.cuioss.portal.ui.test.mocks.PortalMirrorResourceBundle;

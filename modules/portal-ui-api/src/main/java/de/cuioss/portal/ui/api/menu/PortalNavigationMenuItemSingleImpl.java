@@ -24,7 +24,7 @@ import jakarta.inject.Provider;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemSingle;
-import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

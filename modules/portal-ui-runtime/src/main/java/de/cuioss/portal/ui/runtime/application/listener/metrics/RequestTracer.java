@@ -36,7 +36,7 @@ import org.eclipse.microprofile.metrics.MetricRegistry;
 import org.eclipse.microprofile.metrics.Tag;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
 import de.cuioss.tools.logging.CuiLogger;
 
 /**

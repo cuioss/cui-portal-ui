@@ -34,9 +34,9 @@ import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
-import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
-import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
-import de.cuioss.portal.ui.api.ui.pages.ErrorPage;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
+import de.cuioss.portal.ui.api.pages.ErrorPage;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.application.CuiProjectStage;
 

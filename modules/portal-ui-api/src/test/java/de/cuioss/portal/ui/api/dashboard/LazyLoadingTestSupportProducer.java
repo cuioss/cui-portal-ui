@@ -24,7 +24,7 @@ import jakarta.faces.event.ActionEvent;
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
 import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
-import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingViewController;
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingViewController;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
 

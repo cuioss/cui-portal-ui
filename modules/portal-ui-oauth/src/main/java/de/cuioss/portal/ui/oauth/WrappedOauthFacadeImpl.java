@@ -33,7 +33,7 @@ import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
 import de.cuioss.portal.ui.api.history.HistoryManager;
-import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.Joiner;
 

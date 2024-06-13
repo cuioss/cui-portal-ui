@@ -23,7 +23,7 @@ import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 
 import jakarta.annotation.PostConstruct;
 import de.cuioss.portal.authentication.oauth.LoginPagePath;
-import de.cuioss.portal.ui.api.ui.pages.LoginPage;
+import de.cuioss.portal.ui.api.pages.LoginPage;
 import de.cuioss.tools.logging.CuiLogger;
 
 @RequestScoped

@@ -39,7 +39,7 @@ import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.LoginPagePath;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
 import de.cuioss.portal.ui.runtime.application.view.HttpHeaderFilterImpl;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;

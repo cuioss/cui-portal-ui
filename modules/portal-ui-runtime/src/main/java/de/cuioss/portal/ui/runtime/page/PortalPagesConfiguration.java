@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import de.cuioss.portal.ui.api.ui.pages.LoginPageStrategy;
+import de.cuioss.portal.ui.api.pages.LoginPageStrategy;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;

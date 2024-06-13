@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
-import de.cuioss.portal.ui.api.ui.context.CurrentViewProducer;
+import de.cuioss.portal.ui.api.context.CurrentViewProducer;
 import de.cuioss.portal.ui.runtime.application.listener.view.testhelper.AfterViewListener;
 import de.cuioss.portal.ui.runtime.application.listener.view.testhelper.AfterViewNoPostbackListener;
 import de.cuioss.portal.ui.runtime.application.listener.view.testhelper.BeforeViewListener;

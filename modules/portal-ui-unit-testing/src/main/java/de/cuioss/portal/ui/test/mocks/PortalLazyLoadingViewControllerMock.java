@@ -20,8 +20,8 @@ import java.util.List;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
-import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingRequest;
-import de.cuioss.portal.ui.api.ui.lazyloading.LazyLoadingViewController;
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingViewController;
 import lombok.Getter;
 
 /**

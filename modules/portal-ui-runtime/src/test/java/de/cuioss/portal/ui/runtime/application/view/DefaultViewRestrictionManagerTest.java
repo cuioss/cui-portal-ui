@@ -20,7 +20,7 @@ import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.api.ui.pages.HomePage;
+import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;

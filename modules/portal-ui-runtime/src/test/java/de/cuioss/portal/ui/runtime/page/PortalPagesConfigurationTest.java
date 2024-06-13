@@ -22,7 +22,7 @@ import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.ui.api.ui.pages.LoginPageStrategy;
+import de.cuioss.portal.ui.api.pages.LoginPageStrategy;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
 import lombok.Getter;

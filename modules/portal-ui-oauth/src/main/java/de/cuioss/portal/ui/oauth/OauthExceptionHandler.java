@@ -31,8 +31,8 @@ import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.exception.PortalExceptionHandler;
-import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
-import de.cuioss.portal.ui.api.ui.context.CuiNavigationHandler;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
 
 /**
  * @author Matthias Walliczek

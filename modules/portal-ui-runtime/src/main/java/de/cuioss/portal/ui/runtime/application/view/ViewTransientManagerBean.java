@@ -26,7 +26,7 @@ import jakarta.inject.Provider;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 
 import jakarta.annotation.PostConstruct;
-import de.cuioss.portal.ui.api.ui.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
 import de.cuioss.portal.ui.runtime.application.configuration.ViewConfiguration;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

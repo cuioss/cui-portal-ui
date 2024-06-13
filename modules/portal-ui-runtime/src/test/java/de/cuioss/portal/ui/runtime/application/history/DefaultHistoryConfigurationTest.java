@@ -31,7 +31,7 @@ import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
-import de.cuioss.portal.ui.api.ui.pages.HomePage;
+import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 
