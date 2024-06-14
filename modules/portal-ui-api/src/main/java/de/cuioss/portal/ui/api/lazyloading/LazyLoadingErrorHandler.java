@@ -26,7 +26,7 @@ import de.cuioss.uimodel.result.ResultDetail;
 import de.cuioss.uimodel.result.ResultState;
 
 /**
- * A default implementation of a error handler for a {@link LazyLoadingRequest}.
+ * A default implementation of an error handler for a {@link LazyLoadingRequest}.
  * Writes a log message if the state != {@link ResultState#VALID} and sets the
  * {@link ContextState} for the notification box. If a
  * {@link ResultDetail#getDetail()} is set it will be displayed inside a

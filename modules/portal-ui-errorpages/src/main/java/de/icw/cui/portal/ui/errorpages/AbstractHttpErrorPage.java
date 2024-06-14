@@ -15,35 +15,33 @@
  */
 package de.icw.cui.portal.ui.errorpages;
 
-import static de.cuioss.tools.string.MoreStrings.isEmpty;
-
-import java.io.Serial;
-import java.io.Serializable;
-
+import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
+import de.cuioss.tools.logging.CuiLogger;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 import jakarta.servlet.http.HttpServletRequest;
-
-import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
-import de.cuioss.tools.logging.CuiLogger;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
+
+import static de.cuioss.tools.string.MoreStrings.isEmpty;
+
 /**
  * @author Oliver Wolff
- *
  */
 @EqualsAndHashCode
-@ToString(exclude = { "facesContextProvider" })
+@ToString(exclude = {"facesContextProvider"})
 public abstract class AbstractHttpErrorPage implements Serializable {
 
     private static final CuiLogger log = new CuiLogger(AbstractHttpErrorPage.class);
 
     private static final String UNKNOWN = "?";
-    static final String JAVAX_SERVLET_ERROR_REQUEST_URI = "javax.servlet.error.request_uri";
+    static final String JAKARTA_SERVLET_ERROR_REQUEST_URI = "jakarta.servlet.error.request_uri";
 
     @Serial
     private static final long serialVersionUID = -6617663225820801072L;
@@ -77,16 +75,11 @@ public abstract class AbstractHttpErrorPage implements Serializable {
         return !UNKNOWN.equals(requestUri);
     }
 
-    /**
-     * @param request
-     *
-     * @return
-     */
     private String determineRequestUri(HttpServletRequest request) {
         if (null == request) {
             return UNKNOWN;
         }
-        var attribute = request.getAttribute(JAVAX_SERVLET_ERROR_REQUEST_URI);
+        var attribute = request.getAttribute(JAKARTA_SERVLET_ERROR_REQUEST_URI);
         if (null == attribute) {
             return UNKNOWN;
         }
@@ -103,7 +96,7 @@ public abstract class AbstractHttpErrorPage implements Serializable {
 
     /**
      * @return the concrete error code. It is usually defined by the concrete view /
-     *         backing bean
+     * backing bean
      */
     protected abstract int getErrorCode();
 }

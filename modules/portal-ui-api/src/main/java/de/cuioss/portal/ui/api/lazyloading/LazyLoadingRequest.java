@@ -32,7 +32,7 @@ public interface LazyLoadingRequest<T> {
     /**
      * Trigger a backend request. This request will be started during initialization
      * of the view and run in a separate thread without UI context. It must not try
-     * to access any session specific attributes or parameters or session scoped
+     * to access any session-specific attributes or parameters or session scoped
      * beans and must not try to access the {@link FacesContext}.
      *
      * @return a {@link ResultObject}

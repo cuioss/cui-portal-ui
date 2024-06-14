@@ -15,7 +15,7 @@
  */
 package de.icw.cui.portal.ui.errorpages;
 
-import static de.icw.cui.portal.ui.errorpages.AbstractHttpErrorPage.JAVAX_SERVLET_ERROR_REQUEST_URI;
+import static de.icw.cui.portal.ui.errorpages.AbstractHttpErrorPage.JAKARTA_SERVLET_ERROR_REQUEST_URI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -45,7 +45,7 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
 
     @Test
     void shouldDetectFacesView() {
-        getRequestConfigDecorator().setViewId(FACES_VIEW_JSF).setRequestAttribute(JAVAX_SERVLET_ERROR_REQUEST_URI,
+        getRequestConfigDecorator().setViewId(FACES_VIEW_JSF).setRequestAttribute(JAKARTA_SERVLET_ERROR_REQUEST_URI,
                 FACES_VIEW_JSF);
         underTest.initView();
         assertTrue(underTest.isRequestUriAvailable());
@@ -54,7 +54,7 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
 
     @Test
     void shouldDetectEmptyView() {
-        getRequestConfigDecorator().setViewId("").setRequestAttribute(JAVAX_SERVLET_ERROR_REQUEST_URI, "");
+        getRequestConfigDecorator().setViewId("").setRequestAttribute(JAKARTA_SERVLET_ERROR_REQUEST_URI, "");
         underTest.initView();
         assertFalse(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
@@ -84,7 +84,7 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
     void shouldNotRedirectIfNotConfigured() {
         configuration.fireEvent(PortalConfigurationKeys.PAGES_ERROR_404_REDIRECT, "false");
 
-        getRequestConfigDecorator().setViewId(FACES_VIEW_JSF).setRequestAttribute(JAVAX_SERVLET_ERROR_REQUEST_URI,
+        getRequestConfigDecorator().setViewId(FACES_VIEW_JSF).setRequestAttribute(JAKARTA_SERVLET_ERROR_REQUEST_URI,
                 FACES_VIEW_JSF);
         underTest.initView();
         assertTrue(underTest.isRequestUriAvailable());

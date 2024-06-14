@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-fragment xmlns="https://jakarta.ee/xml/ns/jakartaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-fragment_5_0.xsd"
-    version="5.0">
-    <distributable />
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-fragment_5_0.xsd"
+              version="5.0">
+    <distributable/>
     <name>CuiPortalErrorPages</name>
 
     <error-page>
@@ -12,14 +12,15 @@
         <location>/guest/401.jsf</location>
     </error-page>
     <error-page>
-        <!-- Error page for Http Code 403: Access to the specified resource 
+        <!-- Error page for Http Code 403: Access to the specified resource
             has been forbidden. -->
         <error-code>403</error-code>
         <location>/guest/403.jsf</location>
     </error-page>
     <error-page>
-        <!-- Error page for Http Code 404: The requested resource could not 
-            be found. Therefore the user will be redirected to home / login page in case 
+        <!-- Error page for Http Code 404: The requested resource could not
+            be found.
+            Therefore, the user will be redirected to home / login page in a case
             of the view not found was a jsf view -->
         <error-code>404</error-code>
         <location>/guest/404.jsf</location>
