@@ -147,7 +147,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
 
     /**
      * Handles {@link ViewExpiredException}. In case the user is still authenticated,
-     * the previous page will be reloaded and an according message will be
+     * the previous page will be reloaded, and an according message will be
      * displayed. Otherwise, the user will be redirected to the login-page.
      *
      * @param event to be handled
