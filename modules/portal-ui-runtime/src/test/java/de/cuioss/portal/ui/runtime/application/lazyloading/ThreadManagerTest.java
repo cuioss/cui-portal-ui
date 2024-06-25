@@ -15,31 +15,25 @@
  */
 package de.cuioss.portal.ui.runtime.application.lazyloading;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import java.util.concurrent.ExecutionException;
-
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.configuration.PortalConfigurationSource;
+import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
+import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.inject.Inject;
-
+import lombok.Getter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
-import de.cuioss.portal.configuration.initializer.PortalInitializer;
-import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
-import lombok.Getter;
+import java.util.concurrent.ExecutionException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
 
     @Inject
-    @PortalInitializer
     @Getter
     private ThreadManager underTest;
 
@@ -68,9 +62,9 @@ class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
 
     @Test
     @Disabled("""
-            fails on CI because retrie(1) returns: \
-            FutureHandle(future=java.util.concurrent.FutureTask@3ea4cfe0, context=A, timestamp=1625729207137)\
-            """)
+        fails on CI because retrie(1) returns: \
+        FutureHandle(future=java.util.concurrent.FutureTask@3ea4cfe0, context=A, timestamp=1625729207137)\
+        """)
     void handleTimeout() throws InterruptedException {
         configuration.fireEvent(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "1");
         underTest.initialize();

@@ -15,26 +15,24 @@
  */
 package de.cuioss.portal.ui.runtime.application.lazyloading;
 
-import java.io.Serial;
-import java.io.Serializable;
-
-import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Inject;
-
-import de.cuioss.portal.configuration.initializer.PortalInitializer;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingViewController;
 import de.cuioss.tools.logging.CuiLogger;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * Implementation of {@link LazyLoadingViewController} using the
  * {@link ThreadManager} to start backend requests.
  */
 @Dependent
-@EqualsAndHashCode(exclude = { "threadManager" })
-@ToString(exclude = { "threadManager" })
+@EqualsAndHashCode(exclude = {"threadManager"})
+@ToString(exclude = {"threadManager"})
 public class LazyLoadingViewControllerImpl implements LazyLoadingViewController, Serializable {
 
     @Serial
@@ -43,8 +41,7 @@ public class LazyLoadingViewControllerImpl implements LazyLoadingViewController,
     private static final CuiLogger log = new CuiLogger(LazyLoadingViewControllerImpl.class);
 
     @Inject
-    @PortalInitializer
-    private ThreadManager threadManager;
+    ThreadManager threadManager;
 
     @Override
     public void startRequest(LazyLoadingRequest<?> request) {

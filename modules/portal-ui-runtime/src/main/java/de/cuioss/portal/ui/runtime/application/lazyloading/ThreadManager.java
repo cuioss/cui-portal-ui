@@ -16,13 +16,14 @@
 package de.cuioss.portal.ui.runtime.application.lazyloading;
 
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.initializer.ApplicationInitializer;
-import de.cuioss.portal.configuration.initializer.PortalInitializer;
 import de.cuioss.tools.logging.CuiLogger;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.context.ManagedExecutor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +42,7 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZY
  * seconds are canceled and removed.
  */
 @ApplicationScoped
-@PortalInitializer
-public class ThreadManager implements ApplicationInitializer {
+public class ThreadManager {
 
     /**
      * Milliseconds to sleep between a cleanup cycle.
@@ -104,7 +104,7 @@ public class ThreadManager implements ApplicationInitializer {
         }
     }
 
-    @Override
+    @PostConstruct
     public void initialize() {
         log.debug("Starting ThreadManager");
         if (null == requestHandleTimeoutProvider || null == requestHandleTimeoutProvider.get()) {
@@ -113,23 +113,18 @@ public class ThreadManager implements ApplicationInitializer {
         }
         requestHandleTimeout = requestHandleTimeoutProvider.get();
         log.trace("requestHandleTimeout={}", requestHandleTimeout);
-        executorService = Executors.newCachedThreadPool();
+        executorService = ManagedExecutor.builder().build();
         executorService.execute(cleanupExecutor());
         executorRunning = true;
     }
 
-    @Override
+    @PreDestroy
     public void destroy() {
         log.debug("Shutting down ThreadManager");
         executorRunning = false;
         if (null != executorService) {
             executorService.shutdownNow();
         }
-    }
-
-    @Override
-    public Integer getOrder() {
-        return ApplicationInitializer.ORDER_LATE;
     }
 
     private Runnable cleanupExecutor() {

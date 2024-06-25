@@ -18,7 +18,6 @@ package de.cuioss.portal.ui.runtime.application.lazyloading;
 import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
-import de.cuioss.portal.configuration.initializer.PortalInitializer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
@@ -43,8 +42,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("rawtypes")
 @EnablePortalUiEnvironment
-@AddBeanClasses({ LazyLoadingViewModelImpl.class, MessageProducerMock.class, PortalStickyMessageProducerMock.class })
-@EnableTestLogger(trace = { LazyLoadingViewModelImpl.class, ThreadManager.class })
+@AddBeanClasses({LazyLoadingViewModelImpl.class, MessageProducerMock.class, PortalStickyMessageProducerMock.class})
+@EnableTestLogger(trace = {LazyLoadingViewModelImpl.class, ThreadManager.class})
 class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<LazyLoadingViewModelImpl> {
 
     @Inject
@@ -54,7 +53,6 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     private LazyLoadingViewControllerImpl viewController;
 
     @Inject
-    @PortalInitializer
     private ThreadManager threadManager;
 
     @Inject
@@ -89,7 +87,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
         var underTest = underTestProvider.get();
 
         viewController.startRequest(
-                createRequestWithResult(underTest.getRequestId(), new ResultObject<>("Test", ResultState.VALID)));
+            createRequestWithResult(underTest.getRequestId(), new ResultObject<>("Test", ResultState.VALID)));
 
         underTest.processAction(null);
 
@@ -110,7 +108,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
         var underTest = underTestProvider.get();
 
         viewController.startRequest(createRequestWithResult(underTest.getRequestId(),
-                new ResultObject<>("", ResultState.ERROR, new ResultDetail(new DisplayName("Test")), null)));
+            new ResultObject<>("", ResultState.ERROR, new ResultDetail(new DisplayName("Test")), null)));
 
         underTest.processAction(null);
 
@@ -168,7 +166,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
         var underTest = underTestProvider.get();
 
         viewController.startRequest(
-                createRequestWithResult(underTest.getRequestId(), new ResultObject<>("Test", ResultState.VALID)));
+            createRequestWithResult(underTest.getRequestId(), new ResultObject<>("Test", ResultState.VALID)));
 
         ConcurrentTools.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
         underTest.processAction(null);
@@ -180,7 +178,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     private LazyLoadingRequest<String> createRequestWithResult(final long requestId,
-            final ResultObject<String> resultObject) {
+                                                               final ResultObject<String> resultObject) {
         return new LazyLoadingRequest<>() {
 
             @Override

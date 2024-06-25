@@ -21,10 +21,9 @@ import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
 import de.cuioss.jsf.api.components.model.resultContent.ErrorController;
 import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.initializer.PortalInitializer;
-import de.cuioss.portal.ui.api.message.StickyMessageProducer;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingErrorHandler;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
+import de.cuioss.portal.ui.api.message.StickyMessageProducer;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
@@ -74,7 +73,6 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
     private static final CuiLogger log = new CuiLogger(LazyLoadingViewModelImpl.class);
 
     @Inject
-    @PortalInitializer
     ThreadManager threadManager;
 
     @Inject
