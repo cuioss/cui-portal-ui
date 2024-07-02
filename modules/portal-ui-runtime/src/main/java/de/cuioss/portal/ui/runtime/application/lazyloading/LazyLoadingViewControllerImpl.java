@@ -38,14 +38,14 @@ public class LazyLoadingViewControllerImpl implements LazyLoadingViewController,
     @Serial
     private static final long serialVersionUID = 4698361355745984370L;
 
-    private static final CuiLogger log = new CuiLogger(LazyLoadingViewControllerImpl.class);
+    private static final CuiLogger LOGGER = new CuiLogger(LazyLoadingViewControllerImpl.class);
 
     @Inject
     ThreadManager threadManager;
 
     @Override
     public void startRequest(LazyLoadingRequest<?> request) {
-        log.trace("startRequest {}", request);
+        LOGGER.debug("startRequest {}", request);
         threadManager.store(request.getRequestId(), request::backendRequest, request);
     }
 }

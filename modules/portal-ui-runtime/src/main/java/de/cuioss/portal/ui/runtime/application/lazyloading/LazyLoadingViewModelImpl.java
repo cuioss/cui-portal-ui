@@ -40,7 +40,6 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -108,11 +107,10 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
     @SuppressWarnings("unchecked")
     @Override
     public void processAction(ActionEvent actionEvent) {
-        LOGGER.trace("retrieveRequest '%s'", requestId);
+        LOGGER.debug("retrieveRequest '%s'", requestId);
         var handle = threadManager.retrieve(requestId);
         if (null == handle) {
             LOGGER.debug("No request found requestId='%s'", requestId);
-            ;
             new LazyLoadingErrorHandler().handleRequestError(null, "The request handle could not be found.", this, LOGGER);
             initialized = true;
             return;
@@ -120,16 +118,16 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
         var request = (LazyLoadingRequest<T>) handle.context();
         try {
             var result = (ResultObject<T>) handle.future().get(requestRetrieveTimeout, TimeUnit.SECONDS);
-            LOGGER.trace("result of , requestId='%s': result='%s'", requestId, result);
+            LOGGER.debug("result of , requestId='%s': result='%s'", requestId, result);
             handleRequestResult(result, request.getErrorHandler());
             request.handleResult(result.getResult());
             initialized = true;
         } catch (ExecutionException | TimeoutException | CancellationException e) {
-            LOGGER.trace(e, "Run into Exception, requestId='%s'", requestId);
+            LOGGER.debug(e, "Run into Exception, requestId='%s'", requestId);
             request.getErrorHandler().handleRequestError(e, "The request failed", this, LOGGER);
             initialized = true;
         } catch (InterruptedException ie) {
-            LOGGER.trace(ie, "Run into InterruptedException, requestId='%s'", requestId);
+            LOGGER.debug(ie, "Run into InterruptedException, requestId='%s'", requestId);
             request.getErrorHandler().handleRequestError(ie, "The request was interrupted", this, LOGGER);
             initialized = true;
             Thread.currentThread().interrupt();

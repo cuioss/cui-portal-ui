@@ -76,20 +76,20 @@ public class ThreadManager {
     public void store(final String id, final Callable<?> task, final Object context) {
         synchronized (registry) {
             var timestamp = System.currentTimeMillis();
-            LOGGER.debug(() -> "task " + id + " added at time (ms): " + timestamp);
+            LOGGER.debug("Task %s' added at time (ms): %s", id, timestamp);
             registry.put(id, new FutureHandle(executorService.submit(task), context, timestamp));
         }
     }
 
     /**
-     * Retrieve a task that was {@link #store(long, Callable, Object)}ed before.
+     * Retrieve a task that was {@link #store(String, Callable, Object)}ed before.
      *
      * @param id the unique id
      * @return a {@link FutureHandle} containing the task and the context object
      */
     FutureHandle retrieve(final String id) {
         synchronized (registry) {
-            LOGGER.debug("task retrieved and removed: '%s'", id);
+            LOGGER.debug("Task '%s' retrieved and removed", id);
             return registry.remove(id);
         }
     }
@@ -102,7 +102,7 @@ public class ThreadManager {
                 "Invalid configuration, please check property " + PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT);
         }
         requestHandleTimeout = requestHandleTimeoutProvider.get();
-        LOGGER.trace("requestHandleTimeout={}", requestHandleTimeout);
+        LOGGER.debug("requestHandleTimeout='%s'", requestHandleTimeout);
         executorService = ManagedExecutor.builder().build();
         executorService.execute(cleanupExecutor());
         executorRunning = true;
@@ -123,7 +123,7 @@ public class ThreadManager {
                 try {
                     TimeUnit.MILLISECONDS.sleep(CLEANUP_SLEEP);
                 } catch (final InterruptedException e) {
-                    LOGGER.debug("Interrupted cleanup timout, exiting loop", e);
+                    LOGGER.debug(e, "Interrupted cleanup timout, exiting loop");
                     Thread.currentThread().interrupt();
                     break;
                 }
@@ -133,7 +133,7 @@ public class ThreadManager {
                         if ((System.currentTimeMillis() - entry.getValue().timestamp())
                             / 1000 > requestHandleTimeout) {
 
-                            LOGGER.debug("timeout. terminating id={}, future={}", entry.getKey(), entry.getValue());
+                            LOGGER.debug("timeout. terminating id='%s', future='%s'", entry.getKey(), entry.getValue());
 
                             entry.getValue().future().cancel(true);
                             registry.remove(entry.getKey());
