@@ -22,7 +22,7 @@ import de.cuioss.uimodel.result.ResultObject;
 
 /**
  * A request to a backend service, which can be run in a separate thread and
- * will return a {@link ResultObject}. On success the result will be handled in
+ * will return a {@link ResultObject}. On success, the result will be handled in
  * UI context.
  *
  * @param <T> should be serializable
@@ -51,7 +51,7 @@ public interface LazyLoadingRequest<T> {
      * @return A unique identifier to store the request and allow retrieving of the
      *         result later.
      */
-    long getRequestId();
+    String getRequestId();
 
     /**
      * @return an instance of a {@link LazyLoadingErrorHandler} to be called if a

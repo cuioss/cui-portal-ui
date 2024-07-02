@@ -48,7 +48,7 @@ public abstract class BaseLazyLoadingWidget<T> extends BaseWidget implements Laz
     }
 
     @Override
-    public long getRequestId() {
+    public String getRequestId() {
         return viewModel.getRequestId();
     }
 

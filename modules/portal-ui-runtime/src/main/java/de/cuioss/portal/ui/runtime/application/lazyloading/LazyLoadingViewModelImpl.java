@@ -41,6 +41,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -63,14 +64,10 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZY
 @Dependent
 public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, ErrorController {
 
-    @SuppressWarnings("java:S2245") // owolff: Random no security flaw, because we use it for internal
-    // identification of threads
-    private static final Random RANDOM = new Random();
-
     @Serial
     private static final long serialVersionUID = -3343380539839996245L;
 
-    private static final CuiLogger log = new CuiLogger(LazyLoadingViewModelImpl.class);
+    private static final CuiLogger LOGGER = new CuiLogger(LazyLoadingViewModelImpl.class);
 
     @Inject
     ThreadManager threadManager;
@@ -99,7 +96,7 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
     private boolean initialized;
 
     @Getter
-    private final long requestId = RANDOM.nextLong();
+    private final String requestId = UUID.randomUUID().toString();
 
     /**
      * Will be called by the ajax call to update the lazy loading content.
@@ -111,25 +108,29 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
     @SuppressWarnings("unchecked")
     @Override
     public void processAction(ActionEvent actionEvent) {
-        log.trace("retrieveRequest {}", requestId);
+        LOGGER.trace("retrieveRequest '%s'", requestId);
         var handle = threadManager.retrieve(requestId);
         if (null == handle) {
-            new LazyLoadingErrorHandler().handleRequestError(null, "The request handle could not be found.", this, log);
+            LOGGER.debug("No request found requestId='%s'", requestId);
+            ;
+            new LazyLoadingErrorHandler().handleRequestError(null, "The request handle could not be found.", this, LOGGER);
             initialized = true;
             return;
         }
         var request = (LazyLoadingRequest<T>) handle.context();
         try {
             var result = (ResultObject<T>) handle.future().get(requestRetrieveTimeout, TimeUnit.SECONDS);
-            log.trace("result of {}: {}", requestId, result);
+            LOGGER.trace("result of , requestId='%s': result='%s'", requestId, result);
             handleRequestResult(result, request.getErrorHandler());
             request.handleResult(result.getResult());
             initialized = true;
         } catch (ExecutionException | TimeoutException | CancellationException e) {
-            request.getErrorHandler().handleRequestError(e, "The request failed", this, log);
+            LOGGER.trace(e, "Run into Exception, requestId='%s'", requestId);
+            request.getErrorHandler().handleRequestError(e, "The request failed", this, LOGGER);
             initialized = true;
         } catch (InterruptedException ie) {
-            request.getErrorHandler().handleRequestError(ie, "The request was interrupted", this, log);
+            LOGGER.trace(ie, "Run into InterruptedException, requestId='%s'", requestId);
+            request.getErrorHandler().handleRequestError(ie, "The request was interrupted", this, LOGGER);
             initialized = true;
             Thread.currentThread().interrupt();
         }
@@ -162,7 +163,7 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
         var resultDetail = result.getResultDetail();
         if (resultDetail.isPresent()) {
             errorHandler.handleResultDetail(result.getState(), resultDetail.get(), result.getErrorCode().orElse(null),
-                this, log);
+                this, LOGGER);
         } else {
             setRenderContent(true);
         }

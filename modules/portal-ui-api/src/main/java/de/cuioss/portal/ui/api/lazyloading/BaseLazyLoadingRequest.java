@@ -31,7 +31,7 @@ public abstract class BaseLazyLoadingRequest<T> implements LazyLoadingRequest<T>
     LazyLoadingThreadModel<T> viewModel;
 
     @Override
-    public long getRequestId() {
+    public String getRequestId() {
         return viewModel.getRequestId();
     }
 }

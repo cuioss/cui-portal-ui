@@ -142,7 +142,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
             }
 
             @Override
-            public long getRequestId() {
+            public String getRequestId() {
                 return underTest.getRequestId();
             }
         });
@@ -177,7 +177,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
         assertNotNull(underTest.getNotificationBoxValue());
     }
 
-    private LazyLoadingRequest<String> createRequestWithResult(final long requestId,
+    private LazyLoadingRequest<String> createRequestWithResult(final String requestId,
                                                                final ResultObject<String> resultObject) {
         return new LazyLoadingRequest<>() {
 
@@ -192,7 +192,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
             }
 
             @Override
-            public long getRequestId() {
+            public String getRequestId() {
                 return requestId;
             }
         };

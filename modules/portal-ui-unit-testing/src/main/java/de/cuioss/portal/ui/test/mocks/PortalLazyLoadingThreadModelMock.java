@@ -65,7 +65,7 @@ public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadMod
 
     @Getter
     @Setter
-    private long requestId;
+    private String requestId;
 
     @Getter
     private ActionEvent event;

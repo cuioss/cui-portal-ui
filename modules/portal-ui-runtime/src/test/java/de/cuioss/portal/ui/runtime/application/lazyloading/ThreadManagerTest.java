@@ -19,6 +19,7 @@ import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
+import de.cuioss.test.generator.Generators;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.inject.Inject;
 import lombok.Getter;
@@ -50,14 +51,15 @@ class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
     void handleGoodCase() throws ExecutionException, InterruptedException {
         configuration.fireEvent(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
         underTest.initialize();
-        underTest.store(1, () -> "Test", "A");
-        assertNull(underTest.retrieve(2));
-        var handle = underTest.retrieve(1);
+        String id1 = Generators.nonBlankStrings().next();
+        underTest.store(id1, () -> "Test", "A");
+        assertNull(underTest.retrieve(Generators.nonBlankStrings().next()));
+        var handle = underTest.retrieve(id1);
         assertNotNull(handle);
         assertEquals("A", handle.context());
         assertNotNull(handle.future());
         assertEquals("Test", handle.future().get());
-        assertNull(underTest.retrieve(1));
+        assertNull(underTest.retrieve(id1));
     }
 
     @Test
@@ -68,8 +70,9 @@ class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
     void handleTimeout() throws InterruptedException {
         configuration.fireEvent(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "1");
         underTest.initialize();
-        underTest.store(1, () -> "Test", "A");
+        String id1 = Generators.nonBlankStrings().next();
+        underTest.store(id1, () -> "Test", "A");
         Thread.sleep(3000);
-        assertNull(underTest.retrieve(1));
+        assertNull(underTest.retrieve(id1));
     }
 }

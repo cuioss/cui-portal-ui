@@ -15,18 +15,17 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.inject.Produces;
-import jakarta.faces.event.AbortProcessingException;
-import jakarta.faces.event.ActionEvent;
-
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
 import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingViewController;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
+import jakarta.faces.event.AbortProcessingException;
+import jakarta.faces.event.ActionEvent;
 
 import java.io.Serial;
 
@@ -86,8 +85,8 @@ public class LazyLoadingTestSupportProducer {
             }
 
             @Override
-            public long getRequestId() {
-                return 0;
+            public String getRequestId() {
+                return "0";
             }
         };
     }
