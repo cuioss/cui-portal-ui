@@ -1,11 +1,9 @@
 /**
  * Instances of {@link de.cuioss.portal.ui.api.listener.view.ViewListener}
  * marked with
- * {@link de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener} or
- * {@link de.cuioss.portal.ui.api.listener.view.PortalAfterRestoreViewListener}
+ * {@link de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener}
  * are to be picked up and processed by the general portal restore View
- * listener, see de.icw.cui.portal.configuration.application.listener.view for
- * implementation details.
+ * listener
  *
  * @author Oliver Wolff
  */

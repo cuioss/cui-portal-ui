@@ -29,16 +29,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT;
 
 /**
  * Manages FutureHandle based requests and executes them via
- * {@link Executors#newCachedThreadPool()}. All requests that were not retrieved
- * after
- * {@link PortalConfigurationKeys#PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT}
+ * {@link ManagedExecutor}.
+ * All requests that were not retrieved after {@link PortalConfigurationKeys#PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT}
  * seconds are canceled and removed.
  */
 @ApplicationScoped

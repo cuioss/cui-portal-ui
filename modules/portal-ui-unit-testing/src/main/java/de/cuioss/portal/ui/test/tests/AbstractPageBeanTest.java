@@ -15,19 +15,6 @@
  */
 package de.cuioss.portal.ui.test.tests;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
-
-import jakarta.inject.Inject;
-
-import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.logging.Logger;
-import org.junit.platform.commons.logging.LoggerFactory;
-import org.junit.platform.commons.support.AnnotationSupport;
-
 import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.test.generator.junit.EnableGeneratorController;
@@ -46,8 +33,19 @@ import de.cuioss.test.valueobjects.property.PropertyMetadata;
 import de.cuioss.test.valueobjects.util.GeneratorAnnotationHelper;
 import de.cuioss.test.valueobjects.util.GeneratorRegistry;
 import de.cuioss.test.valueobjects.util.ReflectionHelper;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.logging.Logger;
+import org.junit.platform.commons.logging.LoggerFactory;
+import org.junit.platform.commons.support.AnnotationSupport;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Base class for testing Page / Backing beans.
@@ -62,7 +60,7 @@ import lombok.Setter;
  * <ul>
  * <li>{@code verifyBeanProperties()}: It will be run if the test-class is
  * annotated with {@link VerifyBeanProperty}. For further configuration see
- * {link de.icw.cui.test.valueobjects.api}</li>
+ * {link de.cuioss.test.valueobjects.api}</li>
  * <li>{@code  verifyObjectContracts()}: Verifies the contract of
  * {@link Object#equals(Object)}, {@link Object#hashCode()},
  * {@link Object#toString()} and {@link Serializable} by serializing /
@@ -72,13 +70,12 @@ import lombok.Setter;
  * override it. Previous annotation will not work.</li>
  * </ul>
  *
- * @author Oliver Wolff
- *
  * @param <T> the actual bean under test must be at least {@link Serializable}
+ * @author Oliver Wolff
  */
 @EnableGeneratorController
 public abstract class AbstractPageBeanTest<T extends Serializable>
-        implements JsfEnvironmentConsumer, ShouldBeNotNull<T>, GeneratorRegistry {
+    implements JsfEnvironmentConsumer, ShouldBeNotNull<T>, GeneratorRegistry {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractPageBeanTest.class);
 
@@ -92,10 +89,10 @@ public abstract class AbstractPageBeanTest<T extends Serializable>
 
     @Test
     protected void verifyBeanProperties() {
-        logger.debug(() -> "Checking de.icw.cui.test.valueobjects.api.contracts.VerifyBeanProperty");
+        logger.debug(() -> "Checking VerifyBeanProperty");
         if (AnnotationSupport.findAnnotation(getClass(), VerifyBeanProperty.class).isEmpty()) {
             logger.info(
-                    () -> "In order to test Bean-Properties you need to annotate you test class with de.icw.cui.test.valueobjects.api.contracts.VerifyBeanProperty");
+                () -> "In order to test Bean-Properties you need to annotate you test class with VerifyBeanProperty");
             return;
         }
 
@@ -112,7 +109,7 @@ public abstract class AbstractPageBeanTest<T extends Serializable>
         logger.debug(() -> "Using metadata " + metadata);
 
         Optional<TestContract<T>> contract = BeanPropertyContractImpl.createBeanPropertyTestContract(targetBeanClass,
-                getClass(), metadata);
+            getClass(), metadata);
         if (contract.isEmpty()) {
             logger.debug(() -> "No bean properties configured");
             TypedGeneratorRegistry.clear();
@@ -140,8 +137,8 @@ public abstract class AbstractPageBeanTest<T extends Serializable>
 
             var name = currentClass.getName();
             return name.startsWith(currentClass.getSuperclass().getName()) && (name.contains("$$") // CDI
-                    || name.contains("_ClientProxy") // Quarkus
-                    || name.contains("$HibernateProxy$")); // Hibernate
+                || name.contains("_ClientProxy") // Quarkus
+                || name.contains("$HibernateProxy$")); // Hibernate
         }
     }
 

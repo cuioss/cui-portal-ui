@@ -28,12 +28,12 @@ import lombok.experimental.UtilityClass;
 public final class PortalFamily {
 
     /** Defines the portal components family. */
-    public static final String PORTAL_FAMILY = "de.icw.cui.portal.family";
+    public static final String PORTAL_FAMILY = "de.cuioss.portal.family";
 
     /** The component for {@link SidebarComponent} */
-    public static final String SIDEBAR_COMPONENT = "de.icw.cui.portal.sidebar";
+    public static final String SIDEBAR_COMPONENT = "de.cuioss.portal.sidebar";
 
     /** Default Renderer for {@link AccordionComponent} */
-    public static final String SIDEBAR_RENDERER = "de.icw.cui.portal.sidebar_renderer";
+    public static final String SIDEBAR_RENDERER = "de.cuioss.portal.sidebar_renderer";
 
 }

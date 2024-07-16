@@ -37,8 +37,8 @@
         </description>
         <tag-name>sidebar</tag-name>
         <component>
-            <component-type>de.icw.cui.portal.sidebar</component-type>
-            <renderer-type>de.icw.cui.portal.sidebar_renderer</renderer-type>
+            <component-type>de.cuioss.portal.sidebar</component-type>
+            <renderer-type>de.cuioss.portal.sidebar_renderer</renderer-type>
         </component>
         <attribute>
             <description><![CDATA[The component identifier for this component.  This value must be
@@ -50,9 +50,10 @@
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description><![CDATA[Flag indicating whether or not this component should be rendered
-                (during Render Response Phase), or processed on any subsequent
-                form submit.  The default value for this property is true.]]>
+            <description><![CDATA[Flag indicating whether this component should be rendered
+                (during Render Response Phase), or processed on any later
+                form submit.
+                The default value for this property is true.]]>
             </description>
             <name>rendered</name>
             <required>false</required>

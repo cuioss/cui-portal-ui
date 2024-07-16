@@ -2,9 +2,9 @@
  * <p>
  * Allows to customize an installation. To activate either create a
  * "customization" folder inside
- * {@link de.icw.cui.portal.configuration.PortalConfigurationKeys#PORTAL_CONFIG_DIR}
+ * {@link de.cuioss.portal.configuration.PortalConfigurationKeys#PORTAL_CONFIG_DIR}
  * or configure
- * {@link de.icw.cui.portal.configuration.PortalConfigurationKeys#PORTAL_CUSTOMIZATION_DIR}.
+ * {@link de.cuioss.portal.configuration.PortalConfigurationKeys#PORTAL_CUSTOMIZATION_DIR}.
  * </p>
  *
  * Within this folder a specific structure is expected:

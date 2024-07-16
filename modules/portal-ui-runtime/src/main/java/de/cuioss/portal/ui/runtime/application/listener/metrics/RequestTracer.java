@@ -70,7 +70,7 @@ public class RequestTracer implements Serializable {
 
     /**
      * The default value is explicitly set here, because the actual configuration of
-     * that value is set by the "portal-metrics" module which is optional .
+     * that value is set by the "portal-metrics" module, which is optional.
      */
     @Inject
     @ConfigProperty(name = PORTAL_METRICS_ENABLED, defaultValue = "false")

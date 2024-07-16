@@ -13,54 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.icw.cui.portal.ui.errorpages;
+package de.cuioss.portal.ui.errorpages;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.Serializable;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalSessionStorageMock.class })
-class Http401PageBeanTest extends AbstractPageBeanTest<Http401PageBean> {
-
-    @Getter
-    @Inject
-    private Http401PageBean underTest;
+class ErrorPageBeanTest extends AbstractPageBeanTest<ErrorPageBean> {
 
     @Inject
     @PortalSessionStorage
-    private MapStorage<Serializable, Serializable> mapStorage;
+    private PortalSessionStorageMock mapStorage;
+
+    @Inject
+    @Getter
+    private ErrorPageBean underTest;
 
     @Test
-    void shouldProvideCorrectCode() {
-        assertEquals(401, underTest.getErrorCode());
-    }
-
-    @Test
-    void shouldHandleNoMessage() {
-        underTest.initView();
+    void shouldIgnoreNotExistingMessage() {
         assertFalse(underTest.isMessageAvailable());
     }
 
     @Test
-    void shouldHandleMessage() {
-        DefaultErrorMessage.addErrorMessageToSessionStorage(new DefaultErrorMessage("1", "1", "1", "1"), mapStorage);
-        underTest.initView();
+    void shouldResolveAndRemoveErrorMessage() {
+        var errorMessage = new DefaultErrorMessage("errorCode", "errorTicket", "errorMessage", "pageId");
+        DefaultErrorMessage.addErrorMessageToSessionStorage(errorMessage, mapStorage);
+
+        assertTrue(mapStorage.containsKey(DefaultErrorMessage.LOOKUP_KEY));
         assertTrue(underTest.isMessageAvailable());
+        assertEquals(errorMessage, underTest.getMessage());
+        assertFalse(mapStorage.containsKey(DefaultErrorMessage.LOOKUP_KEY));
     }
+
 }

@@ -27,8 +27,7 @@ import java.lang.annotation.Target;
 import jakarta.inject.Qualifier;
 
 /**
- * Defines Instances of
- * {@link com.icw.ehf.cui.core.api.components.model.widget.DashboardWidgetModel}
+ * Defines Instances of {@link de.cuioss.jsf.api.components.model.widget.DashboardWidgetModel}
  *
  * @author Matthias Walliczek
  */

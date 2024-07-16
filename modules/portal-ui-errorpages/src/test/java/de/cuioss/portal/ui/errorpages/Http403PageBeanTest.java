@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.icw.cui.portal.ui.errorpages;
+package de.cuioss.portal.ui.errorpages;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

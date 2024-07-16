@@ -65,5 +65,5 @@ function stopRenew() {
 
 $(function () {
     initTokenRenew();
-    icw.cui.registerOnIdle(stopRenew)
+    Cui.Core.registerOnIdle(stopRenew)
 });

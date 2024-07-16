@@ -2,7 +2,7 @@
  * Defines ways to unify the handling of locales.
  * {@link de.cuioss.portal.ui.api.locale.LocaleResolverService}
  * <ul>
- * <li>{@link de.icw.cui.portal.locale.PortalLocale} acts as a marker for the
+ * <li>{@link de.cuioss.portal.common.locale.PortalLocale} acts as a marker for the
  * concrete request scoped locale. the portal must provide a corresponding
  * producer.</li>
  * <li>{@link de.cuioss.portal.ui.api.locale.LocaleResolverService}: Defines the

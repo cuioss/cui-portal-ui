@@ -44,7 +44,7 @@ public abstract class PortalNavigationMenuConfigParser {
      * Evaluates the order to sort the menu items.
      * <p>
      * See also
-     * {@link de.icw.cui.portal.configuration.PortalConfigurationKeys#MENU_BASE}.
+     * {@link de.cuioss.portal.configuration.PortalConfigurationKeys#MENU_BASE}.
      *
      * @return the order if set or -1 if order is not set.
      */
@@ -73,7 +73,7 @@ public abstract class PortalNavigationMenuConfigParser {
      * not set or set to true.
      * <p>
      * See also
-     * {@link de.icw.cui.portal.configuration.PortalConfigurationKeys#MENU_BASE}.
+     * {@link de.cuioss.portal.configuration.PortalConfigurationKeys#MENU_BASE}.
      *
      * @return true if the menu item should be rendered.
      */

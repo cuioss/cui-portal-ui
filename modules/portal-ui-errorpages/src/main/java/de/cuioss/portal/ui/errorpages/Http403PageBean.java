@@ -13,53 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.icw.cui.portal.ui.errorpages;
+package de.cuioss.portal.ui.errorpages;
 
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletResponse;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.tools.base.BooleanOperations;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 import java.io.Serial;
 
 /**
- * Page Bean for the error-code 404 (Resource not found)
+ * Page Bean for the error-code 403 (Forbidden)
  *
  * @author Oliver Wolff
  *
  */
 @RequestScoped
 @Named
-@EqualsAndHashCode(callSuper = true)
-public class Http404PageBean extends AbstractHttpErrorPage {
+public class Http403PageBean extends AbstractHttpErrorPage {
 
     @Serial
     private static final long serialVersionUID = -2216275532091092216L;
 
-    @Inject
-    @ConfigProperty(name = PortalConfigurationKeys.PAGES_ERROR_404_REDIRECT)
-    @Getter
-    private boolean shouldRedirect;
-
-    @Override
-    public String initView() {
-        super.initView();
-        if (BooleanOperations.isAnyTrue(!shouldRedirect, !isRequestUriAvailable())) {
-            shouldRedirect = false;
-        }
-        return null;
-    }
-
     @Override
     protected int getErrorCode() {
-        return HttpServletResponse.SC_NOT_FOUND;
+        return HttpServletResponse.SC_FORBIDDEN;
     }
 
 }
