@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="jakarta.faces.html"
-    xmlns:ui="jakarta.faces.facelets"
-    xmlns:o="http://omnifaces.org/ui"
-    xmlns:portal="ttps://cuioss.de/jsf/portal">
-<!-- 
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:portal="https://cuioss.de/jsf/portal">
+<!--
 <documentation>
 	<body>The default master for most of the pages. It provides the
 		container-fluid layout for full screen content.
@@ -70,16 +70,16 @@
 
         <o:importConstants
             type="de.cuioss.portal.ui.api.GlobalComponentIds"
-            var="GlobalIds" />
+            var="GlobalIds"/>
 
         <h:panelGroup id="#{GlobalIds.MAIN_CONTENT.id}" layout="block"
-            styleClass="container-fluid">
+                      styleClass="container-fluid">
             <!-- Display sticky messages. The extension point is an &lt;ui:insert name="stickyMessages" &gt;-->
             <ui:insert name="stickyMessages">
-                <portal:stickyMessages id="stickyMessages" />
+                <portal:stickyMessages id="stickyMessages"/>
             </ui:insert>
 
-            <ui:insert name="content" />
+            <ui:insert name="content"/>
         </h:panelGroup>
     </ui:define>
 </ui:composition>

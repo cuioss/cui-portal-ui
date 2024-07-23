@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.runtime.application.locale;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.List;
-import java.util.Locale;
-
+import de.cuioss.portal.common.locale.LocaleChangeEvent;
+import de.cuioss.portal.common.locale.PortalLocale;
+import de.cuioss.portal.ui.api.PortalCoreBeanNames;
+import de.cuioss.portal.ui.api.locale.LocaleResolverService;
+import de.cuioss.portal.ui.runtime.application.locale.impl.PortalLocaleResolverServiceImpl;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.event.Event;
@@ -29,28 +29,31 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Provider;
-
-import de.cuioss.portal.common.locale.LocaleChangeEvent;
-import de.cuioss.portal.common.locale.PortalLocale;
-import de.cuioss.portal.ui.api.PortalCoreBeanNames;
-import de.cuioss.portal.ui.api.locale.LocaleResolverService;
-import de.cuioss.portal.ui.runtime.application.locale.impl.PortalLocaleResolverServiceImpl;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Locale;
+
 /**
  * The {@link PortalLocaleManagerBean} is about tracking and interaction of
- * client specific locales. The implementation is a fixed (CDI-) scoped bean. In
- * order to change behavior the extension point is an implementation of
- * {@link LocaleResolverService} defined as an {@link Alternative} for
- * {@link PortalLocaleResolver}. The default implementation
+ * client-specific locales.
+ * The implementation is a fixed (CDI-) scoped bean.
+ * To change behavior, the extension point is an implementation of
+ * {@link LocaleResolverService} defined as an {@link Alternative}.
+ * The default implementation
  * {@link PortalLocaleResolverServiceImpl} uses the jsf based in standard
- * behavior. In addition it provides a producer method for {@link PortalLocale}
+ * behavior.
+ * In addition, it provides a producer method for {@link PortalLocale}
  * To put in other words: This bean provides a session-scoped cache for locale,
- * the used service is agnostic of state or bean specific types. In addition it
- * acts as an producer of {@link PortalLocale}: <em>Caution:</em>: Within
+ * the used service is agnostic of state or bean specific types.
+ * In addition, it
+ * acts as a producer of {@link PortalLocale}: <em>Caution:</em>: Within
  * CDI-beans the only way to access the locale is injecting
- * {@link PortalLocale}. The producer is only meant as legacy bridge.
+ * {@link PortalLocale}.
+ * The producer is only meant as legacy bridge.
  *
  * @author Oliver Wolff
  */
@@ -87,12 +90,16 @@ public class PortalLocaleManagerBean implements Serializable {
         return getUserLocale();
     }
 
-    /** @see PortalLocaleResolverServiceImpl#getAvailableLocales() */
+    /**
+     * @see PortalLocaleResolverServiceImpl#getAvailableLocales()
+     */
     public List<Locale> getAvailableLocales() {
         return resolverService.getAvailableLocales();
     }
 
-    /** @see PortalLocaleResolverServiceImpl#saveUserLocale(Locale) */
+    /**
+     * @see PortalLocaleResolverServiceImpl#saveUserLocale(Locale)
+     */
     public void saveUserLocale(final Locale localeValue) {
         locale = localeValue;
         facesContextProvider.get().getViewRoot().setLocale(locale);
@@ -100,7 +107,9 @@ public class PortalLocaleManagerBean implements Serializable {
         localeChangeEvent.fire(locale);
     }
 
-    /** @see PortalLocaleResolverServiceImpl#resolveUserLocale() */
+    /**
+     * @see PortalLocaleResolverServiceImpl#resolveUserLocale()
+     */
     public Locale getUserLocale() {
         if (null == locale) {
             locale = resolverService.resolveUserLocale();
