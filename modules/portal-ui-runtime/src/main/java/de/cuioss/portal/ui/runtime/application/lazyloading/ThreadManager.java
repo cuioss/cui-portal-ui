@@ -43,9 +43,9 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LAZY
 public class ThreadManager {
 
     /**
-     * Milliseconds to sleep between a cleanup cycle.
+     * Duration to sleep between a cleanup cycle.
      */
-    private static final int CLEANUP_SLEEP = 1000;
+    private static final int CLEANUP_SLEEP_SECONDS = 1;
 
     private static final CuiLogger LOGGER = new CuiLogger(ThreadManager.class);
 
@@ -67,7 +67,7 @@ public class ThreadManager {
     /**
      * Store and start a {@link Callable} task.
      *
-     * @param id      a unique id to store and #retrieve(long) the task afterward
+     * @param id      a unique id to store and {@link #retrieve(String)} the task afterward
      * @param task    the task to execute
      * @param context a context object
      */
@@ -101,9 +101,9 @@ public class ThreadManager {
         }
         requestHandleTimeout = requestHandleTimeoutProvider.get();
         LOGGER.debug("requestHandleTimeout='%s'", requestHandleTimeout);
+        executorRunning = true;
         executorService = ManagedExecutor.builder().build();
         executorService.execute(cleanupExecutor());
-        executorRunning = true;
     }
 
     @PreDestroy
@@ -119,7 +119,7 @@ public class ThreadManager {
         return () -> {
             while (executorRunning) {
                 try {
-                    TimeUnit.MILLISECONDS.sleep(CLEANUP_SLEEP);
+                    TimeUnit.SECONDS.sleep(CLEANUP_SLEEP_SECONDS);
                 } catch (final InterruptedException e) {
                     LOGGER.debug(e, "Interrupted cleanup timout, exiting loop");
                     Thread.currentThread().interrupt();
