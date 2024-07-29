@@ -28,6 +28,7 @@ import de.cuioss.tools.logging.CuiLogger;
  */
 public class PortalApplicationFactory extends ApplicationFactory {
 
+    @SuppressWarnings("java:S3077") // thread-safe via createPortalApplication
     private Application application;
 
     private static final CuiLogger LOGGER = new CuiLogger(PortalApplicationFactory.class);
