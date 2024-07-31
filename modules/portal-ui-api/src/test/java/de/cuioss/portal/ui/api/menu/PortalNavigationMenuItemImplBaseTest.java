@@ -15,27 +15,21 @@
  */
 package de.cuioss.portal.ui.api.menu;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_TOP_IDENTIFIER;
-import static de.cuioss.portal.ui.api.menu.MockPortalNavigationMenuItemImplBase.ID;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.jboss.weld.junit5.auto.EnableAutoWeld;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
 import de.cuioss.test.jsf.producer.JsfObjectsProducer;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.jboss.weld.junit5.auto.EnableAutoWeld;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_TOP_IDENTIFIER;
+import static de.cuioss.portal.ui.api.menu.MockPortalNavigationMenuItemImplBase.ID;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnableAutoWeld
 @AddBeanClasses({ JsfObjectsProducer.class })
@@ -60,7 +54,6 @@ class PortalNavigationMenuItemImplBaseTest {
     private Provider<MockPortalNavigationMenuItemImplBase> underTestProvider;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Test

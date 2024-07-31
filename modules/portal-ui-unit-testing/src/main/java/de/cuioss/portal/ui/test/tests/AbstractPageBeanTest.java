@@ -15,7 +15,6 @@
  */
 package de.cuioss.portal.ui.test.tests;
 
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.test.generator.junit.EnableGeneratorController;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
@@ -84,7 +83,6 @@ public abstract class AbstractPageBeanTest<T extends Serializable>
     private JsfEnvironmentHolder environmentHolder;
 
     @Inject
-    @PortalConfigurationSource
     protected PortalTestConfiguration configuration;
 
     @Test

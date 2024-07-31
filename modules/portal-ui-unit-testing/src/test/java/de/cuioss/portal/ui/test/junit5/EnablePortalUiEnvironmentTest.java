@@ -16,7 +16,6 @@
 package de.cuioss.portal.ui.test.junit5;
 
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.test.jsf.defaults.BasicApplicationConfiguration;
 import jakarta.faces.context.FacesContext;
@@ -39,7 +38,6 @@ class EnablePortalUiEnvironmentTest {
     private Provider<String> attribute;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Test

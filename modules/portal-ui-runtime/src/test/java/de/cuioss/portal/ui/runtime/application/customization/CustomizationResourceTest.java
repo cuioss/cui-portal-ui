@@ -16,7 +16,6 @@
 package de.cuioss.portal.ui.runtime.application.customization;
 
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
@@ -38,7 +37,6 @@ class CustomizationResourceTest implements ShouldBeNotNull<CustomizationResource
     private CustomizationResource underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @BeforeEach

@@ -1,6 +1,5 @@
 package de.cuioss.portal.ui.runtime.application.view;
 
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
@@ -33,7 +32,6 @@ class HeaderServletFilterTest implements ShouldBeNotNull<HeaderServletFilter> {
     private HeaderServletFilter underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Produces

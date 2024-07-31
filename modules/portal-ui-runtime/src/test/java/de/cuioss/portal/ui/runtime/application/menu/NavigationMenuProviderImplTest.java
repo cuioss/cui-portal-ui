@@ -15,52 +15,41 @@
  */
 package de.cuioss.portal.ui.runtime.application.menu;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_TOP_IDENTIFIER;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemContainer;
 import de.cuioss.jsf.api.converter.StringIdentConverter;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.api.menu.items.AboutMenuItem;
-import de.cuioss.portal.ui.api.menu.items.AccountMenuItem;
-import de.cuioss.portal.ui.api.menu.items.LogoutMenuItem;
-import de.cuioss.portal.ui.api.menu.items.PreferencesMenuItem;
-import de.cuioss.portal.ui.api.menu.items.UserMenuItem;
+import de.cuioss.portal.ui.api.menu.items.*;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalMirrorResourceBundle;
 import de.cuioss.test.jsf.config.ComponentConfigurator;
 import de.cuioss.test.jsf.config.decorator.ComponentConfigDecorator;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_TOP_IDENTIFIER;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ AccountMenuItem.class, AboutMenuItem.class, LogoutMenuItem.class, EmptyNavigationContainer.class,
-        PreferencesMenuItem.class, UserMenuItem.class, TestNavigationMenuItemSingleWithIdA.class,
-        TestNavigationMenuItemSingleWithIdB.class, TestNavigationMenuItemSingleWithoutId.class,
-        PortalMirrorResourceBundle.class, PortalTestUserProducer.class })
+@AddBeanClasses({AccountMenuItem.class, AboutMenuItem.class, LogoutMenuItem.class, EmptyNavigationContainer.class,
+    PreferencesMenuItem.class, UserMenuItem.class, TestNavigationMenuItemSingleWithIdA.class,
+    TestNavigationMenuItemSingleWithIdB.class, TestNavigationMenuItemSingleWithoutId.class,
+    PortalMirrorResourceBundle.class, PortalTestUserProducer.class})
 class NavigationMenuProviderImplTest
-        implements ShouldHandleObjectContracts<NavigationMenuProviderImpl>, ComponentConfigurator {
+    implements ShouldHandleObjectContracts<NavigationMenuProviderImpl>, ComponentConfigurator {
 
     @Inject
     @Getter
     private NavigationMenuProviderImpl underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @BeforeEach
@@ -84,7 +73,7 @@ class NavigationMenuProviderImplTest
         assertEquals(3, ((NavigationMenuItemContainer) userMenu).getChildren().size());
 
         assertEquals(PreferencesMenuItem.MENU_ID,
-                ((NavigationMenuItemContainer) userMenu).getChildren().get(0).getId());
+            ((NavigationMenuItemContainer) userMenu).getChildren().get(0).getId());
         assertEquals(AccountMenuItem.MENU_ID, ((NavigationMenuItemContainer) userMenu).getChildren().get(1).getId());
         assertEquals(AboutMenuItem.MENU_ID, ((NavigationMenuItemContainer) userMenu).getChildren().get(2).getId());
     }

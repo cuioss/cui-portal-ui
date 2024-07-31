@@ -15,23 +15,20 @@
  */
 package de.cuioss.portal.ui.runtime.application.view.matcher;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import org.jboss.weld.junit5.auto.EnableAutoWeld;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcherImpl;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.configuration.types.ConfigAsViewMatcher;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.EnableAutoWeld;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnableAutoWeld
 @EnablePortalConfiguration
@@ -50,7 +47,6 @@ class ViewMatcherProducerTest implements ShouldBeNotNull<ViewMatcherProducer> {
     private Provider<ViewMatcher> injectedViewMatcher;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Test

@@ -15,29 +15,10 @@
  */
 package de.cuioss.portal.ui.runtime.application;
 
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Locale;
-
-import jakarta.faces.FactoryFinder;
-import jakarta.faces.application.Application;
-import jakarta.faces.application.ApplicationFactory;
-import jakarta.faces.application.ApplicationWrapper;
-import jakarta.faces.application.ProjectStage;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.application.bundle.CuiJSfResourceBundleLocator;
 import de.cuioss.portal.common.bundle.PortalResourceBundleBean;
 import de.cuioss.portal.common.bundle.ResourceBundleWrapperImpl;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.configuration.impl.producer.PortalProjectStageImpl;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
@@ -46,8 +27,21 @@ import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.faces.FactoryFinder;
+import jakarta.faces.application.Application;
+import jakarta.faces.application.ApplicationFactory;
+import jakarta.faces.application.ApplicationWrapper;
+import jakarta.faces.application.ProjectStage;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import java.util.Locale;
+
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalCoreEnvironment
 @AddBeanClasses({ LocaleConfiguration.class, PortalProjectStageImpl.class, PortalResourceBundleBean.class,
@@ -59,7 +53,6 @@ class PortalApplicationTest implements ShouldBeNotNull<PortalApplication>, JsfEn
     private JsfEnvironmentHolder environmentHolder;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Test

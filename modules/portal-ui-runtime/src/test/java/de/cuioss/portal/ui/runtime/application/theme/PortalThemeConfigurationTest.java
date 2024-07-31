@@ -15,20 +15,17 @@
  */
 package de.cuioss.portal.ui.runtime.application.theme;
 
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.EnableAutoWeld;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.EnableAutoWeld;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnableAutoWeld
 @EnablePortalConfiguration
@@ -39,7 +36,6 @@ public class PortalThemeConfigurationTest implements ShouldHandleObjectContracts
     private PortalThemeConfiguration underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     public static final String APPLICATION_DEFAULT_CSS = "application-default.css";
@@ -52,9 +48,9 @@ public class PortalThemeConfigurationTest implements ShouldHandleObjectContracts
     void shouldProvideDefaultConfiguration() {
         assertEquals(PortalThemeConfigurationTest.DEFAULT, underTest.getDefaultTheme());
         assertTrue(underTest.getAvailableThemes().containsAll(
-                immutableList(PortalThemeConfigurationTest.DEFAULT, PortalThemeConfigurationTest.HIGH_CONTRAST)));
+            immutableList(PortalThemeConfigurationTest.DEFAULT, PortalThemeConfigurationTest.HIGH_CONTRAST)));
         assertEquals(PortalThemeConfigurationTest.APPLICATION_DEFAULT_CSS,
-                underTest.getCssForThemeName(underTest.getDefaultTheme()));
+            underTest.getCssForThemeName(underTest.getDefaultTheme()));
     }
 
 }

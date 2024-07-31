@@ -15,20 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.dashboard;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.DASHBOARD_WIDGET;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.ActivateScopes;
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.jboss.weld.junit5.auto.EnableAutoWeld;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.dashboard.support.TestWidgetWithIdA;
@@ -36,13 +22,22 @@ import de.cuioss.portal.ui.runtime.application.dashboard.support.TestWidgetWithI
 import de.cuioss.portal.ui.runtime.application.dashboard.support.TestWidgetWithoutId;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.ActivateScopes;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.jboss.weld.junit5.auto.EnableAutoWeld;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.DASHBOARD_WIDGET;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnableAutoWeld
 @EnablePortalConfiguration
-@AddBeanClasses({ ViewMatcherProducer.class, TestWidgetWithIdA.class, TestWidgetWithIdB.class,
-        TestWidgetWithoutId.class })
-@ActivateScopes({ ViewScoped.class })
+@AddBeanClasses({ViewMatcherProducer.class, TestWidgetWithIdA.class, TestWidgetWithIdB.class,
+    TestWidgetWithoutId.class})
+@ActivateScopes({ViewScoped.class})
 class DashboardWidgetRegistrationTest implements ShouldHandleObjectContracts<DashboardWidgetRegistration> {
 
     @Inject
@@ -50,7 +45,6 @@ class DashboardWidgetRegistrationTest implements ShouldHandleObjectContracts<Das
     private DashboardWidgetRegistration underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Test

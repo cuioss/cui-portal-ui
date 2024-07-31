@@ -29,7 +29,6 @@ class EnablePortalUiEnvironmentTest {
     private Provider<FacesContext> facesContext;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @​Test
