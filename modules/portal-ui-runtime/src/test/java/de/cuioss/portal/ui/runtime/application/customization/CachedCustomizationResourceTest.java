@@ -15,24 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.application.customization;
 
-import static de.cuioss.test.generator.Generators.letterStrings;
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
+import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
+import jakarta.inject.Inject;
 
 import java.io.File;
 import java.io.IOException;
 
-import jakarta.inject.Inject;
-
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
-import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
+import static de.cuioss.test.generator.Generators.letterStrings;
 
 @EnablePortalUiEnvironment
 class CachedCustomizationResourceTest implements ShouldImplementEqualsAndHashCode<CachedCustomizationResource> {
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Override

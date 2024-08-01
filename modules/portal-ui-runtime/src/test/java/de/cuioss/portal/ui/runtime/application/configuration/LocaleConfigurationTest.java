@@ -15,7 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.configuration;
 
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
@@ -37,7 +36,6 @@ class LocaleConfigurationTest implements ShouldHandleObjectContracts<LocaleConfi
     private LocaleConfiguration underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Test

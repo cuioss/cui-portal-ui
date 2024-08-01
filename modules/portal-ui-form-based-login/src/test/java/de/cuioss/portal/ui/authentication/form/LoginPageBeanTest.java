@@ -24,7 +24,6 @@ import de.cuioss.portal.authentication.PortalLoginEvent;
 import de.cuioss.portal.authentication.facade.AuthenticationResults;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
@@ -83,7 +82,6 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     private PortalHistoryManagerMock portalHistoryManagerMock;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     private String username;

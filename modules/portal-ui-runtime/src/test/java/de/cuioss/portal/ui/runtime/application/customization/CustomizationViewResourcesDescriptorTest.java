@@ -16,7 +16,6 @@
 package de.cuioss.portal.ui.runtime.application.customization;
 
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.configuration.schedule.FileChangedEvent;
 import de.cuioss.portal.configuration.schedule.FileWatcherService;
 import de.cuioss.portal.configuration.schedule.PortalFileWatcherService;
@@ -73,7 +72,6 @@ class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<Custom
     private Event<Path> fileChangeEvent;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     private boolean templatesEventWasFired;

@@ -15,31 +15,16 @@
  */
 package de.cuioss.portal.ui.runtime.exception;
 
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_ERROR_LOGICAL_VIEW_ID;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID;
-import static de.cuioss.test.generator.Generators.throwables;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.enterprise.event.Event;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.test.MessageProducerMock;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
+import de.cuioss.portal.ui.api.context.CurrentViewProducer;
+import de.cuioss.portal.ui.api.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
-import de.cuioss.portal.ui.api.context.CurrentViewProducer;
-import de.cuioss.portal.ui.api.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
 import de.cuioss.portal.ui.runtime.application.view.ViewSuppressedException;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
@@ -49,13 +34,21 @@ import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.*;
+import static de.cuioss.test.generator.Generators.throwables;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @EnableTestLogger
-@AddBeanClasses({ CurrentViewProducer.class, NavigationHandlerProducer.class, ViewRelatedExceptionHandler.class,
-        PortalTestUserProducer.class, PortalHistoryManagerMock.class })
+@AddBeanClasses({CurrentViewProducer.class, NavigationHandlerProducer.class, ViewRelatedExceptionHandler.class,
+    PortalTestUserProducer.class, PortalHistoryManagerMock.class})
 class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionHandler>, JsfEnvironmentConsumer {
 
     @Setter
@@ -71,7 +64,6 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
     private PortalSessionStorageMock sessionStorage;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Inject
@@ -90,7 +82,7 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
     @Test
     void shouldCallViewRelatedExceptionHandler() {
         final var event = new ExceptionAsEvent(
-                new ViewSuppressedException(ViewRelatedExceptionHandlerTest.DESCRIPTOR_SUPRRESSED_VIEW));
+            new ViewSuppressedException(ViewRelatedExceptionHandlerTest.DESCRIPTOR_SUPRRESSED_VIEW));
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         portalUserProducerMock.authenticated(false);
         underTest.handle(event);
@@ -102,7 +94,7 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
     @Test
     void shouldCallViewRelatedExceptionHandlerAsEvent() {
         final var event = new ExceptionAsEvent(
-                new ViewSuppressedException(ViewRelatedExceptionHandlerTest.DESCRIPTOR_SUPRRESSED_VIEW));
+            new ViewSuppressedException(ViewRelatedExceptionHandlerTest.DESCRIPTOR_SUPRRESSED_VIEW));
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         portalUserProducerMock.authenticated(false);
         eventBridge.fire(event);

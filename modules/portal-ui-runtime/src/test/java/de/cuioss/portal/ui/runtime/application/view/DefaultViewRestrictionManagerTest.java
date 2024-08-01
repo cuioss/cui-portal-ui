@@ -17,7 +17,6 @@ package de.cuioss.portal.ui.runtime.application.view;
 
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.pages.HomePage;
@@ -58,7 +57,6 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
     private PortalTestUserProducer portalUserProducerMock;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Test

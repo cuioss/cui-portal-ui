@@ -15,24 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_TRACE_ENABLED;
-import static de.cuioss.portal.ui.runtime.application.listener.metrics.RequestTracer.PROCESSING_IDENTIFIER;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.concurrent.TimeUnit;
-
-import jakarta.faces.event.PhaseEvent;
-import jakarta.faces.event.PhaseId;
-import jakarta.inject.Inject;
-
-import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
-import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.microprofile.PortalTestMetricRegistry;
 import de.cuioss.portal.ui.runtime.application.listener.metrics.RequestTracer;
 import de.cuioss.portal.ui.runtime.application.listener.metrics.TraceListener;
@@ -42,12 +25,24 @@ import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
+import jakarta.faces.event.PhaseEvent;
+import jakarta.faces.event.PhaseId;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.TimeUnit;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_TRACE_ENABLED;
+import static de.cuioss.portal.ui.runtime.application.listener.metrics.RequestTracer.PROCESSING_IDENTIFIER;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnablePortalUiEnvironment
-@EnableTestLogger(debug = { TraceListener.class, RequestTracer.class })
-@AddBeanClasses({ RequestTracer.class, PortalTestMetricRegistry.class, TraceListener.class })
+@EnableTestLogger(debug = {TraceListener.class, RequestTracer.class})
+@AddBeanClasses({RequestTracer.class, PortalTestMetricRegistry.class, TraceListener.class})
 @EnablePortalConfiguration(configuration = PORTAL_LISTENER_TRACE_ENABLED + ":true")
 class TraceListenerAdapterTest implements JsfEnvironmentConsumer {
 
@@ -61,10 +56,6 @@ class TraceListenerAdapterTest implements JsfEnvironmentConsumer {
     void setTraceListener() {
         underTest = new TraceListenerAdapter();
     }
-
-    @Inject
-    @PortalConfigurationSource
-    private PortalTestConfiguration configuration;
 
     @Test
     void shouldHandleHappyCase() throws InterruptedException {

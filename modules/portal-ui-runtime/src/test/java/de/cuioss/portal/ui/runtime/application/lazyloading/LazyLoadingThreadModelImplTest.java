@@ -17,7 +17,6 @@ package de.cuioss.portal.ui.runtime.application.lazyloading;
 
 import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
@@ -56,7 +55,6 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     private ThreadManager threadManager;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @BeforeEach

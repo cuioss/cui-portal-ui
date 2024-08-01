@@ -18,7 +18,6 @@ package de.cuioss.portal.ui.runtime.application.storage;
 import de.cuioss.portal.common.bundle.ResourceBundleRegistry;
 import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.servlet.CuiContextPath;
 import de.cuioss.portal.core.storage.PortalClientStorage;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
@@ -48,7 +47,6 @@ class PortalClientStorageImplTest implements ShouldHandleObjectContracts<PortalC
     private PortalClientStorageImpl underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Produces

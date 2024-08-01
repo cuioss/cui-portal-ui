@@ -16,7 +16,6 @@
 package de.cuioss.portal.ui.runtime.application.configuration;
 
 import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
@@ -41,7 +40,6 @@ class ViewConfigurationTest implements ShouldHandleObjectContracts<ViewConfigura
     private ViewConfiguration underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Test

@@ -15,21 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.customization;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-
-import jakarta.faces.application.Resource;
-import jakarta.inject.Inject;
-
-import org.apache.myfaces.test.mock.MockServletContext;
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.resources.CacheableResource;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
@@ -39,15 +25,26 @@ import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import de.cuioss.tools.io.IOStreams;
+import jakarta.faces.application.Resource;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.myfaces.test.mock.MockServletContext;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ CustomizationResourceProducer.class })
+@AddBeanClasses({CustomizationResourceProducer.class})
 class CustomizationResourceHandlerTest
-        implements ShouldBeNotNull<CustomizationResourceHandler>, JsfEnvironmentConsumer {
+    implements ShouldBeNotNull<CustomizationResourceHandler>, JsfEnvironmentConsumer {
 
     private static final String TEST_LIBRARY = "a";
     private static final String TEST_RESOURCE = "some_style.css";
@@ -61,7 +58,6 @@ class CustomizationResourceHandlerTest
     private CustomizationResourceHandler underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @BeforeEach
@@ -75,7 +71,7 @@ class CustomizationResourceHandlerTest
 
         final Map<String, CuiMockResource> mockResources = new HashMap<>();
         mockResources.put(MOCK_LIB + CuiMockResourceHandler.LIBRARY_RESOURCE_DELIMITER + TEST_RESOURCE,
-                new CuiMockResource());
+            new CuiMockResource());
 
         wrapped.setAvailableResouces(mockResources);
         underTest = new CustomizationResourceHandler(wrapped);
@@ -164,7 +160,7 @@ class CustomizationResourceHandlerTest
         assertNotNull(resolved);
 
         final var expected = IOStreams
-                .toByteArray(loadResourceFromClasspath("/customization/resources/a/some_style.min.css"));
+            .toByteArray(loadResourceFromClasspath("/customization/resources/a/some_style.min.css"));
 
         final var actual = IOStreams.toByteArray(resolved.getInputStream());
 
@@ -175,7 +171,7 @@ class CustomizationResourceHandlerTest
         final var javaScript = getUnderTest().createResource("example.js", TEST_LIBRARY);
 
         final var expectedJavascriptContent = IOStreams
-                .toByteArray(loadResourceFromClasspath("/customization/resources/a/example.js"));
+            .toByteArray(loadResourceFromClasspath("/customization/resources/a/example.js"));
 
         final var actualJavascriptContent = IOStreams.toByteArray(javaScript.getInputStream());
 

@@ -15,20 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view;
 
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_HOME;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_LOGIN;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_NOT_THERE;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
@@ -37,10 +24,18 @@ import de.cuioss.portal.ui.runtime.application.view.ViewSuppressedException;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ ViewMatcherProducer.class })
+@AddBeanClasses({ViewMatcherProducer.class})
 class ViewSuppressionListenerTest implements ShouldHandleObjectContracts<ViewSuppressionListener> {
 
     @Inject
@@ -49,7 +44,6 @@ class ViewSuppressionListenerTest implements ShouldHandleObjectContracts<ViewSup
     private ViewSuppressionListener underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     private ViewSuppressedException viewSuppressedException = null;

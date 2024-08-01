@@ -16,7 +16,6 @@
 package de.cuioss.portal.ui.runtime.application.resources;
 
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
@@ -61,7 +60,6 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
     private static final String APPLICATION_CSS = "application.css";
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     private CuiResourceHandler underTest;

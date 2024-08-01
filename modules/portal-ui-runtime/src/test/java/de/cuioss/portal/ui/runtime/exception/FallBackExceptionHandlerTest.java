@@ -15,29 +15,14 @@
  */
 package de.cuioss.portal.ui.runtime.exception;
 
-import static de.cuioss.portal.ui.runtime.exception.FallBackExceptionHandler.PORTAL_130_ERROR_ON_ERROR_PAGE;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_ERROR_LOGICAL_VIEW_ID;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID;
-import static de.cuioss.test.generator.Generators.throwables;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.core.PortalSessionStorageMock;
+import de.cuioss.portal.ui.api.context.CurrentViewProducer;
+import de.cuioss.portal.ui.api.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
-import de.cuioss.portal.ui.api.context.CurrentViewProducer;
-import de.cuioss.portal.ui.api.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
@@ -45,14 +30,23 @@ import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.ui.runtime.exception.FallBackExceptionHandler.PORTAL_130_ERROR_ON_ERROR_PAGE;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_ERROR_LOGICAL_VIEW_ID;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID;
+import static de.cuioss.test.generator.Generators.throwables;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @EnableTestLogger
-@AddBeanClasses({ CurrentViewProducer.class, PortalSessionStorageMock.class, NavigationHandlerProducer.class })
+@AddBeanClasses({CurrentViewProducer.class, PortalSessionStorageMock.class, NavigationHandlerProducer.class})
 class FallBackExceptionHandlerTest
-        implements ShouldHandleObjectContracts<FallBackExceptionHandler>, JsfEnvironmentConsumer {
+    implements ShouldHandleObjectContracts<FallBackExceptionHandler>, JsfEnvironmentConsumer {
 
     @Setter
     @Getter
@@ -67,7 +61,6 @@ class FallBackExceptionHandlerTest
     private PortalSessionStorageMock sessionStorage;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Test
@@ -162,6 +155,6 @@ class FallBackExceptionHandlerTest
         underTest.handleFallBack(exceptionEvent);
         assertEquals(HandleOutcome.LOGGED, exceptionEvent.getOutcome());
         LogAsserts.assertSingleLogMessagePresent(TestLogLevel.ERROR,
-                FallBackExceptionHandler.UNSPECIFIED_EXCEPTION_WITHOUT_VIEW);
+            FallBackExceptionHandler.UNSPECIFIED_EXCEPTION_WITHOUT_VIEW);
     }
 }

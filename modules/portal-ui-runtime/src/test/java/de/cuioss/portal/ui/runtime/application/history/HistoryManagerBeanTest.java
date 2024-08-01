@@ -15,20 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.history;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_VIEW_EXCLUDE_PARAMETER;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import jakarta.faces.lifecycle.ClientWindowScoped;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.ActivateScopes;
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
-import de.cuioss.portal.configuration.PortalConfigurationSource;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
@@ -36,11 +23,21 @@ import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.faces.lifecycle.ClientWindowScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.ActivateScopes;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_VIEW_EXCLUDE_PARAMETER;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
+@AddBeanClasses({DefaultHistoryConfiguration.class, ViewMatcherProducer.class})
 @ActivateScopes(ClientWindowScoped.class)
 class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManagerBean>, JsfEnvironmentConsumer {
 
@@ -49,7 +46,6 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
     private HistoryManagerBean underTest;
 
     @Inject
-    @PortalConfigurationSource
     private PortalTestConfiguration configuration;
 
     @Setter
@@ -67,13 +63,13 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
     public static final String VETO_VIEW_XHTML = "current/veto.jsf";
 
     static final ViewDescriptorImpl CURRENT_VIEW = ViewDescriptorImpl.builder().withViewId(CURRENT_VIEW_XHTML)
-            .withLogicalViewId(CURRENT_VIEW_XHTML).build();
+        .withLogicalViewId(CURRENT_VIEW_XHTML).build();
 
     static final ViewDescriptorImpl SECOND_VIEW = ViewDescriptorImpl.builder().withViewId(SECOND_VIEW_XHTML)
-            .withLogicalViewId(SECOND_VIEW_XHTML).build();
+        .withLogicalViewId(SECOND_VIEW_XHTML).build();
 
     static final ViewDescriptorImpl VETO_VIEW = ViewDescriptorImpl.builder().withViewId(VETO_VIEW_XHTML)
-            .withLogicalViewId(VETO_VIEW_XHTML).build();
+        .withLogicalViewId(VETO_VIEW_XHTML).build();
 
     /**
      * Checks the default configuration
@@ -162,7 +158,7 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
     @Test
     void shouldOnlyAddViewToHistoryIfWasNotLast() {
         final var firstNavigation = ViewDescriptorImpl.builder().withViewId(FIRST_NAVIGATION)
-                .withLogicalViewId(FIRST_NAVIGATION).build();
+            .withLogicalViewId(FIRST_NAVIGATION).build();
         underTest.addCurrentUriToHistory(firstNavigation);
         underTest.addCurrentUriToHistory(SECOND_VIEW);
         underTest.addCurrentUriToHistory(CURRENT_VIEW);
