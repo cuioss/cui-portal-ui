@@ -23,12 +23,15 @@ import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.inject.Inject;
 import lombok.Getter;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.awaitility.Awaitility.await;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
 class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
@@ -60,17 +63,19 @@ class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
         assertNull(underTest.retrieve(id1));
     }
 
+    /**
+     * ThreadManager should clean up (remove) registered callables after a configured timeout.
+     */
     @Test
-    @Disabled("""
-        fails on CI because retrie(1) returns: \
-        FutureHandle(future=java.util.concurrent.FutureTask@3ea4cfe0, context=A, timestamp=1625729207137)\
-        """)
-    void handleTimeout() throws InterruptedException {
+    void handleTimeout() {
+        // clean up after 1 second
         configuration.fireEvent(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "1");
         underTest.initialize();
-        String id1 = Generators.nonBlankStrings().next();
-        underTest.store(id1, () -> "Test", "A");
-        Thread.sleep(3000);
-        assertNull(underTest.retrieve(id1));
+
+        underTest.store("1", () -> "Test", "A");
+
+        await("wait-for-cleanup")
+            .atMost(3, TimeUnit.SECONDS)
+            .until(() -> null == underTest.retrieve("1"));
     }
 }

@@ -2,19 +2,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>de.cuioss.portal.ui</groupId>
         <artifactId>modules</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
     <artifactId>portal-ui-runtime</artifactId>
     <name>Portal UI Runtime</name>
     <description>Provides the runtime implementations for portal-ui-api</description>
+
     <properties>
-        <maven.jar.plugin.automatic.module.name>
-            de.cuioss.portal.ui.runtime
-        </maven.jar.plugin.automatic.module.name>
+        <maven.jar.plugin.automatic.module.name>de.cuioss.portal.ui.runtime</maven.jar.plugin.automatic.module.name>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>de.cuioss.portal.ui</groupId>
@@ -50,7 +52,12 @@
             <groupId>de.cuioss.jsf</groupId>
             <artifactId>cui-jsf-test</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
