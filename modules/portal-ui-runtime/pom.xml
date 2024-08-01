@@ -15,7 +15,6 @@
 
     <properties>
         <maven.jar.plugin.automatic.module.name>de.cuioss.portal.ui.runtime</maven.jar.plugin.automatic.module.name>
-        <awaitility.version>4.2.1</awaitility.version>
     </properties>
 
     <dependencies>
@@ -56,8 +55,6 @@
         <dependency>
             <groupId>org.awaitility</groupId>
             <artifactId>awaitility</artifactId>
-            <version>${awaitility.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
