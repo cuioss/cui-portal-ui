@@ -127,29 +127,29 @@
                 <h:panelGroup layout="block"
                     styleClass="container-fluid"
                     id="#{GlobalIds.NAVIGATION_BAR_TOP.id}">
-                    <div class="navbar-header">
-                        <!-- hamburger menue -->
-                        <button type="button" class="navbar-toggle"
-                            data-toggle="collapse"
-                            data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle
-                                navigation</span> <span class="icon-bar"></span>
-                            <span class="icon-bar"></span> <span
-                                class="icon-bar"></span>
-                        </button>
-                        <ui:insert name="portal_home">
-                            <h:link
-                                id="#{GlobalIds.NAVIGATION_BAR_TOP_HOME.id}"
-                                class="navbar-brand" outcome="home">
-                                <h:outputText
-                                    value="#{msgs['portal.title']}"
-                                    styleClass="portal-title" />
-                            </h:link>
-                        </ui:insert>
-                    </div>
 
-                    <ui:insert name="portal_navbar" />
-                    <div class="collapse navbar-collapse">
+                    <!-- hamburger menue -->
+                    <button type="button" class="navbar-toggler"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navBarContent"
+                            aria-controls="navBarContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <ui:insert name="portal_home">
+                        <h:link
+                            id="#{GlobalIds.NAVIGATION_BAR_TOP_HOME.id}"
+                            class="navbar-brand" outcome="home">
+                            <h:outputText
+                                value="#{msgs['portal.title']}"
+                                styleClass="portal-title" />
+                        </h:link>
+                    </ui:insert>
+
+                    <div class="collapse navbar-collapse" id="navBarContent">
+                        <ui:insert name="portal_navbar" />
                         <ul class="nav navbar-nav navbar-right">
                             <li><p:ajaxStatus id="ajaxStatusPanel"
                                     styleClass="navbar-text">
