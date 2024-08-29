@@ -20,7 +20,6 @@ import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.LoginEvent;
 import de.cuioss.portal.authentication.PortalLoginEvent;
-import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.LoginPagePath;
 import de.cuioss.portal.authentication.oauth.OAuthConfigKeys;
@@ -71,31 +70,30 @@ public class OauthLogoutPageBean implements LogoutPage {
 
     @Inject
     @PortalAuthenticationFacade
-    private Oauth2AuthenticationFacade authenticationFacade;
+    Oauth2AuthenticationFacade authenticationFacade;
 
     @Inject
-    private FacesContext facesContext;
+    FacesContext facesContext;
 
     @Inject
     @PortalLoginEvent
-    private Event<LoginEvent> preLogoutEvent;
+    Event<LoginEvent> preLogoutEvent;
 
     @Inject
-    @PortalUser
-    private AuthenticatedUserInfo authenticatedUserInfo;
+    AuthenticatedUserInfo authenticatedUserInfo;
 
     @Inject
-    private Oauth2Configuration oauth2Configuration;
+    Oauth2Configuration oauth2Configuration;
 
     @Inject
     @LoginPagePath
-    private String loginUrl;
+    String loginUrl;
 
     @Inject
-    private HttpServletRequest servletRequest;
+    HttpServletRequest servletRequest;
 
     @Inject
-    private Oauth2Configuration configuration;
+    Oauth2Configuration configuration;
 
     /**
      * Logs out and redirects to login page.
@@ -109,7 +107,7 @@ public class OauthLogoutPageBean implements LogoutPage {
         }
 
         var idpLogoutUrl = authenticationFacade.retrieveClientLogoutUrl(
-            CollectionBuilder.<UrlParameter>copyFrom().add(getPostLogoutRedirectUriParam()).toImmutableSet());
+                CollectionBuilder.<UrlParameter>copyFrom().add(getPostLogoutRedirectUriParam()).toImmutableSet());
         LOGGER.debug("Redirecting to IDP logout URL: {}", idpLogoutUrl);
 
         // Actually wrong if strictly sticking to rp-initiated-logout specification,
@@ -141,7 +139,7 @@ public class OauthLogoutPageBean implements LogoutPage {
         if (isPresent(postLogoutRedirectUri)) {
             if (isBlank(configuration.getLogoutRedirectParamName())) {
                 LOGGER.warn("postLogoutRedirectUri set, but no url-parameter name. Set via: {}",
-                    OAuthConfigKeys.OPEN_ID_CLIENT_LOGOUT_REDIRECT_PARAMETER);
+                        OAuthConfigKeys.OPEN_ID_CLIENT_LOGOUT_REDIRECT_PARAMETER);
                 return Optional.empty();
             }
 

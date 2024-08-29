@@ -57,7 +57,7 @@ class ViewSuppressionListenerTest implements ShouldHandleObjectContracts<ViewSup
     @Test
     void shouldThrowViewSuppressedException() {
         assertNull(viewSuppressedException);
-        configuration.fireEvent(PortalConfigurationKeys.SUPPRESSED_VIEWS, "/");
+        configuration.update(PortalConfigurationKeys.SUPPRESSED_VIEWS, "/");
         underTest.handleView(DESCRIPTOR_LOGIN);
         assertNotNull(viewSuppressedException);
     }

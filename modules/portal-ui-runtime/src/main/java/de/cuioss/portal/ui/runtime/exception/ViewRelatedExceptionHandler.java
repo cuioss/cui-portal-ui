@@ -15,25 +15,18 @@
  */
 package de.cuioss.portal.ui.runtime.exception;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.application.NavigationHandler;
-import jakarta.faces.application.ViewExpiredException;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-
 import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
-import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthenticatedException;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthorizedException;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.exception.PortalExceptionHandler;
 import de.cuioss.portal.ui.api.history.HistoryManager;
-import de.cuioss.portal.ui.api.context.CuiCurrentView;
-import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
 import de.cuioss.portal.ui.api.pages.ErrorPage;
 import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.api.pages.LoginPage;
@@ -42,6 +35,11 @@ import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
 import de.cuioss.portal.ui.api.view.ViewRestrictionManager;
 import de.cuioss.portal.ui.runtime.application.view.ViewSuppressedException;
 import de.cuioss.tools.logging.CuiLogger;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.NavigationHandler;
+import jakarta.faces.application.ViewExpiredException;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 
 /**
  * This {@link PortalExceptionHandler} provides handler methods for dealing with
@@ -82,28 +80,27 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
 
     @Inject
     @CuiNavigationHandler
-    private NavigationHandler navigationHandler;
+    NavigationHandler navigationHandler;
 
     @Inject
-    private FacesContext facesContext;
+    FacesContext facesContext;
 
     @Inject
-    private MessageProducer messageProducer;
+    MessageProducer messageProducer;
 
     @Inject
-    @PortalUser
-    private AuthenticatedUserInfo authenticatedUserInfo;
+    AuthenticatedUserInfo authenticatedUserInfo;
 
     @Inject
-    private HistoryManager historyManager;
+    HistoryManager historyManager;
 
     @Inject
     @CuiCurrentView
-    private ViewDescriptor currentView;
+    ViewDescriptor currentView;
 
     @Inject
     @PortalViewRestrictionManager
-    private ViewRestrictionManager viewRestrictionManager;
+    ViewRestrictionManager viewRestrictionManager;
 
     @Override
     public void handle(ExceptionAsEvent exceptionEvent) {

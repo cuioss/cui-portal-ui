@@ -76,16 +76,15 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
     @Test
     void testGoodCase() {
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
+        configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
 
         threadManager.initialize();
 
         var underTest = underTestProvider.get();
 
         viewController.startRequest(
-            createRequestWithResult(underTest.getRequestId(), new ResultObject<>("Test", ResultState.VALID)));
+                createRequestWithResult(underTest.getRequestId(), new ResultObject<>("Test", ResultState.VALID)));
 
         underTest.processAction(null);
 
@@ -97,16 +96,15 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
     @Test
     void testError() {
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
+        configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
 
         threadManager.initialize();
 
         var underTest = underTestProvider.get();
 
         viewController.startRequest(createRequestWithResult(underTest.getRequestId(),
-            new ResultObject<>("", ResultState.ERROR, new ResultDetail(new DisplayName("Test")), null)));
+                new ResultObject<>("", ResultState.ERROR, new ResultDetail(new DisplayName("Test")), null)));
 
         underTest.processAction(null);
 
@@ -118,9 +116,8 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
     @Test
     void testTimeoutRetrieve() {
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
+        configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
 
         threadManager.initialize();
 
@@ -155,16 +152,15 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
     @Test
     void testTimeoutHandle() {
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "1");
-        configuration.put(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "1");
+        configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
 
         threadManager.initialize();
 
         var underTest = underTestProvider.get();
 
         viewController.startRequest(
-            createRequestWithResult(underTest.getRequestId(), new ResultObject<>("Test", ResultState.VALID)));
+                createRequestWithResult(underTest.getRequestId(), new ResultObject<>("Test", ResultState.VALID)));
 
         ConcurrentTools.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
         underTest.processAction(null);

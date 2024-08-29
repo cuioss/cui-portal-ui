@@ -15,24 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.application.menu;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.List;
-
+import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
+import de.cuioss.portal.authentication.AuthenticatedUserInfo;
+import de.cuioss.portal.ui.api.menu.NavigationMenuProvider;
+import de.cuioss.tools.logging.CuiLogger;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
-import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
-
-import jakarta.annotation.PostConstruct;
-import de.cuioss.portal.authentication.AuthenticatedUserInfo;
-import de.cuioss.portal.authentication.PortalUser;
-import de.cuioss.portal.ui.api.menu.NavigationMenuProvider;
-import de.cuioss.tools.logging.CuiLogger;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Helper bean used for page access.
@@ -50,7 +47,6 @@ public class NavigationMenuPageBean implements Serializable {
 
     private static final CuiLogger LOGGER = new CuiLogger(NavigationMenuPageBean.class);
 
-    @PortalUser
     @Inject
     AuthenticatedUserInfo userInfo;
 

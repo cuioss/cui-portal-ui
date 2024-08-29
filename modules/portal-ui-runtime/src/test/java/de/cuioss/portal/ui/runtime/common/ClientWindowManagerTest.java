@@ -45,7 +45,7 @@ class ClientWindowManagerTest implements ShouldHandleObjectContracts<ClientWindo
      */
     @Test
     void shouldHandleMaxInactiveInterval() {
-        configuration.fireEvent(PORTAL_SESSION_MAX_INACTIVE_INTERVAL, "10");
+        configuration.update(PORTAL_SESSION_MAX_INACTIVE_INTERVAL, "10");
         assertEquals(10, underTest.getMaxInactiveInterval());
         assertTrue(underTest.isRenderTimeoutForm());
     }
@@ -55,7 +55,7 @@ class ClientWindowManagerTest implements ShouldHandleObjectContracts<ClientWindo
      */
     @Test
     void shouldHandleNullMaxInactiveInterval() {
-        configuration.fireEvent(PORTAL_SESSION_MAX_INACTIVE_INTERVAL, "0");
+        configuration.update(PORTAL_SESSION_MAX_INACTIVE_INTERVAL, "0");
         assertEquals(0, underTest.getMaxInactiveInterval());
         assertFalse(underTest.isRenderTimeoutForm());
     }

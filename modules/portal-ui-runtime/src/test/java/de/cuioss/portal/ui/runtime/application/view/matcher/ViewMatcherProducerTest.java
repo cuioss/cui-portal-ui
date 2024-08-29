@@ -54,15 +54,15 @@ class ViewMatcherProducerTest implements ShouldBeNotNull<ViewMatcherProducer> {
         // Property initially not there
         assertEquals(EmptyViewMatcher.class, injectedViewMatcher.get().getClass());
 
-        configuration.fireEvent(CONFIGURATION_KEY, LIST_SINGLE_VALUE);
+        configuration.update(CONFIGURATION_KEY, LIST_SINGLE_VALUE);
 
         assertEquals(ViewMatcherImpl.class, injectedViewMatcher.get().getClass());
 
-        configuration.fireEvent(CONFIGURATION_KEY, LIST_TWO_VALUES);
+        configuration.update(CONFIGURATION_KEY, LIST_TWO_VALUES);
 
         assertEquals(ViewMatcherImpl.class, injectedViewMatcher.get().getClass());
 
-        configuration.fireEvent(CONFIGURATION_KEY, "");
+        configuration.update(CONFIGURATION_KEY, "");
         assertEquals(EmptyViewMatcher.class, injectedViewMatcher.get().getClass());
     }
 }

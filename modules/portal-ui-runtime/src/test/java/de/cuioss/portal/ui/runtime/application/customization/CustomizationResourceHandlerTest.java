@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @EnablePortalUiEnvironment
 @AddBeanClasses({CustomizationResourceProducer.class})
 class CustomizationResourceHandlerTest
-    implements ShouldBeNotNull<CustomizationResourceHandler>, JsfEnvironmentConsumer {
+        implements ShouldBeNotNull<CustomizationResourceHandler>, JsfEnvironmentConsumer {
 
     private static final String TEST_LIBRARY = "a";
     private static final String TEST_RESOURCE = "some_style.css";
@@ -62,16 +62,15 @@ class CustomizationResourceHandlerTest
 
     @BeforeEach
     void before() {
-        configuration.put(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, "src/test/resources/customization");
-        configuration.put(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED, "true");
-        configuration.put(PortalConfigurationKeys.RESOURCE_MAXAGE, "60");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, "src/test/resources/customization");
+        configuration.update(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED, "true");
+        configuration.update(PortalConfigurationKeys.RESOURCE_MAXAGE, "60");
 
         final var wrapped = new CuiMockResourceHandler();
 
         final Map<String, CuiMockResource> mockResources = new HashMap<>();
         mockResources.put(MOCK_LIB + CuiMockResourceHandler.LIBRARY_RESOURCE_DELIMITER + TEST_RESOURCE,
-            new CuiMockResource());
+                new CuiMockResource());
 
         wrapped.setAvailableResouces(mockResources);
         underTest = new CustomizationResourceHandler(wrapped);
@@ -94,7 +93,7 @@ class CustomizationResourceHandlerTest
 
     @Test
     void productionShouldUseCache() throws IOException {
-        configuration.fireEvent(PortalConfigurationKeys.PORTAL_STAGE, "production");
+        configuration.update(PortalConfigurationKeys.PORTAL_STAGE, "production");
         final var resolved = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);
         final var resolved2 = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);
         assertSame(resolved, resolved2);
@@ -103,8 +102,7 @@ class CustomizationResourceHandlerTest
 
     @Test
     void developmentShouldNotUseCache() throws IOException {
-        configuration.put(PortalConfigurationKeys.PORTAL_STAGE, "development");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.PORTAL_STAGE, "development");
         final var resolved = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);
         final var resolved2 = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);
         assertNotSame(resolved, resolved2);
@@ -160,7 +158,7 @@ class CustomizationResourceHandlerTest
         assertNotNull(resolved);
 
         final var expected = IOStreams
-            .toByteArray(loadResourceFromClasspath("/customization/resources/a/some_style.min.css"));
+                .toByteArray(loadResourceFromClasspath("/customization/resources/a/some_style.min.css"));
 
         final var actual = IOStreams.toByteArray(resolved.getInputStream());
 
@@ -171,7 +169,7 @@ class CustomizationResourceHandlerTest
         final var javaScript = getUnderTest().createResource("example.js", TEST_LIBRARY);
 
         final var expectedJavascriptContent = IOStreams
-            .toByteArray(loadResourceFromClasspath("/customization/resources/a/example.js"));
+                .toByteArray(loadResourceFromClasspath("/customization/resources/a/example.js"));
 
         final var actualJavascriptContent = IOStreams.toByteArray(javaScript.getInputStream());
 

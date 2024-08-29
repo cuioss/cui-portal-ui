@@ -63,13 +63,13 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
     public static final String VETO_VIEW_XHTML = "current/veto.jsf";
 
     static final ViewDescriptorImpl CURRENT_VIEW = ViewDescriptorImpl.builder().withViewId(CURRENT_VIEW_XHTML)
-        .withLogicalViewId(CURRENT_VIEW_XHTML).build();
+            .withLogicalViewId(CURRENT_VIEW_XHTML).build();
 
     static final ViewDescriptorImpl SECOND_VIEW = ViewDescriptorImpl.builder().withViewId(SECOND_VIEW_XHTML)
-        .withLogicalViewId(SECOND_VIEW_XHTML).build();
+            .withLogicalViewId(SECOND_VIEW_XHTML).build();
 
     static final ViewDescriptorImpl VETO_VIEW = ViewDescriptorImpl.builder().withViewId(VETO_VIEW_XHTML)
-        .withLogicalViewId(VETO_VIEW_XHTML).build();
+            .withLogicalViewId(VETO_VIEW_XHTML).build();
 
     /**
      * Checks the default configuration
@@ -141,7 +141,7 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
 
     @Test
     void shouldVetoCorrectly() {
-        configuration.fireEvent(HISTORY_VIEW_EXCLUDE_PARAMETER, VETO_VIEW_XHTML);
+        configuration.update(HISTORY_VIEW_EXCLUDE_PARAMETER, VETO_VIEW_XHTML);
         assertEntryCount(1, underTest);
         underTest.addCurrentUriToHistory(VETO_VIEW);
         assertEntryCount(1, underTest);
@@ -158,7 +158,7 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
     @Test
     void shouldOnlyAddViewToHistoryIfWasNotLast() {
         final var firstNavigation = ViewDescriptorImpl.builder().withViewId(FIRST_NAVIGATION)
-            .withLogicalViewId(FIRST_NAVIGATION).build();
+                .withLogicalViewId(FIRST_NAVIGATION).build();
         underTest.addCurrentUriToHistory(firstNavigation);
         underTest.addCurrentUriToHistory(SECOND_VIEW);
         underTest.addCurrentUriToHistory(CURRENT_VIEW);

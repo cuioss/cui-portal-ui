@@ -15,17 +15,14 @@
  */
 package de.cuioss.portal.ui.api.menu.items;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Inject;
-
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemContainerImpl;
-
-import jakarta.annotation.PostConstruct;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
-import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemContainerImpl;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -56,11 +53,10 @@ public class UserMenuItem extends PortalNavigationMenuItemContainerImpl {
     /** The icon for the user. */
     public static final String ICON = "cui-icon-user";
 
-    /** The string based id for this menu item. */
+    /** The string-based id for this menu item. */
     public static final String MENU_ID = "userMenuItem";
 
     @Inject
-    @PortalUser
     AuthenticatedUserInfo userInfo;
 
     @Inject

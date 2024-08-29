@@ -29,8 +29,8 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ Oauth2AuthenticationFacadeMock.class, WrappedOauthFacadeImpl.class, HttpHeaderFilterImpl.class,
-        ViewMatcherProducer.class, Oauth2ConfigurationProducerMock.class })
+@AddBeanClasses({Oauth2AuthenticationFacadeMock.class, WrappedOauthFacadeImpl.class, HttpHeaderFilterImpl.class,
+        ViewMatcherProducer.class, Oauth2ConfigurationProducerMock.class})
 class OauthRenewComponentTest extends AbstractComponentTest<OauthRenewComponent> {
 
     @Produces
@@ -46,8 +46,7 @@ class OauthRenewComponentTest extends AbstractComponentTest<OauthRenewComponent>
 
     @BeforeEach
     void beforeTest() {
-        configuration.put(PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT, "20");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT, "20");
     }
 
 }

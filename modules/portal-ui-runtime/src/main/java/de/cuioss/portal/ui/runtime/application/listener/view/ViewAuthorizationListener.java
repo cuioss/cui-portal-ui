@@ -15,18 +15,8 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_AUTHORIZATION;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.event.Event;
-import jakarta.inject.Inject;
-
-import jakarta.annotation.Priority;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
-import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthorizedException;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
@@ -37,11 +27,18 @@ import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
 import de.cuioss.portal.ui.api.view.ViewRestrictionManager;
 import de.cuioss.portal.ui.runtime.application.configuration.ViewConfiguration;
 import de.cuioss.portal.ui.runtime.application.view.DefaultViewRestrictionManager;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.Serial;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_AUTHORIZATION;
 
 /**
  * This listener checks the authorization status of a given request. It uses
@@ -63,23 +60,22 @@ public class ViewAuthorizationListener implements ViewListener {
     private static final long serialVersionUID = 8427405526881056257L;
 
     @Inject
-    private ViewConfiguration viewConfiguration;
+    ViewConfiguration viewConfiguration;
 
     @Inject
     @PortalViewRestrictionManager
-    private ViewRestrictionManager viewRestrictionManager;
+    ViewRestrictionManager viewRestrictionManager;
 
     @Inject
-    private Event<ExceptionAsEvent> catchEvent;
+    Event<ExceptionAsEvent> catchEvent;
 
     @Inject
-    @PortalUser
-    private AuthenticatedUserInfo userInfo;
+    AuthenticatedUserInfo userInfo;
 
     @Getter
     @Inject
     @ConfigProperty(name = PORTAL_LISTENER_AUTHORIZATION)
-    private boolean enabled;
+    boolean enabled;
 
     @Override
     public void handleView(final ViewDescriptor viewDescriptor) {

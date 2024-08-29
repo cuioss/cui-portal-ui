@@ -55,7 +55,7 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
  * Searches for templates and views inside of
  * {@value PortalConfigurationKeys#PORTAL_CUSTOMIZATION_DIR}.
  * <p>
- * In {@link ProjectStage#DEVELOPMENT} the folders are monitored and new created
+ * In the case of ProjectStage#DEVELOPMENT the folders are monitored, and new created
  * / deleted files will result in a reset of the corresponding file lists.
  *
  * @author Matthias Walliczek
@@ -133,7 +133,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
             templatePath = currentTemplatePath.toString();
             handledTemplates = retrieveViewResources(currentTemplatePath, "");
             log.debug("Found custom templates folder {} and registered these templates: {}", templatePath,
-                handledTemplates.toString());
+                    handledTemplates.toString());
             fileWatcherService.register(currentTemplatePath);
         } else {
             log.debug("TEMPLATES folder {} does not exists", templatePath);
@@ -157,7 +157,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
                     result.add(prefix.concat(pathname.toFile().getName()));
                 } else if (pathname.toFile().isDirectory()) {
                     result.addAll(retrieveViewResources(currentTemplatePath.resolve(pathname.toFile().getName()),
-                        prefix.concat(pathname.toFile().getName() + "/")));
+                            prefix.concat(pathname.toFile().getName() + "/")));
                 }
             }
         } catch (IOException ex) {
@@ -168,7 +168,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
 
     void fileChangeListener(@Observes @FileChangedEvent final Path newPath) {
         if (null != templatePath && MorePaths.isSameFile(Paths.get(templatePath), newPath)
-            || null != viewPath && MorePaths.isSameFile(Paths.get(viewPath), newPath)) {
+                || null != viewPath && MorePaths.isSameFile(Paths.get(viewPath), newPath)) {
             reloadAndFireEvents();
         }
     }
@@ -181,7 +181,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
         var oldHandledViews = handledViews;
         initialize();
         if (!MoreStrings.nullToEmpty(templatePath).equals(oldTemplatePath)
-            || !handledTemplates.equals(oldHandledTemplates)) {
+                || !handledTemplates.equals(oldHandledTemplates)) {
             viewResourcesConfigChangedEvent.fire(PortalViewResourcesConfigChangedType.TEMPLATES);
         }
         if (!MoreStrings.nullToEmpty(viewPath).equals(oldViewPath) || !handledViews.equals(oldHandledViews)) {

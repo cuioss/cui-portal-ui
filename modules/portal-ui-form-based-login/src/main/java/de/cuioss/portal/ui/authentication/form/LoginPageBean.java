@@ -19,7 +19,6 @@ import de.cuioss.jsf.api.application.message.DisplayNameMessageProducer;
 import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
-import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.authentication.facade.FormBasedAuthenticationFacade;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.model.UserStore;
@@ -106,7 +105,6 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
     DisplayNameMessageProducer displayNameMessageProducer;
 
     @Inject
-    @PortalUser
     AuthenticatedUserInfo userInfo;
 
     @Inject

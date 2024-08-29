@@ -58,7 +58,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({PortalPagesConfiguration.class, PortalTestUserProducer.class, PortalClientStorageMock.class,
-    LoginPageClientStorageImpl.class, LoginPageHistoryManagerProviderImpl.class})
+        LoginPageClientStorageImpl.class, LoginPageHistoryManagerProviderImpl.class})
 class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements ComponentConfigurator {
 
     private static final String SOME_ERROR_KEY = "some.error";
@@ -93,8 +93,7 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     @Param
     public String getParameter(final InjectionPoint injectionPoint) {
 
-        configuration.put(PortalConfigurationKeys.PAGES_LOGIN_DEFAULT_USER_STORE, SOME_OTHER_LDAP_USER_STORE.getName());
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.PAGES_LOGIN_DEFAULT_USER_STORE, SOME_OTHER_LDAP_USER_STORE.getName());
 
         final var name = injectionPoint.getMember().getName();
         return switch (name) {
@@ -122,10 +121,10 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
 
         // Mimic that Preferences was initially called
         final ViewDescriptor newDescriptor = ViewDescriptorImpl.builder()
-            .withViewId(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID)
-            .withUrlParameter(mutableList(new UrlParameter(LoginPage.KEY_USERNAME, TEST_USER_NAME),
-                new UrlParameter(LoginPage.KEY_USERSTORE, TEST_USER_STORE)))
-            .withLogicalViewId(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID).build();
+                .withViewId(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID)
+                .withUrlParameter(mutableList(new UrlParameter(LoginPage.KEY_USERNAME, TEST_USER_NAME),
+                        new UrlParameter(LoginPage.KEY_USERSTORE, TEST_USER_STORE)))
+                .withLogicalViewId(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID).build();
         portalHistoryManagerMock.addCurrentUriToHistory(newDescriptor);
 
         assertEquals(TEST_USER_NAME, underTest.getLoginCredentials().getUsername());
@@ -194,7 +193,7 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
         assertFalse(underTest.isShouldDisplayUserStoreDropdown(), "User store drop-down should be hidden");
 
         assertEquals(DEFAULT_USER_STORE.getName(), underTest.getLoginCredentials().getUserStore(),
-            "On single user store the first must be selected as default");
+                "On single user store the first must be selected as default");
     }
 
     @Test
@@ -212,9 +211,8 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
 
     @Test
     void viewActionShouldLogoutOnLogoutStrategy() {
-        configuration.put(PortalConfigurationKeys.PAGES_LOGIN_ENTER_STRATEGY,
-            LoginPageStrategy.LOGOUT.getStrategyName());
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.PAGES_LOGIN_ENTER_STRATEGY,
+                LoginPageStrategy.LOGOUT.getStrategyName());
         assertNull(underTest.initViewAction());
         authenticationFacadeMock.assertAuthenticated(false);
     }
@@ -224,7 +222,7 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
         // No idea here
     void shouldUseConfiguredUserStoreAsDefault() {
         assertEquals(underTest.getLoginCredentials().getUserStore(), SOME_OTHER_LDAP_USER_STORE.getName(),
-            "Wrong selected user store");
+                "Wrong selected user store");
     }
 
     @Override

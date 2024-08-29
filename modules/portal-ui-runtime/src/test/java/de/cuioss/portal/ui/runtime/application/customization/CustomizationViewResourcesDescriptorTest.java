@@ -79,14 +79,14 @@ class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<Custom
 
     @BeforeEach
     void before() {
-        configuration.fireEvent(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, BASE_CUSTOMIZATION.toString());
+        configuration.update(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, BASE_CUSTOMIZATION.toString());
         underTest.initialize();
     }
 
     @Test
     void shouldDetermineExistingTemplatesDirectory() {
         assertEquals(BASE_CUSTOMIZATION.resolve(TEMPLATES_FOLDER).toString(), underTest.getTemplatePath());
-        configuration.put(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED, "true");
+        configuration.update(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED, "true");
         assertEquals(2, underTest.getHandledTemplates().size());
         assertTrue(underTest.getHandledTemplates().contains("a.xhtml"));
         assertTrue(underTest.getHandledTemplates().contains("c.xhtml/d.xhtml"));
@@ -109,7 +109,7 @@ class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<Custom
         final var playGroundBase = playGround.resolve(stamp);
         Files.createDirectories(playGroundBase);
 
-        configuration.fireEvent(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, playGround.toString());
+        configuration.update(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, playGround.toString());
         underTest.initialize();
 
         assertNull(underTest.getTemplatePath());
@@ -138,7 +138,7 @@ class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<Custom
         final var viewsBase = playGroundBase.resolve(VIEWS_FOLDER);
         Files.createDirectories(viewsBase);
 
-        configuration.fireEvent(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, playGroundBase.toString());
+        configuration.update(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, playGroundBase.toString());
         underTest.initialize();
 
         assertEquals(templatesBase.toString(), underTest.getTemplatePath());
@@ -162,7 +162,7 @@ class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<Custom
     }
 
     void providerChangeEventListener(
-        @Observes @PortalViewResourcesConfigChanged final PortalViewResourcesConfigChangedType type) {
+            @Observes @PortalViewResourcesConfigChanged final PortalViewResourcesConfigChangedType type) {
         if (PortalViewResourcesConfigChangedType.TEMPLATES == type) {
             templatesEventWasFired = true;
         }

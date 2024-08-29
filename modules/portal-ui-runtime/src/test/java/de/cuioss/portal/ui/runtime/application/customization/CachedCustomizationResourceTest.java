@@ -34,8 +34,7 @@ class CachedCustomizationResourceTest implements ShouldImplementEqualsAndHashCod
 
     @Override
     public CachedCustomizationResource getUnderTest() {
-        configuration.put(PortalConfigurationKeys.RESOURCE_MAXAGE, "60");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.RESOURCE_MAXAGE, "60");
         try {
             return new CachedCustomizationResource(
                     new CustomizationResource(File.createTempFile("application-default", ".css"),

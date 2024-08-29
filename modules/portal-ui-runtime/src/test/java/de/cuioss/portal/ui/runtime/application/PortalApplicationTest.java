@@ -44,8 +44,8 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalCoreEnvironment
-@AddBeanClasses({ LocaleConfiguration.class, PortalProjectStageImpl.class, PortalResourceBundleBean.class,
-        ResourceBundleWrapperImpl.class, CuiJSfResourceBundleLocator.class, PortalLocaleProducerMock.class })
+@AddBeanClasses({LocaleConfiguration.class, PortalProjectStageImpl.class, PortalResourceBundleBean.class,
+        ResourceBundleWrapperImpl.class, CuiJSfResourceBundleLocator.class, PortalLocaleProducerMock.class})
 class PortalApplicationTest implements ShouldBeNotNull<PortalApplication>, JsfEnvironmentConsumer {
 
     @Setter
@@ -78,14 +78,14 @@ class PortalApplicationTest implements ShouldBeNotNull<PortalApplication>, JsfEn
 
     @Test
     void shouldHandleSupportedLocales() {
-        configuration.fireEvent(PortalConfigurationKeys.LOCALES_AVAILABLE, "de");
+        configuration.update(PortalConfigurationKeys.LOCALES_AVAILABLE, "de");
         var wrapped = createFromFactory();
         assertEquals(mutableList(Locale.GERMAN), mutableList(wrapped.getSupportedLocales()));
     }
 
     @Test
     void shouldHandleDefaultLocale() {
-        configuration.fireEvent(PortalConfigurationKeys.LOCALE_DEFAULT, "fr");
+        configuration.update(PortalConfigurationKeys.LOCALE_DEFAULT, "fr");
         var wrapped = createFromFactory();
         assertEquals(Locale.FRENCH, wrapped.getDefaultLocale());
     }

@@ -15,48 +15,42 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.inject.Produces;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.LoginEvent;
 import de.cuioss.portal.authentication.PortalLoginEvent;
-import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.model.BaseAuthenticatedUserInfo;
 import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalAuthenticationFacadeMock.class })
+@AddBeanClasses({PortalAuthenticationFacadeMock.class})
 class OauthIFrameLogoutPageBeanTest extends AbstractPageBeanTest<OauthIFrameLogoutPageBean> {
 
     private static final String USER = "user";
 
     @Inject
     @Getter
-    private OauthIFrameLogoutPageBean underTest;
+    OauthIFrameLogoutPageBean underTest;
 
     @Inject
     @PortalAuthenticationFacade
-    private PortalAuthenticationFacadeMock facade;
+    PortalAuthenticationFacadeMock facade;
 
     @Produces
-    @PortalUser
-    private AuthenticatedUserInfo user;
+    AuthenticatedUserInfo user;
 
-    private LoginEvent logoutEvent;
+    LoginEvent logoutEvent;
 
     @BeforeEach
     void resetLogoutEvent() {

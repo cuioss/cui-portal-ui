@@ -37,8 +37,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({Oauth2AuthenticationFacadeMock.class, ViewMatcherProducer.class,
-    Oauth2ConfigurationProducerMock.class, PortalTestUserProducer.class,
-    ServletObjectsFromJSFContextProducer.class})
+        Oauth2ConfigurationProducerMock.class, PortalTestUserProducer.class,
+        ServletObjectsFromJSFContextProducer.class})
 class OauthLogoutPageBeanTest extends AbstractPageBeanTest<OauthLogoutPageBean> {
 
     @Inject
@@ -61,8 +61,7 @@ class OauthLogoutPageBeanTest extends AbstractPageBeanTest<OauthLogoutPageBean> 
 
     @BeforeEach
     void beforeTest() {
-        configuration.put(PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT, "20");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT, "20");
     }
 
     @Test
@@ -82,8 +81,8 @@ class OauthLogoutPageBeanTest extends AbstractPageBeanTest<OauthLogoutPageBean> 
     void logoutWithRedirectUri() {
         facadeMock.setClientLogoutUrl("https://client-logout-uri");
         oAuthConfiguration.setConfiguration(Oauth2ConfigurationImpl.builder().logoutUri("http://logout")
-            .logoutRedirectParamName("post_logout_test_redirect_uri")
-            .postLogoutRedirectUri("https://post.logout.url").build());
+                .logoutRedirectParamName("post_logout_test_redirect_uri")
+                .postLogoutRedirectUri("https://post.logout.url").build());
         assertNull(underTest.logoutViewAction());
         assertRedirect("https://client-logout-uri?post_logout_test_redirect_uri=https%3A%2F%2Fpost.logout.url");
     }

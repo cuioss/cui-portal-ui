@@ -15,8 +15,24 @@
  */
 package de.cuioss.portal.ui.runtime.application.view;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.CONTEXT_PARAM_SEPARATOR;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.VIEW_ROLE_RESTRICTION_PREFIX;
+import de.cuioss.jsf.api.application.navigation.NavigationUtils;
+import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
+import de.cuioss.jsf.api.application.view.matcher.ViewMatcherImpl;
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.portal.authentication.AuthenticatedUserInfo;
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.configuration.types.ConfigAsFilteredMap;
+import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
+import de.cuioss.portal.ui.api.view.ViewRestrictionManager;
+import de.cuioss.tools.collect.MapBuilder;
+import de.cuioss.tools.string.Splitter;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.util.HashSet;
@@ -24,27 +40,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import de.cuioss.jsf.api.application.navigation.NavigationUtils;
-
-import jakarta.annotation.PostConstruct;
-import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
-import de.cuioss.jsf.api.application.view.matcher.ViewMatcherImpl;
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.authentication.AuthenticatedUserInfo;
-import de.cuioss.portal.authentication.PortalUser;
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.types.ConfigAsFilteredMap;
-import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
-import de.cuioss.portal.ui.api.view.ViewRestrictionManager;
-import de.cuioss.tools.collect.MapBuilder;
-import de.cuioss.tools.string.Splitter;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.CONTEXT_PARAM_SEPARATOR;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.VIEW_ROLE_RESTRICTION_PREFIX;
 
 /**
  * Helper class that handles the checking of the roles needed to access a
@@ -65,16 +62,15 @@ public class DefaultViewRestrictionManager implements ViewRestrictionManager {
 
     @Inject
     @ConfigAsFilteredMap(startsWith = VIEW_ROLE_RESTRICTION_PREFIX, stripPrefix = true)
-    private Provider<Map<String, String>> viewRestrictions;
+    Provider<Map<String, String>> viewRestrictions;
 
     private Map<String, ViewMatcher> roleMatcherMap;
 
     @Inject
-    @PortalUser
-    private AuthenticatedUserInfo userInfo;
+    AuthenticatedUserInfo userInfo;
 
     @Inject
-    private Provider<FacesContext> facesContextProvider;
+    Provider<FacesContext> facesContextProvider;
 
     /**
      * Initializes the configured view Matcher

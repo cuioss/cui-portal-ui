@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @EnableAutoWeld
 @EnablePortalConfiguration
 @AddBeanClasses({ViewMatcherProducer.class, TestWidgetWithIdA.class, TestWidgetWithIdB.class,
-    TestWidgetWithoutId.class})
+        TestWidgetWithoutId.class})
 @ActivateScopes({ViewScoped.class})
 class DashboardWidgetRegistrationTest implements ShouldHandleObjectContracts<DashboardWidgetRegistration> {
 
@@ -49,16 +49,13 @@ class DashboardWidgetRegistrationTest implements ShouldHandleObjectContracts<Das
 
     @Test
     void testWidgetsWithoutConfig() {
-        configuration.fireEvent();
-
         assertNotNull(underTest.getWidgets());
         assertTrue(underTest.getWidgets().isEmpty());
     }
 
     @Test
     void testWidgetsWithConfigForA() {
-        configuration.put(DASHBOARD_WIDGET + "A.order", "10");
-        configuration.fireEvent();
+        configuration.update(DASHBOARD_WIDGET + "A.order", "10");
 
         assertNotNull(underTest.getWidgets());
         assertEquals(1, underTest.getWidgets().size());
@@ -67,9 +64,8 @@ class DashboardWidgetRegistrationTest implements ShouldHandleObjectContracts<Das
 
     @Test
     void testWidgetsWithConfigForAAndB() {
-        configuration.put(DASHBOARD_WIDGET + "A.order", "10");
-        configuration.put(DASHBOARD_WIDGET + "B.order", "20");
-        configuration.fireEvent();
+        configuration.update(DASHBOARD_WIDGET + "A.order", "10");
+        configuration.update(DASHBOARD_WIDGET + "B.order", "20");
 
         assertNotNull(underTest.getWidgets());
         assertEquals(2, underTest.getWidgets().size());

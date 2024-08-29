@@ -41,10 +41,10 @@ class CustomizationResourceTest implements ShouldBeNotNull<CustomizationResource
 
     @BeforeEach
     void before() throws IOException {
-        configuration.fireEvent(PortalConfigurationKeys.RESOURCE_MAXAGE, "60");
+        configuration.update(PortalConfigurationKeys.RESOURCE_MAXAGE, "60");
 
         underTest = new CustomizationResource(File.createTempFile("application-default", ".css"),
-            "application-default.css", "vendor", "application/css");
+                "application-default.css", "vendor", "application/css");
     }
 
     @Test

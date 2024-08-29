@@ -68,17 +68,16 @@ class HttpHeaderFilterImplTest implements ShouldHandleObjectContracts<HttpHeader
     }
 
     static void configureFilter(PortalTestConfiguration configuration) {
-        configuration.put(HTTP_HEADER_BASE + "abc.enabled", "true");
-        configuration.put(HTTP_HEADER_BASE + "abc.content", "def: ghi");
+        configuration.update(HTTP_HEADER_BASE + "abc.enabled", "true");
+        configuration.update(HTTP_HEADER_BASE + "abc.content", "def: ghi");
 
-        configuration.put(HTTP_HEADER_BASE + "jkl.enabled", "false");
-        configuration.put(HTTP_HEADER_BASE + "jkl.content", "mno: pqr");
+        configuration.update(HTTP_HEADER_BASE + "jkl.enabled", "false");
+        configuration.update(HTTP_HEADER_BASE + "jkl.content", "mno: pqr");
 
-        configuration.put(HTTP_HEADER_BASE + "stu.enabled", "true");
-        configuration.put(HTTP_HEADER_BASE + "stu.content", "def: vwx:z");
-        configuration.put(HTTP_HEADER_BASE + "stu.views", "testURI");
+        configuration.update(HTTP_HEADER_BASE + "stu.enabled", "true");
+        configuration.update(HTTP_HEADER_BASE + "stu.content", "def: vwx:z");
+        configuration.update(HTTP_HEADER_BASE + "stu.views", "testURI");
 
-        configuration.fireEvent();
     }
 
 }

@@ -37,7 +37,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAlternatives;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -47,8 +46,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ Oauth2AuthenticationFacadeMock.class, HttpHeaderFilterImpl.class, ViewMatcherProducer.class,
-        Oauth2ConfigurationProducerMock.class })
+@AddBeanClasses({Oauth2AuthenticationFacadeMock.class, HttpHeaderFilterImpl.class, ViewMatcherProducer.class,
+        Oauth2ConfigurationProducerMock.class})
 @EnableAlternatives(WrappedOauthFacadeImplTest.class)
 class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeImpl>, JsfEnvironmentConsumer {
 
@@ -78,11 +77,6 @@ class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeIm
 
     @Inject
     private PortalTestConfiguration configuration;
-
-    @BeforeEach
-    void beforeTest() {
-        configuration.fireEvent();
-    }
 
     @Test
     void testRetrieveTokenShouldPass() {

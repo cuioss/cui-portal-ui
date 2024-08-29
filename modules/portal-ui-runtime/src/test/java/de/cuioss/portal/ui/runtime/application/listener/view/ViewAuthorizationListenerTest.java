@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({PortalTestUserProducer.class, ViewConfiguration.class, ViewMatcherProducer.class,
-    DefaultViewRestrictionManager.class})
+        DefaultViewRestrictionManager.class})
 class ViewAuthorizationListenerTest implements ShouldHandleObjectContracts<ViewAuthorizationListener> {
 
     @Inject
@@ -76,9 +76,8 @@ class ViewAuthorizationListenerTest implements ShouldHandleObjectContracts<ViewA
 
     @Test
     void shouldPassOnAuthorizedUser() {
-        configuration.put(VIEW_ROLE_RESTRICTION_PREFIX + "testRole", VIEW_HOME_LOGICAL_VIEW_ID);
-        configuration.put(VIEW_ROLE_RESTRICTION_PREFIX + "testRole2", VIEW_HOME_LOGICAL_VIEW_ID);
-        configuration.fireEvent();
+        configuration.update(VIEW_ROLE_RESTRICTION_PREFIX + "testRole", VIEW_HOME_LOGICAL_VIEW_ID);
+        configuration.update(VIEW_ROLE_RESTRICTION_PREFIX + "testRole2", VIEW_HOME_LOGICAL_VIEW_ID);
 
         assertNull(authorizedException);
 
@@ -89,8 +88,7 @@ class ViewAuthorizationListenerTest implements ShouldHandleObjectContracts<ViewA
 
     @Test
     void shouldFailOnNotAuthorizedUserBecauseMissingRole() {
-        configuration.put(VIEW_ROLE_RESTRICTION_PREFIX + "anotherRole", VIEW_HOME_LOGICAL_VIEW_ID);
-        configuration.fireEvent();
+        configuration.update(VIEW_ROLE_RESTRICTION_PREFIX + "anotherRole", VIEW_HOME_LOGICAL_VIEW_ID);
 
         assertNull(authorizedException);
 

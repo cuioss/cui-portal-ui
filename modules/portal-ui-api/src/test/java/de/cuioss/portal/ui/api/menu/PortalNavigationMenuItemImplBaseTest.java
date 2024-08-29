@@ -32,7 +32,7 @@ import static de.cuioss.portal.ui.api.menu.MockPortalNavigationMenuItemImplBase.
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnableAutoWeld
-@AddBeanClasses({ JsfObjectsProducer.class })
+@AddBeanClasses({JsfObjectsProducer.class})
 @EnableJsfEnvironment
 @EnablePortalConfiguration
 class PortalNavigationMenuItemImplBaseTest {
@@ -68,8 +68,8 @@ class PortalNavigationMenuItemImplBaseTest {
 
     @Test
     void shouldHandleConfiguration() {
-        configuration.fireEvent(ENABLED, "true", ORDER, DEFAULT_ORDER.toString());
-        configuration.fireEvent(PARENT, DEFAULT_PARENT);
+        configuration.update(ENABLED, "true", ORDER, DEFAULT_ORDER.toString());
+        configuration.update(PARENT, DEFAULT_PARENT);
 
         underTest = underTestProvider.get();
         assertEquals(DEFAULT_PARENT, underTest.getParentId());

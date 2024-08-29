@@ -50,7 +50,7 @@ class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
 
     @Test
     void handleGoodCase() throws ExecutionException, InterruptedException {
-        configuration.fireEvent(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
+        configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
         underTest.initialize();
         String id1 = Generators.nonBlankStrings().next();
         underTest.store(id1, () -> "Test", "A");
@@ -69,7 +69,7 @@ class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
     @Test
     void handleTimeout() {
         // clean up after 1 second
-        configuration.fireEvent(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "1");
+        configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "1");
         underTest.initialize();
 
         underTest.store("1", () -> "Test", "A");

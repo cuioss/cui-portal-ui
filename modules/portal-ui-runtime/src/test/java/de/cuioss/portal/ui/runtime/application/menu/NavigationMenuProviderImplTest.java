@@ -39,11 +39,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({AccountMenuItem.class, AboutMenuItem.class, LogoutMenuItem.class, EmptyNavigationContainer.class,
-    PreferencesMenuItem.class, UserMenuItem.class, TestNavigationMenuItemSingleWithIdA.class,
-    TestNavigationMenuItemSingleWithIdB.class, TestNavigationMenuItemSingleWithoutId.class,
-    PortalMirrorResourceBundle.class, PortalTestUserProducer.class})
+        PreferencesMenuItem.class, UserMenuItem.class, TestNavigationMenuItemSingleWithIdA.class,
+        TestNavigationMenuItemSingleWithIdB.class, TestNavigationMenuItemSingleWithoutId.class,
+        PortalMirrorResourceBundle.class, PortalTestUserProducer.class})
 class NavigationMenuProviderImplTest
-    implements ShouldHandleObjectContracts<NavigationMenuProviderImpl>, ComponentConfigurator {
+        implements ShouldHandleObjectContracts<NavigationMenuProviderImpl>, ComponentConfigurator {
 
     @Inject
     @Getter
@@ -54,7 +54,7 @@ class NavigationMenuProviderImplTest
 
     @BeforeEach
     void before() {
-        configuration.fireEvent(MENU_BASE + "accountMenuItem.enabled", "true");
+        configuration.update(MENU_BASE + "accountMenuItem.enabled", "true");
     }
 
     /**
@@ -73,17 +73,16 @@ class NavigationMenuProviderImplTest
         assertEquals(3, ((NavigationMenuItemContainer) userMenu).getChildren().size());
 
         assertEquals(PreferencesMenuItem.MENU_ID,
-            ((NavigationMenuItemContainer) userMenu).getChildren().get(0).getId());
+                ((NavigationMenuItemContainer) userMenu).getChildren().get(0).getId());
         assertEquals(AccountMenuItem.MENU_ID, ((NavigationMenuItemContainer) userMenu).getChildren().get(1).getId());
         assertEquals(AboutMenuItem.MENU_ID, ((NavigationMenuItemContainer) userMenu).getChildren().get(2).getId());
     }
 
     @Test
     void shouldIgnoreEmptyContainer() {
-        configuration.put(MENU_BASE + EmptyNavigationContainer.MENU_ID + ".order", "40");
-        configuration.put(MENU_BASE + EmptyNavigationContainer.MENU_ID + ".enabled", "true");
-        configuration.put(MENU_BASE + EmptyNavigationContainer.MENU_ID + ".parent", MENU_TOP_IDENTIFIER);
-        configuration.fireEvent();
+        configuration.update(MENU_BASE + EmptyNavigationContainer.MENU_ID + ".order", "40");
+        configuration.update(MENU_BASE + EmptyNavigationContainer.MENU_ID + ".enabled", "true");
+        configuration.update(MENU_BASE + EmptyNavigationContainer.MENU_ID + ".parent", MENU_TOP_IDENTIFIER);
 
         var topLevelElements = underTest.getNavigationMenuRoots();
         assertEquals(2, topLevelElements.size());
@@ -119,33 +118,30 @@ class NavigationMenuProviderImplTest
     @Test
     void shouldHandleSeparator() {
         // Separator
-        configuration.put(MENU_BASE + "separator1.order", "47");
-        configuration.put(MENU_BASE + "separator1.enabled", "true");
-        configuration.put(MENU_BASE + "separator1.parent", UserMenuItem.MENU_ID);
-        configuration.put(MENU_BASE + "separator2.order", "49");
-        configuration.put(MENU_BASE + "separator2.enabled", "true");
-        configuration.put(MENU_BASE + "separator2.parent", UserMenuItem.MENU_ID);
-        configuration.fireEvent();
+        configuration.update(MENU_BASE + "separator1.order", "47");
+        configuration.update(MENU_BASE + "separator1.enabled", "true");
+        configuration.update(MENU_BASE + "separator1.parent", UserMenuItem.MENU_ID);
+        configuration.update(MENU_BASE + "separator2.order", "49");
+        configuration.update(MENU_BASE + "separator2.enabled", "true");
+        configuration.update(MENU_BASE + "separator2.parent", UserMenuItem.MENU_ID);
         assertEquals(4, underTest.getContainerMenuItemById(UserMenuItem.MENU_ID).get().getChildren().size());
     }
 
     @Test
     void shouldIgnoreNotRenderedSeparator() {
         // Separator
-        configuration.put(MENU_BASE + "separator1.order", "47");
-        configuration.put(MENU_BASE + "separator1.enabled", "false");
-        configuration.put(MENU_BASE + "separator1.parent", UserMenuItem.MENU_ID);
-        configuration.fireEvent();
+        configuration.update(MENU_BASE + "separator1.order", "47");
+        configuration.update(MENU_BASE + "separator1.enabled", "false");
+        configuration.update(MENU_BASE + "separator1.parent", UserMenuItem.MENU_ID);
         assertEquals(3, underTest.getContainerMenuItemById(UserMenuItem.MENU_ID).get().getChildren().size());
     }
 
     @Test
     void shouldIgnoreSeparatorWithInvalidParent() {
         // Separator
-        configuration.put(MENU_BASE + "separator1.order", "47");
-        configuration.put(MENU_BASE + "separator1.enabled", "true");
-        configuration.put(MENU_BASE + "separator1.parent", "NotThere");
-        configuration.fireEvent();
+        configuration.update(MENU_BASE + "separator1.order", "47");
+        configuration.update(MENU_BASE + "separator1.enabled", "true");
+        configuration.update(MENU_BASE + "separator1.parent", "NotThere");
         // Hm hard to test. At least it should not have been added to existing container
         assertEquals(3, underTest.getContainerMenuItemById(UserMenuItem.MENU_ID).get().getChildren().size());
     }
@@ -157,17 +153,14 @@ class NavigationMenuProviderImplTest
 
     @Test
     void testApplicationMenusWithoutConfig() {
-        configuration.fireEvent();
-
         assertNotNull(underTest.getMenuItemsByParentId("application"));
         assertTrue(underTest.getMenuItemsByParentId("application").isEmpty());
     }
 
     @Test
     void testApplicationMenusWithConfigForA() {
-        configuration.put(PortalConfigurationKeys.MENU_BASE + "A.order", "10");
-        configuration.put(PortalConfigurationKeys.MENU_BASE + "A.parent", "application");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.MENU_BASE + "A.order", "10");
+        configuration.update(PortalConfigurationKeys.MENU_BASE + "A.parent", "application");
 
         assertNotNull(underTest.getMenuItemsByParentId("application"));
         assertEquals(1, underTest.getMenuItemsByParentId("application").size());
@@ -176,11 +169,10 @@ class NavigationMenuProviderImplTest
 
     @Test
     void testApplicationMenusWithConfigForAAndB() {
-        configuration.put(PortalConfigurationKeys.MENU_BASE + "A.order", "10");
-        configuration.put(PortalConfigurationKeys.MENU_BASE + "A.parent", "application");
-        configuration.put(PortalConfigurationKeys.MENU_BASE + "B.order", "20");
-        configuration.put(PortalConfigurationKeys.MENU_BASE + "B.parent", "application");
-        configuration.fireEvent();
+        configuration.update(PortalConfigurationKeys.MENU_BASE + "A.order", "10");
+        configuration.update(PortalConfigurationKeys.MENU_BASE + "A.parent", "application");
+        configuration.update(PortalConfigurationKeys.MENU_BASE + "B.order", "20");
+        configuration.update(PortalConfigurationKeys.MENU_BASE + "B.parent", "application");
 
         assertNotNull(underTest.getMenuItemsByParentId("application"));
         assertEquals(2, underTest.getMenuItemsByParentId("application").size());

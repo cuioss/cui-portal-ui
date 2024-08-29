@@ -19,7 +19,6 @@ import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.LoginEvent;
 import de.cuioss.portal.authentication.PortalLoginEvent;
-import de.cuioss.portal.authentication.PortalUser;
 import de.cuioss.portal.authentication.facade.AuthenticationFacade;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.common.priority.PortalPriorities;
@@ -51,18 +50,17 @@ public class LogoutPageBean implements LogoutPage {
 
     @Inject
     @PortalAuthenticationFacade
-    private AuthenticationFacade authenticationFacade;
+    AuthenticationFacade authenticationFacade;
 
     @Inject
-    private FacesContext facesContext;
+    FacesContext facesContext;
 
     @Inject
     @PortalLoginEvent
-    private Event<LoginEvent> preLogoutEvent;
+    Event<LoginEvent> preLogoutEvent;
 
     @Inject
-    @PortalUser
-    private AuthenticatedUserInfo authenticatedUserInfo;
+    AuthenticatedUserInfo authenticatedUserInfo;
 
     /**
      * Logs out and redirects to login page.

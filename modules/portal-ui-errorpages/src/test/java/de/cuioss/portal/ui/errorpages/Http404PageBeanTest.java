@@ -81,7 +81,7 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
 
     @Test
     void shouldNotRedirectIfNotConfigured() {
-        configuration.fireEvent(PortalConfigurationKeys.PAGES_ERROR_404_REDIRECT, "false");
+        configuration.update(PortalConfigurationKeys.PAGES_ERROR_404_REDIRECT, "false");
 
         getRequestConfigDecorator().setViewId(FACES_VIEW_JSF).setRequestAttribute(AbstractHttpErrorPage.JAKARTA_SERVLET_ERROR_REQUEST_URI,
                 FACES_VIEW_JSF);

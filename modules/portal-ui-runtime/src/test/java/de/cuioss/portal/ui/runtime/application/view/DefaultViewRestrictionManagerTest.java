@@ -70,7 +70,7 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
 
     @Test
     void shouldRestrictSingleContent() {
-        configuration.fireEvent(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/");
+        configuration.update(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/");
 
         portalUserProducerMock.roles(immutableList(ROLE_CONTENT));
 
@@ -85,7 +85,7 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
 
     @Test
     void shouldRestrictMultipleRoles() {
-        configuration.fireEvent(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/",
+        configuration.update(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/",
             VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/content/admin");
 
         portalUserProducerMock.roles(immutableList(ROLE_CONTENT, ROLE_ADMIN));
@@ -104,7 +104,7 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
 
     @Test
     void shouldNotMatchRoleConfiguredDirectoryToAnyPage() {
-        configuration.fireEvent(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/content/admin/",
+        configuration.update(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/content/admin/",
             VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/");
 
         ViewDescriptor pageMatchedToDirectoryPath = new ViewDescriptorImpl("faces/content/administrationPage.jsf",
@@ -120,7 +120,7 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
 
     @Test
     void shouldHandleOutcomes() {
-        configuration.fireEvent(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/");
+        configuration.update(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/");
 
         assertFalse(underTest.isUserAuthorizedForViewOutcome(HomePage.OUTCOME));
     }

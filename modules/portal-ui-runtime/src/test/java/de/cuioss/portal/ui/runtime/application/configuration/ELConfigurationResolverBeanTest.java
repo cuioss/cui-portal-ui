@@ -39,15 +39,13 @@ class ELConfigurationResolverBeanTest {
 
     @Test
     void testGetString() {
-        configuration.put("abc", "def");
-        configuration.fireEvent();
+        configuration.update("abc", "def");
         assertEquals("def", underTest.getString("abc"));
     }
 
     @Test
     void testGetKeys() {
-        configuration.put("abc", "def");
-        configuration.fireEvent();
+        configuration.update("abc", "def");
         assertTrue(Collections.asList(underTest.getKeys()).contains("abc"));
     }
 }

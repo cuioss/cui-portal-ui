@@ -15,23 +15,21 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import java.io.Serial;
-import java.io.Serializable;
-
+import de.cuioss.portal.authentication.AuthenticatedUserInfo;
+import de.cuioss.portal.authentication.LoginEvent;
+import de.cuioss.portal.authentication.PortalLoginEvent;
+import de.cuioss.portal.authentication.facade.AuthenticationFacade;
+import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
-
-import de.cuioss.portal.authentication.AuthenticatedUserInfo;
-import de.cuioss.portal.authentication.LoginEvent;
-import de.cuioss.portal.authentication.PortalLoginEvent;
-import de.cuioss.portal.authentication.PortalUser;
-import de.cuioss.portal.authentication.facade.AuthenticationFacade;
-import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * Provides an empty logout page to be embedded from the oauth server via iframe
@@ -50,22 +48,18 @@ public class OauthIFrameLogoutPageBean implements Serializable {
 
     @Inject
     @PortalAuthenticationFacade
-    private AuthenticationFacade authenticationFacade;
+    AuthenticationFacade authenticationFacade;
 
     @Inject
-    private HttpServletRequest servletRequest;
+    HttpServletRequest servletRequest;
 
     @Inject
-    @PortalUser
-    private AuthenticatedUserInfo authenticatedUserInfo;
+    AuthenticatedUserInfo authenticatedUserInfo;
 
     @Inject
     @PortalLoginEvent
-    private Event<LoginEvent> preLougoutEvent;
+    Event<LoginEvent> preLougoutEvent;
 
-    /**
-     * @return
-     */
     public String logoutViewAction() {
         if (authenticatedUserInfo.isAuthenticated()) {
             preLougoutEvent.fire(LoginEvent.builder().action(LoginEvent.Action.LOGOUT).build());

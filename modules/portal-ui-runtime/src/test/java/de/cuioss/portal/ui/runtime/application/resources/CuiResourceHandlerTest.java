@@ -79,7 +79,7 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
         availableResources.put(CSS_LIBRARY + "-style.css", prepareResource(STYLE_CSS, CSS_LIBRARY));
         availableResources.put(CSS_LIBRARY + "-style.min.css", prepareResource(STYLE_MIN_CSS, CSS_LIBRARY));
         availableResources.put(CSS_LIBRARY + "-application.css",
-            prepareResource(APPLICATION_CSS, CSS_LIBRARY, "1.0.0"));
+                prepareResource(APPLICATION_CSS, CSS_LIBRARY, "1.0.0"));
         availableResources.put("alien_lib-any_unknown.jpg", prepareResource(ANY_UNKNOWN_JPG, ALIEN_LIB));
         mockResourceHandler.setAvailableResouces(availableResources);
     }
@@ -121,7 +121,7 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
     @Test
     void shouldUpdateVersionInformation() {
         var version = new IntegerGenerator(1, 100).next().toString();
-        configuration.fireEvent(PortalConfigurationKeys.RESOURCE_VERSION, version);
+        configuration.update(PortalConfigurationKeys.RESOURCE_VERSION, version);
         var expectedVersionInfo = "&v=" + version;
         var resource = underTest.createResource(STYLE_CSS, CSS_LIBRARY);
         assertNotNull(resource);
@@ -130,10 +130,10 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
         var applicationCssResource = underTest.createResource(APPLICATION_CSS, CSS_LIBRARY);
         assertTrue(applicationCssResource.getRequestPath().endsWith("1.0.0"), "version information was not found");
         assertFalse(applicationCssResource.getRequestPath().endsWith(expectedVersionInfo),
-            "unexpected version information found");
+                "unexpected version information found");
 
         var alienResource = underTest.createResource(ANY_UNKNOWN_JPG, ALIEN_LIB);
         assertFalse(alienResource.getRequestPath().endsWith(expectedVersionInfo),
-            "unexpected version information found");
+                "unexpected version information found");
     }
 }
