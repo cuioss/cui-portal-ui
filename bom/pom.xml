@@ -30,12 +30,6 @@
             </dependency>
             <dependency>
                 <groupId>de.cuioss.portal.ui</groupId>
-                <artifactId>portal-ui-default-navigation</artifactId>
-                <version>${project.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>de.cuioss.portal.ui</groupId>
                 <artifactId>portal-ui-oauth</artifactId>
                 <version>${project.version}</version>
                 <scope>runtime</scope>

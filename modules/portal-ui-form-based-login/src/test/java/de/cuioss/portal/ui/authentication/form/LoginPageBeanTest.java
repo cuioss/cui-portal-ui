@@ -28,6 +28,7 @@ import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacad
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
+import de.cuioss.portal.ui.api.context.Param;
 import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.api.pages.LoginPage;
 import de.cuioss.portal.ui.api.pages.LoginPageStrategy;
@@ -50,7 +51,6 @@ import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.omnifaces.cdi.Param;
 
 import static de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock.*;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
@@ -90,7 +90,7 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     private LoginEvent event;
 
     @Produces
-    @Param
+    @Param(name = "")
     public String getParameter(final InjectionPoint injectionPoint) {
 
         configuration.update(PortalConfigurationKeys.PAGES_LOGIN_DEFAULT_USER_STORE, SOME_OTHER_LDAP_USER_STORE.getName());
