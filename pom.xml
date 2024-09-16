@@ -36,6 +36,5 @@
     <modules>
         <module>bom</module>
         <module>modules</module>
-        <module>configuration</module>
     </modules>
 </project>

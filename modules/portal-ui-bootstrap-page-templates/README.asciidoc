@@ -2,27 +2,17 @@
 
 == What is it?
 
-Provides Facelet templates for creating portal pages. It is based on Twitters bootstrap
+Provides Facelet templates for creating portal pages.
+It is based on https://getbootstrap.com[Twitters Bootstrap frontend toolkit].
+In addition, it provides some JSF-Components for the layouts (previously `portal-ui-components`).
 
-In addition, it provides some JSF-Components for the layouts (previous portal-ui-components)
+== Account Pages
 
-== Maven Coordinates
+Under `METEA-INF/pages/account/` there are:
 
-[source,xml]
-----
-<dependency>
-     <groupId>de.cuioss.portal.ui</groupId>
-     <artifactId>portal-ui-bootstrap-page-templates</artifactId>
-</dependency>
-----
+* about.xhtml
+* account.xhtml
+* preferences.xhtml
 
-== Info
-
-Downstream modules like
-
-* portal-ui-form-based-login
-* portal-ui-components
-
-rely on these templates.
-
-So if you want / need to replace them, you have to consider them as well
+The Faces navigation template `account-navigation.faces-config.xml`
+can be used to define navigation rules.
