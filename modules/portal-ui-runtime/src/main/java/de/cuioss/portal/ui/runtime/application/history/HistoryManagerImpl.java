@@ -124,7 +124,7 @@ class HistoryManagerImpl implements HistoryManager {
     /**
      * Adds a view identifier as history entry. <em>Caution: </em> While the method
      * {@link #addCurrentUriToHistory(ViewDescriptor)} explicitly checks against
-     * {@link HistoryConfiguration#getExcludeFromHistoryMatcher()} this method
+     * {@link DefaultHistoryConfiguration#getExcludeFromHistoryMatcher()} this method
      * assumes this is already done, therefore the caller must ensure this.
      *
      * @param viewIdentifier must not be null

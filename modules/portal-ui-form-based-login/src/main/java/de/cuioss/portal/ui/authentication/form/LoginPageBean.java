@@ -215,13 +215,8 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
 
     @Override
     protected void handleLoginFailed(final IDisplayNameProvider<?> reason) {
-        // FIXME: MWL reactivate
-        // if (!clientInformation.canIUse(FeatureName.COOKIES)) {
-        // messageProducer.setGlobalErrorMessage("message.error.cookies.disable");
-        // }
         if (null != reason) {
             displayNameMessageProducer.showAsGlobalMessage(reason, FacesMessage.SEVERITY_ERROR);
         }
     }
-
 }

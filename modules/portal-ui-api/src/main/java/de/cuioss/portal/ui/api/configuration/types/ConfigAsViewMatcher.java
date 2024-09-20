@@ -32,7 +32,7 @@ import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 
 /**
- * Injects a config property as a {@link ViewMatcher}. In case the the property
+ * Injects a config property as a {@link ViewMatcher}. In case the property
  * is null or empty it will be an {@link EmptyViewMatcher}. The default
  * splitting character for the individual paths is
  * {@value PortalConfigurationKeys#CONTEXT_PARAM_SEPARATOR}

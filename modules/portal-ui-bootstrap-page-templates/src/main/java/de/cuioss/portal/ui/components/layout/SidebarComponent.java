@@ -58,15 +58,14 @@ import lombok.experimental.Delegate;
  * <h2>Attributes</h2>
  * <ul>
  * <li>Common attributes like style, styleClass, rendered and id</li>
- * <li>{@link HtmlElementProvider}, defaulting to {@value Node#NAV}</li>
+ * <li>{@link HtmlElementProvider}, defaulting to {@link Node#NAV}</li>
  * </ul>
  * <h2>Styling</h2>
  * <ul>
- * <li>The marker css class is '{@value PortalCssClasses#SIDEBAR}'</li>
+ * <li>The marker css class is '{@link PortalCssClasses#SIDEBAR}'</li>
  * </ul>
  *
  * @author Oliver Wolff
- *
  */
 @FacesComponent(PortalFamily.SIDEBAR_COMPONENT)
 @SuppressWarnings("squid:MaximumInheritanceDepth") // Artifact of Jsf-structure

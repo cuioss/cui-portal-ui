@@ -41,14 +41,12 @@
 				<li>The view locale will be set to localeProducer.locale where
 					localeProducer is an instance of LocaleProducer.
 					In case of the cui-portal the default implementation is
-					de.cuioss.portal.ui.api.application.locale.PortalLocaleManagerBean</li>
-				<li>The transient state will be set by
-					viewTransientManager.transientView. in case of the CUI-portal
-					the
-					implementation-class is
-					de.cuioss.portal.ui.api.application.view.ViewTransientManagerBean.
+					<code>de.cuioss.portal.ui.runtime.application.locale.PortalLocaleManagerBean</code></li>
+				<li>The transient state will be set by viewTransientManager.transientView.
+				    In case of the CUI-portal the implementation-class is
+					<code>de.cuioss.portal.ui.runtime.application.view.ViewTransientManagerBean</code>.
 					In order to alter the transientViews use configuration parameter
-					(default: web.xml) with the key 'cui.cdi.portal.view.transient'</li>
+					(default: web.xml) with the key 'portal.view.transient'</li>
 			</ul>
 		</body>
 	</section>
@@ -86,7 +84,7 @@
 
         <!-- This meta tag needs to be placed right under the <head> element in order to take effect -->
         <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="x-ua-compatible" content="IE=edge" />
             <!-- Ensure to load the jquery library for all pages. cui.js relies on it -->
             <h:outputScript name="jquery/jquery.js" library="primefaces" />
         </f:facet>

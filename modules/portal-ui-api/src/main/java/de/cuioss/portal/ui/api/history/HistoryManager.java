@@ -52,7 +52,7 @@ public interface HistoryManager extends Serializable, Iterable<ViewIdentifier> {
     void addCurrentUriToHistory(ViewDescriptor viewId);
 
     /**
-     * This methods checks whether a page was reloaded using f5 or the corresponding
+     * This method checks whether a page was reloaded using f5 or the corresponding
      * link.
      * <h3>Assumptions</h3>
      * <ul>
@@ -91,7 +91,7 @@ public interface HistoryManager extends Serializable, Iterable<ViewIdentifier> {
 
     /**
      * @return the previous page. If there is none found it returns the default
-     * page. The found ViewIdentifer, if it is not the fallback, will be
+     * page. The found ViewIdentifier, if it is not the fallback, will be
      * <em>kept</em> from the history
      */
     ViewIdentifier peekPrevious();

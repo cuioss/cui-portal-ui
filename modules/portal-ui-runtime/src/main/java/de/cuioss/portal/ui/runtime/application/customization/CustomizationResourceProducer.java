@@ -46,7 +46,7 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUST
 /**
  * Allow overriding {@link Resource}s for customization at the file system. Will
  * retrieve all files in {@link #RESOURCES_DIRECTORY} and return these files
- * when asked for a matching resource. During {@link ProjectStage#PRODUCTION}
+ * when asked for a matching resource. During {@link de.cuioss.portal.common.stage.ProjectStage#PRODUCTION}
  * all resources are cached.
  *
  * @author Matthias Walliczek

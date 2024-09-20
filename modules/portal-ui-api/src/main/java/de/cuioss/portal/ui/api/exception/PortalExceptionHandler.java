@@ -16,8 +16,8 @@
 package de.cuioss.portal.ui.api.exception;
 
 /**
- * A Successor of deltaspikes ExcpetionHandler. Not that elegant but works
- * anyway. In essence it defines a handler for specific / single exception;
+ * A Successor of deltaspikes ExceptionHandler. Not that elegant but works
+ * anyway. In essence, it defines a handler for specific / single exception;
  */
 public interface PortalExceptionHandler {
 

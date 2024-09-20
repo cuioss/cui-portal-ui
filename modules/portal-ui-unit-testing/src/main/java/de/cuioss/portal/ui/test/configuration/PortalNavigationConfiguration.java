@@ -64,10 +64,10 @@ public class PortalNavigationConfiguration implements ApplicationConfigurator {
     /** The error view */
     public static final String VIEW_ERROR_VIEW_ID = "/guest/error.xhtml";
 
-    /** A non existing view */
+    /** A non-existing view */
     public static final String VIEW_NOT_THERE_LOGICAL_VIEW_ID = "/not/there.jsf";
 
-    /** A non existing view */
+    /** A non-existing view */
     public static final String VIEW_NOT_THERE_VIEW_ID = "/not/there.xhtml";
 
     /**

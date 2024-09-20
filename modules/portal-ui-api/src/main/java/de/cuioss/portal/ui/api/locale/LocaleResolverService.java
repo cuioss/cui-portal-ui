@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Provides methods like access on configured locales and changing the locale on
- * per user basis.
+ * Provides methods like access on configured locales and changing the locale on a
+ * per-user basis.
  *
  * @author Oliver Wolff
  */
@@ -36,13 +36,12 @@ public interface LocaleResolverService {
      * Saves the locale changed by user interaction
      *
      * @param locale to be updated. Must be one of {@link #getAvailableLocales()}.
-     *               Otherwise it will throws an {@link IllegalArgumentException}
+     *               Otherwise, it will throw an {@link IllegalArgumentException}.
      */
     void saveUserLocale(Locale locale);
 
     /**
-     * @return The currently acitve user-locale
-     *
+     * @return The currently active user-locale
      */
     Locale resolveUserLocale();
 }

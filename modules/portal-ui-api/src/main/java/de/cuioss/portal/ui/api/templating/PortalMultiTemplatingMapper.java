@@ -30,17 +30,13 @@ import jakarta.inject.Qualifier;
 /**
  * Marker for the portal provided default implementation of
  * {@link MultiTemplatingMapper}. Used for injecting or overriding the portals
- * defaults implementation. It is @ApplicationScoped and
+ * defaults implementation. It is @ApplicationScoped and @Named(PortalCoreBeanNames.MULTI_TEMPLATING_MAPPER_BEAN_NAME)
  *
- * @Named(PortalCoreBeanNames.MULTI_TEMPLATING_MAPPER_BEAN_NAME)
- *
- *                                                               @author Oliver
- *                                                               Wolff
+ * @author Oliver Wolff
  */
 @Qualifier
 @ApplicationScoped
 @Retention(RUNTIME)
 @Target({ TYPE, METHOD, FIELD, PARAMETER })
 public @interface PortalMultiTemplatingMapper {
-
 }

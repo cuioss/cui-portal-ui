@@ -41,7 +41,7 @@ public interface ViewRestrictionManager extends Serializable {
     Set<String> getRequiredRolesForView(ViewDescriptor descriptor);
 
     /**
-     * Determines whether the currently logged in user is allowed / authorized to
+     * Determines whether the currently logged-in user is allowed / authorized to
      * access the given view.
      *
      * @param descriptor identifying the view to be accessed, must not be null
@@ -51,14 +51,14 @@ public interface ViewRestrictionManager extends Serializable {
     boolean isUserAuthorized(ViewDescriptor descriptor);
 
     /**
-     * Determines whether the currently logged in user is allowed / authorized to
+     * Determines whether the currently logged-in user is allowed / authorized to
      * access the given view, identified by the given outcome.
      *
      * @param viewOutcome String outcome identifying a concrete view that should be
      *                    checked
      * @return a boolean indicating whether the current user is authorized to access
      *         the given view {@code true} or not {@code false}
-     * @throws IllegalStateException signaling, that the view can not not
+     * @throws IllegalStateException signaling, that the view can not be
      *                               determined, e.g.g there is no navigation-rule
      *                               defined for the given outcome
      */

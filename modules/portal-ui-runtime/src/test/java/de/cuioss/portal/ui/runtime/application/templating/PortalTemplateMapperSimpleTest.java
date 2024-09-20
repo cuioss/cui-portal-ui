@@ -59,8 +59,7 @@ class PortalTemplateMapperSimpleTest implements ShouldHandleObjectContracts<Port
     }
 
     @Test
-    void shouldFailOnNoneExisitigResource() {
+    void shouldFailOnNoneExistingResource() {
         assertThrows(IllegalArgumentException.class, () -> underTest.resolveTemplatePath(NOT_THERE));
     }
-
 }

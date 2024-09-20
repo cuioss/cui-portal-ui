@@ -26,7 +26,7 @@ import de.cuioss.portal.ui.runtime.application.listener.view.PortalCDIViewListen
 import java.io.Serial;
 
 /**
- * Replacement for deltaspike phase listener. In essence it routes the
+ * Replacement for deltaspike phase listener. In essence, it routes the
  * corresponding calls to {@link PortalRestoreViewListener}
  */
 public class PortalViewListenerAdapter implements PhaseListener {

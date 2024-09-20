@@ -9,7 +9,7 @@
 <documentation>
     <body>The root.xhtml extends technical_root.xhtml and creates the basic
         html structure used by all portal
-        pages. In addition it provides
+        pages. In addition, it provides
         standard content elements like a growl for
         global messages, the
         timeout-mechanism, the default ajax-error handling and some more. The
@@ -79,9 +79,9 @@
             var="GlobalIds" />
 
         <!-- Provides a combination of primefaces idle-monitor and some cui specific classes / components.
-          In essence it displays a modal dialog to the user if the current window is idle for longer than the session lives.
+          In essence, it displays a modal dialog to the user if the current window is idle for longer than the session lives.
           On confirm the page will be reloaded. In case of the session being active the page will be displayed again.
-          Otherwise the user will be redirected to the login-screen. It will only be rendered for non-transient views.
+          Otherwise, the user will be redirected to the login-screen. It will only be rendered for non-transient views.
           if you want to exclude it for other pages you can define an empty &lt;ui:insert name="clientTimeout"&gt;
           in your consuming page -->
         <ui:insert name="clientTimeout">
@@ -113,7 +113,7 @@
           This can be overridden via &lt;ui:insert name="portal_home" &gt;.
           To add elements to the navbar between brand element and navigation &lt;ui:insert name="portal_navbar" &gt;
           can be used.
-          The extension point for the actual menu is an &lt;ui:insert name="portal_navigation" &gt;.
+          The extension point for the actual menu is a &lt;ui:insert name="portal_navigation" &gt;.
           The default implementation queries de.cuioss.portal.ui.api.application.menu.NavigationMenuPageBean
           whether to display the navigation elements. For the portal they will be rendered if the user is logged in.
           See de.cuioss.portal.ui.api.menu of CUI-portal-core-spec on details how the dynamic navigation works.
@@ -176,7 +176,7 @@
             </o:cache>
         </nav>
 
-        <!-- Display global messages as a primefaces growl. The extension point is an &lt;ui:insert name="messages" &gt;-->
+        <!-- Display global messages as a primefaces growl. The extension point is a &lt;ui:insert name="messages" &gt;-->
         <ui:insert name="messages">
             <p:growl id="#{GlobalIds.GLOBAL_PAGE_MESSAGES.id}"
                 widgetVar="globalPageMessages" escape="false"

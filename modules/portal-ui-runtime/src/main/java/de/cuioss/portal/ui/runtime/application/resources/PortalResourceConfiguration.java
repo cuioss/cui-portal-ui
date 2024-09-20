@@ -36,7 +36,7 @@ import lombok.ToString;
 
 /**
  * Combines the runtime information that are specific to the
- * {@link CuiResourceHandler}. Usually this are version information (for the
+ * {@link CuiResourceHandler}. Usually these are version information (for the
  * cache-buster-functionality) and library names that are to be under version
  * control.
  * <p>

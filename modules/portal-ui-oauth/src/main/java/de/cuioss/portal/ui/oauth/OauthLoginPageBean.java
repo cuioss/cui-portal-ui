@@ -102,10 +102,10 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
 
     /**
      * Check if the client was redirected from an oauth2 server with valid code and
-     * login if so. Otherwise check if the client tries to access a deep link and
+     * login if so. Otherwise, check if the client tries to access a deep link and
      * skip this page if so.
      *
-     * @return the next view after login if login was successful. Otherwise null.
+     * @return the next view after login if login was successful. Otherwise, null.
      */
     public String testLoginViewAction() {
         var targetView = wrappedOauthFacade.retrieveTargetView();
@@ -116,10 +116,10 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
 
     /**
      * Check if the client was redirected from an oauth2 server with valid code and
-     * login if so. Otherwise start the login implicit by redirecting to the oauth
+     * login if so. Otherwise, start the login implicit by redirecting to the oauth
      * server.
      *
-     * @return the next view after login if login was successful. Otherwise null.
+     * @return the next view after login if login was successful. Otherwise, null.
      */
     public String testLoginAndRedirectViewAction() {
         var targetView = wrappedOauthFacade.retrieveTargetView();

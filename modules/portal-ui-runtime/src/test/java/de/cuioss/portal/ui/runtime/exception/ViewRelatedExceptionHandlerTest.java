@@ -114,7 +114,7 @@ class ViewRelatedExceptionHandlerTest
         final var event = new ExceptionAsEvent(new ViewExpiredException(VIEW_PREFERENCES_LOGICAL_VIEW_ID));
         // Prepare history manager
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
-        // go to another page without notifying the historManger: Needed because
+        // go to another page without notifying the historyManger: Needed because
         // we want to check the history redirect.
         historyManagerMock.addCurrentUriToHistory(DESCRIPTOR_PREFERENCES);
 

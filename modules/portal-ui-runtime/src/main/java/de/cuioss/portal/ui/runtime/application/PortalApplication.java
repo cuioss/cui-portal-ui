@@ -34,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * Decorate the standard {@link Application} in order to bridge the portal
- * specific implementations with the JSF-specific ones. Currently these are:
+ * specific implementations with the JSF-specific ones. Currently, these are:
  * <ul>
  * <li>{@link Application#getProjectStage()}</li>
  * <li>{@link Application#getDefaultLocale()}</li>

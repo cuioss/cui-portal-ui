@@ -60,7 +60,7 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
      * @param userStore used as default value
      * @param username  used as default value
      * @return option for {@linkplain LoginCredentials}, if userStore or userName is
-     *         missing opntion is empty
+     *         missing option is empty
      */
     @Override
     public Optional<LoginCredentials> extractFromDeepLinkingUrlParameter(final String userStore,

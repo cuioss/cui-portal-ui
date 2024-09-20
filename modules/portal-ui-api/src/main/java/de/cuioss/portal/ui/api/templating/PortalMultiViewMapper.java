@@ -30,9 +30,9 @@ import jakarta.inject.Qualifier;
 /**
  * Marker for the portal provided default implementation of
  * {@link MultiViewMapper}. Used for injecting or overriding the portals
- * defaults implementation. It is @ApplicationScoped and
+ * defaults implementation. It is @ApplicationScoped and @Named(MultiViewMapper.BEAN_NAME).
  *
- * @Named(MultiViewMapper.BEAN_NAME) @author Oliver Wolff
+ * @author Oliver Wolff
  */
 @Qualifier
 @ApplicationScoped
