@@ -81,7 +81,7 @@ public class UserThemeBean implements Serializable {
      * Service must store it accordingly.
      *
      * @param newTheme to be set, must be one of
-     *                 {@link ThemeConfiguration#getAvailableThemes()}. The
+     *                 {@link PortalThemeConfiguration#getAvailableThemes()}. The
      *                 implementation must ensure this.
      */
     public void saveTheme(final String newTheme) {

@@ -58,7 +58,7 @@ class OauthMessagePhaseListenerTest implements ShouldBeNotNull<OauthMessagePhase
     @Test
     void shouldRestoreMessagesIfAllConditionsAreMet() {
         addSomeMessages();
-        fireBeforPhase();
+        fireBeforePhase();
         assertNull(getSession().getAttribute(MESSAGES_IDENTIFIER), "Should have been removed");
     }
 
@@ -67,11 +67,11 @@ class OauthMessagePhaseListenerTest implements ShouldBeNotNull<OauthMessagePhase
         addSomeMessages();
         environmentHolder.getFacesContext().responseComplete();
 
-        fireBeforPhase();
+        fireBeforePhase();
         assertNotNull(getSession().getAttribute(MESSAGES_IDENTIFIER), "Should have been removed");
     }
 
-    private void fireBeforPhase() {
+    private void fireBeforePhase() {
         underTest.beforePhase(
                 new PhaseEvent(FacesContext.getCurrentInstance(), PhaseId.RENDER_RESPONSE, new MockLifecycle()));
     }

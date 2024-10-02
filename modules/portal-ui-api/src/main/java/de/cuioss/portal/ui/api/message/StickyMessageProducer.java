@@ -29,7 +29,7 @@ public interface StickyMessageProducer {
     /**
      * Convenience Method for setting sticky info messages
      *
-     * @param messageKey must no be null
+     * @param messageKey must not be null
      * @param parameter  Ellipses of Object Parameter for MessageFormat
      */
     void setInfoMessage(String messageKey, Object... parameter);
@@ -37,7 +37,7 @@ public interface StickyMessageProducer {
     /**
      * Convenience Method for setting sticky error messages
      *
-     * @param messageKey must no be null
+     * @param messageKey must not be null
      * @param parameter  Ellipses of Object Parameter for MessageFormat
      */
     void setErrorMessage(String messageKey, Object... parameter);
@@ -45,7 +45,7 @@ public interface StickyMessageProducer {
     /**
      * Convenience Method for setting sticky warning messages
      *
-     * @param messageKey must no be null
+     * @param messageKey must not be null
      * @param parameter  Ellipses of Object Parameter for MessageFormat
      */
     void setWarningMessage(String messageKey, Object... parameter);
@@ -53,7 +53,7 @@ public interface StickyMessageProducer {
     /**
      * Stores and displays a sticky message with given severity and messageKey.
      *
-     * @param messageKey must no be null
+     * @param messageKey must not be null
      * @param severity   The Severity level of the Message, must not be null.
      * @param parameter  Ellipses of Object Parameter for MessageFormat
      */
@@ -62,7 +62,7 @@ public interface StickyMessageProducer {
     /**
      * Stores and displays a sticky message with given severity and messageString.
      *
-     * @param messageString must no be null
+     * @param messageString must not be null
      * @param severity      The Severity level of the Message, must not be null.
      * @param parameter     Ellipses of Object Parameter for MessageFormat
      */

@@ -15,8 +15,6 @@
  */
 package de.cuioss.portal.ui.api.lazyloading;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
 import jakarta.inject.Inject;
 
 import org.jboss.weld.junit5.auto.AddBeanClasses;

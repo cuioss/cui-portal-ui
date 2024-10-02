@@ -46,7 +46,7 @@ import de.cuioss.test.jsf.producer.JsfObjectsProducer;
 import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
 
 /**
- * Using this annotations at type-level of a junit 5 test defines the basic
+ * Using this annotation at type-level of a junit 5 test defines the basic
  * infrastructure for creating unit-tests in the portal contexts. It is a
  * meta-annotation consisting of:
  *

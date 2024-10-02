@@ -45,13 +45,13 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LIST
  * {@link DefaultViewRestrictionManager} to determine the corresponding
  * access-rights. If the request addresses a view that is not admitted, it will
  * fire a {@link UserNotAuthorizedException}.
+ * Must be called after AuthenticationListener!
  *
  * @author Oliver Wolff
  */
 @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE)
 @RequestScoped
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL - 1)
-// Must be called after AuthenticatationListener
 @EqualsAndHashCode(of = "viewConfiguration")
 @ToString(of = "viewConfiguration")
 public class ViewAuthorizationListener implements ViewListener {

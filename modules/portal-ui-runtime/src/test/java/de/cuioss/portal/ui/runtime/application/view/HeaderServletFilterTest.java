@@ -23,6 +23,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@SuppressWarnings("UastIncorrectHttpHeaderInspection")
 @EnableAutoWeld
 @EnablePortalConfiguration
 @AddBeanClasses({ViewMatcherProducer.class, HttpHeaderFilterImpl.class})
@@ -45,6 +46,7 @@ class HeaderServletFilterTest implements ShouldBeNotNull<HeaderServletFilter> {
     }
 
     @Test
+    @SuppressWarnings("UastIncorrectHttpHeaderInspection")
     void shouldDoFilter() throws ServletException, IOException {
         HttpHeaderFilterImplTest.configureFilter(configuration);
 

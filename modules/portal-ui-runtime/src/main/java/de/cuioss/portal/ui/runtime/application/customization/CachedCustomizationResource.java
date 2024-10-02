@@ -31,7 +31,7 @@ import lombok.ToString;
 
 /**
  * To allow caching of {@link CustomizationResource}s in case of
- * {@link ProjectStage#PRODUCTION}
+ * {@link de.cuioss.portal.common.stage.ProjectStage#PRODUCTION}
  *
  * @author Matthias Walliczek
  */

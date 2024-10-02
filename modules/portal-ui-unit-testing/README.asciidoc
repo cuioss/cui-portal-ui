@@ -31,7 +31,7 @@ class EnablePortalUiEnvironmentTest {
     @Inject
     private PortalTestConfiguration configuration;
 
-    @​Test
+    @Test
     void shouldEnableEnvironment() {
         assertNotNull(facesContext.get());
         assertNotNull(configuration);
@@ -39,6 +39,7 @@ class EnablePortalUiEnvironmentTest {
                 facesContext.get().getExternalContext().getRequestHeaderMap()
                         .get(BasicApplicationConfiguration.USER_AGENT));
     }
+}
 ----
 
 === Module Consistency Test
@@ -57,7 +58,7 @@ If you want to access views / navigation with the standard portal views like log
 ----
 @EnablePortalUiEnvironment
 @JsfTestConfiguration(PortalTestNavigationConfiguration.class)
-class EnablePortalUiEnvironmentTest {
+class EnablePortalUiEnvironmentTest {}
 ----
 
 === Testing a page / Backing bean
@@ -114,13 +115,13 @@ class ViewBeanTest extends AbstractPageBeanTest<ViewBean> {
 
 `verifyObjectContracts()`: Verifies the contract of `Object.equals(Object)`, `Object.hashCode()`, `Object.toString()` and `Serializable` by serializing / deserializing the object. 
 
-_Caution_: it will check less detailed compared to previous variants. If you want a full blown test use `ValueObjectTest` directly. If you want to adapt the test you must override it. Previous annotation will not work.
+_Caution_: it will check less detailed compared to previous variants. If you want a full-blown test use `ValueObjectTest` directly. If you want to adapt the test you must override it. Previous annotation will not work.
 
 
 === Testing with PortalMessageProducer
 
 If you experience: `Could not load bean of type MessageProducer and name 'messageProducer'
-setup your test class as following:
+set up your test class as following:
 
 [source,java]
 ----
@@ -148,7 +149,7 @@ The base class is `de.cuioss.portal.ui.test.tests.PortalNavigationMenuItemsTest`
 @AddBeanClasses({ AboutMenuItem.class, AccountMenuItem.class})
 class PortalNavigationMenuItemsTestTest extends PortalNavigationMenuItemsTest implements BeanConfigurator {
 
-    @​Test
+    @Test
     void shouldFilterNoType() {
         assertEquals(2, getFilteredInstances().size());
     }
@@ -158,4 +159,5 @@ class PortalNavigationMenuItemsTestTest extends PortalNavigationMenuItemsTest im
         decorator.register(new PortalMirrorResourceBundle());
 
     }
+}
 ----

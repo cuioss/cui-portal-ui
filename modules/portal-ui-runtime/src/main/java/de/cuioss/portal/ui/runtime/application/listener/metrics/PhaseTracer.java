@@ -106,7 +106,7 @@ public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
      */
     public PhaseTracer stop() {
         if (stopWatch.isRunning()) {
-            log.trace("Stoping tracing for phase='%s'", phaseName);
+            log.trace("Stopping tracing for phase='%s'", phaseName);
             stopWatch.stop();
         } else {
             log.warn("IllegalState: Must ony be started once, phase='%s'", phaseName);

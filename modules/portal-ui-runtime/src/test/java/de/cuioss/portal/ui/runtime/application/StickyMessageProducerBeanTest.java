@@ -60,7 +60,7 @@ class StickyMessageProducerBeanTest implements ShouldHandleObjectContracts<Stick
     }
 
     @Test
-    void shouldProvidePosibilityToRemoveMessageByUi() {
+    void shouldProvidePossibilityToRemoveMessageByUi() {
         final var addedMessage = addAnyMessageToStorage();
         assertTrue(underTest.getMessages().contains(addedMessage));
 

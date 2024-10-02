@@ -24,7 +24,7 @@ import lombok.ToString;
 import java.io.Serial;
 
 /**
- * To be thrown at if a view needs to be supressed.
+ * To be thrown at if a view needs to be suppressed.
  *
  * @author Oliver Wolff
  */

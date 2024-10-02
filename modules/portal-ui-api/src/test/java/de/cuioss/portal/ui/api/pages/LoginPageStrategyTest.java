@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 class LoginPageStrategyTest {
 
     @Test
-    void shouldReturnStrategyOnExisitingName() {
+    void shouldReturnStrategyOnExistingName() {
         assertEquals(LoginPageStrategy.GOTO_HOME,
                 LoginPageStrategy.getFromString(LoginPageStrategy.GOTO_HOME.getStrategyName()));
         assertEquals(LoginPageStrategy.LOGOUT,

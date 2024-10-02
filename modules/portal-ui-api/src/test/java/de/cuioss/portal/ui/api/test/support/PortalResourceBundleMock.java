@@ -28,8 +28,8 @@ import lombok.ToString;
 
 /**
  * Mock variant of {@link ResourceBundleWrapper}. Simulate
- * {@link #getString(String)} (={@link #getObject(String)}) by simply returning
- * the key (like PortalMessageProducerMock ). {@link #getKeys()} will return an
+ * {@link #getString(String)} by simply returning
+ * the key (like PortalMessageProducerMock). Calls to {@link #getKeys()} will return an
  * empty list.
  *
  * @author Oliver Wolff

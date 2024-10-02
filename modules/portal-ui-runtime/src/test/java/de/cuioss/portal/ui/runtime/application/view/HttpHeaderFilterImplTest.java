@@ -58,6 +58,7 @@ class HttpHeaderFilterImplTest implements ShouldHandleObjectContracts<HttpHeader
     }
 
     @Test
+    @SuppressWarnings("UastIncorrectHttpHeaderInspection")
     void testCustomConfig() {
         configureFilter(configuration);
 
@@ -77,7 +78,5 @@ class HttpHeaderFilterImplTest implements ShouldHandleObjectContracts<HttpHeader
         configuration.update(HTTP_HEADER_BASE + "stu.enabled", "true");
         configuration.update(HTTP_HEADER_BASE + "stu.content", "def: vwx:z");
         configuration.update(HTTP_HEADER_BASE + "stu.views", "testURI");
-
     }
-
 }

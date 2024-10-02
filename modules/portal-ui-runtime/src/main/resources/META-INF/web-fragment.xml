@@ -96,10 +96,10 @@
         <description>If this param is set, and calling toLowerCase().equals("true") on a String representation of its value returns true,
         all submitted fields will be validated. This is necessary to allow the model validator to decide whether null or empty values are allowable
         in the current application. If the value is false, null or empty values will not be passed to the validators.
-        If the value is the string gautoh, the runtime must check if JSR-303 Beans Validation is present in the current environment.
-        If so, the runtime must proceed as if the value gtrueh had been specified.
-        If JSR-303 Beans Validation is not present in the current environment, the runtime most proceed as if the value "false" had been specified.
-        If the param is not set, the system must behave as if the param was set with the value gautoh. </description>
+        If the value is the string "auto", the runtime must check if JSR-303 Beans Validation is present in the current environment.
+        If so, the runtime must proceed as if the value "true" had been specified.
+        If JSR-303 Beans Validation is not present in the current environment, the runtime most proceed as if the value "false" had been specified.
+        If the param is not set, the system must behave as if the param was set with the value "auto". </description>
         <param-name>jakarta.faces.VALIDATE_EMPTY_FIELDS</param-name>
         <param-value>false</param-value>
     </context-param>

@@ -45,7 +45,7 @@ public interface LoginPageClientStorage {
      *
      * @param loginCredentials {@linkplain LoginCredentials} must not be
      *                         {@code null}
-     * @throws {@linkplain NullPointerException} if parameter is {@code null}
+     * @throws NullPointerException if parameter is {@code null}
      */
     void updateLocalStored(final LoginCredentials loginCredentials);
 

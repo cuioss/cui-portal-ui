@@ -55,7 +55,7 @@ class LibraryInventoryTest {
     }
 
     @Test
-    void testNullGetReourceMapping() {
+    void testNullGetResourceMapping() {
         assertThrows(NullPointerException.class, () -> lib.getResourceMapping(null));
     }
 

@@ -63,8 +63,7 @@ class PortalTemplateMapperExtendedTest implements ShouldHandleObjectContracts<Po
     }
 
     @Test
-    void shouldFailOnNoneExisitigResource() {
+    void shouldFailOnNoneExistingResource() {
         assertThrows(IllegalArgumentException.class, () -> underTest.resolveTemplatePath(NOT_THERE));
     }
-
 }

@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.application.configuration;
 
 import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.ui.api.configuration.types.ConfigAsViewMatcher;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
@@ -50,7 +51,7 @@ public class ViewConfiguration implements Serializable {
 
     /**
      * {@link ViewMatcher} checking for non-secured views, defined with
-     * {@link #NON_SECURED_VIEWS}
+     * {@link PortalConfigurationKeys#NON_SECURED_VIEWS}
      */
     @Getter
     private ViewMatcher nonSecuredViewMatcher;
@@ -61,7 +62,7 @@ public class ViewConfiguration implements Serializable {
 
     /**
      * {@link ViewMatcher} checking for transient views, defined with
-     * {@link #TRANSIENT_VIEWS}
+     * {@link PortalConfigurationKeys#TRANSIENT_VIEWS}
      */
     @Getter
     private ViewMatcher transientViewMatcher;
@@ -72,7 +73,7 @@ public class ViewConfiguration implements Serializable {
 
     /**
      * {@link ViewMatcher} checking for non-secured views, defined with
-     * {@link #SUPPRESSED_VIEWS}
+     * {@link PortalConfigurationKeys#SUPPRESSED_VIEWS}
      */
     @Getter
     private ViewMatcher suppressedViewMatcher;

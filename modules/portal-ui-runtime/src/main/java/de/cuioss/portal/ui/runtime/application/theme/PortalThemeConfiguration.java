@@ -34,8 +34,8 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * Default {@link ThemeConfiguration} reads default-theme and available themes
- * from the configuration system
+ * Reads default-theme and available themes
+ * from the configuration system.
  *
  * @author Oliver Wolff
  */

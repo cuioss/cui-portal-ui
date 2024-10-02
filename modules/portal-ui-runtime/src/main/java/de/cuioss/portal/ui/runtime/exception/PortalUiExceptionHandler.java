@@ -50,7 +50,7 @@ public class PortalUiExceptionHandler {
      *                       handles a contained {@link Throwable} it will notify
      *                       using the given {@link ExceptionAsEvent} by calling
      *                       {@link ExceptionAsEvent#handled(HandleOutcome)}
-     * @throws @throws IllegalStateException in cased of projectStage being
+     * @throws IllegalStateException in cased of projectStage being
      *                 Development
      */
     public void handle(@Observes ExceptionAsEvent exceptionEvent) {
