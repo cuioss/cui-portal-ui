@@ -28,7 +28,6 @@ import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacad
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
-import de.cuioss.portal.ui.api.context.Param;
 import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.api.pages.LoginPage;
 import de.cuioss.portal.ui.api.pages.LoginPageStrategy;
@@ -49,8 +48,8 @@ import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.omnifaces.cdi.Param;
 
 import static de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock.*;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
@@ -90,18 +89,14 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     private LoginEvent event;
 
     @Produces
-    @Param(name = "")
+    @Param
     public String getParameter(final InjectionPoint injectionPoint) {
-
-        configuration.update(PortalConfigurationKeys.PAGES_LOGIN_DEFAULT_USER_STORE, SOME_OTHER_LDAP_USER_STORE.getName());
-
         final var name = injectionPoint.getMember().getName();
         return switch (name) {
             case LoginPage.KEY_USERNAME -> username;
             case LoginPage.KEY_USERSTORE -> userStore;
             default -> null;
         };
-
     }
 
     @Test
@@ -218,9 +213,8 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     }
 
     @Test
-    @Disabled
-        // No idea here
     void shouldUseConfiguredUserStoreAsDefault() {
+        configuration.update(PortalConfigurationKeys.PAGES_LOGIN_DEFAULT_USER_STORE, SOME_OTHER_LDAP_USER_STORE.getName());
         assertEquals(underTest.getLoginCredentials().getUserStore(), SOME_OTHER_LDAP_USER_STORE.getName(),
                 "Wrong selected user store");
     }

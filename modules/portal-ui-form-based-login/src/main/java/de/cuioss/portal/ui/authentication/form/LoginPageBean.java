@@ -23,7 +23,6 @@ import de.cuioss.portal.authentication.facade.FormBasedAuthenticationFacade;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.model.UserStore;
 import de.cuioss.portal.common.priority.PortalPriorities;
-import de.cuioss.portal.ui.api.context.Param;
 import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.api.pages.LoginPage;
 import de.cuioss.portal.ui.api.pages.LoginPageClientStorage;
@@ -47,6 +46,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.omnifaces.cdi.Param;
 
 import java.io.Serial;
 import java.util.List;
@@ -74,12 +74,10 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
     @Getter
     private LoginCredentials loginCredentials;
 
-    @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
     @Param(name = "username")
     String username;
 
-    @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
     @Param(name = "userstore")
     String userstore;
