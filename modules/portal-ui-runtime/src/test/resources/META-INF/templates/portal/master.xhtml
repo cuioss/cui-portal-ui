@@ -58,7 +58,7 @@
 					name="messages" &gt;</li>
 				<li>Footer: The footer is implemented as an include: &lt;ui:include
 					src="/templates/layout_footer.xhtml" /&gt; it can be overwritten by
-					configuring the MultitemplateMapper accordingly
+					configuring the MultiTemplatingMapper accordingly
 				</li>
 			</ul>
 		</body>
@@ -74,7 +74,7 @@
 
         <h:panelGroup id="#{GlobalIds.MAIN_CONTENT.id}" layout="block"
             styleClass="container-fluid">
-            <!-- Display sticky messages. The extension point is a &lt;ui:insert name="stickyMessages" &gt;-->
+            <!-- Display sticky messages. The extension point is an &lt;ui:insert name="stickyMessages" &gt;-->
             <ui:insert name="stickyMessages">
                 <portal:stickyMessages id="stickyMessages" />
             </ui:insert>
