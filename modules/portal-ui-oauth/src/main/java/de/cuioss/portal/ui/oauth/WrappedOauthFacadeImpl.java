@@ -112,6 +112,7 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
         retrieveToken(Joiner.on(' ').join(initialScopes, e.getMissingScopes()));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Map<String, Serializable> retrieveViewParameters() {
         log.trace("retrieveViewParameters");

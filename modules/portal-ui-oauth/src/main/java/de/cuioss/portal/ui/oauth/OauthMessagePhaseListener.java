@@ -22,7 +22,6 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.event.PhaseEvent;
 import jakarta.faces.event.PhaseId;
 import jakarta.faces.event.PhaseListener;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -37,7 +36,7 @@ import static jakarta.faces.event.PhaseId.RENDER_RESPONSE;
 /**
  * Restore {@link FacesMessage}s after a redirect to the oauth server and back
  * again. Before redirecting to the oauth server
- * {@link WrappedOauthFacadeImpl#preserveCurrentView(HttpServletRequest)} will
+ * {@link WrappedOauthFacadeImpl} will implicitly
  * store the existing messages in the messing, and this class will restore them
  * before {@link PhaseId#RENDER_RESPONSE}.
  */

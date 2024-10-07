@@ -83,7 +83,7 @@ public interface WrappedOauthFacade {
 
     /**
      * Retrieve the target view from the history manager. Because of problems with
-     * the window scope after redirect from oauth server use a session stored target
+     * the window scope after redirect from oauth server, use a session stored target
      * view if present.
      *
      * @return

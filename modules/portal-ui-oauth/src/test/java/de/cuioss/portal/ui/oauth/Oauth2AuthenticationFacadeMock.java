@@ -106,7 +106,6 @@ public class Oauth2AuthenticationFacadeMock implements Oauth2AuthenticationFacad
 
     @Override
     public boolean logout(final HttpServletRequest servletRequest) {
-        // TODO Auto-generated method stub
         return false;
     }
 

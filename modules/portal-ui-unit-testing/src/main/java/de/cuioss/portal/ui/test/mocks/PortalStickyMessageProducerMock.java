@@ -102,7 +102,7 @@ public class PortalStickyMessageProducerMock implements Serializable, StickyMess
 
     /**
      * @param messageKey key that should be present in the added
-     *                   {@linkplain StickyMessage#message()}s
+     *                   {@linkplain StickyMessage#getMessage()}s
      *                   {@linkplain IDisplayNameProvider#getContent()} string.
      */
     public void assertThatKeyIsPresent(final String messageKey) {
