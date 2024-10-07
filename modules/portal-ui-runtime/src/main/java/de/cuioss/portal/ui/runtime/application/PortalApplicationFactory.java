@@ -27,10 +27,9 @@ import jakarta.faces.application.ApplicationWrapper;
  */
 public class PortalApplicationFactory extends ApplicationFactory {
 
+    private static final CuiLogger LOGGER = new CuiLogger(PortalApplicationFactory.class);
     @SuppressWarnings("java:S3077") // thread-safe via createPortalApplication
     private Application application;
-
-    private static final CuiLogger LOGGER = new CuiLogger(PortalApplicationFactory.class);
 
     /**
      * Construct a new OPortalApplicationFactory around the given wrapped factory.

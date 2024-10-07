@@ -28,8 +28,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnableAutoWeld
-@AddBeanClasses({ LoginPagePathProducer.class })
-@ActivateScopes({ RequestScoped.class })
+@AddBeanClasses({LoginPagePathProducer.class})
+@ActivateScopes({RequestScoped.class})
 class LoginPagePathProducerWOFacesContextTest {
 
     @Inject

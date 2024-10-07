@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 @EnableAutoWeld
-@AddBeanClasses({ LazyLoadingTestSupportProducer.class })
+@AddBeanClasses({LazyLoadingTestSupportProducer.class})
 class BaseLazyLoadingWidgetTest
         implements ShouldBeNotNull<TestLazyLoadingWidget>, ShouldImplementEqualsAndHashCode<TestLazyLoadingWidget> {
 

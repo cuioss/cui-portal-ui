@@ -36,14 +36,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Qualifier
 @Retention(RUNTIME)
-@Target({ TYPE, METHOD, FIELD, PARAMETER })
+@Target({TYPE, METHOD, FIELD, PARAMETER})
 public @interface PortalRestoreViewListener {
 
     /**
      * @return {@link PhaseExecution} indicating whether a concrete Portal-listener
-     *         is to be fired
-     *         {@link PhaseListener#beforePhase(jakarta.faces.event.PhaseEvent)} of
-     *         {@link PhaseListener#afterPhase(jakarta.faces.event.PhaseEvent)}
+     * is to be fired
+     * {@link PhaseListener#beforePhase(jakarta.faces.event.PhaseEvent)} of
+     * {@link PhaseListener#afterPhase(jakarta.faces.event.PhaseEvent)}
      */
     PhaseExecution value();
 }

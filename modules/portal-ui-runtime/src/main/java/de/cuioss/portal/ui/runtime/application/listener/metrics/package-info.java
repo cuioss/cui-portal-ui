@@ -4,6 +4,5 @@
  * {@link de.cuioss.portal.ui.runtime.application.listener.metrics.RequestTracer}
  *
  * @author Oliver Wolff
- *
  */
 package de.cuioss.portal.ui.runtime.application.listener.metrics;

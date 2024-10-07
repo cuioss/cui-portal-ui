@@ -48,13 +48,13 @@ public interface LazyLoadingRequest<T> {
 
     /**
      * @return A unique identifier to store the request and allow retrieving of the
-     *         result later.
+     * result later.
      */
     String getRequestId();
 
     /**
      * @return an instance of a {@link LazyLoadingErrorHandler} to be called if a
-     *         {@link ResultDetail} was provided in the {@link #backendRequest()}.
+     * {@link ResultDetail} was provided in the {@link #backendRequest()}.
      */
     default LazyLoadingErrorHandler getErrorHandler() {
         return new LazyLoadingErrorHandler();

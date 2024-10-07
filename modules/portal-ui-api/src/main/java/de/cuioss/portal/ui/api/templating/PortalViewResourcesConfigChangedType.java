@@ -21,10 +21,14 @@ package de.cuioss.portal.ui.api.templating;
  */
 public enum PortalViewResourcesConfigChangedType {
 
-    /** Indicates view-templates. */
+    /**
+     * Indicates view-templates.
+     */
     TEMPLATES,
 
-    /** Indicates actual views. */
+    /**
+     * Indicates actual views.
+     */
     VIEWS
 
 }

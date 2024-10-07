@@ -22,7 +22,7 @@ import de.cuioss.test.valueobjects.api.contracts.VerifyBuilder;
 import de.cuioss.test.valueobjects.api.generator.PropertyGenerator;
 
 @PropertyGenerator(IDisplayNameProviderTypedGenerator.class)
-@VerifyBuilder(required = { "state", "message" })
+@VerifyBuilder(required = {"state", "message"})
 class StickyMessageTest extends ValueObjectTest<StickyMessage> {
 
 }

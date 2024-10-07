@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalTestUserProducer.class, ViewConfiguration.class, ViewMatcherProducer.class })
+@AddBeanClasses({PortalTestUserProducer.class, ViewConfiguration.class, ViewMatcherProducer.class})
 class ViewAuthenticationListenerTest implements ShouldHandleObjectContracts<ViewAuthenticationListener> {
 
     @Inject

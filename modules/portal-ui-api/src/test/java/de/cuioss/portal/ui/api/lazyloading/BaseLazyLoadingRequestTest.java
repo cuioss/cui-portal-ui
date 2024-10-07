@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 @EnableAutoWeld
-@AddBeanClasses({ LazyLoadingTestSupportProducer.class, TestBaseLazyLoadingRequest.class })
+@AddBeanClasses({LazyLoadingTestSupportProducer.class, TestBaseLazyLoadingRequest.class})
 class BaseLazyLoadingRequestTest implements ShouldBeNotNull<TestBaseLazyLoadingRequest>,
         ShouldImplementEqualsAndHashCode<TestBaseLazyLoadingRequest> {
 

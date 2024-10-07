@@ -60,14 +60,12 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUST
 @PortalResourceProducer
 public class CustomizationResourceProducer implements ResourceProducer {
 
-    private static final CuiLogger log = new CuiLogger(CustomizationResourceProducer.class);
-
     /**
      * The name of the folder inside the
      * {@link PortalConfigurationKeys#PORTAL_CUSTOMIZATION_DIR}.
      */
     public static final String RESOURCES_DIRECTORY = "resources";
-
+    private static final CuiLogger log = new CuiLogger(CustomizationResourceProducer.class);
     @Inject
     private Provider<CuiProjectStage> projectStageProvider;
 
@@ -91,6 +89,41 @@ public class CustomizationResourceProducer implements ResourceProducer {
     private Map<String, List<String>> foundResources;
 
     private Map<File, CachedCustomizationResource> resourcesCache;
+
+    private static String createResourceNameInMinifiedStyle(final String resourceName) {
+        final var parts = Splitter.on('.').trimResults().limit(2).splitToList(resourceName);
+        if (!parts.isEmpty() && parts.size() > 1)
+            return parts.get(0) + ".min." + parts.get(1);
+        return null;
+    }
+
+    private static File lookupResourceDirectory(final Path customizationPath) {
+        if (null != customizationPath) {
+            final var resourcesDir = customizationPath.resolve(RESOURCES_DIRECTORY).toFile();
+            if (resourcesDir.exists() && resourcesDir.isDirectory())
+                return resourcesDir;
+        }
+        log.info(
+                "No installation specific customization detected, using defaults. If this is intentional you can ignore this message");
+        return null;
+    }
+
+    private static List<String> findFilesInDirectory(final Path path) {
+
+        File[] filesInDirectory = null;
+
+        try {
+            filesInDirectory = path.toFile().listFiles(File::isFile);
+        } catch (final SecurityException e) {
+            // it's not critical enough to explode if access to directory failed
+            log.warn(e, "Portal-122 : access denied to: {}", path.toFile().getName());
+        }
+
+        if (null == filesInDirectory)
+            return Collections.emptyList();
+
+        return Arrays.stream(filesInDirectory).map(File::getName).toList();
+    }
 
     @Override
     public Resource retrieveResource(final String resourceName, final String libraryName) {
@@ -125,7 +158,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
         if (!resourcesCache.containsKey(resourceFile)) {
             final var mimeType = determineMimeType(resourceFile);
             resourcesCache.put(resourceFile, new CachedCustomizationResource(
-                new CustomizationResource(resourceFile, resourceName, libraryName, mimeType)));
+                    new CustomizationResource(resourceFile, resourceName, libraryName, mimeType)));
         }
 
         return resourcesCache.get(resourceFile);
@@ -144,13 +177,6 @@ public class CustomizationResourceProducer implements ResourceProducer {
         return resourcePath.toPath().resolve(libraryName).resolve(resourceName).toFile();
     }
 
-    private static String createResourceNameInMinifiedStyle(final String resourceName) {
-        final var parts = Splitter.on('.').trimResults().limit(2).splitToList(resourceName);
-        if (!parts.isEmpty() && parts.size() > 1)
-            return parts.get(0) + ".min." + parts.get(1);
-        return null;
-    }
-
     private String determineMimeType(final File resourceFile) {
         return facesContextProvider.get().getExternalContext().getMimeType(resourceFile.toString());
     }
@@ -164,7 +190,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
         prepareFileWatcherService();
 
         customizationDirProvider.get()
-            .ifPresent(customizationDir -> resourcePath = lookupResourceDirectory(Paths.get(customizationDir)));
+                .ifPresent(customizationDir -> resourcePath = lookupResourceDirectory(Paths.get(customizationDir)));
 
         if (null != resourcePath) {
 
@@ -181,7 +207,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
                         final var pathName = path.toFile().getName();
 
                         final var filesInDirectory = findFilesInDirectory(
-                            resourcePath.toPath().resolve(path.getFileName()));
+                                resourcePath.toPath().resolve(path.getFileName()));
 
                         foundResources.put(pathName, filesInDirectory);
                     }
@@ -194,17 +220,6 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
     }
 
-    private static File lookupResourceDirectory(final Path customizationPath) {
-        if (null != customizationPath) {
-            final var resourcesDir = customizationPath.resolve(RESOURCES_DIRECTORY).toFile();
-            if (resourcesDir.exists() && resourcesDir.isDirectory())
-                return resourcesDir;
-        }
-        log.info(
-            "No installation specific customization detected, using defaults. If this is intentional you can ignore this message");
-        return null;
-    }
-
     private void prepareFileWatcherService() {
         // if was executed before there may be some file watches registered
         if (null != resourcePath) {
@@ -213,23 +228,6 @@ public class CustomizationResourceProducer implements ResourceProducer {
             // may customization path was adapted
             resourcePath = null;
         }
-    }
-
-    private static List<String> findFilesInDirectory(final Path path) {
-
-        File[] filesInDirectory = null;
-
-        try {
-            filesInDirectory = path.toFile().listFiles(File::isFile);
-        } catch (final SecurityException e) {
-            // it's not critical enough to explode if access to directory failed
-            log.warn(e, "Portal-122 : access denied to: {}", path.toFile().getName());
-        }
-
-        if (null == filesInDirectory)
-            return Collections.emptyList();
-
-        return Arrays.stream(filesInDirectory).map(File::getName).toList();
     }
 
     void fileChangeListener(@Observes @FileChangedEvent final Path newPath) {

@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ LoginPagePathProducer.class })
+@AddBeanClasses({LoginPagePathProducer.class})
 class LoginPagePathProducerTest {
 
     @Inject

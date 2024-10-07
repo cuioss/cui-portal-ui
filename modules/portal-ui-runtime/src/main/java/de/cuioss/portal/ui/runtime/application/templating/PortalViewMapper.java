@@ -97,12 +97,12 @@ public class PortalViewMapper implements MultiViewMapper {
     }
 
     private void handleDescriptor(final Map<String, URL> builderMap, final StaticViewDescriptor descriptor,
-            final String resourceName) {
+                                  final String resourceName) {
         try {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getViewPath() + '/' + resourceName).getURL();
             if (null == url) {
                 log.warn("Portal-127: View {} with path {} from descriptor {} was not found", resourceName,
-                    descriptor.getViewPath(), descriptor.toString());
+                        descriptor.getViewPath(), descriptor.toString());
             } else {
                 log.debug("adding view {}", resourceName);
                 builderMap.put(resourceName, url);

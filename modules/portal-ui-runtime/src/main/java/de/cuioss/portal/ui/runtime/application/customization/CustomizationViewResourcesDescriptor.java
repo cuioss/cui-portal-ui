@@ -110,6 +110,23 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
     @Getter
     private String viewPath;
 
+    private static List<String> retrieveViewResources(final Path currentTemplatePath, final String prefix) {
+        List<String> result = mutableList();
+        try (var directoryStream = Files.newDirectoryStream(currentTemplatePath)) {
+            for (Path pathname : directoryStream) {
+                if (pathname.toFile().isFile() && pathname.toString().endsWith(".xhtml")) {
+                    result.add(prefix.concat(pathname.toFile().getName()));
+                } else if (pathname.toFile().isDirectory()) {
+                    result.addAll(retrieveViewResources(currentTemplatePath.resolve(pathname.toFile().getName()),
+                            prefix.concat(pathname.toFile().getName() + "/")));
+                }
+            }
+        } catch (IOException ex) {
+            log.warn(ex, "Portal-122: Unable to search path: {}", currentTemplatePath.toString());
+        }
+        return result;
+    }
+
     /**
      * Initialization.
      */
@@ -152,23 +169,6 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
         } else {
             log.debug("VIEWS folder {} does not exists", viewPath);
         }
-    }
-
-    private static List<String> retrieveViewResources(final Path currentTemplatePath, final String prefix) {
-        List<String> result = mutableList();
-        try (var directoryStream = Files.newDirectoryStream(currentTemplatePath)) {
-            for (Path pathname : directoryStream) {
-                if (pathname.toFile().isFile() && pathname.toString().endsWith(".xhtml")) {
-                    result.add(prefix.concat(pathname.toFile().getName()));
-                } else if (pathname.toFile().isDirectory()) {
-                    result.addAll(retrieveViewResources(currentTemplatePath.resolve(pathname.toFile().getName()),
-                            prefix.concat(pathname.toFile().getName() + "/")));
-                }
-            }
-        } catch (IOException ex) {
-            log.warn(ex, "Portal-122: Unable to search path: {}", currentTemplatePath.toString());
-        }
-        return result;
     }
 
     void fileChangeListener(@Observes @FileChangedEvent final Path newPath) {

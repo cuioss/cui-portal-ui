@@ -34,40 +34,64 @@ import java.util.Collections;
  */
 public class PortalNavigationConfiguration implements ApplicationConfigurator {
 
-    /** The home view */
+    /**
+     * The home view
+     */
     public static final String VIEW_HOME_LOGICAL_VIEW_ID = "/portal/home.jsf";
 
-    /** The home view */
+    /**
+     * The home view
+     */
     public static final String VIEW_HOME_VIEW_ID = "/portal/home.xhtml";
 
-    /** The login view */
+    /**
+     * The login view
+     */
     public static final String VIEW_LOGIN_LOGICAL_VIEW_ID = "/guest/login.jsf";
 
-    /** The login view */
+    /**
+     * The login view
+     */
     public static final String VIEW_LOGIN_VIEW_ID = "/guest/login.xhtml";
 
-    /** The logout view */
+    /**
+     * The logout view
+     */
     public static final String VIEW_LOGOUT_LOGICAL_VIEW_ID = "/guest/logout.jsf";
 
-    /** The logout view */
+    /**
+     * The logout view
+     */
     public static final String VIEW_LOGOUT_VIEW_ID = "/guest/logout.xhtml";
 
-    /** The preferences view */
+    /**
+     * The preferences view
+     */
     public static final String VIEW_PREFERENCES_LOGICAL_VIEW_ID = "/portal/preferences.jsf";
 
-    /** The preferences view */
+    /**
+     * The preferences view
+     */
     public static final String VIEW_PREFERENCES_VIEW_ID = "/portal/preferences.xhtml";
 
-    /** The error view */
+    /**
+     * The error view
+     */
     public static final String VIEW_ERROR_LOGICAL_VIEW_ID = "/guest/error.jsf";
 
-    /** The error view */
+    /**
+     * The error view
+     */
     public static final String VIEW_ERROR_VIEW_ID = "/guest/error.xhtml";
 
-    /** A non-existing view */
+    /**
+     * A non-existing view
+     */
     public static final String VIEW_NOT_THERE_LOGICAL_VIEW_ID = "/not/there.jsf";
 
-    /** A non-existing view */
+    /**
+     * A non-existing view
+     */
     public static final String VIEW_NOT_THERE_VIEW_ID = "/not/there.xhtml";
 
     /**

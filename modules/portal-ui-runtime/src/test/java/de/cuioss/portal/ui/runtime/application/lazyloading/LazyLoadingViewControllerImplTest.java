@@ -23,7 +23,7 @@ import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ StickyMessageProviderMock.class })
+@AddBeanClasses({StickyMessageProviderMock.class})
 class LazyLoadingViewControllerImplTest implements ShouldHandleObjectContracts<LazyLoadingViewControllerImpl> {
 
     @Inject

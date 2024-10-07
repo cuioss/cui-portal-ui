@@ -31,7 +31,7 @@ public interface NavigationMenuProvider extends Serializable {
 
     /**
      * @return the list of {@link NavigationMenuItem} representing the top level
-     *         element of the navigation menu.
+     * element of the navigation menu.
      */
     List<NavigationMenuItem> getNavigationMenuRoots();
 
@@ -45,7 +45,7 @@ public interface NavigationMenuProvider extends Serializable {
      *
      * @param id may be null or empty
      * @return the found {@link NavigationMenuItem} if present,
-     *         {@link Optional#empty()} if id is {@code null} or none could be found
+     * {@link Optional#empty()} if id is {@code null} or none could be found
      */
     Optional<NavigationMenuItem> getMenuItemById(String id);
 
@@ -56,8 +56,8 @@ public interface NavigationMenuProvider extends Serializable {
      *
      * @param id may be null or empty
      * @return the found {@link NavigationMenuItemContainer} if present,
-     *         {@link Optional#empty()} if id is {@code null} or none could be
-     *         found, or the found id does not represent a container
+     * {@link Optional#empty()} if id is {@code null} or none could be
+     * found, or the found id does not represent a container
      */
     Optional<NavigationMenuItemContainer> getContainerMenuItemById(String id);
 
@@ -66,7 +66,7 @@ public interface NavigationMenuProvider extends Serializable {
      *
      * @param ids to be looked up
      * @return the found {@link NavigationMenuItem} if present, an empty list
-     *         otherwise
+     * otherwise
      */
     List<NavigationMenuItem> getMenuItemsByIds(String... ids);
 }

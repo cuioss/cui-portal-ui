@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ MessageProducerMock.class, PortalStickyMessageProducerMock.class })
+@AddBeanClasses({MessageProducerMock.class, PortalStickyMessageProducerMock.class})
 class LazyLoadingViewModelImplTest implements ShouldHandleObjectContracts<LazyLoadingViewModelImpl<String>> {
 
     @Inject

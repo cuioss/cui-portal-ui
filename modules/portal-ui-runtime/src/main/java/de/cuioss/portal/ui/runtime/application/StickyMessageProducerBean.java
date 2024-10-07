@@ -113,7 +113,7 @@ public class StickyMessageProducerBean implements Serializable, StickyMessagePro
 
     /**
      * @return {@code true} if at least one message is available, {@code false}
-     *         otherwise
+     * otherwise
      */
     @Override
     public boolean isAnyMessageAvailable() {

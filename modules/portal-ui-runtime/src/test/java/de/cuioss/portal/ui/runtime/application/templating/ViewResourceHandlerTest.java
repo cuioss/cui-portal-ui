@@ -35,15 +35,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
-@EnableAlternatives({ MockTemplateMapper.class, MockViewMapper.class })
+@EnableAlternatives({MockTemplateMapper.class, MockViewMapper.class})
 class ViewResourceHandlerTest implements ShouldBeNotNull<ViewResourceHandler>, JsfEnvironmentConsumer {
 
+    private static final String TEMPLATES_BASE_BATH = "META-INF/templates/test/";
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
-
-    private static final String TEMPLATES_BASE_BATH = "META-INF/templates/test/";
-
     @Getter
     private ViewResourceHandler underTest;
 

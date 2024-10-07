@@ -46,20 +46,17 @@ public class PortalLocaleProducerMock implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 901932913924354093L;
-
+    @Inject
+    @LocaleChangeEvent
+    Event<Locale> localeChangeEvent;
     @Getter
     @Setter
     @Produces
     @Dependent
     @PortalLocale
     private Locale locale = Locale.ENGLISH;
-
     @Getter
     @Setter
     private List<Locale> availableLocales = immutableList(Locale.GERMAN, Locale.ENGLISH);
-
-    @Inject
-    @LocaleChangeEvent
-    Event<Locale> localeChangeEvent;
 
 }

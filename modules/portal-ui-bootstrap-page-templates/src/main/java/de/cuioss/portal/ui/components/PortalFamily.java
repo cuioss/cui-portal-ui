@@ -27,13 +27,19 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public final class PortalFamily {
 
-    /** Defines the portal components family. */
+    /**
+     * Defines the portal components family.
+     */
     public static final String PORTAL_FAMILY = "de.cuioss.portal.family";
 
-    /** The component for {@link SidebarComponent} */
+    /**
+     * The component for {@link SidebarComponent}
+     */
     public static final String SIDEBAR_COMPONENT = "de.cuioss.portal.sidebar";
 
-    /** Default Renderer for {@link AccordionComponent} */
+    /**
+     * Default Renderer for {@link AccordionComponent}
+     */
     public static final String SIDEBAR_RENDERER = "de.cuioss.portal.sidebar_renderer";
 
 }

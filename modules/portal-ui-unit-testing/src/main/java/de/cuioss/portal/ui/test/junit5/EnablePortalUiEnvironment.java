@@ -81,10 +81,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @EnableAutoWeld
 @EnablePortalConfiguration
 @EnableJsfEnvironment
-@JsfTestConfiguration({ BasicApplicationConfiguration.class, PortalNavigationConfiguration.class })
-@AddBeanClasses({ PortalProjectStageImpl.class, PortalMirrorResourceBundle.class, PortalLocaleProducerMock.class,
+@JsfTestConfiguration({BasicApplicationConfiguration.class, PortalNavigationConfiguration.class})
+@AddBeanClasses({PortalProjectStageImpl.class, PortalMirrorResourceBundle.class, PortalLocaleProducerMock.class,
         PortalStickyMessageProducerMock.class, JsfObjectsProducer.class, ServletObjectsFromJSFContextProducer.class,
-        CurrentViewProducer.class, NavigationHandlerProducer.class })
-@ActivateScopes({ RequestScoped.class, SessionScoped.class, ConversationScoped.class, ViewScoped.class })
+        CurrentViewProducer.class, NavigationHandlerProducer.class})
+@ActivateScopes({RequestScoped.class, SessionScoped.class, ConversationScoped.class, ViewScoped.class})
 public @interface EnablePortalUiEnvironment {
 }

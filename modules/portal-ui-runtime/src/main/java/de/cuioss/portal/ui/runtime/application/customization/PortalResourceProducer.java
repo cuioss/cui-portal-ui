@@ -30,11 +30,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Annotation for a {@link ResourceProducer}.
  *
  * @author Matthias Walliczek
- *
  */
 @Qualifier
 @Retention(RUNTIME)
-@Target({ TYPE, METHOD, FIELD, PARAMETER })
+@Target({TYPE, METHOD, FIELD, PARAMETER})
 public @interface PortalResourceProducer {
 
 }

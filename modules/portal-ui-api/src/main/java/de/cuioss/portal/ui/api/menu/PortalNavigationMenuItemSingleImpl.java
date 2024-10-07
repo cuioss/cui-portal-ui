@@ -40,29 +40,24 @@ public class PortalNavigationMenuItemSingleImpl extends PortalNavigationMenuItem
 
     @Serial
     private static final long serialVersionUID = -4639141255087105993L;
-
+    @Getter
+    private final Map<String, String> outcomeParameter = new HashMap<>();
     @Inject
     @CuiCurrentView
     Provider<ViewDescriptor> currentViewProvider;
-
     @Getter
     @Setter
     private String outcome;
-
     @Getter
     @Setter
     private String target;
-
     @Getter
     @Setter
     private String onClickAction;
 
-    @Getter
-    private final Map<String, String> outcomeParameter = new HashMap<>();
-
     /**
      * @return true if the current view id equals the configured outcome or is
-     *         contained in {@link #getActiveForAdditionalViewId()}.
+     * contained in {@link #getActiveForAdditionalViewId()}.
      */
     @Override
     public boolean isActive() {

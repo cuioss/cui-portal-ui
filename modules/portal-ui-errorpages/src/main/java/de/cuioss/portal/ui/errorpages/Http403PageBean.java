@@ -25,7 +25,6 @@ import java.io.Serial;
  * Page Bean for the error-code 403 (Forbidden)
  *
  * @author Oliver Wolff
- *
  */
 @RequestScoped
 @Named

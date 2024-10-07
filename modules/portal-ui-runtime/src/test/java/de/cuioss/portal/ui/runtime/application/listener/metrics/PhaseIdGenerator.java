@@ -22,7 +22,6 @@ import static de.cuioss.test.generator.Generators.fixedValues;
 
 /**
  * @author Oliver Wolff
- *
  */
 public class PhaseIdGenerator implements TypedGenerator<PhaseId> {
 

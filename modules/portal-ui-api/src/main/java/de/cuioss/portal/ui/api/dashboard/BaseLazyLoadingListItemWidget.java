@@ -31,6 +31,8 @@ import java.util.List;
 public abstract class BaseLazyLoadingListItemWidget<T> extends BaseLazyLoadingWidget<T>
         implements ListItemWidgetModel, DashboardWidgetModel {
 
+    @Serial
+    private static final long serialVersionUID = -9216862082387228019L;
     /**
      * The id of the within this module defined composite component that should be used
      * as default for this implementation of this abstract widget class.
@@ -38,10 +40,6 @@ public abstract class BaseLazyLoadingListItemWidget<T> extends BaseLazyLoadingWi
      */
     @Getter
     private final String compositeComponentId = "cui-composite:listItemWidget";
-
-    @Serial
-    private static final long serialVersionUID = -9216862082387228019L;
-
     @Getter
     private List<ListItem> items = Collections.emptyList();
 

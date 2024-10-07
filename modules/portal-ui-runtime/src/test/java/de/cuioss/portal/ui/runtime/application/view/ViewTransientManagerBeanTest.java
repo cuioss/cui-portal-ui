@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ ViewConfiguration.class, CurrentViewProducer.class, ViewMatcherProducer.class })
+@AddBeanClasses({ViewConfiguration.class, CurrentViewProducer.class, ViewMatcherProducer.class})
 class ViewTransientManagerBeanTest
         implements ShouldHandleObjectContracts<ViewTransientManagerBean>, JsfEnvironmentConsumer {
 

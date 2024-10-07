@@ -61,8 +61,8 @@ public abstract class CacheableResource extends CuiResource {
      */
     protected String determineResourcePath() {
         return ResourceHandler.RESOURCE_IDENTIFIER + '/' +
-            getLibraryName() +
-            '/' +
-            getResourceName();
+                getLibraryName() +
+                '/' +
+                getResourceName();
     }
 }

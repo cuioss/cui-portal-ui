@@ -43,7 +43,6 @@ import static de.cuioss.portal.configuration.util.ConfigurationHelper.resolveCon
  * Implementation of a {@link File} based {@link CacheableResource}.
  *
  * @author Matthias Walliczek
- *
  */
 @ToString(of = "resourceFile")
 @EqualsAndHashCode(of = "resourceFile", callSuper = false)
@@ -65,7 +64,7 @@ public final class CustomizationResource extends CacheableResource {
      * @param contentType
      */
     public CustomizationResource(final File resourceFile, final String resourceName, final String libraryName,
-            final String contentType) {
+                                 final String contentType) {
         this.resourceFile = resourceFile;
         setResourceName(resourceName);
         setLibraryName(libraryName);

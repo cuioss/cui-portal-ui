@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalSessionStorageMock.class })
+@AddBeanClasses({PortalSessionStorageMock.class})
 class Http401PageBeanTest extends AbstractPageBeanTest<Http401PageBean> {
 
     @Getter

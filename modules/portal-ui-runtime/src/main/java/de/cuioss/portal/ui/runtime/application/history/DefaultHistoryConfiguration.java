@@ -15,25 +15,23 @@
  */
 package de.cuioss.portal.ui.runtime.application.history;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_EXCLUDE_PARAMETER;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_VIEW_EXCLUDE_PARAMETER;
+import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.ui.api.configuration.types.ConfigAsViewMatcher;
+import de.cuioss.portal.ui.api.pages.HomePage;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.ui.api.configuration.types.ConfigAsViewMatcher;
-import de.cuioss.portal.ui.api.pages.HomePage;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_EXCLUDE_PARAMETER;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.HISTORY_VIEW_EXCLUDE_PARAMETER;
 
 /**
  * Configuration for {@link de.cuioss.portal.ui.api.history.HistoryManager},
@@ -55,26 +53,20 @@ import lombok.ToString;
 @ToString
 public class DefaultHistoryConfiguration implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 8178547799619418410L;
-
     /**
      * The default size for the history-size
      */
     static final int DEFAULT_HISTORY_SIZE = 10;
-
-    @Getter
-    private String fallback;
-
+    @Serial
+    private static final long serialVersionUID = 8178547799619418410L;
     @Getter
     private final String fallbackOutcome = HomePage.OUTCOME;
-
     @Getter
     private final int historySize = DEFAULT_HISTORY_SIZE;
-
     @Getter
     private final boolean excludeFacesParameter = true;
-
+    @Getter
+    private String fallback;
     @Getter
     @Inject
     @ConfigProperty(name = HISTORY_EXCLUDE_PARAMETER)

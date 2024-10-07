@@ -35,24 +35,23 @@ import java.util.List;
 @ApplicationScoped
 public class PortalHistoryManagerMock implements HistoryManager {
 
-    @Serial
-    private static final long serialVersionUID = -3934691506290620858L;
-
-    /** The home navigation view */
+    /**
+     * The home navigation view
+     */
     public static final String VIEW_HOME = "/portal/home.jsf";
-
     /**
      * {@link ViewIdentifier}, representing home navigation.
      */
     public static final ViewIdentifier IDENTIFIER_HOME = new ViewIdentifier(VIEW_HOME, "home", new ArrayList<>());
-
+    @Serial
+    private static final long serialVersionUID = -3934691506290620858L;
+    /**
+     * The storage for the history.
+     */
+    private final List<ViewIdentifier> history;
     @Getter
     @Setter
     private boolean pageReload = false;
-
-    /** The storage for the history. */
-    private final List<ViewIdentifier> history;
-
     @Getter
     @Setter
     private ViewIdentifier currentView;

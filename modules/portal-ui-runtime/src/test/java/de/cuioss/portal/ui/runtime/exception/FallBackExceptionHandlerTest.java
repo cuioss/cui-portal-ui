@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @EnableTestLogger
 @AddBeanClasses({CurrentViewProducer.class, PortalSessionStorageMock.class, NavigationHandlerProducer.class})
 class FallBackExceptionHandlerTest
-    implements ShouldHandleObjectContracts<FallBackExceptionHandler>, JsfEnvironmentConsumer {
+        implements ShouldHandleObjectContracts<FallBackExceptionHandler>, JsfEnvironmentConsumer {
 
     @Setter
     @Getter
@@ -158,6 +158,6 @@ class FallBackExceptionHandlerTest
         underTest.handleFallBack(exceptionEvent);
         assertEquals(HandleOutcome.LOGGED, exceptionEvent.getOutcome());
         LogAsserts.assertSingleLogMessagePresent(TestLogLevel.ERROR,
-            FallBackExceptionHandler.UNSPECIFIED_EXCEPTION_WITHOUT_VIEW);
+                FallBackExceptionHandler.UNSPECIFIED_EXCEPTION_WITHOUT_VIEW);
     }
 }

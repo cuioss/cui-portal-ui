@@ -62,11 +62,11 @@ public class DashboardWidgetRegistration implements Serializable {
     @PostConstruct
     public void init() {
         widgets = mutableList(
-            widgetsInstances.stream()
-                .filter(DashboardWidgetModel::isRendered)
-                .filter(widget -> getOrder(widget).isPresent())
-                .sorted(Comparator.comparing((DashboardWidgetModel o) -> getOrder(o).get()))
-                .toList());
+                widgetsInstances.stream()
+                        .filter(DashboardWidgetModel::isRendered)
+                        .filter(widget -> getOrder(widget).isPresent())
+                        .sorted(Comparator.comparing((DashboardWidgetModel o) -> getOrder(o).get()))
+                        .toList());
     }
 
     private Optional<Integer> getOrder(WidgetModel widget) {

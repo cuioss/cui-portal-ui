@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnableAutoWeld
 @EnablePortalConfiguration
-@AddBeanClasses({ DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
+@AddBeanClasses({DefaultHistoryConfiguration.class, ViewMatcherProducer.class})
 class DefaultHistoryConfigurationTest implements ShouldHandleObjectContracts<DefaultHistoryConfiguration> {
 
     @Inject

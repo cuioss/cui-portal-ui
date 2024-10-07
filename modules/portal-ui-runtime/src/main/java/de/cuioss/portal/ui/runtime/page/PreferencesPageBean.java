@@ -101,7 +101,7 @@ public class PreferencesPageBean implements PreferencesPage {
         availableLocales = new ArrayList<>();
         for (final Locale locale : localeManagerBean.getAvailableLocales()) {
             availableLocales.add(new SelectItem(locale, resourceBundle
-                .getString(LOCALE_KEY_PREFIX + locale.getLanguage())));
+                    .getString(LOCALE_KEY_PREFIX + locale.getLanguage())));
         }
         selectedLocale = localeManagerBean.getUserLocale();
     }

@@ -31,7 +31,7 @@ import java.util.List;
  * @author Oliver Wolff
  */
 @SuppressWarnings("squid:S1214") // We allow constants in the page interfaces, because they belong together
-                                 // (coherence).
+// (coherence).
 public interface LoginPage extends Serializable {
 
     /**
@@ -44,13 +44,19 @@ public interface LoginPage extends Serializable {
      */
     String OUTCOME = "login";
 
-    /** URL Parameter / Local Storage key name */
+    /**
+     * URL Parameter / Local Storage key name
+     */
     String KEY_USERSTORE = "userstore";
 
-    /** URL Parameter / Local Storage key name */
+    /**
+     * URL Parameter / Local Storage key name
+     */
     String KEY_USERNAME = "username";
 
-    /** Local Storage key name */
+    /**
+     * Local Storage key name
+     */
     String KEY_REMEMBER_ME = "remember_me";
 
     /**
@@ -70,14 +76,14 @@ public interface LoginPage extends Serializable {
 
     /**
      * @return the list of {@link UserStore} top be used. It is meant to be
-     *         displayed within the drop-down labeled "UserStore"
+     * displayed within the drop-down labeled "UserStore"
      */
     List<UserStore> getAvailableUserStores();
 
     /**
      * @return boolean indicating whether to display a dropdown for choosing a
-     *         ldapserver, in other words {@link #getAvailableUserStores()
-     *         .getSize()} > 1
+     * ldapserver, in other words {@link #getAvailableUserStores()
+     * .getSize()} > 1
      */
     boolean isShouldDisplayUserStoreDropdown();
 
@@ -85,16 +91,16 @@ public interface LoginPage extends Serializable {
      * Executes the login.
      *
      * @return String outcome, depending on the login-status. On successful login it
-     *         returns "home", in case of not successful login it returns null.
-     *         <em>Caution:</em> Implementations must support deep-linking, saying a
-     *         requested url must be called after successful login. This is usually
-     *         done by using the {@link HistoryManager}
+     * returns "home", in case of not successful login it returns null.
+     * <em>Caution:</em> Implementations must support deep-linking, saying a
+     * requested url must be called after successful login. This is usually
+     * done by using the {@link HistoryManager}
      */
     String login();
 
     /**
      * @return the string representing the component to be focused: either
-     *         "username" or "password"
+     * "username" or "password"
      */
     String getFocusComponent();
 

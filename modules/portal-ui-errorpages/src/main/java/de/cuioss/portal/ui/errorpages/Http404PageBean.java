@@ -31,7 +31,6 @@ import java.io.Serial;
  * Page Bean for the error-code 404 (Resource not found)
  *
  * @author Oliver Wolff
- *
  */
 @RequestScoped
 @Named

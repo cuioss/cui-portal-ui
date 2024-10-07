@@ -39,17 +39,20 @@ import java.io.Serial;
 @ToString(callSuper = true)
 public class AboutMenuItem extends PortalNavigationMenuItemSingleImpl {
 
+    /**
+     * The label Key for this component.
+     */
+    public static final String LABEL_KEY = "cui.commons.portal.menu.about.label";
+    /**
+     * The icon for this component.
+     */
+    public static final String ICON = "cui-icon-circle_question_mark";
+    /**
+     * The string-based id for this menu item.
+     */
+    public static final String MENU_ID = "aboutMenuItem";
     @Serial
     private static final long serialVersionUID = 1452093785009425867L;
-
-    /** The label Key for this component. */
-    public static final String LABEL_KEY = "cui.commons.portal.menu.about.label";
-
-    /** The icon for this component. */
-    public static final String ICON = "cui-icon-circle_question_mark";
-
-    /** The string-based id for this menu item. */
-    public static final String MENU_ID = "aboutMenuItem";
 
     /**
      * Constructor.

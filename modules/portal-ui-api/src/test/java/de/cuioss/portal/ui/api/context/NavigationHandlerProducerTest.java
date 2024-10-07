@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 @EnableJsfEnvironment
 @EnableAutoWeld
-@AddBeanClasses({ NavigationHandlerProducer.class, JsfObjectsProducer.class })
+@AddBeanClasses({NavigationHandlerProducer.class, JsfObjectsProducer.class})
 class NavigationHandlerProducerTest {
 
     @Inject

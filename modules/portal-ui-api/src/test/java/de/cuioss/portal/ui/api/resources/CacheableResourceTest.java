@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnableJsfEnvironment
 class CacheableResourceTest implements ShouldBeNotNull<CacheableResource>,
-    ShouldImplementEqualsAndHashCode<CacheableResource>, JsfEnvironmentConsumer {
+        ShouldImplementEqualsAndHashCode<CacheableResource>, JsfEnvironmentConsumer {
 
     @Setter
     @Getter

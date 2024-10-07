@@ -43,13 +43,13 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
     private static final String ROLE_ADMIN = "admin";
 
     private static final ViewDescriptor ANY_GUEST = new ViewDescriptorImpl("/guest/any.jsf", "/guest/any.xhtml",
-        Collections.emptyList());
+            Collections.emptyList());
 
     private static final ViewDescriptor ANY_CONTENT = new ViewDescriptorImpl("/content/any.jsf", "/content/any.xhtml",
-        Collections.emptyList());
+            Collections.emptyList());
 
     private static final ViewDescriptor ADMIN_CONTENT = new ViewDescriptorImpl("/content/admin.jsf",
-        "/content/admin.xhtml", Collections.emptyList());
+            "/content/admin.xhtml", Collections.emptyList());
 
     @Inject
     @Getter
@@ -89,7 +89,7 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
     @Test
     void shouldRestrictMultipleRoles() {
         configuration.update(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/",
-            VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/content/admin");
+                VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/content/admin");
 
         portalUserProducerMock.roles(immutableList(ROLE_CONTENT, ROLE_ADMIN));
 
@@ -108,14 +108,14 @@ class DefaultViewRestrictionManagerTest implements ShouldHandleObjectContracts<D
     @Test
     void shouldNotMatchRoleConfiguredDirectoryToAnyPage() {
         configuration.update(VIEW_ROLE_RESTRICTION_PREFIX + ROLE_ADMIN, "/content/admin/",
-            VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/");
+                VIEW_ROLE_RESTRICTION_PREFIX + ROLE_CONTENT, "/content/");
 
         ViewDescriptor pageMatchedToDirectoryPath = new ViewDescriptorImpl("faces/content/administrationPage.jsf",
-            "/content/administrationPage.xhtml", Collections.emptyList());
+                "/content/administrationPage.xhtml", Collections.emptyList());
 
         portalUserProducerMock.roles(immutableList(ROLE_CONTENT));
         assertEquals(1, underTest.getRequiredRolesForView(pageMatchedToDirectoryPath).size(),
-            "The role admin defines the restriction on directory which have to end with '/', it shouldn't matched to any page's name");
+                "The role admin defines the restriction on directory which have to end with '/', it shouldn't matched to any page's name");
         assertTrue(underTest.getRequiredRolesForView(pageMatchedToDirectoryPath).contains(ROLE_CONTENT));
 
         assertTrue(underTest.isUserAuthorized(pageMatchedToDirectoryPath));

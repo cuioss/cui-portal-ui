@@ -36,7 +36,7 @@ public interface LoginPageHistoryManagerProvider {
      * @param userStore used as default value
      * @param username  used as default value
      * @return option for {@linkplain LoginCredentials} extract from url parameter,
-     *         empty option if parameters are missing
+     * empty option if parameters are missing
      */
     Optional<LoginCredentials> extractFromDeepLinkingUrlParameter(final String userStore, final String username);
 

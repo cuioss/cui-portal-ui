@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ DefaultHistoryConfiguration.class, HistoryManagerBean.class, ViewMatcherProducer.class })
+@AddBeanClasses({DefaultHistoryConfiguration.class, HistoryManagerBean.class, ViewMatcherProducer.class})
 @ActivateScopes(ClientWindowScoped.class)
 class HistoryNavigationHandlerTest implements JsfEnvironmentConsumer {
 

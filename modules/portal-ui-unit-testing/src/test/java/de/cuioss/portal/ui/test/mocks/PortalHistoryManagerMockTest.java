@@ -31,12 +31,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class PortalHistoryManagerMockTest implements ShouldBeNotNull<PortalHistoryManagerMock> {
 
     public static final String CURRENT_VIEW_XHTML = "current/view.jsf";
-
+    public static final String OTHER_VIEW_XHTML = "current/other.jsf";
     private final ViewDescriptorImpl currentView = ViewDescriptorImpl.builder().withViewId(CURRENT_VIEW_XHTML)
             .withLogicalViewId(CURRENT_VIEW_XHTML).build();
-
-    public static final String OTHER_VIEW_XHTML = "current/other.jsf";
-
     private final ViewDescriptorImpl otherView = ViewDescriptorImpl.builder().withViewId(OTHER_VIEW_XHTML)
             .withLogicalViewId(OTHER_VIEW_XHTML).build();
 

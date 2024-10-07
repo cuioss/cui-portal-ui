@@ -96,7 +96,7 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
     }
 
     public void handleDescriptor(final Map<String, URL> builderMap, final StaticTemplateDescriptor descriptor,
-            final String resourceName) {
+                                 final String resourceName) {
         try {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getTemplatePath() + '/' + resourceName)
                     .getURL();

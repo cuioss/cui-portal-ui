@@ -74,23 +74,21 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @EnableGeneratorController
 public abstract class AbstractPageBeanTest<T extends Serializable>
-    implements JsfEnvironmentConsumer, ShouldBeNotNull<T>, GeneratorRegistry {
+        implements JsfEnvironmentConsumer, ShouldBeNotNull<T>, GeneratorRegistry {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractPageBeanTest.class);
-
+    @Inject
+    protected PortalTestConfiguration configuration;
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
-
-    @Inject
-    protected PortalTestConfiguration configuration;
 
     @Test
     protected void verifyBeanProperties() {
         logger.debug(() -> "Checking VerifyBeanProperty");
         if (AnnotationSupport.findAnnotation(getClass(), VerifyBeanProperty.class).isEmpty()) {
             logger.info(
-                () -> "In order to test Bean-Properties you need to annotate you test class with VerifyBeanProperty");
+                    () -> "In order to test Bean-Properties you need to annotate you test class with VerifyBeanProperty");
             return;
         }
 
@@ -107,7 +105,7 @@ public abstract class AbstractPageBeanTest<T extends Serializable>
         logger.debug(() -> "Using metadata " + metadata);
 
         Optional<TestContract<T>> contract = BeanPropertyContractImpl.createBeanPropertyTestContract(targetBeanClass,
-            getClass(), metadata);
+                getClass(), metadata);
         if (contract.isEmpty()) {
             logger.debug(() -> "No bean properties configured");
             TypedGeneratorRegistry.clear();
@@ -135,8 +133,8 @@ public abstract class AbstractPageBeanTest<T extends Serializable>
 
             var name = currentClass.getName();
             return name.startsWith(currentClass.getSuperclass().getName()) && (name.contains("$$") // CDI
-                || name.contains("_ClientProxy") // Quarkus
-                || name.contains("$HibernateProxy$")); // Hibernate
+                    || name.contains("_ClientProxy") // Quarkus
+                    || name.contains("$HibernateProxy$")); // Hibernate
         }
     }
 

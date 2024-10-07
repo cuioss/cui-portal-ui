@@ -38,33 +38,30 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({PortalClientStorageImpl.class, PortalLocaleProducerMock.class, ResourceBundleWrapper.class,
-    InstallationResourceBundleWrapperMock.class, ResourceBundleRegistry.class})
+        InstallationResourceBundleWrapperMock.class, ResourceBundleRegistry.class})
 class PortalClientStorageImplTest implements ShouldHandleObjectContracts<PortalClientStorageImpl> {
 
     private static final String testKey = "testKey";
-
+    @Produces
+    @CuiContextPath
+    String contextPath = "context";
     @Inject
     @PortalClientStorage
     @Getter
     private PortalClientStorageImpl underTest;
-
     @Inject
     private PortalTestConfiguration configuration;
 
-    @Produces
-    @CuiContextPath
-    String contextPath = "context";
-
     @Test
     @Disabled("""
-        org.apache.myfaces.test.mock.MockExternalContext20#addResponseCookie doesn't know the cookie key \
-         (myfaces-test23-1.0.8-sources.jar!/org/apache/myfaces/test/mock/MockExternalContext20.java:346)\
-        'httpOnly' added by 'omnifaces-3.1.jar!/org/omnifaces/util/FacesLocal.class:758' and throws \
-        an Exception therefore. \
-        See: https://issues.apache.org/jira/browse/MYFACESTEST-72\
-        deltaspike-jsf-module-api 1.8.1 uses myfaces-test20, see: \
-        deltaspike-jsf-module-api-1.8.1-sources.jar!/META-INF/maven/org.apache.deltaspike.modules/deltaspike-jsf-module-api/pom.xml:55\
-        So: omnifaces-3.1 doesn't go with myfaces-2.3""")
+            org.apache.myfaces.test.mock.MockExternalContext20#addResponseCookie doesn't know the cookie key \
+             (myfaces-test23-1.0.8-sources.jar!/org/apache/myfaces/test/mock/MockExternalContext20.java:346)\
+            'httpOnly' added by 'omnifaces-3.1.jar!/org/omnifaces/util/FacesLocal.class:758' and throws \
+            an Exception therefore. \
+            See: https://issues.apache.org/jira/browse/MYFACESTEST-72\
+            deltaspike-jsf-module-api 1.8.1 uses myfaces-test20, see: \
+            deltaspike-jsf-module-api-1.8.1-sources.jar!/META-INF/maven/org.apache.deltaspike.modules/deltaspike-jsf-module-api/pom.xml:55\
+            So: omnifaces-3.1 doesn't go with myfaces-2.3""")
     void testRoundTrip() {
         configuration.update(PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAX_AGE, "666");
 

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@VerifyConstructor(of = { "errorCode", "errorTicket", "errorMessage", "pageId" })
+@VerifyConstructor(of = {"errorCode", "errorTicket", "errorMessage", "pageId"})
 class DefaultErrorMessageTest extends ValueObjectTest<DefaultErrorMessage> {
 
     @Test

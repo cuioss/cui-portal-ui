@@ -27,7 +27,6 @@ import java.util.Map;
 
 /**
  * @author Oliver Wolff
- *
  */
 @RequiredArgsConstructor
 public class PortalNavigationMenuItemSeparatorImpl extends PortalNavigationMenuConfigParser

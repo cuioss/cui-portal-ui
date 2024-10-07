@@ -68,27 +68,22 @@ import static de.cuioss.tools.string.MoreStrings.isEmpty;
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @RequestScoped
 @Named("navigationMenuProvider")
-@EqualsAndHashCode(of = { "navigationMenuRoots" })
-@ToString(of = { "navigationMenuRoots" })
+@EqualsAndHashCode(of = {"navigationMenuRoots"})
+@ToString(of = {"navigationMenuRoots"})
 public class NavigationMenuProviderImpl implements NavigationMenuProvider {
 
     @Serial
     private static final long serialVersionUID = 8780699386708876208L;
     private static final CuiLogger LOGGER = new CuiLogger(NavigationMenuProviderImpl.class);
-
+    private final Map<String, List<NavigationMenuItem>> virtualParentContainer = new HashMap<>();
     @Inject
     @PortalMenuItem
     Instance<NavigationMenuItem> injectedItems;
-
     @Inject
     @ConfigAsFilteredMap(startsWith = MENU_BASE, stripPrefix = true)
     Map<String, String> menuConfig;
-
     @Getter
     private List<NavigationMenuItem> navigationMenuRoots = new ArrayList<>();
-
-    private final Map<String, List<NavigationMenuItem>> virtualParentContainer = new HashMap<>();
-
     /**
      * Defines all elements that are rendered.
      */
@@ -195,7 +190,7 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
     }
 
     private List<NavigationMenuItemContainer> createCombinedContainerList(final List<NavigationMenuItem> roots,
-            final List<NavigationMenuItem> noRoots) {
+                                                                          final List<NavigationMenuItem> noRoots) {
         final List<NavigationMenuItemContainer> result = new ArrayList<>();
         for (final NavigationMenuItem item : roots) {
             if (item instanceof NavigationMenuItemContainer container) {

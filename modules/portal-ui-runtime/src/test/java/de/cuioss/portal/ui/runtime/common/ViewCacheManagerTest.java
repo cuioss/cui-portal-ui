@@ -45,7 +45,6 @@ class ViewCacheManagerTest implements ShouldHandleObjectContracts<ViewCacheManag
     private Event<PageRefreshEvent> event;
 
     @Test
-
     void testReset() {
         CacheFactory.getCache(getFacesContext(), "session").put("header", "<h1>Header</h1>");
         assertNotNull(CacheFactory.getCache(getFacesContext(), "session").get("header"));

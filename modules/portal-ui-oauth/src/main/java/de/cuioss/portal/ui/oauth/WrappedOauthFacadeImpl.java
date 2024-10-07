@@ -47,17 +47,13 @@ import java.util.Map;
 @PortalWrappedOauthFacade
 public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
 
+    static final String MESSAGES_IDENTIFIER = "oauthMessages";
     private static final CuiLogger log = new CuiLogger(WrappedOauthFacadeImpl.class);
-
     /**
      * Attribute name for the target view id to be stored in the session.
      */
     private static final String VIEW_IDENTIFIER = "oauthViewIdentifier";
-
     private static final String PARAMETER_IDENTIFIER = "oauthViewparameter";
-
-    static final String MESSAGES_IDENTIFIER = "oauthMessages";
-
     private static final String MESSAGE_GET_ATTRIBUTE_FAILED = "session.getAttribute failed";
 
     @Inject
@@ -109,7 +105,7 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
 
     @Override
     public void handleMissingScopesException(MissingScopesException e, String initialScopes,
-            Map<String, Serializable> parameters) {
+                                             Map<String, Serializable> parameters) {
         log.trace(e, "handleMissingScopesException {}", initialScopes);
         var request = servletRequestProvider.get();
         request.getSession().setAttribute(PARAMETER_IDENTIFIER, new HashMap<>(parameters));

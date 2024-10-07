@@ -41,7 +41,6 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
  * Gathers all lifecycle-information regarding tracing of certain Phases.
  *
  * @author Oliver Wolff
- *
  */
 @RequestScoped
 public class RequestTracer implements Serializable {
@@ -54,14 +53,10 @@ public class RequestTracer implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 2706209506496310554L;
-
-    private final Map<Integer, PhaseTracer> tracerMap = new HashMap<>();
-
-    private final PhaseTracer complete = new PhaseTracer(PhaseId.ANY_PHASE);
-
     private static final String METRIC_ID_PHASE = "jsf.view.phase";
     private static final String METRIC_ID_TOTAL = "jsf.view.total";
-
+    private final Map<Integer, PhaseTracer> tracerMap = new HashMap<>();
+    private final PhaseTracer complete = new PhaseTracer(PhaseId.ANY_PHASE);
     @Inject
     @CuiCurrentView
     private Provider<ViewDescriptor> currentViewProvider;

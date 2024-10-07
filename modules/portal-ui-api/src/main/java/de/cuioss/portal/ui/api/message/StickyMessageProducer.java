@@ -89,7 +89,7 @@ public interface StickyMessageProducer {
 
     /**
      * @return {@code true} if at least one message is available, {@code false}
-     *         otherwise
+     * otherwise
      */
     default boolean isAnyMessageAvailable() {
         return !getMessages().isEmpty();

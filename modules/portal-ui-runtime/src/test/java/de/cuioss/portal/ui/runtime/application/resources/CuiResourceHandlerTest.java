@@ -46,28 +46,37 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @EnablePortalConfiguration(configuration = RESOURCE_VERSION + ":1.0")
 class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
 
+    private static final String CSS_LIBRARY = "de.cuioss.portal.css";
+    private static final String STYLE_CSS = "style.css";
+    private static final String STYLE_MIN_CSS = "style.min.css";
+    private static final String ANY_UNKNOWN_JPG = "any_unknown.jpg";
+    private static final String ALIEN_LIB = "alien_lib";
+    private static final String APPLICATION_CSS = "application.css";
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
-
-    private static final String CSS_LIBRARY = "de.cuioss.portal.css";
-
-    private static final String STYLE_CSS = "style.css";
-
-    private static final String STYLE_MIN_CSS = "style.min.css";
-
-    private static final String ANY_UNKNOWN_JPG = "any_unknown.jpg";
-
-    private static final String ALIEN_LIB = "alien_lib";
-
-    private static final String APPLICATION_CSS = "application.css";
-
     @Inject
     private PortalTestConfiguration configuration;
 
     private CuiResourceHandler underTest;
 
     private CuiMockResourceHandler mockResourceHandler;
+
+    private static CuiMockResource prepareResource(String name, String lib) {
+        return prepareResource(name, lib, null);
+    }
+
+    private static CuiMockResource prepareResource(String name, String lib, String versionInfo) {
+        var mockResource = new CuiMockResource();
+        mockResource.setResourceName(name);
+        mockResource.setLibraryName(lib);
+        if (MoreStrings.isBlank(versionInfo)) {
+            mockResource.setRequestPath("/jakarta.faces.resource/" + name + "?ln=" + lib);
+        } else {
+            mockResource.setRequestPath("/jakarta.faces.resource/" + name + "?ln=" + lib + "&v=" + versionInfo);
+        }
+        return mockResource;
+    }
 
     @BeforeEach
     void setUpHandlerTest() {
@@ -85,22 +94,6 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
                 prepareResource(APPLICATION_CSS, CSS_LIBRARY, "1.0.0"));
         availableResources.put("alien_lib-any_unknown.jpg", prepareResource(ANY_UNKNOWN_JPG, ALIEN_LIB));
         mockResourceHandler.setAvailableResouces(availableResources);
-    }
-
-    private static CuiMockResource prepareResource(String name, String lib) {
-        return prepareResource(name, lib, null);
-    }
-
-    private static CuiMockResource prepareResource(String name, String lib, String versionInfo) {
-        var mockResource = new CuiMockResource();
-        mockResource.setResourceName(name);
-        mockResource.setLibraryName(lib);
-        if (MoreStrings.isBlank(versionInfo)) {
-            mockResource.setRequestPath("/jakarta.faces.resource/" + name + "?ln=" + lib);
-        } else {
-            mockResource.setRequestPath("/jakarta.faces.resource/" + name + "?ln=" + lib + "&v=" + versionInfo);
-        }
-        return mockResource;
     }
 
     @Test

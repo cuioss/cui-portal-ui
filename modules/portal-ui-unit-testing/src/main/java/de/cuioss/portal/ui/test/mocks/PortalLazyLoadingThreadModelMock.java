@@ -31,9 +31,8 @@ import lombok.Setter;
 import java.io.Serial;
 
 /**
- * @author Oliver Wolff
  * @param <T>
- *
+ * @author Oliver Wolff
  */
 @Dependent
 public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadModel<T> {

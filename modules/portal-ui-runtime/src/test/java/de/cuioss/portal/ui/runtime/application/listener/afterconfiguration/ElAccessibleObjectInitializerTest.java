@@ -25,7 +25,7 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 
 @EnableAutoWeld
-@AddBeanClasses({ PortalViewMapper.class, PortalProjectStageImpl.class })
+@AddBeanClasses({PortalViewMapper.class, PortalProjectStageImpl.class})
 class ElAccessibleObjectInitializerTest implements ShouldBeNotNull<ElAccessibleObjectInitializer> {
 
     @Getter

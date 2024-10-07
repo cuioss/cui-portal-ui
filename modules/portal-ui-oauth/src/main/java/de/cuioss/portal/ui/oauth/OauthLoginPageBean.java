@@ -86,6 +86,7 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
     private Oauth2Configuration oauth2Configuration;
 
     private boolean doRedirectOnFailure;
+    private String loginTarget;
 
     /**
      * Initialize the bean and check the configuration.
@@ -124,8 +125,6 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
         doRedirectOnFailure = true;
         return loginAction(() -> targetView, ServletAdapterUtil.getRequest(facesContext), facesContext);
     }
-
-    private String loginTarget;
 
     /**
      * @return The oauth2 login url.

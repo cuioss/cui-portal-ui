@@ -60,36 +60,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @EnablePortalUiEnvironment
 @EnableTestLogger
 @AddBeanClasses({CurrentViewProducer.class, NavigationHandlerProducer.class, HistoryManagerBean.class,
-    DefaultHistoryConfiguration.class, ViewMatcherProducer.class})
+        DefaultHistoryConfiguration.class, ViewMatcherProducer.class})
 @ActivateScopes(ClientWindowScoped.class)
 class ViewRelatedExceptionHandlerTest
-    implements ShouldHandleObjectContracts<ViewRelatedExceptionHandler>, JsfEnvironmentConsumer {
+        implements ShouldHandleObjectContracts<ViewRelatedExceptionHandler>, JsfEnvironmentConsumer {
 
+    static final ViewDescriptor DESCRIPTOR_SUPRRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")
+            .withLogicalViewId("suppressedViewId").build();
     private static final String WARNING_KEY_PORTAL_002 = "Portal-103";
-
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
-
     @Inject
     private PortalTestUserProducer portalUserProducerMock;
-
     @Inject
     @Getter
     private ViewRelatedExceptionHandler underTest;
-
     @Inject
     private HistoryManager historyManagerMock;
-
     @Inject
     private MessageProducerMock messageProducerMock;
-
     @Inject
     @PortalViewRestrictionManager
     private PortalViewRestrictionManagerMock viewRestrictionManagerMock;
-
-    static final ViewDescriptor DESCRIPTOR_SUPRRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")
-        .withLogicalViewId("suppressedViewId").build();
 
     @Test
     void shouldHandleViewSuppressedExceptionForLoggedInUser() {
@@ -144,8 +137,8 @@ class ViewRelatedExceptionHandlerTest
     @Test
     void shouldHandleNotAuthorizedExceptionWithRedirectToHome() {
         final var event = new ExceptionAsEvent(
-            new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
-                Collections.emptyList(), Collections.emptyList()));
+                new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
+                        Collections.emptyList(), Collections.emptyList()));
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
 
         underTest.handle(event);
@@ -155,7 +148,7 @@ class ViewRelatedExceptionHandlerTest
         assertTrue(event.isHandled());
         assertRedirect(VIEW_HOME_LOGICAL_VIEW_ID);
         messageProducerMock
-            .assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_INSUFFICIENT_PERMISSIONS_KEY);
+                .assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_INSUFFICIENT_PERMISSIONS_KEY);
     }
 
     @Test
@@ -164,8 +157,8 @@ class ViewRelatedExceptionHandlerTest
         viewRestrictionManagerMock.setAuthorized(false);
 
         final var event = new ExceptionAsEvent(
-            new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
-                Collections.emptyList(), Collections.emptyList()));
+                new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
+                        Collections.emptyList(), Collections.emptyList()));
         getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
 
         underTest.handle(event);
@@ -175,7 +168,7 @@ class ViewRelatedExceptionHandlerTest
 
         assertRedirect(VIEW_LOGOUT_LOGICAL_VIEW_ID);
         messageProducerMock
-            .assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_INSUFFICIENT_PERMISSIONS_KEY);
+                .assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_INSUFFICIENT_PERMISSIONS_KEY);
     }
 
     @Test

@@ -76,11 +76,10 @@ public abstract class AbstractLoginPageBean implements Serializable {
      *                       successful login and fire of the userChangeEvent.
      * @param servletRequest the current servlet request
      * @param facesContext
-     *
      * @return
      */
     protected String loginAction(final Supplier<ViewIdentifier> targetSupplier, final HttpServletRequest servletRequest,
-            final FacesContext facesContext) {
+                                 final FacesContext facesContext) {
         final var loginResult = doLogin(servletRequest);
 
         if (!loginResult.isValid()) {
@@ -124,10 +123,9 @@ public abstract class AbstractLoginPageBean implements Serializable {
      * Trigger the login request to the authentication backend.
      *
      * @param servletRequest the current {@link HttpServletRequest}
-     *
      * @return an {@link AuthenticatedUserInfo} that may either be authenticated or
-     *         unauthenticated. Must never be null! It should always provide the
-     *         username as identifier, even at failed login attempts!
+     * unauthenticated. Must never be null! It should always provide the
+     * username as identifier, even at failed login attempts!
      */
     protected abstract ResultObject<AuthenticatedUserInfo> doLogin(HttpServletRequest servletRequest);
 

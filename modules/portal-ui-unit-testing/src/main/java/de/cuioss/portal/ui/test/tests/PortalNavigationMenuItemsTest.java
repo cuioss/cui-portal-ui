@@ -61,8 +61,8 @@ public class PortalNavigationMenuItemsTest {
 
     /**
      * @return a filtered {@link List} of {@link NavigationMenuItem} containing all
-     *         injected {@link NavigationMenuItem} annotated with
-     *         {@link PortalMenuItem} and not being vetoed by {@link VetoType}
+     * injected {@link NavigationMenuItem} annotated with
+     * {@link PortalMenuItem} and not being vetoed by {@link VetoType}
      */
     public List<NavigationMenuItem> getFilteredInstances() {
         Optional<VetoType> vetoAnnotationOptional = MoreReflection.extractAnnotation(this.getClass(), VetoType.class);

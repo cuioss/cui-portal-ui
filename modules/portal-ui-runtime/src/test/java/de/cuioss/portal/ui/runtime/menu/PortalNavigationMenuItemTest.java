@@ -24,7 +24,7 @@ import de.cuioss.portal.ui.test.tests.PortalNavigationMenuItemsTest;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ AboutMenuItem.class, AccountMenuItem.class, LogoutMenuItem.class, PreferencesMenuItem.class })
+@AddBeanClasses({AboutMenuItem.class, AccountMenuItem.class, LogoutMenuItem.class, PreferencesMenuItem.class})
 class PortalNavigationMenuItemTest extends PortalNavigationMenuItemsTest {
 
 }

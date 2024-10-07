@@ -60,7 +60,7 @@ public class CachedCustomizationResource extends CacheableResource {
         super.setContentType(resource.getContentType());
         eTag = resource.getETag();
         responseHeaders = resource.getResponseHeaders();
-        byte[] resourceContent = { 0 };
+        byte[] resourceContent = {0};
         IOException exceptionOccursOnRead = null;
         try {
             resourceContent = IOStreams.toByteArray(resource.getInputStream());

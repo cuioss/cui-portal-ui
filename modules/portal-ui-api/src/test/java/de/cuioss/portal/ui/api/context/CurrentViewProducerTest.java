@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnableJsfEnvironment
 @EnableAutoWeld
-@AddBeanClasses({ CurrentViewProducer.class })
+@AddBeanClasses({CurrentViewProducer.class})
 class CurrentViewProducerTest implements ShouldBeNotNull<ViewDescriptor> {
 
     @Inject

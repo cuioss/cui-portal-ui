@@ -30,8 +30,8 @@ public interface MultiTemplatingMapper extends Serializable {
      *                          e.g. root.xhtml or subdirectory/component.xhtml
      *                          without the technical path segments
      * @return an instance of a {@link URL} to access the prefixed resource either
-     *         as external file or as classpath resource, e.g. portal/root.xhtml or
-     *         portal/subdirectory/component.xhtml respectively
+     * as external file or as classpath resource, e.g. portal/root.xhtml or
+     * portal/subdirectory/component.xhtml respectively
      */
     URL resolveTemplatePath(String requestedResource);
 }

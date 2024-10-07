@@ -23,15 +23,14 @@ import java.io.Serial;
 @PortalMenuItem
 public class EmptyNavigationContainer extends PortalNavigationMenuItemContainerImpl {
 
+    public static final String LABEL_KEY = "portal.runtime.configuration.settings.menu.label";
+    public static final String ICON = "cui-icon-settings";
+    /**
+     * The string based id for this menu item.
+     */
+    public static final String MENU_ID = "emptyMenuItem";
     @Serial
     private static final long serialVersionUID = 5073024579976343083L;
-
-    public static final String LABEL_KEY = "portal.runtime.configuration.settings.menu.label";
-
-    public static final String ICON = "cui-icon-settings";
-
-    /** The string based id for this menu item. */
-    public static final String MENU_ID = "emptyMenuItem";
 
     public EmptyNavigationContainer() {
         super.setIconStyleClass(ICON);

@@ -23,7 +23,7 @@ import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ NavigationMenuProviderImpl.class, PortalTestUserProducer.class })
+@AddBeanClasses({NavigationMenuProviderImpl.class, PortalTestUserProducer.class})
 class NavigationMenuPageBeanTest extends AbstractPageBeanTest<NavigationMenuPageBean> {
 
     @Inject

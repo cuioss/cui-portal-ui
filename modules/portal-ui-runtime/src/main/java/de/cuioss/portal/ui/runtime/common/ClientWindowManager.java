@@ -42,13 +42,11 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESS
 @ToString(of = "maxInactiveInterval", doNotUseGetters = true)
 public class ClientWindowManager implements Serializable {
 
-    private static final CuiLogger LOGGER = new CuiLogger(ClientWindowManager.class);
-
     /**
      * Bean name for looking up instances using EL.
      */
     public static final String BEAN_NAME = "clientWindowManager";
-
+    private static final CuiLogger LOGGER = new CuiLogger(ClientWindowManager.class);
     @Serial
     private static final long serialVersionUID = 8603571267932838043L;
 
@@ -72,7 +70,7 @@ public class ClientWindowManager implements Serializable {
 
     /**
      * @return the interval to be used for determining after which time the
-     *         corresponding window should show the timeout-popup
+     * corresponding window should show the timeout-popup
      */
     public int getMaxInactiveInterval() {
         if (maxInactiveInterval > -1) {

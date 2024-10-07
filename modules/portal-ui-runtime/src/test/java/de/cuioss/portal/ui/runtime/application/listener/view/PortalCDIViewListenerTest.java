@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ CurrentViewProducer.class, AfterViewListener.class })
+@AddBeanClasses({CurrentViewProducer.class, AfterViewListener.class})
 class PortalCDIViewListenerTest
         implements ShouldHandleObjectContracts<PortalCDIViewListener>, JsfEnvironmentConsumer, RequestConfigurator {
 

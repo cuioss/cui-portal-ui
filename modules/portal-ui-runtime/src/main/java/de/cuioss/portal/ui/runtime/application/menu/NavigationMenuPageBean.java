@@ -38,8 +38,8 @@ import java.util.List;
  */
 @Named("navigationMenuPageBean")
 @RequestScoped
-@EqualsAndHashCode(of = { "displayMenu", "navigationMenuItems" })
-@ToString(of = { "displayMenu", "navigationMenuItems" })
+@EqualsAndHashCode(of = {"displayMenu", "navigationMenuItems"})
+@ToString(of = {"displayMenu", "navigationMenuItems"})
 public class NavigationMenuPageBean implements Serializable {
 
     @Serial

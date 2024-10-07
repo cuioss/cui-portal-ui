@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalSessionStorageMock.class, MessageProducerBean.class })
+@AddBeanClasses({PortalSessionStorageMock.class, MessageProducerBean.class})
 class OauthExceptionHandlerTest implements ShouldBeSerializable<OauthExceptionHandler> {
 
     @Inject

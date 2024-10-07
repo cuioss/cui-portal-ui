@@ -27,7 +27,6 @@ import java.util.List;
 
 /**
  * @author Oliver Wolff
- *
  */
 @EqualsAndHashCode(callSuper = true)
 public class PortalNavigationMenuItemContainerImpl extends PortalNavigationMenuItemImplBase

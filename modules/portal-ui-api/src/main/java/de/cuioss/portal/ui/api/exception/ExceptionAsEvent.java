@@ -31,12 +31,10 @@ public class ExceptionAsEvent implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -1422214652443353900L;
-
-    @Getter
-    private HandleOutcome outcome;
-
     @Getter
     private final Throwable exception;
+    @Getter
+    private HandleOutcome outcome;
 
     public ExceptionAsEvent(Throwable exception) {
         this.exception = exception;
@@ -56,7 +54,7 @@ public class ExceptionAsEvent implements Serializable {
 
     /**
      * @return boolean indicating whether the contained exception was already
-     *         handled
+     * handled
      */
     public boolean isHandled() {
         return HandleOutcome.NO_OP != outcome;

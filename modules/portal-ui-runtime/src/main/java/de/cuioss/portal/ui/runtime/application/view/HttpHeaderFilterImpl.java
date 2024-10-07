@@ -69,6 +69,18 @@ public class HttpHeaderFilterImpl {
 
     private List<HttpHeader> headerList;
 
+    private static ViewMatcher createViewMatcher(final String value) {
+        if (MoreStrings.isEmpty(value)) {
+            return new EmptyViewMatcher(false);
+        }
+        return new ViewMatcherImpl(Splitter.on(PortalConfigurationKeys.CONTEXT_PARAM_SEPARATOR).trimResults()
+                .omitEmptyStrings().splitToList(value));
+    }
+
+    private static HttpHeader getOrCreateHeader(final String key, final Map<String, HttpHeader> headerMap) {
+        return headerMap.computeIfAbsent(key, v -> new HttpHeader());
+    }
+
     @PostConstruct
     public void initialize() {
 
@@ -87,7 +99,7 @@ public class HttpHeaderFilterImpl {
                 switch (split.get(1).toLowerCase(Locale.ROOT)) {
                     case "enabled":
                         getOrCreateHeader(split.get(0), headerMap)
-                            .setEnabled(Boolean.parseBoolean(entry.getValue().trim()));
+                                .setEnabled(Boolean.parseBoolean(entry.getValue().trim()));
                         break;
                     case "views":
                         getOrCreateHeader(split.get(0), headerMap).setViewMatcher(createViewMatcher(entry.getValue()));
@@ -110,19 +122,6 @@ public class HttpHeaderFilterImpl {
         }
         headerList = headerMap.values().stream().filter(HttpHeader::isEnabled).sorted().toList();
     }
-
-    private static ViewMatcher createViewMatcher(final String value) {
-        if (MoreStrings.isEmpty(value)) {
-            return new EmptyViewMatcher(false);
-        }
-        return new ViewMatcherImpl(Splitter.on(PortalConfigurationKeys.CONTEXT_PARAM_SEPARATOR).trimResults()
-            .omitEmptyStrings().splitToList(value));
-    }
-
-    private static HttpHeader getOrCreateHeader(final String key, final Map<String, HttpHeader> headerMap) {
-        return headerMap.computeIfAbsent(key, v -> new HttpHeader());
-    }
-
 
     /**
      * Add headers if view matches any defined httpHeader rule

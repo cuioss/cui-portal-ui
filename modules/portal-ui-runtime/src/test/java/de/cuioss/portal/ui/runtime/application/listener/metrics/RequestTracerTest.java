@@ -38,8 +38,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @EnablePortalUiEnvironment
 @EnableTestLogger(trace = RequestTracer.class)
 @AddBeanClasses(PortalTestMetricRegistry.class)
-@EnablePortalConfiguration(configuration = { PORTAL_METRICS_ENABLED + ":true",
-        PORTAL_LISTENER_TRACE_ENABLED + ":true" })
+@EnablePortalConfiguration(configuration = {PORTAL_METRICS_ENABLED + ":true",
+        PORTAL_LISTENER_TRACE_ENABLED + ":true"})
 class RequestTracerTest implements ShouldBeNotNull<RequestTracer> {
 
     @Inject

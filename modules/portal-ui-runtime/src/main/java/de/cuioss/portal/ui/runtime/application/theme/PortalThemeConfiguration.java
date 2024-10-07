@@ -15,23 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.application.theme;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_AVAILABLE;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_DEFAULT;
+import de.cuioss.portal.configuration.types.ConfigAsList;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-
-import jakarta.annotation.PostConstruct;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import de.cuioss.portal.configuration.types.ConfigAsList;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_AVAILABLE;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_DEFAULT;
 
 /**
  * Reads default-theme and available themes
@@ -40,21 +38,30 @@ import lombok.ToString;
  * @author Oliver Wolff
  */
 @ApplicationScoped
-@EqualsAndHashCode(of = { "availableThemes", "defaultTheme" }, doNotUseGetters = true)
-@ToString(of = { "availableThemes", "defaultTheme" }, doNotUseGetters = true)
+@EqualsAndHashCode(of = {"availableThemes", "defaultTheme"}, doNotUseGetters = true)
+@ToString(of = {"availableThemes", "defaultTheme"}, doNotUseGetters = true)
 public class PortalThemeConfiguration implements Serializable {
 
+    /**
+     * The name of the css to be looked for. Caution: it is assumed to end with
+     * ".css". The portal/styling assumes the name to be 'application.css'
+     */
+    public static final String CSS_NAME = "application.css";
+    /**
+     * The name of the library where the css files are located in. The portal
+     * styling assumes 'de.cuioss.portal.css'
+     */
+    public static final String CSS_LIBRARY = "de.cuioss.portal.css";
     @Serial
     private static final long serialVersionUID = 3077568114159593192L;
-
     private ThemeManager themeManager;
-
-    /** The (configured) list of available themes. */
+    /**
+     * The (configured) list of available themes.
+     */
     @Inject
     @ConfigAsList(name = THEME_AVAILABLE)
     @Getter
     private List<String> availableThemes;
-
     /**
      * the (configured default theme). It must be one of
      * {@link #getAvailableThemes()}
@@ -63,18 +70,6 @@ public class PortalThemeConfiguration implements Serializable {
     @ConfigProperty(name = THEME_DEFAULT)
     @Getter
     private String defaultTheme;
-
-    /**
-     * The name of the css to be looked for. Caution: it is assumed to end with
-     * ".css". The portal/styling assumes the name to be 'application.css'
-     */
-    public static final String CSS_NAME = "application.css";
-
-    /**
-     * The name of the library where the css files are located in. The portal
-     * styling assumes 'de.cuioss.portal.css'
-     */
-    public static final String CSS_LIBRARY = "de.cuioss.portal.css";
 
     /**
      * Initializes the bean, see class documentation for details

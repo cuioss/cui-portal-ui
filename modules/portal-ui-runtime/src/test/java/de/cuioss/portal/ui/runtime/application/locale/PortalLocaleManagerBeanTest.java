@@ -35,8 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalLocaleResolverServiceMock.class })
-@EnableAlternatives({ PortalLocaleResolverServiceMock.class })
+@AddBeanClasses({PortalLocaleResolverServiceMock.class})
+@EnableAlternatives({PortalLocaleResolverServiceMock.class})
 @ExcludeBeanClasses(PortalLocaleProducerMock.class)
 class PortalLocaleManagerBeanTest implements ShouldHandleObjectContracts<PortalLocaleManagerBean> {
 

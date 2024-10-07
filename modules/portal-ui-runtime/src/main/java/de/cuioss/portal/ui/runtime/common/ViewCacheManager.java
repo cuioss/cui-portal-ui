@@ -53,6 +53,8 @@ public class ViewCacheManager implements Serializable {
     @Inject
     @ConfigProperty(name = ENABLE_CACHE)
     boolean enabled;
+    @Inject
+    Provider<FacesContext> contextProvider;
 
     /**
      * @return boolean indicating whether the cache is disabled by configuration
@@ -60,9 +62,6 @@ public class ViewCacheManager implements Serializable {
     public boolean isDisabled() {
         return !enabled;
     }
-
-    @Inject
-    Provider<FacesContext> contextProvider;
 
     /**
      * Reset the cache when the authenticated user was changed during the session

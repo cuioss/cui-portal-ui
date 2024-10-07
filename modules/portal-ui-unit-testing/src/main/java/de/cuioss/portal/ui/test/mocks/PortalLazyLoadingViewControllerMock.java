@@ -25,7 +25,6 @@ import java.util.List;
 
 /**
  * @author Oliver Wolff
- *
  */
 @ApplicationScoped
 public class PortalLazyLoadingViewControllerMock implements LazyLoadingViewController {

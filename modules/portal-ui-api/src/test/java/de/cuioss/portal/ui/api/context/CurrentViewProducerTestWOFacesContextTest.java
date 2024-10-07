@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnableAutoWeld
-@AddBeanClasses({ CurrentViewProducer.class })
+@AddBeanClasses({CurrentViewProducer.class})
 class CurrentViewProducerTestWOFacesContextTest {
 
     @Inject

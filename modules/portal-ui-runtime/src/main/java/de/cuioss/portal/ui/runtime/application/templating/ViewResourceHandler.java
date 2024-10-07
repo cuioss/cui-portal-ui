@@ -47,12 +47,23 @@ public class ViewResourceHandler extends ResourceHandlerWrapper {
     private static final CuiLogger LOGGER = new CuiLogger(ViewResourceHandler.class);
 
     private static final String RESOURCE_PREFIX_TEMPLATES = "/templates/";
-
-    private MultiTemplatingMapper multiTemplatingMapper;
-
     @Getter
     @NonNull
     private final ResourceHandler wrapped;
+    private MultiTemplatingMapper multiTemplatingMapper;
+
+    private static String removePrefix(final String resourceName) {
+        List<String> list = mutableList(Splitter.on("/").omitEmptyStrings().splitToList(resourceName));
+        if (list.size() < 2) {
+            throw new IllegalStateException(
+                    "Expected identifier in form of '/templates/xyz.xhtml', actually: " + resourceName);
+        }
+        return Joiner.on('/').join(list.subList(1, list.size()));
+    }
+
+    private static boolean shouldHandleResource(final String resourceName) {
+        return nullToEmpty(resourceName).startsWith(RESOURCE_PREFIX_TEMPLATES);
+    }
 
     @Override
     public ViewResource createViewResource(final FacesContext context, final String resourceName) {
@@ -88,18 +99,5 @@ public class ViewResourceHandler extends ResourceHandlerWrapper {
                     .resolveBeanOrThrowIllegalStateException(MultiTemplatingMapper.class, PortalMultiTemplatingMapper.class);
         }
 
-    }
-
-    private static String removePrefix(final String resourceName) {
-        List<String> list = mutableList(Splitter.on("/").omitEmptyStrings().splitToList(resourceName));
-        if (list.size() < 2) {
-            throw new IllegalStateException(
-                    "Expected identifier in form of '/templates/xyz.xhtml', actually: " + resourceName);
-        }
-        return Joiner.on('/').join(list.subList(1, list.size()));
-    }
-
-    private static boolean shouldHandleResource(final String resourceName) {
-        return nullToEmpty(resourceName).startsWith(RESOURCE_PREFIX_TEMPLATES);
     }
 }

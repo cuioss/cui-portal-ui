@@ -43,7 +43,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * bundles you can add {@link EnableResourceBundleSupport} as well
  *
  * @author Oliver Wolff
- *
  */
 @Documented
 @Retention(RUNTIME)
@@ -52,7 +51,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @EnablePortalConfiguration
 @EnableJsfEnvironment
 @JsfTestConfiguration(BasicApplicationConfiguration.class)
-@AddBeanClasses({ PortalProjectStageImpl.class })
-@ActivateScopes({ RequestScoped.class, SessionScoped.class, ConversationScoped.class, ViewScoped.class })
+@AddBeanClasses({PortalProjectStageImpl.class})
+@ActivateScopes({RequestScoped.class, SessionScoped.class, ConversationScoped.class, ViewScoped.class})
 public @interface EnablePortalCoreEnvironment {
 }

@@ -63,14 +63,11 @@ public class DefaultViewRestrictionManager implements ViewRestrictionManager {
     @Inject
     @ConfigAsFilteredMap(startsWith = VIEW_ROLE_RESTRICTION_PREFIX, stripPrefix = true)
     Provider<Map<String, String>> viewRestrictions;
-
-    private Map<String, ViewMatcher> roleMatcherMap;
-
     @Inject
     AuthenticatedUserInfo userInfo;
-
     @Inject
     Provider<FacesContext> facesContextProvider;
+    private Map<String, ViewMatcher> roleMatcherMap;
 
     /**
      * Initializes the configured view Matcher

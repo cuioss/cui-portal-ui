@@ -96,7 +96,7 @@ public class ViewConfiguration implements Serializable {
         nonSecuredViewMatcher = nonSecuredViewMatcherProvider.get();
         if (nonSecuredViewMatcher instanceof EmptyViewMatcher) {
             log.warn("The configuration of " + NON_SECURED_VIEWS
-                + " results in all views of the application being only accessible for authorized user. If this is intentional you can ignore this warning");
+                    + " results in all views of the application being only accessible for authorized user. If this is intentional you can ignore this warning");
         }
         transientViewMatcher = transientViewMatcherProvider.get();
         suppressedViewMatcher = suppressedViewMatcherProvider.get();

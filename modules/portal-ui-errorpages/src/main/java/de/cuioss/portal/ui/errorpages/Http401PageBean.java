@@ -32,7 +32,6 @@ import java.io.Serializable;
  * Page Bean for the error-code 401 (the request requires HTTP authentication)
  *
  * @author Oliver Wolff
- *
  */
 @RequestScoped
 @Named

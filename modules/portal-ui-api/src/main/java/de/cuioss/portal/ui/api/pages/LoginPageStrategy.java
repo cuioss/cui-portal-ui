@@ -23,12 +23,13 @@ import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 
 /**
  * @author Oliver Wolff
- *
  */
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum LoginPageStrategy {
 
-    /** Defines that the login-page should redirect to home. */
+    /**
+     * Defines that the login-page should redirect to home.
+     */
     GOTO_HOME("goto_home"),
 
     /**
@@ -46,7 +47,6 @@ public enum LoginPageStrategy {
      * @param loginPageStrategyName must not be null and represent an instance of
      *                              {@link LoginPageStrategy#values()}
      * @return the found {@link LoginPageStrategy}
-     *
      * @throws IllegalArgumentException if no strategy can be found
      */
     public static LoginPageStrategy getFromString(final String loginPageStrategyName) {

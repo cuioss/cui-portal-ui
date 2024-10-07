@@ -34,8 +34,8 @@ public interface WrappedOauthFacade {
      * server.
      *
      * @return the accessToken is available, otherwise null is returned, a redirect
-     *         to the oauth server is issued, and the page is accessed a second
-     *         time.
+     * to the oauth server is issued, and the page is accessed a second
+     * time.
      */
     String retrieveToken();
 
@@ -45,8 +45,8 @@ public interface WrappedOauthFacade {
      *
      * @param scopes the scopes as space separated list.
      * @return the accessToken is available, otherwise null is returned, a redirect
-     *         to the oauth server is issued, and the page is accessed a second
-     *         time.
+     * to the oauth server is issued, and the page is accessed a second
+     * time.
      */
     String retrieveToken(String scopes);
 
@@ -70,7 +70,7 @@ public interface WrappedOauthFacade {
      *                       redirect
      */
     void handleMissingScopesException(MissingScopesException e, String initialScopes,
-            Map<String, Serializable> viewParameters);
+                                      Map<String, Serializable> viewParameters);
 
     /**
      * Retrieve the view parameters stored by

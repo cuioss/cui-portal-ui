@@ -23,7 +23,7 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 
 @EnableAutoWeld
-@AddBeanClasses({ JsfObjectsProducer.class })
+@AddBeanClasses({JsfObjectsProducer.class})
 @EnableJsfEnvironment
 @EnablePortalConfiguration
 class PortalNavigationMenuItemExternalSingleImplTest

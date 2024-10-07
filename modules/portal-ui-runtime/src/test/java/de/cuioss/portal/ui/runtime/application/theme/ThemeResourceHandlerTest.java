@@ -28,20 +28,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalThemeConfiguration.class, PortalClientStorageMock.class, UserThemeBean.class })
+@AddBeanClasses({PortalThemeConfiguration.class, PortalClientStorageMock.class, UserThemeBean.class})
 class ThemeResourceHandlerTest implements ShouldBeNotNull<ThemeResourceHandler>, JsfEnvironmentConsumer {
-
-    @Getter
-    private ThemeResourceHandler underTest;
-
-    private ResourceHandlerMock resourceHandlerMock;
 
     private static final String LIBRARY_NAME = "de.cuioss.portal.css";
     private static final String OTHER_LIBRARY_NAME = "de.cuioss.portal.other";
-
     private static final String STYLE_CSS = "application.css";
-
     private static final String STYLE_OTHER = "other.css";
+    @Getter
+    private ThemeResourceHandler underTest;
+    private ResourceHandlerMock resourceHandlerMock;
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;

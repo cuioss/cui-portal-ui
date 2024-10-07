@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalThemeConfiguration.class, PortalClientStorageMock.class })
+@AddBeanClasses({PortalThemeConfiguration.class, PortalClientStorageMock.class})
 @EnableGeneratorController
 class UserThemeBeanTest implements ShouldHandleObjectContracts<UserThemeBean> {
 

@@ -53,17 +53,29 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
     @Inject
     private Provider<HistoryManager> historyManagerProvider;
 
+    private static boolean isUserStore(final UrlParameter currentParam) {
+        return KEY_USERSTORE.equals(currentParam.getName());
+    }
+
+    private static boolean isUserName(final UrlParameter currentParam) {
+        return KEY_USERNAME.equals(currentParam.getName());
+    }
+
+    private static Predicate<? super UrlParameter> excludeUserStoreAndUserName() {
+        return (var param) -> !isUserStore(param) && !isUserName(param);
+    }
+
     /**
      * Extract userStore and userName from deep link URL
      *
      * @param userStore used as default value
      * @param username  used as default value
      * @return option for {@linkplain LoginCredentials}, if userStore or userName is
-     *         missing option is empty
+     * missing option is empty
      */
     @Override
     public Optional<LoginCredentials> extractFromDeepLinkingUrlParameter(final String userStore,
-            final String username) {
+                                                                         final String username) {
 
         var extractedUserStore = MoreStrings.emptyToNull(userStore);
         var extractedUserName = MoreStrings.emptyToNull(username);
@@ -102,17 +114,5 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
     @Override
     public HistoryManager getWrapped() {
         return historyManagerProvider.get();
-    }
-
-    private static boolean isUserStore(final UrlParameter currentParam) {
-        return KEY_USERSTORE.equals(currentParam.getName());
-    }
-
-    private static boolean isUserName(final UrlParameter currentParam) {
-        return KEY_USERNAME.equals(currentParam.getName());
-    }
-
-    private static Predicate<? super UrlParameter> excludeUserStoreAndUserName() {
-        return (var param) -> !isUserStore(param) && !isUserName(param);
     }
 }

@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ HistoryManagerBean.class, DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
+@AddBeanClasses({HistoryManagerBean.class, DefaultHistoryConfiguration.class, ViewMatcherProducer.class})
 @ActivateScopes(ClientWindowScoped.class)
 class HistoryManagerListenerTest
         implements ShouldHandleObjectContracts<HistoryManagerListener>, JsfEnvironmentConsumer {

@@ -46,8 +46,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ Oauth2AuthenticationFacadeMock.class, WrappedOauthFacadeImpl.class, HttpHeaderFilterImpl.class,
-        ViewMatcherProducer.class, Oauth2ConfigurationProducerMock.class, ServletObjectsFromJSFContextProducer.class })
+@AddBeanClasses({Oauth2AuthenticationFacadeMock.class, WrappedOauthFacadeImpl.class, HttpHeaderFilterImpl.class,
+        ViewMatcherProducer.class, Oauth2ConfigurationProducerMock.class, ServletObjectsFromJSFContextProducer.class})
 @EnableAlternatives(OauthLoginPageBeanTest.class)
 class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
 
@@ -64,6 +64,11 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
 
     @Inject
     private PortalHistoryManagerMock portalHistoryManagerMock;
+    @Inject
+    private PortalTestConfiguration configuration;
+    @Produces
+    @LoginPagePath
+    private String loginUrl = "login.jsf";
 
     @Produces
     @CuiCurrentView
@@ -72,13 +77,6 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
     ViewDescriptor getCurrentView() {
         return DESCRIPTOR_LOGIN;
     }
-
-    @Inject
-    private PortalTestConfiguration configuration;
-
-    @Produces
-    @LoginPagePath
-    private String loginUrl = "login.jsf";
 
     @Test
     void testUnauthorizedShouldCauseRedirect() {

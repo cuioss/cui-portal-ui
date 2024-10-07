@@ -35,7 +35,6 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LIST
  * debug.
  *
  * @author Oliver Wolff
- *
  */
 @RequestScoped
 public class TraceListener implements PhaseListener {

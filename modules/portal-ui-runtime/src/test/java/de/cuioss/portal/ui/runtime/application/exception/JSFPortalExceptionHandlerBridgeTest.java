@@ -42,8 +42,8 @@ import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfigurati
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ CurrentViewProducer.class, NavigationHandlerProducer.class, PortalUiExceptionHandler.class,
-        ViewRelatedExceptionHandler.class, PortalTestUserProducer.class, PortalHistoryManagerMock.class })
+@AddBeanClasses({CurrentViewProducer.class, NavigationHandlerProducer.class, PortalUiExceptionHandler.class,
+        ViewRelatedExceptionHandler.class, PortalTestUserProducer.class, PortalHistoryManagerMock.class})
 class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
 
     static final ViewDescriptor DESCRIPTOR_SUPPRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")

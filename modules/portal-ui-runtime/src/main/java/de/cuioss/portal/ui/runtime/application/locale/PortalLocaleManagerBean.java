@@ -68,15 +68,12 @@ public class PortalLocaleManagerBean implements Serializable {
 
     @Inject
     LocaleResolverService resolverService;
-
-    private Locale locale;
-
     @Inject
     @LocaleChangeEvent
     Event<Locale> localeChangeEvent;
-
     @Inject
     Provider<FacesContext> facesContextProvider;
+    private Locale locale;
 
     /**
      * Producer method for {@link Locale} identified by {@link PortalLocale}

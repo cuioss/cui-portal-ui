@@ -66,6 +66,12 @@ public class PortalNavigationMenuItemImplBase extends PortalNavigationMenuConfig
     @Getter
     @Setter
     private List<String> activeForAdditionalViewId = new ArrayList<>();
+    @Getter
+    @Setter
+    private String labelKey;
+    @Getter
+    @Setter
+    private String labelValue;
 
     @Override
     public int compareTo(final NavigationMenuItem other) {
@@ -81,14 +87,6 @@ public class PortalNavigationMenuItemImplBase extends PortalNavigationMenuConfig
     public boolean isTitleAvailable() {
         return null != getResolvedTitle();
     }
-
-    @Getter
-    @Setter
-    private String labelKey;
-
-    @Getter
-    @Setter
-    private String labelValue;
 
     /**
      * @return the resolved label

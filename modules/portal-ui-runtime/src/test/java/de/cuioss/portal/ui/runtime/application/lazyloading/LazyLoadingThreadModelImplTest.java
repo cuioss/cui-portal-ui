@@ -60,6 +60,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
     @Inject
     private PortalTestConfiguration configuration;
+    private String testResult;
 
     @BeforeEach
     void cleanTestResult() {
@@ -70,8 +71,6 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     void afterTest() {
         threadManager.destroy();
     }
-
-    private String testResult;
 
     @Override
     public LazyLoadingViewModelImpl getUnderTest() {

@@ -26,7 +26,7 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 
 @EnableAutoWeld
-@AddBeanClasses({ UserMenuItem.class, PortalTestUserProducer.class, PortalResourceBundleMock.class })
+@AddBeanClasses({UserMenuItem.class, PortalTestUserProducer.class, PortalResourceBundleMock.class})
 @EnablePortalConfiguration
 class UserMenuItemTest implements ShouldHandleObjectContracts<UserMenuItem> {
 

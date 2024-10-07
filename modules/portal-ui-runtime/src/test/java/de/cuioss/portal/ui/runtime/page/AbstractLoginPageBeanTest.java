@@ -28,11 +28,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @EnablePortalUiEnvironment
 class AbstractLoginPageBeanTest extends AbstractPageBeanTest<TestLoginPage> {
 
+    private final PortalAuthenticationFacadeMock facadeMock = new PortalAuthenticationFacadeMock();
     @Inject
     @Getter
     private TestLoginPage underTest;
-
-    private final PortalAuthenticationFacadeMock facadeMock = new PortalAuthenticationFacadeMock();
 
     @BeforeEach
     void before() {

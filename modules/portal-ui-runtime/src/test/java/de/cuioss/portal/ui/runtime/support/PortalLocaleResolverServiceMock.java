@@ -43,16 +43,14 @@ import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 @ToString
 public class PortalLocaleResolverServiceMock implements LocaleResolverService {
 
-    @Setter
-    private Locale locale = Locale.ENGLISH;
-
-    @Getter
-    @Setter
-    private List<Locale> availableLocales = immutableList(Locale.GERMAN, Locale.ENGLISH);
-
     @Inject
     @LocaleChangeEvent
     Event<Locale> localeChangeEvent;
+    @Setter
+    private Locale locale = Locale.ENGLISH;
+    @Getter
+    @Setter
+    private List<Locale> availableLocales = immutableList(Locale.GERMAN, Locale.ENGLISH);
 
     @Override
     public void saveUserLocale(final Locale newLocale) {

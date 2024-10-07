@@ -23,7 +23,6 @@ import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
  * Global component id's
  *
  * @author i000576
- *
  */
 public enum GlobalComponentIds {
 

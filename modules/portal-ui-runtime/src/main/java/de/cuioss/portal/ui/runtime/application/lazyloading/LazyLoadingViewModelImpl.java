@@ -67,35 +67,26 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
     private static final long serialVersionUID = -3343380539839996245L;
 
     private static final CuiLogger LOGGER = new CuiLogger(LazyLoadingViewModelImpl.class);
-
+    @Getter
+    private final String requestId = UUID.randomUUID().toString();
     @Inject
     ThreadManager threadManager;
-
     @Inject
     @ConfigProperty(name = PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT)
     int requestRetrieveTimeout;
-
     @Inject
     Provider<DisplayNameMessageProducer> displayNameMessageProducer;
-
     @Inject
     StickyMessageProducer stickyMessageProducer;
-
     @Getter
     private IDisplayNameProvider<?> notificationBoxValue;
-
     @Getter
     private ContextState notificationBoxState;
-
     @Getter
     @Setter
     private boolean renderContent;
-
     @Getter
     private boolean initialized;
-
-    @Getter
-    private final String requestId = UUID.randomUUID().toString();
 
     /**
      * Will be called by the ajax call to update the lazy loading content.
@@ -161,7 +152,7 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
         var resultDetail = result.getResultDetail();
         if (resultDetail.isPresent()) {
             errorHandler.handleResultDetail(result.getState(), resultDetail.get(), result.getErrorCode().orElse(null),
-                this, LOGGER);
+                    this, LOGGER);
         } else {
             setRenderContent(true);
         }

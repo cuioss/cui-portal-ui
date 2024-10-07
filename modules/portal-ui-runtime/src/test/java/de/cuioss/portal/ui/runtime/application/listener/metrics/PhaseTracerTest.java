@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @PropertyConfig(name = "phaseId", propertyClass = PhaseId.class, propertyReadWrite = PropertyReadWrite.WRITE_ONLY)
-@VerifyConstructor(of = { "phaseId" }, allRequired = true)
+@VerifyConstructor(of = {"phaseId"}, allRequired = true)
 @PropertyReflectionConfig(skip = true)
 class PhaseTracerTest extends ValueObjectTest<PhaseTracer> {
 

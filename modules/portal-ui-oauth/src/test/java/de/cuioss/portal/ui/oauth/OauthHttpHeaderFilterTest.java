@@ -38,20 +38,15 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @EnablePortalUiEnvironment
 class OauthHttpHeaderFilterTest implements ShouldBeNotNull<OauthHttpHeaderFilter>, JsfEnvironmentConsumer {
 
-    private static final String ACCESS_CONTROL_ALLOW_CREDENTIALS = OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_CREDENTIALS;
-
-    private static final String ME = "https://locahost:8080/me";
-
     static final String FACES_GUEST_LOGIN_JSF = "/guest/login.jsf";
-
+    private static final String ACCESS_CONTROL_ALLOW_CREDENTIALS = OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_CREDENTIALS;
+    private static final String ME = "https://locahost:8080/me";
+    @Getter
+    private final OauthHttpHeaderFilter underTest = new OauthHttpHeaderFilter();
+    private final FilterChain filterChain = EasyMock.createNiceMock(FilterChain.class);
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
-
-    @Getter
-    private final OauthHttpHeaderFilter underTest = new OauthHttpHeaderFilter();
-
-    private final FilterChain filterChain= EasyMock.createNiceMock(FilterChain.class);
 
     @Test
     void shouldHandleHappyCase() throws ServletException, IOException {

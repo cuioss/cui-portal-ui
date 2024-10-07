@@ -41,7 +41,10 @@ import org.junit.jupiter.api.Test;
 import java.util.Locale;
 
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalCoreEnvironment
 @AddBeanClasses({LocaleConfiguration.class, PortalProjectStageImpl.class, PortalResourceBundleBean.class,
@@ -54,6 +57,13 @@ class PortalApplicationTest implements ShouldBeNotNull<PortalApplication>, JsfEn
 
     @Inject
     private PortalTestConfiguration configuration;
+
+    private static Application createFromFactory() {
+        var applicationFactory = (ApplicationFactory) FactoryFinder.getFactory(FactoryFinder.APPLICATION_FACTORY);
+
+        var factory = new PortalApplicationFactory(applicationFactory);
+        return factory.getApplication();
+    }
 
     @Test
     void shouldHandleProjectProductionStage() {
@@ -106,13 +116,6 @@ class PortalApplicationTest implements ShouldBeNotNull<PortalApplication>, JsfEn
     @Test
     void shouldProvideWrapped() {
         assertNotNull(((ApplicationWrapper) createFromFactory()).getWrapped());
-    }
-
-    private static Application createFromFactory() {
-        var applicationFactory = (ApplicationFactory) FactoryFinder.getFactory(FactoryFinder.APPLICATION_FACTORY);
-
-        var factory = new PortalApplicationFactory(applicationFactory);
-        return factory.getApplication();
     }
 
     @Override

@@ -38,7 +38,7 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LIST
 
 @EnablePortalUiEnvironment
 @EnableTestLogger(debug = RequestTracer.class)
-@AddBeanClasses({ RequestTracer.class })
+@AddBeanClasses({RequestTracer.class})
 @EnablePortalConfiguration(configuration = PORTAL_LISTENER_TRACE_ENABLED + ":false")
 class TraceListenerDisabledTest implements ShouldBeNotNull<TraceListener>, JsfEnvironmentConsumer {
 

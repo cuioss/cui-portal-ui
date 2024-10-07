@@ -15,17 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.history;
 
-import static de.cuioss.tools.string.MoreStrings.emptyToNull;
-import static de.cuioss.tools.string.MoreStrings.isEmpty;
-
-import java.io.Serial;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import jakarta.faces.context.FacesContext;
-
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
@@ -33,10 +22,20 @@ import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.net.ParameterFilter;
+import jakarta.faces.context.FacesContext;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import static de.cuioss.tools.string.MoreStrings.emptyToNull;
+import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
 /**
  * Bean keeping track of the view history. For configuration see package-info
@@ -48,37 +47,33 @@ import lombok.ToString;
 @ToString
 class HistoryManagerImpl implements HistoryManager {
 
-    @Serial
-    private static final long serialVersionUID = 2205593126500409010L;
-
-    private static final CuiLogger log = new CuiLogger(HistoryManagerImpl.class);
-
     /**
      * Bean name for looking up instances.
      */
     public static final String BEAN_NAME = "historyManager";
-
+    @Serial
+    private static final long serialVersionUID = 2205593126500409010L;
+    private static final CuiLogger log = new CuiLogger(HistoryManagerImpl.class);
     private final int historySize;
 
-    /** The technical parameter filter. */
+    /**
+     * The technical parameter filter.
+     */
     @Getter
     private final ParameterFilter parameterFilter;
-
+    private final ViewMatcher excludeFromHistoryMatcher;
+    private final DefaultHistoryConfiguration historyConfiguration;
     @Getter
     @Setter
     private boolean pageReload;
-
     /**
      * The current view, that is not put history yet.
      */
     private ViewIdentifier currentView;
-
-    /** The storage for the history. */
+    /**
+     * The storage for the history.
+     */
     private List<ViewIdentifier> history;
-
-    private final ViewMatcher excludeFromHistoryMatcher;
-
-    private final DefaultHistoryConfiguration historyConfiguration;
 
     /**
      * Constructor.

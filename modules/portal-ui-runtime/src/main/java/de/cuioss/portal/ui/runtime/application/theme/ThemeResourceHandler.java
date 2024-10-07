@@ -15,12 +15,11 @@
  */
 package de.cuioss.portal.ui.runtime.application.theme;
 
+import de.cuioss.portal.common.cdi.PortalBeanManager;
+import de.cuioss.tools.logging.CuiLogger;
 import jakarta.faces.application.Resource;
 import jakarta.faces.application.ResourceHandler;
 import jakarta.faces.application.ResourceHandlerWrapper;
-
-import de.cuioss.portal.common.cdi.PortalBeanManager;
-import de.cuioss.tools.logging.CuiLogger;
 
 /**
  * Handles the resolving of the correct theme css. It filters for libraryName=

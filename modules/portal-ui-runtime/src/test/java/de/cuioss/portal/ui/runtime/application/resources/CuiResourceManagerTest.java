@@ -22,9 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class CuiResourceManagerTest {
 
-    private CuiResourceManager cui;
-
     public LibraryInventory lib;
+    private CuiResourceManager cui;
 
     @BeforeEach
     void setUp() {

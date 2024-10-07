@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ StickyMessageProviderMock.class })
+@AddBeanClasses({StickyMessageProviderMock.class})
 class StickyMessageCollectorViewListenerTest
         implements ShouldHandleObjectContracts<StickyMessageCollectorViewListener> {
 

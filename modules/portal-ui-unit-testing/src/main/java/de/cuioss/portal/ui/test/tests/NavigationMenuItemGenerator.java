@@ -33,7 +33,6 @@ import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
  * Generates an instance of a {@linkplain NavigationMenuItem} implementation.
  *
  * @author Sven Haag
- *
  */
 public class NavigationMenuItemGenerator implements TypedGenerator<NavigationMenuItem> {
 

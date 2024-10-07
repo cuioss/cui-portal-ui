@@ -34,9 +34,8 @@ import static java.util.Objects.requireNonNull;
  * Helper Object aggregating a {@link PhaseId} and a {@link StopWatch}
  *
  * @author Oliver Wolff
- *
  */
-@EqualsAndHashCode(of = { "phaseOrdinal", "phaseName", "didRun" })
+@EqualsAndHashCode(of = {"phaseOrdinal", "phaseName", "didRun"})
 public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
 
     @Serial
@@ -53,7 +52,9 @@ public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
     @Getter(AccessLevel.PACKAGE)
     private final StopWatch stopWatch;
 
-    /** Boolean indicating whether the timer for this phase was run at all. */
+    /**
+     * Boolean indicating whether the timer for this phase was run at all.
+     */
     @Getter
     private boolean didRun;
 

@@ -44,16 +44,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static de.cuioss.test.generator.Generators.letterStrings;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({FileWatcherServiceMock.class})
 @EnableAlternatives({FileWatcherServiceMock.class})
 class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<CustomizationViewResourcesDescriptor> {
 
+    public static final Path BASE_PATH = Paths.get("src/test/resources");
     private static final String TEMPLATES_FOLDER = "templates";
     private static final String VIEWS_FOLDER = "views";
-    public static final Path BASE_PATH = Paths.get("src/test/resources");
     private static final Path BASE_CUSTOMIZATION = BASE_PATH.resolve("customization");
     private static final SimpleDateFormat FILE_SUFFIX_DATEFORMAT = new SimpleDateFormat("yyyyMMddHHmmss");
 

@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalClientStorageMock.class })
+@AddBeanClasses({PortalClientStorageMock.class})
 class LoginPageClientStorageImplTest extends AbstractPageBeanTest<LoginPageClientStorageImpl> {
 
     @Inject
@@ -43,6 +43,11 @@ class LoginPageClientStorageImplTest extends AbstractPageBeanTest<LoginPageClien
     @Inject
     @PortalClientStorage
     private PortalClientStorageMock clientStorage;
+
+    private static LoginCredentials anyLoginCredentials(final boolean rememberMeActive) {
+        return LoginCredentials.builder().rememberLoginCredentials(rememberMeActive).username(strings(20, 30).next())
+                .userStore(strings(20, 30).next()).build();
+    }
 
     @Test
     void shouldProvideEmptyLoginCredentials() {
@@ -102,11 +107,6 @@ class LoginPageClientStorageImplTest extends AbstractPageBeanTest<LoginPageClien
         clientStorage.put(KEY_REMEMBER_ME, Boolean.TRUE.toString());
 
         return expected;
-    }
-
-    private static LoginCredentials anyLoginCredentials(final boolean rememberMeActive) {
-        return LoginCredentials.builder().rememberLoginCredentials(rememberMeActive).username(strings(20, 30).next())
-                .userStore(strings(20, 30).next()).build();
     }
 
 }
