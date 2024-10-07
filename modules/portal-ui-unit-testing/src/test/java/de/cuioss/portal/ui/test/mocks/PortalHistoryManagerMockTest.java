@@ -15,19 +15,17 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
+import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.inject.Inject;
+import lombok.Getter;
+import org.jboss.weld.junit5.auto.EnableAutoWeld;
+import org.junit.jupiter.api.Test;
+
 import static de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock.VIEW_HOME;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.EnableAutoWeld;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
-import lombok.Getter;
 
 @EnableAutoWeld
 class PortalHistoryManagerMockTest implements ShouldBeNotNull<PortalHistoryManagerMock> {

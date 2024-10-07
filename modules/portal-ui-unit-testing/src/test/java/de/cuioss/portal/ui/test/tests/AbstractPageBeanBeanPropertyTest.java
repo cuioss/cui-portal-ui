@@ -15,11 +15,10 @@
  */
 package de.cuioss.portal.ui.test.tests;
 
-import jakarta.inject.Inject;
-
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.support.ViewBean;
 import de.cuioss.test.valueobjects.api.contracts.VerifyBeanProperty;
+import jakarta.inject.Inject;
 import lombok.Getter;
 
 @EnablePortalUiEnvironment

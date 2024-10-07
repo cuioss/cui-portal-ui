@@ -15,24 +15,23 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import java.io.Serializable;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.application.NavigationHandler;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-
 import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.exception.PortalExceptionHandler;
-import de.cuioss.portal.ui.api.context.CuiCurrentView;
-import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.NavigationHandler;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+
+import java.io.Serializable;
 
 /**
  * @author Matthias Walliczek

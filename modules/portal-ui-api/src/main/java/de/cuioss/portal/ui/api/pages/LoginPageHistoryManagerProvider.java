@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.api.pages;
 
-import java.util.Optional;
-
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.uimodel.application.LoginCredentials;
+
+import java.util.Optional;
 
 /**
  * {@linkplain LoginPageHistoryManagerProvider} is a decorator for

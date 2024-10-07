@@ -15,10 +15,6 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.faces.event.ActionEvent;
-import jakarta.inject.Inject;
-
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
 import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
@@ -26,6 +22,9 @@ import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.faces.event.ActionEvent;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
 

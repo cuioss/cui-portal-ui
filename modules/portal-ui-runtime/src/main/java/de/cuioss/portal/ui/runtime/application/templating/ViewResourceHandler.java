@@ -15,26 +15,25 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating;
 
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static de.cuioss.tools.string.MoreStrings.nullToEmpty;
-
-import java.net.URL;
-import java.util.List;
-
-import jakarta.faces.application.ResourceHandler;
-import jakarta.faces.application.ResourceHandlerWrapper;
-import jakarta.faces.application.ViewResource;
-import jakarta.faces.context.FacesContext;
-
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.templating.MultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.Joiner;
 import de.cuioss.tools.string.Splitter;
+import jakarta.faces.application.ResourceHandler;
+import jakarta.faces.application.ResourceHandlerWrapper;
+import jakarta.faces.application.ViewResource;
+import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
+import java.net.URL;
+import java.util.List;
+
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import static de.cuioss.tools.string.MoreStrings.nullToEmpty;
 
 /**
  * Implementation of Multi-Templating: see package-doc
@@ -86,9 +85,7 @@ public class ViewResourceHandler extends ResourceHandlerWrapper {
     private void checkMapper() {
         if (null == multiTemplatingMapper) {
             multiTemplatingMapper = PortalBeanManager
-                    .resolveBean(MultiTemplatingMapper.class, PortalMultiTemplatingMapper.class)
-                    .orElseThrow(() -> new IllegalArgumentException(PortalBeanManager
-                            .createErrorMessage(MultiTemplatingMapper.class, PortalMultiTemplatingMapper.class)));
+                    .resolveBeanOrThrowIllegalStateException(MultiTemplatingMapper.class, PortalMultiTemplatingMapper.class);
         }
 
     }

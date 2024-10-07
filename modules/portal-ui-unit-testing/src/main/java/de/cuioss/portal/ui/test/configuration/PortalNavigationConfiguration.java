@@ -15,8 +15,6 @@
  */
 package de.cuioss.portal.ui.test.configuration;
 
-import java.util.Collections;
-
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.portal.ui.api.pages.ErrorPage;
@@ -26,6 +24,8 @@ import de.cuioss.portal.ui.api.pages.LogoutPage;
 import de.cuioss.portal.ui.api.pages.PreferencesPage;
 import de.cuioss.test.jsf.config.ApplicationConfigurator;
 import de.cuioss.test.jsf.config.decorator.ApplicationConfigDecorator;
+
+import java.util.Collections;
 
 /**
  * Provides methods and structure to mock the portal specific navigation.

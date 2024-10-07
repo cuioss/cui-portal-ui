@@ -88,7 +88,7 @@ public class DefaultViewRestrictionManager implements ViewRestrictionManager {
 
     @Override
     public boolean isUserAuthorized(final ViewDescriptor descriptor) {
-        return userInfo.getRoles().containsAll(getRequiredRolesForView(descriptor));
+        return new HashSet<>(userInfo.getRoles()).containsAll(getRequiredRolesForView(descriptor));
     }
 
     @Override

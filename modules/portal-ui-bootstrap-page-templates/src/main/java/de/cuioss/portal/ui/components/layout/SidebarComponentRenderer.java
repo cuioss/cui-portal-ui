@@ -15,15 +15,14 @@
  */
 package de.cuioss.portal.ui.components.layout;
 
-import java.io.IOException;
-
+import de.cuioss.jsf.api.components.renderer.BaseDecoratorRenderer;
+import de.cuioss.jsf.api.components.renderer.DecoratingResponseWriter;
+import de.cuioss.portal.ui.components.PortalFamily;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.render.FacesRenderer;
 import jakarta.faces.render.Renderer;
 
-import de.cuioss.jsf.api.components.renderer.BaseDecoratorRenderer;
-import de.cuioss.jsf.api.components.renderer.DecoratingResponseWriter;
-import de.cuioss.portal.ui.components.PortalFamily;
+import java.io.IOException;
 
 /**
  * {@link Renderer} for {@link SidebarComponent}

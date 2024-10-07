@@ -21,10 +21,10 @@ import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthenticatedException;
 import de.cuioss.portal.ui.api.authentication.UserNotAuthorizedException;
-import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
-import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.context.NavigationHandlerProducer;
+import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
+import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
 import de.cuioss.portal.ui.runtime.application.history.DefaultHistoryConfiguration;
 import de.cuioss.portal.ui.runtime.application.history.HistoryManagerBean;
@@ -49,7 +49,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.*;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_PREFERENCES;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGOUT_LOGICAL_VIEW_ID;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

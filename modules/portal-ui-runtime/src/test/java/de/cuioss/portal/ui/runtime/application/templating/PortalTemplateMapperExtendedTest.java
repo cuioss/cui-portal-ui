@@ -15,6 +15,15 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating;
 
+import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
+import de.cuioss.portal.ui.runtime.application.templating.support.AdditionalTemplates;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.inject.Inject;
+import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.jboss.weld.junit5.auto.EnableAutoWeld;
+import org.junit.jupiter.api.Test;
+
 import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.MASTER_DEFAULT;
 import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.MASTER_HORIZONTAL_CENTER;
 import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.NOT_THERE;
@@ -23,17 +32,6 @@ import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateM
 import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.TECHNICAL_ROOT;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.jboss.weld.junit5.auto.EnableAutoWeld;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
-import de.cuioss.portal.ui.runtime.application.templating.support.AdditionalTemplates;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
-import lombok.Getter;
 
 @EnableAutoWeld
 @AddBeanClasses({ PortalTemplates.class, AdditionalTemplates.class })

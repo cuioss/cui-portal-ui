@@ -1,10 +1,9 @@
 package de.cuioss.portal.ui.test.tests;
 
-import org.jboss.weld.environment.se.Weld;
-
 import de.cuioss.portal.core.test.tests.BaseModuleConsistencyTest;
 import de.cuioss.test.jsf.producer.JsfObjectsProducer;
 import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
+import org.jboss.weld.environment.se.Weld;
 
 /**
  * Extension to {@link BaseModuleConsistencyTest} that configures

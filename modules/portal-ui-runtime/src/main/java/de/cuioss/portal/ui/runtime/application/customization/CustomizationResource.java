@@ -15,7 +15,14 @@
  */
 package de.cuioss.portal.ui.runtime.application.customization;
 
-import static de.cuioss.portal.configuration.util.ConfigurationHelper.resolveConfigProperty;
+import de.cuioss.portal.common.cdi.PortalBeanManager;
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.ui.api.resources.CacheableResource;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.uimodel.application.CuiProjectStage;
+import jakarta.faces.context.FacesContext;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,15 +37,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TimeZone;
 
-import jakarta.faces.context.FacesContext;
-
-import de.cuioss.portal.common.cdi.PortalBeanManager;
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.ui.api.resources.CacheableResource;
-import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.uimodel.application.CuiProjectStage;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import static de.cuioss.portal.configuration.util.ConfigurationHelper.resolveConfigProperty;
 
 /**
  * Implementation of a {@link File} based {@link CacheableResource}.

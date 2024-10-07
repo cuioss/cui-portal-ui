@@ -15,16 +15,16 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
-import java.io.Serial;
-import java.util.Collections;
-import java.util.List;
-
 import de.cuioss.jsf.api.components.model.widget.DashboardWidgetModel;
 import de.cuioss.jsf.api.components.model.widget.ListItem;
 import de.cuioss.jsf.api.components.model.widget.ListItemWidgetModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.util.Collections;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString

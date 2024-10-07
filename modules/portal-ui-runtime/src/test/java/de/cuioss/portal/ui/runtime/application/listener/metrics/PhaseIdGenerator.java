@@ -15,11 +15,10 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
-import static de.cuioss.test.generator.Generators.fixedValues;
-
+import de.cuioss.test.generator.TypedGenerator;
 import jakarta.faces.event.PhaseId;
 
-import de.cuioss.test.generator.TypedGenerator;
+import static de.cuioss.test.generator.Generators.fixedValues;
 
 /**
  * @author Oliver Wolff

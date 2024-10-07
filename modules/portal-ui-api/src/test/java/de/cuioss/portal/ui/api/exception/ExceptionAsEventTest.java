@@ -15,13 +15,12 @@
  */
 package de.cuioss.portal.ui.api.exception;
 
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import org.junit.jupiter.api.Test;
+
 import static de.cuioss.test.generator.Generators.throwables;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 
 class ExceptionAsEventTest implements ShouldHandleObjectContracts<ExceptionAsEvent> {
 

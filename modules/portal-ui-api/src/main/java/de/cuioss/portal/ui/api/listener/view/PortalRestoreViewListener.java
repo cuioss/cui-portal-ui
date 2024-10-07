@@ -15,18 +15,18 @@
  */
 package de.cuioss.portal.ui.api.listener.view;
 
+import jakarta.faces.event.PhaseId;
+import jakarta.faces.event.PhaseListener;
+import jakarta.inject.Qualifier;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import jakarta.faces.event.PhaseId;
-import jakarta.faces.event.PhaseListener;
-import jakarta.inject.Qualifier;
 
 /**
  * Marker identifying concrete instances of {@link ViewListener}, that are to be

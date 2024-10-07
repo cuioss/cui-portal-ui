@@ -15,23 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
-import static java.util.stream.Collectors.toList;
+import de.cuioss.tools.string.MoreStrings;
+import de.cuioss.tools.string.Splitter;
+import jakarta.faces.application.Resource;
+import jakarta.faces.application.ResourceHandler;
+import jakarta.faces.context.FacesContext;
+import org.omnifaces.resourcehandler.UnmappedResourceHandler;
+import org.omnifaces.util.FacesLocal;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import jakarta.faces.application.Resource;
-import jakarta.faces.application.ResourceHandler;
-import jakarta.faces.context.FacesContext;
-
-import org.omnifaces.resourcehandler.UnmappedResourceHandler;
-import org.omnifaces.util.FacesLocal;
-
-import de.cuioss.tools.string.MoreStrings;
-import de.cuioss.tools.string.Splitter;
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
+import static java.util.stream.Collectors.toList;
 
 /**
  * This resource handler wrap omnifaces UnmappedResourceHandler for restriction
@@ -48,7 +46,7 @@ import de.cuioss.tools.string.Splitter;
  * </p>
  *
  * TODO : could be replaced by original after
- * <a href="https://github.com/omnifaces/omnifaces/issues/481">...</a> is solved. See CUI-915
+ * <a href="https://github.com/omnifaces/omnifaces/issues/481">...</a> is solved.
  *
  * @author Eugen Fischer
  */

@@ -15,15 +15,13 @@
  */
 package de.cuioss.portal.ui.test.tests;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import jakarta.inject.Inject;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.support.ViewBean;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @EnablePortalUiEnvironment
 class AbstractPageBeanTestTest extends AbstractPageBeanTest<ViewBean> {

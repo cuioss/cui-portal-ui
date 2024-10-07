@@ -15,22 +15,22 @@
  */
 package de.cuioss.portal.ui.runtime.application.theme;
 
-import static de.cuioss.tools.base.Preconditions.checkArgument;
-import static de.cuioss.tools.base.Preconditions.checkState;
-import static de.cuioss.tools.collect.MoreCollections.isEmpty;
-import static de.cuioss.tools.string.MoreStrings.isBlank;
-import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
+import de.cuioss.tools.collect.MapBuilder;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.tools.string.Splitter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import de.cuioss.tools.collect.MapBuilder;
-import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.tools.string.Splitter;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import static de.cuioss.tools.base.Preconditions.checkArgument;
+import static de.cuioss.tools.base.Preconditions.checkState;
+import static de.cuioss.tools.collect.MoreCollections.isEmpty;
+import static de.cuioss.tools.string.MoreStrings.isBlank;
+import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 
 /**
  * Support class for translating theme-names derived from

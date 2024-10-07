@@ -15,12 +15,12 @@
  */
 package de.cuioss.portal.ui.api.menu;
 
-import java.util.Map;
-
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.MoreStrings;
 import lombok.Getter;
+
+import java.util.Map;
 
 /**
  * Abstract class to implement {@link NavigationMenuItem#getOrder()} and

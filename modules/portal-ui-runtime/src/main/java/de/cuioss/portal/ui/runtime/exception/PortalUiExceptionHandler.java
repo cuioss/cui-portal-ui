@@ -15,16 +15,15 @@
  */
 package de.cuioss.portal.ui.runtime.exception;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.inject.Instance;
-import jakarta.inject.Inject;
-
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.exception.PortalExceptionHandler;
 import de.cuioss.portal.ui.runtime.application.exception.JSFPortalExceptionHandlerBridge;
 import de.cuioss.tools.logging.CuiLogger;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 
 /**
  * CDI side of exceptionHandler, see {@link JSFPortalExceptionHandlerBridge} for

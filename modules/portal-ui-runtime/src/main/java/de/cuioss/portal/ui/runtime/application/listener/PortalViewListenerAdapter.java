@@ -15,13 +15,12 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener;
 
-import jakarta.faces.event.PhaseEvent;
-import jakarta.faces.event.PhaseId;
-import jakarta.faces.event.PhaseListener;
-
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
 import de.cuioss.portal.ui.runtime.application.listener.view.PortalCDIViewListener;
+import jakarta.faces.event.PhaseEvent;
+import jakarta.faces.event.PhaseId;
+import jakarta.faces.event.PhaseListener;
 
 import java.io.Serial;
 

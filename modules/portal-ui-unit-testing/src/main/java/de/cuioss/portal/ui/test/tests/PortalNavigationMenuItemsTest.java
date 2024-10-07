@@ -15,22 +15,20 @@
  */
 package de.cuioss.portal.ui.test.tests;
 
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import java.util.List;
-import java.util.Optional;
-
-import jakarta.enterprise.inject.Instance;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.test.valueobjects.api.object.VetoType;
 import de.cuioss.tools.reflect.MoreReflection;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.Optional;
+
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Test utility class for NavigationMenuItem tests. Runs object contract tests

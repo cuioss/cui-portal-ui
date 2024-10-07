@@ -15,20 +15,18 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_TRACE_ENABLED;
-
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.tools.logging.CuiLogger;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.event.PhaseEvent;
 import jakarta.faces.event.PhaseId;
 import jakarta.faces.event.PhaseListener;
 import jakarta.inject.Inject;
-
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.tools.logging.CuiLogger;
-
 import java.io.Serial;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LISTENER_TRACE_ENABLED;
 
 /**
  * This feature is enabled by the configuration of the key

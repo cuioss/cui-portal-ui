@@ -15,16 +15,15 @@
  */
 package de.cuioss.portal.ui.runtime.application.customization;
 
-import java.util.Optional;
-
+import de.cuioss.portal.common.cdi.PortalBeanManager;
+import de.cuioss.tools.base.Preconditions;
 import jakarta.faces.application.Resource;
 import jakarta.faces.application.ResourceHandler;
 import jakarta.faces.application.ResourceHandlerWrapper;
-
-import de.cuioss.portal.common.cdi.PortalBeanManager;
-import de.cuioss.tools.base.Preconditions;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Optional;
 
 /**
  * Allows to override specific resources at the installation. Delegates to

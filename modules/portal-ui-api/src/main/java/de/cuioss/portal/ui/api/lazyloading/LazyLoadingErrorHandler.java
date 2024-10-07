@@ -15,8 +15,6 @@
  */
 package de.cuioss.portal.ui.api.lazyloading;
 
-import java.util.logging.Logger;
-
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.resultContent.ErrorController;
 import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
@@ -24,6 +22,8 @@ import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
 import de.cuioss.uimodel.result.ResultDetail;
 import de.cuioss.uimodel.result.ResultState;
+
+import java.util.logging.Logger;
 
 /**
  * A default implementation of an error handler for a {@link LazyLoadingRequest}.

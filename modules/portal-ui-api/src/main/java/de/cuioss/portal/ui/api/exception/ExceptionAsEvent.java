@@ -15,12 +15,12 @@
  */
 package de.cuioss.portal.ui.api.exception;
 
-import java.io.Serial;
-import java.io.Serializable;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * Simplified version of deltaspike's ExceptionToCatchEvent

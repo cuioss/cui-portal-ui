@@ -15,12 +15,12 @@
  */
 package de.cuioss.portal.ui.api.menu;
 
+import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
+import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemContainer;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
-
-import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
-import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemContainer;
 
 /**
  * Provider for the content of the portal specific navigation menu

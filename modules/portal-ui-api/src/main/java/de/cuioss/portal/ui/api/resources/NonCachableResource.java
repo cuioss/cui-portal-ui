@@ -15,10 +15,10 @@
  */
 package de.cuioss.portal.ui.api.resources;
 
+import jakarta.faces.context.FacesContext;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import jakarta.faces.context.FacesContext;
 
 /**
  * Abstract resource disabling caching.

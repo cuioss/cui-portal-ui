@@ -15,11 +15,10 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BaseLazyLoadingListItemWidgetTest implements ShouldHandleObjectContracts<TestLazyLoadingListItemWidget> {
 

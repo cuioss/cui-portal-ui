@@ -15,10 +15,9 @@
  */
 package de.cuioss.portal.ui.api.lazyloading;
 
-import jakarta.faces.context.FacesContext;
-
 import de.cuioss.uimodel.result.ResultDetail;
 import de.cuioss.uimodel.result.ResultObject;
+import jakarta.faces.context.FacesContext;
 
 /**
  * A request to a backend service, which can be run in a separate thread and

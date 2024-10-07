@@ -15,19 +15,17 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN;
+import de.cuioss.tools.logging.CuiLogger;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.rest.client.ext.ResponseExceptionMapper;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.ws.rs.core.MultivaluedMap;
-import jakarta.ws.rs.core.Response;
-
-import org.eclipse.microprofile.rest.client.ext.ResponseExceptionMapper;
-
-import de.cuioss.tools.logging.CuiLogger;
+import static jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 
 /**
  * To detect and handle the error "missing scopes"

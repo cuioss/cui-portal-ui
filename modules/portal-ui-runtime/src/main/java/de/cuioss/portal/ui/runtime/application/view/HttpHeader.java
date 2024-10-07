@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.runtime.application.view;
 
-import java.io.Serial;
-import java.io.Serializable;
-
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
 import lombok.Data;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * Http header setting

@@ -15,16 +15,15 @@
  */
 package de.cuioss.portal.ui.api.test.support;
 
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
+import jakarta.enterprise.context.Dependent;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.io.Serial;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Set;
-
-import jakarta.enterprise.context.Dependent;
-
-import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * Mock variant of {@link ResourceBundleWrapper}. Simulate

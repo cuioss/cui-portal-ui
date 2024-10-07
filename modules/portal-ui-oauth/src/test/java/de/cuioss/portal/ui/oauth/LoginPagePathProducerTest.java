@@ -15,17 +15,15 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.authentication.oauth.LoginPagePath;
 import de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ LoginPagePathProducer.class })

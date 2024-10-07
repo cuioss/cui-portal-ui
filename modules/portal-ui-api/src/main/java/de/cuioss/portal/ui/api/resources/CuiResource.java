@@ -15,13 +15,12 @@
  */
 package de.cuioss.portal.ui.api.resources;
 
-import java.util.Objects;
-
 import jakarta.faces.application.Resource;
 import jakarta.faces.application.ResourceHandler;
 import jakarta.faces.context.FacesContext;
-
 import lombok.ToString;
+
+import java.util.Objects;
 
 /**
  * Base Resource using

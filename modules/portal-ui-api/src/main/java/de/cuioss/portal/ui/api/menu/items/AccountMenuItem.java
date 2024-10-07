@@ -15,11 +15,10 @@
  */
 package de.cuioss.portal.ui.api.menu.items;
 
-import jakarta.enterprise.context.Dependent;
-
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemSingleImpl;
 import de.cuioss.portal.ui.api.pages.AccountPage;
+import jakarta.enterprise.context.Dependent;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

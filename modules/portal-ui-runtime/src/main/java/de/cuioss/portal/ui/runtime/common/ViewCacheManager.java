@@ -15,28 +15,26 @@
  */
 package de.cuioss.portal.ui.runtime.common;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.ENABLE_CACHE;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Locale;
-
+import de.cuioss.portal.authentication.AuthenticatedUserInfo;
+import de.cuioss.portal.authentication.UserChangeEvent;
+import de.cuioss.portal.common.locale.LocaleChangeEvent;
+import de.cuioss.portal.ui.api.events.PageRefreshEvent;
+import de.cuioss.tools.logging.CuiLogger;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Provider;
-
+import lombok.ToString;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.omnifaces.util.cache.CacheFactory;
 
-import de.cuioss.portal.authentication.AuthenticatedUserInfo;
-import de.cuioss.portal.authentication.UserChangeEvent;
-import de.cuioss.portal.common.locale.LocaleChangeEvent;
-import de.cuioss.portal.ui.api.events.PageRefreshEvent;
-import de.cuioss.tools.logging.CuiLogger;
-import lombok.ToString;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Locale;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.ENABLE_CACHE;
 
 /**
  * To manage the disabled property of o:cache for the header in root.xhtml and

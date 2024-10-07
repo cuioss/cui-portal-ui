@@ -15,10 +15,9 @@
  */
 package de.cuioss.portal.ui.runtime.application.menu;
 
-import jakarta.enterprise.context.Dependent;
-
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemSingleImpl;
+import jakarta.enterprise.context.Dependent;
 
 import java.io.Serial;
 

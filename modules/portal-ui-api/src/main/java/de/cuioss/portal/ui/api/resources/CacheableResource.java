@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.api.resources;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import jakarta.faces.application.ResourceHandler;
 import jakarta.faces.context.FacesContext;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Abstract resource allowing basic caching functionality.

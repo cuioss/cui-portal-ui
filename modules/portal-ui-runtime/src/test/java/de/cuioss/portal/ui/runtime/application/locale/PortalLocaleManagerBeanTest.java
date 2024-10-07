@@ -15,26 +15,24 @@
  */
 package de.cuioss.portal.ui.runtime.application.locale;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.Locale;
-
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.jboss.weld.junit5.auto.EnableAlternatives;
-import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.common.locale.LocaleChangeEvent;
 import de.cuioss.portal.ui.runtime.support.PortalLocaleResolverServiceMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.jboss.weld.junit5.auto.EnableAlternatives;
+import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import java.util.Locale;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ PortalLocaleResolverServiceMock.class })

@@ -15,10 +15,10 @@
  */
 package de.cuioss.portal.ui.api.pages;
 
-import java.util.function.Supplier;
-
 import de.cuioss.portal.core.storage.ClientStorage;
 import de.cuioss.uimodel.application.LoginCredentials;
+
+import java.util.function.Supplier;
 
 /**
  * {@linkplain LoginPageClientStorage} is a decorator for

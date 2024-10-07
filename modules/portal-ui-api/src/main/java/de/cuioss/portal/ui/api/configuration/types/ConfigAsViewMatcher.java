@@ -15,21 +15,20 @@
  */
 package de.cuioss.portal.ui.api.configuration.types;
 
+import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
+import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import jakarta.enterprise.util.Nonbinding;
+import jakarta.inject.Qualifier;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import jakarta.enterprise.util.Nonbinding;
-import jakarta.inject.Qualifier;
-
-import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
-import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
 
 /**
  * Injects a config property as a {@link ViewMatcher}. In case the property
@@ -40,7 +39,7 @@ import de.cuioss.portal.configuration.PortalConfigurationKeys;
  * @author Oliver Wolff
  */
 @Qualifier
-@Target({ TYPE, METHOD, FIELD, PARAMETER })
+@Target({TYPE, METHOD, FIELD, PARAMETER})
 @Retention(RUNTIME)
 public @interface ConfigAsViewMatcher {
 
@@ -52,7 +51,7 @@ public @interface ConfigAsViewMatcher {
 
     /**
      * @return the separator char, defaults to
-     *         {@value PortalConfigurationKeys#CONTEXT_PARAM_SEPARATOR}
+     * {@value PortalConfigurationKeys#CONTEXT_PARAM_SEPARATOR}
      */
     @Nonbinding
     char separator() default PortalConfigurationKeys.CONTEXT_PARAM_SEPARATOR;

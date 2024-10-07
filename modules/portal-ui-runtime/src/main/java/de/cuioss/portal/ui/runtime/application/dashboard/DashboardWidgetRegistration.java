@@ -15,8 +15,19 @@
  */
 package de.cuioss.portal.ui.runtime.application.dashboard;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.DASHBOARD_WIDGET;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import de.cuioss.jsf.api.components.model.widget.DashboardWidgetModel;
+import de.cuioss.jsf.api.components.model.widget.WidgetModel;
+import de.cuioss.portal.configuration.types.ConfigAsFilteredMap;
+import de.cuioss.portal.ui.api.dashboard.PortalDashboardWidget;
+import de.cuioss.tools.string.MoreStrings;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.inject.Instance;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -25,21 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import jakarta.enterprise.inject.Instance;
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
-import de.cuioss.jsf.api.components.model.widget.DashboardWidgetModel;
-
-import jakarta.annotation.PostConstruct;
-import de.cuioss.jsf.api.components.model.widget.WidgetModel;
-import de.cuioss.portal.configuration.types.ConfigAsFilteredMap;
-import de.cuioss.portal.ui.api.dashboard.PortalDashboardWidget;
-import de.cuioss.tools.string.MoreStrings;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.DASHBOARD_WIDGET;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 @ViewScoped
 @Named

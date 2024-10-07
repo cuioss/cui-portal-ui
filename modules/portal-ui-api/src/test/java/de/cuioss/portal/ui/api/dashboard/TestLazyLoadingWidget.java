@@ -15,10 +15,9 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
-import jakarta.enterprise.context.Dependent;
-
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
+import jakarta.enterprise.context.Dependent;
 
 import java.io.Serial;
 

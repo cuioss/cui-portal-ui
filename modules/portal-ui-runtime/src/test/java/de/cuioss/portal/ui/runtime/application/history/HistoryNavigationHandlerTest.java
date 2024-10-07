@@ -1,27 +1,25 @@
 package de.cuioss.portal.ui.runtime.application.history;
 
-import static de.cuioss.portal.ui.runtime.application.history.HistoryManagerBeanTest.CURRENT_VIEW;
-import static de.cuioss.portal.ui.runtime.application.history.HistoryManagerBeanTest.SECOND_VIEW;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import jakarta.faces.application.ConfigurableNavigationHandler;
-import jakarta.faces.lifecycle.ClientWindowScoped;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.ActivateScopes;
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import jakarta.faces.application.ConfigurableNavigationHandler;
+import jakarta.faces.lifecycle.ClientWindowScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.ActivateScopes;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.ui.runtime.application.history.HistoryManagerBeanTest.CURRENT_VIEW;
+import static de.cuioss.portal.ui.runtime.application.history.HistoryManagerBeanTest.SECOND_VIEW;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ DefaultHistoryConfiguration.class, HistoryManagerBean.class, ViewMatcherProducer.class })

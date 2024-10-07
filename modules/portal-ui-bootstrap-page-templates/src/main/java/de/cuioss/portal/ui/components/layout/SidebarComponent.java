@@ -15,9 +15,6 @@
  */
 package de.cuioss.portal.ui.components.layout;
 
-import jakarta.faces.component.FacesComponent;
-import jakarta.faces.context.FacesContext;
-
 import de.cuioss.jsf.api.components.base.BaseCuiPanel;
 import de.cuioss.jsf.api.components.css.StyleClassBuilder;
 import de.cuioss.jsf.api.components.css.StyleClassResolver;
@@ -26,6 +23,8 @@ import de.cuioss.jsf.api.components.partial.HtmlElementProvider;
 import de.cuioss.jsf.api.components.util.ComponentUtility;
 import de.cuioss.portal.ui.components.PortalCssClasses;
 import de.cuioss.portal.ui.components.PortalFamily;
+import jakarta.faces.component.FacesComponent;
+import jakarta.faces.context.FacesContext;
 import lombok.experimental.Delegate;
 
 /**

@@ -15,13 +15,12 @@
  */
 package de.cuioss.portal.ui.api.context;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import jakarta.inject.Inject;
-
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnableAutoWeld
 @AddBeanClasses({ CurrentViewProducer.class })

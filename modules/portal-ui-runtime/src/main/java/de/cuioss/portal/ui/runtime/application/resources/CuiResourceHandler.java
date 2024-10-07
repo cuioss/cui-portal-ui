@@ -15,13 +15,12 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import jakarta.faces.application.Resource;
-import jakarta.faces.application.ResourceHandler;
-
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.tools.io.StructuredFilename;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.application.CuiProjectStage;
+import jakarta.faces.application.Resource;
+import jakarta.faces.application.ResourceHandler;
 import lombok.Getter;
 
 /**

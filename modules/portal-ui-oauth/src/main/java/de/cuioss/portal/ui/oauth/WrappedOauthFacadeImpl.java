@@ -15,11 +15,15 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
+import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
+import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.history.HistoryManager;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.tools.string.Joiner;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -27,15 +31,10 @@ import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 import jakarta.servlet.http.HttpServletRequest;
 
-import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
-import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
-import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
-import de.cuioss.portal.ui.api.history.HistoryManager;
-import de.cuioss.portal.ui.api.context.CuiCurrentView;
-import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.tools.string.Joiner;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Implementation of {@link WrappedOauthFacade} using {@link HistoryManager} and

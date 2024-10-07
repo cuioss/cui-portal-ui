@@ -15,30 +15,29 @@
  */
 package de.cuioss.portal.ui.runtime.exception;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Optional;
-import java.util.UUID;
-
+import de.cuioss.jsf.api.application.navigation.NavigationUtils;
+import de.cuioss.jsf.api.common.util.CheckContextState;
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.portal.core.storage.MapStorage;
+import de.cuioss.portal.core.storage.PortalSessionStorage;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
+import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
+import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
+import de.cuioss.portal.ui.api.exception.HandleOutcome;
+import de.cuioss.portal.ui.api.pages.ErrorPage;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.uimodel.application.CuiProjectStage;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.NavigationHandler;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 
-import de.cuioss.jsf.api.application.navigation.NavigationUtils;
-import de.cuioss.jsf.api.common.util.CheckContextState;
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.core.storage.MapStorage;
-import de.cuioss.portal.core.storage.PortalSessionStorage;
-import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
-import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
-import de.cuioss.portal.ui.api.exception.HandleOutcome;
-import de.cuioss.portal.ui.api.context.CuiCurrentView;
-import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
-import de.cuioss.portal.ui.api.pages.ErrorPage;
-import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.uimodel.application.CuiProjectStage;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Defines the last line of defense, saying displaying the error page with the

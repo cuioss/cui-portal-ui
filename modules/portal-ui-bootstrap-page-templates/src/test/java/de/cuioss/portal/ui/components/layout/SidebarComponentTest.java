@@ -15,14 +15,13 @@
  */
 package de.cuioss.portal.ui.components.layout;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.components.html.Node;
 import de.cuioss.portal.ui.components.PortalCssClasses;
 import de.cuioss.portal.ui.components.PortalFamily;
 import de.cuioss.test.jsf.component.AbstractUiComponentTest;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SidebarComponentTest extends AbstractUiComponentTest<SidebarComponent> {
 

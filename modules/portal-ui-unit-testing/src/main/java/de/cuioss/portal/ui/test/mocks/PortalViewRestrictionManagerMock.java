@@ -15,22 +15,21 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
-import static java.util.Objects.requireNonNull;
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
+import de.cuioss.portal.ui.api.view.ViewRestrictionManager;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.SessionScoped;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.SessionScoped;
-
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
-import de.cuioss.portal.ui.api.view.ViewRestrictionManager;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Mock-implementation of {@link ViewRestrictionManager}. It is

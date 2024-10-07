@@ -15,17 +15,15 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import jakarta.inject.Inject;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
 class AbstractLoginPageBeanTest extends AbstractPageBeanTest<TestLoginPage> {

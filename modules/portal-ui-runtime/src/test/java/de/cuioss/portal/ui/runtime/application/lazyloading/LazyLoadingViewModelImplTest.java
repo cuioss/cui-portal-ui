@@ -15,14 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.lazyloading;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
 import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
@@ -32,7 +24,13 @@ import de.cuioss.uimodel.nameprovider.DisplayName;
 import de.cuioss.uimodel.result.ResultDetail;
 import de.cuioss.uimodel.result.ResultObject;
 import de.cuioss.uimodel.result.ResultState;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ MessageProducerMock.class, PortalStickyMessageProducerMock.class })

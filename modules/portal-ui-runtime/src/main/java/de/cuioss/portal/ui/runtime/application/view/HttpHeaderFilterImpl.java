@@ -34,7 +34,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.HTTP_HEADER_BASE;

@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.api.pages;
 
-import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 
 /**
  * @author Oliver Wolff

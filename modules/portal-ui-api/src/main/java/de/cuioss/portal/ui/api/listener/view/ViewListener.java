@@ -15,11 +15,10 @@
  */
 package de.cuioss.portal.ui.api.listener.view;
 
-import java.io.Serializable;
-
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import jakarta.faces.event.PhaseId;
 
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import java.io.Serializable;
 
 /**
  * Instances of this Listener will be called from the portal as listener for

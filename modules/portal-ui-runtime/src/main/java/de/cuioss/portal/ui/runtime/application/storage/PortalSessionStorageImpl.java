@@ -15,20 +15,18 @@
  */
 package de.cuioss.portal.ui.runtime.application.storage;
 
-import static de.cuioss.portal.ui.api.PortalCoreBeanNames.SESSION_STORAGE_BEAN_NAME;
+import de.cuioss.portal.common.priority.PortalPriorities;
+import de.cuioss.portal.core.storage.PortalSessionStorage;
+import de.cuioss.portal.core.storage.SessionStorage;
+import de.cuioss.portal.core.storage.impl.MapStorageImpl;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Named;
-
-import de.cuioss.portal.common.priority.PortalPriorities;
-
-import jakarta.annotation.Priority;
-import de.cuioss.portal.core.storage.PortalSessionStorage;
-import de.cuioss.portal.core.storage.SessionStorage;
-import de.cuioss.portal.core.storage.impl.MapStorageImpl;
+import static de.cuioss.portal.ui.api.PortalCoreBeanNames.SESSION_STORAGE_BEAN_NAME;
 
 /**
  * Represents the session scoped runtime representation of

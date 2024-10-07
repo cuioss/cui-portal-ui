@@ -15,19 +15,17 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view.testhelper;
 
-import java.io.Serial;
-import java.util.HashSet;
-import java.util.Set;
-
-import jakarta.enterprise.context.Dependent;
-
 import de.cuioss.jsf.api.components.css.ContextState;
-
-import jakarta.annotation.PostConstruct;
 import de.cuioss.portal.ui.api.message.StickyMessage;
 import de.cuioss.portal.ui.api.message.StickyMessageProvider;
 import de.cuioss.uimodel.nameprovider.DisplayName;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.Dependent;
 import lombok.Data;
+
+import java.io.Serial;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Mock impl for StickyMessageProvider

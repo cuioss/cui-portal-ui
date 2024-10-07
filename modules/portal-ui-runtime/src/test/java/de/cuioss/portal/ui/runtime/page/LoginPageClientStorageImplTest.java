@@ -15,24 +15,22 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
+import de.cuioss.portal.core.storage.PortalClientStorage;
+import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
+import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
+import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import de.cuioss.uimodel.application.LoginCredentials;
+import jakarta.inject.Inject;
+import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
 import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_REMEMBER_ME;
 import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERNAME;
 import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERSTORE;
 import static de.cuioss.test.generator.Generators.strings;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.core.storage.PortalClientStorage;
-import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
-import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
-import de.cuioss.uimodel.application.LoginCredentials;
-import lombok.Getter;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({ PortalClientStorageMock.class })

@@ -15,11 +15,10 @@
  */
 package de.cuioss.portal.ui.runtime.application;
 
+import de.cuioss.tools.logging.CuiLogger;
 import jakarta.faces.application.Application;
 import jakarta.faces.application.ApplicationFactory;
 import jakarta.faces.application.ApplicationWrapper;
-
-import de.cuioss.tools.logging.CuiLogger;
 
 /**
  * Factory for creating / wrapping an existing {@link ApplicationFactory}

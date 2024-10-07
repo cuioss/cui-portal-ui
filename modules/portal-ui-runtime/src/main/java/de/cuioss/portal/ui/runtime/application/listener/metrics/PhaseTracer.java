@@ -15,21 +15,20 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
-import static java.util.Objects.requireNonNull;
+import de.cuioss.tools.concurrent.StopWatch;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.tools.string.MoreStrings;
+import jakarta.faces.event.PhaseId;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import jakarta.faces.event.PhaseId;
-
-import de.cuioss.tools.concurrent.StopWatch;
-import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.tools.string.MoreStrings;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Helper Object aggregating a {@link PhaseId} and a {@link StopWatch}

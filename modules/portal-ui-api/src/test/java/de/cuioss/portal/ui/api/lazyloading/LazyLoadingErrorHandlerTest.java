@@ -15,11 +15,6 @@
  */
 package de.cuioss.portal.ui.api.lazyloading;
 
-import static de.cuioss.test.generator.Generators.letterStrings;
-
-import org.easymock.EasyMock;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.components.model.resultContent.ErrorController;
 import de.cuioss.test.generator.Generators;
 import de.cuioss.test.juli.LogAsserts;
@@ -27,6 +22,10 @@ import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import de.cuioss.tools.logging.CuiLogger;
+import org.easymock.EasyMock;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.test.generator.Generators.letterStrings;
 
 @EnableTestLogger
 class LazyLoadingErrorHandlerTest implements ShouldBeNotNull<LazyLoadingErrorHandler> {

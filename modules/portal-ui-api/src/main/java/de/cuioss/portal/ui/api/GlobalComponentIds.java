@@ -15,9 +15,9 @@
  */
 package de.cuioss.portal.ui.api;
 
-import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
-
 import lombok.Getter;
+
+import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 
 /**
  * Global component id's

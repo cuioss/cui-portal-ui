@@ -15,6 +15,16 @@
  */
 package de.cuioss.portal.ui.runtime.application.history;
 
+import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
+import de.cuioss.portal.ui.api.pages.HomePage;
+import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.jboss.weld.junit5.auto.EnableAutoWeld;
+import org.junit.jupiter.api.Test;
+
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_HOME;
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_LOGIN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,18 +32,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.jboss.weld.junit5.auto.EnableAutoWeld;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
-import de.cuioss.portal.ui.api.pages.HomePage;
-import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 
 @EnableAutoWeld
 @EnablePortalConfiguration

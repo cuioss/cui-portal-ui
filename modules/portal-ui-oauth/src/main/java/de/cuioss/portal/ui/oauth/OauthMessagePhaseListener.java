@@ -15,25 +15,24 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static de.cuioss.jsf.api.application.navigation.NavigationUtils.getCurrentView;
-import static de.cuioss.jsf.api.servlet.ServletAdapterUtil.getResponse;
-import static de.cuioss.portal.ui.oauth.WrappedOauthFacadeImpl.MESSAGES_IDENTIFIER;
-import static jakarta.faces.event.PhaseId.RENDER_RESPONSE;
-
-import java.io.Serial;
-import java.util.List;
-
+import de.cuioss.jsf.api.common.util.CheckContextState;
+import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
+import de.cuioss.tools.logging.CuiLogger;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.event.PhaseEvent;
 import jakarta.faces.event.PhaseId;
 import jakarta.faces.event.PhaseListener;
 import jakarta.servlet.http.HttpServletRequest;
-
-import de.cuioss.jsf.api.common.util.CheckContextState;
-import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
-import de.cuioss.tools.logging.CuiLogger;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.util.List;
+
+import static de.cuioss.jsf.api.application.navigation.NavigationUtils.getCurrentView;
+import static de.cuioss.jsf.api.servlet.ServletAdapterUtil.getResponse;
+import static de.cuioss.portal.ui.oauth.WrappedOauthFacadeImpl.MESSAGES_IDENTIFIER;
+import static jakarta.faces.event.PhaseId.RENDER_RESPONSE;
 
 /**
  * Restore {@link FacesMessage}s after a redirect to the oauth server and back

@@ -15,6 +15,12 @@
  */
 package de.cuioss.portal.ui.oauth;
 
+import jakarta.ws.rs.core.Response;
+import org.junit.jupiter.api.Test;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import static jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,13 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import jakarta.ws.rs.core.Response;
-
-import org.junit.jupiter.api.Test;
 
 class MissingScopesErrorDecoderTest {
 

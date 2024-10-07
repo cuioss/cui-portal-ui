@@ -15,9 +15,9 @@
  */
 package de.cuioss.portal.ui.api;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Quite nonsense, coverage only

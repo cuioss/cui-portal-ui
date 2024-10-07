@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import java.io.Serializable;
-import java.util.Map;
-
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
+
+import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Wrapper for the {@link Oauth2AuthenticationFacade} using JSF specific

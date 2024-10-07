@@ -15,15 +15,14 @@
  */
 package de.cuioss.portal.ui.api.pages;
 
-import java.io.Serializable;
-import java.util.List;
-
-import jakarta.enterprise.context.RequestScoped;
-
 import de.cuioss.portal.authentication.model.UserStore;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.uimodel.application.LoginCredentials;
+import jakarta.enterprise.context.RequestScoped;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Specifies the page bean for the form-login. It should usually be

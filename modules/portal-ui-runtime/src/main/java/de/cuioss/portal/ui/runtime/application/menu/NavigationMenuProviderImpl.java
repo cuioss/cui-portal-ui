@@ -15,30 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.menu;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static de.cuioss.tools.string.MoreStrings.isEmpty;
-
-import java.io.Serial;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.inject.Instance;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
-
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemContainer;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemSeparator;
 import de.cuioss.portal.common.priority.PortalPriorities;
@@ -49,9 +26,29 @@ import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.tools.collect.CollectionBuilder;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.MoreStrings;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
 /**
  * Default implementation for {@link NavigationMenuProvider} that acts as a

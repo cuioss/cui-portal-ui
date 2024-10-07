@@ -15,20 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static de.cuioss.jsf.api.application.navigation.NavigationUtils.getCurrentView;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.function.Supplier;
-
-import jakarta.enterprise.event.Event;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-import jakarta.servlet.http.HttpServletRequest;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.LoginEvent;
@@ -42,6 +28,18 @@ import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
 import de.cuioss.uimodel.result.ResultObject;
+import jakarta.enterprise.event.Event;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.function.Supplier;
+
+import static de.cuioss.jsf.api.application.navigation.NavigationUtils.getCurrentView;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT;
 
 /**
  * Abstract helper class for {@link LoginPage} supporting deep linking.

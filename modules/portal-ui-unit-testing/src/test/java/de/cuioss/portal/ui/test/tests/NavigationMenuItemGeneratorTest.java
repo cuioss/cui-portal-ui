@@ -15,13 +15,12 @@
  */
 package de.cuioss.portal.ui.test.tests;
 
-import static de.cuioss.test.generator.Generators.integers;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
 import de.cuioss.test.generator.Generators;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.test.generator.Generators.integers;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NavigationMenuItemGeneratorTest {
 

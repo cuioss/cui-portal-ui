@@ -15,23 +15,22 @@
  */
 package de.cuioss.portal.ui.api.menu;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
+import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
+import de.cuioss.jsf.api.components.support.LabelResolver;
+import de.cuioss.portal.configuration.types.ConfigAsFilteredMap;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-
-import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
-import de.cuioss.jsf.api.components.support.LabelResolver;
-import de.cuioss.portal.configuration.types.ConfigAsFilteredMap;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
 
 /**
  * Base implementation for any cdi portal based {@link NavigationMenuItem}

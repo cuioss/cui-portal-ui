@@ -15,26 +15,25 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERNAME;
-import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERSTORE;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Optional;
-import java.util.function.Predicate;
-
-import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.pages.LoginPageHistoryManagerProvider;
 import de.cuioss.tools.net.UrlParameter;
 import de.cuioss.tools.string.MoreStrings;
 import de.cuioss.uimodel.application.LoginCredentials;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Optional;
+import java.util.function.Predicate;
+
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERNAME;
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERSTORE;
 
 /**
  * {@linkplain LoginPageHistoryManagerProviderImpl} is a decorator for

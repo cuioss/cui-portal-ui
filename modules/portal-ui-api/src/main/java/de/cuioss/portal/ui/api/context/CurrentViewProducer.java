@@ -15,15 +15,14 @@
  */
 package de.cuioss.portal.ui.api.context;
 
+import de.cuioss.jsf.api.application.navigation.NavigationUtils;
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
-
-import de.cuioss.jsf.api.application.navigation.NavigationUtils;
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 
 /**
  * Produces a requestScoped {@link ViewDescriptor} typed with

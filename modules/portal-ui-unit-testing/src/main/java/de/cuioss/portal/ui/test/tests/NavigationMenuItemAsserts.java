@@ -15,13 +15,13 @@
  */
 package de.cuioss.portal.ui.test.tests;
 
-import static de.cuioss.tools.string.MoreStrings.emptyToNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemSingle;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuLabelProvider;
 import lombok.experimental.UtilityClass;
+
+import static de.cuioss.tools.string.MoreStrings.emptyToNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Base class for testing instances of {@link NavigationMenuItem}s

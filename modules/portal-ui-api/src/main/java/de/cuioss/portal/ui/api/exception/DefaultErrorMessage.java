@@ -15,15 +15,15 @@
  */
 package de.cuioss.portal.ui.api.exception;
 
-import java.io.Serial;
-import java.io.Serializable;
-
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.SessionStorage;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * Simple Container for communicating and displaying exception information at

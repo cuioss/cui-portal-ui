@@ -31,7 +31,9 @@ import lombok.ToString;
 import java.io.Serial;
 import java.io.Serializable;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.*;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.NON_SECURED_VIEWS;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.SUPPRESSED_VIEWS;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.TRANSIENT_VIEWS;
 
 /**
  * Reads the View specific configuration from the web.xml and provides
