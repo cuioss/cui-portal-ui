@@ -15,16 +15,15 @@
  */
 package de.cuioss.portal.ui.runtime.exception;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.inject.Instance;
-import jakarta.inject.Inject;
-
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.exception.PortalExceptionHandler;
 import de.cuioss.portal.ui.runtime.application.exception.JSFPortalExceptionHandlerBridge;
 import de.cuioss.tools.logging.CuiLogger;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 
 /**
  * CDI side of exceptionHandler, see {@link JSFPortalExceptionHandlerBridge} for
@@ -45,13 +44,12 @@ public class PortalUiExceptionHandler {
     private FallBackExceptionHandler fallBackExceptionHandler;
 
     /**
-     *
      * @param exceptionEvent the exception that may be handled. If this Handler
      *                       handles a contained {@link Throwable} it will notify
      *                       using the given {@link ExceptionAsEvent} by calling
      *                       {@link ExceptionAsEvent#handled(HandleOutcome)}
      * @throws IllegalStateException in cased of projectStage being
-     *                 Development
+     *                               Development
      */
     public void handle(@Observes ExceptionAsEvent exceptionEvent) {
         if (exceptionEvent.isHandled()) {

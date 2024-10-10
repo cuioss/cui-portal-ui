@@ -15,6 +15,18 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
+import de.cuioss.test.valueobjects.ValueObjectTest;
+import de.cuioss.test.valueobjects.api.contracts.VerifyConstructor;
+import de.cuioss.test.valueobjects.api.property.PropertyConfig;
+import de.cuioss.test.valueobjects.api.property.PropertyReflectionConfig;
+import de.cuioss.tools.property.PropertyReadWrite;
+import jakarta.faces.event.PhaseId;
+import org.junit.jupiter.api.Test;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,22 +34,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import jakarta.faces.event.PhaseId;
-
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.test.valueobjects.ValueObjectTest;
-import de.cuioss.test.valueobjects.api.contracts.VerifyConstructor;
-import de.cuioss.test.valueobjects.api.property.PropertyConfig;
-import de.cuioss.test.valueobjects.api.property.PropertyReflectionConfig;
-import de.cuioss.tools.property.PropertyReadWrite;
-
 @PropertyConfig(name = "phaseId", propertyClass = PhaseId.class, propertyReadWrite = PropertyReadWrite.WRITE_ONLY)
-@VerifyConstructor(of = { "phaseId" }, allRequired = true)
+@VerifyConstructor(of = {"phaseId"}, allRequired = true)
 @PropertyReflectionConfig(skip = true)
 class PhaseTracerTest extends ValueObjectTest<PhaseTracer> {
 

@@ -15,24 +15,22 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HANDLED_LIBRARIES;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HANDLED_SUFFIXES;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_VERSION;
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.portal.configuration.types.ConfigAsList;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.portal.configuration.types.ConfigAsList;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HANDLED_LIBRARIES;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HANDLED_SUFFIXES;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_VERSION;
 
 /**
  * Combines the runtime information that are specific to the

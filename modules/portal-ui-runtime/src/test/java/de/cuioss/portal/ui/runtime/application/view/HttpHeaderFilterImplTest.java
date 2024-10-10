@@ -51,6 +51,18 @@ class HttpHeaderFilterImplTest implements ShouldHandleObjectContracts<HttpHeader
     @Produces
     private MockHttpServletRequest servletRequest;
 
+    static void configureFilter(PortalTestConfiguration configuration) {
+        configuration.update(HTTP_HEADER_BASE + "abc.enabled", "true");
+        configuration.update(HTTP_HEADER_BASE + "abc.content", "def: ghi");
+
+        configuration.update(HTTP_HEADER_BASE + "jkl.enabled", "false");
+        configuration.update(HTTP_HEADER_BASE + "jkl.content", "mno: pqr");
+
+        configuration.update(HTTP_HEADER_BASE + "stu.enabled", "true");
+        configuration.update(HTTP_HEADER_BASE + "stu.content", "def: vwx:z");
+        configuration.update(HTTP_HEADER_BASE + "stu.views", "testURI");
+    }
+
     @BeforeEach
     void beforeEach() {
         servletRequest = new MockHttpServletRequest();
@@ -66,17 +78,5 @@ class HttpHeaderFilterImplTest implements ShouldHandleObjectContracts<HttpHeader
         getUnderTest().onCreate(servletRequest, response);
         assertEquals("vwx:z", response.getHeader("def"));
         assertNull(response.getHeader("mno"));
-    }
-
-    static void configureFilter(PortalTestConfiguration configuration) {
-        configuration.update(HTTP_HEADER_BASE + "abc.enabled", "true");
-        configuration.update(HTTP_HEADER_BASE + "abc.content", "def: ghi");
-
-        configuration.update(HTTP_HEADER_BASE + "jkl.enabled", "false");
-        configuration.update(HTTP_HEADER_BASE + "jkl.content", "mno: pqr");
-
-        configuration.update(HTTP_HEADER_BASE + "stu.enabled", "true");
-        configuration.update(HTTP_HEADER_BASE + "stu.content", "def: vwx:z");
-        configuration.update(HTTP_HEADER_BASE + "stu.views", "testURI");
     }
 }

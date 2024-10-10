@@ -15,33 +15,31 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener;
 
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import jakarta.faces.event.PhaseEvent;
-import jakarta.faces.event.PhaseId;
-import jakarta.inject.Inject;
-
-import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
+import de.cuioss.portal.ui.api.context.CurrentViewProducer;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
-import de.cuioss.portal.ui.api.context.CurrentViewProducer;
 import de.cuioss.portal.ui.runtime.application.listener.view.PortalCDIViewListener;
 import de.cuioss.portal.ui.runtime.application.listener.view.testhelper.AfterViewListener;
 import de.cuioss.portal.ui.runtime.application.listener.view.testhelper.BeforeViewListener;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import jakarta.faces.event.PhaseEvent;
+import jakarta.faces.event.PhaseId;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ CurrentViewProducer.class, AfterViewListener.class, PortalCDIViewListener.class })
+@AddBeanClasses({CurrentViewProducer.class, AfterViewListener.class, PortalCDIViewListener.class})
 class PortalViewListenerAdapterTest implements JsfEnvironmentConsumer {
 
     @Setter

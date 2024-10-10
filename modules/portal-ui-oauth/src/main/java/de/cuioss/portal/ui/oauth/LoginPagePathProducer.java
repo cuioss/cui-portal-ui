@@ -15,23 +15,23 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.inject.Produces;
-import jakarta.faces.context.FacesContext;
-
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
-
-import jakarta.annotation.PostConstruct;
 import de.cuioss.portal.authentication.oauth.LoginPagePath;
 import de.cuioss.portal.ui.api.pages.LoginPage;
 import de.cuioss.tools.logging.CuiLogger;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.faces.context.FacesContext;
 
 @RequestScoped
 public class LoginPagePathProducer {
 
     private static final CuiLogger log = new CuiLogger(LoginPagePathProducer.class);
 
-    /** Default login page based on CUI-portal-oauth faces-config.xml */
+    /**
+     * Default login page based on CUI-portal-oauth faces-config.xml
+     */
     private static final String DEFAULT = "/guest/login.xhtml";
 
     @Produces

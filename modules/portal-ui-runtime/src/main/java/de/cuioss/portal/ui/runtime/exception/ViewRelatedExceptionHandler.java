@@ -52,25 +52,20 @@ import jakarta.inject.Inject;
 @RequestScoped
 public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
 
-    private static final String HANDLING_S_AS_S = "Handling '%s' as '%s'";
-
-    private static final CuiLogger LOGGER = new CuiLogger(ViewRelatedExceptionHandler.class);
-
     /**
      * Key for the message to be displayed on {@link ViewSuppressedException}
      */
     public static final String VIEW_SUPPRESSED_KEY = "system.exception.view.suppressed";
-
     /**
      * Key for the message to be displayed on {@link ViewExpiredException}
      */
     public static final String VIEW_EXPIRED_KEY = "system.exception.view.expired";
-
     /**
      * Key for the message to be displayed on {@link UserNotAuthorizedException}
      */
     public static final String VIEW_INSUFFICIENT_PERMISSIONS_KEY = "system.exception.view.insufficient.permissions";
-
+    private static final String HANDLING_S_AS_S = "Handling '%s' as '%s'";
+    private static final CuiLogger LOGGER = new CuiLogger(ViewRelatedExceptionHandler.class);
     private static final String PORTAL_103 = "Portal-103: View '{}' requires the roles '{}', but user '{}' only has the roles: '{}'";
 
     private static final String NAV_LOOP_ERROR_MSG = """
@@ -134,7 +129,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
         } else if (null != exception.getSuppressedViewDescriptor()
                 && null != exception.getSuppressedViewDescriptor().getLogicalViewId()
                 && exception.getSuppressedViewDescriptor().getLogicalViewId()
-                        .equals(NavigationUtils.lookUpToLogicalViewIdBy(facesContext, outcome))) {
+                .equals(NavigationUtils.lookUpToLogicalViewIdBy(facesContext, outcome))) {
             LOGGER.error(NAV_LOOP_ERROR_MSG, exception.getSuppressedViewDescriptor().getLogicalViewId());
             outcome = ErrorPage.OUTCOME;
         }

@@ -38,11 +38,9 @@ import static de.cuioss.tools.string.MoreStrings.isEmpty;
 @ToString(exclude = {"facesContextProvider"})
 public abstract class AbstractHttpErrorPage implements Serializable {
 
-    private static final CuiLogger log = new CuiLogger(AbstractHttpErrorPage.class);
-
-    private static final String UNKNOWN = "?";
     static final String JAKARTA_SERVLET_ERROR_REQUEST_URI = "jakarta.servlet.error.request_uri";
-
+    private static final CuiLogger log = new CuiLogger(AbstractHttpErrorPage.class);
+    private static final String UNKNOWN = "?";
     @Serial
     private static final long serialVersionUID = -6617663225820801072L;
 

@@ -29,7 +29,10 @@ import org.junit.jupiter.api.Test;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_TOP_IDENTIFIER;
 import static de.cuioss.portal.ui.api.menu.MockPortalNavigationMenuItemImplBase.ID;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnableAutoWeld
 @AddBeanClasses({JsfObjectsProducer.class})

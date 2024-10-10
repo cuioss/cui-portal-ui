@@ -15,15 +15,13 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
-import jakarta.inject.Inject;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @EnablePortalUiEnvironment
 class RedirectorImplTest implements ShouldBeNotNull<RedirectorImpl> {

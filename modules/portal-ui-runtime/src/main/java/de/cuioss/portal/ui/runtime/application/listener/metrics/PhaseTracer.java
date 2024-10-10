@@ -15,29 +15,27 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
-import static java.util.Objects.requireNonNull;
+import de.cuioss.tools.concurrent.StopWatch;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.tools.string.MoreStrings;
+import jakarta.faces.event.PhaseId;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import jakarta.faces.event.PhaseId;
-
-import de.cuioss.tools.concurrent.StopWatch;
-import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.tools.string.MoreStrings;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Helper Object aggregating a {@link PhaseId} and a {@link StopWatch}
  *
  * @author Oliver Wolff
- *
  */
-@EqualsAndHashCode(of = { "phaseOrdinal", "phaseName", "didRun" })
+@EqualsAndHashCode(of = {"phaseOrdinal", "phaseName", "didRun"})
 public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
 
     @Serial
@@ -54,7 +52,9 @@ public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
     @Getter(AccessLevel.PACKAGE)
     private final StopWatch stopWatch;
 
-    /** Boolean indicating whether the timer for this phase was run at all. */
+    /**
+     * Boolean indicating whether the timer for this phase was run at all.
+     */
     @Getter
     private boolean didRun;
 

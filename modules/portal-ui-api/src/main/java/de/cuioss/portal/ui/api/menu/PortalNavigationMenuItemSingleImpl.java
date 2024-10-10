@@ -15,20 +15,19 @@
  */
 package de.cuioss.portal.ui.api.menu;
 
-import java.io.Serial;
-import java.util.HashMap;
-import java.util.Map;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemSingle;
 import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Implementation of {@link NavigationMenuItemSingle} using cdi portal and it's
@@ -41,29 +40,24 @@ public class PortalNavigationMenuItemSingleImpl extends PortalNavigationMenuItem
 
     @Serial
     private static final long serialVersionUID = -4639141255087105993L;
-
+    @Getter
+    private final Map<String, String> outcomeParameter = new HashMap<>();
     @Inject
     @CuiCurrentView
     Provider<ViewDescriptor> currentViewProvider;
-
     @Getter
     @Setter
     private String outcome;
-
     @Getter
     @Setter
     private String target;
-
     @Getter
     @Setter
     private String onClickAction;
 
-    @Getter
-    private final Map<String, String> outcomeParameter = new HashMap<>();
-
     /**
      * @return true if the current view id equals the configured outcome or is
-     *         contained in {@link #getActiveForAdditionalViewId()}.
+     * contained in {@link #getActiveForAdditionalViewId()}.
      */
     @Override
     public boolean isActive() {

@@ -1,26 +1,24 @@
 package de.cuioss.portal.ui.runtime.application.theme;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_DEFAULT;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.core.storage.PortalClientStorage;
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.generator.Generators;
 import de.cuioss.test.generator.junit.EnableGeneratorController;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_DEFAULT;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalThemeConfiguration.class, PortalClientStorageMock.class })
+@AddBeanClasses({PortalThemeConfiguration.class, PortalClientStorageMock.class})
 @EnableGeneratorController
 class UserThemeBeanTest implements ShouldHandleObjectContracts<UserThemeBean> {
 

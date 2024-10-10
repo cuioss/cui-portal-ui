@@ -25,7 +25,7 @@ import java.io.Serializable;
  * @author Oliver Wolff
  */
 @SuppressWarnings("squid:S1214") // We allow constants in the page interfaces, because they belong together
-                                 // (coherence).
+// (coherence).
 public interface LogoutPage extends Serializable {
 
     /**
@@ -47,7 +47,7 @@ public interface LogoutPage extends Serializable {
 
     /**
      * @return null if logout was successful otherwise {@link LoginPage#OUTCOME} in
-     *         order to force a login.
+     * order to force a login.
      */
     String performLogout();
 

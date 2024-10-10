@@ -15,16 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application;
 
-import static de.cuioss.jsf.api.components.css.ContextState.DANGER;
-import static de.cuioss.test.generator.Generators.enumValues;
-import static de.cuioss.test.generator.Generators.letterStrings;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.events.ModelPayloadEvent;
 import de.cuioss.jsf.api.components.support.DummyComponent;
@@ -34,7 +24,15 @@ import de.cuioss.portal.ui.test.mocks.PortalStickyMessageProducerMock;
 import de.cuioss.test.generator.TypedGenerator;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import de.cuioss.uimodel.nameprovider.DisplayName;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.jsf.api.components.css.ContextState.DANGER;
+import static de.cuioss.test.generator.Generators.enumValues;
+import static de.cuioss.test.generator.Generators.letterStrings;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
 @ExcludeBeanClasses(PortalStickyMessageProducerMock.class)
@@ -45,6 +43,10 @@ class StickyMessageProducerBeanTest implements ShouldHandleObjectContracts<Stick
     @Inject
     @Getter
     private StickyMessageProducerBean underTest;
+
+    private static ModelPayloadEvent asEvent(final StickyMessage msg) {
+        return new ModelPayloadEvent(new DummyComponent(), msg);
+    }
 
     @Test
     void testErrorMessage() {
@@ -68,19 +70,15 @@ class StickyMessageProducerBeanTest implements ShouldHandleObjectContracts<Stick
         assertThatNoMessagesStored();
     }
 
+    /*
+     * Helper Methods
+     */
+
     private StickyMessage addAnyMessageToStorage() {
         final var stickyMessage = new StickyMessage(true, CONTEXT_STATE_GENERATOR.next(),
                 new DisplayName(letterStrings(10, 20).next()));
         underTest.addMessage(stickyMessage);
         return stickyMessage;
-    }
-
-    /*
-     * Helper Methods
-     */
-
-    private static ModelPayloadEvent asEvent(final StickyMessage msg) {
-        return new ModelPayloadEvent(new DummyComponent(), msg);
     }
 
     private void assertThatNoMessagesStored() {

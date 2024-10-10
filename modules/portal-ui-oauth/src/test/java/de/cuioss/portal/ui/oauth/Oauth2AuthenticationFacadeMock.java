@@ -15,22 +15,7 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static de.cuioss.tools.net.UrlParameter.createParameterString;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Alternative;
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-import jakarta.servlet.http.HttpServletRequest;
-
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
-
-import jakarta.annotation.Priority;
 import de.cuioss.portal.authentication.facade.AuthenticationSource;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.model.BaseAuthenticatedUserInfo;
@@ -39,10 +24,23 @@ import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.net.UrlParameter;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static de.cuioss.tools.net.UrlParameter.createParameterString;
 
 @PortalAuthenticationFacade
 @ApplicationScoped
@@ -108,7 +106,6 @@ public class Oauth2AuthenticationFacadeMock implements Oauth2AuthenticationFacad
 
     @Override
     public boolean logout(final HttpServletRequest servletRequest) {
-        // TODO Auto-generated method stub
         return false;
     }
 

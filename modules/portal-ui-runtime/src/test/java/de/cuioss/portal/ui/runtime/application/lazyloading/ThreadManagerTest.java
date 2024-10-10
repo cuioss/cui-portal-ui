@@ -75,7 +75,7 @@ class ThreadManagerTest implements ShouldHandleObjectContracts<ThreadManager> {
         underTest.store("1", () -> "Test", "A");
 
         await("wait-for-cleanup")
-            .atMost(3, TimeUnit.SECONDS)
-            .until(() -> null == underTest.retrieve("1"));
+                .atMost(3, TimeUnit.SECONDS)
+                .until(() -> null == underTest.retrieve("1"));
     }
 }

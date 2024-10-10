@@ -15,13 +15,12 @@
  */
 package de.cuioss.portal.ui.api.resources;
 
-import java.util.Objects;
-
 import jakarta.faces.application.Resource;
 import jakarta.faces.application.ResourceHandler;
 import jakarta.faces.context.FacesContext;
-
 import lombok.ToString;
+
+import java.util.Objects;
 
 /**
  * Base Resource using
@@ -32,24 +31,6 @@ import lombok.ToString;
  */
 @ToString
 public abstract class CuiResource extends Resource {
-
-    @Override
-    public String getRequestPath() {
-        return calculateRequestPath(getResourceName(), getLibraryName(), FacesContext.getCurrentInstance());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getResourceName(), getLibraryName());
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj instanceof final CuiResource other)
-            return Objects.equals(getResourceName(), other.getResourceName())
-                    && Objects.equals(getLibraryName(), other.getLibraryName());
-        return false;
-    }
 
     /**
      * Calculate the request path to a given resource to be used a link target.
@@ -67,5 +48,23 @@ public abstract class CuiResource extends Resource {
             uri += "?ln=" + libraryName;
         }
         return context.getApplication().getViewHandler().getResourceURL(context, uri);
+    }
+
+    @Override
+    public String getRequestPath() {
+        return calculateRequestPath(getResourceName(), getLibraryName(), FacesContext.getCurrentInstance());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getResourceName(), getLibraryName());
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj instanceof final CuiResource other)
+            return Objects.equals(getResourceName(), other.getResourceName())
+                    && Objects.equals(getLibraryName(), other.getLibraryName());
+        return false;
     }
 }

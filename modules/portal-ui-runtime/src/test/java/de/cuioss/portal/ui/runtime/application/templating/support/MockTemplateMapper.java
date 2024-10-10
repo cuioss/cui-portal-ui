@@ -15,17 +15,16 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating.support;
 
-import java.io.Serial;
-import java.net.URL;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Alternative;
-
 import de.cuioss.portal.ui.api.templating.MultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
 import de.cuioss.tools.io.FileLoaderUtility;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Alternative;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serial;
+import java.net.URL;
 
 @PortalMultiTemplatingMapper
 @ApplicationScoped

@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import java.io.Serializable;
-import java.util.Map;
-
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
+
+import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Wrapper for the {@link Oauth2AuthenticationFacade} using JSF specific
@@ -34,8 +34,8 @@ public interface WrappedOauthFacade {
      * server.
      *
      * @return the accessToken is available, otherwise null is returned, a redirect
-     *         to the oauth server is issued, and the page is accessed a second
-     *         time.
+     * to the oauth server is issued, and the page is accessed a second
+     * time.
      */
     String retrieveToken();
 
@@ -45,8 +45,8 @@ public interface WrappedOauthFacade {
      *
      * @param scopes the scopes as space separated list.
      * @return the accessToken is available, otherwise null is returned, a redirect
-     *         to the oauth server is issued, and the page is accessed a second
-     *         time.
+     * to the oauth server is issued, and the page is accessed a second
+     * time.
      */
     String retrieveToken(String scopes);
 
@@ -70,7 +70,7 @@ public interface WrappedOauthFacade {
      *                       redirect
      */
     void handleMissingScopesException(MissingScopesException e, String initialScopes,
-            Map<String, Serializable> viewParameters);
+                                      Map<String, Serializable> viewParameters);
 
     /**
      * Retrieve the view parameters stored by
@@ -83,7 +83,7 @@ public interface WrappedOauthFacade {
 
     /**
      * Retrieve the target view from the history manager. Because of problems with
-     * the window scope after redirect from oauth server use a session stored target
+     * the window scope after redirect from oauth server, use a session stored target
      * view if present.
      *
      * @return

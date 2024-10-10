@@ -15,17 +15,16 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating.support;
 
-import java.net.URL;
-import java.util.Optional;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Alternative;
-
 import de.cuioss.portal.ui.api.templating.MultiViewMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiViewMapper;
 import de.cuioss.tools.io.FileLoaderUtility;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Alternative;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.net.URL;
+import java.util.Optional;
 
 @PortalMultiViewMapper
 @Alternative

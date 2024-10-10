@@ -15,17 +15,15 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import jakarta.inject.Inject;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.ui.api.pages.LoginPageStrategy;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnablePortalUiEnvironment
 class PortalPagesConfigurationTest extends AbstractPageBeanTest<PortalPagesConfiguration> {

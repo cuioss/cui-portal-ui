@@ -15,18 +15,16 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.inject.Inject;
-
+import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
-import lombok.Getter;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnableAutoWeld
 @AddBeanClasses(PortalTemplates.class)

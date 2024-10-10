@@ -15,10 +15,10 @@
  */
 package de.cuioss.portal.ui.api.pages;
 
-import java.io.Serializable;
-
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
+
+import java.io.Serializable;
 
 /**
  * Specifies the page bean backing the error page.
@@ -26,7 +26,7 @@ import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
  * @author Oliver Wolff
  */
 @SuppressWarnings("squid:S1214") // We allow constants in the page interfaces, because they belong together
-                                 // (coherence).
+// (coherence).
 public interface ErrorPage extends Serializable {
 
     /**

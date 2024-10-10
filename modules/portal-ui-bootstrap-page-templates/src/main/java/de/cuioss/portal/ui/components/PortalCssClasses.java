@@ -30,7 +30,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum PortalCssClasses implements StyleClassProvider {
 
-    /** "sidebar" */
+    /**
+     * "sidebar"
+     */
     SIDEBAR("sidebar");
 
     @Getter

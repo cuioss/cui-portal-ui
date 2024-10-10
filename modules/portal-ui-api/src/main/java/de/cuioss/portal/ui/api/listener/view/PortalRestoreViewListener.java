@@ -15,18 +15,18 @@
  */
 package de.cuioss.portal.ui.api.listener.view;
 
+import jakarta.faces.event.PhaseId;
+import jakarta.faces.event.PhaseListener;
+import jakarta.inject.Qualifier;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import jakarta.faces.event.PhaseId;
-import jakarta.faces.event.PhaseListener;
-import jakarta.inject.Qualifier;
 
 /**
  * Marker identifying concrete instances of {@link ViewListener}, that are to be
@@ -36,14 +36,14 @@ import jakarta.inject.Qualifier;
  */
 @Qualifier
 @Retention(RUNTIME)
-@Target({ TYPE, METHOD, FIELD, PARAMETER })
+@Target({TYPE, METHOD, FIELD, PARAMETER})
 public @interface PortalRestoreViewListener {
 
     /**
      * @return {@link PhaseExecution} indicating whether a concrete Portal-listener
-     *         is to be fired
-     *         {@link PhaseListener#beforePhase(jakarta.faces.event.PhaseEvent)} of
-     *         {@link PhaseListener#afterPhase(jakarta.faces.event.PhaseEvent)}
+     * is to be fired
+     * {@link PhaseListener#beforePhase(jakarta.faces.event.PhaseEvent)} of
+     * {@link PhaseListener#afterPhase(jakarta.faces.event.PhaseEvent)}
      */
     PhaseExecution value();
 }

@@ -15,19 +15,17 @@
  */
 package de.cuioss.portal.ui.runtime.application;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import jakarta.faces.FactoryFinder;
-import jakarta.faces.application.ApplicationFactory;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import jakarta.faces.FactoryFinder;
+import jakarta.faces.application.ApplicationFactory;
 import lombok.Getter;
 import lombok.Setter;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnableJsfEnvironment
 class PortalApplicationFactoryTest implements JsfEnvironmentConsumer {

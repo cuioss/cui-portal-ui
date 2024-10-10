@@ -15,18 +15,16 @@
  */
 package de.cuioss.portal.ui.errorpages;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.inject.Inject;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
 class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {

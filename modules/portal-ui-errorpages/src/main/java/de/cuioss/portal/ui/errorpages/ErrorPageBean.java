@@ -15,28 +15,25 @@
  */
 package de.cuioss.portal.ui.errorpages;
 
-import java.io.Serial;
-import java.io.Serializable;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import jakarta.servlet.http.HttpServletResponse;
-
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
-
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.pages.ErrorPage;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * Portal base implementation of {@link ErrorPage} <em>Note:</em> It is assumed

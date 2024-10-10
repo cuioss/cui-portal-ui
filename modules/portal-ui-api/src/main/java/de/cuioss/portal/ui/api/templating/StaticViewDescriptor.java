@@ -29,13 +29,13 @@ public interface StaticViewDescriptor extends Serializable {
 
     /**
      * @return a List of names of the templates to be handles by this concrete
-     *         descriptor.
+     * descriptor.
      */
     List<String> getHandledViews();
 
     /**
      * @return the name of the faces-Directory the templates within this descriptor
-     *         belong to. It must not end with '/'
+     * belong to. It must not end with '/'
      */
     String getViewPath();
 }

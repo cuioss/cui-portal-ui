@@ -39,7 +39,7 @@
  * </pre>
  * <p>
  * The <em>/templates</em> part is used for our
- * {@link de.cuioss.portal.ui.runtime.application.templating.ViewResourceHandler} to
+ * de.cuioss.portal.ui.runtime.application.templating.ViewResourceHandler to
  * intercept the resolution. The second part identifies the concrete template
  * without the template-directory being part of the path: "Give me that thingy"
  * instead of "Give me the content of that path". This approach let us keep the
@@ -49,7 +49,7 @@
  *
  * <p>
  * While the
- * {@link de.cuioss.portal.ui.runtime.application.templating.ViewResourceHandler}
+ * de.cuioss.portal.ui.runtime.application.templating.ViewResourceHandler
  * takes care regarding the delivery of the template the actual logic of which
  * template to choose is implemented within concrete instances of
  * {@link de.cuioss.portal.ui.api.templating.MultiTemplatingMapper} that needs

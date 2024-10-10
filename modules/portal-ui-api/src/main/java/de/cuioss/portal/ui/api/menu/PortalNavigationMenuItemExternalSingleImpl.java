@@ -25,7 +25,6 @@ import java.io.Serial;
 
 /**
  * @author Oliver Wolff
- *
  */
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

@@ -1,6 +1,5 @@
 /**
- * Intermediate approach on how to define which pages needs to be secured. Later
- * on it will be replaced by delta-spike mechanism.
+ * Intermediate approach on how to define which pages needs to be secured.
  *
  * @author Oliver Wolff
  */

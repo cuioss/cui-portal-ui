@@ -15,23 +15,22 @@
  */
 package de.cuioss.portal.ui.runtime.support;
 
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
-
-import java.util.List;
-import java.util.Locale;
-
+import de.cuioss.portal.common.locale.LocaleChangeEvent;
+import de.cuioss.portal.ui.api.locale.LocaleResolverService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
-
-import de.cuioss.portal.common.locale.LocaleChangeEvent;
-import de.cuioss.portal.ui.api.locale.LocaleResolverService;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.List;
+import java.util.Locale;
+
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 
 /**
  * Mock version of {@link LocaleResolverService}
@@ -44,16 +43,14 @@ import lombok.ToString;
 @ToString
 public class PortalLocaleResolverServiceMock implements LocaleResolverService {
 
-    @Setter
-    private Locale locale = Locale.ENGLISH;
-
-    @Getter
-    @Setter
-    private List<Locale> availableLocales = immutableList(Locale.GERMAN, Locale.ENGLISH);
-
     @Inject
     @LocaleChangeEvent
     Event<Locale> localeChangeEvent;
+    @Setter
+    private Locale locale = Locale.ENGLISH;
+    @Getter
+    @Setter
+    private List<Locale> availableLocales = immutableList(Locale.GERMAN, Locale.ENGLISH);
 
     @Override
     public void saveUserLocale(final Locale newLocale) {

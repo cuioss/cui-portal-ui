@@ -15,11 +15,10 @@
  */
 package de.cuioss.portal.ui.api.menu.items;
 
-import jakarta.enterprise.context.Dependent;
-
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemSingleImpl;
 import de.cuioss.portal.ui.api.pages.LogoutPage;
+import jakarta.enterprise.context.Dependent;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -40,20 +39,24 @@ import java.io.Serial;
 @ToString(callSuper = true)
 public class LogoutMenuItem extends PortalNavigationMenuItemSingleImpl {
 
+    /**
+     * The label Key for this component.
+     */
+    public static final String LABEL_KEY = "cui.commons.portal.menu.logout.label";
+    /**
+     * The title Key for this component.
+     */
+    public static final String TITLE_KEY = "cui.commons.portal.menu.logout.title";
+    /**
+     * The icon for this component.
+     */
+    public static final String ICON = "cui-icon-power";
+    /**
+     * The string based id for this menu item.
+     */
+    public static final String MENU_ID = "logoutMenuItem";
     @Serial
     private static final long serialVersionUID = -1265061305901788409L;
-
-    /** The label Key for this component. */
-    public static final String LABEL_KEY = "cui.commons.portal.menu.logout.label";
-
-    /** The title Key for this component. */
-    public static final String TITLE_KEY = "cui.commons.portal.menu.logout.title";
-
-    /** The icon for this component. */
-    public static final String ICON = "cui-icon-power";
-
-    /** The string based id for this menu item. */
-    public static final String MENU_ID = "logoutMenuItem";
 
     /**
      * Constructor.

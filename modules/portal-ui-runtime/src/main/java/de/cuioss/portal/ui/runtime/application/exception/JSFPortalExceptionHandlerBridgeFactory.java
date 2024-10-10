@@ -15,10 +15,9 @@
  */
 package de.cuioss.portal.ui.runtime.application.exception;
 
+import de.cuioss.tools.logging.CuiLogger;
 import jakarta.faces.context.ExceptionHandler;
 import jakarta.faces.context.ExceptionHandlerFactory;
-
-import de.cuioss.tools.logging.CuiLogger;
 
 /**
  * Factory for creating instances of {@link JSFPortalExceptionHandlerBridge}

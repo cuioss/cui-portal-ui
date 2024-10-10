@@ -15,44 +15,38 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_ORIGIN;
-import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ORIGIN;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import org.easymock.EasyMock;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.mocks.CuiMockHttpServletRequest;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
+import org.easymock.EasyMock;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_ORIGIN;
+import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ORIGIN;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
 class OauthHttpHeaderFilterTest implements ShouldBeNotNull<OauthHttpHeaderFilter>, JsfEnvironmentConsumer {
 
-    private static final String ACCESS_CONTROL_ALLOW_CREDENTIALS = OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_CREDENTIALS;
-
-    private static final String ME = "https://locahost:8080/me";
-
     static final String FACES_GUEST_LOGIN_JSF = "/guest/login.jsf";
-
+    private static final String ACCESS_CONTROL_ALLOW_CREDENTIALS = OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_CREDENTIALS;
+    private static final String ME = "https://locahost:8080/me";
+    @Getter
+    private final OauthHttpHeaderFilter underTest = new OauthHttpHeaderFilter();
+    private final FilterChain filterChain = EasyMock.createNiceMock(FilterChain.class);
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
-
-    @Getter
-    private final OauthHttpHeaderFilter underTest = new OauthHttpHeaderFilter();
-
-    private final FilterChain filterChain= EasyMock.createNiceMock(FilterChain.class);
 
     @Test
     void shouldHandleHappyCase() throws ServletException, IOException {

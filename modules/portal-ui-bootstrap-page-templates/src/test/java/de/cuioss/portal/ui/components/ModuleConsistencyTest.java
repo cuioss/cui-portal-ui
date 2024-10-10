@@ -15,9 +15,8 @@
  */
 package de.cuioss.portal.ui.components;
 
-import org.junit.jupiter.api.Disabled;
-
 import de.cuioss.portal.core.test.tests.BaseModuleConsistencyTest;
+import org.junit.jupiter.api.Disabled;
 
 /**
  * Tests the complete cdi environment / wiring

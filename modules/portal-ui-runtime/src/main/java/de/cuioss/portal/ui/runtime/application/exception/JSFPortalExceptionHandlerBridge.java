@@ -15,15 +15,14 @@
  */
 package de.cuioss.portal.ui.runtime.application.exception;
 
-import jakarta.faces.FacesException;
-import jakarta.faces.context.ExceptionHandler;
-import jakarta.faces.context.ExceptionHandlerWrapper;
-import jakarta.faces.event.ExceptionQueuedEventContext;
-
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.runtime.exception.PortalUiExceptionHandler;
 import de.cuioss.tools.logging.CuiLogger;
+import jakarta.faces.FacesException;
+import jakarta.faces.context.ExceptionHandler;
+import jakarta.faces.context.ExceptionHandlerWrapper;
+import jakarta.faces.event.ExceptionQueuedEventContext;
 
 /**
  * Bridges the JSf Exception based Exception-Handling to the Portal Ui Based ->

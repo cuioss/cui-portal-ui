@@ -15,11 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.view.matcher;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.inject.Produces;
-import jakarta.enterprise.inject.spi.InjectionPoint;
-
 import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcher;
 import de.cuioss.jsf.api.application.view.matcher.ViewMatcherImpl;
@@ -27,6 +22,10 @@ import de.cuioss.portal.configuration.util.ConfigurationHelper;
 import de.cuioss.portal.ui.api.configuration.types.ConfigAsViewMatcher;
 import de.cuioss.tools.string.MoreStrings;
 import de.cuioss.tools.string.Splitter;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 
 /**
  * Provides specific producer methods for elements not covered by the standard

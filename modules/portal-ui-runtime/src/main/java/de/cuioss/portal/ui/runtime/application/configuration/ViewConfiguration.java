@@ -31,7 +31,9 @@ import lombok.ToString;
 import java.io.Serial;
 import java.io.Serializable;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.*;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.NON_SECURED_VIEWS;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.SUPPRESSED_VIEWS;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.TRANSIENT_VIEWS;
 
 /**
  * Reads the View specific configuration from the web.xml and provides
@@ -94,7 +96,7 @@ public class ViewConfiguration implements Serializable {
         nonSecuredViewMatcher = nonSecuredViewMatcherProvider.get();
         if (nonSecuredViewMatcher instanceof EmptyViewMatcher) {
             log.warn("The configuration of " + NON_SECURED_VIEWS
-                + " results in all views of the application being only accessible for authorized user. If this is intentional you can ignore this warning");
+                    + " results in all views of the application being only accessible for authorized user. If this is intentional you can ignore this warning");
         }
         transientViewMatcher = transientViewMatcherProvider.get();
         suppressedViewMatcher = suppressedViewMatcherProvider.get();

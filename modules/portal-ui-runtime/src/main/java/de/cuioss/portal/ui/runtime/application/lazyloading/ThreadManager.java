@@ -48,21 +48,16 @@ public class ThreadManager {
     private static final int CLEANUP_SLEEP_SECONDS = 1;
 
     private static final CuiLogger LOGGER = new CuiLogger(ThreadManager.class);
-
+    private final Map<String, FutureHandle> registry = new HashMap<>();
     @Inject
     @ConfigProperty(name = PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT)
     private Provider<Integer> requestHandleTimeoutProvider;
-
     private int requestHandleTimeout;
-
     private ExecutorService executorService;
-
     /**
      * To stop the cleanup worker thread.
      */
     private boolean executorRunning = false;
-
-    private final Map<String, FutureHandle> registry = new HashMap<>();
 
     /**
      * Store and start a {@link Callable} task.
@@ -97,7 +92,7 @@ public class ThreadManager {
         LOGGER.debug("Starting ThreadManager");
         if (null == requestHandleTimeoutProvider || null == requestHandleTimeoutProvider.get()) {
             throw new IllegalStateException(
-                "Invalid configuration, please check property " + PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT);
+                    "Invalid configuration, please check property " + PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT);
         }
         requestHandleTimeout = requestHandleTimeoutProvider.get();
         LOGGER.debug("requestHandleTimeout='%s'", requestHandleTimeout);
@@ -129,7 +124,7 @@ public class ThreadManager {
                 synchronized (registry) {
                     for (final Map.Entry<String, FutureHandle> entry : registry.entrySet()) {
                         if ((System.currentTimeMillis() - entry.getValue().timestamp())
-                            / 1000 > requestHandleTimeout) {
+                                / 1000 > requestHandleTimeout) {
 
                             LOGGER.debug("timeout. terminating id='%s', future='%s'", entry.getKey(), entry.getValue());
 

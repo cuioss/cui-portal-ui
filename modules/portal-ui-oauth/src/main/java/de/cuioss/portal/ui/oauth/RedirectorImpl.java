@@ -15,13 +15,12 @@
  */
 package de.cuioss.portal.ui.oauth;
 
+import de.cuioss.jsf.api.application.navigation.NavigationUtils;
+import de.cuioss.portal.authentication.oauth.OauthRedirector;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
-
-import de.cuioss.jsf.api.application.navigation.NavigationUtils;
-import de.cuioss.portal.authentication.oauth.OauthRedirector;
 
 /**
  * Implementation of the {@link OauthRedirector} interface using

@@ -15,25 +15,23 @@
  */
 package de.cuioss.portal.ui.runtime.application.view;
 
-import java.io.Serial;
-import java.io.Serializable;
-
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import de.cuioss.portal.ui.runtime.application.configuration.ViewConfiguration;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Provider;
-
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-
-import jakarta.annotation.PostConstruct;
-import de.cuioss.portal.ui.api.context.CuiCurrentView;
-import de.cuioss.portal.ui.runtime.application.configuration.ViewConfiguration;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
- * Managed bean bridging the view with instances of
+ * Managed bean to bridge the view with instances of
  *
  * @author Oliver Wolff
  */
@@ -62,7 +60,7 @@ public class ViewTransientManagerBean implements Serializable {
     private Provider<ViewDescriptor> currentViewProvider;
 
     /**
-     * Initializes the bean. See class documentation for expected result.
+     * Initializes the bean. See class documentation for an expected result.
      */
     @PostConstruct
     public void initBean() {

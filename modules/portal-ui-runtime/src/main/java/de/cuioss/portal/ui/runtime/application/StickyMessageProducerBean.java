@@ -15,10 +15,17 @@
  */
 package de.cuioss.portal.ui.runtime.application;
 
-import static de.cuioss.portal.ui.api.PortalCoreBeanNames.STICKY_MESSAGE_BEAN_NAME;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static java.text.MessageFormat.format;
-import static java.util.Objects.requireNonNull;
+import de.cuioss.jsf.api.components.css.ContextState;
+import de.cuioss.jsf.api.components.events.ModelPayloadEvent;
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
+import de.cuioss.portal.ui.api.message.StickyMessage;
+import de.cuioss.portal.ui.api.message.StickyMessageProducer;
+import de.cuioss.uimodel.nameprovider.DisplayName;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -26,18 +33,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
-import de.cuioss.jsf.api.components.css.ContextState;
-import de.cuioss.jsf.api.components.events.ModelPayloadEvent;
-import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
-import de.cuioss.portal.ui.api.message.StickyMessage;
-import de.cuioss.portal.ui.api.message.StickyMessageProducer;
-import de.cuioss.uimodel.nameprovider.DisplayName;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import static de.cuioss.portal.ui.api.PortalCoreBeanNames.STICKY_MESSAGE_BEAN_NAME;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import static java.text.MessageFormat.format;
+import static java.util.Objects.requireNonNull;
 
 /**
  * @author Matthias Walliczek
@@ -114,7 +113,7 @@ public class StickyMessageProducerBean implements Serializable, StickyMessagePro
 
     /**
      * @return {@code true} if at least one message is available, {@code false}
-     *         otherwise
+     * otherwise
      */
     @Override
     public boolean isAnyMessageAvailable() {

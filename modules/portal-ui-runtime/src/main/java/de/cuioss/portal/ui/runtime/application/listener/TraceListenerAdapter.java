@@ -37,14 +37,14 @@ public class TraceListenerAdapter implements PhaseListener {
     @Override
     public void afterPhase(PhaseEvent event) {
         PortalBeanManager.resolveBean(TraceListener.class, null)
-            .orElseThrow(() -> new IllegalStateException(UNABLE_TO_ACCESS_TRACE_LISTENER)).afterPhase(event);
+                .orElseThrow(() -> new IllegalStateException(UNABLE_TO_ACCESS_TRACE_LISTENER)).afterPhase(event);
 
     }
 
     @Override
     public void beforePhase(PhaseEvent event) {
         PortalBeanManager.resolveBean(TraceListener.class, null)
-            .orElseThrow(() -> new IllegalStateException(UNABLE_TO_ACCESS_TRACE_LISTENER)).beforePhase(event);
+                .orElseThrow(() -> new IllegalStateException(UNABLE_TO_ACCESS_TRACE_LISTENER)).beforePhase(event);
 
     }
 

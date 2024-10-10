@@ -15,20 +15,19 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
-import java.io.Serial;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import jakarta.enterprise.context.ApplicationScoped;
-
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.tools.collect.CollectionLiterals;
 import de.cuioss.tools.net.ParameterFilter;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author Oliver Wolff
@@ -36,24 +35,23 @@ import lombok.Setter;
 @ApplicationScoped
 public class PortalHistoryManagerMock implements HistoryManager {
 
-    @Serial
-    private static final long serialVersionUID = -3934691506290620858L;
-
-    /** The home navigation view */
+    /**
+     * The home navigation view
+     */
     public static final String VIEW_HOME = "/portal/home.jsf";
-
     /**
      * {@link ViewIdentifier}, representing home navigation.
      */
     public static final ViewIdentifier IDENTIFIER_HOME = new ViewIdentifier(VIEW_HOME, "home", new ArrayList<>());
-
+    @Serial
+    private static final long serialVersionUID = -3934691506290620858L;
+    /**
+     * The storage for the history.
+     */
+    private final List<ViewIdentifier> history;
     @Getter
     @Setter
     private boolean pageReload = false;
-
-    /** The storage for the history. */
-    private final List<ViewIdentifier> history;
-
     @Getter
     @Setter
     private ViewIdentifier currentView;

@@ -36,12 +36,18 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAlternatives;
 import org.junit.jupiter.api.Test;
 
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_HOME;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_LOGIN;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_PREFERENCES;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ Oauth2AuthenticationFacadeMock.class, WrappedOauthFacadeImpl.class, HttpHeaderFilterImpl.class,
-        ViewMatcherProducer.class, Oauth2ConfigurationProducerMock.class, ServletObjectsFromJSFContextProducer.class })
+@AddBeanClasses({Oauth2AuthenticationFacadeMock.class, WrappedOauthFacadeImpl.class, HttpHeaderFilterImpl.class,
+        ViewMatcherProducer.class, Oauth2ConfigurationProducerMock.class, ServletObjectsFromJSFContextProducer.class})
 @EnableAlternatives(OauthLoginPageBeanTest.class)
 class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
 
@@ -58,6 +64,11 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
 
     @Inject
     private PortalHistoryManagerMock portalHistoryManagerMock;
+    @Inject
+    private PortalTestConfiguration configuration;
+    @Produces
+    @LoginPagePath
+    private String loginUrl = "login.jsf";
 
     @Produces
     @CuiCurrentView
@@ -66,13 +77,6 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
     ViewDescriptor getCurrentView() {
         return DESCRIPTOR_LOGIN;
     }
-
-    @Inject
-    private PortalTestConfiguration configuration;
-
-    @Produces
-    @LoginPagePath
-    private String loginUrl = "login.jsf";
 
     @Test
     void testUnauthorizedShouldCauseRedirect() {

@@ -15,12 +15,10 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view.testhelper;
 
-import jakarta.enterprise.context.RequestScoped;
-
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
-
-import jakarta.annotation.Priority;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
 
 import java.io.Serial;
 

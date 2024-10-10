@@ -28,7 +28,6 @@ import lombok.experimental.UtilityClass;
  * other cases CDI should be used directly.
  *
  * @author Oliver Wolff
- *
  */
 @UtilityClass
 public class PortalCoreBeanNames {
@@ -58,6 +57,8 @@ public class PortalCoreBeanNames {
      */
     public static final String MULTI_VIEW_MAPPER_BEAN_NAME = "multiViewMapper";
 
-    /** Name for producer-bean of {@link PortalLocale} */
+    /**
+     * Name for producer-bean of {@link PortalLocale}
+     */
     public static final String PORTAL_LOCALE_MANAGER = "portalLocaleManager";
 }

@@ -15,16 +15,15 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 class CuiResourceManagerTest {
 
-    private CuiResourceManager cui;
-
     public LibraryInventory lib;
+    private CuiResourceManager cui;
 
     @BeforeEach
     void setUp() {

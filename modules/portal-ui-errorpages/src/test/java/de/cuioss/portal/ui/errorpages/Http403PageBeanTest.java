@@ -15,15 +15,13 @@
  */
 package de.cuioss.portal.ui.errorpages;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import jakarta.inject.Inject;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import jakarta.inject.Inject;
 import lombok.Getter;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnablePortalUiEnvironment
 class Http403PageBeanTest extends AbstractPageBeanTest<Http403PageBean> {

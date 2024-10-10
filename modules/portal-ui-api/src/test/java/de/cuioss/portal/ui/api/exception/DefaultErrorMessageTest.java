@@ -15,15 +15,14 @@
  */
 package de.cuioss.portal.ui.api.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.core.storage.impl.MapStorageImpl;
 import de.cuioss.test.valueobjects.ValueObjectTest;
 import de.cuioss.test.valueobjects.api.contracts.VerifyConstructor;
+import org.junit.jupiter.api.Test;
 
-@VerifyConstructor(of = { "errorCode", "errorTicket", "errorMessage", "pageId" })
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@VerifyConstructor(of = {"errorCode", "errorTicket", "errorMessage", "pageId"})
 class DefaultErrorMessageTest extends ValueObjectTest<DefaultErrorMessage> {
 
     @Test

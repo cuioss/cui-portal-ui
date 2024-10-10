@@ -15,25 +15,24 @@
  */
 package de.cuioss.portal.ui.test.tests;
 
-import static de.cuioss.test.generator.Generators.booleans;
-import static de.cuioss.test.generator.Generators.fixedValues;
-import static de.cuioss.test.generator.Generators.integers;
-import static de.cuioss.test.generator.Generators.letterStrings;
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
-
-import java.util.List;
-
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemContainerImpl;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemSeparatorImpl;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemSingleImpl;
 import de.cuioss.test.generator.TypedGenerator;
 
+import java.util.List;
+
+import static de.cuioss.test.generator.Generators.booleans;
+import static de.cuioss.test.generator.Generators.fixedValues;
+import static de.cuioss.test.generator.Generators.integers;
+import static de.cuioss.test.generator.Generators.letterStrings;
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
+
 /**
  * Generates an instance of a {@linkplain NavigationMenuItem} implementation.
  *
  * @author Sven Haag
- *
  */
 public class NavigationMenuItemGenerator implements TypedGenerator<NavigationMenuItem> {
 

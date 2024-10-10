@@ -15,22 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.application;
 
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
-import jakarta.faces.application.Application;
-import jakarta.faces.application.ApplicationWrapper;
-import jakarta.faces.application.ProjectStage;
-import jakarta.faces.context.FacesContext;
-
 import de.cuioss.portal.common.bundle.PortalResourceBundleBean;
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.application.CuiProjectStage;
+import jakarta.faces.application.Application;
+import jakarta.faces.application.ApplicationWrapper;
+import jakarta.faces.application.ProjectStage;
+import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Decorate the standard {@link Application} in order to bridge the portal

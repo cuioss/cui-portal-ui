@@ -15,15 +15,14 @@
  */
 package de.cuioss.portal.ui.components.layout;
 
-import java.io.IOException;
-
+import de.cuioss.jsf.api.components.renderer.BaseDecoratorRenderer;
+import de.cuioss.jsf.api.components.renderer.DecoratingResponseWriter;
+import de.cuioss.portal.ui.components.PortalFamily;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.render.FacesRenderer;
 import jakarta.faces.render.Renderer;
 
-import de.cuioss.jsf.api.components.renderer.BaseDecoratorRenderer;
-import de.cuioss.jsf.api.components.renderer.DecoratingResponseWriter;
-import de.cuioss.portal.ui.components.PortalFamily;
+import java.io.IOException;
 
 /**
  * {@link Renderer} for {@link SidebarComponent}
@@ -34,6 +33,7 @@ import de.cuioss.portal.ui.components.PortalFamily;
 public class SidebarComponentRenderer extends BaseDecoratorRenderer<SidebarComponent> {
 
     /**
+     *
      */
     public SidebarComponentRenderer() {
         super(false);
@@ -41,7 +41,7 @@ public class SidebarComponentRenderer extends BaseDecoratorRenderer<SidebarCompo
 
     @Override
     protected void doEncodeBegin(final FacesContext context, final DecoratingResponseWriter<SidebarComponent> writer,
-            final SidebarComponent component) throws IOException {
+                                 final SidebarComponent component) throws IOException {
         writer.withStartElement(component.resolveHtmlElement());
         writer.withStyleClass(component.resolveStyleClass());
         writer.withAttributeStyle(component.getStyle());
@@ -51,7 +51,7 @@ public class SidebarComponentRenderer extends BaseDecoratorRenderer<SidebarCompo
 
     @Override
     protected void doEncodeEnd(final FacesContext context, final DecoratingResponseWriter<SidebarComponent> writer,
-            final SidebarComponent component) throws IOException {
+                               final SidebarComponent component) throws IOException {
         writer.withEndElement(component.resolveHtmlElement());
     }
 }

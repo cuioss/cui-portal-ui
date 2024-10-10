@@ -15,27 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating;
 
-import static de.cuioss.portal.ui.api.PortalCoreBeanNames.MULTI_VIEW_MAPPER_BEAN_NAME;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-
-import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.inject.Instance;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import jakarta.inject.Provider;
-
 import de.cuioss.portal.common.priority.PortalPriorities;
-
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-
 import de.cuioss.portal.ui.api.templating.MultiViewMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiViewMapper;
 import de.cuioss.portal.ui.api.templating.PortalViewDescriptor;
@@ -45,8 +25,25 @@ import de.cuioss.portal.ui.api.templating.StaticViewDescriptor;
 import de.cuioss.tools.io.FileLoaderUtility;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.application.CuiProjectStage;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Provider;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import static de.cuioss.portal.ui.api.PortalCoreBeanNames.MULTI_VIEW_MAPPER_BEAN_NAME;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
  * The Mapper collects all instances of {@link StaticViewDescriptor} and sorts
@@ -100,12 +97,12 @@ public class PortalViewMapper implements MultiViewMapper {
     }
 
     private void handleDescriptor(final Map<String, URL> builderMap, final StaticViewDescriptor descriptor,
-            final String resourceName) {
+                                  final String resourceName) {
         try {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getViewPath() + '/' + resourceName).getURL();
             if (null == url) {
                 log.warn("Portal-127: View {} with path {} from descriptor {} was not found", resourceName,
-                    descriptor.getViewPath(), descriptor.toString());
+                        descriptor.getViewPath(), descriptor.toString());
             } else {
                 log.debug("adding view {}", resourceName);
                 builderMap.put(resourceName, url);

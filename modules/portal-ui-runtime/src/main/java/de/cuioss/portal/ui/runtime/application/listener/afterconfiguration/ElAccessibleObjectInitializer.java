@@ -15,13 +15,12 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.afterconfiguration;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Inject;
-
 import de.cuioss.portal.configuration.initializer.ApplicationInitializer;
 import de.cuioss.portal.configuration.initializer.PortalInitializer;
 import de.cuioss.portal.ui.api.templating.MultiViewMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiViewMapper;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 
 /**
  * See package javadoc for details

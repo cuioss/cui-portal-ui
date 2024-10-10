@@ -64,57 +64,43 @@ import static de.cuioss.tools.string.MoreStrings.isEmpty;
 @Named(LoginPage.BEAN_NAME)
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @RequestScoped
-@EqualsAndHashCode(of = { "loginCredentials", "availableUserStores" }, doNotUseGetters = true, callSuper = false)
-@ToString(of = { "loginCredentials", "availableUserStores" }, doNotUseGetters = true)
+@EqualsAndHashCode(of = {"loginCredentials", "availableUserStores"}, doNotUseGetters = true, callSuper = false)
+@ToString(of = {"loginCredentials", "availableUserStores"}, doNotUseGetters = true)
 public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
 
     @Serial
     private static final long serialVersionUID = 8709729494565906154L;
-
-    @Getter
-    private LoginCredentials loginCredentials;
-
     @Inject
     @Param(name = "username")
     String username;
-
     @Inject
     @Param(name = "userstore")
     String userstore;
-
-    @Getter
-    private List<UserStore> availableUserStores;
-
     @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
     @PortalAuthenticationFacade
     FormBasedAuthenticationFacade authenticationFacade;
-
     @Inject
     LoginPageHistoryManagerProvider historyManagerProvider;
-
     @Inject
     LoginPageClientStorage localStorage;
-
     @Inject
     MessageProducer messageProducer;
-
     @Inject
     DisplayNameMessageProducer displayNameMessageProducer;
-
     @Inject
     AuthenticatedUserInfo userInfo;
-
     @Inject
     Provider<FacesContext> facesContextProvider;
-
     @Inject
     PortalPagesConfiguration pagesConfiguration;
-
     @Inject
     @ConfigProperty(name = PAGES_LOGIN_DEFAULT_USER_STORE)
     Optional<String> defaultConfiguredUserStore;
-
+    @Getter
+    private LoginCredentials loginCredentials;
+    @Getter
+    private List<UserStore> availableUserStores;
     @Getter
     @Setter
     private String errorTextKey;
@@ -168,14 +154,14 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
         if (userInfo.isAuthenticated()) {
             final var strategy = pagesConfiguration.getLoginPageStrategy();
             switch (strategy) {
-            case GOTO_HOME:
-                outcome = HomePage.OUTCOME;
-                break;
-            case LOGOUT:
-                authenticationFacade.logout(ServletAdapterUtil.getRequest(facesContextProvider.get()));
-                break;
-            default:
-                throw new IllegalStateException("Unknown LoginPageStrategy found: " + strategy);
+                case GOTO_HOME:
+                    outcome = HomePage.OUTCOME;
+                    break;
+                case LOGOUT:
+                    authenticationFacade.logout(ServletAdapterUtil.getRequest(facesContextProvider.get()));
+                    break;
+                default:
+                    throw new IllegalStateException("Unknown LoginPageStrategy found: " + strategy);
             }
         }
         if (!isEmpty(errorTextKey)) {

@@ -15,15 +15,14 @@
  */
 package de.cuioss.portal.ui.test.tests.support;
 
-import java.io.Serial;
-import java.io.Serializable;
-
 import jakarta.faces.view.ViewScoped;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 @ViewScoped
 @EqualsAndHashCode

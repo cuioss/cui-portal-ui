@@ -15,21 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.view;
 
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_PREFERENCES;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_VIEW_ID;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.faces.lifecycle.ClientWindowScoped;
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.ActivateScopes;
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.listener.view.PhaseExecution;
 import de.cuioss.portal.ui.api.listener.view.PortalRestoreViewListener;
@@ -40,11 +25,24 @@ import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.faces.lifecycle.ClientWindowScoped;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.ActivateScopes;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.DESCRIPTOR_PREFERENCES;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_VIEW_ID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ HistoryManagerBean.class, DefaultHistoryConfiguration.class, ViewMatcherProducer.class })
+@AddBeanClasses({HistoryManagerBean.class, DefaultHistoryConfiguration.class, ViewMatcherProducer.class})
 @ActivateScopes(ClientWindowScoped.class)
 class HistoryManagerListenerTest
         implements ShouldHandleObjectContracts<HistoryManagerListener>, JsfEnvironmentConsumer {

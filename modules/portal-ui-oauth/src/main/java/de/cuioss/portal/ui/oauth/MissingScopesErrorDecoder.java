@@ -15,19 +15,17 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN;
+import de.cuioss.tools.logging.CuiLogger;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.rest.client.ext.ResponseExceptionMapper;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.ws.rs.core.MultivaluedMap;
-import jakarta.ws.rs.core.Response;
-
-import org.eclipse.microprofile.rest.client.ext.ResponseExceptionMapper;
-
-import de.cuioss.tools.logging.CuiLogger;
+import static jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 
 /**
  * To detect and handle the error "missing scopes"
@@ -42,12 +40,11 @@ public class MissingScopesErrorDecoder implements ResponseExceptionMapper<Missin
     /**
      * @param status  HTTP status code
      * @param headers HTTP Headers
-     *
      * @return MissingScopesException on HTTP 403 and existing www-authenticate
-     *         header with missing scopes
+     * header with missing scopes
      */
     public static MissingScopesException checkAndHandleMissingScopes(final int status,
-            final MultivaluedMap<String, Object> headers) {
+                                                                     final MultivaluedMap<String, Object> headers) {
         if (SC_FORBIDDEN == status) {
             log.trace("response.status == 403");
 
@@ -76,6 +73,12 @@ public class MissingScopesErrorDecoder implements ResponseExceptionMapper<Missin
         return null;
     }
 
+    private static List<String> filterHeader(MultivaluedMap<String, Object> headers) {
+        return headers.entrySet().stream().filter(entry -> entry.getKey().equalsIgnoreCase(WWW_AUTHENTICATE_HEADER_KEY))
+                .map(Map.Entry::getValue).flatMap(Collection::stream).filter(value -> value instanceof String)
+                .map(value -> (String) value).toList();
+    }
+
     @Override
     public MissingScopesException toThrowable(Response response) {
         return checkAndHandleMissingScopes(response.getStatus(), response.getHeaders());
@@ -94,11 +97,5 @@ public class MissingScopesErrorDecoder implements ResponseExceptionMapper<Missin
             return true;
         }
         return false;
-    }
-
-    private static List<String> filterHeader(MultivaluedMap<String, Object> headers) {
-        return headers.entrySet().stream().filter(entry -> entry.getKey().equalsIgnoreCase(WWW_AUTHENTICATE_HEADER_KEY))
-                .map(Map.Entry::getValue).flatMap(Collection::stream).filter(value -> value instanceof String)
-                .map(value -> (String) value).toList();
     }
 }

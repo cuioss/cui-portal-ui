@@ -15,22 +15,20 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingErrorHandler;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
 import jakarta.inject.Inject;
-
+import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.portal.ui.api.lazyloading.LazyLoadingErrorHandler;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
-import lombok.Getter;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 @EnableAutoWeld
-@AddBeanClasses({ LazyLoadingTestSupportProducer.class })
+@AddBeanClasses({LazyLoadingTestSupportProducer.class})
 class BaseLazyLoadingWidgetTest
         implements ShouldBeNotNull<TestLazyLoadingWidget>, ShouldImplementEqualsAndHashCode<TestLazyLoadingWidget> {
 

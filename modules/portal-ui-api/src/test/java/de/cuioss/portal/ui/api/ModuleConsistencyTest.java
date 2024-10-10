@@ -15,12 +15,11 @@
  */
 package de.cuioss.portal.ui.api;
 
-import org.jboss.weld.environment.se.Weld;
-
 import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock;
 import de.cuioss.portal.core.test.tests.BaseModuleConsistencyTest;
 import de.cuioss.test.jsf.producer.JsfObjectsProducer;
 import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
+import org.jboss.weld.environment.se.Weld;
 
 class ModuleConsistencyTest extends BaseModuleConsistencyTest {
 

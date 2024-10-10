@@ -15,26 +15,25 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERNAME;
-import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERSTORE;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Optional;
-import java.util.function.Predicate;
-
-import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.pages.LoginPageHistoryManagerProvider;
 import de.cuioss.tools.net.UrlParameter;
 import de.cuioss.tools.string.MoreStrings;
 import de.cuioss.uimodel.application.LoginCredentials;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Optional;
+import java.util.function.Predicate;
+
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERNAME;
+import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERSTORE;
 
 /**
  * {@linkplain LoginPageHistoryManagerProviderImpl} is a decorator for
@@ -54,17 +53,29 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
     @Inject
     private Provider<HistoryManager> historyManagerProvider;
 
+    private static boolean isUserStore(final UrlParameter currentParam) {
+        return KEY_USERSTORE.equals(currentParam.getName());
+    }
+
+    private static boolean isUserName(final UrlParameter currentParam) {
+        return KEY_USERNAME.equals(currentParam.getName());
+    }
+
+    private static Predicate<? super UrlParameter> excludeUserStoreAndUserName() {
+        return (var param) -> !isUserStore(param) && !isUserName(param);
+    }
+
     /**
      * Extract userStore and userName from deep link URL
      *
      * @param userStore used as default value
      * @param username  used as default value
      * @return option for {@linkplain LoginCredentials}, if userStore or userName is
-     *         missing option is empty
+     * missing option is empty
      */
     @Override
     public Optional<LoginCredentials> extractFromDeepLinkingUrlParameter(final String userStore,
-            final String username) {
+                                                                         final String username) {
 
         var extractedUserStore = MoreStrings.emptyToNull(userStore);
         var extractedUserName = MoreStrings.emptyToNull(username);
@@ -103,17 +114,5 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
     @Override
     public HistoryManager getWrapped() {
         return historyManagerProvider.get();
-    }
-
-    private static boolean isUserStore(final UrlParameter currentParam) {
-        return KEY_USERSTORE.equals(currentParam.getName());
-    }
-
-    private static boolean isUserName(final UrlParameter currentParam) {
-        return KEY_USERNAME.equals(currentParam.getName());
-    }
-
-    private static Predicate<? super UrlParameter> excludeUserStoreAndUserName() {
-        return (var param) -> !isUserStore(param) && !isUserName(param);
     }
 }

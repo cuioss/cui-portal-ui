@@ -45,17 +45,17 @@ import java.io.Serial;
 @ToString(callSuper = true)
 public class UserMenuItem extends PortalNavigationMenuItemContainerImpl {
 
+    /**
+     * The icon for the user.
+     */
+    public static final String ICON = "cui-icon-user";
+    /**
+     * The string-based id for this menu item.
+     */
+    public static final String MENU_ID = "userMenuItem";
     @Serial
     private static final long serialVersionUID = 1452093785009425867L;
-
     private static final String USER_MENU_TITLE_KEY = "cui.commons.portal.menu.user.title";
-
-    /** The icon for the user. */
-    public static final String ICON = "cui-icon-user";
-
-    /** The string-based id for this menu item. */
-    public static final String MENU_ID = "userMenuItem";
-
     @Inject
     AuthenticatedUserInfo userInfo;
 

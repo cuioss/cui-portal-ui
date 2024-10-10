@@ -21,7 +21,6 @@ import jakarta.faces.application.Resource;
  * To be used by {@link CustomizationResourceHandler}.
  *
  * @author Matthias Walliczek
- *
  */
 public interface ResourceProducer {
 
@@ -29,7 +28,7 @@ public interface ResourceProducer {
      * @param resourceName
      * @param libraryName
      * @return the resource with given resourceName and libraryName if found,
-     *         otherwise null
+     * otherwise null
      */
     Resource retrieveResource(String resourceName, String libraryName);
 

@@ -46,7 +46,7 @@ class EnablePortalUiEnvironmentTest {
         assertNotNull(attribute.get());
         assertNotNull(configuration);
         assertEquals(BasicApplicationConfiguration.FIREFOX, facesContext.get().getExternalContext()
-            .getRequestHeaderMap().get(BasicApplicationConfiguration.USER_AGENT));
+                .getRequestHeaderMap().get(BasicApplicationConfiguration.USER_AGENT));
     }
 
 }

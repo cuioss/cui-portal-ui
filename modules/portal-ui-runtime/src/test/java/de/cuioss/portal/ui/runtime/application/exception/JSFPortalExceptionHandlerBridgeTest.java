@@ -15,16 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.exception;
 
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
-import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.jsf.test.MessageProducerMock;
@@ -40,12 +30,20 @@ import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
 import de.cuioss.portal.ui.test.mocks.PortalViewRestrictionManagerMock;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
+import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ CurrentViewProducer.class, NavigationHandlerProducer.class, PortalUiExceptionHandler.class,
-        ViewRelatedExceptionHandler.class, PortalTestUserProducer.class, PortalHistoryManagerMock.class })
+@AddBeanClasses({CurrentViewProducer.class, NavigationHandlerProducer.class, PortalUiExceptionHandler.class,
+        ViewRelatedExceptionHandler.class, PortalTestUserProducer.class, PortalHistoryManagerMock.class})
 class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
 
     static final ViewDescriptor DESCRIPTOR_SUPPRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")

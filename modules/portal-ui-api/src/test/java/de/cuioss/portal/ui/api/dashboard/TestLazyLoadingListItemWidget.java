@@ -15,14 +15,14 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
-import java.io.Serial;
-import java.util.Collections;
-import java.util.List;
-
 import de.cuioss.jsf.api.components.model.widget.ListItem;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
 import de.cuioss.uimodel.result.ResultObject;
+
+import java.io.Serial;
+import java.util.Collections;
+import java.util.List;
 
 class TestLazyLoadingListItemWidget extends BaseLazyLoadingListItemWidget<String> {
 

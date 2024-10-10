@@ -15,11 +15,15 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
+import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
+import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.history.HistoryManager;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.tools.string.Joiner;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -27,15 +31,10 @@ import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 import jakarta.servlet.http.HttpServletRequest;
 
-import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
-import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
-import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
-import de.cuioss.portal.ui.api.history.HistoryManager;
-import de.cuioss.portal.ui.api.context.CuiCurrentView;
-import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.tools.string.Joiner;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Implementation of {@link WrappedOauthFacade} using {@link HistoryManager} and
@@ -48,17 +47,13 @@ import de.cuioss.tools.string.Joiner;
 @PortalWrappedOauthFacade
 public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
 
+    static final String MESSAGES_IDENTIFIER = "oauthMessages";
     private static final CuiLogger log = new CuiLogger(WrappedOauthFacadeImpl.class);
-
     /**
      * Attribute name for the target view id to be stored in the session.
      */
     private static final String VIEW_IDENTIFIER = "oauthViewIdentifier";
-
     private static final String PARAMETER_IDENTIFIER = "oauthViewparameter";
-
-    static final String MESSAGES_IDENTIFIER = "oauthMessages";
-
     private static final String MESSAGE_GET_ATTRIBUTE_FAILED = "session.getAttribute failed";
 
     @Inject
@@ -110,13 +105,14 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
 
     @Override
     public void handleMissingScopesException(MissingScopesException e, String initialScopes,
-            Map<String, Serializable> parameters) {
+                                             Map<String, Serializable> parameters) {
         log.trace(e, "handleMissingScopesException {}", initialScopes);
         var request = servletRequestProvider.get();
         request.getSession().setAttribute(PARAMETER_IDENTIFIER, new HashMap<>(parameters));
         retrieveToken(Joiner.on(' ').join(initialScopes, e.getMissingScopes()));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Map<String, Serializable> retrieveViewParameters() {
         log.trace("retrieveViewParameters");

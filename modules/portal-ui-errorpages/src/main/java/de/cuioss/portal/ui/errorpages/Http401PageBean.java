@@ -15,25 +15,23 @@
  */
 package de.cuioss.portal.ui.errorpages;
 
-import java.io.Serial;
-import java.io.Serializable;
-
+import de.cuioss.portal.core.storage.MapStorage;
+import de.cuioss.portal.core.storage.PortalSessionStorage;
+import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletResponse;
-
-import de.cuioss.portal.core.storage.MapStorage;
-import de.cuioss.portal.core.storage.PortalSessionStorage;
-import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * Page Bean for the error-code 401 (the request requires HTTP authentication)
  *
  * @author Oliver Wolff
- *
  */
 @RequestScoped
 @Named

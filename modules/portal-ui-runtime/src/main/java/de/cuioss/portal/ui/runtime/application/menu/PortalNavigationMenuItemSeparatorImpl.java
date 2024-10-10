@@ -15,9 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.menu;
 
-import java.io.Serial;
-import java.util.Map;
-
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItem;
 import de.cuioss.jsf.api.components.model.menu.NavigationMenuItemSeparator;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuConfigParser;
@@ -25,9 +22,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serial;
+import java.util.Map;
+
 /**
  * @author Oliver Wolff
- *
  */
 @RequiredArgsConstructor
 public class PortalNavigationMenuItemSeparatorImpl extends PortalNavigationMenuConfigParser

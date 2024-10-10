@@ -15,11 +15,10 @@
  */
 package de.cuioss.portal.ui.runtime.application.dashboard.support;
 
-import jakarta.enterprise.context.Dependent;
-
 import de.cuioss.portal.ui.api.dashboard.PortalDashboardWidget;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
+import jakarta.enterprise.context.Dependent;
 
 import java.io.Serial;
 

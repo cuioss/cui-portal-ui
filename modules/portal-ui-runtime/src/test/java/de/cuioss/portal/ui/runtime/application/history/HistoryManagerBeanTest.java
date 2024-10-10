@@ -41,35 +41,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ActivateScopes(ClientWindowScoped.class)
 class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManagerBean>, JsfEnvironmentConsumer {
 
+    public static final String CURRENT_VIEW_XHTML = "current/view.jsf";
+    public static final String FALLBACK_VIEW = "/portal/home.jsf";
+    public static final String SECOND_VIEW_XHTML = "current/view2.jsf";
+    public static final String VETO_VIEW_XHTML = "current/veto.jsf";
+    static final ViewDescriptorImpl CURRENT_VIEW = ViewDescriptorImpl.builder().withViewId(CURRENT_VIEW_XHTML)
+            .withLogicalViewId(CURRENT_VIEW_XHTML).build();
+    static final ViewDescriptorImpl SECOND_VIEW = ViewDescriptorImpl.builder().withViewId(SECOND_VIEW_XHTML)
+            .withLogicalViewId(SECOND_VIEW_XHTML).build();
+    static final ViewDescriptorImpl VETO_VIEW = ViewDescriptorImpl.builder().withViewId(VETO_VIEW_XHTML)
+            .withLogicalViewId(VETO_VIEW_XHTML).build();
+    private static final String FIRST_NAVIGATION = "/current/view3.jsf";
     @Inject
     @Getter
     private HistoryManagerBean underTest;
-
     @Inject
     private PortalTestConfiguration configuration;
-
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
 
-    private static final String FIRST_NAVIGATION = "/current/view3.jsf";
-
-    public static final String CURRENT_VIEW_XHTML = "current/view.jsf";
-
-    public static final String FALLBACK_VIEW = "/portal/home.jsf";
-
-    public static final String SECOND_VIEW_XHTML = "current/view2.jsf";
-
-    public static final String VETO_VIEW_XHTML = "current/veto.jsf";
-
-    static final ViewDescriptorImpl CURRENT_VIEW = ViewDescriptorImpl.builder().withViewId(CURRENT_VIEW_XHTML)
-            .withLogicalViewId(CURRENT_VIEW_XHTML).build();
-
-    static final ViewDescriptorImpl SECOND_VIEW = ViewDescriptorImpl.builder().withViewId(SECOND_VIEW_XHTML)
-            .withLogicalViewId(SECOND_VIEW_XHTML).build();
-
-    static final ViewDescriptorImpl VETO_VIEW = ViewDescriptorImpl.builder().withViewId(VETO_VIEW_XHTML)
-            .withLogicalViewId(VETO_VIEW_XHTML).build();
+    /**
+     * Verify count of iterable
+     *
+     * @param expected value
+     * @param iterable {@link Iterable}
+     */
+    public static void assertEntryCount(final int expected, final Iterable<?> iterable) {
+        assertEquals(expected, mutableList(iterable).size());
+    }
 
     /**
      * Checks the default configuration
@@ -171,16 +171,6 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
         assertEquals(FIRST_NAVIGATION, underTest.popPrevious().getViewId());
         // is default
         assertEquals(FALLBACK_VIEW, underTest.popPrevious().getViewId());
-    }
-
-    /**
-     * Verify count of iterable
-     *
-     * @param expected value
-     * @param iterable {@link Iterable}
-     */
-    public static void assertEntryCount(final int expected, final Iterable<?> iterable) {
-        assertEquals(expected, mutableList(iterable).size());
     }
 
 }

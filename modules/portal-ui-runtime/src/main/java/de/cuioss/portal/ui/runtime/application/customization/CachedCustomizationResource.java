@@ -15,19 +15,18 @@
  */
 package de.cuioss.portal.ui.runtime.application.customization;
 
+import de.cuioss.portal.ui.api.resources.CacheableResource;
+import de.cuioss.tools.io.IOStreams;
+import jakarta.faces.context.FacesContext;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
-
-import jakarta.faces.context.FacesContext;
-
-import de.cuioss.portal.ui.api.resources.CacheableResource;
-import de.cuioss.tools.io.IOStreams;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 
 /**
  * To allow caching of {@link CustomizationResource}s in case of
@@ -61,7 +60,7 @@ public class CachedCustomizationResource extends CacheableResource {
         super.setContentType(resource.getContentType());
         eTag = resource.getETag();
         responseHeaders = resource.getResponseHeaders();
-        byte[] resourceContent = { 0 };
+        byte[] resourceContent = {0};
         IOException exceptionOccursOnRead = null;
         try {
             resourceContent = IOStreams.toByteArray(resource.getInputStream());

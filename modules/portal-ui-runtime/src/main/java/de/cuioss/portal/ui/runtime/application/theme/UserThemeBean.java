@@ -15,26 +15,23 @@
  */
 package de.cuioss.portal.ui.runtime.application.theme;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_DEFAULT;
-import static de.cuioss.tools.base.Preconditions.checkArgument;
+import de.cuioss.portal.common.priority.PortalPriorities;
+import de.cuioss.portal.core.storage.ClientStorage;
+import de.cuioss.portal.core.storage.PortalClientStorage;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import de.cuioss.portal.common.priority.PortalPriorities;
-
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-
-import de.cuioss.portal.core.storage.ClientStorage;
-import de.cuioss.portal.core.storage.PortalClientStorage;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.THEME_DEFAULT;
+import static de.cuioss.tools.base.Preconditions.checkArgument;
 
 /**
  * Default implementation that stores the currently active / selected theme

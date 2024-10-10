@@ -15,17 +15,7 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import static de.cuioss.tools.base.Preconditions.checkArgument;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import jakarta.servlet.http.HttpServletRequest;
-
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
-
-import jakarta.annotation.PostConstruct;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
@@ -39,10 +29,18 @@ import de.cuioss.portal.ui.runtime.page.AbstractLoginPageBean;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.io.Serial;
+
+import static de.cuioss.tools.base.Preconditions.checkArgument;
 
 /**
  * Page Bean for the Oauth2 Login Page Bean. Supports two mode:
@@ -88,6 +86,7 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
     private Oauth2Configuration oauth2Configuration;
 
     private boolean doRedirectOnFailure;
+    private String loginTarget;
 
     /**
      * Initialize the bean and check the configuration.
@@ -126,8 +125,6 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
         doRedirectOnFailure = true;
         return loginAction(() -> targetView, ServletAdapterUtil.getRequest(facesContext), facesContext);
     }
-
-    private String loginTarget;
 
     /**
      * @return The oauth2 login url.

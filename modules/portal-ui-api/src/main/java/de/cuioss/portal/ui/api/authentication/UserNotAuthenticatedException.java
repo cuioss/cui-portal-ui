@@ -20,8 +20,8 @@ import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import java.io.Serial;
 
 /**
- * To be fired if a user is not authenticated. It will be derived from
- * {@link AuthenticatedUserInfo#isAuthenticated()}
+ * To be fired if a user is not authenticated.
+ * It will be derived from {@link AuthenticatedUserInfo#isAuthenticated()}
  *
  * @author Oliver Wolff
  */

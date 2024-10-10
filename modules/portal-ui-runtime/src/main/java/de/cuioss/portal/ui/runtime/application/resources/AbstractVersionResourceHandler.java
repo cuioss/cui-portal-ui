@@ -19,7 +19,6 @@ import jakarta.faces.application.Resource;
 import jakarta.faces.application.ResourceHandler;
 import jakarta.faces.application.ResourceHandlerWrapper;
 import jakarta.faces.application.ResourceWrapper;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -43,7 +42,7 @@ public abstract class AbstractVersionResourceHandler extends ResourceHandlerWrap
     }
 
     /**
-     * provide module-specific decision if the requested resource should get handled
+     * provide a module-specific decision if the requested resource should get handled
      * by this resource handler
      */
     protected abstract boolean shouldHandleRequestedResource(String resourceName, String libraryName);

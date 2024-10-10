@@ -15,9 +15,8 @@
  */
 package de.cuioss.portal.ui.api.lazyloading;
 
-import jakarta.inject.Inject;
-
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
+import jakarta.inject.Inject;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

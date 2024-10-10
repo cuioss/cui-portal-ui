@@ -15,18 +15,16 @@
  */
 package de.cuioss.portal.ui.api.resources;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
+import jakarta.faces.context.FacesContext;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import jakarta.faces.context.FacesContext;
-
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class NonCachableResourceTest
         implements ShouldBeNotNull<NonCachableResource>, ShouldImplementEqualsAndHashCode<NonCachableResource> {

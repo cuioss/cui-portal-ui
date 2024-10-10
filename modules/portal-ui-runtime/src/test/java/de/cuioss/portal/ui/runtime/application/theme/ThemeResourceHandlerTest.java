@@ -15,10 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.theme;
 
-import org.jboss.weld.junit5.auto.AddBeanClasses;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
 import de.cuioss.portal.ui.runtime.support.ResourceHandlerMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
@@ -27,22 +23,21 @@ import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @EnablePortalUiEnvironment
-@AddBeanClasses({ PortalThemeConfiguration.class, PortalClientStorageMock.class, UserThemeBean.class })
+@AddBeanClasses({PortalThemeConfiguration.class, PortalClientStorageMock.class, UserThemeBean.class})
 class ThemeResourceHandlerTest implements ShouldBeNotNull<ThemeResourceHandler>, JsfEnvironmentConsumer {
-
-    @Getter
-    private ThemeResourceHandler underTest;
-
-    private ResourceHandlerMock resourceHandlerMock;
 
     private static final String LIBRARY_NAME = "de.cuioss.portal.css";
     private static final String OTHER_LIBRARY_NAME = "de.cuioss.portal.other";
-
     private static final String STYLE_CSS = "application.css";
-
     private static final String STYLE_OTHER = "other.css";
+    @Getter
+    private ThemeResourceHandler underTest;
+    private ResourceHandlerMock resourceHandlerMock;
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;

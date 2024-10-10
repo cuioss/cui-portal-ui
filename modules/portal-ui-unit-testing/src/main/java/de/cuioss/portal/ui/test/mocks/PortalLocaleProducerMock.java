@@ -15,25 +15,24 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
+import de.cuioss.portal.common.locale.LocaleChangeEvent;
+import de.cuioss.portal.common.locale.PortalLocale;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.event.Event;
-import jakarta.enterprise.inject.Produces;
-import jakarta.inject.Inject;
-
-import de.cuioss.portal.common.locale.LocaleChangeEvent;
-import de.cuioss.portal.common.locale.PortalLocale;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 
 /**
  * Mock version of {@link PortalLocale}
@@ -47,20 +46,17 @@ public class PortalLocaleProducerMock implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 901932913924354093L;
-
+    @Inject
+    @LocaleChangeEvent
+    Event<Locale> localeChangeEvent;
     @Getter
     @Setter
     @Produces
     @Dependent
     @PortalLocale
     private Locale locale = Locale.ENGLISH;
-
     @Getter
     @Setter
     private List<Locale> availableLocales = immutableList(Locale.GERMAN, Locale.ENGLISH);
-
-    @Inject
-    @LocaleChangeEvent
-    Event<Locale> localeChangeEvent;
 
 }

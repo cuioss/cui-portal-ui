@@ -15,20 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.page;
 
-import static de.cuioss.jsf.api.application.navigation.NavigationUtils.getCurrentView;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.function.Supplier;
-
-import jakarta.enterprise.event.Event;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-import jakarta.servlet.http.HttpServletRequest;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.LoginEvent;
@@ -42,6 +28,18 @@ import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
 import de.cuioss.uimodel.result.ResultObject;
+import jakarta.enterprise.event.Event;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.function.Supplier;
+
+import static de.cuioss.jsf.api.application.navigation.NavigationUtils.getCurrentView;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT;
 
 /**
  * Abstract helper class for {@link LoginPage} supporting deep linking.
@@ -78,11 +76,10 @@ public abstract class AbstractLoginPageBean implements Serializable {
      *                       successful login and fire of the userChangeEvent.
      * @param servletRequest the current servlet request
      * @param facesContext
-     *
      * @return
      */
     protected String loginAction(final Supplier<ViewIdentifier> targetSupplier, final HttpServletRequest servletRequest,
-            final FacesContext facesContext) {
+                                 final FacesContext facesContext) {
         final var loginResult = doLogin(servletRequest);
 
         if (!loginResult.isValid()) {
@@ -126,10 +123,9 @@ public abstract class AbstractLoginPageBean implements Serializable {
      * Trigger the login request to the authentication backend.
      *
      * @param servletRequest the current {@link HttpServletRequest}
-     *
      * @return an {@link AuthenticatedUserInfo} that may either be authenticated or
-     *         unauthenticated. Must never be null! It should always provide the
-     *         username as identifier, even at failed login attempts!
+     * unauthenticated. Must never be null! It should always provide the
+     * username as identifier, even at failed login attempts!
      */
     protected abstract ResultObject<AuthenticatedUserInfo> doLogin(HttpServletRequest servletRequest);
 

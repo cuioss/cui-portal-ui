@@ -15,16 +15,14 @@
  */
 package de.cuioss.portal.ui.runtime.application.storage;
 
+import de.cuioss.portal.core.storage.PortalSessionStorage;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
-
+import lombok.Getter;
 import org.jboss.weld.junit5.auto.ActivateScopes;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
-
-import de.cuioss.portal.core.storage.PortalSessionStorage;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
-import lombok.Getter;
 
 @EnableAutoWeld
 @AddBeanClasses(PortalSessionStorageImpl.class)

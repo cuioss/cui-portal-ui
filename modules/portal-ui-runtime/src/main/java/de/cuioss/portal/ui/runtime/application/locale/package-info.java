@@ -27,6 +27,5 @@
  * <pre>
  * {@code void actOnLocaleChangeEven(@Observes @LocaleChangeEvent Locale newLocale)}
  * </pre>
- *
  */
 package de.cuioss.portal.ui.runtime.application.locale;

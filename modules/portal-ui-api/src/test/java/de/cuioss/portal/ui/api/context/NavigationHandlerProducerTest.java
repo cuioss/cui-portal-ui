@@ -15,22 +15,20 @@
  */
 package de.cuioss.portal.ui.api.context;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-
+import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
+import de.cuioss.test.jsf.producer.JsfObjectsProducer;
 import jakarta.faces.application.NavigationHandler;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
-
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
-import de.cuioss.test.jsf.producer.JsfObjectsProducer;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 @EnableJsfEnvironment
 @EnableAutoWeld
-@AddBeanClasses({ NavigationHandlerProducer.class, JsfObjectsProducer.class })
+@AddBeanClasses({NavigationHandlerProducer.class, JsfObjectsProducer.class})
 class NavigationHandlerProducerTest {
 
     @Inject

@@ -15,15 +15,14 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
-import jakarta.faces.event.ActionEvent;
-import jakarta.inject.Inject;
-
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
 import de.cuioss.jsf.api.components.model.widget.BaseWidget;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingViewController;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
+import jakarta.faces.event.ActionEvent;
+import jakarta.inject.Inject;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

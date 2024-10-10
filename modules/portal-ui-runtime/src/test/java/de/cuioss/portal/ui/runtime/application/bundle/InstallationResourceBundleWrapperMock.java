@@ -15,19 +15,17 @@
  */
 package de.cuioss.portal.ui.runtime.application.bundle;
 
-import static de.cuioss.tools.collect.CollectionLiterals.mutableSet;
+import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
+import de.cuioss.portal.common.priority.PortalPriorities;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.SessionScoped;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.util.Set;
 
-import jakarta.enterprise.context.SessionScoped;
-
-import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
-
-import jakarta.annotation.Priority;
-import de.cuioss.portal.common.priority.PortalPriorities;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableSet;
 
 @SessionScoped
 @Priority(PortalPriorities.PORTAL_INSTALLATION_LEVEL)

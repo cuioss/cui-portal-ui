@@ -15,15 +15,15 @@
  */
 package de.cuioss.portal.ui.api.exception;
 
-import java.io.Serial;
-import java.io.Serializable;
-
 import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.SessionStorage;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * Simple Container for communicating and displaying exception information at
@@ -42,23 +42,33 @@ public class DefaultErrorMessage implements Serializable {
      */
     public static final String LOOKUP_KEY = "defaultErrorMessage";
 
-    /** Serial version UID. */
+    /**
+     * Serial version UID.
+     */
     @Serial
     private static final long serialVersionUID = 5486339618618279597L;
 
-    /** The error code. */
+    /**
+     * The error code.
+     */
     @Getter
     private final String errorCode;
 
-    /** The error code. */
+    /**
+     * The error code.
+     */
     @Getter
     private final String errorTicket;
 
-    /** The error code. */
+    /**
+     * The error code.
+     */
     @Getter
     private final String errorMessage;
 
-    /** The page that raised the error. */
+    /**
+     * The page that raised the error.
+     */
     @Getter
     private final String pageId;
 

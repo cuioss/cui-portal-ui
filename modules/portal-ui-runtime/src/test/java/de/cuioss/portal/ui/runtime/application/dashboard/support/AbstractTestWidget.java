@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractTestWidget extends BaseDeferredLoadingWidget<ArrayList<ListItem>>
-    implements ListItemWidgetModel {
+        implements ListItemWidgetModel {
 
     @Serial
     private static final long serialVersionUID = 8583462862065649466L;

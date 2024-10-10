@@ -15,15 +15,6 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.EnableAlternatives;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiViewMapper;
 import de.cuioss.portal.ui.runtime.application.templating.support.MockTemplateMapper;
@@ -33,19 +24,24 @@ import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jboss.weld.junit5.auto.EnableAlternatives;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
-@EnableAlternatives({ MockTemplateMapper.class, MockViewMapper.class })
+@EnableAlternatives({MockTemplateMapper.class, MockViewMapper.class})
 class ViewResourceHandlerTest implements ShouldBeNotNull<ViewResourceHandler>, JsfEnvironmentConsumer {
 
+    private static final String TEMPLATES_BASE_BATH = "META-INF/templates/test/";
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
-
-    private static final String TEMPLATES_BASE_BATH = "META-INF/templates/test/";
-
     @Getter
     private ViewResourceHandler underTest;
 

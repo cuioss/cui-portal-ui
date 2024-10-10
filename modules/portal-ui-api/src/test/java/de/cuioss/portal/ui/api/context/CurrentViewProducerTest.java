@@ -15,22 +15,20 @@
  */
 package de.cuioss.portal.ui.api.context;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.inject.Inject;
-
+import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
-import lombok.Getter;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnableJsfEnvironment
 @EnableAutoWeld
-@AddBeanClasses({ CurrentViewProducer.class })
+@AddBeanClasses({CurrentViewProducer.class})
 class CurrentViewProducerTest implements ShouldBeNotNull<ViewDescriptor> {
 
     @Inject

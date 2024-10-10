@@ -21,7 +21,11 @@ import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock;
 import de.cuioss.portal.core.test.mocks.authentication.PortalTestUserProducer;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
-import de.cuioss.portal.ui.api.menu.items.*;
+import de.cuioss.portal.ui.api.menu.items.AboutMenuItem;
+import de.cuioss.portal.ui.api.menu.items.AccountMenuItem;
+import de.cuioss.portal.ui.api.menu.items.LogoutMenuItem;
+import de.cuioss.portal.ui.api.menu.items.PreferencesMenuItem;
+import de.cuioss.portal.ui.api.menu.items.UserMenuItem;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalMirrorResourceBundle;
 import de.cuioss.test.jsf.config.ComponentConfigurator;
@@ -35,7 +39,10 @@ import org.junit.jupiter.api.Test;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_TOP_IDENTIFIER;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({AccountMenuItem.class, AboutMenuItem.class, LogoutMenuItem.class, EmptyNavigationContainer.class,

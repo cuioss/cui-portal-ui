@@ -15,11 +15,11 @@
  */
 package de.cuioss.portal.ui.api.pages;
 
-import java.util.Optional;
-
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.uimodel.application.LoginCredentials;
+
+import java.util.Optional;
 
 /**
  * {@linkplain LoginPageHistoryManagerProvider} is a decorator for
@@ -36,7 +36,7 @@ public interface LoginPageHistoryManagerProvider {
      * @param userStore used as default value
      * @param username  used as default value
      * @return option for {@linkplain LoginCredentials} extract from url parameter,
-     *         empty option if parameters are missing
+     * empty option if parameters are missing
      */
     Optional<LoginCredentials> extractFromDeepLinkingUrlParameter(final String userStore, final String username);
 

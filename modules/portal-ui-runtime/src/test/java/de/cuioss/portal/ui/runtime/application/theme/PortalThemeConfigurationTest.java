@@ -31,26 +31,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @EnablePortalConfiguration
 public class PortalThemeConfigurationTest implements ShouldHandleObjectContracts<PortalThemeConfiguration> {
 
+    public static final String APPLICATION_DEFAULT_CSS = "application-default.css";
+    public static final String DEFAULT = "Default";
+    public static final String HIGH_CONTRAST = "High-Contrast";
     @Inject
     @Getter
     private PortalThemeConfiguration underTest;
-
     @Inject
     private PortalTestConfiguration configuration;
-
-    public static final String APPLICATION_DEFAULT_CSS = "application-default.css";
-
-    public static final String DEFAULT = "Default";
-
-    public static final String HIGH_CONTRAST = "High-Contrast";
 
     @Test
     void shouldProvideDefaultConfiguration() {
         assertEquals(PortalThemeConfigurationTest.DEFAULT, underTest.getDefaultTheme());
         assertTrue(underTest.getAvailableThemes().containsAll(
-            immutableList(PortalThemeConfigurationTest.DEFAULT, PortalThemeConfigurationTest.HIGH_CONTRAST)));
+                immutableList(PortalThemeConfigurationTest.DEFAULT, PortalThemeConfigurationTest.HIGH_CONTRAST)));
         assertEquals(PortalThemeConfigurationTest.APPLICATION_DEFAULT_CSS,
-            underTest.getCssForThemeName(underTest.getDefaultTheme()));
+                underTest.getCssForThemeName(underTest.getDefaultTheme()));
     }
 
 }

@@ -15,11 +15,10 @@
  */
 package de.cuioss.portal.ui.runtime.application;
 
+import de.cuioss.tools.logging.CuiLogger;
 import jakarta.faces.application.Application;
 import jakarta.faces.application.ApplicationFactory;
 import jakarta.faces.application.ApplicationWrapper;
-
-import de.cuioss.tools.logging.CuiLogger;
 
 /**
  * Factory for creating / wrapping an existing {@link ApplicationFactory}
@@ -28,10 +27,9 @@ import de.cuioss.tools.logging.CuiLogger;
  */
 public class PortalApplicationFactory extends ApplicationFactory {
 
+    private static final CuiLogger LOGGER = new CuiLogger(PortalApplicationFactory.class);
     @SuppressWarnings("java:S3077") // thread-safe via createPortalApplication
     private Application application;
-
-    private static final CuiLogger LOGGER = new CuiLogger(PortalApplicationFactory.class);
 
     /**
      * Construct a new OPortalApplicationFactory around the given wrapped factory.

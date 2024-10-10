@@ -15,10 +15,9 @@
  */
 package de.cuioss.portal.ui.api.lazyloading;
 
-import jakarta.faces.context.FacesContext;
-
 import de.cuioss.uimodel.result.ResultDetail;
 import de.cuioss.uimodel.result.ResultObject;
+import jakarta.faces.context.FacesContext;
 
 /**
  * A request to a backend service, which can be run in a separate thread and
@@ -49,13 +48,13 @@ public interface LazyLoadingRequest<T> {
 
     /**
      * @return A unique identifier to store the request and allow retrieving of the
-     *         result later.
+     * result later.
      */
     String getRequestId();
 
     /**
      * @return an instance of a {@link LazyLoadingErrorHandler} to be called if a
-     *         {@link ResultDetail} was provided in the {@link #backendRequest()}.
+     * {@link ResultDetail} was provided in the {@link #backendRequest()}.
      */
     default LazyLoadingErrorHandler getErrorHandler() {
         return new LazyLoadingErrorHandler();

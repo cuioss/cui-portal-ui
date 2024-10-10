@@ -15,13 +15,12 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import jakarta.faces.application.Resource;
-import jakarta.faces.application.ResourceHandler;
-
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.tools.io.StructuredFilename;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.application.CuiProjectStage;
+import jakarta.faces.application.Resource;
+import jakarta.faces.application.ResourceHandler;
 import lombok.Getter;
 
 /**
@@ -75,7 +74,7 @@ public class CuiResourceHandler extends AbstractVersionResourceHandler {
      * @param resourceName
      * @param libraryName
      * @return boolean indicating whether the resourceHandler should handle (modify)
-     *         the given resource Request
+     * the given resource Request
      */
     private boolean shouldHandle(final String resourceName, final String libraryName) {
         if (getProjectStage().isDevelopment()) {

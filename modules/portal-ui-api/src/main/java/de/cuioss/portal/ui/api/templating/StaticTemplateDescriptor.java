@@ -30,13 +30,13 @@ public interface StaticTemplateDescriptor extends Serializable {
 
     /**
      * @return a List of names of the templates to be handles by this concrete
-     *         descriptor.
+     * descriptor.
      */
     List<String> getHandledTemplates();
 
     /**
      * @return the name of the Template-Directory the templates within this
-     *         descriptor belong to. It must not end with '/'
+     * descriptor belong to. It must not end with '/'
      */
     String getTemplatePath();
 }

@@ -40,13 +40,16 @@ import static de.cuioss.portal.ui.runtime.exception.FallBackExceptionHandler.POR
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_ERROR_LOGICAL_VIEW_ID;
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID;
 import static de.cuioss.test.generator.Generators.throwables;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @EnablePortalUiEnvironment
 @EnableTestLogger
 @AddBeanClasses({CurrentViewProducer.class, PortalSessionStorageMock.class, NavigationHandlerProducer.class})
 class FallBackExceptionHandlerTest
-    implements ShouldHandleObjectContracts<FallBackExceptionHandler>, JsfEnvironmentConsumer {
+        implements ShouldHandleObjectContracts<FallBackExceptionHandler>, JsfEnvironmentConsumer {
 
     @Setter
     @Getter
@@ -155,6 +158,6 @@ class FallBackExceptionHandlerTest
         underTest.handleFallBack(exceptionEvent);
         assertEquals(HandleOutcome.LOGGED, exceptionEvent.getOutcome());
         LogAsserts.assertSingleLogMessagePresent(TestLogLevel.ERROR,
-            FallBackExceptionHandler.UNSPECIFIED_EXCEPTION_WITHOUT_VIEW);
+                FallBackExceptionHandler.UNSPECIFIED_EXCEPTION_WITHOUT_VIEW);
     }
 }

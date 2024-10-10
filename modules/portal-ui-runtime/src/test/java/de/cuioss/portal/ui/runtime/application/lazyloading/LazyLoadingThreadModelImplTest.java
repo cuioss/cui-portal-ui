@@ -37,7 +37,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("rawtypes")
 @EnablePortalUiEnvironment
@@ -56,6 +60,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
     @Inject
     private PortalTestConfiguration configuration;
+    private String testResult;
 
     @BeforeEach
     void cleanTestResult() {
@@ -66,8 +71,6 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     void afterTest() {
         threadManager.destroy();
     }
-
-    private String testResult;
 
     @Override
     public LazyLoadingViewModelImpl getUnderTest() {

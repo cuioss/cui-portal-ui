@@ -15,23 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.common;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_MAX_INACTIVE_INTERVAL;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT;
-
-import java.io.Serial;
-import java.io.Serializable;
-
+import de.cuioss.portal.ui.runtime.application.view.ViewTransientManagerBean;
+import de.cuioss.tools.logging.CuiLogger;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Provider;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import de.cuioss.portal.ui.runtime.application.view.ViewTransientManagerBean;
-import de.cuioss.tools.logging.CuiLogger;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import java.io.Serial;
+import java.io.Serializable;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_MAX_INACTIVE_INTERVAL;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT;
 
 /**
  * Session bean to control over timeout.
@@ -44,13 +42,11 @@ import lombok.ToString;
 @ToString(of = "maxInactiveInterval", doNotUseGetters = true)
 public class ClientWindowManager implements Serializable {
 
-    private static final CuiLogger LOGGER = new CuiLogger(ClientWindowManager.class);
-
     /**
      * Bean name for looking up instances using EL.
      */
     public static final String BEAN_NAME = "clientWindowManager";
-
+    private static final CuiLogger LOGGER = new CuiLogger(ClientWindowManager.class);
     @Serial
     private static final long serialVersionUID = 8603571267932838043L;
 
@@ -74,7 +70,7 @@ public class ClientWindowManager implements Serializable {
 
     /**
      * @return the interval to be used for determining after which time the
-     *         corresponding window should show the timeout-popup
+     * corresponding window should show the timeout-popup
      */
     public int getMaxInactiveInterval() {
         if (maxInactiveInterval > -1) {

@@ -15,15 +15,13 @@
  */
 package de.cuioss.portal.ui.components.layout;
 
-import jakarta.faces.component.UIComponent;
-import jakarta.faces.component.html.HtmlOutputText;
-
-import org.junit.jupiter.api.Test;
-
 import de.cuioss.jsf.api.components.html.HtmlTreeBuilder;
 import de.cuioss.jsf.api.components.html.Node;
 import de.cuioss.portal.ui.components.PortalCssClasses;
 import de.cuioss.test.jsf.renderer.AbstractComponentRendererTest;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.html.HtmlOutputText;
+import org.junit.jupiter.api.Test;
 
 class SidebarComponentRendererTest extends AbstractComponentRendererTest<SidebarComponentRenderer> {
 

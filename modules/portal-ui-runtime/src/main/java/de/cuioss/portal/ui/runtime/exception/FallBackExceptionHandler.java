@@ -15,30 +15,29 @@
  */
 package de.cuioss.portal.ui.runtime.exception;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Optional;
-import java.util.UUID;
-
+import de.cuioss.jsf.api.application.navigation.NavigationUtils;
+import de.cuioss.jsf.api.common.util.CheckContextState;
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.portal.core.storage.MapStorage;
+import de.cuioss.portal.core.storage.PortalSessionStorage;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
+import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
+import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
+import de.cuioss.portal.ui.api.exception.HandleOutcome;
+import de.cuioss.portal.ui.api.pages.ErrorPage;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.uimodel.application.CuiProjectStage;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.NavigationHandler;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 
-import de.cuioss.jsf.api.application.navigation.NavigationUtils;
-import de.cuioss.jsf.api.common.util.CheckContextState;
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.core.storage.MapStorage;
-import de.cuioss.portal.core.storage.PortalSessionStorage;
-import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
-import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
-import de.cuioss.portal.ui.api.exception.HandleOutcome;
-import de.cuioss.portal.ui.api.context.CuiCurrentView;
-import de.cuioss.portal.ui.api.context.CuiNavigationHandler;
-import de.cuioss.portal.ui.api.pages.ErrorPage;
-import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.uimodel.application.CuiProjectStage;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Defines the last line of defense, saying displaying the error page with the
@@ -53,25 +52,16 @@ import de.cuioss.uimodel.application.CuiProjectStage;
 @RequestScoped
 public class FallBackExceptionHandler implements Serializable {
 
+    static final String UNSPECIFIED_EXCEPTION_WITHOUT_VIEW = "Portal-112: An unspecified exception has been caught and handled by fallback strategy";
+    static final String PORTAL_130_ERROR_ON_ERROR_PAGE = "Portal-130: Previous error occurs on error page. This will lead to damaged output and is a sign of corrupted deployment";
     private static final CuiLogger LOGGER = new CuiLogger(FallBackExceptionHandler.class);
-
     @Serial
     private static final long serialVersionUID = -1197300817644970750L;
-
     private static final String SYSTEM_ERROR = "System error";
-
     private static final String UNSPECIFIED_EXCEPTION = "Portal-111: An unspecified exception has been caught and handled by fallback strategy while trying to access view ";
-
     private static final String UNSPECIFIED_EXCEPTION_SUFFIX = ", errorTicket=";
-
-    static final String UNSPECIFIED_EXCEPTION_WITHOUT_VIEW = "Portal-112: An unspecified exception has been caught and handled by fallback strategy";
-
     private static final String EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_SESSION = "Portal-113: Detected an invalidated session, trying to recreate, reason={}";
-
     private static final String EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_NEW_SESSION = "Portal-502: Unable to recreate session, reason={}";
-
-    static final String PORTAL_130_ERROR_ON_ERROR_PAGE = "Portal-130: Previous error occurs on error page. This will lead to damaged output and is a sign of corrupted deployment";
-
     @Inject
     @PortalSessionStorage
     private Provider<MapStorage<Serializable, Serializable>> sessionStorageProvider;

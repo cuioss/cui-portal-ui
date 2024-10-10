@@ -39,7 +39,12 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({CustomizationResourceProducer.class})
@@ -59,6 +64,16 @@ class CustomizationResourceHandlerTest
 
     @Inject
     private PortalTestConfiguration configuration;
+
+    private static void checkResource(final Resource resolved) throws IOException {
+        assertNotNull(resolved, "Resource is null");
+        assertInstanceOf(CacheableResource.class, resolved, "Resource should be instance of CacheableResource");
+        assertNotNull(resolved.getContentType(), "Resource ContentType is missing");
+        assertNotNull(resolved.getResourceName(), "Resource ResourceName is missing");
+        assertNotNull(resolved.getLibraryName(), "Resource LibraryName is missing");
+        assertNotNull(resolved.getResponseHeaders(), "Resource ResponseHeaders is missing");
+        assertNotNull(resolved.getInputStream(), "Resource InputStream is missing");
+    }
 
     @BeforeEach
     void before() {
@@ -108,16 +123,6 @@ class CustomizationResourceHandlerTest
         assertNotSame(resolved, resolved2);
         assertEquals(resolved, resolved2);
         checkResource(resolved2);
-    }
-
-    private static void checkResource(final Resource resolved) throws IOException {
-        assertNotNull(resolved, "Resource is null");
-        assertInstanceOf(CacheableResource.class, resolved, "Resource should be instance of CacheableResource");
-        assertNotNull(resolved.getContentType(), "Resource ContentType is missing");
-        assertNotNull(resolved.getResourceName(), "Resource ResourceName is missing");
-        assertNotNull(resolved.getLibraryName(), "Resource LibraryName is missing");
-        assertNotNull(resolved.getResponseHeaders(), "Resource ResponseHeaders is missing");
-        assertNotNull(resolved.getInputStream(), "Resource InputStream is missing");
     }
 
     @Test

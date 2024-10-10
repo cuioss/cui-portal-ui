@@ -15,26 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating;
 
-import static de.cuioss.portal.ui.api.PortalCoreBeanNames.MULTI_TEMPLATING_MAPPER_BEAN_NAME;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-
-import java.io.Serial;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.inject.Instance;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
 import de.cuioss.portal.common.priority.PortalPriorities;
-
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-
 import de.cuioss.portal.ui.api.templating.MultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
@@ -44,8 +25,24 @@ import de.cuioss.portal.ui.api.templating.StaticTemplateDescriptor;
 import de.cuioss.tools.collect.MapBuilder;
 import de.cuioss.tools.io.FileLoaderUtility;
 import de.cuioss.tools.logging.CuiLogger;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.io.Serial;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static de.cuioss.portal.ui.api.PortalCoreBeanNames.MULTI_TEMPLATING_MAPPER_BEAN_NAME;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
  * The Mapper collects all instances of {@link StaticTemplateDescriptor} and
@@ -99,7 +96,7 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
     }
 
     public void handleDescriptor(final Map<String, URL> builderMap, final StaticTemplateDescriptor descriptor,
-            final String resourceName) {
+                                 final String resourceName) {
         try {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getTemplatePath() + '/' + resourceName)
                     .getURL();

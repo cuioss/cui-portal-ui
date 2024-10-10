@@ -15,30 +15,25 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
+import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
+import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.inject.Inject;
+import lombok.Getter;
+import org.jboss.weld.junit5.auto.EnableAutoWeld;
+import org.junit.jupiter.api.Test;
+
 import static de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock.VIEW_HOME;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import jakarta.inject.Inject;
-
-import org.jboss.weld.junit5.auto.EnableAutoWeld;
-import org.junit.jupiter.api.Test;
-
-import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
-import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
-import lombok.Getter;
-
 @EnableAutoWeld
 class PortalHistoryManagerMockTest implements ShouldBeNotNull<PortalHistoryManagerMock> {
 
     public static final String CURRENT_VIEW_XHTML = "current/view.jsf";
-
+    public static final String OTHER_VIEW_XHTML = "current/other.jsf";
     private final ViewDescriptorImpl currentView = ViewDescriptorImpl.builder().withViewId(CURRENT_VIEW_XHTML)
             .withLogicalViewId(CURRENT_VIEW_XHTML).build();
-
-    public static final String OTHER_VIEW_XHTML = "current/other.jsf";
-
     private final ViewDescriptorImpl otherView = ViewDescriptorImpl.builder().withViewId(OTHER_VIEW_XHTML)
             .withLogicalViewId(OTHER_VIEW_XHTML).build();
 

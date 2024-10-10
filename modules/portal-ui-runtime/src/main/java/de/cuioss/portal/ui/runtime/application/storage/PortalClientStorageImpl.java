@@ -15,31 +15,29 @@
  */
 package de.cuioss.portal.ui.runtime.application.storage;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAX_AGE;
-import static de.cuioss.portal.ui.api.PortalCoreBeanNames.CLIENT_STORAGE_BEAN_NAME;
-import static org.omnifaces.util.Faces.addResponseCookie;
-import static org.omnifaces.util.Faces.getRequestCookie;
-import static org.omnifaces.util.Faces.removeResponseCookie;
-
-import java.io.Serial;
-import java.util.HashMap;
-import java.util.Map;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import jakarta.inject.Provider;
-
-import jakarta.annotation.Priority;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.core.servlet.CuiContextPath;
 import de.cuioss.portal.core.storage.ClientStorage;
 import de.cuioss.portal.core.storage.PortalClientStorage;
 import de.cuioss.tools.string.MoreStrings;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Provider;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import java.io.Serial;
+import java.util.HashMap;
+import java.util.Map;
+
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAX_AGE;
+import static de.cuioss.portal.ui.api.PortalCoreBeanNames.CLIENT_STORAGE_BEAN_NAME;
+import static org.omnifaces.util.Faces.addResponseCookie;
+import static org.omnifaces.util.Faces.getRequestCookie;
+import static org.omnifaces.util.Faces.removeResponseCookie;
 
 /**
  * Represents the request scoped runtime representation of

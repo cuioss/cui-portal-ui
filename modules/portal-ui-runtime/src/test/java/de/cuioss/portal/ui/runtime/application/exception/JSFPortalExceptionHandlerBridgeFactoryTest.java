@@ -15,13 +15,11 @@
  */
 package de.cuioss.portal.ui.runtime.application.exception;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-
+import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
 import jakarta.faces.context.ExceptionHandlerWrapper;
-
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 @EnableJsfEnvironment
 class JSFPortalExceptionHandlerBridgeFactoryTest {

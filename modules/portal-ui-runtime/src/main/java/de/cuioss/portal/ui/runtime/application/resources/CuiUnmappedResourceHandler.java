@@ -15,23 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
-import static java.util.stream.Collectors.toList;
+import de.cuioss.tools.string.MoreStrings;
+import de.cuioss.tools.string.Splitter;
+import jakarta.faces.application.Resource;
+import jakarta.faces.application.ResourceHandler;
+import jakarta.faces.context.FacesContext;
+import org.omnifaces.resourcehandler.UnmappedResourceHandler;
+import org.omnifaces.util.FacesLocal;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import jakarta.faces.application.Resource;
-import jakarta.faces.application.ResourceHandler;
-import jakarta.faces.context.FacesContext;
-
-import org.omnifaces.resourcehandler.UnmappedResourceHandler;
-import org.omnifaces.util.FacesLocal;
-
-import de.cuioss.tools.string.MoreStrings;
-import de.cuioss.tools.string.Splitter;
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
+import static java.util.stream.Collectors.toList;
 
 /**
  * This resource handler wrap omnifaces UnmappedResourceHandler for restriction
@@ -40,15 +38,15 @@ import de.cuioss.tools.string.Splitter;
  * parameter
  * <p>
  * <code>
- *         &lt;context-param&gt;<br>
- *         &lt;param-name&gt;jakarta.faces.RESOURCE_EXCLUDES&lt;/param-name&gt;<br>
- *         &lt;param-value&gt;.class .jsp .jspx .properties .xhtml .groovy&lt;/param-value&gt;<br>
- *         &lt;/context-param&gt;
- *      </code>
+ * &lt;context-param&gt;<br>
+ * &lt;param-name&gt;jakarta.faces.RESOURCE_EXCLUDES&lt;/param-name&gt;<br>
+ * &lt;param-value&gt;.class .jsp .jspx .properties .xhtml .groovy&lt;/param-value&gt;<br>
+ * &lt;/context-param&gt;
+ * </code>
  * </p>
- *
+ * <p>
  * TODO : could be replaced by original after
- * <a href="https://github.com/omnifaces/omnifaces/issues/481">...</a> is solved. See CUI-915
+ * <a href="https://github.com/omnifaces/omnifaces/issues/481">...</a> is solved.
  *
  * @author Eugen Fischer
  */
@@ -64,38 +62,6 @@ public class CuiUnmappedResourceHandler extends UnmappedResourceHandler {
      */
     public CuiUnmappedResourceHandler(final ResourceHandler wrapped) {
         super(wrapped);
-    }
-
-    @Override
-    public Resource decorateResource(final Resource resource) {
-
-        if (null != resource && shouldBeHandledHere(resource.getRequestPath()))
-            return super.decorateResource(resource);
-
-        return resource;
-    }
-
-    @Override
-    public boolean isResourceRequest(final FacesContext context) {
-        final var requestURI = FacesLocal.getRequestURI(context);
-        final var requestContextPath = FacesLocal.getRequestContextPath(context);
-        final var isResourceRequest = requestURI.startsWith(requestContextPath + RESOURCE_IDENTIFIER);
-        if (isResourceRequest) {
-            context.getAttributes().put("com.sun.faces.RESOURCE_REQUEST", true);
-        }
-        return isResourceRequest && shouldBeHandledHere(requestURI)
-                // wrapped should decide not super !
-                || getWrapped().isResourceRequest(context);
-    }
-
-    @Override
-    public void handleResourceRequest(final FacesContext context) throws IOException {
-        final var requestURI = FacesLocal.getRequestURI(context);
-        if (shouldBeHandledHere(requestURI)) {
-            super.handleResourceRequest(context);
-        } else {
-            getWrapped().handleResourceRequest(context);
-        }
     }
 
     private static boolean shouldBeHandledHere(final String requestURI) {
@@ -132,5 +98,37 @@ public class CuiUnmappedResourceHandler extends UnmappedResourceHandler {
     private static String getContextParameter() {
         return MoreStrings.emptyToNull(FacesContext.getCurrentInstance().getExternalContext()
                 .getInitParameter(ResourceHandler.RESOURCE_EXCLUDES_PARAM_NAME));
+    }
+
+    @Override
+    public Resource decorateResource(final Resource resource) {
+
+        if (null != resource && shouldBeHandledHere(resource.getRequestPath()))
+            return super.decorateResource(resource);
+
+        return resource;
+    }
+
+    @Override
+    public boolean isResourceRequest(final FacesContext context) {
+        final var requestURI = FacesLocal.getRequestURI(context);
+        final var requestContextPath = FacesLocal.getRequestContextPath(context);
+        final var isResourceRequest = requestURI.startsWith(requestContextPath + RESOURCE_IDENTIFIER);
+        if (isResourceRequest) {
+            context.getAttributes().put("com.sun.faces.RESOURCE_REQUEST", true);
+        }
+        return isResourceRequest && shouldBeHandledHere(requestURI)
+                // wrapped should decide not super !
+                || getWrapped().isResourceRequest(context);
+    }
+
+    @Override
+    public void handleResourceRequest(final FacesContext context) throws IOException {
+        final var requestURI = FacesLocal.getRequestURI(context);
+        if (shouldBeHandledHere(requestURI)) {
+            super.handleResourceRequest(context);
+        } else {
+            getWrapped().handleResourceRequest(context);
+        }
     }
 }

@@ -15,22 +15,22 @@
  */
 package de.cuioss.portal.ui.runtime.application.theme;
 
-import static de.cuioss.tools.base.Preconditions.checkArgument;
-import static de.cuioss.tools.base.Preconditions.checkState;
-import static de.cuioss.tools.collect.MoreCollections.isEmpty;
-import static de.cuioss.tools.string.MoreStrings.isBlank;
-import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
+import de.cuioss.tools.collect.MapBuilder;
+import de.cuioss.tools.logging.CuiLogger;
+import de.cuioss.tools.string.Splitter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import de.cuioss.tools.collect.MapBuilder;
-import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.tools.string.Splitter;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import static de.cuioss.tools.base.Preconditions.checkArgument;
+import static de.cuioss.tools.base.Preconditions.checkState;
+import static de.cuioss.tools.collect.MoreCollections.isEmpty;
+import static de.cuioss.tools.string.MoreStrings.isBlank;
+import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 
 /**
  * Support class for translating theme-names derived from
@@ -42,16 +42,12 @@ import lombok.ToString;
 @ToString
 public class ThemeManager implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 2368337948482686947L;
-
-    private static final CuiLogger log = new CuiLogger(ThemeManager.class);
-
-    private static final String CSS_SUFFIX = ".css";
-
     static final String CSS_PREFEXI_NAME = Splitter.on('.').splitToList(PortalThemeConfiguration.CSS_NAME).iterator()
             .next() + "-";
-
+    @Serial
+    private static final long serialVersionUID = 2368337948482686947L;
+    private static final CuiLogger log = new CuiLogger(ThemeManager.class);
+    private static final String CSS_SUFFIX = ".css";
     private final Map<String, String> themeNameCssMapping;
 
     private final List<String> availableThemes;
@@ -71,9 +67,17 @@ public class ThemeManager implements Serializable {
         var mapBuilder = new MapBuilder<String, String>();
         for (String themeName : themeConfiguration.getAvailableThemes()) {
             mapBuilder.put(themeName,
-                CSS_PREFEXI_NAME + themeName.toLowerCase() + CSS_SUFFIX);
+                    CSS_PREFEXI_NAME + themeName.toLowerCase() + CSS_SUFFIX);
         }
         themeNameCssMapping = mapBuilder.toImmutableMap();
+    }
+
+    private static void checkThemeNameContract(final List<String> availableThemes, final String defaultTheme) {
+        checkArgument(!isEmpty(availableThemes), "no availableThemes provided");
+        requireNotEmpty(defaultTheme, "defaultTheme");
+        checkState(availableThemes.contains(defaultTheme), "Default theme: '%s' can not be found within '%s'",
+                defaultTheme, availableThemes);
+
     }
 
     /**
@@ -96,14 +100,6 @@ public class ThemeManager implements Serializable {
             log.debug("No configured theme found for {}, using default theme.", themeLookupName);
         }
         return themeLookupName;
-    }
-
-    private static void checkThemeNameContract(final List<String> availableThemes, final String defaultTheme) {
-        checkArgument(!isEmpty(availableThemes), "no availableThemes provided");
-        requireNotEmpty(defaultTheme, "defaultTheme");
-        checkState(availableThemes.contains(defaultTheme), "Default theme: '%s' can not be found within '%s'",
-                defaultTheme, availableThemes);
-
     }
 
 }

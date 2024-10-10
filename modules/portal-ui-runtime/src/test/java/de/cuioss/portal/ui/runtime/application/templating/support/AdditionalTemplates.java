@@ -15,21 +15,19 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating.support;
 
-import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
+import de.cuioss.portal.common.priority.PortalPriorities;
+import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
+import de.cuioss.portal.ui.api.templating.StaticTemplateDescriptor;
+import jakarta.annotation.Priority;
+import jakarta.inject.Named;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.util.List;
 
-import jakarta.inject.Named;
-
-import de.cuioss.portal.common.priority.PortalPriorities;
-
-import jakarta.annotation.Priority;
-import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
-import de.cuioss.portal.ui.api.templating.StaticTemplateDescriptor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 
 /**
  * Defines the Portal defined templates

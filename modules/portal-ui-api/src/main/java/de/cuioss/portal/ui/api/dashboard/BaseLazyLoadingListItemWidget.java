@@ -15,10 +15,6 @@
  */
 package de.cuioss.portal.ui.api.dashboard;
 
-import java.io.Serial;
-import java.util.Collections;
-import java.util.List;
-
 import de.cuioss.jsf.api.components.model.widget.DashboardWidgetModel;
 import de.cuioss.jsf.api.components.model.widget.ListItem;
 import de.cuioss.jsf.api.components.model.widget.ListItemWidgetModel;
@@ -26,11 +22,17 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.util.Collections;
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @ToString
 public abstract class BaseLazyLoadingListItemWidget<T> extends BaseLazyLoadingWidget<T>
         implements ListItemWidgetModel, DashboardWidgetModel {
 
+    @Serial
+    private static final long serialVersionUID = -9216862082387228019L;
     /**
      * The id of the within this module defined composite component that should be used
      * as default for this implementation of this abstract widget class.
@@ -38,10 +40,6 @@ public abstract class BaseLazyLoadingListItemWidget<T> extends BaseLazyLoadingWi
      */
     @Getter
     private final String compositeComponentId = "cui-composite:listItemWidget";
-
-    @Serial
-    private static final long serialVersionUID = -9216862082387228019L;
-
     @Getter
     private List<ListItem> items = Collections.emptyList();
 

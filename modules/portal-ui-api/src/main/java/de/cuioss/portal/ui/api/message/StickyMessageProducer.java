@@ -15,9 +15,9 @@
  */
 package de.cuioss.portal.ui.api.message;
 
-import java.util.List;
-
 import de.cuioss.jsf.api.components.css.ContextState;
+
+import java.util.List;
 
 /**
  * Produces sticky messages to be displayed until the user dismisses them.
@@ -89,7 +89,7 @@ public interface StickyMessageProducer {
 
     /**
      * @return {@code true} if at least one message is available, {@code false}
-     *         otherwise
+     * otherwise
      */
     default boolean isAnyMessageAvailable() {
         return !getMessages().isEmpty();

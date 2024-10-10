@@ -15,17 +15,15 @@
  */
 package de.cuioss.portal.ui.errorpages;
 
+import de.cuioss.portal.configuration.PortalConfigurationKeys;
+import de.cuioss.tools.base.BooleanOperations;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletResponse;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import de.cuioss.portal.configuration.PortalConfigurationKeys;
-import de.cuioss.tools.base.BooleanOperations;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.io.Serial;
 
@@ -33,7 +31,6 @@ import java.io.Serial;
  * Page Bean for the error-code 404 (Resource not found)
  *
  * @author Oliver Wolff
- *
  */
 @RequestScoped
 @Named

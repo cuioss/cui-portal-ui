@@ -15,8 +15,16 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
-import static de.cuioss.portal.configuration.MetricsConfigKeys.PORTAL_METRICS_ENABLED;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import de.cuioss.jsf.api.common.view.ViewDescriptor;
+import de.cuioss.portal.ui.api.context.CuiCurrentView;
+import de.cuioss.tools.logging.CuiLogger;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.event.PhaseId;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.metrics.MetricRegistry;
+import org.eclipse.microprofile.metrics.Tag;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -26,24 +34,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.event.PhaseId;
-import jakarta.inject.Inject;
-import jakarta.inject.Provider;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.eclipse.microprofile.metrics.MetricRegistry;
-import org.eclipse.microprofile.metrics.Tag;
-
-import de.cuioss.jsf.api.common.view.ViewDescriptor;
-import de.cuioss.portal.ui.api.context.CuiCurrentView;
-import de.cuioss.tools.logging.CuiLogger;
+import static de.cuioss.portal.configuration.MetricsConfigKeys.PORTAL_METRICS_ENABLED;
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
  * Gathers all lifecycle-information regarding tracing of certain Phases.
  *
  * @author Oliver Wolff
- *
  */
 @RequestScoped
 public class RequestTracer implements Serializable {
@@ -56,14 +53,10 @@ public class RequestTracer implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 2706209506496310554L;
-
-    private final Map<Integer, PhaseTracer> tracerMap = new HashMap<>();
-
-    private final PhaseTracer complete = new PhaseTracer(PhaseId.ANY_PHASE);
-
     private static final String METRIC_ID_PHASE = "jsf.view.phase";
     private static final String METRIC_ID_TOTAL = "jsf.view.total";
-
+    private final Map<Integer, PhaseTracer> tracerMap = new HashMap<>();
+    private final PhaseTracer complete = new PhaseTracer(PhaseId.ANY_PHASE);
     @Inject
     @CuiCurrentView
     private Provider<ViewDescriptor> currentViewProvider;

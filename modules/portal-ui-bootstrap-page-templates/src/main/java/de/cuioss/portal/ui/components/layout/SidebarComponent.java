@@ -15,9 +15,6 @@
  */
 package de.cuioss.portal.ui.components.layout;
 
-import jakarta.faces.component.FacesComponent;
-import jakarta.faces.context.FacesContext;
-
 import de.cuioss.jsf.api.components.base.BaseCuiPanel;
 import de.cuioss.jsf.api.components.css.StyleClassBuilder;
 import de.cuioss.jsf.api.components.css.StyleClassResolver;
@@ -26,6 +23,8 @@ import de.cuioss.jsf.api.components.partial.HtmlElementProvider;
 import de.cuioss.jsf.api.components.util.ComponentUtility;
 import de.cuioss.portal.ui.components.PortalCssClasses;
 import de.cuioss.portal.ui.components.PortalFamily;
+import jakarta.faces.component.FacesComponent;
+import jakarta.faces.context.FacesContext;
 import lombok.experimental.Delegate;
 
 /**
@@ -37,22 +36,22 @@ import lombok.experimental.Delegate;
  *
  * <pre>
  * {@code
-    <ui:define name="sidebarLeft">
-        <portal:sidebar>
-            <h1>Some Content in the sidebar</h1>
-        </portal:sidebar>
- </ui:define>}
+ * <ui:define name="sidebarLeft">
+ * <portal:sidebar>
+ * <h1>Some Content in the sidebar</h1>
+ * </portal:sidebar>
+ * </ui:define>}
  * </pre>
  *
  * <h3>Sidebar Right Sample</h3>
  *
  * <pre>
  * {@code
-    <ui:define name="sidebarRight">
-        <portal:sidebar>
-            <h1>Some Content in the right sidebar</h1>
-        </portal:sidebar>
- </ui:define>}
+ * <ui:define name="sidebarRight">
+ * <portal:sidebar>
+ * <h1>Some Content in the right sidebar</h1>
+ * </portal:sidebar>
+ * </ui:define>}
  * </pre>
  *
  * <h2>Attributes</h2>
@@ -82,16 +81,6 @@ public class SidebarComponent extends BaseCuiPanel implements StyleClassResolver
         super.setRendererType(PortalFamily.SIDEBAR_RENDERER);
     }
 
-    @Override
-    public StyleClassBuilder resolveStyleClass() {
-        return PortalCssClasses.SIDEBAR.getStyleClassBuilder().append(super.getStyleClass());
-    }
-
-    @Override
-    public String getFamily() {
-        return PortalFamily.PORTAL_FAMILY;
-    }
-
     /**
      * Shortcut for creating and casting a component of type
      * {@link SidebarComponent}.
@@ -101,6 +90,16 @@ public class SidebarComponent extends BaseCuiPanel implements StyleClassResolver
      */
     public static SidebarComponent createComponent(final FacesContext facesContext) {
         return ComponentUtility.createComponent(facesContext, PortalFamily.SIDEBAR_COMPONENT);
+    }
+
+    @Override
+    public StyleClassBuilder resolveStyleClass() {
+        return PortalCssClasses.SIDEBAR.getStyleClassBuilder().append(super.getStyleClass());
+    }
+
+    @Override
+    public String getFamily() {
+        return PortalFamily.PORTAL_FAMILY;
     }
 
 }

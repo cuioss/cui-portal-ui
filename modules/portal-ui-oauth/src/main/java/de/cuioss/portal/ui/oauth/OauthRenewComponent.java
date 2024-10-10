@@ -15,16 +15,15 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import java.util.Optional;
-
-import jakarta.faces.component.FacesComponent;
-import jakarta.faces.component.UINamingContainer;
-
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.tools.logging.CuiLogger;
+import jakarta.faces.component.FacesComponent;
+import jakarta.faces.component.UINamingContainer;
 import lombok.Getter;
+
+import java.util.Optional;
 
 /**
  * Backing bean for sso composite component.

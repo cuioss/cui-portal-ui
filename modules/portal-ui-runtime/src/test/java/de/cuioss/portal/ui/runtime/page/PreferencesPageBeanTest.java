@@ -38,11 +38,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({NavigationHandlerProducer.class, PortalThemeConfiguration.class, UserThemeBean.class,
-    PortalLocaleResolverServiceMock.class, PortalClientStorageMock.class})
+        PortalLocaleResolverServiceMock.class, PortalClientStorageMock.class})
 @EnableAlternatives({PortalLocaleResolverServiceMock.class})
 @ExcludeBeanClasses({PortalLocaleProducerMock.class})
 class PreferencesPageBeanTest extends AbstractPageBeanTest<PreferencesPageBean> {
@@ -66,7 +68,7 @@ class PreferencesPageBeanTest extends AbstractPageBeanTest<PreferencesPageBean> 
     @Test
     void shouldRedirectOnThemeChange() {
         underTest.themeChangeListener(new ValueChangeEvent(new DummyComponent(), PortalThemeConfigurationTest.DEFAULT,
-            PortalThemeConfigurationTest.HIGH_CONTRAST));
+                PortalThemeConfigurationTest.HIGH_CONTRAST));
         assertNavigatedWithOutcome(PreferencesPage.OUTCOME);
     }
 

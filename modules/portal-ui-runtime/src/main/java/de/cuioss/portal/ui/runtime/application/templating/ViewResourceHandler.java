@@ -15,26 +15,25 @@
  */
 package de.cuioss.portal.ui.runtime.application.templating;
 
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static de.cuioss.tools.string.MoreStrings.nullToEmpty;
-
-import java.net.URL;
-import java.util.List;
-
-import jakarta.faces.application.ResourceHandler;
-import jakarta.faces.application.ResourceHandlerWrapper;
-import jakarta.faces.application.ViewResource;
-import jakarta.faces.context.FacesContext;
-
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.templating.MultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.Joiner;
 import de.cuioss.tools.string.Splitter;
+import jakarta.faces.application.ResourceHandler;
+import jakarta.faces.application.ResourceHandlerWrapper;
+import jakarta.faces.application.ViewResource;
+import jakarta.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
+import java.net.URL;
+import java.util.List;
+
+import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
+import static de.cuioss.tools.string.MoreStrings.nullToEmpty;
 
 /**
  * Implementation of Multi-Templating: see package-doc
@@ -48,12 +47,23 @@ public class ViewResourceHandler extends ResourceHandlerWrapper {
     private static final CuiLogger LOGGER = new CuiLogger(ViewResourceHandler.class);
 
     private static final String RESOURCE_PREFIX_TEMPLATES = "/templates/";
-
-    private MultiTemplatingMapper multiTemplatingMapper;
-
     @Getter
     @NonNull
     private final ResourceHandler wrapped;
+    private MultiTemplatingMapper multiTemplatingMapper;
+
+    private static String removePrefix(final String resourceName) {
+        List<String> list = mutableList(Splitter.on("/").omitEmptyStrings().splitToList(resourceName));
+        if (list.size() < 2) {
+            throw new IllegalStateException(
+                    "Expected identifier in form of '/templates/xyz.xhtml', actually: " + resourceName);
+        }
+        return Joiner.on('/').join(list.subList(1, list.size()));
+    }
+
+    private static boolean shouldHandleResource(final String resourceName) {
+        return nullToEmpty(resourceName).startsWith(RESOURCE_PREFIX_TEMPLATES);
+    }
 
     @Override
     public ViewResource createViewResource(final FacesContext context, final String resourceName) {
@@ -86,23 +96,8 @@ public class ViewResourceHandler extends ResourceHandlerWrapper {
     private void checkMapper() {
         if (null == multiTemplatingMapper) {
             multiTemplatingMapper = PortalBeanManager
-                    .resolveBean(MultiTemplatingMapper.class, PortalMultiTemplatingMapper.class)
-                    .orElseThrow(() -> new IllegalArgumentException(PortalBeanManager
-                            .createErrorMessage(MultiTemplatingMapper.class, PortalMultiTemplatingMapper.class)));
+                    .resolveBeanOrThrowIllegalStateException(MultiTemplatingMapper.class, PortalMultiTemplatingMapper.class);
         }
 
-    }
-
-    private static String removePrefix(final String resourceName) {
-        List<String> list = mutableList(Splitter.on("/").omitEmptyStrings().splitToList(resourceName));
-        if (list.size() < 2) {
-            throw new IllegalStateException(
-                    "Expected identifier in form of '/templates/xyz.xhtml', actually: " + resourceName);
-        }
-        return Joiner.on('/').join(list.subList(1, list.size()));
-    }
-
-    private static boolean shouldHandleResource(final String resourceName) {
-        return nullToEmpty(resourceName).startsWith(RESOURCE_PREFIX_TEMPLATES);
     }
 }

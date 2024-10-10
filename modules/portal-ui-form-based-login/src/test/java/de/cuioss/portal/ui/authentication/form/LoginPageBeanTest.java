@@ -51,9 +51,15 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 import org.omnifaces.cdi.Param;
 
-import static de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock.*;
+import static de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock.DEFAULT_USER_STORE;
+import static de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock.SOME_LDAP_USER_STORE;
+import static de.cuioss.portal.core.test.mocks.authentication.PortalAuthenticationFacadeMock.SOME_OTHER_LDAP_USER_STORE;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({PortalPagesConfiguration.class, PortalTestUserProducer.class, PortalClientStorageMock.class,

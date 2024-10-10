@@ -15,18 +15,16 @@
  */
 package de.cuioss.portal.ui.test.mocks;
 
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
+import de.cuioss.portal.ui.api.lazyloading.LazyLoadingViewController;
+import jakarta.enterprise.context.ApplicationScoped;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
-import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
-import de.cuioss.portal.ui.api.lazyloading.LazyLoadingViewController;
-import lombok.Getter;
-
 /**
  * @author Oliver Wolff
- *
  */
 @ApplicationScoped
 public class PortalLazyLoadingViewControllerMock implements LazyLoadingViewController {

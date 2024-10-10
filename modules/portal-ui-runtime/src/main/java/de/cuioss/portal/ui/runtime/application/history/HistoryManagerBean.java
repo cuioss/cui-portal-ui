@@ -51,12 +51,10 @@ public class HistoryManagerBean implements HistoryManager {
 
     @Inject
     DefaultHistoryConfiguration historyConfiguration;
-
-    @Delegate(types = HistoryManager.class)
-    private HistoryManager delegate;
-
     @Inject
     Provider<FacesContext> facesContextProvider;
+    @Delegate(types = HistoryManager.class)
+    private HistoryManager delegate;
 
     /**
      * Initializes the bean. See class documentation for expected result.

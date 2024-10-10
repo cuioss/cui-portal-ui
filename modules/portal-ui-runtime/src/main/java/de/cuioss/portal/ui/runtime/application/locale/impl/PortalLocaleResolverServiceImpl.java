@@ -15,7 +15,21 @@
  */
 package de.cuioss.portal.ui.runtime.application.locale.impl;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALE_DEFAULT;
+import de.cuioss.portal.common.priority.PortalPriorities;
+import de.cuioss.portal.core.storage.ClientStorage;
+import de.cuioss.portal.core.storage.PortalClientStorage;
+import de.cuioss.portal.ui.api.locale.LocaleResolverService;
+import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Provider;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -23,24 +37,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import jakarta.inject.Provider;
-
-import de.cuioss.portal.common.priority.PortalPriorities;
-
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Priority;
-
-import de.cuioss.portal.core.storage.ClientStorage;
-import de.cuioss.portal.core.storage.PortalClientStorage;
-import de.cuioss.portal.ui.api.locale.LocaleResolverService;
-import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALE_DEFAULT;
 
 /**
  * Default implementation of {@link LocaleResolverService} that uses the jsf
@@ -53,27 +50,22 @@ import lombok.ToString;
 @Priority(PortalPriorities.PORTAL_CORE_LEVEL)
 @Named
 @SessionScoped
-@EqualsAndHashCode(of = { "locale", "availableLocales" }, doNotUseGetters = true)
-@ToString(of = { "locale", "availableLocales" }, doNotUseGetters = true)
+@EqualsAndHashCode(of = {"locale", "availableLocales"}, doNotUseGetters = true)
+@ToString(of = {"locale", "availableLocales"}, doNotUseGetters = true)
 public class PortalLocaleResolverServiceImpl implements LocaleResolverService, Serializable {
 
     @Serial
     private static final long serialVersionUID = 2745227675026232302L;
-
-    private Locale locale;
-
-    @Getter
-    private List<Locale> availableLocales;
-
     @Inject
     Provider<FacesContext> facesContextProvider;
-
     @Inject
     LocaleConfiguration localeConfiguration;
-
     @Inject
     @PortalClientStorage
     ClientStorage clientStorage;
+    private Locale locale;
+    @Getter
+    private List<Locale> availableLocales;
 
     /**
      * Initializer method for the bean

@@ -15,11 +15,10 @@
  */
 package de.cuioss.portal.ui.api.menu.items;
 
-import jakarta.enterprise.context.Dependent;
-
 import de.cuioss.portal.ui.api.menu.PortalMenuItem;
 import de.cuioss.portal.ui.api.menu.PortalNavigationMenuItemSingleImpl;
 import de.cuioss.portal.ui.api.pages.AccountPage;
+import jakarta.enterprise.context.Dependent;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -40,17 +39,20 @@ import java.io.Serial;
 @ToString(callSuper = true)
 public class AccountMenuItem extends PortalNavigationMenuItemSingleImpl {
 
+    /**
+     * The label Key for this component.
+     */
+    public static final String LABEL_KEY = "cui.commons.portal.menu.account.label";
+    /**
+     * The icon for this component.
+     */
+    public static final String ICON = "cui-icon-keys";
+    /**
+     * The string based id for this menu item.
+     */
+    public static final String MENU_ID = "accountMenuItem";
     @Serial
     private static final long serialVersionUID = 1452093785009425867L;
-
-    /** The label Key for this component. */
-    public static final String LABEL_KEY = "cui.commons.portal.menu.account.label";
-
-    /** The icon for this component. */
-    public static final String ICON = "cui-icon-keys";
-
-    /** The string based id for this menu item. */
-    public static final String MENU_ID = "accountMenuItem";
 
     /**
      * Constructor.
