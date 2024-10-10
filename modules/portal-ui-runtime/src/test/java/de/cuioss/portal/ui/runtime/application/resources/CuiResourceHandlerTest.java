@@ -46,12 +46,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @EnablePortalConfiguration(configuration = RESOURCE_VERSION + ":1.0")
 class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
 
-    private static final String CSS_LIBRARY = "de.cuioss.portal.css";
-    private static final String STYLE_CSS = "style.css";
-    private static final String STYLE_MIN_CSS = "style.min.css";
-    private static final String ANY_UNKNOWN_JPG = "any_unknown.jpg";
-    private static final String ALIEN_LIB = "alien_lib";
-    private static final String APPLICATION_CSS = "application.css";
+    static final String CSS_LIBRARY = "de.cuioss.portal.css";
+    static final String STYLE_CSS = "style.css";
+    static final String STYLE_MIN_CSS = "style.min.css";
+    static final String ANY_UNKNOWN_JPG = "any_unknown.jpg";
+    static final String ALIEN_LIB = "alien_lib";
+    static final String APPLICATION_CSS = "application.css";
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
@@ -62,7 +62,7 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
 
     private CuiMockResourceHandler mockResourceHandler;
 
-    private static CuiMockResource prepareResource(String name, String lib) {
+    static CuiMockResource prepareResource(String name, String lib) {
         return prepareResource(name, lib, null);
     }
 
@@ -80,20 +80,22 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
 
     @BeforeEach
     void setUpHandlerTest() {
-        setupResourceHandlerMock();
+        mockResourceHandler = setupResourceHandlerMock();
         configuration.production();
         underTest = new CuiResourceHandler(mockResourceHandler);
     }
 
-    void setupResourceHandlerMock() {
-        mockResourceHandler = new CuiMockResourceHandler();
+    static CuiMockResourceHandler setupResourceHandlerMock() {
+        var resourceHandler
+                = new CuiMockResourceHandler();
         Map<String, CuiMockResource> availableResources = new HashMap<>();
         availableResources.put(CSS_LIBRARY + "-style.css", prepareResource(STYLE_CSS, CSS_LIBRARY));
         availableResources.put(CSS_LIBRARY + "-style.min.css", prepareResource(STYLE_MIN_CSS, CSS_LIBRARY));
         availableResources.put(CSS_LIBRARY + "-application.css",
                 prepareResource(APPLICATION_CSS, CSS_LIBRARY, "1.0.0"));
         availableResources.put("alien_lib-any_unknown.jpg", prepareResource(ANY_UNKNOWN_JPG, ALIEN_LIB));
-        mockResourceHandler.setAvailableResouces(availableResources);
+        resourceHandler.setAvailableResouces(availableResources);
+        return resourceHandler;
     }
 
     @Test
