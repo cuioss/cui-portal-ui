@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnableAutoWeld
-@AddBeanClasses(PortalTemplates.class)
+@AddBeanClasses(PortalCoreTemplates.class)
 class PortalTemplateMapperSimpleTest implements ShouldHandleObjectContracts<PortalTemplateMapper> {
 
     public static final String PORTAL = "/META-INF/templates/portal/";

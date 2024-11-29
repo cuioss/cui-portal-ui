@@ -23,7 +23,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Resource Handle does adapt the request ulr for any resource covered by
+ * Resource Handle does adapt the request URL for any resource covered by
  * {@link #shouldHandleRequestedResource(String, String)} by adding a current
  * module version to a resource path
  */

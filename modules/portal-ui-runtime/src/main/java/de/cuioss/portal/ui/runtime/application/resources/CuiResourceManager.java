@@ -19,8 +19,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
@@ -34,10 +32,7 @@ import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 @ApplicationScoped
 @ToString
 @EqualsAndHashCode
-public class CuiResourceManager implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = -3598150198738923569L;
+public class CuiResourceManager {
 
     private final ConcurrentHashMap<String, LibraryInventory> libraries = new ConcurrentHashMap<>();
 

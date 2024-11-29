@@ -124,9 +124,7 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
 
     /**
      * Listener for {@link PortalViewResourcesConfigChanged}s. Reinitialize the
-     * templates map.
-     *
-     * @param type
+     * templates map
      */
     void configurationChangeEventListener(
             @Observes @PortalViewResourcesConfigChanged final PortalViewResourcesConfigChangedType type) {
