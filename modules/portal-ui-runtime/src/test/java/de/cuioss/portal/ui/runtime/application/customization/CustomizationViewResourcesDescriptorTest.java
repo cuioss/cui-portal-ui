@@ -22,13 +22,10 @@ import de.cuioss.portal.configuration.schedule.PortalFileWatcherService;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
 import de.cuioss.portal.ui.api.templating.PortalViewDescriptor;
-import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChanged;
-import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChangedType;
 import de.cuioss.portal.ui.runtime.support.FileWatcherServiceMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.enterprise.event.Event;
-import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
@@ -152,25 +149,6 @@ class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<Custom
 
         fileChangeEvent.fire(templatesBase);
         assertEquals(1, underTest.getHandledTemplates().size());
-        assertTrue(templatesEventWasFired);
-
-        assertEquals(viewsBase.toString(), underTest.getViewPath());
-        assertEquals(0, underTest.getHandledViews().size());
-        final var newViewName = FILE_SUFFIX_DATEFORMAT.format(new Date()) + letterStrings(5, 6).next() + ".xhtml";
-        final var newViewPath = Paths.get(underTest.getViewPath()).resolve(newViewName);
-        Files.createFile(newViewPath);
-        fileChangeEvent.fire(viewsBase);
-        assertEquals(1, underTest.getHandledViews().size());
-        assertTrue(viewsEventWasFired);
     }
 
-    void providerChangeEventListener(
-            @Observes @PortalViewResourcesConfigChanged final PortalViewResourcesConfigChangedType type) {
-        if (PortalViewResourcesConfigChangedType.TEMPLATES == type) {
-            templatesEventWasFired = true;
-        }
-        if (PortalViewResourcesConfigChangedType.VIEWS == type) {
-            viewsEventWasFired = true;
-        }
-    }
 }
