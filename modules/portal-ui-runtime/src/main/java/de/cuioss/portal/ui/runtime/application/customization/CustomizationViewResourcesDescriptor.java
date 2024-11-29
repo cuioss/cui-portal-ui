@@ -22,8 +22,6 @@ import de.cuioss.portal.configuration.schedule.FileWatcherService;
 import de.cuioss.portal.configuration.schedule.PortalFileWatcherService;
 import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
 import de.cuioss.portal.ui.api.templating.PortalViewDescriptor;
-import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChanged;
-import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChangedType;
 import de.cuioss.portal.ui.api.templating.StaticTemplateDescriptor;
 import de.cuioss.portal.ui.api.templating.StaticViewDescriptor;
 import de.cuioss.tools.io.MorePaths;
@@ -32,7 +30,6 @@ import de.cuioss.tools.string.MoreStrings;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Event;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -85,10 +82,6 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
     @Inject
     @PortalFileWatcherService
     private FileWatcherService fileWatcherService;
-
-    @Inject
-    @PortalViewResourcesConfigChanged
-    private Event<PortalViewResourcesConfigChangedType> viewResourcesConfigChangedEvent;
 
     @Inject
     @ConfigProperty(name = PORTAL_CUSTOMIZATION_ENABLED)
@@ -185,12 +178,5 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
         var oldViewPath = viewPath;
         var oldHandledViews = handledViews;
         initialize();
-        if (!MoreStrings.nullToEmpty(templatePath).equals(oldTemplatePath)
-                || !handledTemplates.equals(oldHandledTemplates)) {
-            viewResourcesConfigChangedEvent.fire(PortalViewResourcesConfigChangedType.TEMPLATES);
-        }
-        if (!MoreStrings.nullToEmpty(viewPath).equals(oldViewPath) || !handledViews.equals(oldHandledViews)) {
-            viewResourcesConfigChangedEvent.fire(PortalViewResourcesConfigChangedType.VIEWS);
-        }
     }
 }

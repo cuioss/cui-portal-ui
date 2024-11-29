@@ -19,15 +19,12 @@ import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.templating.MultiViewMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiViewMapper;
 import de.cuioss.portal.ui.api.templating.PortalViewDescriptor;
-import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChanged;
-import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChangedType;
 import de.cuioss.portal.ui.api.templating.StaticViewDescriptor;
 import de.cuioss.tools.io.FileLoaderUtility;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -113,15 +110,4 @@ public class PortalViewMapper implements MultiViewMapper {
                 key -> FileLoaderUtility.getLoaderForPath("classpath:/META-INF/" + key).getURL()));
     }
 
-    /**
-     * Listener for {@link PortalViewResourcesConfigChanged}s. Reinitialize the
-     * templates map
-     */
-    void configurationChangeEventListener(
-            @Observes @PortalViewResourcesConfigChanged final PortalViewResourcesConfigChangedType type) {
-        if (PortalViewResourcesConfigChangedType.VIEWS == type) {
-            log.debug("Reinitialize templates map");
-            init();
-        }
-    }
 }
