@@ -24,7 +24,6 @@ import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChangedType;
 import de.cuioss.portal.ui.api.templating.StaticViewDescriptor;
 import de.cuioss.tools.io.FileLoaderUtility;
 import de.cuioss.tools.logging.CuiLogger;
-import de.cuioss.uimodel.application.CuiProjectStage;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -32,7 +31,6 @@ import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.inject.Provider;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -66,9 +64,6 @@ public class PortalViewMapper implements MultiViewMapper {
     @Inject
     @PortalViewDescriptor
     private Instance<StaticViewDescriptor> descriptors;
-
-    @Inject
-    private Provider<CuiProjectStage> projectStageProvider;
 
     /**
      * Sorts the descriptors according to Priority annotation and creates the
@@ -120,9 +115,7 @@ public class PortalViewMapper implements MultiViewMapper {
 
     /**
      * Listener for {@link PortalViewResourcesConfigChanged}s. Reinitialize the
-     * templates map.
-     *
-     * @param type
+     * templates map
      */
     void configurationChangeEventListener(
             @Observes @PortalViewResourcesConfigChanged final PortalViewResourcesConfigChangedType type) {

@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnableAutoWeld
-@AddBeanClasses({PortalTemplates.class, AdditionalTemplates.class})
+@AddBeanClasses({PortalCoreTemplates.class, AdditionalTemplates.class})
 class PortalTemplateMapperExtendedTest implements ShouldHandleObjectContracts<PortalTemplateMapper> {
 
     public static final String ADDITIONAL_PROVIDER = "additional/";
@@ -48,7 +48,7 @@ class PortalTemplateMapperExtendedTest implements ShouldHandleObjectContracts<Po
 
     @Test
     void shouldInitCorrectly() {
-        // To be controlled through PortalTemplates
+        // To be controlled through PortalCoreTemplates
         assertTrue(underTest.resolveTemplatePath(TECHNICAL_ROOT).getPath().endsWith(PORTAL + TECHNICAL_ROOT));
         assertTrue(underTest.resolveTemplatePath(MASTER_DEFAULT).getPath().endsWith(PORTAL + MASTER_DEFAULT));
         assertTrue(underTest.resolveTemplatePath(MASTER_HORIZONTAL_CENTER).getPath()
