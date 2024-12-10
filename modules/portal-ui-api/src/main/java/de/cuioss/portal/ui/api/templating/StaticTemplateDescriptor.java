@@ -19,8 +19,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Utilized for statically extending the default {@link MultiTemplatingMapper}
- * defined by cui-portal-core-cdi-impl. Provides information which template are
+ * Used for statically extending the default {@link MultiTemplatingMapper}
+ * defined by cui-portal-core-cdi-impl.
+ * Provides information which template is
  * to be handled by which concrete Template-Directory, see package-info for
  * details.
  *
@@ -29,7 +30,7 @@ import java.util.List;
 public interface StaticTemplateDescriptor extends Serializable {
 
     /**
-     * @return a List of names of the templates to be handles by this concrete
+     * @return a List of the templates-names to be handles by this concrete
      * descriptor.
      */
     List<String> getHandledTemplates();
