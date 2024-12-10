@@ -48,7 +48,7 @@ import static de.cuioss.portal.configuration.util.ConfigurationHelper.resolveCon
 @EqualsAndHashCode(of = "resourceFile", callSuper = false)
 public final class CustomizationResource extends CacheableResource {
 
-    private static final CuiLogger log = new CuiLogger(CustomizationResource.class);
+    private static final CuiLogger LOGGER = new CuiLogger(CustomizationResource.class);
 
     private static final String HEADER_LAST_MODIFIED = "Last-Modified";
     private static final String HEADER_EXPIRES = "Expires";
@@ -57,12 +57,6 @@ public final class CustomizationResource extends CacheableResource {
 
     private final File resourceFile;
 
-    /**
-     * @param resourceFile
-     * @param resourceName
-     * @param libraryName
-     * @param contentType
-     */
     public CustomizationResource(final File resourceFile, final String resourceName, final String libraryName,
                                  final String contentType) {
         this.resourceFile = resourceFile;
@@ -112,8 +106,7 @@ public final class CustomizationResource extends CacheableResource {
         try {
             return resourceFile.toURI().toURL();
         } catch (final MalformedURLException e) {
-            log.warn("Portal-145: Customization resource '" + resourceFile
-                    + "' can not be resolved to an URL", e);
+            LOGGER.warn(e, "Portal-145: Customization resource '%s' can not be resolved to an URL", resourceFile);
             throw new IllegalStateException(e);
         }
     }

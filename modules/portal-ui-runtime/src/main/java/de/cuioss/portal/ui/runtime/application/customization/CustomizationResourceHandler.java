@@ -26,8 +26,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.Optional;
 
 /**
- * Allows to override specific resources at the installation. Delegates to
- * {@link ResourceProducer}.
+ * Allows overriding specific resources at the installation. Delegates to {@link ResourceProducer}.
  *
  * @author Matthias Walliczek
  */

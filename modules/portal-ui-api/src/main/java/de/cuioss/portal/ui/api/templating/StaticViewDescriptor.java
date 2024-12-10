@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Utilized for statically extending the default {@link MultiViewMapper} defined
+ * Used for statically extending the default {@link MultiViewMapper} defined
  * by portal-ui-api. Provides information which views are to be handled by which
  * concrete faces-Directory, see package-info for details.
  *
@@ -28,7 +28,7 @@ import java.util.List;
 public interface StaticViewDescriptor extends Serializable {
 
     /**
-     * @return a List of names of the templates to be handles by this concrete
+     * @return a List of the templates-names to be handles by this concrete
      * descriptor.
      */
     List<String> getHandledViews();

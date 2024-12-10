@@ -52,7 +52,7 @@ public class CachedCustomizationResource extends CacheableResource {
      * Constructor to create a new cached instance of the given resource. Will try
      * to retrieve the content and persist it.
      *
-     * @param resource
+     * @param resource to be customized
      */
     public CachedCustomizationResource(final CustomizationResource resource) {
         super.setResourceName(resource.getResourceName());
