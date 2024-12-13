@@ -35,9 +35,9 @@ public abstract class CuiResource extends Resource {
     /**
      * Calculate the request path to a given resource to be used a link target.
      *
-     * @param resourceName
-     * @param libraryName
-     * @param context
+     * @param resourceName identifying the resource
+     * @param libraryName  identifying the library
+     * @param context      The current {@link FacesContext}
      * @return the request path (relative, without host name)
      */
     public static String calculateRequestPath(String resourceName, String libraryName, FacesContext context) {

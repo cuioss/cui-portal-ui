@@ -25,7 +25,7 @@ import java.util.Map;
  *
  * @author Matthias Walliczek
  */
-public abstract class NonCachableResource extends CuiResource {
+public abstract class NonCacheableResource extends CuiResource {
 
     static final String MAX_AGE_0 = "max-age=0";
     static final String PUBLIC = "public";

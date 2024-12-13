@@ -57,7 +57,7 @@ public abstract class CacheableResource extends CuiResource {
     }
 
     /**
-     * Create resource path to be appended after context path
+     * Create a resource path to be appended after a context path
      */
     protected String determineResourcePath() {
         return ResourceHandler.RESOURCE_IDENTIFIER + '/' +
