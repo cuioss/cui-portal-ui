@@ -33,13 +33,13 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HA
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_VERSION;
 
 /**
- * Combines the runtime information that are specific to the
+ * Combines the runtime information that is specific to the
  * {@link CuiResourceHandler}. Usually these are version information (for the
  * cache-buster-functionality) and library names that are to be under version
  * control.
  * <p>
  * The default implementation reads the Resource related configuration from the
- * configuration-sub-system, the keys are described at
+ * configuration-subsystem, the keys are described at
  * {@link PortalConfigurationKeys}
  *
  * @author Oliver Wolff

@@ -26,12 +26,12 @@ import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class NonCachableResourceTest
-        implements ShouldBeNotNull<NonCachableResource>, ShouldImplementEqualsAndHashCode<NonCachableResource> {
+class NonCacheableResourceTest
+        implements ShouldBeNotNull<NonCacheableResource>, ShouldImplementEqualsAndHashCode<NonCacheableResource> {
 
     @Override
-    public NonCachableResource getUnderTest() {
-        return new NonCachableResource() {
+    public NonCacheableResource getUnderTest() {
+        return new NonCacheableResource() {
 
             @Override
             public InputStream getInputStream() throws IOException {
@@ -52,11 +52,11 @@ class NonCachableResourceTest
         assertTrue(resource.userAgentNeedsUpdate(FacesContext.getCurrentInstance()));
 
         var header = resource.getResponseHeaders();
-        assertTrue(header.containsKey(NonCachableResource.HEADER_ACCEPT));
-        assertTrue(header.containsKey(NonCachableResource.HEADER_CACHE_CONTROL));
+        assertTrue(header.containsKey(NonCacheableResource.HEADER_ACCEPT));
+        assertTrue(header.containsKey(NonCacheableResource.HEADER_CACHE_CONTROL));
 
-        assertTrue(header.containsValue(NonCachableResource.PUBLIC));
-        assertTrue(header.containsValue(NonCachableResource.MAX_AGE_0));
+        assertTrue(header.containsValue(NonCacheableResource.PUBLIC));
+        assertTrue(header.containsValue(NonCacheableResource.MAX_AGE_0));
     }
 
 }
