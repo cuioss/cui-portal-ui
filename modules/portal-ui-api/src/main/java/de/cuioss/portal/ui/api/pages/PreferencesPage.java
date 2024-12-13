@@ -18,7 +18,7 @@ package de.cuioss.portal.ui.api.pages;
 import java.io.Serializable;
 
 /**
- * Specifies the page bean backing the preferences page.
+ * Specifies the page bean backing the 'preferences' page.
  *
  * @author Oliver Wolff
  */

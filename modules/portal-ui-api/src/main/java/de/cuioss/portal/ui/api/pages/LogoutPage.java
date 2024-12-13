@@ -19,8 +19,7 @@ import java.io.Serializable;
 
 /**
  * Provides methods for handling the logout. It can be used from the logout page
- * {@link #logoutViewAction()} or by programmatically calling
- * {@link #performLogout()}
+ * {@link #logoutViewAction()} or by programmatically calling {@link #performLogout()}
  *
  * @author Oliver Wolff
  */
