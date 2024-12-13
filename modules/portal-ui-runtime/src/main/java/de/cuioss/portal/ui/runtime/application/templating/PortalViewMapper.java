@@ -54,7 +54,7 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 @ToString(of = "viewMap")
 public class PortalViewMapper implements MultiViewMapper {
 
-    private static final CuiLogger log = new CuiLogger(PortalViewMapper.class);
+    private static final CuiLogger LOGGER = new CuiLogger(PortalViewMapper.class);
 
     private Map<String, URL> viewMap;
 
@@ -72,19 +72,19 @@ public class PortalViewMapper implements MultiViewMapper {
         // Now iterate over sorted descriptors and create the mapping
         viewMap = new HashMap<>();
         for (final StaticViewDescriptor descriptor : sortedDescriptors) {
-            log.debug("found descriptor: {}", descriptor.getClass().getCanonicalName());
+            LOGGER.debug("found descriptor: %s", descriptor.getClass().getCanonicalName());
             for (final String resourceName : descriptor.getHandledViews()) {
                 if (!viewMap.containsKey(resourceName)) {
                     handleDescriptor(viewMap, descriptor, resourceName);
                 } else {
-                    log.debug("skipping view {}", resourceName);
+                    LOGGER.debug("skipping view %s", resourceName);
                 }
             }
         }
-        if (log.isDebugEnabled()) {
+        if (LOGGER.isDebugEnabled()) {
             final var viewMapDebug = new StringBuilder("Resulting view map:\r");
             viewMap.forEach((key, value) -> viewMapDebug.append("%-30s -> %s\r".formatted(key, value.getPath())));
-            log.debug(viewMapDebug.toString());
+            LOGGER.debug(viewMapDebug.toString());
         }
     }
 
@@ -93,14 +93,14 @@ public class PortalViewMapper implements MultiViewMapper {
         try {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getViewPath() + '/' + resourceName).getURL();
             if (null == url) {
-                log.warn("Portal-127: View {} with path {} from descriptor {} was not found", resourceName,
+                LOGGER.warn("Portal-127: View %s with path %s from descriptor %s was not found", resourceName,
                         descriptor.getViewPath(), descriptor.toString());
             } else {
-                log.debug("adding view {}", resourceName);
+                LOGGER.debug("adding view %s", resourceName);
                 builderMap.put(resourceName, url);
             }
         } catch (final IllegalArgumentException e) {
-            log.warn("Portal-144: Configured view/template resource '{}' can not be resolved, skipped", resourceName);
+            LOGGER.warn("Portal-144: Configured view/template resource '%s' can not be resolved, skipped", resourceName);
         }
     }
 

@@ -43,8 +43,8 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
  * The Mapper collects all instances of {@link StaticTemplateDescriptor} and
- * sorts the templates accordingly. Itself it acts as a
- * {@link MultiTemplatingMapper}
+ * sorts the templates accordingly.
+ * Itself it acts as a {@link MultiTemplatingMapper}
  *
  * @author Oliver Wolff
  */
@@ -59,7 +59,7 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
     @Serial
     private static final long serialVersionUID = -8398917391620682636L;
 
-    private static final CuiLogger log = new CuiLogger(PortalTemplateMapper.class);
+    private static final CuiLogger LOGGER = new CuiLogger(PortalTemplateMapper.class);
 
     private Map<String, URL> templateMap;
 
@@ -85,10 +85,10 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
             }
         }
         templateMap = MapBuilder.copyFrom(builderMap).toImmutableMap();
-        if (log.isDebugEnabled()) {
+        if (LOGGER.isDebugEnabled()) {
             final var viewMapDebug = new StringBuilder("Resulting templates map:\r");
             templateMap.forEach((key, value) -> viewMapDebug.append("%-30s -> %s\r".formatted(key, value.getPath())));
-            log.debug(viewMapDebug.toString());
+            LOGGER.debug(viewMapDebug.toString());
         }
     }
 
@@ -98,15 +98,15 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getTemplatePath() + '/' + resourceName)
                     .getURL();
             if (null == url) {
-                log.warn("Portal-126: Template {} with path {} from descriptor {} was not found", resourceName,
+                LOGGER.warn("Portal-126: Template %s with path %s from descriptor %s was not found", resourceName,
                         descriptor.getTemplatePath(), descriptor.toString());
             } else {
                 builderMap.put(resourceName, url);
             }
         } catch (final IllegalArgumentException e) {
-            log.warn(
-                    "Portal-144: Configured view/template resource '" + resourceName + "' can not be resolved, skipped",
-                    e);
+            LOGGER.warn(e,
+                    "Portal-144: Configured view/template resource '%s' can not be resolved, skipped",
+                    resourceName);
         }
     }
 

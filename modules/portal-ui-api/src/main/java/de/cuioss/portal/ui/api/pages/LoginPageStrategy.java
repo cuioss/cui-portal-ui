@@ -28,12 +28,12 @@ import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 public enum LoginPageStrategy {
 
     /**
-     * Defines that the login-page should redirect to home.
+     * Defines that the login-page should redirect home.
      */
     GOTO_HOME("goto_home"),
 
     /**
-     * Defines that the login-page should logout if user is already logged in.
+     * Defines that the login-page should log out if user is already logged in.
      */
     LOGOUT("logout");
 

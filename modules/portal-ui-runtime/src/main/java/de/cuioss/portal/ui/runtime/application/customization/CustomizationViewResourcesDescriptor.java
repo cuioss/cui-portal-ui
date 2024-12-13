@@ -21,6 +21,7 @@ import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
 import de.cuioss.portal.ui.api.templating.PortalViewDescriptor;
 import de.cuioss.portal.ui.api.templating.StaticTemplateDescriptor;
 import de.cuioss.portal.ui.api.templating.StaticViewDescriptor;
+import de.cuioss.tools.collect.CollectionBuilder;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Priority;
@@ -42,7 +43,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED;
-import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
  * Descriptor to handle customized views and templates.
@@ -50,8 +50,6 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
  * Searches for templates and views inside of
  * {@value PortalConfigurationKeys#PORTAL_CUSTOMIZATION_DIR}.
  * <p>
- * In the case of ProjectStage#DEVELOPMENT the folders are monitored, and new created
- * / deleted files will result in a reset of the corresponding file lists.
  *
  * @author Matthias Walliczek
  */
@@ -93,20 +91,22 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
     private String viewPath;
 
     private static List<String> retrieveViewResources(final Path currentTemplatePath, final String prefix) {
-        List<String> result = mutableList();
+        CollectionBuilder<String> result = new CollectionBuilder<>();
         try (var directoryStream = Files.newDirectoryStream(currentTemplatePath)) {
             for (Path pathname : directoryStream) {
                 if (pathname.toFile().isFile() && pathname.toString().endsWith(".xhtml")) {
+                    LOGGER.debug("Adding view resource: '%s'", pathname.toString());
                     result.add(prefix.concat(pathname.toFile().getName()));
                 } else if (pathname.toFile().isDirectory()) {
-                    result.addAll(retrieveViewResources(currentTemplatePath.resolve(pathname.toFile().getName()),
+                    LOGGER.debug("Handling directory: '%s'", pathname.toString());
+                    result.add(retrieveViewResources(currentTemplatePath.resolve(pathname.toFile().getName()),
                             prefix.concat(pathname.toFile().getName() + "/")));
                 }
             }
         } catch (IOException ex) {
             LOGGER.warn(ex, "Portal-122: Unable to search path: %s", currentTemplatePath.toString());
         }
-        return result;
+        return result.toImmutableList();
     }
 
     /**
