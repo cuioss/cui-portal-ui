@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.templating;
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.templating.MultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
+import de.cuioss.tools.base.Preconditions;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.Joiner;
 import de.cuioss.tools.string.Splitter;
@@ -42,22 +43,23 @@ import static de.cuioss.tools.string.MoreStrings.nullToEmpty;
  * @author Oliver Wolff
  */
 @RequiredArgsConstructor
-public class ViewResourceHandler extends ResourceHandlerWrapper {
+public class TemplateResourceHandler extends ResourceHandlerWrapper {
 
-    private static final CuiLogger LOGGER = new CuiLogger(ViewResourceHandler.class);
+    private static final CuiLogger LOGGER = new CuiLogger(TemplateResourceHandler.class);
 
     private static final String RESOURCE_PREFIX_TEMPLATES = "/templates/";
+
     @Getter
     @NonNull
     private final ResourceHandler wrapped;
-    private MultiTemplatingMapper multiTemplatingMapper;
+
+    @Getter(lazy = true)
+    private final MultiTemplatingMapper multiTemplatingMapper = PortalBeanManager
+            .resolveBeanOrThrowIllegalStateException(MultiTemplatingMapper.class, PortalMultiTemplatingMapper.class);
 
     private static String removePrefix(final String resourceName) {
         List<String> list = mutableList(Splitter.on("/").omitEmptyStrings().splitToList(resourceName));
-        if (list.size() < 2) {
-            throw new IllegalStateException(
-                    "Expected identifier in form of '/templates/xyz.xhtml', actually: " + resourceName);
-        }
+        Preconditions.checkState(list.size() > 1, "Expected identifier in form of '/templates/xyz.xhtml', actually: %s", resourceName);
         return Joiner.on('/').join(list.subList(1, list.size()));
     }
 
@@ -73,31 +75,10 @@ public class ViewResourceHandler extends ResourceHandlerWrapper {
 
                 @Override
                 public URL getURL() {
-                    return computeURL(resourceName);
+                    return getMultiTemplatingMapper().resolveTemplatePath(removePrefix(resourceName));
                 }
             };
         }
         return super.createViewResource(context, resourceName);
-    }
-
-    /**
-     * Computes a corresponding classpath related url.
-     *
-     * @param resourceName must not be null
-     * @return hte computed URL
-     */
-    URL computeURL(final String resourceName) {
-        checkMapper();
-        LOGGER.debug("Resolving template resource for %s", resourceName);
-        return multiTemplatingMapper.resolveTemplatePath(removePrefix(resourceName));
-
-    }
-
-    private void checkMapper() {
-        if (null == multiTemplatingMapper) {
-            multiTemplatingMapper = PortalBeanManager
-                    .resolveBeanOrThrowIllegalStateException(MultiTemplatingMapper.class, PortalMultiTemplatingMapper.class);
-        }
-
     }
 }

@@ -24,7 +24,7 @@
  * <li>Template-Directory: Within Template-Root-Path are the concrete
  * sub-directories located, containing the actual templates for that directory.
  * e.g. "/META-INF/templates/portal/" for the portal provided templates or
- * "/META-INF/templates/referral/" for the referral provided</li>
+ * "/META-INF/templates/reference/" for the reference provided</li>
  * <li>TEMPLATES: Are the actual templates located under the concrete
  * Template-Directory e.g. "/META-INF/templates/portal/root.xhtml"</li>
  * </ul>

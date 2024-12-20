@@ -36,14 +36,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
 @EnableAlternatives({MockTemplateMapper.class, MockViewMapper.class})
-class ViewResourceHandlerTest implements ShouldBeNotNull<ViewResourceHandler>, JsfEnvironmentConsumer {
+class TemplateResourceHandlerTest implements ShouldBeNotNull<TemplateResourceHandler>, JsfEnvironmentConsumer {
 
     private static final String TEMPLATES_BASE_BATH = "META-INF/templates/test/";
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
     @Getter
-    private ViewResourceHandler underTest;
+    private TemplateResourceHandler underTest;
 
     @Inject
     @PortalMultiTemplatingMapper
@@ -55,7 +55,7 @@ class ViewResourceHandlerTest implements ShouldBeNotNull<ViewResourceHandler>, J
 
     @BeforeEach
     void beforeTest() {
-        underTest = new ViewResourceHandler(new CuiMockResourceHandler());
+        underTest = new TemplateResourceHandler(new CuiMockResourceHandler());
     }
 
     @Test
