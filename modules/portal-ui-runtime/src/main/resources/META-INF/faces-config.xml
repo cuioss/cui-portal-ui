@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="4.0"
-    xmlns="https://jakarta.ee/xml/ns/jakartaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_4_0.xsd">
+              xmlns="https://jakarta.ee/xml/ns/jakartaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_4_0.xsd">
     <name>PortalUIRuntime</name>
     <ordering>
         <after>
@@ -10,12 +10,15 @@
         </after>
     </ordering>
     <application>
-        <navigation-handler>de.cuioss.portal.ui.runtime.application.history.HistoryNavigationHandler</navigation-handler>
+        <navigation-handler>de.cuioss.portal.ui.runtime.application.history.HistoryNavigationHandler
+        </navigation-handler>
         <resource-handler>de.cuioss.portal.ui.runtime.application.templating.TemplateResourceHandler</resource-handler>
         <resource-handler>de.cuioss.portal.ui.runtime.application.resources.CuiResourceHandler</resource-handler>
-        <resource-handler>de.cuioss.portal.ui.runtime.application.customization.CustomizationResourceHandler</resource-handler>
+        <resource-handler>de.cuioss.portal.ui.runtime.application.customization.CustomizationResourceHandler
+        </resource-handler>
         <resource-handler>de.cuioss.portal.ui.runtime.application.theme.ThemeResourceHandler</resource-handler>
-      <!--  <resource-handler>de.cuioss.portal.ui.runtime.application.resources.CuiUnmappedResourceHandler</resource-handler>-->
+        <resource-handler>de.cuioss.portal.ui.runtime.application.resources.CuiUnmappedResourceHandler
+        </resource-handler>
         <locale-config>
             <default-locale>en</default-locale>
             <supported-locale>en</supported-locale>
@@ -24,7 +27,9 @@
     </application>
     <factory>
         <application-factory>de.cuioss.portal.ui.runtime.application.PortalApplicationFactory</application-factory>
-        <exception-handler-factory>de.cuioss.portal.ui.runtime.application.exception.JSFPortalExceptionHandlerBridgeFactory</exception-handler-factory>
+        <exception-handler-factory>
+            de.cuioss.portal.ui.runtime.application.exception.JSFPortalExceptionHandlerBridgeFactory
+        </exception-handler-factory>
     </factory>
 
     <lifecycle>
