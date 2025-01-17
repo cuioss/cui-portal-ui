@@ -47,7 +47,7 @@ public class TemplateResourceHandler extends ResourceHandlerWrapper {
 
     private static final CuiLogger LOGGER = new CuiLogger(TemplateResourceHandler.class);
 
-    private static final String RESOURCE_PREFIX_TEMPLATES = "/templates/";
+    public static final String RESOURCE_PREFIX_TEMPLATES = "/templates/";
 
     @Getter
     @NonNull

@@ -19,6 +19,7 @@
         <resource-handler>de.cuioss.portal.ui.runtime.application.theme.ThemeResourceHandler</resource-handler>
         <resource-handler>de.cuioss.portal.ui.runtime.application.resources.CuiUnmappedResourceHandler
         </resource-handler>
+        <resource-handler>de.cuioss.portal.ui.runtime.application.resources.PortalViewResourceHandler</resource-handler>
         <locale-config>
             <default-locale>en</default-locale>
             <supported-locale>en</supported-locale>
