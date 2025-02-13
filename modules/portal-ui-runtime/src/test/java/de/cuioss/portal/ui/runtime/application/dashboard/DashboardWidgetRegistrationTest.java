@@ -50,13 +50,13 @@ class DashboardWidgetRegistrationTest implements ShouldHandleObjectContracts<Das
     private PortalTestConfiguration configuration;
 
     @Test
-    void testWidgetsWithoutConfig() {
+    void widgetsWithoutConfig() {
         assertNotNull(underTest.getWidgets());
         assertTrue(underTest.getWidgets().isEmpty());
     }
 
     @Test
-    void testWidgetsWithConfigForA() {
+    void widgetsWithConfigForA() {
         configuration.update(DASHBOARD_WIDGET + "A.order", "10");
 
         assertNotNull(underTest.getWidgets());
@@ -65,7 +65,7 @@ class DashboardWidgetRegistrationTest implements ShouldHandleObjectContracts<Das
     }
 
     @Test
-    void testWidgetsWithConfigForAAndB() {
+    void widgetsWithConfigForAAndB() {
         configuration.update(DASHBOARD_WIDGET + "A.order", "10");
         configuration.update(DASHBOARD_WIDGET + "B.order", "20");
 

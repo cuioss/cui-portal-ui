@@ -49,7 +49,7 @@ class StickyMessageProducerBeanTest implements ShouldHandleObjectContracts<Stick
     }
 
     @Test
-    void testErrorMessage() {
+    void errorMessage() {
         final var msgKey = "system.general.error";
         final var expectedMessage = new StickyMessage(true, DANGER, new DisplayName(msgKey));
         assertThatNoMessagesStored();

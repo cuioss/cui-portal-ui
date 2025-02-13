@@ -71,7 +71,7 @@ class HttpHeaderFilterImplTest implements ShouldHandleObjectContracts<HttpHeader
 
     @Test
     @SuppressWarnings("UastIncorrectHttpHeaderInspection")
-    void testCustomConfig() {
+    void customConfig() {
         configureFilter(configuration);
 
         HttpServletResponse response = new MockHttpServletResponse();

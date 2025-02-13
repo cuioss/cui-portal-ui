@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.Date;
 
 import static de.cuioss.test.generator.Generators.letterStrings;
@@ -51,7 +51,7 @@ class CustomizationViewResourcesDescriptorEmptyDirectoryTest implements ShouldBe
 
     @Test
     void shouldHandleNotExistingDirectories() throws IOException {
-        final var playGround = Paths.get("target/playground/");
+        final var playGround = Path.of("target/playground/");
         if (!Files.exists(playGround)) {
             Files.createDirectories(playGround);
         }

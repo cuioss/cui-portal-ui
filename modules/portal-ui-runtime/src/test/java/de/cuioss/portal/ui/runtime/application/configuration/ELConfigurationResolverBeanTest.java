@@ -38,13 +38,13 @@ class ELConfigurationResolverBeanTest {
     private PortalTestConfiguration configuration;
 
     @Test
-    void testGetString() {
+    void getString() {
         configuration.update("abc", "def");
         assertEquals("def", underTest.getString("abc"));
     }
 
     @Test
-    void testGetKeys() {
+    void getKeys() {
         configuration.update("abc", "def");
         assertTrue(Collections.asList(underTest.getKeys()).contains("abc"));
     }

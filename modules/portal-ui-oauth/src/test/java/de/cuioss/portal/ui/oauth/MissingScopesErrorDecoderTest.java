@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MissingScopesErrorDecoderTest {
 
     @Test
-    void testUpperCaseHeader() throws URISyntaxException {
+    void upperCaseHeader() throws URISyntaxException {
         final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden")
                 .header("WWW-Authenticate", "error=\"insufficient_scope\", scope=\"abc\"").build();
         var msed = new MissingScopesErrorDecoder();
@@ -43,7 +43,7 @@ class MissingScopesErrorDecoderTest {
     }
 
     @Test
-    void testBearerError() throws URISyntaxException {
+    void bearerError() throws URISyntaxException {
         final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden")
                 .header("WWW-Authenticate", "Bearer error=\"insufficient_scope\", scope=\"abc\"").build();
         var msed = new MissingScopesErrorDecoder();
@@ -54,7 +54,7 @@ class MissingScopesErrorDecoderTest {
     }
 
     @Test
-    void testLowerCaseHeader() throws URISyntaxException {
+    void lowerCaseHeader() throws URISyntaxException {
         final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden")
                 .header("www-authenticate", "error=\"insufficient_scope\", scope=\"abc\"").build();
         var msed = new MissingScopesErrorDecoder();

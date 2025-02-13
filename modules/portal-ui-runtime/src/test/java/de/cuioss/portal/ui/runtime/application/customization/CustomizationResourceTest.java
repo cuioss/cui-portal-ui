@@ -51,7 +51,7 @@ class CustomizationResourceTest implements ShouldBeNotNull<CustomizationResource
     }
 
     @Test
-    void testCustomizationResource() throws IOException {
+    void customizationResource() throws IOException {
         assertFalse(MoreStrings.isEmpty(underTest.getETag()));
         var headers = underTest.getResponseHeaders();
         assertNotNull(headers);

@@ -62,7 +62,7 @@ class PortalClientStorageImplTest implements ShouldHandleObjectContracts<PortalC
             deltaspike-jsf-module-api 1.8.1 uses myfaces-test20, see: \
             deltaspike-jsf-module-api-1.8.1-sources.jar!/META-INF/maven/org.apache.deltaspike.modules/deltaspike-jsf-module-api/pom.xml:55\
             So: omnifaces-3.1 doesn't go with myfaces-2.3""")
-    void testRoundTrip() {
+    void roundTrip() {
         configuration.update(PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAX_AGE, "666");
 
         underTest.remove(testKey);

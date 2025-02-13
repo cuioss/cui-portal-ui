@@ -159,13 +159,13 @@ class NavigationMenuProviderImplTest
     }
 
     @Test
-    void testApplicationMenusWithoutConfig() {
+    void applicationMenusWithoutConfig() {
         assertNotNull(underTest.getMenuItemsByParentId("application"));
         assertTrue(underTest.getMenuItemsByParentId("application").isEmpty());
     }
 
     @Test
-    void testApplicationMenusWithConfigForA() {
+    void applicationMenusWithConfigForA() {
         configuration.update(PortalConfigurationKeys.MENU_BASE + "A.order", "10");
         configuration.update(PortalConfigurationKeys.MENU_BASE + "A.parent", "application");
 
@@ -175,7 +175,7 @@ class NavigationMenuProviderImplTest
     }
 
     @Test
-    void testApplicationMenusWithConfigForAAndB() {
+    void applicationMenusWithConfigForAAndB() {
         configuration.update(PortalConfigurationKeys.MENU_BASE + "A.order", "10");
         configuration.update(PortalConfigurationKeys.MENU_BASE + "A.parent", "application");
         configuration.update(PortalConfigurationKeys.MENU_BASE + "B.order", "20");

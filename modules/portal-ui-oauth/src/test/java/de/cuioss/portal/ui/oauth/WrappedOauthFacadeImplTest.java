@@ -81,7 +81,7 @@ class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeIm
     private PortalTestConfiguration configuration;
 
     @Test
-    void testRetrieveTokenShouldPass() {
+    void retrieveTokenShouldPass() {
         oauth2AuthenticationFacadeMock.setTokenToRetrieve("token");
         assertEquals("token", underTest.retrieveToken("abc"));
     }
@@ -95,7 +95,7 @@ class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeIm
     }
 
     @Test
-    void testRetrieveTokenShouldTriggerNew() {
+    void retrieveTokenShouldTriggerNew() {
         oauth2AuthenticationFacadeMock.setTokenToRetrieve(null);
         oauth2AuthenticationFacadeMock.setAuthenticated(true);
         assertNull(underTest.retrieveToken("abc"));
@@ -104,7 +104,7 @@ class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeIm
     }
 
     @Test
-    void testRetrieveTargetView() {
+    void retrieveTargetView() {
         // Create ViewIdentifier for Preferences page
         var preferences = ViewIdentifier.getFromViewDesciptor(DESCRIPTOR_PREFERENCES,
                 new ParameterFilter(Collections.emptyList(), false));

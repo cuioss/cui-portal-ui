@@ -79,7 +79,7 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
     }
 
     @Test
-    void testUnauthorizedShouldCauseRedirect() {
+    void unauthorizedShouldCauseRedirect() {
         oauth2AuthenticationFacadeMock.setAuthenticated(false);
         var result = underTest.testLoginAndRedirectViewAction();
         assertNull(result);
@@ -87,7 +87,7 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
     }
 
     @Test
-    void testAuthenticatedShouldRedirectCorrect() {
+    void authenticatedShouldRedirectCorrect() {
         portalHistoryManagerMock.addCurrentUriToHistory(DESCRIPTOR_PREFERENCES);
         oauth2AuthenticationFacadeMock.setAuthenticated(false);
         underTest.testLoginAndRedirectViewAction();
@@ -101,7 +101,7 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
     }
 
     @Test
-    void testAuthenticatedShouldRedirectCorrectAtDeepLinkingAndLandingPage() {
+    void authenticatedShouldRedirectCorrectAtDeepLinkingAndLandingPage() {
         portalHistoryManagerMock.addCurrentUriToHistory(DESCRIPTOR_PREFERENCES);
         oauth2AuthenticationFacadeMock.setAuthenticated(false);
         underTest.testLoginViewAction();
@@ -115,7 +115,7 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
     }
 
     @Test
-    void testAuthenticatedShouldRedirectCorrectAtLandingPage() {
+    void authenticatedShouldRedirectCorrectAtLandingPage() {
         portalHistoryManagerMock.addCurrentUriToHistory(DESCRIPTOR_HOME);
         oauth2AuthenticationFacadeMock.setAuthenticated(false);
         underTest.testLoginViewAction();
@@ -123,12 +123,12 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
     }
 
     @Test
-    void testLoginTarget() {
+    void loginTarget() {
         assertNotNull(underTest.loginTarget());
     }
 
     @Test
-    void testNoConfig() {
+    void noConfig() {
         oauth2ConfigurationProducerMock.setConfiguration(null);
         assertThrows(WeldException.class, () -> underTest.testLoginViewAction());
     }

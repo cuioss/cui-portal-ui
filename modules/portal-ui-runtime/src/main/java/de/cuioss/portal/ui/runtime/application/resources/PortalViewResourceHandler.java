@@ -58,7 +58,7 @@ public class PortalViewResourceHandler extends ResourceHandlerWrapper {
     public ViewResource createViewResource(final FacesContext context, final String resourceName) {
         if (shouldHandleResource(resourceName)) {
             LOGGER.debug("Requested view resource: %s", resourceName);
-            val handler = CACHE.computeIfAbsent(resourceName, k -> new PortalViewResourceHolder(resourceName));
+            final var handler = CACHE.computeIfAbsent(resourceName, k -> new PortalViewResourceHolder(resourceName));
             if (handler.isResourceAvailable()) {
                 return handler;
             }
