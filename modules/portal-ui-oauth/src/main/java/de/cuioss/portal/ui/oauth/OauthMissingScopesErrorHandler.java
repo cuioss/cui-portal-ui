@@ -31,7 +31,7 @@ public class OauthMissingScopesErrorHandler extends LazyLoadingErrorHandler {
 
     @Override
     public void handleResultDetail(final ResultState state, final ResultDetail detail, final Enum<?> errorCode,
-                                   final ErrorController errorController, final CuiLogger log) {
+            final ErrorController errorController, final CuiLogger log) {
 
         log.trace("OauthMissingScopesErrorHandler handleRequestError");
 

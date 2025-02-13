@@ -41,7 +41,7 @@ public class SidebarComponentRenderer extends BaseDecoratorRenderer<SidebarCompo
 
     @Override
     protected void doEncodeBegin(final FacesContext context, final DecoratingResponseWriter<SidebarComponent> writer,
-                                 final SidebarComponent component) throws IOException {
+            final SidebarComponent component) throws IOException {
         writer.withStartElement(component.resolveHtmlElement());
         writer.withStyleClass(component.resolveStyleClass());
         writer.withAttributeStyle(component.getStyle());
@@ -51,7 +51,7 @@ public class SidebarComponentRenderer extends BaseDecoratorRenderer<SidebarCompo
 
     @Override
     protected void doEncodeEnd(final FacesContext context, final DecoratingResponseWriter<SidebarComponent> writer,
-                               final SidebarComponent component) throws IOException {
+            final SidebarComponent component) throws IOException {
         writer.withEndElement(component.resolveHtmlElement());
     }
 }

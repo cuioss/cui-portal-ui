@@ -72,9 +72,6 @@ public class DefaultErrorMessage implements Serializable {
     @Getter
     private final String pageId;
 
-    @Getter
-    private String stackTrace;
-
     /**
      * Store a given {@link DefaultErrorMessage} into the given {@link MapStorage}
      *

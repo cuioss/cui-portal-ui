@@ -44,7 +44,7 @@ public class MissingScopesErrorDecoder implements ResponseExceptionMapper<Missin
      * header with missing scopes
      */
     public static MissingScopesException checkAndHandleMissingScopes(final int status,
-                                                                     final MultivaluedMap<String, Object> headers) {
+            final MultivaluedMap<String, Object> headers) {
         if (SC_FORBIDDEN == status) {
             log.trace("response.status == 403");
 
