@@ -190,7 +190,7 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
     }
 
     private List<NavigationMenuItemContainer> createCombinedContainerList(final List<NavigationMenuItem> roots,
-                                                                          final List<NavigationMenuItem> noRoots) {
+            final List<NavigationMenuItem> noRoots) {
         final List<NavigationMenuItemContainer> result = new ArrayList<>();
         for (final NavigationMenuItem item : roots) {
             if (item instanceof NavigationMenuItemContainer container) {
