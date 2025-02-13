@@ -105,7 +105,7 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
 
     @Override
     public void handleMissingScopesException(MissingScopesException e, String initialScopes,
-                                             Map<String, Serializable> parameters) {
+            Map<String, Serializable> parameters) {
         log.trace(e, "handleMissingScopesException {}", initialScopes);
         var request = servletRequestProvider.get();
         request.getSession().setAttribute(PARAMETER_IDENTIFIER, new HashMap<>(parameters));
