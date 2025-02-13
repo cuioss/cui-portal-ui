@@ -35,7 +35,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -175,7 +174,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
         resourcesCache = new HashMap<>(0);
 
         customizationDirProvider.get()
-                .ifPresent(customizationDir -> resourcePath = lookupResourceDirectory(Paths.get(customizationDir)));
+                .ifPresent(customizationDir -> resourcePath = lookupResourceDirectory(Path.of(customizationDir)));
 
         if (null != resourcePath) {
 

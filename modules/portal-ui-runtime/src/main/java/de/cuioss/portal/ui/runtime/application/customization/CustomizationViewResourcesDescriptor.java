@@ -37,7 +37,6 @@ import java.io.IOException;
 import java.io.Serial;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -126,7 +125,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
             LOGGER.debug("Customization dir is empty, nothing to do here");
             return;
         }
-        final var customizationPath = Paths.get(customizationDir.get());
+        final var customizationPath = Path.of(customizationDir.get());
         var currentTemplatePath = customizationPath.resolve(TEMPLATES_DIRECTORY);
         if (currentTemplatePath.toFile().exists()) {
             templatePath = currentTemplatePath.toString();

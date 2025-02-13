@@ -27,7 +27,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @EnablePortalUiEnvironment
 class CustomizationViewResourcesDescriptorTest implements ShouldBeNotNull<CustomizationViewResourcesDescriptor> {
 
-    public static final Path BASE_PATH = Paths.get("src/test/resources");
+    public static final Path BASE_PATH = Path.of("src/test/resources");
     private static final String TEMPLATES_FOLDER = "templates";
     private static final String VIEWS_FOLDER = "views";
     private static final Path BASE_CUSTOMIZATION = BASE_PATH.resolve("customization");

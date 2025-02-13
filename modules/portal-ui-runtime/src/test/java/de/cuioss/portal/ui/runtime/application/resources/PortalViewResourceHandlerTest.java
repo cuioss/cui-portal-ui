@@ -36,10 +36,10 @@ class PortalViewResourceHandlerTest implements JsfEnvironmentConsumer {
     @Test
     void shouldHandleAvailableViews() {
         PortalViewResourceHandler underTest = new PortalViewResourceHandler(resourceHandler);
-        val result = underTest.createViewResource(getFacesContext(), HELLO_WORLD_XHTML);
+        final var result = underTest.createViewResource(getFacesContext(), HELLO_WORLD_XHTML);
         assertInstanceOf(PortalViewResourceHolder.class, result);
         assertTrue(result.getURL().toString().endsWith(PortalViewResourceHandler.LOOKUP_PREFIX + HELLO_WORLD_XHTML), result.getURL().toString());
-        val cached = underTest.createViewResource(getFacesContext(), HELLO_WORLD_XHTML);
+        final var cached = underTest.createViewResource(getFacesContext(), HELLO_WORLD_XHTML);
         assertEquals(result, cached);
         assertSame(result, cached, "Should be the same instance");
     }
@@ -47,10 +47,10 @@ class PortalViewResourceHandlerTest implements JsfEnvironmentConsumer {
     @Test
     void shouldIgnoreMissingViews() {
         PortalViewResourceHandler underTest = new PortalViewResourceHandler(resourceHandler);
-        val result = underTest.createViewResource(getFacesContext(), NOT_THERE_XHTML);
+        final var result = underTest.createViewResource(getFacesContext(), NOT_THERE_XHTML);
         assertFalse(result instanceof PortalViewResourceHolder);
         assertEquals(CuiMockResourceHandler.DUMMY_URL + NOT_THERE_XHTML, result.getURL().toString());
-        val cached = underTest.createViewResource(getFacesContext(), NOT_THERE_XHTML);
+        final var cached = underTest.createViewResource(getFacesContext(), NOT_THERE_XHTML);
         assertEquals(CuiMockResourceHandler.DUMMY_URL + NOT_THERE_XHTML, cached.getURL().toString());
     }
 }

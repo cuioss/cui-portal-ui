@@ -41,7 +41,7 @@ class LazyLoadingViewModelImplTest implements ShouldHandleObjectContracts<LazyLo
     private LazyLoadingViewModelImpl<String> underTest;
 
     @Test
-    void testHandleRequestResultAndResetNotificationBox() {
+    void handleRequestResultAndResetNotificationBox() {
         assertNull(underTest.getNotificationBoxValue());
         underTest.handleRequestResult(new ResultObject<>("", ResultState.VALID), new ResultErrorHandler());
         assertNull(underTest.getNotificationBoxValue());
