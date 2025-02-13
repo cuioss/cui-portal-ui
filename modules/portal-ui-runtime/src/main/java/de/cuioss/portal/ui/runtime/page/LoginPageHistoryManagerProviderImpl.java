@@ -75,7 +75,7 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
      */
     @Override
     public Optional<LoginCredentials> extractFromDeepLinkingUrlParameter(final String userStore,
-                                                                         final String username) {
+            final String username) {
 
         var extractedUserStore = MoreStrings.emptyToNull(userStore);
         var extractedUserName = MoreStrings.emptyToNull(username);

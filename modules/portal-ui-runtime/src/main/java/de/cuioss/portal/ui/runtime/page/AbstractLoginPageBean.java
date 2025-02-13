@@ -79,7 +79,7 @@ public abstract class AbstractLoginPageBean implements Serializable {
      * @return
      */
     protected String loginAction(final Supplier<ViewIdentifier> targetSupplier, final HttpServletRequest servletRequest,
-                                 final FacesContext facesContext) {
+            final FacesContext facesContext) {
         final var loginResult = doLogin(servletRequest);
 
         if (loginResult instanceof LoginResult.Failure failure) {

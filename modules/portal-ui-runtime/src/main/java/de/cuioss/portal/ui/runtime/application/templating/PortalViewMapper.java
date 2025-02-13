@@ -89,7 +89,7 @@ public class PortalViewMapper implements MultiViewMapper {
     }
 
     private void handleDescriptor(final Map<String, URL> builderMap, final StaticViewDescriptor descriptor,
-                                  final String resourceName) {
+            final String resourceName) {
         try {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getViewPath() + '/' + resourceName).getURL();
             if (null == url) {

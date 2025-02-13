@@ -58,7 +58,7 @@ public final class CustomizationResource extends CacheableResource {
     private final File resourceFile;
 
     public CustomizationResource(final File resourceFile, final String resourceName, final String libraryName,
-                                 final String contentType) {
+            final String contentType) {
         this.resourceFile = resourceFile;
         setResourceName(resourceName);
         setLibraryName(libraryName);

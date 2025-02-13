@@ -175,7 +175,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     private LazyLoadingRequest<String> createRequestWithResult(final String requestId,
-                                                               final ResultObject<String> resultObject) {
+            final ResultObject<String> resultObject) {
         return new LazyLoadingRequest<>() {
 
             @Override
