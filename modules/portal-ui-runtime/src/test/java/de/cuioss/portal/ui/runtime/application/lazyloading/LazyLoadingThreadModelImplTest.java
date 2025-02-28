@@ -130,7 +130,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
 
             @Override
             public ResultObject<String> backendRequest() {
-                ConcurrentTools.sleepUninterruptibly(2000, TimeUnit.MILLISECONDS);
+                ConcurrentTools.sleepUninterruptedly(2000, TimeUnit.MILLISECONDS);
                 return new ResultObject<>("Test", ResultState.VALID);
             }
 
@@ -165,7 +165,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
         viewController.startRequest(
                 createRequestWithResult(underTest.getRequestId(), new ResultObject<>("Test", ResultState.VALID)));
 
-        ConcurrentTools.sleepUninterruptibly(3000, TimeUnit.MILLISECONDS);
+        ConcurrentTools.sleepUninterruptedly(3000, TimeUnit.MILLISECONDS);
         underTest.processAction(null);
 
         assertNull(testResult);

@@ -58,6 +58,10 @@ public class PortalApplication extends ApplicationWrapper {
     private final LocaleConfiguration portalLocaleConfiguration = PortalBeanManager
             .resolveRequiredBean(LocaleConfiguration.class);
 
+    @Getter(lazy = true)
+    private final PortalResourceBundleBean portalResourceBundleBean = PortalBeanManager
+            .resolveRequiredBean(PortalResourceBundleBean.class);
+
     @Override
     public ProjectStage getProjectStage() {
         var stage = getPortalProjectStage();
@@ -84,7 +88,7 @@ public class PortalApplication extends ApplicationWrapper {
     public ResourceBundle getResourceBundle(FacesContext ctx, String name) {
         if (PortalResourceBundleBean.BUNDLE_NAME.equals(name)) {
             LOGGER.debug("Requesting PortalResourceBundleBean");
-            return PortalResourceBundleBean.resolveFromCDIContext();
+            return getPortalResourceBundleBean();
         }
         return super.getResourceBundle(ctx, name);
     }
