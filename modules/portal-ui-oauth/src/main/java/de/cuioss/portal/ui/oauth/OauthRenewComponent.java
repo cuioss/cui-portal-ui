@@ -18,6 +18,8 @@ package de.cuioss.portal.ui.oauth;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
 import de.cuioss.portal.common.cdi.PortalBeanManager;
+import de.cuioss.portal.ui.runtime.application.customization.PortalResourceProducer;
+import de.cuioss.portal.ui.runtime.application.customization.ResourceProducer;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.faces.component.FacesComponent;
 import jakarta.faces.component.UINamingContainer;
