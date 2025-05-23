@@ -10,16 +10,6 @@
         <version>1.4.1</version>
         <relativePath/>
     </parent>
-    <repositories>
-        <repository>
-            <id>sonatype-snapshots</id>
-            <name>Sonatype Snapshot Repository</name>
-            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <groupId>de.cuioss.portal.ui</groupId>
     <artifactId>cui-portal-ui</artifactId>
     <name>cui portal ui</name>
