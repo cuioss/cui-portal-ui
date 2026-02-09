@@ -47,6 +47,7 @@ import java.io.Serial;
 import java.util.Optional;
 
 import static de.cuioss.portal.authentication.oauth.OAuthConfigKeys.OPEN_ID_CLIENT_POST_LOGOUT_REDIRECT_URI;
+import static de.cuioss.portal.ui.oauth.PortalUiOauthLogMessages.*;
 import static de.cuioss.tools.string.MoreStrings.isBlank;
 import static de.cuioss.tools.string.MoreStrings.isPresent;
 
@@ -138,8 +139,7 @@ public class OauthLogoutPageBean implements LogoutPage {
         final var postLogoutRedirectUri = configuration.getPostLogoutRedirectUri();
         if (isPresent(postLogoutRedirectUri)) {
             if (isBlank(configuration.getLogoutRedirectParamName())) {
-                LOGGER.warn("postLogoutRedirectUri set, but no url-parameter name. Set via: %s",
-                        OAuthConfigKeys.OPEN_ID_CLIENT_LOGOUT_REDIRECT_PARAMETER);
+                LOGGER.warn(WARN.MISSING_LOGOUT_REDIRECT_PARAM, OAuthConfigKeys.OPEN_ID_CLIENT_LOGOUT_REDIRECT_PARAMETER);
                 return Optional.empty();
             }
 

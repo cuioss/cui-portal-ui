@@ -53,7 +53,7 @@ public class CuiResourceHandler extends AbstractVersionResourceHandler {
         if (shouldHandle(resourceName, libraryName)) {
             LOGGER.debug("Handling '%s'/'%s'", libraryName, resourceName);
             final var determinedResourceName = determineResourceName(resourceName, libraryName);
-            LOGGER.debug("Final ResourceName '%s'/'%s'", determinedResourceName);
+            LOGGER.debug("Final ResourceName '%s'/'%s'", libraryName, determinedResourceName);
             return super.createResource(determinedResourceName, libraryName);
         }
         return super.createResource(resourceName, libraryName);

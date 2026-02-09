@@ -17,6 +17,8 @@ package de.cuioss.portal.ui.errorpages;
 
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.tools.logging.CuiLogger;
+
+import static de.cuioss.portal.ui.errorpages.PortalUiErrorPagesLogMessages.*;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
@@ -62,7 +64,7 @@ public abstract class AbstractHttpErrorPage implements Serializable {
         var request = ServletAdapterUtil.getRequest(context);
         requestUri = determineRequestUri(request);
         ServletAdapterUtil.getResponse(context).setStatus(getErrorCode());
-        LOGGER.warn("Portal-137: Http-Error '%s' for requested-uri '%s' was raised", getErrorCode(), requestUri);
+        LOGGER.warn(WARN.PORTAL_137_HTTP_ERROR, getErrorCode(), requestUri);
         return null;
     }
 

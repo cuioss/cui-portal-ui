@@ -22,6 +22,8 @@ import de.cuioss.http.security.monitoring.SecurityEventCounter;
 import de.cuioss.http.security.pipeline.PipelineFactory;
 import de.cuioss.tools.logging.CuiLogger;
 
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
+
 /**
  * Validates resource paths against path traversal and other URL-based attacks
  * using the cui-http security validation framework.
@@ -61,8 +63,7 @@ public class PortalPathValidator {
             pathValidator.validate(path);
             return true;
         } catch (UrlSecurityException e) {
-            LOGGER.warn("Portal-150: Rejected potentially malicious path '%s': %s",
-                    path, e.getMessage());
+            LOGGER.warn(WARN.PORTAL_150_MALICIOUS_PATH, path, e.getMessage());
             return false;
         }
     }

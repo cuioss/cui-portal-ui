@@ -19,6 +19,8 @@ import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.tools.logging.CuiLogger;
+
+import static de.cuioss.portal.ui.oauth.PortalUiOauthLogMessages.*;
 import jakarta.faces.component.FacesComponent;
 import jakarta.faces.component.UINamingContainer;
 import lombok.Getter;
@@ -55,7 +57,7 @@ public class OauthRenewComponent extends UINamingContainer {
             renewInterval = authenticationFacade.get().retrieveRenewInterval();
             loginUrl = authenticationFacade.get().getLoginUrl();
         } else {
-            LOGGER.error("Unable to resolve bean of type '%s' with qualifier '%s'",
+            LOGGER.error(ERROR.BEAN_RESOLUTION_FAILED,
                     Oauth2AuthenticationFacade.class, PortalAuthenticationFacade.class);
             renewUrl = null;
             renewInterval = null;

@@ -20,6 +20,8 @@ import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.MoreStrings;
 import lombok.Getter;
 
+import static de.cuioss.portal.ui.api.PortalUiApiLogMessages.*;
+
 import java.util.Map;
 
 /**
@@ -55,9 +57,7 @@ public abstract class PortalNavigationMenuConfigParser {
         try {
             return Integer.parseInt(getMenuConfig().get(getId() + ORDER_SUFFIX));
         } catch (NumberFormatException e) {
-            LOGGER.warn(e, "Portal-138: Invalid menu configuration: Order property '"
-                    + getMenuConfig().get(getId() + ORDER_SUFFIX) + "' for menu item '" + getId()
-                    + "' can not be parsed");
+            LOGGER.warn(WARN.PORTAL_138_INVALID_MENU_ORDER, getMenuConfig().get(getId() + ORDER_SUFFIX), getId());
             return -1;
         }
     }

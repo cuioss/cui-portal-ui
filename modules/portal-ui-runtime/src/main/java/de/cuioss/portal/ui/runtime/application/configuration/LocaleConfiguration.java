@@ -36,6 +36,7 @@ import java.util.Locale;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALES_AVAILABLE;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.LOCALE_DEFAULT;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 
 /**
@@ -81,14 +82,14 @@ public class LocaleConfiguration implements Serializable {
         try {
             defaultLocale = localeDefaultProvider.get();
         } catch (final IllegalArgumentException e) {
-            LOGGER.warn("Invalid configuration found for %s defaulting to %s", LOCALE_DEFAULT, Locale.ENGLISH);
+            LOGGER.warn(WARN.INVALID_LOCALE_CONFIG, LOCALE_DEFAULT, Locale.ENGLISH);
             defaultLocale = Locale.ENGLISH;
         }
 
         try {
             availableLocales = localesAvailableProvider.get();
         } catch (final IllegalArgumentException e) {
-            LOGGER.warn("Invalid configuration found for %s defaulting to %s", LOCALES_AVAILABLE, defaultLocale);
+            LOGGER.warn(WARN.INVALID_LOCALE_CONFIG, LOCALES_AVAILABLE, defaultLocale);
             availableLocales = immutableList(defaultLocale);
         }
     }

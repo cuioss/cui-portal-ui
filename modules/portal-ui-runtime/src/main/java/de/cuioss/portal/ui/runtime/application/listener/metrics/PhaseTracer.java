@@ -28,6 +28,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -90,7 +91,7 @@ public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
     public PhaseTracer start() {
         didRun = true;
         if (stopWatch.isRunning()) {
-            LOGGER.warn("IllegalState: Must only be started once, phaseName='%s'", phaseName);
+            LOGGER.warn(WARN.PHASE_ALREADY_STARTED, phaseName);
         } else {
             LOGGER.trace("Starting tracing for phase='%s'", phaseName);
             stopWatch.start();
@@ -109,7 +110,7 @@ public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
             LOGGER.trace("Stopping tracing for phase='%s'", phaseName);
             stopWatch.stop();
         } else {
-            LOGGER.warn("IllegalState: Must ony be started once, phase='%s'", phaseName);
+            LOGGER.warn(WARN.PHASE_ALREADY_STOPPED, phaseName);
         }
         return this;
     }

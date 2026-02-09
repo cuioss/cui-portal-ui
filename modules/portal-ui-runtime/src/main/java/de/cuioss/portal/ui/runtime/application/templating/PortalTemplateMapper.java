@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 import static de.cuioss.portal.ui.api.PortalCoreBeanNames.MULTI_TEMPLATING_MAPPER_BEAN_NAME;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
@@ -98,15 +99,13 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getTemplatePath() + '/' + resourceName)
                     .getURL();
             if (null == url) {
-                LOGGER.warn("Portal-126: Template %s with path %s from descriptor %s was not found", resourceName,
+                LOGGER.warn(WARN.PORTAL_126_TEMPLATE_NOT_FOUND, resourceName,
                         descriptor.getTemplatePath(), descriptor.toString());
             } else {
                 builderMap.put(resourceName, url);
             }
         } catch (final IllegalArgumentException e) {
-            LOGGER.warn(e,
-                    "Portal-144: Configured view/template resource '%s' can not be resolved, skipped",
-                    resourceName);
+            LOGGER.warn(e, WARN.PORTAL_144_RESOURCE_NOT_RESOLVED, resourceName);
         }
     }
 

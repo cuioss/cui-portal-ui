@@ -38,6 +38,7 @@ import java.util.Optional;
 import java.util.TimeZone;
 
 import static de.cuioss.portal.configuration.util.ConfigurationHelper.resolveConfigProperty;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 
 /**
  * Implementation of a {@link File} based {@link CacheableResource}.
@@ -106,7 +107,7 @@ public final class CustomizationResource extends CacheableResource {
         try {
             return resourceFile.toURI().toURL();
         } catch (final MalformedURLException e) {
-            LOGGER.warn(e, "Portal-145: Customization resource '%s' can not be resolved to an URL", resourceFile);
+            LOGGER.warn(e, WARN.PORTAL_145_CUSTOMIZATION_UNRESOLVABLE, resourceFile);
             throw new IllegalStateException(e);
         }
     }

@@ -38,6 +38,7 @@ import lombok.ToString;
 import java.io.Serial;
 import java.util.List;
 
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
@@ -106,7 +107,7 @@ public class PortalCDIViewListener implements PhaseListener {
                 handleListener(sortedAfterNonPostbackListeners, context, currentView);
             }
         } else {
-            LOGGER.warn("Unable to determine view.");
+            LOGGER.warn(WARN.UNABLE_TO_DETERMINE_VIEW);
         }
     }
 
@@ -132,7 +133,7 @@ public class PortalCDIViewListener implements PhaseListener {
                     }
                 }
             } else {
-                LOGGER.warn("Unable to determine view.");
+                LOGGER.warn(WARN.UNABLE_TO_DETERMINE_VIEW);
             }
         }
     }

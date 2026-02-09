@@ -34,6 +34,7 @@ import lombok.RequiredArgsConstructor;
 import java.net.URL;
 import java.util.List;
 
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 import static de.cuioss.tools.string.MoreStrings.nullToEmpty;
 
@@ -74,7 +75,7 @@ public class TemplateResourceHandler extends ResourceHandlerWrapper {
     public ViewResource createViewResource(final FacesContext context, final String resourceName) {
         if (shouldHandleResource(resourceName)) {
             if (!PATH_VALIDATOR.isValidPath(resourceName)) {
-                LOGGER.warn("Portal-150: Rejected invalid template resource path: '%s'", resourceName);
+                LOGGER.warn(WARN.PORTAL_150_INVALID_TEMPLATE_PATH, resourceName);
                 return super.createViewResource(context, resourceName);
             }
             LOGGER.debug("Found template resource for %s", resourceName);

@@ -52,6 +52,7 @@ public class JSFPortalExceptionHandlerBridge extends ExceptionHandlerWrapper {
 
             try {
                 var throwable = exceptionQueuedEventContext.getException();
+                // cui-rewrite:disable CuiLoggerStandardsRecipe
                 LOGGER.trace("Handling Throwable '%s'", throwable);
 
                 var exceptionEvent = new ExceptionAsEvent(throwable);

@@ -21,6 +21,8 @@ import de.cuioss.tools.io.MorePaths;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.MoreStrings;
 import de.cuioss.tools.string.Splitter;
+
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import de.cuioss.uimodel.application.CuiProjectStage;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
@@ -90,8 +92,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
             if (resourcesDir.exists() && resourcesDir.isDirectory())
                 return resourcesDir;
         }
-        LOGGER.info(
-                "No installation specific customization detected, using defaults. If this is intentional you can ignore this message");
+        LOGGER.info(INFO.CUSTOMIZATION_DEFAULTS);
         return null;
     }
 
@@ -103,7 +104,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
             filesInDirectory = path.toFile().listFiles(File::isFile);
         } catch (final SecurityException e) {
             // it's not critical enough to explode if access to directory failed
-            LOGGER.warn(e, "Portal-122 : access denied to: %s", path.toFile().getName());
+            LOGGER.warn(e, WARN.PORTAL_122_ACCESS_DENIED, path.toFile().getName());
         }
 
         if (null == filesInDirectory)
@@ -171,7 +172,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
     private File resolveAndValidate(final String libraryName, final String fileName) {
         var resolved = resourcePath.toPath().resolve(libraryName).resolve(fileName).normalize().toFile();
         if (!resolved.toPath().startsWith(resourcePath.toPath())) {
-            LOGGER.warn("Portal-150: Rejected path traversal attempt: '%s/%s'", libraryName, fileName);
+            LOGGER.warn(WARN.PORTAL_150_PATH_TRAVERSAL, libraryName, fileName);
             throw new IllegalArgumentException("Invalid resource path");
         }
         return resolved;
@@ -191,7 +192,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
         if (null != resourcePath) {
 
-            LOGGER.info("Searching customization resources in folder %s", resourcePath.getAbsolutePath());
+            LOGGER.info(INFO.SEARCHING_CUSTOMIZATION_RESOURCES, resourcePath.getAbsolutePath());
 
             try (final var directoryStream = Files.newDirectoryStream(resourcePath.toPath())) {
                 for (final Path path : directoryStream) {
@@ -205,9 +206,9 @@ public class CustomizationResourceProducer implements ResourceProducer {
                         foundResources.put(pathName, filesInDirectory);
                     }
                 }
-                LOGGER.info("Found resources: %s", foundResources);
+                LOGGER.info(INFO.FOUND_RESOURCES, foundResources);
             } catch (final IOException ex) {
-                LOGGER.warn(ex, "Portal-122: Unable to search path: %s", resourcePath.toString());
+                LOGGER.warn(ex, WARN.PORTAL_122_UNABLE_TO_SEARCH_PATH, resourcePath.toString());
             }
         }
 

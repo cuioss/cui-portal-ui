@@ -35,6 +35,8 @@ import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
 import de.cuioss.portal.ui.api.view.ViewRestrictionManager;
 import de.cuioss.portal.ui.runtime.application.view.ViewSuppressedException;
 import de.cuioss.tools.logging.CuiLogger;
+
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.NavigationHandler;
 import jakarta.faces.application.ViewExpiredException;
@@ -66,12 +68,6 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
     public static final String VIEW_INSUFFICIENT_PERMISSIONS_KEY = "system.exception.view.insufficient.permissions";
     private static final String HANDLING_S_AS_S = "Handling '%s' as '%s'";
     private static final CuiLogger LOGGER = new CuiLogger(ViewRelatedExceptionHandler.class);
-    private static final String PORTAL_103 = "Portal-103: View '{}' requires the roles '{}', but user '{}' only has the roles: '{}'";
-
-    private static final String NAV_LOOP_ERROR_MSG = """
-            Portal-505: The view '{}' is suppressed but is the designated navigation target at the same time.\
-             This would result in a loop. The error page is displayed therefore instead.\
-            """;
 
     @Inject
     @CuiNavigationHandler
@@ -130,7 +126,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
                 && null != exception.getSuppressedViewDescriptor().getLogicalViewId()
                 && exception.getSuppressedViewDescriptor().getLogicalViewId()
                 .equals(NavigationUtils.lookUpToLogicalViewIdBy(facesContext, outcome))) {
-            LOGGER.error(NAV_LOOP_ERROR_MSG, exception.getSuppressedViewDescriptor().getLogicalViewId());
+            LOGGER.error(ERROR.PORTAL_505_NAV_LOOP, exception.getSuppressedViewDescriptor().getLogicalViewId());
             outcome = ErrorPage.OUTCOME;
         }
         navigationHandler.handleNavigation(facesContext, null, outcome);
@@ -180,7 +176,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
 
         var exception = (UserNotAuthorizedException) event.getException();
 
-        LOGGER.warn(PORTAL_103, exception.getRequestedView().getLogicalViewId(), exception.getRequiredRoles(),
+        LOGGER.warn(WARN.PORTAL_103_INSUFFICIENT_PERMISSIONS, exception.getRequestedView().getLogicalViewId(), exception.getRequiredRoles(),
                 authenticatedUserInfo.getDisplayName(), exception.getUserRoles());
 
         messageProducer.setGlobalErrorMessage(VIEW_INSUFFICIENT_PERMISSIONS_KEY);

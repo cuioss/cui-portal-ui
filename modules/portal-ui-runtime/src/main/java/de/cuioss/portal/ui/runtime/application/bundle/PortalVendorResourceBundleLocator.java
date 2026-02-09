@@ -19,6 +19,8 @@ import de.cuioss.portal.common.bundle.ResourceBundleLocator;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
+
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.EqualsAndHashCode;
@@ -58,9 +60,9 @@ public class PortalVendorResourceBundleLocator implements ResourceBundleLocator 
         try {
             ResourceBundle.getBundle(CUSTOM_BUNDLE_PATH, Locale.getDefault());
             bundle = CUSTOM_BUNDLE_PATH;
-            LOGGER.info("Custom messages found at '%s'.", CUSTOM_BUNDLE_PATH);
+            LOGGER.info(INFO.CUSTOM_MESSAGES_FOUND, CUSTOM_BUNDLE_PATH);
         } catch (MissingResourceException e) {
-            LOGGER.info("Custom messages not found at '%s', ignoring.", CUSTOM_BUNDLE_PATH);
+            LOGGER.info(INFO.CUSTOM_MESSAGES_NOT_FOUND, CUSTOM_BUNDLE_PATH);
             bundle = null;
         }
     }

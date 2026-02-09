@@ -17,6 +17,8 @@ package de.cuioss.portal.ui.runtime.application.resources;
 
 import de.cuioss.portal.ui.runtime.application.templating.TemplateResourceHandler;
 import de.cuioss.tools.logging.CuiLogger;
+
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import jakarta.faces.application.ResourceHandler;
 import jakarta.faces.application.ResourceHandlerWrapper;
 import jakarta.faces.application.ViewResource;
@@ -68,7 +70,7 @@ public class PortalViewResourceHandler extends ResourceHandlerWrapper {
     public ViewResource createViewResource(final FacesContext context, final String resourceName) {
         if (shouldHandleResource(resourceName)) {
             if (!PATH_VALIDATOR.isValidPath(resourceName)) {
-                LOGGER.warn("Portal-150: Rejected invalid view resource path: '%s'", resourceName);
+                LOGGER.warn(WARN.PORTAL_150_INVALID_VIEW_RESOURCE_PATH, resourceName);
                 return wrapped.createViewResource(context, resourceName);
             }
             LOGGER.debug("Requested view resource: %s", resourceName);

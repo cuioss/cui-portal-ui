@@ -24,6 +24,8 @@ import de.cuioss.portal.ui.api.templating.StaticViewDescriptor;
 import de.cuioss.tools.collect.CollectionBuilder;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
+
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -103,7 +105,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
                 }
             }
         } catch (IOException ex) {
-            LOGGER.warn(ex, "Portal-122: Unable to search path: %s", currentTemplatePath.toString());
+            LOGGER.warn(ex, WARN.PORTAL_122_UNABLE_TO_SEARCH_PATH, currentTemplatePath.toString());
         }
         return result.toImmutableList();
     }

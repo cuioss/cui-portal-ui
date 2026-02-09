@@ -68,15 +68,15 @@ public class PortalApplicationFactory extends ApplicationFactory {
      */
     private Application createPortalApplication(final Application application) {
         synchronized (PortalApplicationFactory.class) {
-            LOGGER.debug("Initializing with given application", application.getClass().getName());
+            LOGGER.debug("Initializing with given application: %s", application.getClass().getName());
             var toBeWrapped = application;
             while (!(toBeWrapped instanceof PortalApplication) && toBeWrapped instanceof ApplicationWrapper) {
-                LOGGER.debug("Found wrapped application", toBeWrapped.getClass().getName());
+                LOGGER.debug("Found wrapped application: %s", toBeWrapped.getClass().getName());
                 toBeWrapped = ((ApplicationWrapper) toBeWrapped).getWrapped();
             }
 
             if (!(toBeWrapped instanceof PortalApplication)) {
-                LOGGER.debug("Wrapping application", application.getClass().getName());
+                LOGGER.debug("Wrapping application: %s", application.getClass().getName());
                 toBeWrapped = new PortalApplication(application);
             }
             this.application = toBeWrapped;

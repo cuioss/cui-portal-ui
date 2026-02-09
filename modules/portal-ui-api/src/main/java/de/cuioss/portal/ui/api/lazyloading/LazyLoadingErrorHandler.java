@@ -47,8 +47,10 @@ public class LazyLoadingErrorHandler extends ResultErrorHandler {
      */
     public void handleRequestError(Throwable cause, String message, ErrorController errorController, CuiLogger log) {
         if (null != cause) {
+            // cui-rewrite:disable CuiLogRecordPatternRecipe
             log.warn(cause, message);
         } else {
+            // cui-rewrite:disable CuiLogRecordPatternRecipe
             log.warn(message);
         }
         errorController.addNotificationBox(requestErrorKey, ContextState.DANGER);

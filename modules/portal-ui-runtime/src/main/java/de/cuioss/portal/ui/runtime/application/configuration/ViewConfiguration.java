@@ -34,6 +34,7 @@ import java.io.Serializable;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.NON_SECURED_VIEWS;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.SUPPRESSED_VIEWS;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.TRANSIENT_VIEWS;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 
 /**
  * Reads the View specific configuration from the web.xml and provides
@@ -95,8 +96,7 @@ public class ViewConfiguration implements Serializable {
     private void doConfigure() {
         nonSecuredViewMatcher = nonSecuredViewMatcherProvider.get();
         if (nonSecuredViewMatcher instanceof EmptyViewMatcher) {
-            LOGGER.warn("The configuration of " + NON_SECURED_VIEWS
-                    + " results in all views of the application being only accessible for authorized user. If this is intentional you can ignore this warning");
+            LOGGER.warn(WARN.ALL_VIEWS_SECURED, NON_SECURED_VIEWS);
         }
         transientViewMatcher = transientViewMatcherProvider.get();
         suppressedViewMatcher = suppressedViewMatcherProvider.get();
