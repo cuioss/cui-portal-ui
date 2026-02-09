@@ -64,7 +64,7 @@ public class PortalThemeConfiguration implements Serializable {
     private List<String> availableThemes;
     /**
      * the (configured default theme). It must be one of
-     * {@link #getAvailableThemes()}
+     * {@link #availableThemes}
      */
     @Inject
     @ConfigProperty(name = THEME_DEFAULT)

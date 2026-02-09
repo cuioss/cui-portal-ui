@@ -23,9 +23,8 @@
  * faces-config:
  *
  * <pre>
- * {@code <resource-handler>de.cuioss.portal.ui.runtime.application.theme.ThemeResourceHandler}</resource-handler>}
+ * &lt;resource-handler&gt;de.cuioss.portal.ui.runtime.application.theme.ThemeResourceHandler&lt;/resource-handler&gt;
  * </pre>
- * </p>
  * <p>
  * The configuration keys are:
  * <ul>

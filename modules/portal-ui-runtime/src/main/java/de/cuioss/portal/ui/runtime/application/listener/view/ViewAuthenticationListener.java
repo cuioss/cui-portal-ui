@@ -40,7 +40,7 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LIST
 
 /**
  * This listener checks the authorization status of a given request. In case the
- * injected {@link ViewConfiguration#getNonSecuredViewMatcher()} returns false
+ * injected {@link ViewConfiguration#nonSecuredViewMatcher} returns false
  * and the current {@link AuthenticatedUserInfo#isAuthenticated()} returns false
  * it will fire an {@link UserNotAuthenticatedException}.
  *
