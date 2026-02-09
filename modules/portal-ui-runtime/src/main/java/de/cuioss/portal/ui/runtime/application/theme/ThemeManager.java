@@ -84,9 +84,9 @@ public class ThemeManager implements Serializable {
      * Actual 'business' method for getting a concrete application.css from
      *
      * @param themeName to be looked up. If it is null, empty or not part of
-     *                  {@link PortalThemeConfiguration#getAvailableThemes()} it
+     *                  {@link PortalThemeConfiguration#availableThemes} it
      *                  returns the configured
-     *                  {@link PortalThemeConfiguration#getDefaultTheme()}
+     *                  {@link PortalThemeConfiguration#defaultTheme}
      * @return the corresponding css name.
      */
     public String getCssForThemeName(final String themeName) {
