@@ -20,6 +20,7 @@ import de.cuioss.portal.ui.api.templating.MultiViewMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiViewMapper;
 import de.cuioss.portal.ui.api.templating.PortalViewDescriptor;
 import de.cuioss.portal.ui.api.templating.StaticViewDescriptor;
+import de.cuioss.portal.ui.runtime.application.resources.PortalPathValidator;
 import de.cuioss.tools.io.FileLoaderUtility;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
@@ -55,6 +56,8 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 public class PortalViewMapper implements MultiViewMapper {
 
     private static final CuiLogger LOGGER = new CuiLogger(PortalViewMapper.class);
+
+    private static final PortalPathValidator PATH_VALIDATOR = new PortalPathValidator();
 
     private Map<String, URL> viewMap;
 
@@ -106,6 +109,10 @@ public class PortalViewMapper implements MultiViewMapper {
 
     @Override
     public Optional<URL> resolveViewPath(final String requestedResource) {
+        if (!PATH_VALIDATOR.isValidPath(requestedResource)) {
+            LOGGER.warn("Portal-150: Rejected invalid view path: '%s'", requestedResource);
+            return Optional.empty();
+        }
         return Optional.ofNullable(viewMap.computeIfAbsent(requestedResource,
                 key -> FileLoaderUtility.getLoaderForPath("classpath:/META-INF/" + key).getURL()));
     }

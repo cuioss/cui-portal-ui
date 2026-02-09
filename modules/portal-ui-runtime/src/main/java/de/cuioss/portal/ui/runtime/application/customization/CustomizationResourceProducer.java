@@ -158,10 +158,23 @@ public class CustomizationResourceProducer implements ResourceProducer {
             final var resourceNameMinified = createResourceNameInMinifiedStyle(resourceName);
 
             if (null != resourceNameMinified && foundResources.get(libraryName).contains(resourceNameMinified))
-                return resourcePath.toPath().resolve(libraryName).resolve(resourceNameMinified).toFile();
+                return resolveAndValidate(libraryName, resourceNameMinified);
         }
 
-        return resourcePath.toPath().resolve(libraryName).resolve(resourceName).toFile();
+        return resolveAndValidate(libraryName, resourceName);
+    }
+
+    /**
+     * Resolves the file path and validates that the normalized result stays
+     * within the {@link #resourcePath} directory, preventing path traversal attacks.
+     */
+    private File resolveAndValidate(final String libraryName, final String fileName) {
+        var resolved = resourcePath.toPath().resolve(libraryName).resolve(fileName).normalize().toFile();
+        if (!resolved.toPath().startsWith(resourcePath.toPath())) {
+            LOGGER.warn("Portal-150: Rejected path traversal attempt: '%s/%s'", libraryName, fileName);
+            throw new IllegalArgumentException("Invalid resource path");
+        }
+        return resolved;
     }
 
     private String determineMimeType(final File resourceFile) {

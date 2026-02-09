@@ -22,6 +22,8 @@ import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -66,5 +68,20 @@ class PortalViewResourceHandlerTest implements JsfEnvironmentConsumer {
         assertEquals(CuiMockResourceHandler.DUMMY_URL + NOT_THERE_XHTML, result.getURL().toString());
         final var cached = underTest.createViewResource(getFacesContext(), NOT_THERE_XHTML);
         assertEquals(CuiMockResourceHandler.DUMMY_URL + NOT_THERE_XHTML, cached.getURL().toString());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "/../../../etc/passwd",
+            "/hello/../../META-INF/microprofile-config.properties",
+            "/..%2f..%2fetc%2fpasswd",
+            "/%2e%2e/secret.properties"
+    })
+    void shouldRejectPathTraversalAttempts(String maliciousPath) {
+        PortalViewResourceHandler underTest = new PortalViewResourceHandler(resourceHandler);
+        // Path traversal attempts must fall through to the wrapped handler (not resolved from /portal/views)
+        final var result = underTest.createViewResource(getFacesContext(), maliciousPath);
+        assertFalse(result instanceof PortalViewResourceHolder,
+                "Path traversal attempt must not resolve to a PortalViewResourceHolder: " + maliciousPath);
     }
 }

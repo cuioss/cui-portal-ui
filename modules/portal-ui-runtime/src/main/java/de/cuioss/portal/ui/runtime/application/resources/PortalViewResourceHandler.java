@@ -25,8 +25,9 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Used for resolving View-Resources from /portal/views
@@ -36,9 +37,19 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 public class PortalViewResourceHandler extends ResourceHandlerWrapper {
 
-    private static final Map<String, PortalViewResourceHolder> CACHE = new ConcurrentHashMap<>();
+    private static final int MAX_CACHE_SIZE = 200;
+
+    private static final Map<String, PortalViewResourceHolder> CACHE =
+            Collections.synchronizedMap(new LinkedHashMap<>(64, 0.75f, true) {
+                @Override
+                protected boolean removeEldestEntry(Map.Entry<String, PortalViewResourceHolder> eldest) {
+                    return size() > MAX_CACHE_SIZE;
+                }
+            });
 
     private static final CuiLogger LOGGER = new CuiLogger(PortalViewResourceHandler.class);
+
+    private static final PortalPathValidator PATH_VALIDATOR = new PortalPathValidator();
 
     /**
      * Describes the path where to look up the portal-views.
@@ -56,6 +67,10 @@ public class PortalViewResourceHandler extends ResourceHandlerWrapper {
     @Override
     public ViewResource createViewResource(final FacesContext context, final String resourceName) {
         if (shouldHandleResource(resourceName)) {
+            if (!PATH_VALIDATOR.isValidPath(resourceName)) {
+                LOGGER.warn("Portal-150: Rejected invalid view resource path: '%s'", resourceName);
+                return wrapped.createViewResource(context, resourceName);
+            }
             LOGGER.debug("Requested view resource: %s", resourceName);
             final var handler = CACHE.computeIfAbsent(resourceName, k -> new PortalViewResourceHolder(resourceName));
             if (handler.isResourceAvailable()) {

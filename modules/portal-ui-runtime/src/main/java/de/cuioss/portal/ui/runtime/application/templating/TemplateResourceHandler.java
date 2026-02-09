@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.templating;
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.portal.ui.api.templating.MultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
+import de.cuioss.portal.ui.runtime.application.resources.PortalPathValidator;
 import de.cuioss.tools.base.Preconditions;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.Joiner;
@@ -47,6 +48,8 @@ public class TemplateResourceHandler extends ResourceHandlerWrapper {
 
     private static final CuiLogger LOGGER = new CuiLogger(TemplateResourceHandler.class);
 
+    private static final PortalPathValidator PATH_VALIDATOR = new PortalPathValidator();
+
     public static final String RESOURCE_PREFIX_TEMPLATES = "/templates/";
 
     @Getter
@@ -70,6 +73,10 @@ public class TemplateResourceHandler extends ResourceHandlerWrapper {
     @Override
     public ViewResource createViewResource(final FacesContext context, final String resourceName) {
         if (shouldHandleResource(resourceName)) {
+            if (!PATH_VALIDATOR.isValidPath(resourceName)) {
+                LOGGER.warn("Portal-150: Rejected invalid template resource path: '%s'", resourceName);
+                return super.createViewResource(context, resourceName);
+            }
             LOGGER.debug("Found template resource for %s", resourceName);
             return new ViewResource() {
 
