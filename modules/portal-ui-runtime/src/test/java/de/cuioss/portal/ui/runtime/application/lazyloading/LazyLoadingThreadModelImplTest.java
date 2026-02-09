@@ -78,7 +78,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     @Test
-    void testGoodCase() {
+    void goodCase() {
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
 
@@ -98,7 +98,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     @Test
-    void testError() {
+    void error() {
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
 
@@ -118,7 +118,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     @Test
-    void testTimeoutRetrieve() {
+    void timeoutRetrieve() {
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
 
@@ -154,7 +154,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     @Test
-    void testTimeoutHandle() {
+    void timeoutHandle() {
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "1");
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
 
@@ -175,7 +175,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     private LazyLoadingRequest<String> createRequestWithResult(final String requestId,
-                                                               final ResultObject<String> resultObject) {
+            final ResultObject<String> resultObject) {
         return new LazyLoadingRequest<>() {
 
             @Override

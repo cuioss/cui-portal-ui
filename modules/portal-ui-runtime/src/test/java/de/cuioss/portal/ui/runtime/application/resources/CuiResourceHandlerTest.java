@@ -99,7 +99,7 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
     }
 
     @Test
-    void testCreateResourceProduction() {
+    void createResourceProduction() {
         var resource = underTest.createResource(STYLE_CSS, CSS_LIBRARY);
         assertNotNull(resource);
         assertEquals(CSS_LIBRARY, resource.getLibraryName());
@@ -107,7 +107,7 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
     }
 
     @Test
-    void testCreateResourceDevelopment() {
+    void createResourceDevelopment() {
         configuration.development();
         underTest = new CuiResourceHandler(mockResourceHandler);
         var resource = underTest.createResource(STYLE_CSS, CSS_LIBRARY);

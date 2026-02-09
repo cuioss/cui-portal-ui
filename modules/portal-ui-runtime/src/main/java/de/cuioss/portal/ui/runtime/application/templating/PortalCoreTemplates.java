@@ -41,7 +41,7 @@ import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
 @Named
 @EqualsAndHashCode
 @ToString
-public class PortalTemplates implements StaticTemplateDescriptor {
+public class PortalCoreTemplates implements StaticTemplateDescriptor {
 
     @Serial
     private static final long serialVersionUID = 1933293647595996193L;

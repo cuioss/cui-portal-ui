@@ -26,12 +26,12 @@ import java.util.Optional;
 public interface MultiViewMapper {
 
     /**
-     * @param requestedResource must not be null. Represents a concrete view e.g.
-     *                          faces/guest/login.xhtml or
+     * @param requestedResource must not be null.
+     *                          Represents a concrete view e.g., faces/guest/login.xhtml or
      *                          subdirectory/component.xhtml without the technical
      *                          path segments
      * @return an instance of a {@link URL} to access the prefixed resource either
-     * as external file or as classpath resource, e.g. portal/root.xhtml or
+     * as external file or as classpath resource, e.g., portal/root.xhtml or
      * portal/subdirectory/component.xhtml respectively
      */
     Optional<URL> resolveViewPath(String requestedResource);

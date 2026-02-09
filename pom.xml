@@ -10,14 +10,12 @@
         <version>1.4.1</version>
         <relativePath/>
     </parent>
-
     <groupId>de.cuioss.portal.ui</groupId>
     <artifactId>cui-portal-ui</artifactId>
     <name>cui portal ui</name>
     <version>1.0.0-SNAPSHOT</version>
     <description>Provides the JSF based UI-components defining the CUIOSS Portal.</description>
     <packaging>pom</packaging>
-
     <url>https://github.com/cuioss/cui-portal-ui/</url>
     <scm>
         <url>https://github.com/cuioss/cui-portal-ui/</url>

@@ -35,10 +35,19 @@
             <artifactId>microprofile-context-propagation-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>de.cuioss</groupId>
+            <artifactId>cui-http</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.smallrye</groupId>
             <artifactId>smallrye-context-propagation</artifactId>
             <scope>test</scope>
         </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
         <!-- Test -->
         <dependency>
             <groupId>de.cuioss.portal.ui</groupId>

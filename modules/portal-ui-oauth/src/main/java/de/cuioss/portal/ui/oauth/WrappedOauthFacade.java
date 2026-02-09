@@ -70,7 +70,7 @@ public interface WrappedOauthFacade {
      *                       redirect
      */
     void handleMissingScopesException(MissingScopesException e, String initialScopes,
-                                      Map<String, Serializable> viewParameters);
+            Map<String, Serializable> viewParameters);
 
     /**
      * Retrieve the view parameters stored by

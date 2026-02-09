@@ -19,8 +19,6 @@ import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.portal.ui.api.templating.MultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
 import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
-import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChanged;
-import de.cuioss.portal.ui.api.templating.PortalViewResourcesConfigChangedType;
 import de.cuioss.portal.ui.api.templating.StaticTemplateDescriptor;
 import de.cuioss.tools.collect.MapBuilder;
 import de.cuioss.tools.io.FileLoaderUtility;
@@ -28,7 +26,6 @@ import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -46,8 +43,8 @@ import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
  * The Mapper collects all instances of {@link StaticTemplateDescriptor} and
- * sorts the templates accordingly. Itself it acts as a
- * {@link MultiTemplatingMapper}
+ * sorts the templates accordingly.
+ * Itself it acts as a {@link MultiTemplatingMapper}
  *
  * @author Oliver Wolff
  */
@@ -62,7 +59,7 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
     @Serial
     private static final long serialVersionUID = -8398917391620682636L;
 
-    private static final CuiLogger log = new CuiLogger(PortalTemplateMapper.class);
+    private static final CuiLogger LOGGER = new CuiLogger(PortalTemplateMapper.class);
 
     private Map<String, URL> templateMap;
 
@@ -88,28 +85,28 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
             }
         }
         templateMap = MapBuilder.copyFrom(builderMap).toImmutableMap();
-        if (log.isDebugEnabled()) {
+        if (LOGGER.isDebugEnabled()) {
             final var viewMapDebug = new StringBuilder("Resulting templates map:\r");
             templateMap.forEach((key, value) -> viewMapDebug.append("%-30s -> %s\r".formatted(key, value.getPath())));
-            log.debug(viewMapDebug.toString());
+            LOGGER.debug(viewMapDebug.toString());
         }
     }
 
     public void handleDescriptor(final Map<String, URL> builderMap, final StaticTemplateDescriptor descriptor,
-                                 final String resourceName) {
+            final String resourceName) {
         try {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getTemplatePath() + '/' + resourceName)
                     .getURL();
             if (null == url) {
-                log.warn("Portal-126: Template {} with path {} from descriptor {} was not found", resourceName,
+                LOGGER.warn("Portal-126: Template %s with path %s from descriptor %s was not found", resourceName,
                         descriptor.getTemplatePath(), descriptor.toString());
             } else {
                 builderMap.put(resourceName, url);
             }
         } catch (final IllegalArgumentException e) {
-            log.warn(
-                    "Portal-144: Configured view/template resource '" + resourceName + "' can not be resolved, skipped",
-                    e);
+            LOGGER.warn(e,
+                    "Portal-144: Configured view/template resource '%s' can not be resolved, skipped",
+                    resourceName);
         }
     }
 
@@ -122,17 +119,4 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
         return resolved;
     }
 
-    /**
-     * Listener for {@link PortalViewResourcesConfigChanged}s. Reinitialize the
-     * templates map.
-     *
-     * @param type
-     */
-    void configurationChangeEventListener(
-            @Observes @PortalViewResourcesConfigChanged final PortalViewResourcesConfigChangedType type) {
-        if (PortalViewResourcesConfigChangedType.TEMPLATES == type) {
-            log.debug("Reinitialize templates map");
-            init();
-        }
-    }
 }

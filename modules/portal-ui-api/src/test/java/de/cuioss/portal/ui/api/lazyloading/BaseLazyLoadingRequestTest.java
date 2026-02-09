@@ -22,8 +22,9 @@ import jakarta.inject.Inject;
 import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @EnableAutoWeld
 @AddBeanClasses({LazyLoadingTestSupportProducer.class, TestBaseLazyLoadingRequest.class})
@@ -37,6 +38,6 @@ class BaseLazyLoadingRequestTest implements ShouldBeNotNull<TestBaseLazyLoadingR
     @Test
     void shouldDelegateHappyCase() {
 
-        Assertions.assertDoesNotThrow(() -> underTest.getRequestId());
+        assertDoesNotThrow(() -> underTest.getRequestId());
     }
 }
