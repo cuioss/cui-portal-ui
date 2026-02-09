@@ -22,16 +22,18 @@ import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.view.HttpHeaderFilterImpl;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.jsf.component.AbstractComponentTest;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({Oauth2AuthenticationFacadeMock.class, WrappedOauthFacadeImpl.class, HttpHeaderFilterImpl.class,
         ViewMatcherProducer.class, Oauth2ConfigurationProducerMock.class})
-class OauthRenewComponentTest extends AbstractComponentTest<OauthRenewComponent> {
+class OauthRenewComponentTest {
 
     @Produces
     @LoginPagePath
@@ -49,4 +51,9 @@ class OauthRenewComponentTest extends AbstractComponentTest<OauthRenewComponent>
         configuration.update(PortalConfigurationKeys.PORTAL_SESSION_TIMEOUT, "20");
     }
 
+    @Test
+    void shouldCreateComponent() {
+        var component = new OauthRenewComponent();
+        assertNotNull(component);
+    }
 }

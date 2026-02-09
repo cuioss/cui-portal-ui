@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import de.cuioss.jsf.api.components.model.resultContent.ErrorController;
+import de.cuioss.jsf.api.components.model.result_content.ErrorController;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingErrorHandler;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.result.ResultDetail;

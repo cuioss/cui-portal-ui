@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.lazyloading;
 
-import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
+import de.cuioss.jsf.api.components.model.result_content.ResultErrorHandler;
 import de.cuioss.jsf.test.MessageProducerMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalStickyMessageProducerMock;

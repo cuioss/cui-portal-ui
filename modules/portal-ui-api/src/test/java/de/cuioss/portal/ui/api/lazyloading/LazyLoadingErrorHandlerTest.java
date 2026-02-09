@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.api.lazyloading;
 
-import de.cuioss.jsf.api.components.model.resultContent.ErrorController;
+import de.cuioss.jsf.api.components.model.result_content.ErrorController;
 import de.cuioss.test.generator.Generators;
 import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;

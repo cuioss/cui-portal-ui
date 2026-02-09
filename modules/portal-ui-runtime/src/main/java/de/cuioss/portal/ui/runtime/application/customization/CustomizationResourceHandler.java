@@ -47,7 +47,7 @@ public class CustomizationResourceHandler extends ResourceHandlerWrapper {
                 PortalResourceProducer.class);
 
         Preconditions.checkArgument(resourceProducer.isPresent(),
-                PortalBeanManager.createLogMessage(ResourceProducer.class, PortalResourceProducer.class));
+                "Unable to resolve bean of type '%s' with qualifier '%s'", ResourceProducer.class, PortalResourceProducer.class);
 
         var result = resourceProducer.get().retrieveResource(resourceName, libraryName);
         if (null != result) {

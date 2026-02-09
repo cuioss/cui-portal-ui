@@ -18,12 +18,11 @@ package de.cuioss.portal.ui.runtime.page;
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
+import de.cuioss.portal.authentication.facade.AuthenticationResults;
+import de.cuioss.portal.authentication.facade.LoginResult;
 import de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
-import de.cuioss.uimodel.result.ResultDetail;
-import de.cuioss.uimodel.result.ResultObject;
-import de.cuioss.uimodel.result.ResultState;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
@@ -51,13 +50,12 @@ public class TestLoginPage extends AbstractLoginPageBean {
     private boolean simulateLoginError;
 
     @Override
-    protected ResultObject<AuthenticatedUserInfo> doLogin(final HttpServletRequest servletRequest) {
+    protected LoginResult doLogin(final HttpServletRequest servletRequest) {
         if (simulateLoginError) {
-            return ResultObject.<AuthenticatedUserInfo>builder().state(ResultState.WARNING)
-                    .resultDetail(new ResultDetail(new LabeledKey("OOPS ... something went wrong ... ")))
-                    .result(userInfo).build();
+            return AuthenticationResults.invalidResultKey("OOPS ... something went wrong ... ",
+                    userInfo != null ? userInfo.getIdentifier() : null, null);
         }
-        return ResultObject.<AuthenticatedUserInfo>builder().state(ResultState.VALID).result(userInfo).build();
+        return AuthenticationResults.validResult(userInfo);
     }
 
     @Override
