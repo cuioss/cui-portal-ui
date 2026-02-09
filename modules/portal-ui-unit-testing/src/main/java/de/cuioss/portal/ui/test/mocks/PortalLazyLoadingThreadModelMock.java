@@ -17,7 +17,7 @@ package de.cuioss.portal.ui.test.mocks;
 
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
-import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
+import de.cuioss.jsf.api.components.model.result_content.ResultErrorHandler;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;

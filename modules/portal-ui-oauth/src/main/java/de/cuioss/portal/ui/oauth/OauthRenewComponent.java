@@ -55,8 +55,8 @@ public class OauthRenewComponent extends UINamingContainer {
             renewInterval = authenticationFacade.get().retrieveRenewInterval();
             loginUrl = authenticationFacade.get().getLoginUrl();
         } else {
-            log.error(PortalBeanManager.createLogMessage(Oauth2AuthenticationFacade.class,
-                    PortalAuthenticationFacade.class));
+            log.error("Unable to resolve bean of type '{}' with qualifier '{}'",
+                    Oauth2AuthenticationFacade.class, PortalAuthenticationFacade.class);
             renewUrl = null;
             renewInterval = null;
             loginUrl = null;

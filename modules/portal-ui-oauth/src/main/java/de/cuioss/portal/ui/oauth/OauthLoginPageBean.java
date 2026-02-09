@@ -18,8 +18,8 @@ package de.cuioss.portal.ui.oauth;
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
-import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.facade.AuthenticationResults;
+import de.cuioss.portal.authentication.facade.LoginResult;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
@@ -28,7 +28,6 @@ import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.runtime.page.AbstractLoginPageBean;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
-import de.cuioss.uimodel.result.ResultObject;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
@@ -137,7 +136,7 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
     }
 
     @Override
-    protected ResultObject<AuthenticatedUserInfo> doLogin(final HttpServletRequest currentServletRequest) {
+    protected LoginResult doLogin(final HttpServletRequest currentServletRequest) {
         checkArgument(null != currentView, "currentView must be available");
         return AuthenticationResults.validResult(
                 authenticationFacade.testLogin(currentView.getUrlParameter(), oauth2Configuration.getInitialScopes()));

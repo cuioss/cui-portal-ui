@@ -16,8 +16,8 @@
 package de.cuioss.portal.ui.api.lazyloading;
 
 import de.cuioss.jsf.api.components.css.ContextState;
-import de.cuioss.jsf.api.components.model.resultContent.ErrorController;
-import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
+import de.cuioss.jsf.api.components.model.result_content.ErrorController;
+import de.cuioss.jsf.api.components.model.result_content.ResultErrorHandler;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
 import de.cuioss.uimodel.result.ResultDetail;

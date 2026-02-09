@@ -18,28 +18,32 @@ package de.cuioss.portal.ui.components.layout;
 import de.cuioss.jsf.api.components.html.HtmlTreeBuilder;
 import de.cuioss.jsf.api.components.html.Node;
 import de.cuioss.portal.ui.components.PortalCssClasses;
+import de.cuioss.test.jsf.config.decorator.ComponentConfigDecorator;
 import de.cuioss.test.jsf.renderer.AbstractComponentRendererTest;
 import jakarta.faces.component.UIComponent;
-import jakarta.faces.component.html.HtmlOutputText;
+import jakarta.faces.context.FacesContext;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 class SidebarComponentRendererTest extends AbstractComponentRendererTest<SidebarComponentRenderer> {
 
     @Test
-    void shouldRenderMinimal() {
+    void shouldRenderMinimal(FacesContext facesContext) throws IOException {
         var component = new SidebarComponent();
         var expected = new HtmlTreeBuilder().withNode(Node.NAV).withStyleClass(PortalCssClasses.SIDEBAR);
-        assertRenderResult(component, expected.getDocument());
+        assertRenderResult(component, expected.getDocument(), facesContext);
     }
 
     @Test
-    void shouldRenderWithChildren() {
+    void shouldRenderWithChildren(FacesContext facesContext) throws IOException {
         var component = new SidebarComponent();
-        component.getChildren().add(new HtmlOutputText());
-        getComponentConfigDecorator().registerMockRendererForHtmlOutputText();
+        component.getChildren().add(new jakarta.faces.component.html.HtmlOutputText());
+        new ComponentConfigDecorator(facesContext.getApplication(), facesContext)
+                .registerMockRendererForHtmlOutputText();
         var expected = new HtmlTreeBuilder().withNode(Node.NAV).withStyleClass(PortalCssClasses.SIDEBAR)
                 .withNode("HtmlOutputText");
-        assertRenderResult(component, expected.getDocument());
+        assertRenderResult(component, expected.getDocument(), facesContext);
     }
 
     @Override

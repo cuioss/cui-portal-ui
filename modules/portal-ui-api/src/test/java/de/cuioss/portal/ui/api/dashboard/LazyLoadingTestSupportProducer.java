@@ -17,7 +17,7 @@ package de.cuioss.portal.ui.api.dashboard;
 
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
-import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
+import de.cuioss.jsf.api.components.model.result_content.ResultErrorHandler;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingViewController;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.result.ResultObject;

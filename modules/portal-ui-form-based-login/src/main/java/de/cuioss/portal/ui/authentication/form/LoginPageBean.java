@@ -20,6 +20,7 @@ import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.facade.FormBasedAuthenticationFacade;
+import de.cuioss.portal.authentication.facade.LoginResult;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.model.UserStore;
 import de.cuioss.portal.common.priority.PortalPriorities;
@@ -31,7 +32,6 @@ import de.cuioss.portal.ui.runtime.page.AbstractLoginPageBean;
 import de.cuioss.portal.ui.runtime.page.PortalPagesConfiguration;
 import de.cuioss.uimodel.application.LoginCredentials;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
-import de.cuioss.uimodel.result.ResultObject;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.RequestScoped;
@@ -193,7 +193,7 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
     }
 
     @Override
-    protected ResultObject<AuthenticatedUserInfo> doLogin(final HttpServletRequest currentServletRequest) {
+    protected LoginResult doLogin(final HttpServletRequest currentServletRequest) {
         return authenticationFacade.login(currentServletRequest, loginCredentials);
     }
 
