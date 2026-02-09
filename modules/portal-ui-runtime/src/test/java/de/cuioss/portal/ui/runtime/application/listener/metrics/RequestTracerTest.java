@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -50,7 +50,7 @@ class RequestTracerTest implements ShouldBeNotNull<RequestTracer> {
     private PortalTestMetricRegistry metricsRegistry;
 
     @Test
-    void shouldHandleHappyCase() throws InterruptedException {
+    void shouldHandleHappyCase() throws Exception {
         startSleepStop(PhaseId.RESTORE_VIEW);
         startSleepStop(PhaseId.APPLY_REQUEST_VALUES);
         startSleepStop(PhaseId.RENDER_RESPONSE);
@@ -64,7 +64,7 @@ class RequestTracerTest implements ShouldBeNotNull<RequestTracer> {
     }
 
     @Test
-    void shouldHandleInvalidCallOrder() throws InterruptedException {
+    void shouldHandleInvalidCallOrder() throws Exception {
         startSleepStop(PhaseId.RESTORE_VIEW);
         underTest.stop(PhaseId.APPLY_REQUEST_VALUES);
         startSleepStop(PhaseId.RENDER_RESPONSE);
@@ -86,7 +86,7 @@ class RequestTracerTest implements ShouldBeNotNull<RequestTracer> {
     }
 
     @Test
-    void shouldOnlyWriteOnDebugEnabled() throws InterruptedException {
+    void shouldOnlyWriteOnDebugEnabled() throws Exception {
         TestLogLevel.INFO.addLogger(RequestTracer.class);
         startSleepStop(PhaseId.RESTORE_VIEW);
         startSleepStop(PhaseId.APPLY_REQUEST_VALUES);
@@ -96,7 +96,7 @@ class RequestTracerTest implements ShouldBeNotNull<RequestTracer> {
     }
 
     @Test
-    void shouldIgnoreAnyPhase() throws InterruptedException {
+    void shouldIgnoreAnyPhase() throws Exception {
         startSleepStop(PhaseId.ANY_PHASE);
         underTest.writeStatistics();
         LogAsserts.assertSingleLogMessagePresentContaining(TestLogLevel.DEBUG,
@@ -104,7 +104,7 @@ class RequestTracerTest implements ShouldBeNotNull<RequestTracer> {
     }
 
     @Test
-    void registersMetrics() throws InterruptedException {
+    void registersMetrics() throws Exception {
         startSleepStop(PhaseId.RESTORE_VIEW);
         startSleepStop(PhaseId.APPLY_REQUEST_VALUES);
         startSleepStop(PhaseId.RENDER_RESPONSE);

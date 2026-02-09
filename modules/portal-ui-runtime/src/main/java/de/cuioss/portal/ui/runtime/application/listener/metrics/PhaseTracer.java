@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -41,7 +41,7 @@ public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
     @Serial
     private static final long serialVersionUID = -8784042523143046556L;
 
-    private static final CuiLogger log = new CuiLogger(PhaseTracer.class);
+    private static final CuiLogger LOGGER = new CuiLogger(PhaseTracer.class);
 
     @Getter
     private final Integer phaseOrdinal;
@@ -90,9 +90,9 @@ public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
     public PhaseTracer start() {
         didRun = true;
         if (stopWatch.isRunning()) {
-            log.warn("IllegalState: Must only be started once, phaseName='%s'", phaseName);
+            LOGGER.warn("IllegalState: Must only be started once, phaseName='%s'", phaseName);
         } else {
-            log.trace("Starting tracing for phase='%s'", phaseName);
+            LOGGER.trace("Starting tracing for phase='%s'", phaseName);
             stopWatch.start();
         }
         return this;
@@ -106,10 +106,10 @@ public class PhaseTracer implements Serializable, Comparable<PhaseTracer> {
      */
     public PhaseTracer stop() {
         if (stopWatch.isRunning()) {
-            log.trace("Stopping tracing for phase='%s'", phaseName);
+            LOGGER.trace("Stopping tracing for phase='%s'", phaseName);
             stopWatch.stop();
         } else {
-            log.warn("IllegalState: Must ony be started once, phase='%s'", phaseName);
+            LOGGER.warn("IllegalState: Must ony be started once, phase='%s'", phaseName);
         }
         return this;
     }

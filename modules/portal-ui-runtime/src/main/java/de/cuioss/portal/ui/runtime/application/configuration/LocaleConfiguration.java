@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -57,7 +57,7 @@ public class LocaleConfiguration implements Serializable {
     @Serial
     private static final long serialVersionUID = 4249111201638474035L;
 
-    private static final CuiLogger log = new CuiLogger(LocaleConfiguration.class);
+    private static final CuiLogger LOGGER = new CuiLogger(LocaleConfiguration.class);
 
     @Inject
     @ConfigAsLocale(name = LOCALE_DEFAULT, defaultToSystem = false)
@@ -81,14 +81,14 @@ public class LocaleConfiguration implements Serializable {
         try {
             defaultLocale = localeDefaultProvider.get();
         } catch (final IllegalArgumentException e) {
-            log.warn("Invalid configuration found for {} defaulting to {}", LOCALE_DEFAULT, Locale.ENGLISH);
+            LOGGER.warn("Invalid configuration found for %s defaulting to %s", LOCALE_DEFAULT, Locale.ENGLISH);
             defaultLocale = Locale.ENGLISH;
         }
 
         try {
             availableLocales = localesAvailableProvider.get();
         } catch (final IllegalArgumentException e) {
-            log.warn("Invalid configuration found for {} defaulting to {}", LOCALES_AVAILABLE, defaultLocale);
+            LOGGER.warn("Invalid configuration found for %s defaulting to %s", LOCALES_AVAILABLE, defaultLocale);
             availableLocales = immutableList(defaultLocale);
         }
     }

@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -98,21 +98,21 @@ public class HttpHeaderFilterImpl {
             } else {
                 switch (split.get(1).toLowerCase(Locale.ROOT)) {
                     case "enabled":
-                        getOrCreateHeader(split.get(0), headerMap)
+                        getOrCreateHeader(split.getFirst(), headerMap)
                                 .setEnabled(Boolean.parseBoolean(entry.getValue().trim()));
                         break;
                     case "views":
-                        getOrCreateHeader(split.get(0), headerMap).setViewMatcher(createViewMatcher(entry.getValue()));
+                        getOrCreateHeader(split.getFirst(), headerMap).setViewMatcher(createViewMatcher(entry.getValue()));
                         break;
                     case "content":
-                        final var header = getOrCreateHeader(split.get(0), headerMap);
+                        final var header = getOrCreateHeader(split.getFirst(), headerMap);
                         final var value = entry.getValue().trim();
                         final var splitValues = Splitter.on(": ").splitToList(value);
                         if (splitValues.size() < 2) {
                             LOGGER.warn(INVALID_VALUE, entry.getValue(), entry.getKey());
                             break;
                         }
-                        header.setKey(splitValues.get(0).trim());
+                        header.setKey(splitValues.getFirst().trim());
                         header.setValue(value.substring(value.indexOf(": ") + 2));
                         break;
                     default:

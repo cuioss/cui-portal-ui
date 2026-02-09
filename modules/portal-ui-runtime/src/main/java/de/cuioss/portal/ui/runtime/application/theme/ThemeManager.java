@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,11 +42,10 @@ import static de.cuioss.tools.string.MoreStrings.requireNotEmpty;
 @ToString
 public class ThemeManager implements Serializable {
 
-    static final String CSS_PREFEXI_NAME = Splitter.on('.').splitToList(PortalThemeConfiguration.CSS_NAME).iterator()
-            .next() + "-";
+    static final String CSS_PREFEXI_NAME = Splitter.on('.').splitToList(PortalThemeConfiguration.CSS_NAME).getFirst() + "-";
     @Serial
     private static final long serialVersionUID = 2368337948482686947L;
-    private static final CuiLogger log = new CuiLogger(ThemeManager.class);
+    private static final CuiLogger LOGGER = new CuiLogger(ThemeManager.class);
     private static final String CSS_SUFFIX = ".css";
     private final Map<String, String> themeNameCssMapping;
 
@@ -97,7 +96,7 @@ public class ThemeManager implements Serializable {
         var themeLookupName = themeName;
         if (isBlank(themeName) || !availableThemes.contains(themeName)) {
             themeLookupName = defaultTheme;
-            log.debug("No configured theme found for {}, using default theme.", themeLookupName);
+            LOGGER.debug("No configured theme found for %s, using default theme.", themeLookupName);
         }
         return themeLookupName;
     }

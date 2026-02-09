@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -80,7 +80,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
     private static String createResourceNameInMinifiedStyle(final String resourceName) {
         final var parts = Splitter.on('.').trimResults().limit(2).splitToList(resourceName);
         if (!parts.isEmpty() && parts.size() > 1)
-            return parts.get(0) + ".min." + parts.get(1);
+            return parts.getFirst() + ".min." + parts.get(1);
         return null;
     }
 
@@ -103,7 +103,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
             filesInDirectory = path.toFile().listFiles(File::isFile);
         } catch (final SecurityException e) {
             // it's not critical enough to explode if access to directory failed
-            LOGGER.warn(e, "Portal-122 : access denied to: {}", path.toFile().getName());
+            LOGGER.warn(e, "Portal-122 : access denied to: %s", path.toFile().getName());
         }
 
         if (null == filesInDirectory)
@@ -137,7 +137,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
         final var resourceFile = loadFile(resourceName, libraryName);
 
-        LOGGER.trace("create customization resource: libraryName {}, resourceName {}", libraryName, resourceName);
+        LOGGER.trace("create customization resource: libraryName %s, resourceName %s", libraryName, resourceName);
         // during development, create each time new resource
         if (projectStageProvider.get().isDevelopment())
             return new CustomizationResource(resourceFile, resourceName, libraryName, determineMimeType(resourceFile));
@@ -191,7 +191,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
         if (null != resourcePath) {
 
-            LOGGER.info("Searching customization resources in folder {}", resourcePath.getAbsolutePath());
+            LOGGER.info("Searching customization resources in folder %s", resourcePath.getAbsolutePath());
 
             try (final var directoryStream = Files.newDirectoryStream(resourcePath.toPath())) {
                 for (final Path path : directoryStream) {
@@ -205,9 +205,9 @@ public class CustomizationResourceProducer implements ResourceProducer {
                         foundResources.put(pathName, filesInDirectory);
                     }
                 }
-                LOGGER.info("Found resources: {}", foundResources);
+                LOGGER.info("Found resources: %s", foundResources);
             } catch (final IOException ex) {
-                LOGGER.warn(ex, "Portal-122: Unable to search path: {}", resourcePath.toString());
+                LOGGER.warn(ex, "Portal-122: Unable to search path: %s", resourcePath.toString());
             }
         }
 

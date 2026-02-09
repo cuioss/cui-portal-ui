@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,7 +43,7 @@ import static de.cuioss.portal.configuration.PortalConfigurationDefaults.CUSTOM_
 @EqualsAndHashCode
 public class PortalVendorResourceBundleLocator implements ResourceBundleLocator {
 
-    private static final CuiLogger log = new CuiLogger(PortalVendorResourceBundleLocator.class);
+    private static final CuiLogger LOGGER = new CuiLogger(PortalVendorResourceBundleLocator.class);
 
     @Serial
     private static final long serialVersionUID = -8478481710191113463L;
@@ -58,9 +58,9 @@ public class PortalVendorResourceBundleLocator implements ResourceBundleLocator 
         try {
             ResourceBundle.getBundle(CUSTOM_BUNDLE_PATH, Locale.getDefault());
             bundle = CUSTOM_BUNDLE_PATH;
-            log.info("Custom messages found at '{}'.", CUSTOM_BUNDLE_PATH);
+            LOGGER.info("Custom messages found at '%s'.", CUSTOM_BUNDLE_PATH);
         } catch (MissingResourceException e) {
-            log.info("Custom messages not found at '{}', ignoring.", CUSTOM_BUNDLE_PATH);
+            LOGGER.info("Custom messages not found at '%s', ignoring.", CUSTOM_BUNDLE_PATH);
             bundle = null;
         }
     }

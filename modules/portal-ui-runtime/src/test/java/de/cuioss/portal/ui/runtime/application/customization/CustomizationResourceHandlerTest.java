@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -101,13 +101,13 @@ class CustomizationResourceHandlerTest
     }
 
     @Test
-    void shouldHandledMatchingLibraryName() throws IOException {
+    void shouldHandledMatchingLibraryName() throws Exception {
         final var resolved = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);
         checkResource(resolved);
     }
 
     @Test
-    void productionShouldUseCache() throws IOException {
+    void productionShouldUseCache() throws Exception {
         configuration.update(PortalConfigurationKeys.PORTAL_STAGE, "production");
         final var resolved = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);
         final var resolved2 = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);
@@ -116,7 +116,7 @@ class CustomizationResourceHandlerTest
     }
 
     @Test
-    void developmentShouldNotUseCache() throws IOException {
+    void developmentShouldNotUseCache() throws Exception {
         configuration.update(PortalConfigurationKeys.PORTAL_STAGE, "development");
         final var resolved = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);
         final var resolved2 = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);
@@ -126,7 +126,7 @@ class CustomizationResourceHandlerTest
     }
 
     @Test
-    void shouldHandledMatchingResourceNameIncludingLibraryName() throws IOException {
+    void shouldHandledMatchingResourceNameIncludingLibraryName() throws Exception {
         final var resolved = getUnderTest().createResource(TEST_LIBRARY + "/" + TEST_RESOURCE, null);
         checkResource(resolved);
     }
@@ -156,7 +156,7 @@ class CustomizationResourceHandlerTest
     }
 
     @Test
-    void shouldUseMinifiedArtifactIfAvailable() throws IOException {
+    void shouldUseMinifiedArtifactIfAvailable() throws Exception {
 
         // ask for some_style.css, but retrieve minified version
         final var resolved = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);

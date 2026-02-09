@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -68,21 +68,21 @@ class PhaseTracerTest extends ValueObjectTest<PhaseTracer> {
     }
 
     @Test
-    void shouldAugmentToTimerList() throws InterruptedException {
+    void shouldAugmentToTimerList() throws Exception {
         var phase = PhaseId.PROCESS_VALIDATIONS;
         var outputPrefix = phase.getOrdinal() + "-" + phase.getName() + ": ";
         var underTest = new PhaseTracer(phase);
         List<String> result = mutableList();
         underTest.addTimeToList(result);
         assertEquals(1, result.size());
-        assertEquals(outputPrefix + "-1", result.get(0));
+        assertEquals(outputPrefix + "-1", result.getFirst());
 
         result.clear();
         underTest.start();
         TimeUnit.MILLISECONDS.sleep(10);
         underTest.stop();
         underTest.addTimeToList(result);
-        assertNotEquals(outputPrefix + "-1", result.get(0));
+        assertNotEquals(outputPrefix + "-1", result.getFirst());
     }
 
     @Test
@@ -94,7 +94,7 @@ class PhaseTracerTest extends ValueObjectTest<PhaseTracer> {
         List<PhaseTracer> list = mutableList(apply, validation, response);
         Collections.shuffle(list);
         Collections.sort(list);
-        assertEquals(apply, list.get(0));
+        assertEquals(apply, list.getFirst());
         assertEquals(validation, list.get(1));
         assertEquals(response, list.get(2));
     }

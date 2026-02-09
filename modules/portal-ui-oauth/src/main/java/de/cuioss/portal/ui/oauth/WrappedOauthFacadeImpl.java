@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,7 +48,7 @@ import java.util.Map;
 public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
 
     static final String MESSAGES_IDENTIFIER = "oauthMessages";
-    private static final CuiLogger log = new CuiLogger(WrappedOauthFacadeImpl.class);
+    private static final CuiLogger LOGGER = new CuiLogger(WrappedOauthFacadeImpl.class);
     /**
      * Attribute name for the target view id to be stored in the session.
      */
@@ -83,7 +83,7 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
 
     @Override
     public String retrieveToken(final String scopes) {
-        log.trace("retrieveToken for scopes: {}", scopes);
+        LOGGER.trace("retrieveToken for scopes: %s", scopes);
         var currentView = currentViewProvider.get();
         var request = servletRequestProvider.get();
         var token = authenticationFacade.retrieveToken(scopes);
@@ -99,14 +99,14 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
 
     @Override
     public void handleMissingScopesException(MissingScopesException e, Map<String, Serializable> parameters) {
-        log.trace("handleMissingScopesException", e);
+        LOGGER.trace("handleMissingScopesException", e);
         handleMissingScopesException(e, oauth2ConfigurationProvider.get().getInitialScopes(), parameters);
     }
 
     @Override
     public void handleMissingScopesException(MissingScopesException e, String initialScopes,
             Map<String, Serializable> parameters) {
-        log.trace(e, "handleMissingScopesException {}", initialScopes);
+        LOGGER.trace(e, "handleMissingScopesException %s", initialScopes);
         var request = servletRequestProvider.get();
         request.getSession().setAttribute(PARAMETER_IDENTIFIER, new HashMap<>(parameters));
         retrieveToken(Joiner.on(' ').join(initialScopes, e.getMissingScopes()));
@@ -115,7 +115,7 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
     @SuppressWarnings("unchecked")
     @Override
     public Map<String, Serializable> retrieveViewParameters() {
-        log.trace("retrieveViewParameters");
+        LOGGER.trace("retrieveViewParameters");
         Map<String, Serializable> result = new HashMap<>();
         var servletRequest = servletRequestProvider.get();
         try {
@@ -125,13 +125,13 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
                 servletRequest.getSession().removeAttribute(PARAMETER_IDENTIFIER);
                 if (null != servletRequest.getSession().getAttribute(MESSAGES_IDENTIFIER)) {
                     var messages = (List<FacesMessage>) servletRequest.getSession().getAttribute(MESSAGES_IDENTIFIER);
-                    log.trace("restore messages: {}", messages);
+                    LOGGER.trace("restore messages: %s", messages);
                     messages.forEach(message -> facesContextProvider.get().addMessage(null, message));
                     servletRequest.getSession().removeAttribute(MESSAGES_IDENTIFIER);
                 }
             }
         } catch (IllegalStateException e) {
-            log.debug(MESSAGE_GET_ATTRIBUTE_FAILED, e);
+            LOGGER.debug(MESSAGE_GET_ATTRIBUTE_FAILED, e);
         }
         return result;
     }
@@ -139,26 +139,26 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
     @Override
     public ViewIdentifier retrieveTargetView() {
         var targetView = historyManagerProvider.get().getCurrentView();
-        log.trace("retrieveTargetView from historyManager.getCurrentView(): {}", targetView);
+        LOGGER.trace("retrieveTargetView from historyManager.getCurrentView(): %s", targetView);
         var servletRequest = servletRequestProvider.get();
         try {
             if (null != servletRequest.getSession(false)
                     && null != servletRequest.getSession().getAttribute(VIEW_IDENTIFIER)) {
                 targetView = (ViewIdentifier) servletRequest.getSession().getAttribute(VIEW_IDENTIFIER);
-                log.trace("retrieveTargetView servletRequest.getSession().getAttribute(VIEW_IDENTIFIER): {}",
+                LOGGER.trace("retrieveTargetView servletRequest.getSession().getAttribute(VIEW_IDENTIFIER): %s",
                         targetView);
                 servletRequest.getSession().setAttribute(VIEW_IDENTIFIER, null);
-                log.trace("retrieveTargetView servletRequest VIEW_IDENTIFIER reset");
+                LOGGER.trace("retrieveTargetView servletRequest VIEW_IDENTIFIER reset");
             }
         } catch (IllegalStateException e) {
-            log.debug(MESSAGE_GET_ATTRIBUTE_FAILED, e);
+            LOGGER.debug(MESSAGE_GET_ATTRIBUTE_FAILED, e);
         }
         return targetView;
     }
 
     @Override
     public void preserveCurrentView() {
-        log.trace("preserveCurrentView");
+        LOGGER.trace("preserveCurrentView");
         var servletRequest = servletRequestProvider.get();
         try {
             if (null != servletRequest.getSession(false)
@@ -166,15 +166,15 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
                 preserveCurrentView(servletRequest);
             }
         } catch (IllegalStateException e) {
-            log.debug(MESSAGE_GET_ATTRIBUTE_FAILED, e);
+            LOGGER.debug(MESSAGE_GET_ATTRIBUTE_FAILED, e);
         }
     }
 
     private void preserveCurrentView(HttpServletRequest servletRequest) {
-        log.debug("preserveCurrentView Preserving target {}", historyManagerProvider.get().getCurrentView());
+        LOGGER.debug("preserveCurrentView Preserving target %s", historyManagerProvider.get().getCurrentView());
         servletRequest.getSession().setAttribute(VIEW_IDENTIFIER, historyManagerProvider.get().getCurrentView());
         var messages = facesContextProvider.get().getMessageList(null);
-        log.trace("preserveCurrentView store messages: {}", messages);
+        LOGGER.trace("preserveCurrentView store messages: %s", messages);
         servletRequest.getSession().setAttribute(MESSAGES_IDENTIFIER, messages);
     }
 }
