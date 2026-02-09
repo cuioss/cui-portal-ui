@@ -35,9 +35,7 @@ import java.util.Map;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAX_AGE;
 import static de.cuioss.portal.ui.api.PortalCoreBeanNames.CLIENT_STORAGE_BEAN_NAME;
-import static org.omnifaces.util.Faces.addResponseCookie;
-import static org.omnifaces.util.Faces.getRequestCookie;
-import static org.omnifaces.util.Faces.removeResponseCookie;
+import static org.omnifaces.util.Faces.*;
 
 /**
  * Represents the request scoped runtime representation of

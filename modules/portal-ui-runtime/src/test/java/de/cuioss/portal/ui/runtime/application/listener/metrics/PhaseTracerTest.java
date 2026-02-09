@@ -28,11 +28,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @PropertyConfig(name = "phaseId", propertyClass = PhaseId.class, propertyReadWrite = PropertyReadWrite.WRITE_ONLY)
 @VerifyConstructor(of = {"phaseId"}, allRequired = true)

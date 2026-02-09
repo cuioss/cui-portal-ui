@@ -28,9 +28,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HANDLED_LIBRARIES;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_HANDLED_SUFFIXES;
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_VERSION;
+import static de.cuioss.portal.configuration.PortalConfigurationKeys.*;
 
 /**
  * Combines the runtime information that is specific to the

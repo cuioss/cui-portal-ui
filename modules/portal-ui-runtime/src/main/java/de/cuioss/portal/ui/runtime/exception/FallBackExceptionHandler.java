@@ -28,8 +28,6 @@ import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.pages.ErrorPage;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.application.CuiProjectStage;
-
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.NavigationHandler;
 import jakarta.faces.context.FacesContext;
@@ -40,6 +38,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Optional;
 import java.util.UUID;
+
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.ERROR;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 
 /**
  * Defines the last line of defense, saying displaying the error page with the
@@ -129,7 +130,7 @@ public class FallBackExceptionHandler implements Serializable {
             var sessionStorage = sessionStorageProvider.get();
             sessionStorage.containsKey("testKey");
             return Optional.of(sessionStorage);
-        // cui-rewrite:disable InvalidExceptionUsageRecipe
+            // cui-rewrite:disable InvalidExceptionUsageRecipe
         } catch (RuntimeException e) {
             LOGGER.warn(WARN.EXCEPTION_HANDLING_INVALID_SESSION, e.getMessage());
             facesContext.getExternalContext().getSession(true);
@@ -138,7 +139,7 @@ public class FallBackExceptionHandler implements Serializable {
                 sessionStorage = sessionStorageProvider.get();
                 sessionStorage.containsKey("testKey");
                 return Optional.of(sessionStorage);
-            // cui-rewrite:disable InvalidExceptionUsageRecipe
+                // cui-rewrite:disable InvalidExceptionUsageRecipe
             } catch (RuntimeException e1) {
                 LOGGER.error(e1, ERROR.PORTAL_502_SESSION_RECREATE_FAILED, e1.getMessage());
             }

@@ -31,9 +31,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import static de.cuioss.portal.ui.api.resources.CacheableResource.HEADER_IF_NONE_MATCH;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnableJsfEnvironment
 class CacheableResourceTest implements ShouldBeNotNull<CacheableResource>,

@@ -35,13 +35,14 @@ import de.cuioss.portal.ui.api.view.PortalViewRestrictionManager;
 import de.cuioss.portal.ui.api.view.ViewRestrictionManager;
 import de.cuioss.portal.ui.runtime.application.view.ViewSuppressedException;
 import de.cuioss.tools.logging.CuiLogger;
-
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.NavigationHandler;
 import jakarta.faces.application.ViewExpiredException;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
+
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.ERROR;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 
 /**
  * This {@link PortalExceptionHandler} provides handler methods for dealing with

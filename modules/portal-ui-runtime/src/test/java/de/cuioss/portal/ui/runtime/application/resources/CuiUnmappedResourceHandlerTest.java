@@ -27,9 +27,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static jakarta.faces.application.ResourceHandler.RESOURCE_IDENTIFIER;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 class CuiUnmappedResourceHandlerTest implements JsfEnvironmentConsumer {

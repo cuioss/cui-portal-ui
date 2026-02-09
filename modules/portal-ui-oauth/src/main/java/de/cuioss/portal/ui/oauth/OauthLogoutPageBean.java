@@ -47,7 +47,7 @@ import java.io.Serial;
 import java.util.Optional;
 
 import static de.cuioss.portal.authentication.oauth.OAuthConfigKeys.OPEN_ID_CLIENT_POST_LOGOUT_REDIRECT_URI;
-import static de.cuioss.portal.ui.oauth.PortalUiOauthLogMessages.*;
+import static de.cuioss.portal.ui.oauth.PortalUiOauthLogMessages.WARN;
 import static de.cuioss.tools.string.MoreStrings.isBlank;
 import static de.cuioss.tools.string.MoreStrings.isPresent;
 

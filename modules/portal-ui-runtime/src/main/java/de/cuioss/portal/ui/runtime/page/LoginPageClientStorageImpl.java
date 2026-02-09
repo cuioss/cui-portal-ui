@@ -29,9 +29,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.function.Supplier;
 
-import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_REMEMBER_ME;
-import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERNAME;
-import static de.cuioss.portal.ui.api.pages.LoginPage.KEY_USERSTORE;
+import static de.cuioss.portal.ui.api.pages.LoginPage.*;
 import static java.util.Objects.requireNonNull;
 
 /**

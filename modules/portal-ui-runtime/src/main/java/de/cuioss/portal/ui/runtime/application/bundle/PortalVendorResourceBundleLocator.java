@@ -19,8 +19,6 @@ import de.cuioss.portal.common.bundle.ResourceBundleLocator;
 import de.cuioss.portal.common.priority.PortalPriorities;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
-
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.EqualsAndHashCode;
@@ -32,6 +30,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static de.cuioss.portal.configuration.PortalConfigurationDefaults.CUSTOM_BUNDLE_PATH;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.INFO;
 
 /**
  * Defines the vendor-specific bundle to be defined within a portal application,

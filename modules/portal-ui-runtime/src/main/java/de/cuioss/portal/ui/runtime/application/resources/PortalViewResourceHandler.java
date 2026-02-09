@@ -17,8 +17,6 @@ package de.cuioss.portal.ui.runtime.application.resources;
 
 import de.cuioss.portal.ui.runtime.application.templating.TemplateResourceHandler;
 import de.cuioss.tools.logging.CuiLogger;
-
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import jakarta.faces.application.ResourceHandler;
 import jakarta.faces.application.ResourceHandlerWrapper;
 import jakarta.faces.application.ViewResource;
@@ -30,6 +28,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 
 /**
  * Used for resolving View-Resources from /portal/views

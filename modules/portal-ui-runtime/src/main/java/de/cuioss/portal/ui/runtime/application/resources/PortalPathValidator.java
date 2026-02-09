@@ -22,7 +22,7 @@ import de.cuioss.http.security.monitoring.SecurityEventCounter;
 import de.cuioss.http.security.pipeline.PipelineFactory;
 import de.cuioss.tools.logging.CuiLogger;
 
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 
 /**
  * Validates resource paths against path traversal and other URL-based attacks

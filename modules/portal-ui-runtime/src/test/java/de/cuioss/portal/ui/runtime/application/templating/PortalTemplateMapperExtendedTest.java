@@ -24,12 +24,7 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.MASTER_DEFAULT;
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.MASTER_HORIZONTAL_CENTER;
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.NOT_THERE;
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.PORTAL;
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.ROOT;
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.TECHNICAL_ROOT;
+import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

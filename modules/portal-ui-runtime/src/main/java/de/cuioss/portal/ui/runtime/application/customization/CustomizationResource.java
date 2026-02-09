@@ -38,7 +38,7 @@ import java.util.Optional;
 import java.util.TimeZone;
 
 import static de.cuioss.portal.configuration.util.ConfigurationHelper.resolveConfigProperty;
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 
 /**
  * Implementation of a {@link File} based {@link CacheableResource}.

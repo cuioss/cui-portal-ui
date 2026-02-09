@@ -38,7 +38,7 @@ import lombok.ToString;
 import java.io.Serial;
 import java.util.List;
 
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**

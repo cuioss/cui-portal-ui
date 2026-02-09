@@ -43,7 +43,8 @@ import java.util.Map.Entry;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.HTTP_HEADER_BASE;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.HTTP_HEADER_ENABLED;
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.ERROR;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
 /**

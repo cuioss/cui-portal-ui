@@ -20,9 +20,9 @@ import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.MoreStrings;
 import lombok.Getter;
 
-import static de.cuioss.portal.ui.api.PortalUiApiLogMessages.*;
-
 import java.util.Map;
+
+import static de.cuioss.portal.ui.api.PortalUiApiLogMessages.WARN;
 
 /**
  * Abstract class to implement {@link NavigationMenuItem#getOrder()} and

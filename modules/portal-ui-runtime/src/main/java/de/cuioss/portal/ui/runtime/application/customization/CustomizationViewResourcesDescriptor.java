@@ -24,8 +24,6 @@ import de.cuioss.portal.ui.api.templating.StaticViewDescriptor;
 import de.cuioss.tools.collect.CollectionBuilder;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
-
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -44,6 +42,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 
 /**
  * Descriptor to handle customized views and templates.

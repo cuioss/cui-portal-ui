@@ -30,9 +30,7 @@ import java.nio.file.Path;
 import java.util.Date;
 
 import static de.cuioss.test.generator.Generators.letterStrings;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 class CustomizationViewResourcesDescriptorEmptyDirectoryTest implements ShouldBeNotNull<CustomizationViewResourcesDescriptor> {

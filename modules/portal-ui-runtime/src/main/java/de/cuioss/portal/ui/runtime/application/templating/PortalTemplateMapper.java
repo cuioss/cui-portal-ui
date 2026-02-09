@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 import static de.cuioss.portal.ui.api.PortalCoreBeanNames.MULTI_TEMPLATING_MAPPER_BEAN_NAME;
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**

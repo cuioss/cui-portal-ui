@@ -21,8 +21,6 @@ import de.cuioss.tools.io.MorePaths;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.MoreStrings;
 import de.cuioss.tools.string.Splitter;
-
-import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.*;
 import de.cuioss.uimodel.application.CuiProjectStage;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
@@ -43,6 +41,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.INFO;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 
 /**
  * Allow overriding {@link Resource}s for customization at the file system. Will

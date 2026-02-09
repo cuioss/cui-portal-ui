@@ -17,8 +17,6 @@ package de.cuioss.portal.ui.errorpages;
 
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.tools.logging.CuiLogger;
-
-import static de.cuioss.portal.ui.errorpages.PortalUiErrorPagesLogMessages.*;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
@@ -31,6 +29,7 @@ import lombok.ToString;
 import java.io.Serial;
 import java.io.Serializable;
 
+import static de.cuioss.portal.ui.errorpages.PortalUiErrorPagesLogMessages.WARN;
 import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
 /**

@@ -39,10 +39,7 @@ import org.junit.jupiter.api.Test;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_TOP_IDENTIFIER;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({AccountMenuItem.class, AboutMenuItem.class, LogoutMenuItem.class, EmptyNavigationContainer.class,
