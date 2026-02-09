@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * USed for resolving View-Resources from /portal/views
+ * Used for resolving View-Resources from /portal/views
  *
  * @author Oliver Wolff
  */
