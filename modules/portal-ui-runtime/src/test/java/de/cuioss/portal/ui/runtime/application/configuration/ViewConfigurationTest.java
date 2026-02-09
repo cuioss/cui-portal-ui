@@ -19,6 +19,7 @@ import de.cuioss.jsf.api.application.view.matcher.EmptyViewMatcher;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.inject.Inject;
 import lombok.Getter;
@@ -33,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @EnableAutoWeld
 @EnablePortalConfiguration
 @AddBeanClasses({ViewMatcherProducer.class})
+@EnableTestLogger
 class ViewConfigurationTest implements ShouldHandleObjectContracts<ViewConfiguration> {
 
     @Inject

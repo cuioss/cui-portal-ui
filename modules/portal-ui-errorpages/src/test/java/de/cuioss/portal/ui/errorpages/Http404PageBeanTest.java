@@ -18,6 +18,9 @@ package de.cuioss.portal.ui.errorpages;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import de.cuioss.test.juli.LogAsserts;
+import de.cuioss.test.juli.TestLogLevel;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import jakarta.inject.Inject;
 import lombok.Getter;
 import org.junit.jupiter.api.Test;
@@ -25,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
+@EnableTestLogger
 class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
 
     private static final String FACES_VIEW_JSF = "/view.jsf";
@@ -45,6 +49,7 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
         underTest.initView();
         assertTrue(underTest.isRequestUriAvailable());
         assertTrue(underTest.isShouldRedirect());
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-ERR-100");
     }
 
     @Test
@@ -53,6 +58,7 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
         underTest.initView();
         assertFalse(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-ERR-100");
     }
 
     @Test
@@ -61,6 +67,7 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
         underTest.initView();
         assertFalse(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-ERR-100");
     }
 
     /**
@@ -73,6 +80,7 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
         underTest.initView();
         assertFalse(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-ERR-100");
     }
 
     @Test
@@ -84,5 +92,6 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
         underTest.initView();
         assertTrue(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-ERR-100");
     }
 }

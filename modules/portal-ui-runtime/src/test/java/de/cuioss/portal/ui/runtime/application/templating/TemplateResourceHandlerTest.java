@@ -23,6 +23,7 @@ import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.inject.Inject;
 import lombok.Getter;
@@ -35,6 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
+@EnableTestLogger
 @EnableAlternatives({MockTemplateMapper.class, MockViewMapper.class})
 class TemplateResourceHandlerTest implements ShouldBeNotNull<TemplateResourceHandler>, JsfEnvironmentConsumer {
 

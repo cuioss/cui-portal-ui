@@ -23,6 +23,9 @@ import de.cuioss.test.jsf.mocks.CuiMockResource;
 import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import de.cuioss.test.juli.LogAsserts;
+import de.cuioss.test.juli.TestLogLevel;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import de.cuioss.tools.io.IOStreams;
 import jakarta.faces.application.Resource;
@@ -43,6 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({CustomizationResourceProducer.class})
+@EnableTestLogger
 class CustomizationResourceHandlerTest
         implements ShouldBeNotNull<CustomizationResourceHandler>, JsfEnvironmentConsumer {
 
@@ -99,6 +103,8 @@ class CustomizationResourceHandlerTest
     void shouldHandledMatchingLibraryName() throws Exception {
         final var resolved = getUnderTest().createResource(TEST_RESOURCE, TEST_LIBRARY);
         checkResource(resolved);
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.INFO, "PORTAL-UI-RT-4");
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.INFO, "PORTAL-UI-RT-5");
     }
 
     @Test

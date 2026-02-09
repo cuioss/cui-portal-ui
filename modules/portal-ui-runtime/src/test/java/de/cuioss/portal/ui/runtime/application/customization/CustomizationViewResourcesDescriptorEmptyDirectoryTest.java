@@ -20,6 +20,7 @@ import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.templating.PortalTemplateDescriptor;
 import de.cuioss.portal.ui.api.templating.PortalViewDescriptor;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.inject.Inject;
 import lombok.Getter;
@@ -33,6 +34,7 @@ import static de.cuioss.test.generator.Generators.letterStrings;
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
+@EnableTestLogger
 class CustomizationViewResourcesDescriptorEmptyDirectoryTest implements ShouldBeNotNull<CustomizationViewResourcesDescriptor> {
 
 

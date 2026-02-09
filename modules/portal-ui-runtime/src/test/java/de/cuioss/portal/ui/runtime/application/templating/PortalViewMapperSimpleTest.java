@@ -16,6 +16,7 @@
 package de.cuioss.portal.ui.runtime.application.templating;
 
 import de.cuioss.portal.ui.api.templating.PortalMultiViewMapper;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.inject.Inject;
 import lombok.Getter;
@@ -25,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @EnableAutoWeld
+@EnableTestLogger
 class PortalViewMapperSimpleTest implements ShouldHandleObjectContracts<PortalViewMapper> {
 
     public static final String PORTAL = "/META-INF/";

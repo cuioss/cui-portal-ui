@@ -15,6 +15,9 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
+import de.cuioss.test.juli.LogAsserts;
+import de.cuioss.test.juli.TestLogLevel;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -22,6 +25,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@EnableTestLogger
 class PortalPathValidatorTest {
 
     private final PortalPathValidator underTest = new PortalPathValidator();
@@ -52,6 +56,7 @@ class PortalPathValidatorTest {
     })
     void shouldRejectMaliciousPaths(String path) {
         assertFalse(underTest.isValidPath(path), "Should reject malicious path: " + path);
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-RT-111");
     }
 
     @Test

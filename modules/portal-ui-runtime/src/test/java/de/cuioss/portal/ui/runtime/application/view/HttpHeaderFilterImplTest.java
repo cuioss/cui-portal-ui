@@ -18,6 +18,7 @@ package de.cuioss.portal.ui.runtime.application.view;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
@@ -37,6 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @EnableAutoWeld
 @EnablePortalConfiguration
 @AddBeanClasses({ViewMatcherProducer.class})
+@EnableTestLogger
 class HttpHeaderFilterImplTest implements ShouldHandleObjectContracts<HttpHeaderFilterImpl> {
 
     static final String TEST_URI = "testURI";

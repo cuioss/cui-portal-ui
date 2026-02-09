@@ -19,6 +19,9 @@ import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
 import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import de.cuioss.test.juli.LogAsserts;
+import de.cuioss.test.juli.TestLogLevel;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.Test;
@@ -28,6 +31,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnableJsfEnvironment
+@EnableTestLogger
 class PortalViewResourceHandlerTest implements JsfEnvironmentConsumer {
 
     public static final String HELLO_WORLD_XHTML = "/hello/world.xhtml";
@@ -79,5 +83,6 @@ class PortalViewResourceHandlerTest implements JsfEnvironmentConsumer {
         final var result = underTest.createViewResource(getFacesContext(), maliciousPath);
         assertFalse(result instanceof PortalViewResourceHolder,
                 "Path traversal attempt must not resolve to a PortalViewResourceHolder: " + maliciousPath);
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-RT-112");
     }
 }

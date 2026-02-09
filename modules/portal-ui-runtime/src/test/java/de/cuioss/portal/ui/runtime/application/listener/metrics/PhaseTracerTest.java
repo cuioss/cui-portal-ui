@@ -15,6 +15,9 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
+import de.cuioss.test.juli.LogAsserts;
+import de.cuioss.test.juli.TestLogLevel;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.ValueObjectTest;
 import de.cuioss.test.valueobjects.api.contracts.VerifyConstructor;
 import de.cuioss.test.valueobjects.api.property.PropertyConfig;
@@ -33,6 +36,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @PropertyConfig(name = "phaseId", propertyClass = PhaseId.class, propertyReadWrite = PropertyReadWrite.WRITE_ONLY)
 @VerifyConstructor(of = {"phaseId"}, allRequired = true)
 @PropertyReflectionConfig(skip = true)
+@EnableTestLogger
 class PhaseTracerTest extends ValueObjectTest<PhaseTracer> {
 
     @Test
@@ -61,6 +65,10 @@ class PhaseTracerTest extends ValueObjectTest<PhaseTracer> {
         underTest.start();
         assertTrue(underTest.isDidRun());
         assertNotNull(underTest.toString());
+        // stop() called without prior start() triggers PHASE_ALREADY_STOPPED
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-RT-119");
+        // start() called while already running triggers PHASE_ALREADY_STARTED
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-RT-118");
     }
 
     @Test

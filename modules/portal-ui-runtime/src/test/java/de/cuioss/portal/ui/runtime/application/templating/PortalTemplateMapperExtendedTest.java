@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.application.templating;
 
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
 import de.cuioss.portal.ui.runtime.application.templating.support.AdditionalTemplates;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.inject.Inject;
 import lombok.Getter;
@@ -29,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnableAutoWeld
+@EnableTestLogger
 @AddBeanClasses({PortalCoreTemplates.class, AdditionalTemplates.class})
 class PortalTemplateMapperExtendedTest implements ShouldHandleObjectContracts<PortalTemplateMapper> {
 
