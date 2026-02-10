@@ -112,6 +112,7 @@ class RequestTracerTest implements ShouldBeNotNull<RequestTracer> {
         assertEquals(4, timer.size());
     }
 
+    @SuppressWarnings("java:S2925")
     private void startSleepStop(PhaseId phaseId) throws InterruptedException {
         underTest.start(phaseId);
         TimeUnit.MILLISECONDS.sleep(50);

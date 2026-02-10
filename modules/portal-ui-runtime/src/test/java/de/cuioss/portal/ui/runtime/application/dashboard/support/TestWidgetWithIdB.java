@@ -36,6 +36,7 @@ public class TestWidgetWithIdB extends AbstractTestWidget {
 
     @Override
     protected void doInit() {
+        // No-op: test stub implementation
     }
 
     @Override

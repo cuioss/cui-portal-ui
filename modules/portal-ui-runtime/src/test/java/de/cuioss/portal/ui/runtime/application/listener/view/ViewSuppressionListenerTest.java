@@ -52,6 +52,7 @@ class ViewSuppressionListenerTest implements ShouldHandleObjectContracts<ViewSup
     void shouldAlwaysReturnFalseOnDefault() {
         underTest.handleView(DESCRIPTOR_HOME);
         underTest.handleView(DESCRIPTOR_NOT_THERE);
+        assertNull(viewSuppressedException);
     }
 
     @Test

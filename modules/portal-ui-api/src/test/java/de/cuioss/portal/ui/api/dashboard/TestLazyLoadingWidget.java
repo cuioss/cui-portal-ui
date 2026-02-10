@@ -34,7 +34,7 @@ class TestLazyLoadingWidget extends BaseLazyLoadingWidget<String> {
 
     @Override
     public void handleResult(String result) {
-
+        // No-op: test stub implementation
     }
 
     @Override
