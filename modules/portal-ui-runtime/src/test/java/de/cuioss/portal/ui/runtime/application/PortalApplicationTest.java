@@ -32,7 +32,6 @@ import jakarta.faces.application.ApplicationWrapper;
 import jakarta.faces.application.ProjectStage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
-import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

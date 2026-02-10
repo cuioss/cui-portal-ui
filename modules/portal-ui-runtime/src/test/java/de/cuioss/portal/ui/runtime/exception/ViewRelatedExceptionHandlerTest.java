@@ -84,7 +84,7 @@ class ViewRelatedExceptionHandlerTest
         facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         underTest.handle(event);
         assertTrue(event.isHandled());
-        assertRedirect(facesContext,VIEW_HOME_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_HOME_LOGICAL_VIEW_ID);
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_SUPPRESSED_KEY);
     }
 
@@ -96,7 +96,7 @@ class ViewRelatedExceptionHandlerTest
         portalUserProducerMock.authenticated(false);
         underTest.handle(event);
         assertTrue(event.isHandled());
-        assertRedirect(facesContext,VIEW_LOGIN_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_LOGIN_LOGICAL_VIEW_ID);
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_SUPPRESSED_KEY);
     }
 
@@ -113,7 +113,7 @@ class ViewRelatedExceptionHandlerTest
         facesContext.getViewRoot().setViewId(VIEW_HOME_LOGICAL_VIEW_ID);
         underTest.handle(event);
         assertTrue(event.isHandled());
-        assertRedirect(facesContext,VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_EXPIRED_KEY);
     }
 
@@ -124,7 +124,7 @@ class ViewRelatedExceptionHandlerTest
         // Prepare history manager
         facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         underTest.handle(event);
-        assertRedirect(facesContext,VIEW_LOGIN_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_LOGIN_LOGICAL_VIEW_ID);
         // Preferences should be put on top of the navigation for redirect over
         // login.
         assertEquals(VIEW_PREFERENCES_LOGICAL_VIEW_ID, historyManagerMock.getCurrentView().getViewId());
@@ -143,7 +143,7 @@ class ViewRelatedExceptionHandlerTest
         LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, WARNING_KEY_PORTAL_002);
 
         assertTrue(event.isHandled());
-        assertRedirect(facesContext,VIEW_HOME_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_HOME_LOGICAL_VIEW_ID);
         messageProducerMock
                 .assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_INSUFFICIENT_PERMISSIONS_KEY);
     }
@@ -163,7 +163,7 @@ class ViewRelatedExceptionHandlerTest
         LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, WARNING_KEY_PORTAL_002);
         assertTrue(event.isHandled());
 
-        assertRedirect(facesContext,VIEW_LOGOUT_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_LOGOUT_LOGICAL_VIEW_ID);
         messageProducerMock
                 .assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_INSUFFICIENT_PERMISSIONS_KEY);
     }

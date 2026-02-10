@@ -83,7 +83,7 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
         portalUserProducerMock.authenticated(false);
         underTest.handle(event);
         assertTrue(event.isHandled());
-        assertRedirect(facesContext,VIEW_LOGIN_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_LOGIN_LOGICAL_VIEW_ID);
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_SUPPRESSED_KEY);
     }
 
@@ -96,7 +96,7 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
         portalUserProducerMock.authenticated(false);
         eventBridge.fire(event);
         assertTrue(event.isHandled());
-        assertRedirect(facesContext,VIEW_LOGIN_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_LOGIN_LOGICAL_VIEW_ID);
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_SUPPRESSED_KEY);
     }
 
@@ -109,7 +109,7 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
         underTest.handle(exceptionEvent);
         assertEquals(HandleOutcome.REDIRECT, exceptionEvent.getOutcome());
 
-        assertRedirect(facesContext,VIEW_ERROR_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_ERROR_LOGICAL_VIEW_ID);
         var message = (DefaultErrorMessage) sessionStorage.get(DefaultErrorMessage.LOOKUP_KEY);
         assertNotNull(message);
     }

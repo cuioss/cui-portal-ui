@@ -30,8 +30,8 @@ import jakarta.inject.Inject;
 import lombok.Getter;
 import org.apache.myfaces.test.mock.MockFacesContext;
 import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
-import org.junit.jupiter.api.BeforeEach;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID;

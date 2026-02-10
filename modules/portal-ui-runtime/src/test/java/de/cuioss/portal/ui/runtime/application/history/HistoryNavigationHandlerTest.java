@@ -31,9 +31,7 @@ import org.junit.jupiter.api.Test;
 
 import static de.cuioss.portal.ui.runtime.application.history.HistoryManagerBeanTest.CURRENT_VIEW;
 import static de.cuioss.portal.ui.runtime.application.history.HistoryManagerBeanTest.SECOND_VIEW;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({DefaultHistoryConfiguration.class, HistoryManagerBean.class, ViewMatcherProducer.class})
