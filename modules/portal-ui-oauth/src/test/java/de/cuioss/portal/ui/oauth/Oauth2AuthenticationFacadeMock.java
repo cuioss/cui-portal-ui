@@ -102,7 +102,7 @@ public class Oauth2AuthenticationFacadeMock implements Oauth2AuthenticationFacad
 
     @Override
     public void invalidateToken() {
-
+        // No-op: test stub implementation
     }
 
     @Override

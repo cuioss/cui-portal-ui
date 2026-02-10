@@ -29,6 +29,6 @@ public class TestNavigationMenuItemSingleWithoutId extends PortalNavigationMenuI
     private static final long serialVersionUID = 1233230578256255603L;
 
     public TestNavigationMenuItemSingleWithoutId() {
-
+        // No-op: test stub implementation
     }
 }
