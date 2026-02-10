@@ -42,7 +42,7 @@ public class CustomizationResourceHandler extends ResourceHandlerWrapper {
                 PortalResourceProducer.class)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Unable to resolve bean of type '%s' with qualifier '%s'".formatted(
-                                ResourceProducer.class, PortalResourceProducer.class)));
+                                ResourceProducer.class.getName(), PortalResourceProducer.class.getName())));
 
         var result = producer.retrieveResource(resourceName, libraryName);
         if (null != result) {
