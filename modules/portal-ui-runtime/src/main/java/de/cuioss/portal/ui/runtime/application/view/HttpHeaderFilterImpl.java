@@ -57,15 +57,23 @@ public class HttpHeaderFilterImpl {
 
     private static final CuiLogger LOGGER = new CuiLogger(HttpHeaderFilterImpl.class);
 
-    @Inject
-    @ConfigAsFilteredMap(startsWith = HTTP_HEADER_BASE, stripPrefix = true)
     private Provider<Map<String, String>> headerMapProvider;
 
-    @Inject
-    @ConfigProperty(name = HTTP_HEADER_ENABLED, defaultValue = "true")
     private Boolean enabled;
 
     private List<HttpHeader> headerList;
+
+    protected HttpHeaderFilterImpl() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public HttpHeaderFilterImpl(
+            @ConfigAsFilteredMap(startsWith = HTTP_HEADER_BASE, stripPrefix = true) Provider<Map<String, String>> headerMapProvider,
+            @ConfigProperty(name = HTTP_HEADER_ENABLED, defaultValue = "true") Boolean enabled) {
+        this.headerMapProvider = headerMapProvider;
+        this.enabled = enabled;
+    }
 
     private static ViewMatcher createViewMatcher(final String value) {
         if (MoreStrings.isEmpty(value)) {

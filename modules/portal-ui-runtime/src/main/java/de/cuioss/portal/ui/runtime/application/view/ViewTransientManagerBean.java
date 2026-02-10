@@ -52,12 +52,20 @@ public class ViewTransientManagerBean implements Serializable {
     @Getter
     private boolean transientView = false;
 
-    @Inject
     private ViewConfiguration viewConfiguration;
 
-    @Inject
-    @CuiCurrentView
     private Provider<ViewDescriptor> currentViewProvider;
+
+    protected ViewTransientManagerBean() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public ViewTransientManagerBean(ViewConfiguration viewConfiguration,
+            @CuiCurrentView Provider<ViewDescriptor> currentViewProvider) {
+        this.viewConfiguration = viewConfiguration;
+        this.currentViewProvider = currentViewProvider;
+    }
 
     /**
      * Initializes the bean. See class documentation for an expected result.

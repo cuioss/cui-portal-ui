@@ -50,8 +50,16 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
     @Serial
     private static final long serialVersionUID = 6346481935899028211L;
 
-    @Inject
     private Provider<HistoryManager> historyManagerProvider;
+
+    protected LoginPageHistoryManagerProviderImpl() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public LoginPageHistoryManagerProviderImpl(Provider<HistoryManager> historyManagerProvider) {
+        this.historyManagerProvider = historyManagerProvider;
+    }
 
     private static boolean isUserStore(final UrlParameter currentParam) {
         return KEY_USERSTORE.equals(currentParam.getName());

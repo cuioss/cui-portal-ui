@@ -58,13 +58,10 @@ public class PreferencesPageBean implements PreferencesPage {
 
     private static final String LOCALE_KEY_PREFIX = "common.locale.";
 
-    @Inject
     private UserThemeBean userThemeBean;
 
-    @Inject
     private PortalThemeConfiguration themeConfiguration;
 
-    @Inject
     private PortalLocaleManagerBean localeManagerBean;
 
     @Getter
@@ -81,15 +78,27 @@ public class PreferencesPageBean implements PreferencesPage {
     @Setter
     private Locale selectedLocale;
 
-    @Inject
     private ResourceBundleWrapper resourceBundle;
 
-    @Inject
     private FacesContext facesContext;
 
-    @Inject
-    @CuiNavigationHandler
     private NavigationHandler navigationHandler;
+
+    protected PreferencesPageBean() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PreferencesPageBean(UserThemeBean userThemeBean, PortalThemeConfiguration themeConfiguration,
+            PortalLocaleManagerBean localeManagerBean, ResourceBundleWrapper resourceBundle,
+            FacesContext facesContext, @CuiNavigationHandler NavigationHandler navigationHandler) {
+        this.userThemeBean = userThemeBean;
+        this.themeConfiguration = themeConfiguration;
+        this.localeManagerBean = localeManagerBean;
+        this.resourceBundle = resourceBundle;
+        this.facesContext = facesContext;
+        this.navigationHandler = navigationHandler;
+    }
 
     /**
      * Initializes the lists for the drop-down menus.

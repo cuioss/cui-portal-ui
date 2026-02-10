@@ -50,16 +50,25 @@ public class ClientWindowManager implements Serializable {
     @Serial
     private static final long serialVersionUID = 8603571267932838043L;
 
-    @Inject
-    @ConfigProperty(name = PORTAL_SESSION_MAX_INACTIVE_INTERVAL)
-    Integer maxInactiveInterval;
+    private Integer maxInactiveInterval;
+
+    private Integer sessionTimeout;
+
+    private Provider<ViewTransientManagerBean> viewTransientManagerProvider;
+
+    protected ClientWindowManager() {
+        // for CDI proxy
+    }
 
     @Inject
-    @ConfigProperty(name = PORTAL_SESSION_TIMEOUT)
-    Integer sessionTimeout;
-
-    @Inject
-    Provider<ViewTransientManagerBean> viewTransientManagerProvider;
+    public ClientWindowManager(
+            @ConfigProperty(name = PORTAL_SESSION_MAX_INACTIVE_INTERVAL) Integer maxInactiveInterval,
+            @ConfigProperty(name = PORTAL_SESSION_TIMEOUT) Integer sessionTimeout,
+            Provider<ViewTransientManagerBean> viewTransientManagerProvider) {
+        this.maxInactiveInterval = maxInactiveInterval;
+        this.sessionTimeout = sessionTimeout;
+        this.viewTransientManagerProvider = viewTransientManagerProvider;
+    }
 
     /**
      * @return boolean indicating whether to render the timeout-form

@@ -48,9 +48,16 @@ public class LoginPageClientStorageImpl implements LoginPageClientStorage, Seria
     private static final long serialVersionUID = 5017201224201952867L;
 
     @SuppressWarnings("cdi-ambiguous-dependency")
-    @Inject
-    @PortalClientStorage
     private ClientStorage clientStorage;
+
+    protected LoginPageClientStorageImpl() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public LoginPageClientStorageImpl(@PortalClientStorage ClientStorage clientStorage) {
+        this.clientStorage = clientStorage;
+    }
 
     /**
      * {@linkplain Supplier} use {@linkplain ClientStorage} to extract

@@ -59,20 +59,28 @@ public class FallBackExceptionHandler implements Serializable {
     @Serial
     private static final long serialVersionUID = -1197300817644970750L;
     private static final String SYSTEM_ERROR = "System error";
-    @Inject
-    @PortalSessionStorage
     private Provider<MapStorage<Serializable, Serializable>> sessionStorageProvider;
 
-    @Inject
-    @CuiNavigationHandler
     private NavigationHandler navigationHandler;
 
-    @Inject
-    @CuiCurrentView
     private ViewDescriptor currentView;
 
-    @Inject
     private CuiProjectStage projectStage;
+
+    protected FallBackExceptionHandler() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public FallBackExceptionHandler(
+            @PortalSessionStorage Provider<MapStorage<Serializable, Serializable>> sessionStorageProvider,
+            @CuiNavigationHandler NavigationHandler navigationHandler,
+            @CuiCurrentView ViewDescriptor currentView, CuiProjectStage projectStage) {
+        this.sessionStorageProvider = sessionStorageProvider;
+        this.navigationHandler = navigationHandler;
+        this.currentView = currentView;
+        this.projectStage = projectStage;
+    }
 
     /**
      * Actual handler, see class documentation for details.
