@@ -15,7 +15,6 @@
  */
 package de.cuioss.portal.ui.oauth;
 
-import de.cuioss.jsf.api.application.message.MessageProducer;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.portal.common.bundle.ResourceBundleWrapper;
 import de.cuioss.portal.core.storage.MapStorage;
@@ -41,8 +40,6 @@ public class OauthExceptionHandler implements PortalExceptionHandler {
 
     private static final String OAUTH_ERROR_OUTCOME = "oauth-error";
 
-    private final MessageProducer messageProducer;
-
     private final ViewDescriptor currentView;
 
     private final FacesContext facesContext;
@@ -55,7 +52,6 @@ public class OauthExceptionHandler implements PortalExceptionHandler {
 
     protected OauthExceptionHandler() {
         // for CDI proxy
-        this.messageProducer = null;
         this.currentView = null;
         this.facesContext = null;
         this.navigationHandler = null;
@@ -64,11 +60,10 @@ public class OauthExceptionHandler implements PortalExceptionHandler {
     }
 
     @Inject
-    public OauthExceptionHandler(MessageProducer messageProducer, @CuiCurrentView ViewDescriptor currentView,
-            FacesContext facesContext, @CuiNavigationHandler NavigationHandler navigationHandler,
+    public OauthExceptionHandler(@CuiCurrentView ViewDescriptor currentView, FacesContext facesContext,
+            @CuiNavigationHandler NavigationHandler navigationHandler,
             @PortalSessionStorage MapStorage<Serializable, Serializable> sessionStorage,
             ResourceBundleWrapper resourceBundle) {
-        this.messageProducer = messageProducer;
         this.currentView = currentView;
         this.facesContext = facesContext;
         this.navigationHandler = navigationHandler;

@@ -70,7 +70,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
     @Serial
     private static final long serialVersionUID = 2575347911928721019L;
 
-    private Boolean customizationEnabled;
+    private boolean customizationEnabled;
 
     private Optional<String> customizationDir;
 
@@ -80,7 +80,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
 
     @Inject
     public CustomizationViewResourcesDescriptor(
-            @ConfigProperty(name = PORTAL_CUSTOMIZATION_ENABLED) Boolean customizationEnabled,
+            @ConfigProperty(name = PORTAL_CUSTOMIZATION_ENABLED) boolean customizationEnabled,
             @ConfigProperty(name = PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR) Optional<String> customizationDir) {
         this.customizationEnabled = customizationEnabled;
         this.customizationDir = customizationDir;

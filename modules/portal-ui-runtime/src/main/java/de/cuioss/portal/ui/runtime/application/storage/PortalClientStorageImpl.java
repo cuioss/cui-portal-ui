@@ -28,6 +28,7 @@ import jakarta.inject.Provider;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.omnifaces.util.Faces;
 
 import java.io.Serial;
 import java.util.HashMap;
@@ -75,7 +76,7 @@ public class PortalClientStorageImpl implements ClientStorage {
 
     @Override
     public String get(final String key) {
-        return cache.computeIfAbsent(key, k -> getRequestCookie(k));
+        return cache.computeIfAbsent(key, Faces::getRequestCookie);
     }
 
     @Override

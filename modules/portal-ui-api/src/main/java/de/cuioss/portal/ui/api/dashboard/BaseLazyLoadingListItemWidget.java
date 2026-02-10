@@ -38,10 +38,14 @@ public abstract class BaseLazyLoadingListItemWidget<T> extends BaseLazyLoadingWi
      * as default for this implementation of this abstract widget class.
      * May be overridden by a different id of a more specific composite component.
      */
-    @Getter
-    private final String compositeComponentId = "cui-composite:listItemWidget";
+    private static final String COMPOSITE_COMPONENT_ID = "cui-composite:listItemWidget";
     @Getter
     private List<ListItem> items = Collections.emptyList();
+
+    @Override
+    public String getCompositeComponentId() {
+        return COMPOSITE_COMPONENT_ID;
+    }
 
     protected abstract List<ListItem> mapResult(T result);
 

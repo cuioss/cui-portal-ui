@@ -29,12 +29,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serial;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static de.cuioss.tools.string.MoreStrings.emptyToNull;
 import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
 /**
@@ -184,18 +182,14 @@ class HistoryManagerImpl implements HistoryManager {
      * @return the fallback identifier for the given state of the application.
      */
     private ViewIdentifier getFallbackIdentifier() {
-        var fallback = historyConfiguration.getFallback();
         final var fallbackOutcome = historyConfiguration.getFallbackOutcome();
-        if (isEmpty(fallback) && isEmpty(fallbackOutcome)) {
-            throw new IllegalStateException("Neither fallback url nor fallbackOutcome configured");
+        if (isEmpty(fallbackOutcome)) {
+            throw new IllegalStateException("No fallbackOutcome configured");
         }
 
-        var fallbackIdentifier = new ViewIdentifier(fallback, fallbackOutcome, Collections.emptyList());
-        if (null == emptyToNull(fallback) && null != emptyToNull(fallbackOutcome)) {
-            fallbackIdentifier = NavigationUtils.lookUpToViewIdentifierBy(FacesContext.getCurrentInstance(),
-                    fallbackOutcome);
-            LOGGER.debug("fallback was calculated to : ['%s']", fallbackIdentifier);
-        }
+        var fallbackIdentifier = NavigationUtils.lookUpToViewIdentifierBy(FacesContext.getCurrentInstance(),
+                fallbackOutcome);
+        LOGGER.debug("fallback was calculated to : ['%s']", fallbackIdentifier);
         return fallbackIdentifier;
     }
 

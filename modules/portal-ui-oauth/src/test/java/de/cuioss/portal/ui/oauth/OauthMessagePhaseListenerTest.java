@@ -74,8 +74,8 @@ class OauthMessagePhaseListenerTest implements ShouldBeNotNull<OauthMessagePhase
 
     @Test
     void shouldHandleAfterPhaseWithoutError() {
-        underTest.afterPhase(
-                new PhaseEvent(FacesContext.getCurrentInstance(), PhaseId.RENDER_RESPONSE, new MockLifecycle()));
+        assertDoesNotThrow(() -> underTest.afterPhase(
+                new PhaseEvent(FacesContext.getCurrentInstance(), PhaseId.RENDER_RESPONSE, new MockLifecycle())));
     }
 
     @Test
