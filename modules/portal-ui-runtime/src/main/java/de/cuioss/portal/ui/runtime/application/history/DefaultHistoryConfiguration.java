@@ -59,14 +59,12 @@ public class DefaultHistoryConfiguration implements Serializable {
     static final int DEFAULT_HISTORY_SIZE = 10;
     @Serial
     private static final long serialVersionUID = 8178547799619418410L;
-    @Getter
-    private final String fallbackOutcome = HomePage.OUTCOME;
-    @Getter
-    private final int historySize = DEFAULT_HISTORY_SIZE;
-    @Getter
-    private final boolean excludeFacesParameter = true;
-    @Getter
-    private String fallback;
+    private static final String FALLBACK_OUTCOME = HomePage.OUTCOME;
+
+    private static final int HISTORY_SIZE = DEFAULT_HISTORY_SIZE;
+
+    private static final boolean EXCLUDE_FACES_PARAMETER = true;
+
     @Getter
     private List<String> excludeParameter;
 
@@ -83,6 +81,18 @@ public class DefaultHistoryConfiguration implements Serializable {
             @ConfigAsViewMatcher(name = HISTORY_VIEW_EXCLUDE_PARAMETER) ViewMatcher excludeFromHistoryMatcher) {
         this.excludeParameter = excludeParameter;
         this.excludeFromHistoryMatcher = excludeFromHistoryMatcher;
+    }
+
+    public String getFallbackOutcome() {
+        return FALLBACK_OUTCOME;
+    }
+
+    public int getHistorySize() {
+        return HISTORY_SIZE;
+    }
+
+    public boolean isExcludeFacesParameter() {
+        return EXCLUDE_FACES_PARAMETER;
     }
 
 }

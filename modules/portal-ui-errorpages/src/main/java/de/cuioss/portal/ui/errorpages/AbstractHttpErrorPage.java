@@ -45,7 +45,7 @@ public abstract class AbstractHttpErrorPage implements Serializable {
     private static final long serialVersionUID = -6617663225820801072L;
 
     @Getter(AccessLevel.PROTECTED)
-    private final Provider<FacesContext> facesContextProvider;
+    private final transient Provider<FacesContext> facesContextProvider;
 
     /**
      * Constructor for CDI proxy creation.

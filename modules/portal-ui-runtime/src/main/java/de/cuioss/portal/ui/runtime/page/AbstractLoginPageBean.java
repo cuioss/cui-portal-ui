@@ -115,10 +115,8 @@ public abstract class AbstractLoginPageBean implements Serializable {
 
             LOGGER.debug("user is NOT authenticated");
             handleLoginFailed(UNABLE_TO_LOGIN_MSG);
-            if (null != newUserInfo.getIdentifier()) {
-                loginEvent.fire(LoginEvent.builder().action(LoginEvent.Action.LOGIN_FAILED)
-                        .username(newUserInfo.getIdentifier()).build());
-            }
+            loginEvent.fire(LoginEvent.builder().action(LoginEvent.Action.LOGIN_FAILED)
+                    .username(newUserInfo.getIdentifier()).build());
         }
         return null;
     }

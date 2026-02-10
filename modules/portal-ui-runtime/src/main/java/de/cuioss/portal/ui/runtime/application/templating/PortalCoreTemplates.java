@@ -51,7 +51,11 @@ public class PortalCoreTemplates implements StaticTemplateDescriptor {
             "master_centered.xhtml", "http_error_page.xhtml", "technical_root.xhtml", "root.xhtml",
             "layout_footer.xhtml");
 
-    @Getter
-    private final String templatePath = "classpath:/META-INF/templates/portal";
+    private static final String TEMPLATE_PATH = "classpath:/META-INF/templates/portal";
+
+    @Override
+    public String getTemplatePath() {
+        return TEMPLATE_PATH;
+    }
 
 }
