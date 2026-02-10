@@ -16,7 +16,10 @@
 package de.cuioss.portal.ui.errorpages;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.inject.Provider;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.Serial;
@@ -32,6 +35,17 @@ public class Http403PageBean extends AbstractHttpErrorPage {
 
     @Serial
     private static final long serialVersionUID = -2216275532091092216L;
+
+    /**
+     * CDI proxy constructor.
+     */
+    protected Http403PageBean() {
+    }
+
+    @Inject
+    public Http403PageBean(Provider<FacesContext> facesContextProvider) {
+        super(facesContextProvider);
+    }
 
     @Override
     protected int getErrorCode() {

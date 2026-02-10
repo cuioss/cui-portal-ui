@@ -28,5 +28,6 @@ class ModuleConsistencyTest extends BaseModuleConsistencyTest {
     @Override
     @Disabled("Currently there is the need to portal-core-impl modules. This needs to be fixed: PortalHistoryManager")
     protected void shouldStartUpContainer() {
+        // No-op: test stub implementation
     }
 }
