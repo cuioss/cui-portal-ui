@@ -50,11 +50,7 @@ public class LoginPageHistoryManagerProviderImpl implements LoginPageHistoryMana
     @Serial
     private static final long serialVersionUID = 6346481935899028211L;
 
-    private Provider<HistoryManager> historyManagerProvider;
-
-    protected LoginPageHistoryManagerProviderImpl() {
-        // for CDI proxy
-    }
+    private final Provider<HistoryManager> historyManagerProvider;
 
     @Inject
     public LoginPageHistoryManagerProviderImpl(Provider<HistoryManager> historyManagerProvider) {
