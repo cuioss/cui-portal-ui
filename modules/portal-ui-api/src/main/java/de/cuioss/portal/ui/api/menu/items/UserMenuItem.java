@@ -56,11 +56,13 @@ public class UserMenuItem extends PortalNavigationMenuItemContainerImpl {
     @Serial
     private static final long serialVersionUID = 1452093785009425867L;
     private static final String USER_MENU_TITLE_KEY = "cui.commons.portal.menu.user.title";
-    @SuppressWarnings("java:S6813") // Used by @PostConstruct; parent hierarchy uses field injection
+    @SuppressWarnings("java:S6813")
+    // Used by @PostConstruct; parent hierarchy uses field injection
     @Inject
     AuthenticatedUserInfo userInfo;
 
-    @SuppressWarnings("java:S6813") // Used by @PostConstruct; parent hierarchy uses field injection
+    @SuppressWarnings("java:S6813")
+    // Used by @PostConstruct; parent hierarchy uses field injection
     @Inject
     ResourceBundleWrapper resourceBundle;
 

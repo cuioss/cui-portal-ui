@@ -42,7 +42,8 @@ public class PortalNavigationMenuItemSingleImpl extends PortalNavigationMenuItem
     private static final long serialVersionUID = -4639141255087105993L;
     @Getter
     private final Map<String, String> outcomeParameter = new HashMap<>();
-    @SuppressWarnings("java:S6813") // Deep menu hierarchy; constructor injection would leak @CuiCurrentView qualifier to all subclasses
+    @SuppressWarnings("java:S6813")
+    // Deep menu hierarchy; constructor injection would leak @CuiCurrentView qualifier to all subclasses
     @Inject
     @CuiCurrentView
     Provider<ViewDescriptor> currentViewProvider;

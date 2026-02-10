@@ -42,7 +42,8 @@ public class PortalNavigationMenuItemImplBase extends PortalNavigationMenuConfig
     @Serial
     private static final long serialVersionUID = -7137939377092965593L;
 
-    @SuppressWarnings("java:S6813") // Abstract base class with @ConfigAsFilteredMap qualifier; constructor injection would leak to all subclasses
+    @SuppressWarnings("java:S6813")
+    // Abstract base class with @ConfigAsFilteredMap qualifier; constructor injection would leak to all subclasses
     @Inject
     @ConfigAsFilteredMap(startsWith = MENU_BASE, stripPrefix = true)
     @Getter(value = AccessLevel.PROTECTED)
