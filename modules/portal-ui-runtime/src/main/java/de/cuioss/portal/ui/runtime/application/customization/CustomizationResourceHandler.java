@@ -16,14 +16,11 @@
 package de.cuioss.portal.ui.runtime.application.customization;
 
 import de.cuioss.portal.common.cdi.PortalBeanManager;
-import de.cuioss.tools.base.Preconditions;
 import jakarta.faces.application.Resource;
 import jakarta.faces.application.ResourceHandler;
 import jakarta.faces.application.ResourceHandlerWrapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
 
 /**
  * Allows overriding specific resources at the installation. Delegates to {@link ResourceProducer}.
@@ -40,15 +37,14 @@ public class CustomizationResourceHandler extends ResourceHandlerWrapper {
     private final ResourceHandler wrapped;
 
     @Override
-    @SuppressWarnings("java:S3655") // owolff: False Positive, isPresent is checked properly
     public Resource createResource(final String resourceName, final String libraryName) {
-        final Optional<ResourceProducer> resourceProducer = PortalBeanManager.resolveBean(ResourceProducer.class,
-                PortalResourceProducer.class);
+        final ResourceProducer producer = PortalBeanManager.resolveBean(ResourceProducer.class,
+                PortalResourceProducer.class)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Unable to resolve bean of type '%s' with qualifier '%s'".formatted(
+                                ResourceProducer.class, PortalResourceProducer.class)));
 
-        Preconditions.checkArgument(resourceProducer.isPresent(),
-                "Unable to resolve bean of type '%s' with qualifier '%s'", ResourceProducer.class, PortalResourceProducer.class);
-
-        var result = resourceProducer.get().retrieveResource(resourceName, libraryName);
+        var result = producer.retrieveResource(resourceName, libraryName);
         if (null != result) {
             return result;
         }
