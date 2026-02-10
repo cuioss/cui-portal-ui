@@ -73,7 +73,7 @@ class OauthMissingScopesErrorHandlerTest {
 
     @Test
     void shouldDelegateNonMissingScopesExceptionToSuper() {
-        var exception = new RuntimeException("other error");
+        var exception = /*~~(TODO: Use specific not RuntimeException. Suppress: // cui-rewrite:disable InvalidExceptionUsageRecipe)~~>*/new RuntimeException("other error");
         var detail = new ResultDetail(new DisplayName("other error"), exception);
 
         replay(wrappedOauthFacadeMock, errorControllerMock);

@@ -45,6 +45,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.*;
@@ -121,7 +122,7 @@ class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeIm
         var session = getSession();
         session.setAttribute("oauthViewparameter", params);
         session.setAttribute("oauthMessages",
-                java.util.List.of(new FacesMessage(FacesMessage.SEVERITY_WARN, "test warning", "detail")));
+                List.of(new FacesMessage(FacesMessage.SEVERITY_WARN, "test warning", "detail")));
 
         var result = underTest.retrieveViewParameters();
         assertEquals("value1", result.get("key1"));
@@ -143,8 +144,7 @@ class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeIm
 
         // Verify parameters were stored in session
         var session = getSession();
-        @SuppressWarnings("unchecked")
-        var stored = (Map<String, Serializable>) session.getAttribute("oauthViewparameter");
+        @SuppressWarnings("unchecked") var stored = (Map<String, Serializable>) session.getAttribute("oauthViewparameter");
         assertNotNull(stored);
         assertEquals("val1", stored.get("param1"));
     }

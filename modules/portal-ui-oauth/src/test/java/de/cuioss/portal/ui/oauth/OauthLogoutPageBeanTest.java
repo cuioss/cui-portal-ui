@@ -25,16 +25,15 @@ import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
 import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
+import de.cuioss.test.juli.LogAsserts;
+import de.cuioss.test.juli.TestLogLevel;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import de.cuioss.test.juli.LogAsserts;
-import de.cuioss.test.juli.TestLogLevel;
-import de.cuioss.test.juli.junit5.EnableTestLogger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;

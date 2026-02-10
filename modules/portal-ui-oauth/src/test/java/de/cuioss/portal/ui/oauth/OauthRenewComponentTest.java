@@ -22,6 +22,7 @@ import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.view.HttpHeaderFilterImpl;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import org.jboss.weld.junit5.ExplicitParamInjection;
@@ -29,11 +30,8 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import de.cuioss.test.juli.LogAsserts;
-import de.cuioss.test.juli.TestLogLevel;
-import de.cuioss.test.juli.junit5.EnableTestLogger;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnableTestLogger(trace = OauthRenewComponent.class)
 @EnablePortalUiEnvironment
