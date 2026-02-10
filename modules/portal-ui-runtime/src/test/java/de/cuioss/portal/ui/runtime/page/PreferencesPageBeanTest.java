@@ -20,6 +20,7 @@ import de.cuioss.portal.common.locale.LocaleChangeEvent;
 import de.cuioss.portal.core.test.mocks.core.PortalClientStorageMock;
 import de.cuioss.portal.ui.api.context.NavigationHandlerProducer;
 import de.cuioss.portal.ui.api.pages.PreferencesPage;
+import de.cuioss.portal.ui.runtime.application.locale.PortalLocaleManagerBean;
 import de.cuioss.portal.ui.runtime.application.theme.PortalThemeConfiguration;
 import de.cuioss.portal.ui.runtime.application.theme.PortalThemeConfigurationTest;
 import de.cuioss.portal.ui.runtime.application.theme.UserThemeBean;
@@ -27,10 +28,12 @@ import de.cuioss.portal.ui.runtime.support.PortalLocaleResolverServiceMock;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import de.cuioss.test.jsf.junit5.NavigationAsserts;
 import jakarta.enterprise.event.Observes;
 import jakarta.faces.event.ValueChangeEvent;
 import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.ExplicitParamInjection;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAlternatives;
 import org.jboss.weld.junit5.auto.ExcludeBeanClasses;
@@ -41,8 +44,9 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
+@ExplicitParamInjection
 @AddBeanClasses({NavigationHandlerProducer.class, PortalThemeConfiguration.class, UserThemeBean.class,
-        PortalLocaleResolverServiceMock.class, PortalClientStorageMock.class})
+        PortalLocaleResolverServiceMock.class, PortalClientStorageMock.class, PortalLocaleManagerBean.class})
 @EnableAlternatives({PortalLocaleResolverServiceMock.class})
 @ExcludeBeanClasses({PortalLocaleProducerMock.class})
 class PreferencesPageBeanTest extends AbstractPageBeanTest<PreferencesPageBean> {
@@ -64,17 +68,17 @@ class PreferencesPageBeanTest extends AbstractPageBeanTest<PreferencesPageBean> 
     }
 
     @Test
-    void shouldRedirectOnThemeChange() {
+    void shouldRedirectOnThemeChange(NavigationAsserts navigationAsserts) {
         underTest.themeChangeListener(new ValueChangeEvent(new DummyComponent(), PortalThemeConfigurationTest.DEFAULT,
                 PortalThemeConfigurationTest.HIGH_CONTRAST));
-        assertNavigatedWithOutcome(PreferencesPage.OUTCOME);
+        navigationAsserts.assertNavigatedWithOutcome(PreferencesPage.OUTCOME);
     }
 
     @Test
-    void shouldRedirectOnLocaleChange() {
+    void shouldRedirectOnLocaleChange(NavigationAsserts navigationAsserts) {
         assertNull(changeEventResult);
         underTest.localeChangeListener(new ValueChangeEvent(new DummyComponent(), Locale.GERMAN, Locale.ENGLISH));
-        assertNavigatedWithOutcome(PreferencesPage.OUTCOME);
+        navigationAsserts.assertNavigatedWithOutcome(PreferencesPage.OUTCOME);
         assertEquals(Locale.ENGLISH, changeEventResult);
     }
 

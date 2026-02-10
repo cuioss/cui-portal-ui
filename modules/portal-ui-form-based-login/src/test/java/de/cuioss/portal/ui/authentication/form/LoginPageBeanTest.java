@@ -15,6 +15,7 @@
  */
 package de.cuioss.portal.ui.authentication.form;
 
+import de.cuioss.jsf.api.application.message.DisplayNameMessageProducer;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.common.view.ViewDescriptorImpl;
 import de.cuioss.jsf.api.converter.nameprovider.LabeledKeyConverter;
@@ -38,16 +39,18 @@ import de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
-import de.cuioss.test.jsf.config.ComponentConfigurator;
 import de.cuioss.test.jsf.config.decorator.ComponentConfigDecorator;
+import de.cuioss.test.jsf.config.decorator.RequestConfigDecorator;
+import de.cuioss.test.jsf.junit5.NavigationAsserts;
 import de.cuioss.tools.net.UrlParameter;
-import de.cuioss.uimodel.nameprovider.LabeledKey;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.ExplicitParamInjection;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.omnifaces.cdi.Param;
 
@@ -62,9 +65,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
+@ExplicitParamInjection
 @AddBeanClasses({PortalPagesConfiguration.class, PortalTestUserProducer.class, PortalClientStorageMock.class,
-        LoginPageClientStorageImpl.class, LoginPageHistoryManagerProviderImpl.class})
-class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements ComponentConfigurator {
+        LoginPageClientStorageImpl.class, LoginPageHistoryManagerProviderImpl.class, DisplayNameMessageProducer.class})
+class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> {
 
     private static final String SOME_ERROR_KEY = "some.error";
 
@@ -94,6 +98,11 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
 
     private LoginEvent event;
 
+    @BeforeEach
+    void setUp(ComponentConfigDecorator componentConfig) {
+        componentConfig.registerConverter(LabeledKeyConverter.class);
+    }
+
     @Produces
     @Param
     public String getParameter(final InjectionPoint injectionPoint) {
@@ -115,10 +124,11 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
     }
 
     @Test
-    void shouldUseUrlParameterAtDeepLinking() {
+    void shouldUseUrlParameterAtDeepLinking(RequestConfigDecorator requestConfig,
+            NavigationAsserts navigationAsserts) {
 
         authenticationFacadeMock.logout(null);
-        getRequestConfigDecorator().setViewId(PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID);
+        requestConfig.setViewId(PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         // Mimic that Preferences was initially called
         final ViewDescriptor newDescriptor = ViewDescriptorImpl.builder()
@@ -133,16 +143,17 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
         underTest.getLoginCredentials().setPassword(TEST_USER_NAME);
 
         underTest.login();
-        assertRedirect(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+        navigationAsserts.assertRedirect(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         assertNotNull(event);
         assertEquals(LoginEvent.Action.LOGIN_SUCCESS, event.getAction());
     }
 
     @Test
-    void shouldRedirectToRequestedUrlAfterSuccessfulLogin() {
+    void shouldRedirectToRequestedUrlAfterSuccessfulLogin(RequestConfigDecorator requestConfig,
+            NavigationAsserts navigationAsserts) {
 
         authenticationFacadeMock.logout(null);
-        getRequestConfigDecorator().setViewId(PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID);
+        requestConfig.setViewId(PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID);
         // Mimic that Preferences was initially called
         portalHistoryManagerMock.addCurrentUriToHistory(PortalNavigationConfiguration.DESCRIPTOR_PREFERENCES);
 
@@ -150,26 +161,27 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
         underTest.getLoginCredentials().setUsername(PortalAuthenticationFacadeMock.USER);
 
         underTest.login();
-        assertRedirect(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+        navigationAsserts.assertRedirect(PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID);
     }
 
     @Test
-    void shouldReturnHomeAfterSuccessfulLogin() {
+    void shouldReturnHomeAfterSuccessfulLogin(RequestConfigDecorator requestConfig,
+            NavigationAsserts navigationAsserts) {
 
         authenticationFacadeMock.logout(null);
-        getRequestConfigDecorator().setViewId(PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID);
+        requestConfig.setViewId(PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID);
         underTest.getLoginCredentials().setPassword(PortalAuthenticationFacadeMock.USER);
         underTest.getLoginCredentials().setUsername(PortalAuthenticationFacadeMock.USER);
 
         underTest.login();
-        assertRedirect(PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID);
+        navigationAsserts.assertRedirect(PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID);
     }
 
     @Test
-    void shouldFailOnInvalidLoginCredentials() {
+    void shouldFailOnInvalidLoginCredentials(RequestConfigDecorator requestConfig) {
 
         authenticationFacadeMock.logout(null);
-        getRequestConfigDecorator().setViewId(PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID);
+        requestConfig.setViewId(PortalNavigationConfiguration.VIEW_LOGIN_LOGICAL_VIEW_ID);
         underTest.getLoginCredentials().setPassword(PortalAuthenticationFacadeMock.ADMIN);
         underTest.getLoginCredentials().setUsername(PortalAuthenticationFacadeMock.USER);
         assertNull(underTest.login());
@@ -223,11 +235,6 @@ class LoginPageBeanTest extends AbstractPageBeanTest<LoginPageBean> implements C
         configuration.update(PortalConfigurationKeys.PAGES_LOGIN_DEFAULT_USER_STORE, SOME_OTHER_LDAP_USER_STORE.getName());
         assertEquals(underTest.getLoginCredentials().getUserStore(), SOME_OTHER_LDAP_USER_STORE.getName(),
                 "Wrong selected user store");
-    }
-
-    @Override
-    public void configureComponents(final ComponentConfigDecorator decorator) {
-        decorator.registerConverter(LabeledKeyConverter.class, LabeledKey.class);
     }
 
     void onLoginEventListener(@Observes @PortalLoginEvent final LoginEvent givenEvent) {
