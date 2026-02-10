@@ -70,6 +70,7 @@ class TraceListenerTest implements ShouldBeNotNull<TraceListener>, JsfEnvironmen
         assertEquals(PhaseId.ANY_PHASE, underTest.getPhaseId());
     }
 
+    @SuppressWarnings("java:S2925")
     private void startSleepStop(PhaseId phaseId) throws InterruptedException {
         underTest.beforePhase(phaseEvent(phaseId));
         TimeUnit.MILLISECONDS.sleep(50);

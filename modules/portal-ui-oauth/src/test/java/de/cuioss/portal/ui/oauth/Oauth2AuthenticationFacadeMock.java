@@ -29,11 +29,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Collections;
 import java.util.List;
@@ -101,7 +102,7 @@ public class Oauth2AuthenticationFacadeMock implements Oauth2AuthenticationFacad
 
     @Override
     public void invalidateToken() {
-
+        // No-op: test stub implementation
     }
 
     @Override

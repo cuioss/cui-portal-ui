@@ -38,15 +38,15 @@ class BaseLazyLoadingWidgetTest
 
     @Test
     void shouldDelegateHappyCase() {
-        var underTest = getUnderTest();
+        var widget = getUnderTest();
 
-        assertDoesNotThrow(underTest::startInitialize);
-        assertDoesNotThrow(() -> underTest.processAction(null));
-        assertDoesNotThrow(underTest::getRequestId);
-        assertDoesNotThrow(underTest::getNotificationBoxState);
-        assertDoesNotThrow(underTest::getNotificationBoxValue);
-        assertDoesNotThrow(underTest::isInitialized);
-        assertDoesNotThrow(underTest::isRenderContent);
+        assertDoesNotThrow(widget::startInitialize);
+        assertDoesNotThrow(() -> widget.processAction(null));
+        assertDoesNotThrow(widget::getRequestId);
+        assertDoesNotThrow(widget::getNotificationBoxState);
+        assertDoesNotThrow(widget::getNotificationBoxValue);
+        assertDoesNotThrow(widget::isInitialized);
+        assertDoesNotThrow(widget::isRenderContent);
     }
 
     @Test

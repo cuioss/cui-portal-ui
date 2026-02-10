@@ -67,8 +67,8 @@ import lombok.experimental.Delegate;
  * @author Oliver Wolff
  */
 @FacesComponent(PortalFamily.SIDEBAR_COMPONENT)
-@SuppressWarnings("squid:MaximumInheritanceDepth")
-// Artifact of Jsf-structure
+@SuppressWarnings("java:S110")
+// Deep inheritance is artifact of JSF component hierarchy
 public class SidebarComponent extends BaseCuiPanel implements StyleClassResolver {
 
     @Delegate

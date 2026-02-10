@@ -20,12 +20,13 @@ import de.cuioss.test.jsf.mocks.CuiMockHttpServletRequest;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
 
 import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_ORIGIN;
 import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ORIGIN;
