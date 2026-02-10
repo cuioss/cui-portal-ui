@@ -30,6 +30,7 @@ import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
+import org.junit.jupiter.api.BeforeEach;
 import lombok.Getter;
 import org.apache.myfaces.test.mock.MockHttpServletResponse;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
@@ -57,9 +58,15 @@ class FallBackExceptionHandlerTest
     @Inject
     private PortalTestConfiguration configuration;
 
+    private FacesContext facesContext;
+
+    @BeforeEach
+    void setUp() {
+        this.facesContext = FacesContext.getCurrentInstance();
+    }
+
     @Test
     void shouldHandleThrowable() {
-        var facesContext = FacesContext.getCurrentInstance();
         facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
@@ -73,7 +80,7 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldShortcutIfHandled() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
@@ -84,7 +91,7 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldWriteTicketId() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
@@ -100,7 +107,7 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldHandleInvalidSessionNotRecover() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
         sessionStorage.setThrowIllegalStateOnAccess(true);
 
@@ -114,7 +121,7 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldHandleInvalidSession() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
         sessionStorage.setThrowIllegalStateOnAccessOnce(true);
 
@@ -127,7 +134,7 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldThrowIfInDevelopmentStage() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         configuration.development();
         facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
         var throwable = throwables().next();
@@ -138,7 +145,7 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldDetectCallFromErrorPage() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         facesContext.getViewRoot().setViewId(VIEW_ERROR_LOGICAL_VIEW_ID);
         var throwable = throwables().next();
         var exceptionEvent = new ExceptionAsEvent(throwable);
@@ -149,7 +156,7 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldHandleResponseAlreadyCommitted() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
         facesContext.release();
         var throwable = throwables().next();

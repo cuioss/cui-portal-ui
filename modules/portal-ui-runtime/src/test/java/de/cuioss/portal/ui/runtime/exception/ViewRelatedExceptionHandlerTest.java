@@ -40,6 +40,7 @@ import jakarta.faces.application.ViewExpiredException;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.lifecycle.ClientWindowScoped;
 import jakarta.inject.Inject;
+import org.junit.jupiter.api.BeforeEach;
 import lombok.Getter;
 import org.apache.myfaces.test.mock.MockHttpServletResponse;
 import org.jboss.weld.junit5.auto.ActivateScopes;
@@ -76,9 +77,15 @@ class ViewRelatedExceptionHandlerTest
     @PortalViewRestrictionManager
     private PortalViewRestrictionManagerMock viewRestrictionManagerMock;
 
+    private FacesContext facesContext;
+
+    @BeforeEach
+    void setUp() {
+        this.facesContext = FacesContext.getCurrentInstance();
+    }
+
     @Test
     void shouldHandleViewSuppressedExceptionForLoggedInUser() {
-        var facesContext = FacesContext.getCurrentInstance();
         final var event = new ExceptionAsEvent(new ViewSuppressedException(DESCRIPTOR_SUPRRESSED_VIEW));
 
         facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
@@ -90,7 +97,7 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldHandleViewSuppressedExceptionForLoggedOutUser() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         final var event = new ExceptionAsEvent(new ViewSuppressedException(DESCRIPTOR_SUPRRESSED_VIEW));
         facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         portalUserProducerMock.authenticated(false);
@@ -102,7 +109,7 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldHandleViewExpiredExceptionForLoggedInUser() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         final var event = new ExceptionAsEvent(new ViewExpiredException(VIEW_PREFERENCES_LOGICAL_VIEW_ID));
         // Prepare history manager
         facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
@@ -119,7 +126,7 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldRedirectToLoginOnNotAuthenticatedUser() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         final var event = new ExceptionAsEvent(new UserNotAuthenticatedException());
         // Prepare history manager
         facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
@@ -132,7 +139,7 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldHandleNotAuthorizedExceptionWithRedirectToHome() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         final var event = new ExceptionAsEvent(
                 new UserNotAuthorizedException(ViewDescriptorImpl.builder().withLogicalViewId("/").build(),
                         Collections.emptyList(), Collections.emptyList()));
@@ -150,7 +157,7 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldHandleNotAuthorizedExceptionWithRedirectToLogin() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         viewRestrictionManagerMock.setAuthorized(false);
 
         final var event = new ExceptionAsEvent(
@@ -170,7 +177,7 @@ class ViewRelatedExceptionHandlerTest
 
     @Test
     void shouldHandleViewExpiredExceptionForLoggedOutUser() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         final var event = new ExceptionAsEvent(new ViewExpiredException(VIEW_PREFERENCES_LOGICAL_VIEW_ID));
         // Prepare history manager
         facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);

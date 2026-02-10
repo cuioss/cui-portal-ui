@@ -21,6 +21,7 @@ import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import jakarta.faces.context.FacesContext;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -36,9 +37,15 @@ class PortalViewResourceHandlerTest {
 
     private final CuiMockResourceHandler resourceHandler = new CuiMockResourceHandler();
 
+    private FacesContext facesContext;
+
+    @BeforeEach
+    void setUp() {
+        this.facesContext = FacesContext.getCurrentInstance();
+    }
+
     @Test
     void shouldIgnoreDefaultAndTemplates() {
-        var facesContext = FacesContext.getCurrentInstance();
         PortalViewResourceHandler underTest = new PortalViewResourceHandler(resourceHandler);
         assertEquals(CuiMockResourceHandler.DUMMY_URL + "/", underTest.createViewResource(facesContext, "/").getURL().toString());
         assertEquals(CuiMockResourceHandler.DUMMY_URL + "/templates/hey", underTest.createViewResource(facesContext, "/templates/hey").getURL().toString());
@@ -46,7 +53,7 @@ class PortalViewResourceHandlerTest {
 
     @Test
     void shouldHandleAvailableViews() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         PortalViewResourceHandler underTest = new PortalViewResourceHandler(resourceHandler);
         final var result = underTest.createViewResource(facesContext, HELLO_WORLD_XHTML);
         assertInstanceOf(PortalViewResourceHolder.class, result);
@@ -58,7 +65,7 @@ class PortalViewResourceHandlerTest {
 
     @Test
     void shouldIgnoreMissingViews() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         PortalViewResourceHandler underTest = new PortalViewResourceHandler(resourceHandler);
         final var result = underTest.createViewResource(facesContext, NOT_THERE_XHTML);
         assertFalse(result instanceof PortalViewResourceHolder);
@@ -75,7 +82,7 @@ class PortalViewResourceHandlerTest {
             "/%2e%2e/secret.properties"
     })
     void shouldRejectPathTraversalAttempts(String maliciousPath) {
-        var facesContext = FacesContext.getCurrentInstance();
+
         PortalViewResourceHandler underTest = new PortalViewResourceHandler(resourceHandler);
         // Path traversal attempts must fall through to the wrapped handler (not resolved from /portal/views)
         final var result = underTest.createViewResource(facesContext, maliciousPath);

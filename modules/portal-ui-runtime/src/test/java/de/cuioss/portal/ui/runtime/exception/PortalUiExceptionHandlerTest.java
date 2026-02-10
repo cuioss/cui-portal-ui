@@ -35,6 +35,7 @@ import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.enterprise.event.Event;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
+import org.junit.jupiter.api.BeforeEach;
 import lombok.Getter;
 import org.apache.myfaces.test.mock.MockHttpServletResponse;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
@@ -74,9 +75,15 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
     @Inject
     private Event<ExceptionAsEvent> eventBridge;
 
+    private FacesContext facesContext;
+
+    @BeforeEach
+    void setUp() {
+        this.facesContext = FacesContext.getCurrentInstance();
+    }
+
     @Test
     void shouldCallViewRelatedExceptionHandler() {
-        var facesContext = FacesContext.getCurrentInstance();
         final var event = new ExceptionAsEvent(
                 new ViewSuppressedException(ViewRelatedExceptionHandlerTest.DESCRIPTOR_SUPRRESSED_VIEW));
         facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
@@ -89,7 +96,7 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
 
     @Test
     void shouldCallViewRelatedExceptionHandlerAsEvent() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         final var event = new ExceptionAsEvent(
                 new ViewSuppressedException(ViewRelatedExceptionHandlerTest.DESCRIPTOR_SUPRRESSED_VIEW));
         facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
@@ -102,7 +109,7 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
 
     @Test
     void shouldHandleThrowable() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
@@ -116,7 +123,7 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
 
     @Test
     void shouldShortcutIfHandled() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());

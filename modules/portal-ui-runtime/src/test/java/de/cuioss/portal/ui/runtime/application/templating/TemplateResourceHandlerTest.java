@@ -50,14 +50,17 @@ class TemplateResourceHandlerTest implements ShouldBeNotNull<TemplateResourceHan
     @PortalMultiViewMapper
     private MockViewMapper viewMapper;
 
+    private FacesContext facesContext;
+
     @BeforeEach
     void beforeTest() {
         underTest = new TemplateResourceHandler(new CuiMockResourceHandler());
+        this.facesContext = FacesContext.getCurrentInstance();
     }
 
     @Test
     void shouldPassThroughUnmapped() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         var result = underTest.createViewResource(facesContext, "dummy");
         assertNotNull(result);
         assertTrue(result.getURL().toString().startsWith(CuiMockResourceHandler.DUMMY_URL));
@@ -65,7 +68,7 @@ class TemplateResourceHandlerTest implements ShouldBeNotNull<TemplateResourceHan
 
     @Test
     void shouldMapTemplates() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         templateMapper.setBasePath(TEMPLATES_BASE_BATH);
 
         var result = underTest.createViewResource(facesContext, "/templates/dummy.xhtml");

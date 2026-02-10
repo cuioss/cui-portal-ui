@@ -22,6 +22,7 @@ import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
+import org.junit.jupiter.api.BeforeEach;
 import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
@@ -40,16 +41,22 @@ class ViewTransientManagerBeanTest
     @Getter
     private ViewTransientManagerBean underTest;
 
+    private FacesContext facesContext;
+
+    @BeforeEach
+    void setUp() {
+        this.facesContext = FacesContext.getCurrentInstance();
+    }
+
     @Test
     void shouldProvideTransientForLogin() {
-        var facesContext = FacesContext.getCurrentInstance();
         facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
         assertTrue(underTest.isTransientView());
     }
 
     @Test
     void shouldProvideNotTransientForHome() {
-        var facesContext = FacesContext.getCurrentInstance();
+
         facesContext.getViewRoot().setViewId(VIEW_HOME_LOGICAL_VIEW_ID);
         assertFalse(underTest.isTransientView());
     }
