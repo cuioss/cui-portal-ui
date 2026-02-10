@@ -66,21 +66,26 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
     @Serial
     private static final long serialVersionUID = 5261664290647994366L;
 
-    private FacesContext facesContext;
+    private final FacesContext facesContext;
 
-    private ViewDescriptor currentView;
+    private final ViewDescriptor currentView;
 
-    private Oauth2AuthenticationFacade authenticationFacade;
+    private final Oauth2AuthenticationFacade authenticationFacade;
 
-    private WrappedOauthFacade wrappedOauthFacade;
+    private final WrappedOauthFacade wrappedOauthFacade;
 
-    private Oauth2Configuration oauth2Configuration;
+    private final Oauth2Configuration oauth2Configuration;
 
     private boolean doRedirectOnFailure;
     private String loginTarget;
 
     protected OauthLoginPageBean() {
         // for CDI proxy
+        this.facesContext = null;
+        this.currentView = null;
+        this.authenticationFacade = null;
+        this.wrappedOauthFacade = null;
+        this.oauth2Configuration = null;
     }
 
     @Inject

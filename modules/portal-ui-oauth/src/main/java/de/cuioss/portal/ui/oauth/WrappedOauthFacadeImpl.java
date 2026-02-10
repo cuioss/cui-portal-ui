@@ -56,20 +56,26 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
     private static final String PARAMETER_IDENTIFIER = "oauthViewparameter";
     private static final String MESSAGE_GET_ATTRIBUTE_FAILED = "session.getAttribute failed";
 
-    private Provider<HttpServletRequest> servletRequestProvider;
+    private final Provider<HttpServletRequest> servletRequestProvider;
 
-    private Provider<FacesContext> facesContextProvider;
+    private final Provider<FacesContext> facesContextProvider;
 
-    private Provider<ViewDescriptor> currentViewProvider;
+    private final Provider<ViewDescriptor> currentViewProvider;
 
-    private Oauth2AuthenticationFacade authenticationFacade;
+    private final Oauth2AuthenticationFacade authenticationFacade;
 
-    private Provider<Oauth2Configuration> oauth2ConfigurationProvider;
+    private final Provider<Oauth2Configuration> oauth2ConfigurationProvider;
 
-    private Provider<HistoryManager> historyManagerProvider;
+    private final Provider<HistoryManager> historyManagerProvider;
 
     protected WrappedOauthFacadeImpl() {
         // for CDI proxy
+        this.servletRequestProvider = null;
+        this.facesContextProvider = null;
+        this.currentViewProvider = null;
+        this.authenticationFacade = null;
+        this.oauth2ConfigurationProvider = null;
+        this.historyManagerProvider = null;
     }
 
     @Inject

@@ -29,10 +29,11 @@ import jakarta.inject.Provider;
 @ApplicationScoped
 public class RedirectorImpl implements OauthRedirector {
 
-    private Provider<FacesContext> facesContextProvider;
+    private final Provider<FacesContext> facesContextProvider;
 
     protected RedirectorImpl() {
         // for CDI proxy
+        this.facesContextProvider = null;
     }
 
     @Inject

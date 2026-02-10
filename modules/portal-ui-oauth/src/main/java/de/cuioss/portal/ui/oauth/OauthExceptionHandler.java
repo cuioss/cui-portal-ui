@@ -41,20 +41,26 @@ public class OauthExceptionHandler implements PortalExceptionHandler {
 
     private static final String OAUTH_ERROR_OUTCOME = "oauth-error";
 
-    private MessageProducer messageProducer;
+    private final MessageProducer messageProducer;
 
-    private ViewDescriptor currentView;
+    private final ViewDescriptor currentView;
 
-    private FacesContext facesContext;
+    private final FacesContext facesContext;
 
-    private NavigationHandler navigationHandler;
+    private final NavigationHandler navigationHandler;
 
-    private MapStorage<Serializable, Serializable> sessionStorage;
+    private final MapStorage<Serializable, Serializable> sessionStorage;
 
-    private ResourceBundleWrapper resourceBundle;
+    private final ResourceBundleWrapper resourceBundle;
 
     protected OauthExceptionHandler() {
         // for CDI proxy
+        this.messageProducer = null;
+        this.currentView = null;
+        this.facesContext = null;
+        this.navigationHandler = null;
+        this.sessionStorage = null;
+        this.resourceBundle = null;
     }
 
     @Inject

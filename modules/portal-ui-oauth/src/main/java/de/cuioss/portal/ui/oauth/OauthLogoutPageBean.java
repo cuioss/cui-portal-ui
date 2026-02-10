@@ -69,31 +69,36 @@ public class OauthLogoutPageBean implements LogoutPage {
 
     private static final CuiLogger LOGGER = new CuiLogger(OauthLogoutPageBean.class);
 
-    private Oauth2AuthenticationFacade authenticationFacade;
+    private final Oauth2AuthenticationFacade authenticationFacade;
 
-    private FacesContext facesContext;
+    private final FacesContext facesContext;
 
-    private Event<LoginEvent> preLogoutEvent;
+    private final Event<LoginEvent> preLogoutEvent;
 
-    private AuthenticatedUserInfo authenticatedUserInfo;
+    private final AuthenticatedUserInfo authenticatedUserInfo;
 
-    private Oauth2Configuration oauth2Configuration;
+    private final Oauth2Configuration oauth2Configuration;
 
-    private String loginUrl;
+    private final String loginUrl;
 
-    private HttpServletRequest servletRequest;
-
-    private Oauth2Configuration configuration;
+    private final HttpServletRequest servletRequest;
 
     protected OauthLogoutPageBean() {
         // for CDI proxy
+        this.authenticationFacade = null;
+        this.facesContext = null;
+        this.preLogoutEvent = null;
+        this.authenticatedUserInfo = null;
+        this.oauth2Configuration = null;
+        this.loginUrl = null;
+        this.servletRequest = null;
     }
 
     @Inject
     public OauthLogoutPageBean(@PortalAuthenticationFacade Oauth2AuthenticationFacade authenticationFacade,
             FacesContext facesContext, @PortalLoginEvent Event<LoginEvent> preLogoutEvent,
             AuthenticatedUserInfo authenticatedUserInfo, Oauth2Configuration oauth2Configuration,
-            @LoginPagePath String loginUrl, HttpServletRequest servletRequest, Oauth2Configuration configuration) {
+            @LoginPagePath String loginUrl, HttpServletRequest servletRequest) {
         this.authenticationFacade = authenticationFacade;
         this.facesContext = facesContext;
         this.preLogoutEvent = preLogoutEvent;
@@ -101,7 +106,6 @@ public class OauthLogoutPageBean implements LogoutPage {
         this.oauth2Configuration = oauth2Configuration;
         this.loginUrl = loginUrl;
         this.servletRequest = servletRequest;
-        this.configuration = configuration;
     }
 
     /**
@@ -144,15 +148,15 @@ public class OauthLogoutPageBean implements LogoutPage {
      */
     private Optional<UrlParameter> getPostLogoutRedirectUriParam() {
 
-        final var postLogoutRedirectUri = configuration.getPostLogoutRedirectUri();
+        final var postLogoutRedirectUri = oauth2Configuration.getPostLogoutRedirectUri();
         if (isPresent(postLogoutRedirectUri)) {
-            if (isBlank(configuration.getLogoutRedirectParamName())) {
+            if (isBlank(oauth2Configuration.getLogoutRedirectParamName())) {
                 LOGGER.warn(WARN.MISSING_LOGOUT_REDIRECT_PARAM, OAuthConfigKeys.OPEN_ID_CLIENT_LOGOUT_REDIRECT_PARAMETER);
                 return Optional.empty();
             }
 
             LOGGER.debug("postLogoutRedirectUri: %s", postLogoutRedirectUri);
-            return Optional.of(new UrlParameter(configuration.getLogoutRedirectParamName(), postLogoutRedirectUri));
+            return Optional.of(new UrlParameter(oauth2Configuration.getLogoutRedirectParamName(), postLogoutRedirectUri));
         }
 
         LOGGER.debug("No postLogoutRedirectUri configured. Config-Key: %s", OPEN_ID_CLIENT_POST_LOGOUT_REDIRECT_URI);
