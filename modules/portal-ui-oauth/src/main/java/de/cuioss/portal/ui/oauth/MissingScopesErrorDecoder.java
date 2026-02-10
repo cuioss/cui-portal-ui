@@ -75,8 +75,8 @@ public class MissingScopesErrorDecoder implements ResponseExceptionMapper<Missin
 
     private static List<String> filterHeader(MultivaluedMap<String, Object> headers) {
         return headers.entrySet().stream().filter(entry -> WWW_AUTHENTICATE_HEADER_KEY.equalsIgnoreCase(entry.getKey()))
-                .map(Map.Entry::getValue).flatMap(Collection::stream).filter(value -> value instanceof String)
-                .map(value -> (String) value).toList();
+                .map(Map.Entry::getValue).flatMap(Collection::stream).filter(String.class::isInstance)
+                .map(String.class::cast).toList();
     }
 
     @Override
