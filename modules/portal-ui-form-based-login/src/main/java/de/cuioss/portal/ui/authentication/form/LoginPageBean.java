@@ -71,12 +71,14 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
     @Serial
     private static final long serialVersionUID = 8709729494565906154L;
 
-    @SuppressWarnings("java:S6813") // OmniFaces @Param requires field injection for InjectionPoint.getMember() resolution
+    @SuppressWarnings("java:S6813")
+    // OmniFaces @Param requires field injection for InjectionPoint.getMember() resolution
     @Inject
     @Param(name = "username")
     String username;
 
-    @SuppressWarnings("java:S6813") // OmniFaces @Param requires field injection for InjectionPoint.getMember() resolution
+    @SuppressWarnings("java:S6813")
+    // OmniFaces @Param requires field injection for InjectionPoint.getMember() resolution
     @Inject
     @Param(name = "userstore")
     String userstore;
