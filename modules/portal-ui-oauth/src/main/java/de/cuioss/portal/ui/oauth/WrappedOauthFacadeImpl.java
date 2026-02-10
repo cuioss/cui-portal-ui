@@ -57,25 +57,42 @@ public class WrappedOauthFacadeImpl implements WrappedOauthFacade {
     private static final String PARAMETER_IDENTIFIER = "oauthViewparameter";
     private static final String MESSAGE_GET_ATTRIBUTE_FAILED = "session.getAttribute failed";
 
-    @Inject
-    private Provider<HttpServletRequest> servletRequestProvider;
+    private final Provider<HttpServletRequest> servletRequestProvider;
+
+    private final Provider<FacesContext> facesContextProvider;
+
+    private final Provider<ViewDescriptor> currentViewProvider;
+
+    private final Oauth2AuthenticationFacade authenticationFacade;
+
+    private final Provider<Oauth2Configuration> oauth2ConfigurationProvider;
+
+    private final Provider<HistoryManager> historyManagerProvider;
+
+    protected WrappedOauthFacadeImpl() {
+        // for CDI proxy
+        this.servletRequestProvider = null;
+        this.facesContextProvider = null;
+        this.currentViewProvider = null;
+        this.authenticationFacade = null;
+        this.oauth2ConfigurationProvider = null;
+        this.historyManagerProvider = null;
+    }
 
     @Inject
-    private Provider<FacesContext> facesContextProvider;
-
-    @Inject
-    @CuiCurrentView
-    private Provider<ViewDescriptor> currentViewProvider;
-
-    @Inject
-    @PortalAuthenticationFacade
-    private Oauth2AuthenticationFacade authenticationFacade;
-
-    @Inject
-    private Provider<Oauth2Configuration> oauth2ConfigurationProvider;
-
-    @Inject
-    private Provider<HistoryManager> historyManagerProvider;
+    public WrappedOauthFacadeImpl(Provider<HttpServletRequest> servletRequestProvider,
+            Provider<FacesContext> facesContextProvider,
+            @CuiCurrentView Provider<ViewDescriptor> currentViewProvider,
+            @PortalAuthenticationFacade Oauth2AuthenticationFacade authenticationFacade,
+            Provider<Oauth2Configuration> oauth2ConfigurationProvider,
+            Provider<HistoryManager> historyManagerProvider) {
+        this.servletRequestProvider = servletRequestProvider;
+        this.facesContextProvider = facesContextProvider;
+        this.currentViewProvider = currentViewProvider;
+        this.authenticationFacade = authenticationFacade;
+        this.oauth2ConfigurationProvider = oauth2ConfigurationProvider;
+        this.historyManagerProvider = historyManagerProvider;
+    }
 
     @Override
     public String retrieveToken() {
