@@ -47,6 +47,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 public class PortalNavigationMenuItemsTest {
 
+    @SuppressWarnings("java:S6813")
+    // Weld JUnit 5 injects fields via reflection; constructor injection not applicable
     @Inject
     @PortalMenuItem
     private Instance<NavigationMenuItem> instances;

@@ -42,8 +42,16 @@ public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadMod
 
     private static final CuiLogger LOGGER = new CuiLogger(PortalLazyLoadingThreadModelMock.class);
 
-    @Inject
     private PortalLazyLoadingViewControllerMock viewControllerMock;
+
+    protected PortalLazyLoadingThreadModelMock() {
+        // for frameworks
+    }
+
+    @Inject
+    public PortalLazyLoadingThreadModelMock(PortalLazyLoadingViewControllerMock viewControllerMock) {
+        this.viewControllerMock = viewControllerMock;
+    }
 
     @Getter
     @Setter
