@@ -25,6 +25,7 @@ import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import de.cuioss.test.jsf.junit5.NavigationAsserts;
 import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Alternative;
@@ -32,6 +33,7 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import lombok.Getter;
 import org.jboss.weld.exceptions.WeldException;
+import org.jboss.weld.junit5.ExplicitParamInjection;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAlternatives;
 import org.junit.jupiter.api.Test;
@@ -40,6 +42,7 @@ import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfigurati
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
+@ExplicitParamInjection
 @AddBeanClasses({Oauth2AuthenticationFacadeMock.class, WrappedOauthFacadeImpl.class, HttpHeaderFilterImpl.class,
         ViewMatcherProducer.class, Oauth2ConfigurationProducerMock.class, ServletObjectsFromJSFContextProducer.class})
 @EnableAlternatives(OauthLoginPageBeanTest.class)
@@ -81,7 +84,7 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
     }
 
     @Test
-    void authenticatedShouldRedirectCorrect() {
+    void authenticatedShouldRedirectCorrect(NavigationAsserts navigationAsserts) {
         portalHistoryManagerMock.addCurrentUriToHistory(DESCRIPTOR_PREFERENCES);
         oauth2AuthenticationFacadeMock.setAuthenticated(false);
         underTest.testLoginAndRedirectViewAction();
@@ -91,11 +94,11 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
         var result = underTest.testLoginAndRedirectViewAction();
         assertNull(result);
         assertNull(oauth2AuthenticationFacadeMock.getRedirectUrl());
-        assertRedirect(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+        navigationAsserts.assertRedirect(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
     }
 
     @Test
-    void authenticatedShouldRedirectCorrectAtDeepLinkingAndLandingPage() {
+    void authenticatedShouldRedirectCorrectAtDeepLinkingAndLandingPage(NavigationAsserts navigationAsserts) {
         portalHistoryManagerMock.addCurrentUriToHistory(DESCRIPTOR_PREFERENCES);
         oauth2AuthenticationFacadeMock.setAuthenticated(false);
         underTest.testLoginViewAction();
@@ -105,7 +108,7 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
         var result = underTest.testLoginViewAction();
         assertNull(result);
         assertNull(oauth2AuthenticationFacadeMock.getRedirectUrl());
-        assertRedirect(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+        navigationAsserts.assertRedirect(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
     }
 
     @Test
@@ -126,4 +129,5 @@ class OauthLoginPageBeanTest extends AbstractPageBeanTest<OauthLoginPageBean> {
         oauth2ConfigurationProducerMock.setConfiguration(null);
         assertThrows(WeldException.class, () -> underTest.testLoginViewAction());
     }
+
 }

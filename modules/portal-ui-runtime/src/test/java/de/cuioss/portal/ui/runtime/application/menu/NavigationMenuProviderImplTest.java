@@ -28,11 +28,11 @@ import de.cuioss.portal.ui.api.menu.items.PreferencesMenuItem;
 import de.cuioss.portal.ui.api.menu.items.UserMenuItem;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalMirrorResourceBundle;
-import de.cuioss.test.jsf.config.ComponentConfigurator;
 import de.cuioss.test.jsf.config.decorator.ComponentConfigDecorator;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.ExplicitParamInjection;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,12 +42,13 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_TOP_ID
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
+@ExplicitParamInjection
 @AddBeanClasses({AccountMenuItem.class, AboutMenuItem.class, LogoutMenuItem.class, EmptyNavigationContainer.class,
         PreferencesMenuItem.class, UserMenuItem.class, TestNavigationMenuItemSingleWithIdA.class,
         TestNavigationMenuItemSingleWithIdB.class, TestNavigationMenuItemSingleWithoutId.class,
         PortalMirrorResourceBundle.class, PortalTestUserProducer.class})
 class NavigationMenuProviderImplTest
-        implements ShouldHandleObjectContracts<NavigationMenuProviderImpl>, ComponentConfigurator {
+        implements ShouldHandleObjectContracts<NavigationMenuProviderImpl> {
 
     @Inject
     @Getter
@@ -57,8 +58,9 @@ class NavigationMenuProviderImplTest
     private PortalTestConfiguration configuration;
 
     @BeforeEach
-    void before() {
+    void before(ComponentConfigDecorator componentConfig) {
         configuration.update(MENU_BASE + "accountMenuItem.enabled", "true");
+        componentConfig.registerConverter(StringIdentConverter.class);
     }
 
     /**
@@ -148,11 +150,6 @@ class NavigationMenuProviderImplTest
         configuration.update(MENU_BASE + "separator1.parent", "NotThere");
         // Hm hard to test. At least it should not have been added to existing container
         assertEquals(3, underTest.getContainerMenuItemById(UserMenuItem.MENU_ID).get().getChildren().size());
-    }
-
-    @Override
-    public void configureComponents(final ComponentConfigDecorator decorator) {
-        decorator.registerConverter(StringIdentConverter.class, String.class);
     }
 
     @Test

@@ -24,6 +24,7 @@ import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import de.cuioss.test.jsf.junit5.NavigationAsserts;
 import de.cuioss.test.jsf.producer.ServletObjectsFromJSFContextProducer;
 import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
@@ -31,6 +32,7 @@ import de.cuioss.test.juli.junit5.EnableTestLogger;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import lombok.Getter;
+import org.jboss.weld.junit5.ExplicitParamInjection;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,6 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnableTestLogger(trace = OauthLogoutPageBean.class)
 @EnablePortalUiEnvironment
+@ExplicitParamInjection
 @AddBeanClasses({Oauth2AuthenticationFacadeMock.class, ViewMatcherProducer.class,
         Oauth2ConfigurationProducerMock.class, PortalTestUserProducer.class,
         ServletObjectsFromJSFContextProducer.class})
@@ -74,11 +77,11 @@ class OauthLogoutPageBeanTest extends AbstractPageBeanTest<OauthLogoutPageBean> 
     }
 
     @Test
-    void shouldLogoutWithLogoutUrl() {
+    void shouldLogoutWithLogoutUrl(NavigationAsserts navigationAsserts) {
         facadeMock.setClientLogoutUrl("https://client-logout-uri");
         oAuthConfiguration.setConfiguration(Oauth2ConfigurationImpl.builder().logoutUri("http://logout").build());
         assertNull(underTest.logoutViewAction());
-        assertRedirect("https://client-logout-uri");
+        navigationAsserts.assertRedirect("https://client-logout-uri");
     }
 
     @Test
@@ -91,12 +94,12 @@ class OauthLogoutPageBeanTest extends AbstractPageBeanTest<OauthLogoutPageBean> 
     }
 
     @Test
-    void logoutWithRedirectUri() {
+    void logoutWithRedirectUri(NavigationAsserts navigationAsserts) {
         facadeMock.setClientLogoutUrl("https://client-logout-uri");
         oAuthConfiguration.setConfiguration(Oauth2ConfigurationImpl.builder().logoutUri("http://logout")
                 .logoutRedirectParamName("post_logout_test_redirect_uri")
                 .postLogoutRedirectUri("https://post.logout.url").build());
         assertNull(underTest.logoutViewAction());
-        assertRedirect("https://client-logout-uri?post_logout_test_redirect_uri=https%3A%2F%2Fpost.logout.url");
+        navigationAsserts.assertRedirect("https://client-logout-uri?post_logout_test_redirect_uri=https%3A%2F%2Fpost.logout.url");
     }
 }

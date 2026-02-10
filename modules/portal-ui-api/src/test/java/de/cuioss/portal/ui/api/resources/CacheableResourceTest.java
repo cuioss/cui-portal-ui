@@ -16,13 +16,11 @@
 package de.cuioss.portal.ui.api.resources;
 
 import de.cuioss.test.generator.Generators;
+import de.cuioss.test.jsf.config.decorator.RequestConfigDecorator;
 import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldImplementEqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.faces.context.FacesContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,11 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @EnableJsfEnvironment
 class CacheableResourceTest implements ShouldBeNotNull<CacheableResource>,
-        ShouldImplementEqualsAndHashCode<CacheableResource>, JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+        ShouldImplementEqualsAndHashCode<CacheableResource> {
 
     private String etag;
 
@@ -73,21 +67,21 @@ class CacheableResourceTest implements ShouldBeNotNull<CacheableResource>,
     }
 
     @Test
-    void shouldDetectWhetherUANeedsNoUpdate() {
+    void shouldDetectWhetherUANeedsNoUpdate(FacesContext facesContext, RequestConfigDecorator requestConfig) {
         var resource = getUnderTest();
-        assertTrue(resource.userAgentNeedsUpdate(environmentHolder.getFacesContext()));
+        assertTrue(resource.userAgentNeedsUpdate(facesContext));
 
-        environmentHolder.getRequestConfigDecorator().setRequestHeader(HEADER_IF_NONE_MATCH, HEADER_IF_NONE_MATCH);
-        assertTrue(resource.userAgentNeedsUpdate(environmentHolder.getFacesContext()));
+        requestConfig.setRequestHeader(HEADER_IF_NONE_MATCH, HEADER_IF_NONE_MATCH);
+        assertTrue(resource.userAgentNeedsUpdate(facesContext));
 
     }
 
     @Test
-    void shouldDetectWhetherUATNeedsUpdate() {
+    void shouldDetectWhetherUATNeedsUpdate(FacesContext facesContext, RequestConfigDecorator requestConfig) {
         var resource = getUnderTest();
 
-        environmentHolder.getRequestConfigDecorator().setRequestHeader(HEADER_IF_NONE_MATCH, etag);
-        assertFalse(resource.userAgentNeedsUpdate(environmentHolder.getFacesContext()));
+        requestConfig.setRequestHeader(HEADER_IF_NONE_MATCH, etag);
+        assertFalse(resource.userAgentNeedsUpdate(facesContext));
 
     }
 
