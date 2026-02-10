@@ -28,9 +28,6 @@ import org.apache.myfaces.test.mock.MockExternalContext;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.http.HttpServletRequest;
-
 import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_ORIGIN;
 import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ORIGIN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
