@@ -39,11 +39,17 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAlternatives;
 import org.junit.jupiter.api.Test;
 
+import jakarta.faces.application.FacesMessage;
+import jakarta.servlet.http.HttpSession;
+
+import java.io.Serializable;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({Oauth2AuthenticationFacadeMock.class, HttpHeaderFilterImpl.class, ViewMatcherProducer.class,
@@ -99,6 +105,80 @@ class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeIm
         assertNull(underTest.retrieveToken("abc"));
         assertNull(loginPage.testLoginViewAction());
         assertRedirect(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+    }
+
+    @Test
+    void retrieveViewParametersShouldReturnEmptyMapWhenNoSession() {
+        var result = underTest.retrieveViewParameters();
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void retrieveViewParametersShouldReturnStoredParametersAndRestoreMessages() {
+        // Store parameters and messages in session
+        Map<String, Serializable> params = new HashMap<>();
+        params.put("key1", "value1");
+        var session = getSession();
+        session.setAttribute("oauthViewparameter", params);
+        session.setAttribute("oauthMessages",
+                List.of(new FacesMessage(FacesMessage.SEVERITY_WARN, "test warning", "detail")));
+
+        var result = underTest.retrieveViewParameters();
+        assertEquals("value1", result.get("key1"));
+        // Parameters should be removed from session
+        assertNull(session.getAttribute("oauthViewparameter"));
+        // Messages should be removed from session
+        assertNull(session.getAttribute("oauthMessages"));
+    }
+
+    @Test
+    void handleMissingScopesExceptionShouldStoreParametersAndRequestToken() {
+        oauth2AuthenticationFacadeMock.setTokenToRetrieve(null);
+        oauth2AuthenticationFacadeMock.setAuthenticated(true);
+        var exception = new MissingScopesException("extra_scope");
+        Map<String, Serializable> params = new HashMap<>();
+        params.put("param1", "val1");
+
+        underTest.handleMissingScopesException(exception, params);
+
+        // Verify parameters were stored in session
+        var session = getSession();
+        @SuppressWarnings("unchecked") var stored = (Map<String, Serializable>) session.getAttribute("oauthViewparameter");
+        assertNotNull(stored);
+        assertEquals("val1", stored.get("param1"));
+    }
+
+    @Test
+    void handleMissingScopesExceptionWithInitialScopesShouldStoreAndRetrieve() {
+        oauth2AuthenticationFacadeMock.setTokenToRetrieve(null);
+        oauth2AuthenticationFacadeMock.setAuthenticated(true);
+        var exception = new MissingScopesException("extra_scope");
+        Map<String, Serializable> params = new HashMap<>();
+        params.put("key", "value");
+
+        underTest.handleMissingScopesException(exception, "openid profile", params);
+
+        var session = getSession();
+        assertNotNull(session.getAttribute("oauthViewparameter"));
+    }
+
+    @Test
+    void preserveCurrentViewShouldNotOverwriteExisting() {
+        // First call stores the view
+        underTest.preserveCurrentView();
+        var session = getSession();
+        assertNotNull(session.getAttribute("oauthViewIdentifier"));
+
+        // Set a different history and call again - should NOT overwrite
+        portalHistoryManagerMock.addCurrentUriToHistory(DESCRIPTOR_HOME);
+        underTest.preserveCurrentView();
+        // The view identifier should still be the original one
+        assertNotNull(session.getAttribute("oauthViewIdentifier"));
+    }
+
+    private HttpSession getSession() {
+        return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }
 
     @Test

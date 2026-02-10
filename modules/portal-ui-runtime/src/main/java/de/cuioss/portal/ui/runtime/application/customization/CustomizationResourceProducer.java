@@ -194,8 +194,8 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
     private void determineResources() {
 
-        foundResources = new HashMap<>(0);
-        resourcesCache = new HashMap<>(0);
+        foundResources = HashMap.newHashMap(0);
+        resourcesCache = HashMap.newHashMap(0);
 
         customizationDirProvider.get()
                 .ifPresent(customizationDir -> resourcePath = lookupResourceDirectory(Path.of(customizationDir)));

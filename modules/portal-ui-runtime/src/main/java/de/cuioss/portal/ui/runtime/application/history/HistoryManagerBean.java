@@ -35,7 +35,7 @@ import java.io.Serial;
  * The implementation utilizes a stack to store the history. The actual work is
  * done by {@link HistoryManagerImpl}.
  * <p>
- * FIXME: Use WindowScope again if on jsf 4. Update: ClientWindow failed with quarkus
+ * Uses SessionScoped because ClientWindow/WindowScope failed with Quarkus on JSF 4.
  *
  * @author Oliver Wolff
  */

@@ -18,8 +18,10 @@ package de.cuioss.portal.ui.errorpages;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.tools.base.BooleanOperations;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.inject.Provider;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,10 +42,21 @@ public class Http404PageBean extends AbstractHttpErrorPage {
     @Serial
     private static final long serialVersionUID = -2216275532091092216L;
 
-    @Inject
-    @ConfigProperty(name = PortalConfigurationKeys.PAGES_ERROR_404_REDIRECT)
     @Getter
     private boolean shouldRedirect;
+
+    /**
+     * CDI proxy constructor.
+     */
+    protected Http404PageBean() {
+    }
+
+    @Inject
+    public Http404PageBean(Provider<FacesContext> facesContextProvider,
+            @ConfigProperty(name = PortalConfigurationKeys.PAGES_ERROR_404_REDIRECT) boolean shouldRedirect) {
+        super(facesContextProvider);
+        this.shouldRedirect = shouldRedirect;
+    }
 
     @Override
     public String initView() {

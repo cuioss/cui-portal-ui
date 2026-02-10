@@ -30,6 +30,8 @@ import java.io.Serial;
 
 @ToString
 @EqualsAndHashCode(callSuper = false)
+// Abstract base class for extension; field injection avoids leaking deps to subclasses
+@SuppressWarnings("java:S6813")
 public abstract class BaseLazyLoadingWidget<T> extends BaseWidget implements LazyLoadingRequest<T> {
 
     @Serial

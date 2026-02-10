@@ -77,6 +77,8 @@ public abstract class AbstractPageBeanTest<T extends Serializable>
         implements JsfEnvironmentConsumer, ShouldBeNotNull<T>, GeneratorRegistry {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractPageBeanTest.class);
+    @SuppressWarnings("java:S6813")
+    // Weld JUnit 5 injects fields via reflection; constructor injection not applicable
     @Inject
     protected PortalTestConfiguration configuration;
     @Setter
@@ -126,16 +128,14 @@ public abstract class AbstractPageBeanTest<T extends Serializable>
     }
 
     private boolean isProxied(Class<? extends Serializable> currentClass) {
-        {
-            if (currentClass == null || currentClass.getSuperclass() == null) {
-                return false;
-            }
-
-            var name = currentClass.getName();
-            return name.startsWith(currentClass.getSuperclass().getName()) && (name.contains("$$") // CDI
-                    || name.contains("_ClientProxy") // Quarkus
-                    || name.contains("$HibernateProxy$")); // Hibernate
+        if (currentClass == null || currentClass.getSuperclass() == null) {
+            return false;
         }
+
+        var name = currentClass.getName();
+        return name.startsWith(currentClass.getSuperclass().getName()) && (name.contains("$$") // CDI
+                || name.contains("_ClientProxy") // Quarkus
+                || name.contains("$HibernateProxy$")); // Hibernate
     }
 
     @Test

@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
         InstallationResourceBundleWrapperMock.class, ResourceBundleRegistry.class})
 class PortalClientStorageImplTest implements ShouldHandleObjectContracts<PortalClientStorageImpl> {
 
-    private static final String testKey = "testKey";
+    private static final String TEST_KEY = "TEST_KEY";
     @Produces
     @CuiContextPath
     String contextPath = "context";
@@ -63,18 +63,18 @@ class PortalClientStorageImplTest implements ShouldHandleObjectContracts<PortalC
     void roundTrip() {
         configuration.update(PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAX_AGE, "666");
 
-        underTest.remove(testKey);
+        underTest.remove(TEST_KEY);
 
-        assertFalse(underTest.containsKey(testKey));
-        assertEquals("0", underTest.get(testKey, "0"));
-        underTest.put(testKey, "1");
+        assertFalse(underTest.containsKey(TEST_KEY));
+        assertEquals("0", underTest.get(TEST_KEY, "0"));
+        underTest.put(TEST_KEY, "1");
 
-        assertTrue(underTest.containsKey(testKey));
-        assertEquals("1", underTest.get(testKey));
-        assertEquals("1", underTest.get(testKey, "0"));
-        assertEquals("1", underTest.remove(testKey));
+        assertTrue(underTest.containsKey(TEST_KEY));
+        assertEquals("1", underTest.get(TEST_KEY));
+        assertEquals("1", underTest.get(TEST_KEY, "0"));
+        assertEquals("1", underTest.remove(TEST_KEY));
 
-        assertFalse(underTest.containsKey(testKey));
-        assertEquals("0", underTest.get(testKey, "0"));
+        assertFalse(underTest.containsKey(TEST_KEY));
+        assertEquals("0", underTest.get(TEST_KEY, "0"));
     }
 }

@@ -70,33 +70,51 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
 
     @Serial
     private static final long serialVersionUID = 8709729494565906154L;
+
+    @SuppressWarnings("java:S6813")
+    // OmniFaces @Param requires field injection for InjectionPoint.getMember() resolution
     @Inject
     @Param(name = "username")
     String username;
+
+    @SuppressWarnings("java:S6813")
+    // OmniFaces @Param requires field injection for InjectionPoint.getMember() resolution
     @Inject
     @Param(name = "userstore")
     String userstore;
+
+    private FormBasedAuthenticationFacade authenticationFacade;
+    private LoginPageHistoryManagerProvider historyManagerProvider;
+    private LoginPageClientStorage localStorage;
+    private MessageProducer messageProducer;
+    private DisplayNameMessageProducer displayNameMessageProducer;
+    private AuthenticatedUserInfo userInfo;
+    private Provider<FacesContext> facesContextProvider;
+    private PortalPagesConfiguration pagesConfiguration;
+    private Optional<String> defaultConfiguredUserStore;
+
+    protected LoginPageBean() {
+        // for CDI proxy
+    }
+
     @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
-    @PortalAuthenticationFacade
-    FormBasedAuthenticationFacade authenticationFacade;
-    @Inject
-    LoginPageHistoryManagerProvider historyManagerProvider;
-    @Inject
-    LoginPageClientStorage localStorage;
-    @Inject
-    MessageProducer messageProducer;
-    @Inject
-    DisplayNameMessageProducer displayNameMessageProducer;
-    @Inject
-    AuthenticatedUserInfo userInfo;
-    @Inject
-    Provider<FacesContext> facesContextProvider;
-    @Inject
-    PortalPagesConfiguration pagesConfiguration;
-    @Inject
-    @ConfigProperty(name = PAGES_LOGIN_DEFAULT_USER_STORE)
-    Optional<String> defaultConfiguredUserStore;
+    public LoginPageBean(@PortalAuthenticationFacade FormBasedAuthenticationFacade authenticationFacade,
+            LoginPageHistoryManagerProvider historyManagerProvider, LoginPageClientStorage localStorage,
+            MessageProducer messageProducer, DisplayNameMessageProducer displayNameMessageProducer,
+            AuthenticatedUserInfo userInfo, Provider<FacesContext> facesContextProvider,
+            PortalPagesConfiguration pagesConfiguration,
+            @ConfigProperty(name = PAGES_LOGIN_DEFAULT_USER_STORE) Optional<String> defaultConfiguredUserStore) {
+        this.authenticationFacade = authenticationFacade;
+        this.historyManagerProvider = historyManagerProvider;
+        this.localStorage = localStorage;
+        this.messageProducer = messageProducer;
+        this.displayNameMessageProducer = displayNameMessageProducer;
+        this.userInfo = userInfo;
+        this.facesContextProvider = facesContextProvider;
+        this.pagesConfiguration = pagesConfiguration;
+        this.defaultConfiguredUserStore = defaultConfiguredUserStore;
+    }
     @Getter
     private LoginCredentials loginCredentials;
     @Getter
@@ -136,12 +154,10 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
         return !isUserStoreValueValid(loginCredentials.getUserStore());
     }
 
-    @SuppressWarnings("squid:S3655") // owolff: Optional is checked properly
     private String defaultUserStore() {
-        if (defaultConfiguredUserStore.isPresent() && isUserStoreValueValid(defaultConfiguredUserStore.get())) {
-            return defaultConfiguredUserStore.get();
-        }
-        return availableUserStores.getFirst().getName();
+        return defaultConfiguredUserStore
+                .filter(this::isUserStoreValueValid)
+                .orElseGet(() -> availableUserStores.getFirst().getName());
     }
 
     private boolean isUserStoreValueValid(final String userStoreFromCookie) {

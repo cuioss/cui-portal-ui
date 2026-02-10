@@ -43,6 +43,8 @@ import java.io.Serial;
 @Dependent
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+// Used by @PostConstruct; parent hierarchy uses field injection
+@SuppressWarnings("java:S6813")
 public class UserMenuItem extends PortalNavigationMenuItemContainerImpl {
 
     /**
