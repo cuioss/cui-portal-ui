@@ -35,9 +35,11 @@ public abstract class BaseLazyLoadingWidget<T> extends BaseWidget implements Laz
     @Serial
     private static final long serialVersionUID = -3234472642651082710L;
 
+    @SuppressWarnings("java:S6813") // Abstract base class for extension; field injection avoids leaking deps to subclasses
     @Inject
     LazyLoadingThreadModel<T> viewModel;
 
+    @SuppressWarnings("java:S6813") // Abstract base class for extension; field injection avoids leaking deps to subclasses
     @Inject
     LazyLoadingViewController viewController;
 
