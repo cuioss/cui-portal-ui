@@ -47,10 +47,10 @@ public class PortalLocaleProducerMock implements Serializable {
     @Serial
     private static final long serialVersionUID = 901932913924354093L;
 
-    private final Event<Locale> localeChangeEvent;
+    private Event<Locale> localeChangeEvent;
 
     protected PortalLocaleProducerMock() {
-        this.localeChangeEvent = null;
+        // for frameworks
     }
 
     @Inject
