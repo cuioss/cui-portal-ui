@@ -29,8 +29,13 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import de.cuioss.test.juli.LogAsserts;
+import de.cuioss.test.juli.TestLogLevel;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+@EnableTestLogger(trace = OauthRenewComponent.class)
 @EnablePortalUiEnvironment
 @ExplicitParamInjection
 @AddBeanClasses({Oauth2AuthenticationFacadeMock.class, WrappedOauthFacadeImpl.class, HttpHeaderFilterImpl.class,
@@ -54,8 +59,13 @@ class OauthRenewComponentTest {
     }
 
     @Test
-    void shouldCreateComponent() {
+    void shouldCreateComponentWithResolvedFacade() {
+        oauth2AuthenticationFacadeMock.setRenewUrl("https://renew");
+        oauth2AuthenticationFacadeMock.setRenewInterval("300");
         var component = new OauthRenewComponent();
         assertNotNull(component);
+        assertEquals("login.jsf", component.getLoginUrl());
+        assertEquals("https://renew", component.getRenewUrl());
+        assertEquals("300", component.getRenewInterval());
     }
 }

@@ -32,9 +32,14 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import de.cuioss.test.juli.LogAsserts;
+import de.cuioss.test.juli.TestLogLevel;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@EnableTestLogger(trace = OauthLogoutPageBean.class)
 @EnablePortalUiEnvironment
 @AddBeanClasses({Oauth2AuthenticationFacadeMock.class, ViewMatcherProducer.class,
         Oauth2ConfigurationProducerMock.class, PortalTestUserProducer.class,
@@ -75,6 +80,15 @@ class OauthLogoutPageBeanTest extends AbstractPageBeanTest<OauthLogoutPageBean> 
         oAuthConfiguration.setConfiguration(Oauth2ConfigurationImpl.builder().logoutUri("http://logout").build());
         assertNull(underTest.logoutViewAction());
         assertRedirect("https://client-logout-uri");
+    }
+
+    @Test
+    void shouldWarnOnMissingRedirectParamName() {
+        facadeMock.setClientLogoutUrl("https://client-logout-uri");
+        oAuthConfiguration.setConfiguration(Oauth2ConfigurationImpl.builder().logoutUri("http://logout")
+                .postLogoutRedirectUri("https://post.logout.url").build());
+        assertNull(underTest.logoutViewAction());
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-OAUTH-100");
     }
 
     @Test
