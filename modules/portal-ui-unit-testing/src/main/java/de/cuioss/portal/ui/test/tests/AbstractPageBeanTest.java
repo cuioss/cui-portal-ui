@@ -128,16 +128,14 @@ public abstract class AbstractPageBeanTest<T extends Serializable>
     }
 
     private boolean isProxied(Class<? extends Serializable> currentClass) {
-        {
-            if (currentClass == null || currentClass.getSuperclass() == null) {
-                return false;
-            }
-
-            var name = currentClass.getName();
-            return name.startsWith(currentClass.getSuperclass().getName()) && (name.contains("$$") // CDI
-                    || name.contains("_ClientProxy") // Quarkus
-                    || name.contains("$HibernateProxy$")); // Hibernate
+        if (currentClass == null || currentClass.getSuperclass() == null) {
+            return false;
         }
+
+        var name = currentClass.getName();
+        return name.startsWith(currentClass.getSuperclass().getName()) && (name.contains("$$") // CDI
+                || name.contains("_ClientProxy") // Quarkus
+                || name.contains("$HibernateProxy$")); // Hibernate
     }
 
     @Test

@@ -72,7 +72,7 @@ public class CustomizationViewResourcesDescriptor implements StaticTemplateDescr
 
     @Inject
     @ConfigProperty(name = PORTAL_CUSTOMIZATION_ENABLED)
-    private Boolean customizationEnabled;
+    private boolean customizationEnabled;
 
     @Inject
     @ConfigProperty(name = PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR)
