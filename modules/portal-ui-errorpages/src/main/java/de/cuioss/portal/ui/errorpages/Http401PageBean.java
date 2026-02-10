@@ -19,8 +19,10 @@ import de.cuioss.portal.core.storage.MapStorage;
 import de.cuioss.portal.core.storage.PortalSessionStorage;
 import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.inject.Provider;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -41,9 +43,21 @@ public class Http401PageBean extends AbstractHttpErrorPage {
     @Serial
     private static final long serialVersionUID = -2216275532091092216L;
 
+    private final MapStorage<Serializable, Serializable> mapStorage;
+
+    /**
+     * CDI proxy constructor.
+     */
+    protected Http401PageBean() {
+        this.mapStorage = null;
+    }
+
     @Inject
-    @PortalSessionStorage
-    private MapStorage<Serializable, Serializable> mapStorage;
+    public Http401PageBean(Provider<FacesContext> facesContextProvider,
+            @PortalSessionStorage MapStorage<Serializable, Serializable> mapStorage) {
+        super(facesContextProvider);
+        this.mapStorage = mapStorage;
+    }
 
     @Getter
     private DefaultErrorMessage message;
