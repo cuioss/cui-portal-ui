@@ -26,7 +26,7 @@ public class TestBaseLazyLoadingRequest extends BaseLazyLoadingRequest<String> {
 
     @Override
     public void handleResult(String result) {
-
+        // No-op: test stub implementation
     }
 
 }
