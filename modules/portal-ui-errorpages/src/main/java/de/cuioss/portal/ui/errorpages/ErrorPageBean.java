@@ -54,12 +54,24 @@ public class ErrorPageBean implements ErrorPage {
     @Serial
     private static final long serialVersionUID = -3785494532638995890L;
 
-    @Inject
-    @PortalSessionStorage
-    private MapStorage<Serializable, Serializable> mapStorage;
+    private final MapStorage<Serializable, Serializable> mapStorage;
+
+    private final FacesContext context;
+
+    /**
+     * CDI proxy constructor.
+     */
+    protected ErrorPageBean() {
+        this.mapStorage = null;
+        this.context = null;
+    }
 
     @Inject
-    private FacesContext context;
+    public ErrorPageBean(@PortalSessionStorage MapStorage<Serializable, Serializable> mapStorage,
+            FacesContext context) {
+        this.mapStorage = mapStorage;
+        this.context = context;
+    }
 
     @Getter
     private DefaultErrorMessage message;

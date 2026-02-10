@@ -17,6 +17,8 @@ package de.cuioss.portal.ui.oauth;
 
 import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.net.URI;
 
@@ -26,10 +28,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MissingScopesErrorDecoderTest {
 
-    @Test
-    void upperCaseHeader() throws Exception {
+    @ParameterizedTest
+    @CsvSource({
+            "WWW-Authenticate, 'error=\"insufficient_scope\", scope=\"abc\"'",
+            "WWW-Authenticate, 'Bearer error=\"insufficient_scope\", scope=\"abc\"'",
+            "www-authenticate, 'error=\"insufficient_scope\", scope=\"abc\"'"
+    })
+    void shouldDetectMissingScopes(String headerName, String headerValue) throws Exception {
         final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden")
-                .header("WWW-Authenticate", "error=\"insufficient_scope\", scope=\"abc\"").build();
+                .header(headerName, headerValue).build();
         var msed = new MissingScopesErrorDecoder();
         assertTrue(msed.handles(SC_FORBIDDEN, response.getHeaders()));
         var result = msed.toThrowable(response);
@@ -38,25 +45,29 @@ class MissingScopesErrorDecoderTest {
     }
 
     @Test
-    void bearerError() throws Exception {
-        final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden")
-                .header("WWW-Authenticate", "Bearer error=\"insufficient_scope\", scope=\"abc\"").build();
+    void shouldReturnNullFor403WithoutWwwAuthenticateHeader() throws Exception {
+        final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden").build();
         var msed = new MissingScopesErrorDecoder();
-        assertTrue(msed.handles(SC_FORBIDDEN, response.getHeaders()));
-        var result = msed.toThrowable(response);
-        assertNotNull(result);
-        assertEquals("abc", result.getMissingScopes());
+        assertFalse(msed.handles(SC_FORBIDDEN, response.getHeaders()));
+        assertNull(msed.toThrowable(response));
     }
 
     @Test
-    void lowerCaseHeader() throws Exception {
+    void shouldReturnNullFor403WithDifferentError() throws Exception {
         final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden")
-                .header("www-authenticate", "error=\"insufficient_scope\", scope=\"abc\"").build();
+                .header("WWW-Authenticate", "error=\"invalid_token\"").build();
         var msed = new MissingScopesErrorDecoder();
         assertTrue(msed.handles(SC_FORBIDDEN, response.getHeaders()));
-        var result = msed.toThrowable(response);
-        assertNotNull(result);
-        assertEquals("abc", result.getMissingScopes());
+        assertNull(msed.toThrowable(response));
+    }
+
+    @Test
+    void shouldReturnNullWhenScopeEntryMissing() throws Exception {
+        final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden")
+                .header("WWW-Authenticate", "error=\"insufficient_scope\"").build();
+        var msed = new MissingScopesErrorDecoder();
+        assertTrue(msed.handles(SC_FORBIDDEN, response.getHeaders()));
+        assertNull(msed.toThrowable(response));
     }
 
     @Test
