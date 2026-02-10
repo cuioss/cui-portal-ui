@@ -27,9 +27,10 @@ import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.exception.PortalExceptionHandler;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+
 import jakarta.faces.application.NavigationHandler;
 import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 
 import java.io.Serializable;
 

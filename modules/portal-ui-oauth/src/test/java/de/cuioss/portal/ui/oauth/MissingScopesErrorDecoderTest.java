@@ -45,6 +45,32 @@ class MissingScopesErrorDecoderTest {
     }
 
     @Test
+    void shouldReturnNullFor403WithoutWwwAuthenticateHeader() throws Exception {
+        final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden").build();
+        var msed = new MissingScopesErrorDecoder();
+        assertFalse(msed.handles(SC_FORBIDDEN, response.getHeaders()));
+        assertNull(msed.toThrowable(response));
+    }
+
+    @Test
+    void shouldReturnNullFor403WithDifferentError() throws Exception {
+        final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden")
+                .header("WWW-Authenticate", "error=\"invalid_token\"").build();
+        var msed = new MissingScopesErrorDecoder();
+        assertTrue(msed.handles(SC_FORBIDDEN, response.getHeaders()));
+        assertNull(msed.toThrowable(response));
+    }
+
+    @Test
+    void shouldReturnNullWhenScopeEntryMissing() throws Exception {
+        final var response = Response.created(new URI("http://localhost")).status(SC_FORBIDDEN, "forbidden")
+                .header("WWW-Authenticate", "error=\"insufficient_scope\"").build();
+        var msed = new MissingScopesErrorDecoder();
+        assertTrue(msed.handles(SC_FORBIDDEN, response.getHeaders()));
+        assertNull(msed.toThrowable(response));
+    }
+
+    @Test
     void test404() throws Exception {
         final var response = Response.created(new URI("http://localhost")).status(SC_NOT_FOUND, "not found").build();
         var msed = new MissingScopesErrorDecoder();
