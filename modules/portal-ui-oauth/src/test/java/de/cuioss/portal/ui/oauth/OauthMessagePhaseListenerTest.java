@@ -16,17 +16,15 @@
 package de.cuioss.portal.ui.oauth;
 
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.PhaseEvent;
 import jakarta.faces.event.PhaseId;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
-import lombok.Setter;
 import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,17 +35,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @EnableTestLogger(trace = OauthMessagePhaseListener.class)
-class OauthMessagePhaseListenerTest implements ShouldBeNotNull<OauthMessagePhaseListener>, JsfEnvironmentConsumer {
+class OauthMessagePhaseListenerTest implements ShouldBeNotNull<OauthMessagePhaseListener> {
 
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+    private FacesContext facesContext;
+    private ExternalContext externalContext;
 
     @Getter
     private OauthMessagePhaseListener underTest;
 
     @BeforeEach
     void beforeEach() {
+        this.facesContext = FacesContext.getCurrentInstance();
+        this.externalContext = this.facesContext.getExternalContext();
         underTest = new OauthMessagePhaseListener();
     }
 
@@ -61,7 +60,7 @@ class OauthMessagePhaseListenerTest implements ShouldBeNotNull<OauthMessagePhase
     @Test
     void shouldNotRestoreOnCompletedResponse() {
         addSomeMessages();
-        environmentHolder.getFacesContext().responseComplete();
+        facesContext.responseComplete();
 
         fireBeforePhase();
         assertNotNull(getSession().getAttribute(MESSAGES_IDENTIFIER), "Should have been removed");
@@ -83,6 +82,6 @@ class OauthMessagePhaseListenerTest implements ShouldBeNotNull<OauthMessagePhase
     }
 
     private HttpSession getSession() {
-        return (HttpSession) environmentHolder.getExternalContext().getSession(false);
+        return (HttpSession) externalContext.getSession(false);
     }
 }

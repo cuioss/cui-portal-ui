@@ -22,12 +22,8 @@ import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.generator.internal.net.java.quickcheck.generator.support.IntegerGenerator;
 import de.cuioss.test.jsf.mocks.CuiMockResource;
 import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.tools.string.MoreStrings;
 import jakarta.inject.Inject;
-import lombok.Getter;
-import lombok.Setter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @EnablePortalUiEnvironment
 @AddBeanClasses({PortalResourceConfiguration.class, CuiResourceManager.class})
 @EnablePortalConfiguration(configuration = RESOURCE_VERSION + ":1.0")
-class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
+class CuiResourceHandlerTest {
 
     static final String CSS_LIBRARY = "de.cuioss.portal.css";
     static final String STYLE_CSS = "style.css";
@@ -49,9 +45,6 @@ class CuiResourceHandlerTest implements JsfEnvironmentConsumer {
     static final String ANY_UNKNOWN_JPG = "any_unknown.jpg";
     static final String ALIEN_LIB = "alien_lib";
     static final String APPLICATION_CSS = "application.css";
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
     @Inject
     private PortalTestConfiguration configuration;
 

@@ -28,30 +28,25 @@ import de.cuioss.portal.ui.runtime.exception.ViewRelatedExceptionHandler;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
 import de.cuioss.portal.ui.test.mocks.PortalViewRestrictionManagerMock;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
-import lombok.Getter;
-import lombok.Setter;
+import org.apache.myfaces.test.mock.MockHttpServletResponse;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_PREFERENCES_LOGICAL_VIEW_ID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({CurrentViewProducer.class, NavigationHandlerProducer.class, PortalUiExceptionHandler.class,
         ViewRelatedExceptionHandler.class, PortalTestUserProducer.class, PortalHistoryManagerMock.class})
-class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
+class JSFPortalExceptionHandlerBridgeTest {
 
     static final ViewDescriptor DESCRIPTOR_SUPPRESSED_VIEW = ViewDescriptorImpl.builder().withViewId("suppressedViewId")
             .withLogicalViewId("suppressedViewId").build();
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
 
     @Inject
     private MessageProducerMock messageProducerMock;
@@ -72,11 +67,13 @@ class JSFPortalExceptionHandlerBridgeTest implements JsfEnvironmentConsumer {
 
     @Test
     void shouldHandleHappyCase() {
+        var facesContext = FacesContext.getCurrentInstance();
         final var exception = new ViewSuppressedException(DESCRIPTOR_SUPPRESSED_VIEW);
-        getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+        facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         mockExceptionHandler.addUnhandledException(exception);
         underTest.handle();
-        assertRedirect(VIEW_HOME_LOGICAL_VIEW_ID);
+        var response = (MockHttpServletResponse) facesContext.getExternalContext().getResponse();
+        assertEquals(VIEW_HOME_LOGICAL_VIEW_ID, response.getHeader("Location"), "Redirect URL mismatch");
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_SUPPRESSED_KEY);
         mockExceptionHandler.assertHandleCalled();
         assertTrue(mockExceptionHandler.getUnhandledExceptionQueuedEvents().isEmpty(),

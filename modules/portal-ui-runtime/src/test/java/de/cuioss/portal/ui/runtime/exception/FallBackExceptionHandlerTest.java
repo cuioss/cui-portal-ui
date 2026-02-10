@@ -24,15 +24,14 @@ import de.cuioss.portal.ui.api.exception.DefaultErrorMessage;
 import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
+import org.apache.myfaces.test.mock.MockHttpServletResponse;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
@@ -45,11 +44,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @EnableTestLogger
 @AddBeanClasses({CurrentViewProducer.class, PortalSessionStorageMock.class, NavigationHandlerProducer.class})
 class FallBackExceptionHandlerTest
-        implements ShouldHandleObjectContracts<FallBackExceptionHandler>, JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+        implements ShouldHandleObjectContracts<FallBackExceptionHandler> {
 
     @Inject
     @Getter
@@ -64,20 +59,22 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldHandleThrowable() {
-        getRequestConfigDecorator().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        var facesContext = FacesContext.getCurrentInstance();
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
         underTest.handleFallBack(exceptionEvent);
         assertEquals(HandleOutcome.REDIRECT, exceptionEvent.getOutcome());
 
-        assertRedirect(VIEW_ERROR_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_ERROR_LOGICAL_VIEW_ID);
         var message = (DefaultErrorMessage) sessionStorage.get(DefaultErrorMessage.LOOKUP_KEY);
         assertNotNull(message);
     }
 
     @Test
     void shouldShortcutIfHandled() {
-        getRequestConfigDecorator().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        var facesContext = FacesContext.getCurrentInstance();
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
         exceptionEvent.handled(HandleOutcome.USER_MESSAGE);
@@ -87,7 +84,8 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldWriteTicketId() {
-        getRequestConfigDecorator().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        var facesContext = FacesContext.getCurrentInstance();
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
         underTest.handleFallBack(exceptionEvent);
@@ -102,7 +100,8 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldHandleInvalidSessionNotRecover() {
-        getRequestConfigDecorator().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        var facesContext = FacesContext.getCurrentInstance();
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
         sessionStorage.setThrowIllegalStateOnAccess(true);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
@@ -115,7 +114,8 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldHandleInvalidSession() {
-        getRequestConfigDecorator().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        var facesContext = FacesContext.getCurrentInstance();
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
         sessionStorage.setThrowIllegalStateOnAccessOnce(true);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
@@ -127,8 +127,9 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldThrowIfInDevelopmentStage() {
+        var facesContext = FacesContext.getCurrentInstance();
         configuration.development();
-        getRequestConfigDecorator().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
         var throwable = throwables().next();
         var exceptionEvent = new ExceptionAsEvent(throwable);
         assertThrows(IllegalStateException.class, () -> underTest.handleFallBack(exceptionEvent));
@@ -137,7 +138,8 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldDetectCallFromErrorPage() {
-        getRequestConfigDecorator().setViewId(VIEW_ERROR_LOGICAL_VIEW_ID);
+        var facesContext = FacesContext.getCurrentInstance();
+        facesContext.getViewRoot().setViewId(VIEW_ERROR_LOGICAL_VIEW_ID);
         var throwable = throwables().next();
         var exceptionEvent = new ExceptionAsEvent(throwable);
         underTest.handleFallBack(exceptionEvent);
@@ -147,12 +149,18 @@ class FallBackExceptionHandlerTest
 
     @Test
     void shouldHandleResponseAlreadyCommitted() {
-        getRequestConfigDecorator().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
-        getFacesContext().release();
+        var facesContext = FacesContext.getCurrentInstance();
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        facesContext.release();
         var throwable = throwables().next();
         var exceptionEvent = new ExceptionAsEvent(throwable);
         underTest.handleFallBack(exceptionEvent);
         assertEquals(HandleOutcome.LOGGED, exceptionEvent.getOutcome());
         LogAsserts.assertSingleLogMessagePresentContaining(TestLogLevel.ERROR, "Portal-112:");
+    }
+
+    private static void assertRedirect(FacesContext facesContext, String url) {
+        var response = (MockHttpServletResponse) facesContext.getExternalContext().getResponse();
+        assertEquals(url, response.getHeader("Location"), "Redirect URL mismatch");
     }
 }

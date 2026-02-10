@@ -73,6 +73,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Oliver Wolff
  */
 @EnableGeneratorController
+@SuppressWarnings("java:S5738") // JsfEnvironmentConsumer: abstract base class with subclasses in other modules
 public abstract class AbstractPageBeanTest<T extends Serializable>
         implements JsfEnvironmentConsumer, ShouldBeNotNull<T>, GeneratorRegistry {
 

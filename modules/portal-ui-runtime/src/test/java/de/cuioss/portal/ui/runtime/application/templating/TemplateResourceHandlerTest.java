@@ -21,13 +21,11 @@ import de.cuioss.portal.ui.runtime.application.templating.support.MockTemplateMa
 import de.cuioss.portal.ui.runtime.application.templating.support.MockViewMapper;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
 import org.jboss.weld.junit5.auto.EnableAlternatives;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,12 +36,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @EnablePortalUiEnvironment
 @EnableTestLogger
 @EnableAlternatives({MockTemplateMapper.class, MockViewMapper.class})
-class TemplateResourceHandlerTest implements ShouldBeNotNull<TemplateResourceHandler>, JsfEnvironmentConsumer {
+class TemplateResourceHandlerTest implements ShouldBeNotNull<TemplateResourceHandler> {
 
     private static final String TEMPLATES_BASE_BATH = "META-INF/templates/test/";
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
     @Getter
     private TemplateResourceHandler underTest;
 
@@ -62,16 +57,18 @@ class TemplateResourceHandlerTest implements ShouldBeNotNull<TemplateResourceHan
 
     @Test
     void shouldPassThroughUnmapped() {
-        var result = underTest.createViewResource(getFacesContext(), "dummy");
+        var facesContext = FacesContext.getCurrentInstance();
+        var result = underTest.createViewResource(facesContext, "dummy");
         assertNotNull(result);
         assertTrue(result.getURL().toString().startsWith(CuiMockResourceHandler.DUMMY_URL));
     }
 
     @Test
     void shouldMapTemplates() {
+        var facesContext = FacesContext.getCurrentInstance();
         templateMapper.setBasePath(TEMPLATES_BASE_BATH);
 
-        var result = underTest.createViewResource(getFacesContext(), "/templates/dummy.xhtml");
+        var result = underTest.createViewResource(facesContext, "/templates/dummy.xhtml");
         assertNotNull(result);
         assertTrue(result.getURL().toString().endsWith(TEMPLATES_BASE_BATH + "dummy.xhtml"));
     }

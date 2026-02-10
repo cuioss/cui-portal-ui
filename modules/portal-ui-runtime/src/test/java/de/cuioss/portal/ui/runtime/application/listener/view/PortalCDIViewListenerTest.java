@@ -22,17 +22,15 @@ import de.cuioss.portal.ui.runtime.application.listener.view.testhelper.AfterVie
 import de.cuioss.portal.ui.runtime.application.listener.view.testhelper.AfterViewNoPostbackListener;
 import de.cuioss.portal.ui.runtime.application.listener.view.testhelper.BeforeViewListener;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.jsf.config.RequestConfigurator;
-import de.cuioss.test.jsf.config.decorator.RequestConfigDecorator;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.PhaseEvent;
 import jakarta.faces.event.PhaseId;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
+import org.apache.myfaces.test.mock.MockFacesContext;
 import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
+import org.junit.jupiter.api.BeforeEach;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
 
@@ -43,11 +41,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @EnablePortalUiEnvironment
 @AddBeanClasses({CurrentViewProducer.class, AfterViewListener.class})
 class PortalCDIViewListenerTest
-        implements ShouldHandleObjectContracts<PortalCDIViewListener>, JsfEnvironmentConsumer, RequestConfigurator {
+        implements ShouldHandleObjectContracts<PortalCDIViewListener> {
 
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+    private FacesContext facesContext;
 
     @Inject
     @Getter
@@ -64,6 +60,12 @@ class PortalCDIViewListenerTest
     @Inject
     @PortalRestoreViewListener(PhaseExecution.BEFORE_PHASE)
     private BeforeViewListener beforeViewListener;
+
+    @BeforeEach
+    void setUp() {
+        this.facesContext = FacesContext.getCurrentInstance();
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+    }
 
     @Test
     void shouldCallBeforeView() {
@@ -83,7 +85,7 @@ class PortalCDIViewListenerTest
 
     @Test
     void shouldCallAfterViewPostback() {
-        getRequestConfigDecorator().setPostback(true);
+        ((MockFacesContext) facesContext).setPostback(true);
         fireAfterViewPhaseEvent();
         assertEquals(VIEW_LOGIN_LOGICAL_VIEW_ID, afterViewListener.getHandledView().getViewId());
         assertNull(afterViewNoPostbackListener.getHandledView());
@@ -91,16 +93,11 @@ class PortalCDIViewListenerTest
     }
 
     private void fireBeforeViewPhaseEvent() {
-        underTest.beforePhase(new PhaseEvent(getFacesContext(), PhaseId.RESTORE_VIEW, new MockLifecycle()));
+        underTest.beforePhase(new PhaseEvent(facesContext, PhaseId.RESTORE_VIEW, new MockLifecycle()));
     }
 
     private void fireAfterViewPhaseEvent() {
-        underTest.afterPhase(new PhaseEvent(getFacesContext(), PhaseId.RESTORE_VIEW, new MockLifecycle()));
-    }
-
-    @Override
-    public void configureRequest(RequestConfigDecorator decorator) {
-        decorator.setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        underTest.afterPhase(new PhaseEvent(facesContext, PhaseId.RESTORE_VIEW, new MockLifecycle()));
     }
 
 }

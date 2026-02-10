@@ -24,18 +24,17 @@ import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.runtime.application.configuration.LocaleConfiguration;
 import de.cuioss.portal.ui.runtime.support.EnablePortalCoreEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalLocaleProducerMock;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.faces.FactoryFinder;
 import jakarta.faces.application.Application;
 import jakarta.faces.application.ApplicationFactory;
 import jakarta.faces.application.ApplicationWrapper;
 import jakarta.faces.application.ProjectStage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
@@ -46,14 +45,17 @@ import static org.junit.jupiter.api.Assertions.*;
 @EnablePortalCoreEnvironment
 @AddBeanClasses({LocaleConfiguration.class, PortalProjectStageImpl.class, PortalResourceBundleBean.class,
         ResourceBundleWrapperImpl.class, CuiJSfResourceBundleLocator.class, PortalLocaleProducerMock.class})
-class PortalApplicationTest implements ShouldBeNotNull<PortalApplication>, JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+class PortalApplicationTest implements ShouldBeNotNull<PortalApplication> {
 
     @Inject
     private PortalTestConfiguration configuration;
+
+    private Application application;
+
+    @BeforeEach
+    void setUp() {
+        this.application = FacesContext.getCurrentInstance().getApplication();
+    }
 
     private static Application createFromFactory() {
         var applicationFactory = (ApplicationFactory) FactoryFinder.getFactory(FactoryFinder.APPLICATION_FACTORY);
@@ -99,14 +101,16 @@ class PortalApplicationTest implements ShouldBeNotNull<PortalApplication>, JsfEn
 
     @Test
     void shouldReturnCuiBundle() {
-        var resourceBundle = getUnderTest().getResourceBundle(getFacesContext(), PortalResourceBundleBean.BUNDLE_NAME);
+        var facesContext = FacesContext.getCurrentInstance();
+        var resourceBundle = getUnderTest().getResourceBundle(facesContext, PortalResourceBundleBean.BUNDLE_NAME);
         assertNotNull(resourceBundle);
         assertTrue(resourceBundle.keySet().contains("message.error.request"), "Should provide keys from cui-jsf-api");
     }
 
     @Test
     void shouldHandleNonCuiResourceBundle() {
-        var resourceBundle = getUnderTest().getResourceBundle(getFacesContext(), "other");
+        var facesContext = FacesContext.getCurrentInstance();
+        var resourceBundle = getUnderTest().getResourceBundle(facesContext, "other");
         assertNull(resourceBundle);
     }
 
@@ -117,6 +121,6 @@ class PortalApplicationTest implements ShouldBeNotNull<PortalApplication>, JsfEn
 
     @Override
     public PortalApplication getUnderTest() {
-        return new PortalApplication(getApplication());
+        return new PortalApplication(application);
     }
 }

@@ -25,16 +25,15 @@ import de.cuioss.portal.ui.runtime.application.view.HttpHeaderFilterImpl;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import de.cuioss.tools.net.ParameterFilter;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Produces;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
+import org.apache.myfaces.test.mock.MockHttpServletResponse;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAlternatives;
 import org.junit.jupiter.api.Test;
@@ -49,11 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @AddBeanClasses({Oauth2AuthenticationFacadeMock.class, HttpHeaderFilterImpl.class, ViewMatcherProducer.class,
         Oauth2ConfigurationProducerMock.class})
 @EnableAlternatives(WrappedOauthFacadeImplTest.class)
-class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeImpl>, JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeImpl> {
 
     @Getter
     @PortalWrappedOauthFacade
@@ -94,11 +89,13 @@ class WrappedOauthFacadeImplTest implements ShouldBeNotNull<WrappedOauthFacadeIm
 
     @Test
     void retrieveTokenShouldTriggerNew() {
+        var facesContext = FacesContext.getCurrentInstance();
         oauth2AuthenticationFacadeMock.setTokenToRetrieve(null);
         oauth2AuthenticationFacadeMock.setAuthenticated(true);
         assertNull(underTest.retrieveToken("abc"));
         assertNull(loginPage.testLoginViewAction());
-        assertRedirect(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+        var response = (MockHttpServletResponse) facesContext.getExternalContext().getResponse();
+        assertEquals(VIEW_PREFERENCES_LOGICAL_VIEW_ID, response.getHeader("Location"), "Redirect URL mismatch");
     }
 
     @Test

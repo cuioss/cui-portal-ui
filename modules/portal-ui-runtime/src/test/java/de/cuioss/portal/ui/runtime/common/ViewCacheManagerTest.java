@@ -17,13 +17,11 @@ package de.cuioss.portal.ui.runtime.common;
 
 import de.cuioss.portal.ui.api.events.PageRefreshEvent;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.enterprise.event.Event;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
 import org.junit.jupiter.api.Test;
 import org.omnifaces.util.cache.CacheFactory;
 
@@ -31,11 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
-class ViewCacheManagerTest implements ShouldHandleObjectContracts<ViewCacheManager>, JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+class ViewCacheManagerTest implements ShouldHandleObjectContracts<ViewCacheManager> {
 
     @Inject
     @Getter
@@ -46,9 +40,10 @@ class ViewCacheManagerTest implements ShouldHandleObjectContracts<ViewCacheManag
 
     @Test
     void reset() {
-        CacheFactory.getCache(getFacesContext(), "session").put("header", "<h1>Header</h1>");
-        assertNotNull(CacheFactory.getCache(getFacesContext(), "session").get("header"));
+        var facesContext = FacesContext.getCurrentInstance();
+        CacheFactory.getCache(facesContext, "session").put("header", "<h1>Header</h1>");
+        assertNotNull(CacheFactory.getCache(facesContext, "session").get("header"));
         event.fire(new PageRefreshEvent("test"));
-        assertNull(CacheFactory.getCache(getFacesContext(), "session").get("header"));
+        assertNull(CacheFactory.getCache(facesContext, "session").get("header"));
     }
 }

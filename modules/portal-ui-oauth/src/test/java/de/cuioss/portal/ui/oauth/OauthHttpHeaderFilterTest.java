@@ -17,13 +17,14 @@ package de.cuioss.portal.ui.oauth;
 
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.mocks.CuiMockHttpServletRequest;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import org.apache.myfaces.test.mock.MockExternalContext;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
-import lombok.Setter;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @EnablePortalUiEnvironment
-class OauthHttpHeaderFilterTest implements ShouldBeNotNull<OauthHttpHeaderFilter>, JsfEnvironmentConsumer {
+class OauthHttpHeaderFilterTest implements ShouldBeNotNull<OauthHttpHeaderFilter> {
 
     static final String FACES_GUEST_LOGIN_JSF = "/guest/login.jsf";
     private static final String ACCESS_CONTROL_ALLOW_CREDENTIALS = OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_CREDENTIALS;
@@ -41,16 +42,14 @@ class OauthHttpHeaderFilterTest implements ShouldBeNotNull<OauthHttpHeaderFilter
     @Getter
     private final OauthHttpHeaderFilter underTest = new OauthHttpHeaderFilter();
     private final FilterChain filterChain = EasyMock.createNiceMock(FilterChain.class);
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
 
     @Test
     void shouldHandleHappyCase() throws Exception {
-        var response = environmentHolder.getResponse();
-        setRequestUrl(FACES_GUEST_LOGIN_JSF);
-        environmentHolder.getRequestConfigDecorator().setRequestHeader(ORIGIN, ME);
-        HttpServletRequest request = (HttpServletRequest) getExternalContext().getRequest();
+        var externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        var response = (HttpServletResponse) externalContext.getResponse();
+        setRequestUrl(externalContext, FACES_GUEST_LOGIN_JSF);
+        ((MockExternalContext) externalContext).addRequestHeader(ORIGIN, ME);
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 
         underTest.doFilter(request, response, filterChain);
 
@@ -60,17 +59,18 @@ class OauthHttpHeaderFilterTest implements ShouldBeNotNull<OauthHttpHeaderFilter
 
     @Test
     void shouldNotSetHeaderOnMissingOriginHeader() throws Exception {
-        var response = environmentHolder.getResponse();
-        setRequestUrl(FACES_GUEST_LOGIN_JSF);
-        HttpServletRequest request = (HttpServletRequest) getExternalContext().getRequest();
+        var externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        var response = (HttpServletResponse) externalContext.getResponse();
+        setRequestUrl(externalContext, FACES_GUEST_LOGIN_JSF);
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 
         underTest.doFilter(request, response, filterChain);
         assertNull(response.getHeader(ACCESS_CONTROL_ALLOW_ORIGIN));
         assertNull(response.getHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS));
     }
 
-    private void setRequestUrl(String url) {
-        var request = (CuiMockHttpServletRequest) environmentHolder.getExternalContext().getRequest();
+    private void setRequestUrl(ExternalContext externalContext, String url) {
+        var request = (CuiMockHttpServletRequest) externalContext.getRequest();
         request.setPathInfo(url);
     }
 }

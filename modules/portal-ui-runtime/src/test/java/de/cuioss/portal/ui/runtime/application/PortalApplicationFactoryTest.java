@@ -16,23 +16,16 @@
 package de.cuioss.portal.ui.runtime.application;
 
 import de.cuioss.test.jsf.junit5.EnableJsfEnvironment;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import jakarta.faces.FactoryFinder;
 import jakarta.faces.application.ApplicationFactory;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.faces.context.FacesContext;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @EnableJsfEnvironment
-class PortalApplicationFactoryTest implements JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+class PortalApplicationFactoryTest {
 
     @Test
     void shouldBuildFromFactoryWithGetMethod() {
@@ -48,10 +41,11 @@ class PortalApplicationFactoryTest implements JsfEnvironmentConsumer {
 
     @Test
     void shouldBuildFromFactoryWithSetMethod() {
+        var application = FacesContext.getCurrentInstance().getApplication();
         var applicationFactory = (ApplicationFactory) FactoryFinder.getFactory(FactoryFinder.APPLICATION_FACTORY);
 
         var factory = new PortalApplicationFactory(applicationFactory);
-        factory.setApplication(getApplication());
+        factory.setApplication(application);
         assertNotNull(factory.getWrapped());
 
         var wrapped = factory.getApplication();

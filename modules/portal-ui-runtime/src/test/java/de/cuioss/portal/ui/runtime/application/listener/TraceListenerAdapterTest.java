@@ -20,15 +20,12 @@ import de.cuioss.portal.core.test.mocks.microprofile.PortalTestMetricRegistry;
 import de.cuioss.portal.ui.runtime.application.listener.metrics.RequestTracer;
 import de.cuioss.portal.ui.runtime.application.listener.metrics.TraceListener;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.PhaseEvent;
 import jakarta.faces.event.PhaseId;
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,11 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @EnableTestLogger(debug = {TraceListener.class, RequestTracer.class})
 @AddBeanClasses({RequestTracer.class, PortalTestMetricRegistry.class, TraceListener.class})
 @EnablePortalConfiguration(configuration = PORTAL_LISTENER_TRACE_ENABLED + ":true")
-class TraceListenerAdapterTest implements JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+class TraceListenerAdapterTest {
 
     private TraceListenerAdapter underTest;
 
@@ -59,9 +52,10 @@ class TraceListenerAdapterTest implements JsfEnvironmentConsumer {
 
     @Test
     void shouldHandleHappyCase() throws Exception {
-        startSleepStop(PhaseId.RESTORE_VIEW);
-        startSleepStop(PhaseId.APPLY_REQUEST_VALUES);
-        startSleepStop(PhaseId.RENDER_RESPONSE);
+        var facesContext = FacesContext.getCurrentInstance();
+        startSleepStop(facesContext, PhaseId.RESTORE_VIEW);
+        startSleepStop(facesContext, PhaseId.APPLY_REQUEST_VALUES);
+        startSleepStop(facesContext, PhaseId.RENDER_RESPONSE);
         LogAsserts.assertSingleLogMessagePresentContaining(TestLogLevel.DEBUG, PROCESSING_IDENTIFIER);
         LogAsserts.assertSingleLogMessagePresentContaining(TestLogLevel.DEBUG, PhaseId.RESTORE_VIEW.getName());
         LogAsserts.assertSingleLogMessagePresentContaining(TestLogLevel.DEBUG, PhaseId.APPLY_REQUEST_VALUES.getName());
@@ -73,14 +67,14 @@ class TraceListenerAdapterTest implements JsfEnvironmentConsumer {
         assertEquals(PhaseId.ANY_PHASE, underTest.getPhaseId());
     }
 
-    private void startSleepStop(PhaseId phaseId) throws InterruptedException {
-        underTest.beforePhase(phaseEvent(phaseId));
+    private void startSleepStop(FacesContext facesContext, PhaseId phaseId) throws InterruptedException {
+        underTest.beforePhase(phaseEvent(facesContext, phaseId));
         TimeUnit.MILLISECONDS.sleep(50);
-        underTest.afterPhase(phaseEvent(phaseId));
+        underTest.afterPhase(phaseEvent(facesContext, phaseId));
     }
 
-    private PhaseEvent phaseEvent(PhaseId id) {
-        return new PhaseEvent(getFacesContext(), id, new MockLifecycle());
+    private PhaseEvent phaseEvent(FacesContext facesContext, PhaseId id) {
+        return new PhaseEvent(facesContext, id, new MockLifecycle());
     }
 
 }

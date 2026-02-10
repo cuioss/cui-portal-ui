@@ -21,17 +21,15 @@ import de.cuioss.portal.ui.api.resources.CacheableResource;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.mocks.CuiMockResource;
 import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import de.cuioss.tools.io.IOStreams;
 import jakarta.faces.application.Resource;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
 import org.apache.myfaces.test.mock.MockServletContext;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,15 +46,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @AddBeanClasses({CustomizationResourceProducer.class})
 @EnableTestLogger
 class CustomizationResourceHandlerTest
-        implements ShouldBeNotNull<CustomizationResourceHandler>, JsfEnvironmentConsumer {
+        implements ShouldBeNotNull<CustomizationResourceHandler> {
 
     private static final String TEST_LIBRARY = "a";
     private static final String TEST_RESOURCE = "some_style.css";
     private static final String MOCK_LIB = "mock_lib";
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
 
     @Getter
     private CustomizationResourceHandler underTest;
@@ -76,6 +70,7 @@ class CustomizationResourceHandlerTest
 
     @BeforeEach
     void before() {
+        var externalContext = FacesContext.getCurrentInstance().getExternalContext();
         configuration.update(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR, "src/test/resources/customization");
         configuration.update(PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED, "true");
         configuration.update(PortalConfigurationKeys.RESOURCE_MAXAGE, "60");
@@ -88,8 +83,8 @@ class CustomizationResourceHandlerTest
 
         wrapped.setAvailableResouces(mockResources);
         underTest = new CustomizationResourceHandler(wrapped);
-        ((MockServletContext) getExternalContext().getContext()).addMimeType("txt", "text/plain");
-        ((MockServletContext) getExternalContext().getContext()).addMimeType("css", "text/css");
+        ((MockServletContext) externalContext.getContext()).addMimeType("txt", "text/plain");
+        ((MockServletContext) externalContext.getContext()).addMimeType("css", "text/css");
     }
 
     @Test
