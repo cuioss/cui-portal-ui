@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,7 @@ package de.cuioss.portal.ui.test.mocks;
 
 import de.cuioss.jsf.api.components.css.ContextState;
 import de.cuioss.jsf.api.components.model.lazyloading.LazyLoadingThreadModel;
-import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
+import de.cuioss.jsf.api.components.model.result_content.ResultErrorHandler;
 import de.cuioss.portal.ui.api.lazyloading.LazyLoadingRequest;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
@@ -40,7 +40,7 @@ public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadMod
     @Serial
     private static final long serialVersionUID = 8611619042199216440L;
 
-    private static final CuiLogger log = new CuiLogger(PortalLazyLoadingThreadModelMock.class);
+    private static final CuiLogger LOGGER = new CuiLogger(PortalLazyLoadingThreadModelMock.class);
 
     @Inject
     private PortalLazyLoadingViewControllerMock viewControllerMock;
@@ -75,17 +75,18 @@ public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadMod
     private ResultObject<T> handledResult;
 
     @Override
-    @SuppressWarnings("squid:S3655") // owolff: implicitly checked with isValid
+    @SuppressWarnings("squid:S3655")
+    // owolff: implicitly checked with isValid
     public void processAction(ActionEvent event) {
         this.event = event;
         if (!viewControllerMock.getStarted().isEmpty()) {
             @SuppressWarnings("unchecked") // owolff: ok for the unit-test context
-            var started = (LazyLoadingRequest<T>) viewControllerMock.getStarted().iterator().next();
+            var started = (LazyLoadingRequest<T>) viewControllerMock.getStarted().getFirst();
             var requestResult = started.backendRequest();
             if (!requestResult.isValid()) {
                 notificationBoxValue = requestResult.getResultDetail().get().getDetail();
             }
-            requestResult.logDetail("mock", log);
+            requestResult.logDetail("mock", LOGGER);
             started.handleResult(requestResult.getResult());
             viewControllerMock.getStarted().remove(started);
         }
@@ -97,12 +98,13 @@ public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadMod
     }
 
     @Override
-    @SuppressWarnings("squid:S3655") // owolff: implicitly checked with isValid
+    @SuppressWarnings("squid:S3655")
+    // owolff: implicitly checked with isValid
     public void handleRequestResult(ResultObject<T> result, ResultErrorHandler errorHandler) {
         if (!result.isValid()) {
             notificationBoxValue = result.getResultDetail().get().getDetail();
         }
-        result.logDetail("mock", log);
+        result.logDetail("mock", LOGGER);
         this.handledResult = result;
     }
 

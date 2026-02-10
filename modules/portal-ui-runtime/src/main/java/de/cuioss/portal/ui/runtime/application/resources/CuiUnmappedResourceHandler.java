@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  */
 package de.cuioss.portal.ui.runtime.application.resources;
 
-import de.cuioss.tools.string.MoreStrings;
+import de.cuioss.portal.configuration.util.ConfigurationHelper;
 import de.cuioss.tools.string.Splitter;
 import jakarta.faces.application.Resource;
 import jakarta.faces.application.ResourceHandler;
@@ -25,7 +25,6 @@ import org.omnifaces.util.FacesLocal;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
@@ -36,15 +35,6 @@ import static java.util.stream.Collectors.toList;
  * of handling only harmless resources. Blacklist could be adapted by add
  * context-param to web.xml (or fragment), this is the common JSF configuration
  * parameter
- * <p>
- * <code>
- * &lt;context-param&gt;<br>
- * &lt;param-name&gt;jakarta.faces.RESOURCE_EXCLUDES&lt;/param-name&gt;<br>
- * &lt;param-value&gt;.class .jsp .jspx .properties .xhtml .groovy&lt;/param-value&gt;<br>
- * &lt;/context-param&gt;
- * </code>
- * </p>
- * <p>
  * TODO : could be replaced by original after
  * <a href="https://github.com/omnifaces/omnifaces/issues/481">...</a> is solved.
  *
@@ -53,6 +43,7 @@ import static java.util.stream.Collectors.toList;
 public class CuiUnmappedResourceHandler extends UnmappedResourceHandler {
 
     private static final List<Pattern> EXCLUDE_RESOURCES = initExclusionPatterns();
+    public static final String RESOURCE_UNMAPPED_RESOURCES = "portal.resource.unmapped_resources";
 
     /**
      * Creates a new instance of this unmapped resource handler which wraps the
@@ -82,22 +73,13 @@ public class CuiUnmappedResourceHandler extends UnmappedResourceHandler {
     }
 
     /**
-     * Lookup web.xml context-param
-     * {@link jakarta.faces.application.ResourceHandler#RESOURCE_EXCLUDES_PARAM_NAME}.<br>
-     * If exists use as space separated configuration list,<br>
-     * otherwise fallback to
-     * {@link jakarta.faces.application.ResourceHandler#RESOURCE_EXCLUDES_DEFAULT_VALUE}
-     * FIXME owolff: Load from microprofile-config
+     * Loads the configuration {@link #RESOURCE_UNMAPPED_RESOURCES} f exists use as a space separated configuration list,<br>
+     * otherwise fallback to {@link jakarta.faces.application.ResourceHandler#RESOURCE_EXCLUDES_DEFAULT_VALUE}
      */
     private static List<String> configuredExclusions() {
-        final var exclusions = Optional.ofNullable(getContextParameter())
+        final var exclusions = ConfigurationHelper.resolveConfigProperty(RESOURCE_UNMAPPED_RESOURCES)
                 .orElse(ResourceHandler.RESOURCE_EXCLUDES_DEFAULT_VALUE);
         return Splitter.on(' ').omitEmptyStrings().trimResults().splitToList(exclusions);
-    }
-
-    private static String getContextParameter() {
-        return MoreStrings.emptyToNull(FacesContext.getCurrentInstance().getExternalContext()
-                .getInitParameter(ResourceHandler.RESOURCE_EXCLUDES_PARAM_NAME));
     }
 
     @Override

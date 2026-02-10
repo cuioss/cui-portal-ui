@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,8 +16,8 @@
 package de.cuioss.portal.ui.api.lazyloading;
 
 import de.cuioss.jsf.api.components.css.ContextState;
-import de.cuioss.jsf.api.components.model.resultContent.ErrorController;
-import de.cuioss.jsf.api.components.model.resultContent.ResultErrorHandler;
+import de.cuioss.jsf.api.components.model.result_content.ErrorController;
+import de.cuioss.jsf.api.components.model.result_content.ResultErrorHandler;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
 import de.cuioss.uimodel.result.ResultDetail;
@@ -47,8 +47,10 @@ public class LazyLoadingErrorHandler extends ResultErrorHandler {
      */
     public void handleRequestError(Throwable cause, String message, ErrorController errorController, CuiLogger log) {
         if (null != cause) {
-            log.warn(message, cause);
+            // cui-rewrite:disable CuiLogRecordPatternRecipe
+            log.warn(cause, message);
         } else {
+            // cui-rewrite:disable CuiLogRecordPatternRecipe
             log.warn(message);
         }
         errorController.addNotificationBox(requestErrorKey, ContextState.DANGER);

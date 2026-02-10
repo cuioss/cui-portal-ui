@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,8 +17,6 @@ package de.cuioss.portal.ui.runtime.application.customization;
 
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.configuration.schedule.FileChangedEvent;
-import de.cuioss.portal.configuration.schedule.FileWatcherService;
-import de.cuioss.portal.configuration.schedule.PortalFileWatcherService;
 import de.cuioss.tools.io.MorePaths;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.tools.string.MoreStrings;
@@ -26,7 +24,6 @@ import de.cuioss.tools.string.Splitter;
 import de.cuioss.uimodel.application.CuiProjectStage;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.inject.Instance;
 import jakarta.faces.application.Resource;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
@@ -38,7 +35,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -46,7 +42,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_CUSTOMIZATION_ENABLED;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.INFO;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 
 /**
  * Allow overriding {@link Resource}s for customization at the file system. Will
@@ -65,20 +62,13 @@ public class CustomizationResourceProducer implements ResourceProducer {
      * {@link PortalConfigurationKeys#PORTAL_CUSTOMIZATION_DIR}.
      */
     public static final String RESOURCES_DIRECTORY = "resources";
-    private static final CuiLogger log = new CuiLogger(CustomizationResourceProducer.class);
+    private static final CuiLogger LOGGER = new CuiLogger(CustomizationResourceProducer.class);
+
     @Inject
     private Provider<CuiProjectStage> projectStageProvider;
 
     @Inject
-    @PortalFileWatcherService
-    private Instance<FileWatcherService> fileWatcherServiceProvider;
-
-    @Inject
     private Provider<FacesContext> facesContextProvider;
-
-    @Inject
-    @ConfigProperty(name = PORTAL_CUSTOMIZATION_ENABLED)
-    private Provider<Boolean> customizationEnabledProvider;
 
     @Inject
     @ConfigProperty(name = PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR)
@@ -93,7 +83,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
     private static String createResourceNameInMinifiedStyle(final String resourceName) {
         final var parts = Splitter.on('.').trimResults().limit(2).splitToList(resourceName);
         if (!parts.isEmpty() && parts.size() > 1)
-            return parts.get(0) + ".min." + parts.get(1);
+            return parts.getFirst() + ".min." + parts.get(1);
         return null;
     }
 
@@ -103,8 +93,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
             if (resourcesDir.exists() && resourcesDir.isDirectory())
                 return resourcesDir;
         }
-        log.info(
-                "No installation specific customization detected, using defaults. If this is intentional you can ignore this message");
+        LOGGER.info(INFO.CUSTOMIZATION_DEFAULTS);
         return null;
     }
 
@@ -116,7 +105,7 @@ public class CustomizationResourceProducer implements ResourceProducer {
             filesInDirectory = path.toFile().listFiles(File::isFile);
         } catch (final SecurityException e) {
             // it's not critical enough to explode if access to directory failed
-            log.warn(e, "Portal-122 : access denied to: {}", path.toFile().getName());
+            LOGGER.warn(e, WARN.PORTAL_122_ACCESS_DENIED, path.toFile().getName());
         }
 
         if (null == filesInDirectory)
@@ -150,8 +139,8 @@ public class CustomizationResourceProducer implements ResourceProducer {
 
         final var resourceFile = loadFile(resourceName, libraryName);
 
-        log.trace("create customization resource: libraryName {}, resourceName {}", libraryName, resourceName);
-        // during development create each time new resource
+        LOGGER.trace("create customization resource: libraryName %s, resourceName %s", libraryName, resourceName);
+        // during development, create each time new resource
         if (projectStageProvider.get().isDevelopment())
             return new CustomizationResource(resourceFile, resourceName, libraryName, determineMimeType(resourceFile));
 
@@ -171,10 +160,23 @@ public class CustomizationResourceProducer implements ResourceProducer {
             final var resourceNameMinified = createResourceNameInMinifiedStyle(resourceName);
 
             if (null != resourceNameMinified && foundResources.get(libraryName).contains(resourceNameMinified))
-                return resourcePath.toPath().resolve(libraryName).resolve(resourceNameMinified).toFile();
+                return resolveAndValidate(libraryName, resourceNameMinified);
         }
 
-        return resourcePath.toPath().resolve(libraryName).resolve(resourceName).toFile();
+        return resolveAndValidate(libraryName, resourceName);
+    }
+
+    /**
+     * Resolves the file path and validates that the normalized result stays
+     * within the {@link #resourcePath} directory, preventing path traversal attacks.
+     */
+    private File resolveAndValidate(final String libraryName, final String fileName) {
+        var resolved = resourcePath.toPath().resolve(libraryName).resolve(fileName).normalize().toFile();
+        if (!resolved.toPath().startsWith(resourcePath.toPath())) {
+            LOGGER.warn(WARN.PORTAL_150_PATH_TRAVERSAL, libraryName, fileName);
+            throw new IllegalArgumentException("Invalid resource path");
+        }
+        return resolved;
     }
 
     private String determineMimeType(final File resourceFile) {
@@ -184,21 +186,14 @@ public class CustomizationResourceProducer implements ResourceProducer {
     private void determineResources() {
 
         foundResources = new HashMap<>(0);
-
         resourcesCache = new HashMap<>(0);
 
-        prepareFileWatcherService();
-
         customizationDirProvider.get()
-                .ifPresent(customizationDir -> resourcePath = lookupResourceDirectory(Paths.get(customizationDir)));
+                .ifPresent(customizationDir -> resourcePath = lookupResourceDirectory(Path.of(customizationDir)));
 
         if (null != resourcePath) {
 
-            log.debug("Register file watcher to react for changes in directory {}", resourcePath.getAbsolutePath());
-
-            fileWatcherServiceProvider.forEach(provider -> provider.register(resourcePath.toPath()));
-
-            log.info("Searching customization resources in folder {}", resourcePath.getAbsolutePath());
+            LOGGER.info(INFO.SEARCHING_CUSTOMIZATION_RESOURCES, resourcePath.getAbsolutePath());
 
             try (final var directoryStream = Files.newDirectoryStream(resourcePath.toPath())) {
                 for (final Path path : directoryStream) {
@@ -212,22 +207,12 @@ public class CustomizationResourceProducer implements ResourceProducer {
                         foundResources.put(pathName, filesInDirectory);
                     }
                 }
-                log.info("Found resources: {}", foundResources);
+                LOGGER.info(INFO.FOUND_RESOURCES, foundResources);
             } catch (final IOException ex) {
-                log.warn(ex, "Portal-122: Unable to search path: {}", resourcePath.toString());
+                LOGGER.warn(ex, WARN.PORTAL_122_UNABLE_TO_SEARCH_PATH, resourcePath.toString());
             }
         }
 
-    }
-
-    private void prepareFileWatcherService() {
-        // if was executed before there may be some file watches registered
-        if (null != resourcePath) {
-            // cleanup
-            fileWatcherServiceProvider.forEach(provider -> provider.unregister(resourcePath.toPath()));
-            // may customization path was adapted
-            resourcePath = null;
-        }
     }
 
     void fileChangeListener(@Observes @FileChangedEvent final Path newPath) {

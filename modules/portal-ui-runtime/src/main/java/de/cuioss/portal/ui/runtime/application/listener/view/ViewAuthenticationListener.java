@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,7 +40,7 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_LIST
 
 /**
  * This listener checks the authorization status of a given request. In case the
- * injected {@link ViewConfiguration#getNonSecuredViewMatcher()} returns false
+ * injected {@link ViewConfiguration#nonSecuredViewMatcher} returns false
  * and the current {@link AuthenticatedUserInfo#isAuthenticated()} returns false
  * it will fire an {@link UserNotAuthenticatedException}.
  *
@@ -56,7 +56,7 @@ public class ViewAuthenticationListener implements ViewListener {
     @Serial
     private static final long serialVersionUID = 8427405526881056257L;
 
-    private static final CuiLogger log = new CuiLogger(ViewAuthenticationListener.class);
+    private static final CuiLogger LOGGER = new CuiLogger(ViewAuthenticationListener.class);
 
     @Inject
     ViewConfiguration viewConfiguration;
@@ -77,7 +77,7 @@ public class ViewAuthenticationListener implements ViewListener {
         // The user info must be accessed dynamically because of the scoping
         // of the Listener
         if (!viewConfiguration.getNonSecuredViewMatcher().match(viewDescriptor) && !userInfo.isAuthenticated()) {
-            log.debug("Try to access '" + viewDescriptor.getLogicalViewId() + "' which does not match '"
+            LOGGER.debug("Try to access '" + viewDescriptor.getLogicalViewId() + "' which does not match '"
                     + viewConfiguration.getNonSecuredViewMatcher() + "' -> UserNotAuthenticatedException");
             catchEvent.fire(new ExceptionAsEvent(new UserNotAuthenticatedException()));
         }

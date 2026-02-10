@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,6 +23,7 @@ import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
 import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.inject.Inject;
 import lombok.Getter;
@@ -35,15 +36,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnablePortalUiEnvironment
+@EnableTestLogger
 @EnableAlternatives({MockTemplateMapper.class, MockViewMapper.class})
-class ViewResourceHandlerTest implements ShouldBeNotNull<ViewResourceHandler>, JsfEnvironmentConsumer {
+class TemplateResourceHandlerTest implements ShouldBeNotNull<TemplateResourceHandler>, JsfEnvironmentConsumer {
 
     private static final String TEMPLATES_BASE_BATH = "META-INF/templates/test/";
     @Setter
     @Getter
     private JsfEnvironmentHolder environmentHolder;
     @Getter
-    private ViewResourceHandler underTest;
+    private TemplateResourceHandler underTest;
 
     @Inject
     @PortalMultiTemplatingMapper
@@ -55,7 +57,7 @@ class ViewResourceHandlerTest implements ShouldBeNotNull<ViewResourceHandler>, J
 
     @BeforeEach
     void beforeTest() {
-        underTest = new ViewResourceHandler(new CuiMockResourceHandler());
+        underTest = new TemplateResourceHandler(new CuiMockResourceHandler());
     }
 
     @Test

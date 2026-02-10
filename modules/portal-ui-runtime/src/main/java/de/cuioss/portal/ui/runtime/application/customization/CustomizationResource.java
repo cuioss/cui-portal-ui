@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -38,6 +38,7 @@ import java.util.Optional;
 import java.util.TimeZone;
 
 import static de.cuioss.portal.configuration.util.ConfigurationHelper.resolveConfigProperty;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 
 /**
  * Implementation of a {@link File} based {@link CacheableResource}.
@@ -48,7 +49,7 @@ import static de.cuioss.portal.configuration.util.ConfigurationHelper.resolveCon
 @EqualsAndHashCode(of = "resourceFile", callSuper = false)
 public final class CustomizationResource extends CacheableResource {
 
-    private static final CuiLogger log = new CuiLogger(CustomizationResource.class);
+    private static final CuiLogger LOGGER = new CuiLogger(CustomizationResource.class);
 
     private static final String HEADER_LAST_MODIFIED = "Last-Modified";
     private static final String HEADER_EXPIRES = "Expires";
@@ -57,14 +58,8 @@ public final class CustomizationResource extends CacheableResource {
 
     private final File resourceFile;
 
-    /**
-     * @param resourceFile
-     * @param resourceName
-     * @param libraryName
-     * @param contentType
-     */
     public CustomizationResource(final File resourceFile, final String resourceName, final String libraryName,
-                                 final String contentType) {
+            final String contentType) {
         this.resourceFile = resourceFile;
         setResourceName(resourceName);
         setLibraryName(libraryName);
@@ -112,8 +107,7 @@ public final class CustomizationResource extends CacheableResource {
         try {
             return resourceFile.toURI().toURL();
         } catch (final MalformedURLException e) {
-            log.warn("Portal-145: Customization resource '" + resourceFile
-                    + "' can not be resolved to an URL", e);
+            LOGGER.warn(e, WARN.PORTAL_145_CUSTOMIZATION_UNRESOLVABLE, resourceFile);
             throw new IllegalStateException(e);
         }
     }

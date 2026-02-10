@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,7 @@ package de.cuioss.portal.ui.runtime.application.templating;
 
 import de.cuioss.portal.ui.api.templating.PortalMultiTemplatingMapper;
 import de.cuioss.portal.ui.runtime.application.templating.support.AdditionalTemplates;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.inject.Inject;
 import lombok.Getter;
@@ -24,17 +25,13 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.Test;
 
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.MASTER_DEFAULT;
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.MASTER_HORIZONTAL_CENTER;
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.NOT_THERE;
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.PORTAL;
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.ROOT;
-import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.TECHNICAL_ROOT;
+import static de.cuioss.portal.ui.runtime.application.templating.PortalTemplateMapperSimpleTest.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @EnableAutoWeld
-@AddBeanClasses({PortalTemplates.class, AdditionalTemplates.class})
+@EnableTestLogger
+@AddBeanClasses({PortalCoreTemplates.class, AdditionalTemplates.class})
 class PortalTemplateMapperExtendedTest implements ShouldHandleObjectContracts<PortalTemplateMapper> {
 
     public static final String ADDITIONAL_PROVIDER = "additional/";
@@ -48,7 +45,7 @@ class PortalTemplateMapperExtendedTest implements ShouldHandleObjectContracts<Po
 
     @Test
     void shouldInitCorrectly() {
-        // To be controlled through PortalTemplates
+        // To be controlled through PortalCoreTemplates
         assertTrue(underTest.resolveTemplatePath(TECHNICAL_ROOT).getPath().endsWith(PORTAL + TECHNICAL_ROOT));
         assertTrue(underTest.resolveTemplatePath(MASTER_DEFAULT).getPath().endsWith(PORTAL + MASTER_DEFAULT));
         assertTrue(underTest.resolveTemplatePath(MASTER_HORIZONTAL_CENTER).getPath()

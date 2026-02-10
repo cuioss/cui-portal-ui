@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,13 +21,13 @@ import de.cuioss.portal.authentication.LoginEvent;
 import de.cuioss.portal.authentication.PortalLoginEvent;
 import de.cuioss.portal.authentication.UserChangeEvent;
 import de.cuioss.portal.authentication.facade.AuthenticationResults;
+import de.cuioss.portal.authentication.facade.LoginResult;
 import de.cuioss.portal.ui.api.history.HistoryManager;
 import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.api.pages.LoginPage;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
 import de.cuioss.uimodel.nameprovider.LabeledKey;
-import de.cuioss.uimodel.result.ResultObject;
 import jakarta.enterprise.event.Event;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
@@ -79,42 +79,45 @@ public abstract class AbstractLoginPageBean implements Serializable {
      * @return
      */
     protected String loginAction(final Supplier<ViewIdentifier> targetSupplier, final HttpServletRequest servletRequest,
-                                 final FacesContext facesContext) {
+            final FacesContext facesContext) {
         final var loginResult = doLogin(servletRequest);
 
-        if (!loginResult.isValid()) {
-            loginResult.getResultDetail().ifPresent(resultDetail -> handleLoginFailed(resultDetail.getDetail()));
-            if (null != loginResult.getResult().getIdentifier()) {
+        if (loginResult instanceof LoginResult.Failure failure) {
+            handleLoginFailed(failure.errorReason());
+            if (null != failure.username()) {
                 loginEvent.fire(LoginEvent.builder().action(LoginEvent.Action.LOGIN_FAILED)
-                        .username(loginResult.getResult().getIdentifier()).build());
+                        .username(failure.username()).build());
             }
             return null;
         }
-        final var newUserInfo = loginResult.getResult();
-        if (newUserInfo.isAuthenticated()) {
-            LOGGER.debug("user is authenticated");
-            userChangeEvent.fire(newUserInfo);
-            loginEvent.fire(LoginEvent.builder().action(LoginEvent.Action.LOGIN_SUCCESS).build());
-            servletRequest.getSession().setMaxInactiveInterval(sessionTimeout * 60);
 
-            // viewOutcome is never null because home is always the first entry on
-            // initialization
-            final var target = targetSupplier.get();
-            if (!target.getViewId().equalsIgnoreCase(getCurrentView(facesContext).getLogicalViewId())) {
-                LOGGER.debug("redirecting to: {}", target);
-                target.redirect(facesContext);
-                return null;
+        if (loginResult instanceof LoginResult.Success success) {
+            final var newUserInfo = success.authenticatedUserInfo();
+            if (newUserInfo.isAuthenticated()) {
+                LOGGER.debug("user is authenticated");
+                userChangeEvent.fire(newUserInfo);
+                loginEvent.fire(LoginEvent.builder().action(LoginEvent.Action.LOGIN_SUCCESS).build());
+                servletRequest.getSession().setMaxInactiveInterval(sessionTimeout * 60);
+
+                // viewOutcome is never null because home is always the first entry on
+                // initialization
+                final var target = targetSupplier.get();
+                if (!target.getViewId().equalsIgnoreCase(getCurrentView(facesContext).getLogicalViewId())) {
+                    LOGGER.debug("redirecting to: %s", target);
+                    target.redirect(facesContext);
+                    return null;
+                }
+
+                LOGGER.debug("redirecting to HomePage");
+                return HomePage.OUTCOME;
             }
 
-            LOGGER.debug("redirecting to HomePage");
-            return HomePage.OUTCOME;
-        }
-
-        LOGGER.debug("user is NOT authenticated");
-        handleLoginFailed(UNABLE_TO_LOGIN_MSG);
-        if (null != loginResult.getResult().getIdentifier()) {
-            loginEvent.fire(LoginEvent.builder().action(LoginEvent.Action.LOGIN_FAILED)
-                    .username(newUserInfo.getIdentifier()).build());
+            LOGGER.debug("user is NOT authenticated");
+            handleLoginFailed(UNABLE_TO_LOGIN_MSG);
+            if (null != newUserInfo.getIdentifier()) {
+                loginEvent.fire(LoginEvent.builder().action(LoginEvent.Action.LOGIN_FAILED)
+                        .username(newUserInfo.getIdentifier()).build());
+            }
         }
         return null;
     }
@@ -123,11 +126,10 @@ public abstract class AbstractLoginPageBean implements Serializable {
      * Trigger the login request to the authentication backend.
      *
      * @param servletRequest the current {@link HttpServletRequest}
-     * @return an {@link AuthenticatedUserInfo} that may either be authenticated or
-     * unauthenticated. Must never be null! It should always provide the
-     * username as identifier, even at failed login attempts!
+     * @return a {@link LoginResult} indicating success or failure of the login attempt.
+     * Must never be null!
      */
-    protected abstract ResultObject<AuthenticatedUserInfo> doLogin(HttpServletRequest servletRequest);
+    protected abstract LoginResult doLogin(HttpServletRequest servletRequest);
 
     /**
      * Handle failed login, e.g. display an error message.

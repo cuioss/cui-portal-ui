@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,7 +33,7 @@ import static jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN;
  */
 public class MissingScopesErrorDecoder implements ResponseExceptionMapper<MissingScopesException> {
 
-    private static final CuiLogger log = new CuiLogger(MissingScopesErrorDecoder.class);
+    private static final CuiLogger LOGGER = new CuiLogger(MissingScopesErrorDecoder.class);
 
     private static final String WWW_AUTHENTICATE_HEADER_KEY = "www-authenticate";
 
@@ -44,37 +44,37 @@ public class MissingScopesErrorDecoder implements ResponseExceptionMapper<Missin
      * header with missing scopes
      */
     public static MissingScopesException checkAndHandleMissingScopes(final int status,
-                                                                     final MultivaluedMap<String, Object> headers) {
+            final MultivaluedMap<String, Object> headers) {
         if (SC_FORBIDDEN == status) {
-            log.trace("response.status == 403");
+            LOGGER.trace("response.status == 403");
 
             var wwwAuthenticate = filterHeader(headers);
             if (wwwAuthenticate.isEmpty()) {
-                log.debug("www-authenticate not found!");
+                LOGGER.debug("www-authenticate not found!");
                 return null;
             }
-            log.trace("www-authenticate found: {}", wwwAuthenticate);
+            LOGGER.trace("www-authenticate found: %s", wwwAuthenticate);
 
             var wwwAuthenticateEntries = wwwAuthenticate.stream().map(value -> value.split(",")).flatMap(Arrays::stream)
                     .map(String::trim).toList();
-            if (wwwAuthenticateEntries.stream().anyMatch(entry -> entry.equalsIgnoreCase("error=\"insufficient_scope\"")
-                    || entry.equalsIgnoreCase("Bearer error=\"insufficient_scope\""))) {
+            if (wwwAuthenticateEntries.stream().anyMatch(entry -> "error=\"insufficient_scope\"".equalsIgnoreCase(entry)
+                    || "Bearer error=\"insufficient_scope\"".equalsIgnoreCase(entry))) {
                 var missingScopesEntry = wwwAuthenticateEntries.stream()
                         .filter(value -> value.trim().toLowerCase().startsWith("scope=\"")).findFirst();
                 if (missingScopesEntry.isPresent() && missingScopesEntry.get().contains("=")) {
                     var missingScopesValue = missingScopesEntry.get().split("=")[1].replace('\"', ' ').trim();
                     return new MissingScopesException(missingScopesValue);
                 }
-                log.debug("scopes entry is missing");
+                LOGGER.debug("scopes entry is missing");
             } else {
-                log.debug("error=\"insufficient_scope\" is missing");
+                LOGGER.debug("error=\"insufficient_scope\" is missing");
             }
         }
         return null;
     }
 
     private static List<String> filterHeader(MultivaluedMap<String, Object> headers) {
-        return headers.entrySet().stream().filter(entry -> entry.getKey().equalsIgnoreCase(WWW_AUTHENTICATE_HEADER_KEY))
+        return headers.entrySet().stream().filter(entry -> WWW_AUTHENTICATE_HEADER_KEY.equalsIgnoreCase(entry.getKey()))
                 .map(Map.Entry::getValue).flatMap(Collection::stream).filter(value -> value instanceof String)
                 .map(value -> (String) value).toList();
     }
@@ -87,11 +87,11 @@ public class MissingScopesErrorDecoder implements ResponseExceptionMapper<Missin
     @Override
     public boolean handles(int status, MultivaluedMap<String, Object> headers) {
         if (SC_FORBIDDEN == status) {
-            log.trace("response.status == 403");
+            LOGGER.trace("response.status == 403");
 
             var wwwAuthenticate = filterHeader(headers);
             if (wwwAuthenticate.isEmpty()) {
-                log.debug("www-authenticate not found!");
+                LOGGER.debug("www-authenticate not found!");
                 return false;
             }
             return true;

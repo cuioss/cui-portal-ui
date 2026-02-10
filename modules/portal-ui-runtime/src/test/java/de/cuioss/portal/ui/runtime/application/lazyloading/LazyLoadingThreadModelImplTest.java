@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,11 +37,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("rawtypes")
 @EnablePortalUiEnvironment
@@ -78,7 +74,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     @Test
-    void testGoodCase() {
+    void goodCase() {
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
 
@@ -98,7 +94,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     @Test
-    void testError() {
+    void error() {
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "30");
 
@@ -118,7 +114,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     @Test
-    void testTimeoutRetrieve() {
+    void timeoutRetrieve() {
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "30");
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
 
@@ -154,7 +150,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     @Test
-    void testTimeoutHandle() {
+    void timeoutHandle() {
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT, "1");
         configuration.update(PortalConfigurationKeys.PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT, "1");
 
@@ -175,7 +171,7 @@ class LazyLoadingThreadModelImplTest implements ShouldHandleObjectContracts<Lazy
     }
 
     private LazyLoadingRequest<String> createRequestWithResult(final String requestId,
-                                                               final ResultObject<String> resultObject) {
+            final ResultObject<String> resultObject) {
         return new LazyLoadingRequest<>() {
 
             @Override

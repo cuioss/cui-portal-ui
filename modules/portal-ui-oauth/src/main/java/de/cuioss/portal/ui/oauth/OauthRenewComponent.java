@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,6 +25,8 @@ import lombok.Getter;
 
 import java.util.Optional;
 
+import static de.cuioss.portal.ui.oauth.PortalUiOauthLogMessages.ERROR;
+
 /**
  * Backing bean for sso composite component.
  *
@@ -33,7 +35,7 @@ import java.util.Optional;
 @FacesComponent("de.cuioss.portal.ui.oauth.OauthRenewComponent")
 public class OauthRenewComponent extends UINamingContainer {
 
-    private static final CuiLogger log = new CuiLogger(OauthRenewComponent.class);
+    private static final CuiLogger LOGGER = new CuiLogger(OauthRenewComponent.class);
 
     @Getter
     private final String loginUrl;
@@ -55,8 +57,8 @@ public class OauthRenewComponent extends UINamingContainer {
             renewInterval = authenticationFacade.get().retrieveRenewInterval();
             loginUrl = authenticationFacade.get().getLoginUrl();
         } else {
-            log.error(PortalBeanManager.createLogMessage(Oauth2AuthenticationFacade.class,
-                    PortalAuthenticationFacade.class));
+            LOGGER.error(ERROR.BEAN_RESOLUTION_FAILED,
+                    Oauth2AuthenticationFacade.class, PortalAuthenticationFacade.class);
             renewUrl = null;
             renewInterval = null;
             loginUrl = null;

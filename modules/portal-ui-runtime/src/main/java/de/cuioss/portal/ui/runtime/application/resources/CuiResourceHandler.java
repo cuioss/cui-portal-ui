@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -53,6 +53,7 @@ public class CuiResourceHandler extends AbstractVersionResourceHandler {
         if (shouldHandle(resourceName, libraryName)) {
             LOGGER.debug("Handling '%s'/'%s'", libraryName, resourceName);
             final var determinedResourceName = determineResourceName(resourceName, libraryName);
+            LOGGER.debug("Final ResourceName '%s'/'%s'", libraryName, determinedResourceName);
             return super.createResource(determinedResourceName, libraryName);
         }
         return super.createResource(resourceName, libraryName);
@@ -71,8 +72,8 @@ public class CuiResourceHandler extends AbstractVersionResourceHandler {
     /**
      * Checks whether the resourceHandler should handle the given request
      *
-     * @param resourceName
-     * @param libraryName
+     * @param resourceName identifying the actual resource
+     * @param libraryName  identifying the 'path' to the resource
      * @return boolean indicating whether the resourceHandler should handle (modify)
      * the given resource Request
      */
@@ -88,7 +89,7 @@ public class CuiResourceHandler extends AbstractVersionResourceHandler {
 
     /**
      * Computes / checks whether the Resource name needs to be adapted / suffixed
-     * with min, if corresponding version is available.
+     * with min if the corresponding version is available.
      *
      * @param resourceName to be checked against
      * @param libraryName  to be checked against
@@ -113,8 +114,8 @@ public class CuiResourceHandler extends AbstractVersionResourceHandler {
      * registered to the given {@link LibraryInventory} otherwise the original
      * filename will be registered.
      *
-     * @param libraryInventory
-     * @param filename
+     * @param libraryInventory representing the library
+     * @param filename         representing the actual file within the library
      */
     private void registerResourceName(final LibraryInventory libraryInventory, final StructuredFilename filename) {
         var minResourceName = filename.getAppendedName(MINIMIZED_SUFFIX);

@@ -16,6 +16,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Need for the oauth module. Consider removing-->
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>4.0.5</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>de.cuioss.portal.ui</groupId>
                 <artifactId>portal-ui-api</artifactId>

@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,12 +18,10 @@ package de.cuioss.portal.ui.runtime.page;
 import de.cuioss.jsf.api.application.navigation.ViewIdentifier;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.portal.authentication.AuthenticatedUserInfo;
+import de.cuioss.portal.authentication.facade.AuthenticationResults;
+import de.cuioss.portal.authentication.facade.LoginResult;
 import de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
-import de.cuioss.uimodel.nameprovider.LabeledKey;
-import de.cuioss.uimodel.result.ResultDetail;
-import de.cuioss.uimodel.result.ResultObject;
-import de.cuioss.uimodel.result.ResultState;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
@@ -51,13 +49,12 @@ public class TestLoginPage extends AbstractLoginPageBean {
     private boolean simulateLoginError;
 
     @Override
-    protected ResultObject<AuthenticatedUserInfo> doLogin(final HttpServletRequest servletRequest) {
+    protected LoginResult doLogin(final HttpServletRequest servletRequest) {
         if (simulateLoginError) {
-            return ResultObject.<AuthenticatedUserInfo>builder().state(ResultState.WARNING)
-                    .resultDetail(new ResultDetail(new LabeledKey("OOPS ... something went wrong ... ")))
-                    .result(userInfo).build();
+            return AuthenticationResults.invalidResultKey("OOPS ... something went wrong ... ",
+                    userInfo != null ? userInfo.getIdentifier() : null, null);
         }
-        return ResultObject.<AuthenticatedUserInfo>builder().state(ResultState.VALID).result(userInfo).build();
+        return AuthenticationResults.validResult(userInfo);
     }
 
     @Override

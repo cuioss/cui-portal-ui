@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -47,6 +47,7 @@ import java.io.Serial;
 import java.util.Optional;
 
 import static de.cuioss.portal.authentication.oauth.OAuthConfigKeys.OPEN_ID_CLIENT_POST_LOGOUT_REDIRECT_URI;
+import static de.cuioss.portal.ui.oauth.PortalUiOauthLogMessages.WARN;
 import static de.cuioss.tools.string.MoreStrings.isBlank;
 import static de.cuioss.tools.string.MoreStrings.isPresent;
 
@@ -108,7 +109,7 @@ public class OauthLogoutPageBean implements LogoutPage {
 
         var idpLogoutUrl = authenticationFacade.retrieveClientLogoutUrl(
                 CollectionBuilder.<UrlParameter>copyFrom().add(getPostLogoutRedirectUriParam()).toImmutableSet());
-        LOGGER.debug("Redirecting to IDP logout URL: {}", idpLogoutUrl);
+        LOGGER.debug("Redirecting to IDP logout URL: %s", idpLogoutUrl);
 
         // Actually wrong if strictly sticking to rp-initiated-logout specification,
         // but should not bother anyone either.
@@ -138,16 +139,15 @@ public class OauthLogoutPageBean implements LogoutPage {
         final var postLogoutRedirectUri = configuration.getPostLogoutRedirectUri();
         if (isPresent(postLogoutRedirectUri)) {
             if (isBlank(configuration.getLogoutRedirectParamName())) {
-                LOGGER.warn("postLogoutRedirectUri set, but no url-parameter name. Set via: {}",
-                        OAuthConfigKeys.OPEN_ID_CLIENT_LOGOUT_REDIRECT_PARAMETER);
+                LOGGER.warn(WARN.MISSING_LOGOUT_REDIRECT_PARAM, OAuthConfigKeys.OPEN_ID_CLIENT_LOGOUT_REDIRECT_PARAMETER);
                 return Optional.empty();
             }
 
-            LOGGER.debug("postLogoutRedirectUri: {}", postLogoutRedirectUri);
+            LOGGER.debug("postLogoutRedirectUri: %s", postLogoutRedirectUri);
             return Optional.of(new UrlParameter(configuration.getLogoutRedirectParamName(), postLogoutRedirectUri));
         }
 
-        LOGGER.debug("No postLogoutRedirectUri configured. Config-Key: {}", OPEN_ID_CLIENT_POST_LOGOUT_REDIRECT_URI);
+        LOGGER.debug("No postLogoutRedirectUri configured. Config-Key: %s", OPEN_ID_CLIENT_POST_LOGOUT_REDIRECT_URI);
         return Optional.empty();
     }
 }

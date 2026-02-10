@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,14 +21,11 @@ import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
 import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_ORIGIN;
 import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ORIGIN;
@@ -49,7 +46,7 @@ class OauthHttpHeaderFilterTest implements ShouldBeNotNull<OauthHttpHeaderFilter
     private JsfEnvironmentHolder environmentHolder;
 
     @Test
-    void shouldHandleHappyCase() throws ServletException, IOException {
+    void shouldHandleHappyCase() throws Exception {
         var response = environmentHolder.getResponse();
         setRequestUrl(FACES_GUEST_LOGIN_JSF);
         environmentHolder.getRequestConfigDecorator().setRequestHeader(ORIGIN, ME);
@@ -62,7 +59,7 @@ class OauthHttpHeaderFilterTest implements ShouldBeNotNull<OauthHttpHeaderFilter
     }
 
     @Test
-    void shouldNotSetHeaderOnMissingOriginHeader() throws ServletException, IOException {
+    void shouldNotSetHeaderOnMissingOriginHeader() throws Exception {
         var response = environmentHolder.getResponse();
         setRequestUrl(FACES_GUEST_LOGIN_JSF);
         HttpServletRequest request = (HttpServletRequest) getExternalContext().getRequest();

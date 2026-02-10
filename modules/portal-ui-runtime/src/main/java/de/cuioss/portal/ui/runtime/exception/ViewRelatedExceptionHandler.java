@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -41,6 +41,9 @@ import jakarta.faces.application.ViewExpiredException;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.ERROR;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
+
 /**
  * This {@link PortalExceptionHandler} provides handler methods for dealing with
  * view related exceptions, like {@link ViewSuppressedException},
@@ -66,12 +69,6 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
     public static final String VIEW_INSUFFICIENT_PERMISSIONS_KEY = "system.exception.view.insufficient.permissions";
     private static final String HANDLING_S_AS_S = "Handling '%s' as '%s'";
     private static final CuiLogger LOGGER = new CuiLogger(ViewRelatedExceptionHandler.class);
-    private static final String PORTAL_103 = "Portal-103: View '{}' requires the roles '{}', but user '{}' only has the roles: '{}'";
-
-    private static final String NAV_LOOP_ERROR_MSG = """
-            Portal-505: The view '{}' is suppressed but is the designated navigation target at the same time.\
-             This would result in a loop. The error page is displayed therefore instead.\
-            """;
 
     @Inject
     @CuiNavigationHandler
@@ -130,7 +127,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
                 && null != exception.getSuppressedViewDescriptor().getLogicalViewId()
                 && exception.getSuppressedViewDescriptor().getLogicalViewId()
                 .equals(NavigationUtils.lookUpToLogicalViewIdBy(facesContext, outcome))) {
-            LOGGER.error(NAV_LOOP_ERROR_MSG, exception.getSuppressedViewDescriptor().getLogicalViewId());
+            LOGGER.error(ERROR.PORTAL_505_NAV_LOOP, exception.getSuppressedViewDescriptor().getLogicalViewId());
             outcome = ErrorPage.OUTCOME;
         }
         navigationHandler.handleNavigation(facesContext, null, outcome);
@@ -180,7 +177,7 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
 
         var exception = (UserNotAuthorizedException) event.getException();
 
-        LOGGER.warn(PORTAL_103, exception.getRequestedView().getLogicalViewId(), exception.getRequiredRoles(),
+        LOGGER.warn(WARN.PORTAL_103_INSUFFICIENT_PERMISSIONS, exception.getRequestedView().getLogicalViewId(), exception.getRequiredRoles(),
                 authenticatedUserInfo.getDisplayName(), exception.getUserRoles());
 
         messageProducer.setGlobalErrorMessage(VIEW_INSUFFICIENT_PERMISSIONS_KEY);

@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,8 +18,8 @@ package de.cuioss.portal.ui.oauth;
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.jsf.api.common.view.ViewDescriptor;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
-import de.cuioss.portal.authentication.AuthenticatedUserInfo;
 import de.cuioss.portal.authentication.facade.AuthenticationResults;
+import de.cuioss.portal.authentication.facade.LoginResult;
 import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2Configuration;
@@ -28,7 +28,6 @@ import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.runtime.page.AbstractLoginPageBean;
 import de.cuioss.tools.logging.CuiLogger;
 import de.cuioss.uimodel.nameprovider.IDisplayNameProvider;
-import de.cuioss.uimodel.result.ResultObject;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
@@ -62,7 +61,7 @@ import static de.cuioss.tools.base.Preconditions.checkArgument;
 @ToString
 public class OauthLoginPageBean extends AbstractLoginPageBean {
 
-    private static final CuiLogger log = new CuiLogger(OauthLoginPageBean.class);
+    private static final CuiLogger LOGGER = new CuiLogger(OauthLoginPageBean.class);
 
     @Serial
     private static final long serialVersionUID = 5261664290647994366L;
@@ -137,7 +136,7 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
     }
 
     @Override
-    protected ResultObject<AuthenticatedUserInfo> doLogin(final HttpServletRequest currentServletRequest) {
+    protected LoginResult doLogin(final HttpServletRequest currentServletRequest) {
         checkArgument(null != currentView, "currentView must be available");
         return AuthenticationResults.validResult(
                 authenticationFacade.testLogin(currentView.getUrlParameter(), oauth2Configuration.getInitialScopes()));
@@ -146,12 +145,12 @@ public class OauthLoginPageBean extends AbstractLoginPageBean {
     @Override
     protected void handleLoginFailed(final IDisplayNameProvider<?> message) {
         if (doRedirectOnFailure) {
-            log.debug("login failed, redirecting to oauth server");
+            LOGGER.debug("login failed, redirecting to oauth server");
             wrappedOauthFacade.preserveCurrentView();
             doRedirectOnFailure = false;
             authenticationFacade.sendRedirect(oauth2Configuration.getInitialScopes());
         } else {
-            log.debug("noop. redirectOnFailure is false");
+            LOGGER.debug("noop. redirectOnFailure is false");
         }
     }
 }

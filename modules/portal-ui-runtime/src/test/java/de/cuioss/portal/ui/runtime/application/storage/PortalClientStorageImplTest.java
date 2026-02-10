@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,9 +32,7 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({PortalClientStorageImpl.class, PortalLocaleProducerMock.class, ResourceBundleWrapper.class,
@@ -62,7 +60,7 @@ class PortalClientStorageImplTest implements ShouldHandleObjectContracts<PortalC
             deltaspike-jsf-module-api 1.8.1 uses myfaces-test20, see: \
             deltaspike-jsf-module-api-1.8.1-sources.jar!/META-INF/maven/org.apache.deltaspike.modules/deltaspike-jsf-module-api/pom.xml:55\
             So: omnifaces-3.1 doesn't go with myfaces-2.3""")
-    void testRoundTrip() {
+    void roundTrip() {
         configuration.update(PortalConfigurationKeys.CLIENT_STORAGE_COOKIE_MAX_AGE, "666");
 
         underTest.remove(testKey);
