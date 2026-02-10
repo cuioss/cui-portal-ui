@@ -27,6 +27,8 @@ import lombok.RequiredArgsConstructor;
  *
  * @author Oliver Wolff
  */
+@SuppressWarnings("java:S6548")
+// Intentional enum-based utility pattern
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum PortalCssClasses implements StyleClassProvider {
 
