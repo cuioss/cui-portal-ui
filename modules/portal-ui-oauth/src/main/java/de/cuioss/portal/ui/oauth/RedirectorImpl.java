@@ -29,8 +29,16 @@ import jakarta.inject.Provider;
 @ApplicationScoped
 public class RedirectorImpl implements OauthRedirector {
 
-    @Inject
     private Provider<FacesContext> facesContextProvider;
+
+    protected RedirectorImpl() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public RedirectorImpl(Provider<FacesContext> facesContextProvider) {
+        this.facesContextProvider = facesContextProvider;
+    }
 
     @Override
     public void sendRedirect(String url) throws IllegalStateException {

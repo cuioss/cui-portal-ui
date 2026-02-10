@@ -46,19 +46,27 @@ public class OauthIFrameLogoutPageBean implements Serializable {
     @Serial
     private static final long serialVersionUID = 7139554877749164888L;
 
-    @Inject
-    @PortalAuthenticationFacade
-    AuthenticationFacade authenticationFacade;
+    private AuthenticationFacade authenticationFacade;
+
+    private HttpServletRequest servletRequest;
+
+    private AuthenticatedUserInfo authenticatedUserInfo;
+
+    private Event<LoginEvent> preLougoutEvent;
+
+    protected OauthIFrameLogoutPageBean() {
+        // for CDI proxy
+    }
 
     @Inject
-    HttpServletRequest servletRequest;
-
-    @Inject
-    AuthenticatedUserInfo authenticatedUserInfo;
-
-    @Inject
-    @PortalLoginEvent
-    Event<LoginEvent> preLougoutEvent;
+    public OauthIFrameLogoutPageBean(@PortalAuthenticationFacade AuthenticationFacade authenticationFacade,
+            HttpServletRequest servletRequest, AuthenticatedUserInfo authenticatedUserInfo,
+            @PortalLoginEvent Event<LoginEvent> preLougoutEvent) {
+        this.authenticationFacade = authenticationFacade;
+        this.servletRequest = servletRequest;
+        this.authenticatedUserInfo = authenticatedUserInfo;
+        this.preLougoutEvent = preLougoutEvent;
+    }
 
     public String logoutViewAction() {
         if (authenticatedUserInfo.isAuthenticated()) {

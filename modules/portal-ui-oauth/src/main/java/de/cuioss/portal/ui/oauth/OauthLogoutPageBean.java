@@ -69,32 +69,40 @@ public class OauthLogoutPageBean implements LogoutPage {
 
     private static final CuiLogger LOGGER = new CuiLogger(OauthLogoutPageBean.class);
 
-    @Inject
-    @PortalAuthenticationFacade
-    Oauth2AuthenticationFacade authenticationFacade;
+    private Oauth2AuthenticationFacade authenticationFacade;
+
+    private FacesContext facesContext;
+
+    private Event<LoginEvent> preLogoutEvent;
+
+    private AuthenticatedUserInfo authenticatedUserInfo;
+
+    private Oauth2Configuration oauth2Configuration;
+
+    private String loginUrl;
+
+    private HttpServletRequest servletRequest;
+
+    private Oauth2Configuration configuration;
+
+    protected OauthLogoutPageBean() {
+        // for CDI proxy
+    }
 
     @Inject
-    FacesContext facesContext;
-
-    @Inject
-    @PortalLoginEvent
-    Event<LoginEvent> preLogoutEvent;
-
-    @Inject
-    AuthenticatedUserInfo authenticatedUserInfo;
-
-    @Inject
-    Oauth2Configuration oauth2Configuration;
-
-    @Inject
-    @LoginPagePath
-    String loginUrl;
-
-    @Inject
-    HttpServletRequest servletRequest;
-
-    @Inject
-    Oauth2Configuration configuration;
+    public OauthLogoutPageBean(@PortalAuthenticationFacade Oauth2AuthenticationFacade authenticationFacade,
+            FacesContext facesContext, @PortalLoginEvent Event<LoginEvent> preLogoutEvent,
+            AuthenticatedUserInfo authenticatedUserInfo, Oauth2Configuration oauth2Configuration,
+            @LoginPagePath String loginUrl, HttpServletRequest servletRequest, Oauth2Configuration configuration) {
+        this.authenticationFacade = authenticationFacade;
+        this.facesContext = facesContext;
+        this.preLogoutEvent = preLogoutEvent;
+        this.authenticatedUserInfo = authenticatedUserInfo;
+        this.oauth2Configuration = oauth2Configuration;
+        this.loginUrl = loginUrl;
+        this.servletRequest = servletRequest;
+        this.configuration = configuration;
+    }
 
     /**
      * Logs out and redirects to login page.
