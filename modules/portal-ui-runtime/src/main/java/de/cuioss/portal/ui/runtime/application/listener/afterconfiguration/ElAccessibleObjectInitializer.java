@@ -31,9 +31,16 @@ import jakarta.inject.Inject;
 @Dependent
 public class ElAccessibleObjectInitializer implements ApplicationInitializer {
 
-    @Inject
-    @PortalMultiViewMapper
     private MultiViewMapper multiViewMapper;
+
+    protected ElAccessibleObjectInitializer() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public ElAccessibleObjectInitializer(@PortalMultiViewMapper MultiViewMapper multiViewMapper) {
+        this.multiViewMapper = multiViewMapper;
+    }
 
     @Override
     public void initialize() {

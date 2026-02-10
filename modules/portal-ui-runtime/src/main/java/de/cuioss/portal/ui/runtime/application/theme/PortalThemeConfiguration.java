@@ -58,18 +58,25 @@ public class PortalThemeConfiguration implements Serializable {
     /**
      * The (configured) list of available themes.
      */
-    @Inject
-    @ConfigAsList(name = THEME_AVAILABLE)
     @Getter
     private List<String> availableThemes;
     /**
      * the (configured default theme). It must be one of
      * {@link #availableThemes}
      */
-    @Inject
-    @ConfigProperty(name = THEME_DEFAULT)
     @Getter
     private String defaultTheme;
+
+    protected PortalThemeConfiguration() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PortalThemeConfiguration(@ConfigAsList(name = THEME_AVAILABLE) List<String> availableThemes,
+            @ConfigProperty(name = THEME_DEFAULT) String defaultTheme) {
+        this.availableThemes = availableThemes;
+        this.defaultTheme = defaultTheme;
+    }
 
     /**
      * Initializes the bean, see class documentation for details

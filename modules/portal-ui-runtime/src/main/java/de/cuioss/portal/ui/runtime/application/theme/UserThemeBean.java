@@ -49,15 +49,23 @@ public class UserThemeBean implements Serializable {
     @Serial
     private static final long serialVersionUID = 5242120351578770611L;
 
-    @Inject
     private PortalThemeConfiguration themeConfiguration;
 
     @Getter
     private String theme;
 
-    @Inject
-    @PortalClientStorage
     private Provider<ClientStorage> clientStorage;
+
+    protected UserThemeBean() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public UserThemeBean(PortalThemeConfiguration themeConfiguration,
+            @PortalClientStorage Provider<ClientStorage> clientStorage) {
+        this.themeConfiguration = themeConfiguration;
+        this.clientStorage = clientStorage;
+    }
 
     /**
      * Initializer method for the bean

@@ -64,9 +64,16 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
 
     private Map<String, URL> templateMap;
 
-    @Inject
-    @PortalTemplateDescriptor
     private Instance<StaticTemplateDescriptor> descriptors;
+
+    protected PortalTemplateMapper() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PortalTemplateMapper(@PortalTemplateDescriptor Instance<StaticTemplateDescriptor> descriptors) {
+        this.descriptors = descriptors;
+    }
 
     /**
      * Sorts the descriptors according to Priority annotation and creates the

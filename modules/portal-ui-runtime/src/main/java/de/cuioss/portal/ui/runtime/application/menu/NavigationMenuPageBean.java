@@ -47,14 +47,22 @@ public class NavigationMenuPageBean implements Serializable {
 
     private static final CuiLogger LOGGER = new CuiLogger(NavigationMenuPageBean.class);
 
-    @Inject
-    AuthenticatedUserInfo userInfo;
+    private AuthenticatedUserInfo userInfo;
 
-    @Inject
-    NavigationMenuProvider menuProvider;
+    private NavigationMenuProvider menuProvider;
 
     @Getter
     private boolean displayMenu = false;
+
+    protected NavigationMenuPageBean() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public NavigationMenuPageBean(AuthenticatedUserInfo userInfo, NavigationMenuProvider menuProvider) {
+        this.userInfo = userInfo;
+        this.menuProvider = menuProvider;
+    }
 
     @Getter
     private List<NavigationMenuItem> navigationMenuItems;

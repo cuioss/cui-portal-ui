@@ -57,8 +57,6 @@ public class ViewConfiguration implements Serializable {
     @Getter
     private ViewMatcher nonSecuredViewMatcher;
 
-    @Inject
-    @ConfigAsViewMatcher(name = NON_SECURED_VIEWS)
     private Provider<ViewMatcher> nonSecuredViewMatcherProvider;
 
     /**
@@ -68,8 +66,6 @@ public class ViewConfiguration implements Serializable {
     @Getter
     private ViewMatcher transientViewMatcher;
 
-    @Inject
-    @ConfigAsViewMatcher(name = TRANSIENT_VIEWS)
     private Provider<ViewMatcher> transientViewMatcherProvider;
 
     /**
@@ -79,9 +75,21 @@ public class ViewConfiguration implements Serializable {
     @Getter
     private ViewMatcher suppressedViewMatcher;
 
-    @Inject
-    @ConfigAsViewMatcher(name = SUPPRESSED_VIEWS)
     private Provider<ViewMatcher> suppressedViewMatcherProvider;
+
+    protected ViewConfiguration() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public ViewConfiguration(
+            @ConfigAsViewMatcher(name = NON_SECURED_VIEWS) Provider<ViewMatcher> nonSecuredViewMatcherProvider,
+            @ConfigAsViewMatcher(name = TRANSIENT_VIEWS) Provider<ViewMatcher> transientViewMatcherProvider,
+            @ConfigAsViewMatcher(name = SUPPRESSED_VIEWS) Provider<ViewMatcher> suppressedViewMatcherProvider) {
+        this.nonSecuredViewMatcherProvider = nonSecuredViewMatcherProvider;
+        this.transientViewMatcherProvider = transientViewMatcherProvider;
+        this.suppressedViewMatcherProvider = suppressedViewMatcherProvider;
+    }
 
     /**
      * Initializes the bean, see class documentation for details

@@ -64,15 +64,24 @@ public class CustomizationResourceProducer implements ResourceProducer {
     public static final String RESOURCES_DIRECTORY = "resources";
     private static final CuiLogger LOGGER = new CuiLogger(CustomizationResourceProducer.class);
 
-    @Inject
     private Provider<CuiProjectStage> projectStageProvider;
 
-    @Inject
     private Provider<FacesContext> facesContextProvider;
 
-    @Inject
-    @ConfigProperty(name = PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR)
     private Provider<Optional<String>> customizationDirProvider;
+
+    protected CustomizationResourceProducer() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public CustomizationResourceProducer(Provider<CuiProjectStage> projectStageProvider,
+            Provider<FacesContext> facesContextProvider,
+            @ConfigProperty(name = PortalConfigurationKeys.PORTAL_CUSTOMIZATION_DIR) Provider<Optional<String>> customizationDirProvider) {
+        this.projectStageProvider = projectStageProvider;
+        this.facesContextProvider = facesContextProvider;
+        this.customizationDirProvider = customizationDirProvider;
+    }
 
     private File resourcePath;
 
