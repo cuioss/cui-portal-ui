@@ -32,6 +32,7 @@ import java.util.Collections;
  *
  * @author Oliver Wolff
  */
+@SuppressWarnings("java:S1874")
 public class PortalNavigationConfiguration implements ApplicationConfigurator {
 
     /**

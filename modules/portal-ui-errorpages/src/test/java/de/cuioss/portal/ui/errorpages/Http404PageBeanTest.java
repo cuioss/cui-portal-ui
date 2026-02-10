@@ -18,16 +18,21 @@ package de.cuioss.portal.ui.errorpages;
 import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.tests.AbstractPageBeanTest;
+import de.cuioss.test.jsf.config.decorator.RequestConfigDecorator;
 import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import lombok.Getter;
+import org.apache.myfaces.test.mock.MockExternalContext;
+import org.jboss.weld.junit5.ExplicitParamInjection;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
+@ExplicitParamInjection
 @EnableTestLogger
 class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
 
@@ -43,9 +48,9 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
     }
 
     @Test
-    void shouldDetectFacesView() {
-        getRequestConfigDecorator().setViewId(FACES_VIEW_JSF).setRequestAttribute(AbstractHttpErrorPage.JAKARTA_SERVLET_ERROR_REQUEST_URI,
-                FACES_VIEW_JSF);
+    void shouldDetectFacesView(RequestConfigDecorator requestConfig) {
+        requestConfig.setViewId(FACES_VIEW_JSF);
+        requestConfig.setRequestAttribute(AbstractHttpErrorPage.JAKARTA_SERVLET_ERROR_REQUEST_URI, FACES_VIEW_JSF);
         underTest.initView();
         assertTrue(underTest.isRequestUriAvailable());
         assertTrue(underTest.isShouldRedirect());
@@ -53,8 +58,9 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
     }
 
     @Test
-    void shouldDetectEmptyView() {
-        getRequestConfigDecorator().setViewId("").setRequestAttribute(AbstractHttpErrorPage.JAKARTA_SERVLET_ERROR_REQUEST_URI, "");
+    void shouldDetectEmptyView(RequestConfigDecorator requestConfig) {
+        requestConfig.setViewId("");
+        requestConfig.setRequestAttribute(AbstractHttpErrorPage.JAKARTA_SERVLET_ERROR_REQUEST_URI, "");
         underTest.initView();
         assertFalse(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
@@ -62,8 +68,8 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
     }
 
     @Test
-    void shouldHandleNotSetView() {
-        getRequestConfigDecorator().setViewId(null);
+    void shouldHandleNotSetView(RequestConfigDecorator requestConfig) {
+        requestConfig.setViewId(null);
         underTest.initView();
         assertFalse(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
@@ -74,9 +80,9 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
      * Paranoia mode. Should not happen, but error-handling must always be defensive
      */
     @Test
-    void shouldHandleMissingServletRequest() {
-        getRequestConfigDecorator().setViewId(null);
-        getExternalContext().setRequest(null);
+    void shouldHandleMissingServletRequest(RequestConfigDecorator requestConfig) {
+        requestConfig.setViewId(null);
+        ((MockExternalContext) FacesContext.getCurrentInstance().getExternalContext()).setRequest(null);
         underTest.initView();
         assertFalse(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
@@ -84,11 +90,11 @@ class Http404PageBeanTest extends AbstractPageBeanTest<Http404PageBean> {
     }
 
     @Test
-    void shouldNotRedirectIfNotConfigured() {
+    void shouldNotRedirectIfNotConfigured(RequestConfigDecorator requestConfig) {
         configuration.update(PortalConfigurationKeys.PAGES_ERROR_404_REDIRECT, "false");
 
-        getRequestConfigDecorator().setViewId(FACES_VIEW_JSF).setRequestAttribute(AbstractHttpErrorPage.JAKARTA_SERVLET_ERROR_REQUEST_URI,
-                FACES_VIEW_JSF);
+        requestConfig.setViewId(FACES_VIEW_JSF);
+        requestConfig.setRequestAttribute(AbstractHttpErrorPage.JAKARTA_SERVLET_ERROR_REQUEST_URI, FACES_VIEW_JSF);
         underTest.initView();
         assertTrue(underTest.isRequestUriAvailable());
         assertFalse(underTest.isShouldRedirect());
