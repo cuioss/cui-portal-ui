@@ -28,15 +28,14 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import static de.cuioss.tools.collect.CollectionLiterals.immutableList;
-import static java.util.stream.Collectors.toList;
 
 /**
  * This resource handler wrap omnifaces UnmappedResourceHandler for restriction
  * of handling only harmless resources. Blacklist could be adapted by add
  * context-param to web.xml (or fragment), this is the common JSF configuration
  * parameter
- * TODO : could be replaced by original after
- * <a href="https://github.com/omnifaces/omnifaces/issues/481">...</a> is solved.
+ * Wraps OmniFaces UnmappedResourceHandler to restrict handling to harmless resources.
+ * See <a href="https://github.com/omnifaces/omnifaces/issues/481">OmniFaces #481</a>.
  *
  * @author Eugen Fischer
  */
@@ -69,7 +68,7 @@ public class CuiUnmappedResourceHandler extends UnmappedResourceHandler {
 
     private static List<Pattern> initExclusionPatterns() {
         return immutableList(
-                configuredExclusions().stream().map(pattern -> Pattern.compile(".*\\" + pattern)).collect(toList()));
+                configuredExclusions().stream().map(pattern -> Pattern.compile(".*\\" + pattern)).toList());
     }
 
     /**

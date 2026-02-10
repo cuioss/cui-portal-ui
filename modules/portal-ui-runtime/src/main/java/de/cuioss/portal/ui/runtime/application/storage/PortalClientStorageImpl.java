@@ -67,10 +67,7 @@ public class PortalClientStorageImpl implements ClientStorage {
 
     @Override
     public String get(final String key) {
-        if (!cache.containsKey(key)) {
-            cache.put(key, getRequestCookie(key));
-        }
-        return cache.get(key);
+        return cache.computeIfAbsent(key, k -> getRequestCookie(k));
     }
 
     @Override
