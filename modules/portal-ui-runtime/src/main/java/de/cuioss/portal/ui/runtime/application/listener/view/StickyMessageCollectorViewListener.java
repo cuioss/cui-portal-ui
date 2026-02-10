@@ -74,7 +74,7 @@ public class StickyMessageCollectorViewListener implements ViewListener {
     }
 
     private Set<StickyMessage> collectAndCleanup() {
-        final Set<StickyMessage> collected = new HashSet<>(0);
+        final Set<StickyMessage> collected = HashSet.newHashSet(0);
         for (final StickyMessageProvider provider : providers) {
             collected.addAll(provider.retrieveMessages());
         }
