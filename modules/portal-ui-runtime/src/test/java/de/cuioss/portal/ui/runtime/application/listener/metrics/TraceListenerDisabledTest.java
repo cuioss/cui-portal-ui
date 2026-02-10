@@ -58,6 +58,7 @@ class TraceListenerDisabledTest implements ShouldBeNotNull<TraceListener>, JsfEn
         LogAsserts.assertNoLogMessagePresent(TestLogLevel.DEBUG, RequestTracer.class);
     }
 
+    @SuppressWarnings("java:S2925")
     private void startSleepStop(PhaseId phaseId) throws InterruptedException {
         getUnderTest().beforePhase(phaseEvent(phaseId));
         TimeUnit.MILLISECONDS.sleep(50);
