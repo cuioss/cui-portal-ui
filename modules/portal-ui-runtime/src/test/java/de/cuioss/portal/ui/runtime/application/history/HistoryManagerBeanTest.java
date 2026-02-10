@@ -20,13 +20,11 @@ import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.api.pages.HomePage;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.lifecycle.ClientWindowScoped;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
 import org.jboss.weld.junit5.auto.ActivateScopes;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
@@ -39,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @EnablePortalUiEnvironment
 @AddBeanClasses({DefaultHistoryConfiguration.class, ViewMatcherProducer.class})
 @ActivateScopes(ClientWindowScoped.class)
-class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManagerBean>, JsfEnvironmentConsumer {
+class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManagerBean> {
 
     public static final String CURRENT_VIEW_XHTML = "current/view.jsf";
     public static final String FALLBACK_VIEW = "/portal/home.jsf";
@@ -57,9 +55,6 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
     private HistoryManagerBean underTest;
     @Inject
     private PortalTestConfiguration configuration;
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
 
     /**
      * Verify count of iterable
@@ -81,6 +76,7 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
 
     @Test
     void shouldAddViewToHistory() {
+        var facesContext = FacesContext.getCurrentInstance();
         assertEntryCount(1, underTest);
         underTest.addCurrentUriToHistory(CURRENT_VIEW);
         assertEntryCount(2, underTest);
@@ -88,7 +84,7 @@ class HistoryManagerBeanTest implements ShouldHandleObjectContracts<HistoryManag
         underTest.addCurrentUriToHistory(CURRENT_VIEW);
         assertEntryCount(2, underTest);
 
-        getRequestConfigDecorator().setViewId(SECOND_VIEW_XHTML);
+        facesContext.getViewRoot().setViewId(SECOND_VIEW_XHTML);
         underTest.addCurrentUriToHistory(SECOND_VIEW);
         assertEntryCount(3, underTest);
     }

@@ -22,13 +22,11 @@ import de.cuioss.portal.ui.runtime.application.history.DefaultHistoryConfigurati
 import de.cuioss.portal.ui.runtime.application.history.HistoryManagerBean;
 import de.cuioss.portal.ui.runtime.application.view.matcher.ViewMatcherProducer;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.lifecycle.ClientWindowScoped;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
 import org.jboss.weld.junit5.auto.ActivateScopes;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
@@ -40,11 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AddBeanClasses({HistoryManagerBean.class, DefaultHistoryConfiguration.class, ViewMatcherProducer.class})
 @ActivateScopes(ClientWindowScoped.class)
 class HistoryManagerListenerTest
-        implements ShouldHandleObjectContracts<HistoryManagerListener>, JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+        implements ShouldHandleObjectContracts<HistoryManagerListener> {
 
     @Inject
     @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE_EXCLUDE_POSTBACK)
@@ -56,16 +50,18 @@ class HistoryManagerListenerTest
 
     @Test
     void shouldAddToHistory() {
+        var facesContext = FacesContext.getCurrentInstance();
         // Should start on home
         assertEquals(VIEW_HOME_LOGICAL_VIEW_ID, historyManager.getCurrentView().getViewId());
-        getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+        facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         underTest.handleView(DESCRIPTOR_PREFERENCES);
         assertEquals(VIEW_PREFERENCES_LOGICAL_VIEW_ID, historyManager.getCurrentView().getViewId());
     }
 
     @Test
     void shouldDetectPageReload() {
-        getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_VIEW_ID);
+        var facesContext = FacesContext.getCurrentInstance();
+        facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_VIEW_ID);
         underTest.handleView(DESCRIPTOR_PREFERENCES);
 
         assertFalse(historyManager.isPageReload());

@@ -17,10 +17,8 @@ package de.cuioss.portal.ui.runtime.application.resources;
 
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 import org.apache.myfaces.test.mock.MockHttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,16 +28,17 @@ import static jakarta.faces.application.ResourceHandler.RESOURCE_IDENTIFIER;
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
-class CuiUnmappedResourceHandlerTest implements JsfEnvironmentConsumer {
+class CuiUnmappedResourceHandlerTest {
 
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+    private ExternalContext externalContext;
+    private FacesContext facesContext;
 
     private CuiUnmappedResourceHandler underTest;
 
     @BeforeEach
     void setUpHandlerTest() {
+        this.facesContext = FacesContext.getCurrentInstance();
+        this.externalContext = this.facesContext.getExternalContext();
         CuiMockResourceHandler mockResourceHandler = CuiResourceHandlerTest.setupResourceHandlerMock();
         underTest = new CuiUnmappedResourceHandler(mockResourceHandler);
     }
@@ -49,13 +48,13 @@ class CuiUnmappedResourceHandlerTest implements JsfEnvironmentConsumer {
     void shouldDetectRessource(String url, String resourceRequest) {
         boolean resourceRequestBoolean = Boolean.parseBoolean(resourceRequest);
         setRequestURL(url);
-        assertEquals(resourceRequestBoolean, underTest.isResourceRequest(getFacesContext()));
-        assertDoesNotThrow(() -> underTest.handleResourceRequest(getFacesContext()));
+        assertEquals(resourceRequestBoolean, underTest.isResourceRequest(facesContext));
+        assertDoesNotThrow(() -> underTest.handleResourceRequest(facesContext));
         assertNotNull(underTest.decorateResource(CuiResourceHandlerTest.prepareResource(CuiResourceHandlerTest.CSS_LIBRARY, CuiResourceHandlerTest.APPLICATION_CSS)));
     }
 
     private void setRequestURL(String requestURL) {
-        var request = (MockHttpServletRequest) getExternalContext().getRequest();
+        var request = (MockHttpServletRequest) externalContext.getRequest();
         request.setPathElements("faces", "", requestURL, "");
     }
 

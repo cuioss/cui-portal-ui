@@ -30,15 +30,15 @@ import de.cuioss.portal.ui.runtime.application.view.ViewSuppressedException;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.portal.ui.test.mocks.PortalHistoryManagerMock;
 import de.cuioss.portal.ui.test.mocks.PortalViewRestrictionManagerMock;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.enterprise.event.Event;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
+import org.apache.myfaces.test.mock.MockHttpServletResponse;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.*;
@@ -49,11 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @EnableTestLogger
 @AddBeanClasses({CurrentViewProducer.class, NavigationHandlerProducer.class, ViewRelatedExceptionHandler.class,
         PortalTestUserProducer.class, PortalHistoryManagerMock.class})
-class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionHandler>, JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionHandler> {
 
     @Inject
     @Getter
@@ -79,46 +75,56 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
     @Inject
     private Event<ExceptionAsEvent> eventBridge;
 
+    private FacesContext facesContext;
+
+    @BeforeEach
+    void setUp() {
+        this.facesContext = FacesContext.getCurrentInstance();
+    }
+
     @Test
     void shouldCallViewRelatedExceptionHandler() {
         final var event = new ExceptionAsEvent(
                 new ViewSuppressedException(ViewRelatedExceptionHandlerTest.DESCRIPTOR_SUPRRESSED_VIEW));
-        getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+        facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         portalUserProducerMock.authenticated(false);
         underTest.handle(event);
         assertTrue(event.isHandled());
-        assertRedirect(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_LOGIN_LOGICAL_VIEW_ID);
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_SUPPRESSED_KEY);
     }
 
     @Test
     void shouldCallViewRelatedExceptionHandlerAsEvent() {
+
         final var event = new ExceptionAsEvent(
                 new ViewSuppressedException(ViewRelatedExceptionHandlerTest.DESCRIPTOR_SUPRRESSED_VIEW));
-        getRequestConfigDecorator().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
+        facesContext.getViewRoot().setViewId(VIEW_PREFERENCES_LOGICAL_VIEW_ID);
         portalUserProducerMock.authenticated(false);
         eventBridge.fire(event);
         assertTrue(event.isHandled());
-        assertRedirect(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_LOGIN_LOGICAL_VIEW_ID);
         messageProducerMock.assertSingleGlobalMessageWithKeyPresent(ViewRelatedExceptionHandler.VIEW_SUPPRESSED_KEY);
     }
 
     @Test
     void shouldHandleThrowable() {
-        getRequestConfigDecorator().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
         underTest.handle(exceptionEvent);
         assertEquals(HandleOutcome.REDIRECT, exceptionEvent.getOutcome());
 
-        assertRedirect(VIEW_ERROR_LOGICAL_VIEW_ID);
+        assertRedirect(facesContext, VIEW_ERROR_LOGICAL_VIEW_ID);
         var message = (DefaultErrorMessage) sessionStorage.get(DefaultErrorMessage.LOOKUP_KEY);
         assertNotNull(message);
     }
 
     @Test
     void shouldShortcutIfHandled() {
-        getRequestConfigDecorator().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
 
         var exceptionEvent = new ExceptionAsEvent(throwables().next());
         exceptionEvent.handled(HandleOutcome.USER_MESSAGE);
@@ -126,4 +132,8 @@ class PortalUiExceptionHandlerTest implements ShouldBeNotNull<PortalUiExceptionH
         assertEquals(HandleOutcome.USER_MESSAGE, exceptionEvent.getOutcome());
     }
 
+    private static void assertRedirect(FacesContext facesContext, String url) {
+        var response = (MockHttpServletResponse) facesContext.getExternalContext().getResponse();
+        assertEquals(url, response.getHeader("Location"), "Redirect URL mismatch");
+    }
 }

@@ -22,13 +22,10 @@ import de.cuioss.portal.ui.runtime.application.listener.view.PortalCDIViewListen
 import de.cuioss.portal.ui.runtime.application.listener.view.testhelper.AfterViewListener;
 import de.cuioss.portal.ui.runtime.application.listener.view.testhelper.BeforeViewListener;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.PhaseEvent;
 import jakarta.faces.event.PhaseId;
 import jakarta.inject.Inject;
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
@@ -38,11 +35,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({CurrentViewProducer.class, AfterViewListener.class, PortalCDIViewListener.class})
-class PortalViewListenerAdapterTest implements JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+class PortalViewListenerAdapterTest {
 
     @Inject
     @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE)
@@ -54,15 +47,16 @@ class PortalViewListenerAdapterTest implements JsfEnvironmentConsumer {
 
     @Test
     void shouldHandlePhaseListener() {
+        var facesContext = FacesContext.getCurrentInstance();
         var underTest = new PortalViewListenerAdapter();
 
-        getRequestConfigDecorator().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
-        underTest.beforePhase(new PhaseEvent(getFacesContext(), PhaseId.RESTORE_VIEW, new MockLifecycle()));
+        facesContext.getViewRoot().setViewId(VIEW_LOGIN_LOGICAL_VIEW_ID);
+        underTest.beforePhase(new PhaseEvent(facesContext, PhaseId.RESTORE_VIEW, new MockLifecycle()));
 
         assertNotNull(beforeViewListener.getHandledView());
         assertNull(afterViewListener.getHandledView());
 
-        underTest.afterPhase(new PhaseEvent(getFacesContext(), PhaseId.RESTORE_VIEW, new MockLifecycle()));
+        underTest.afterPhase(new PhaseEvent(facesContext, PhaseId.RESTORE_VIEW, new MockLifecycle()));
         assertNotNull(afterViewListener.getHandledView());
 
     }

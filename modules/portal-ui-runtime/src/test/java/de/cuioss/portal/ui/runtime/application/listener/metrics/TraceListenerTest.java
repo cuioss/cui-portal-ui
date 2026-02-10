@@ -18,17 +18,15 @@ package de.cuioss.portal.ui.runtime.application.listener.metrics;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.microprofile.PortalTestMetricRegistry;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.jsf.util.JsfEnvironmentConsumer;
-import de.cuioss.test.jsf.util.JsfEnvironmentHolder;
 import de.cuioss.test.juli.LogAsserts;
 import de.cuioss.test.juli.TestLogLevel;
 import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.PhaseEvent;
 import jakarta.faces.event.PhaseId;
 import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
 import org.apache.myfaces.test.mock.lifecycle.MockLifecycle;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.junit.jupiter.api.Test;
@@ -43,11 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @EnableTestLogger(rootLevel = TestLogLevel.DEBUG, debug = RequestTracer.class)
 @AddBeanClasses({RequestTracer.class, PortalTestMetricRegistry.class})
 @EnablePortalConfiguration(configuration = PORTAL_LISTENER_TRACE_ENABLED + ":true")
-class TraceListenerTest implements ShouldBeNotNull<TraceListener>, JsfEnvironmentConsumer {
-
-    @Setter
-    @Getter
-    private JsfEnvironmentHolder environmentHolder;
+class TraceListenerTest implements ShouldBeNotNull<TraceListener> {
 
     @Inject
     @Getter
@@ -56,9 +50,10 @@ class TraceListenerTest implements ShouldBeNotNull<TraceListener>, JsfEnvironmen
 
     @Test
     void shouldHandleHappyCase() throws Exception {
-        startSleepStop(PhaseId.RESTORE_VIEW);
-        startSleepStop(PhaseId.APPLY_REQUEST_VALUES);
-        startSleepStop(PhaseId.RENDER_RESPONSE);
+        var facesContext = FacesContext.getCurrentInstance();
+        startSleepStop(facesContext, PhaseId.RESTORE_VIEW);
+        startSleepStop(facesContext, PhaseId.APPLY_REQUEST_VALUES);
+        startSleepStop(facesContext, PhaseId.RENDER_RESPONSE);
         LogAsserts.assertSingleLogMessagePresentContaining(TestLogLevel.DEBUG, PROCESSING_IDENTIFIER);
         LogAsserts.assertSingleLogMessagePresentContaining(TestLogLevel.DEBUG, PhaseId.RESTORE_VIEW.getName());
         LogAsserts.assertSingleLogMessagePresentContaining(TestLogLevel.DEBUG, PhaseId.APPLY_REQUEST_VALUES.getName());
@@ -71,13 +66,13 @@ class TraceListenerTest implements ShouldBeNotNull<TraceListener>, JsfEnvironmen
     }
 
     @SuppressWarnings("java:S2925")
-    private void startSleepStop(PhaseId phaseId) throws InterruptedException {
-        underTest.beforePhase(phaseEvent(phaseId));
+    private void startSleepStop(FacesContext facesContext, PhaseId phaseId) throws InterruptedException {
+        underTest.beforePhase(phaseEvent(facesContext, phaseId));
         TimeUnit.MILLISECONDS.sleep(50);
-        underTest.afterPhase(phaseEvent(phaseId));
+        underTest.afterPhase(phaseEvent(facesContext, phaseId));
     }
 
-    private PhaseEvent phaseEvent(PhaseId id) {
-        return new PhaseEvent(getFacesContext(), id, new MockLifecycle());
+    private PhaseEvent phaseEvent(FacesContext facesContext, PhaseId id) {
+        return new PhaseEvent(facesContext, id, new MockLifecycle());
     }
 }
