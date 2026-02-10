@@ -57,7 +57,7 @@ public abstract class PortalNavigationMenuConfigParser {
         try {
             return Integer.parseInt(getMenuConfig().get(getId() + ORDER_SUFFIX));
         } catch (NumberFormatException e) {
-            LOGGER.warn(WARN.PORTAL_138_INVALID_MENU_ORDER, getMenuConfig().get(getId() + ORDER_SUFFIX), getId());
+            LOGGER.warn(e, WARN.PORTAL_138_INVALID_MENU_ORDER, getMenuConfig().get(getId() + ORDER_SUFFIX), getId());
             return -1;
         }
     }
