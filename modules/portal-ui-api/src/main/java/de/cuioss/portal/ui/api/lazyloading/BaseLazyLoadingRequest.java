@@ -26,6 +26,8 @@ import lombok.ToString;
 public abstract class BaseLazyLoadingRequest<T> implements LazyLoadingRequest<T> {
 
     @Getter
+    @SuppressWarnings("java:S6813")
+    // Abstract base class for extension; field injection avoids leaking deps to subclasses
     @Inject
     LazyLoadingThreadModel<T> viewModel;
 
