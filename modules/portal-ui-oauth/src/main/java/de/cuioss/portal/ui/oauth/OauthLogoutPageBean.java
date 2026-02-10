@@ -36,12 +36,12 @@ import jakarta.annotation.Priority;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Alternative;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import jakarta.faces.context.FacesContext;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.Serial;

@@ -30,6 +30,7 @@ import de.cuioss.tools.net.ParameterFilter;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Produces;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import lombok.Getter;
@@ -38,7 +39,6 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAlternatives;
 import org.junit.jupiter.api.Test;
 
-import jakarta.faces.application.FacesMessage;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.Serializable;
