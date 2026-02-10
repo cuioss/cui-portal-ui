@@ -42,8 +42,16 @@ public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadMod
 
     private static final CuiLogger LOGGER = new CuiLogger(PortalLazyLoadingThreadModelMock.class);
 
-    @Inject
     private PortalLazyLoadingViewControllerMock viewControllerMock;
+
+    protected PortalLazyLoadingThreadModelMock() {
+        // for frameworks
+    }
+
+    @Inject
+    public PortalLazyLoadingThreadModelMock(PortalLazyLoadingViewControllerMock viewControllerMock) {
+        this.viewControllerMock = viewControllerMock;
+    }
 
     @Getter
     @Setter
@@ -75,8 +83,6 @@ public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadMod
     private ResultObject<T> handledResult;
 
     @Override
-    @SuppressWarnings("squid:S3655")
-    // owolff: implicitly checked with isValid
     public void processAction(ActionEvent event) {
         this.event = event;
         if (!viewControllerMock.getStarted().isEmpty()) {
@@ -84,7 +90,8 @@ public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadMod
             var started = (LazyLoadingRequest<T>) viewControllerMock.getStarted().getFirst();
             var requestResult = started.backendRequest();
             if (!requestResult.isValid()) {
-                notificationBoxValue = requestResult.getResultDetail().get().getDetail();
+                requestResult.getResultDetail()
+                        .ifPresent(detail -> notificationBoxValue = detail.getDetail());
             }
             requestResult.logDetail("mock", LOGGER);
             started.handleResult(requestResult.getResult());
@@ -98,11 +105,10 @@ public class PortalLazyLoadingThreadModelMock<T> implements LazyLoadingThreadMod
     }
 
     @Override
-    @SuppressWarnings("squid:S3655")
-    // owolff: implicitly checked with isValid
     public void handleRequestResult(ResultObject<T> result, ResultErrorHandler errorHandler) {
         if (!result.isValid()) {
-            notificationBoxValue = result.getResultDetail().get().getDetail();
+            result.getResultDetail()
+                    .ifPresent(detail -> notificationBoxValue = detail.getDetail());
         }
         result.logDetail("mock", LOGGER);
         this.handledResult = result;

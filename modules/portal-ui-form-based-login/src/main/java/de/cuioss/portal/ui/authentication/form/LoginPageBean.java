@@ -154,12 +154,10 @@ public class LoginPageBean extends AbstractLoginPageBean implements LoginPage {
         return !isUserStoreValueValid(loginCredentials.getUserStore());
     }
 
-    @SuppressWarnings("squid:S3655") // owolff: Optional is checked properly
     private String defaultUserStore() {
-        if (defaultConfiguredUserStore.isPresent() && isUserStoreValueValid(defaultConfiguredUserStore.get())) {
-            return defaultConfiguredUserStore.get();
-        }
-        return availableUserStores.getFirst().getName();
+        return defaultConfiguredUserStore
+                .filter(this::isUserStoreValueValid)
+                .orElseGet(() -> availableUserStores.getFirst().getName());
     }
 
     private boolean isUserStoreValueValid(final String userStoreFromCookie) {

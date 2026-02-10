@@ -30,7 +30,7 @@ import java.util.List;
  *
  * @author Oliver Wolff
  */
-@SuppressWarnings("squid:S1214") // We allow constants in the page interfaces, because they belong together
+@SuppressWarnings("java:S1214") // We allow constants in the page interfaces, because they belong together
 // (coherence).
 public interface LoginPage extends Serializable {
 

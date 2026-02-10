@@ -35,14 +35,14 @@ public class OauthMissingScopesErrorHandler extends LazyLoadingErrorHandler {
 
         log.trace("OauthMissingScopesErrorHandler handleRequestError");
 
-        if (null != detail && detail.getCause().isPresent()) {
-            @SuppressWarnings("squid:S3655") // isPresent is called well
-            final var cause = detail.getCause().get();
-            if (cause instanceof MissingScopesException exception) {
-                wrappedOauthFacade.handleMissingScopesException(exception, Collections.emptyMap());
-            } else {
-                super.handleRequestError(cause, detail.getDetail().toString(), errorController, log);
-            }
+        if (null != detail) {
+            detail.getCause().ifPresent(cause -> {
+                if (cause instanceof MissingScopesException exception) {
+                    wrappedOauthFacade.handleMissingScopesException(exception, Collections.emptyMap());
+                } else {
+                    super.handleRequestError(cause, detail.getDetail().toString(), errorController, log);
+                }
+            });
         }
     }
 

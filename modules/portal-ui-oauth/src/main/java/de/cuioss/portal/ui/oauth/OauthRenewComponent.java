@@ -19,9 +19,10 @@ import de.cuioss.portal.authentication.facade.PortalAuthenticationFacade;
 import de.cuioss.portal.authentication.oauth.Oauth2AuthenticationFacade;
 import de.cuioss.portal.common.cdi.PortalBeanManager;
 import de.cuioss.tools.logging.CuiLogger;
+import lombok.Getter;
+
 import jakarta.faces.component.FacesComponent;
 import jakarta.faces.component.UINamingContainer;
-import lombok.Getter;
 
 import java.util.Optional;
 
