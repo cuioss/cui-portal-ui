@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -49,7 +49,7 @@ public class RequestTracer implements Serializable {
 
     static final String NO_TRACING_INFORMATION_AVAILABLE = "No tracing information available";
 
-    private static final CuiLogger log = new CuiLogger(RequestTracer.class);
+    private static final CuiLogger LOGGER = new CuiLogger(RequestTracer.class);
 
     @Serial
     private static final long serialVersionUID = 2706209506496310554L;
@@ -80,11 +80,11 @@ public class RequestTracer implements Serializable {
      */
     public void start(PhaseId id) {
         if (0 == id.getOrdinal()) {
-            log.trace("Ignoring any-phase");
+            LOGGER.trace("Ignoring any-phase");
             return;
         }
         if (PhaseId.RESTORE_VIEW.equals(id)) {
-            log.trace("Using RESTORE_VIEW as starting point for measuring the full processing");
+            LOGGER.trace("Using RESTORE_VIEW as starting point for measuring the full processing");
             complete.start();
             startMetricTotal();
         }
@@ -100,12 +100,12 @@ public class RequestTracer implements Serializable {
      */
     public void stop(PhaseId id) {
         if (PhaseId.RENDER_RESPONSE.equals(id)) {
-            log.trace("Using RENDER_RESPONSE as termination for measuring the full processing");
+            LOGGER.trace("Using RENDER_RESPONSE as termination for measuring the full processing");
             complete.stop();
             stopMetricTotal();
         }
         if (!tracerMap.containsKey(id.getOrdinal())) {
-            log.trace("Tracer for Phase '%s' is not present, ignoring call", id);
+            LOGGER.trace("Tracer for Phase '%s' is not present, ignoring call", id);
             return;
         }
         tracerMap.get(id.getOrdinal()).stop();
@@ -118,7 +118,7 @@ public class RequestTracer implements Serializable {
      * Metrics-registry
      */
     public void writeStatistics() {
-        if (log.isDebugEnabled()) {
+        if (LOGGER.isDebugEnabled()) {
             var builder = new StringBuilder();
             builder.append("\n").append(PROCESSING_IDENTIFIER).append(determineCurrentView()).append("'");
             if (!complete.isDidRun()) {
@@ -131,14 +131,14 @@ public class RequestTracer implements Serializable {
                 var elapsedComplete = complete.getStopWatch().elapsed(TimeUnit.MILLISECONDS);
                 elements.add("0-Request Total: " + elapsedComplete);
                 tracer.forEach(phase -> phase.addTimeToList(elements));
-                log.trace("Gathering differential timings");
+                LOGGER.trace("Gathering differential timings");
                 for (PhaseTracer phaseTracer : tracer) {
                     elapsedComplete = elapsedComplete - phaseTracer.getStopWatch().elapsed(TimeUnit.MILLISECONDS);
                 }
                 elements.add("Delta: " + elapsedComplete);
                 builder.append("\nTimings in ms: ").append(elements);
             }
-            log.debug(builder.toString());
+            LOGGER.debug(builder.toString());
         }
     }
 

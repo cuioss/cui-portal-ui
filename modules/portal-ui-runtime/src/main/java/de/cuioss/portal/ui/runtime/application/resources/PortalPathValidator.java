@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,10 +16,13 @@
 package de.cuioss.portal.ui.runtime.application.resources;
 
 import de.cuioss.http.security.config.SecurityConfiguration;
+import de.cuioss.http.security.core.HttpSecurityValidator;
 import de.cuioss.http.security.exceptions.UrlSecurityException;
 import de.cuioss.http.security.monitoring.SecurityEventCounter;
 import de.cuioss.http.security.pipeline.PipelineFactory;
 import de.cuioss.tools.logging.CuiLogger;
+
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 
 /**
  * Validates resource paths against path traversal and other URL-based attacks
@@ -36,7 +39,7 @@ public class PortalPathValidator {
 
     private static final CuiLogger LOGGER = new CuiLogger(PortalPathValidator.class);
 
-    private final de.cuioss.http.security.core.HttpSecurityValidator pathValidator;
+    private final HttpSecurityValidator pathValidator;
     private final SecurityEventCounter eventCounter;
 
     public PortalPathValidator() {
@@ -60,8 +63,7 @@ public class PortalPathValidator {
             pathValidator.validate(path);
             return true;
         } catch (UrlSecurityException e) {
-            LOGGER.warn("Portal-150: Rejected potentially malicious path '%s': %s",
-                    path, e.getMessage());
+            LOGGER.warn(WARN.PORTAL_150_MALICIOUS_PATH, path, e.getMessage());
             return false;
         }
     }

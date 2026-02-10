@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -53,7 +53,7 @@ class HistoryManagerImpl implements HistoryManager {
     public static final String BEAN_NAME = "historyManager";
     @Serial
     private static final long serialVersionUID = 2205593126500409010L;
-    private static final CuiLogger log = new CuiLogger(HistoryManagerImpl.class);
+    private static final CuiLogger LOGGER = new CuiLogger(HistoryManagerImpl.class);
     private final int historySize;
 
     /**
@@ -105,11 +105,11 @@ class HistoryManagerImpl implements HistoryManager {
 
     @Override
     public void addCurrentUriToHistory(final ViewDescriptor viewDescriptor) {
-        log.trace("addCurrentUriToHistory(id = {}, viewDescriptor = {})", String.valueOf(System.identityHashCode(this)),
+        LOGGER.trace("addCurrentUriToHistory(id = %s, viewDescriptor = %s)", String.valueOf(System.identityHashCode(this)),
                 viewDescriptor);
         if (viewDescriptor.isViewDefined() && !excludeFromHistoryMatcher.match(viewDescriptor)) {
             final var currentViewIdentifier = ViewIdentifier.getFromViewDesciptor(viewDescriptor, parameterFilter);
-            log.trace("currentViewIdentifier = {}", currentViewIdentifier);
+            LOGGER.trace("currentViewIdentifier = %s", currentViewIdentifier);
             if (null != currentViewIdentifier) {
                 handleAddCurrentView(currentViewIdentifier);
             }
@@ -125,7 +125,7 @@ class HistoryManagerImpl implements HistoryManager {
      * @param viewIdentifier must not be null
      */
     private void handleAddCurrentView(final ViewIdentifier viewIdentifier) {
-        log.trace("handleAddCurrentView(id = {}, viewIdentifier = {})", String.valueOf(System.identityHashCode(this)),
+        LOGGER.trace("handleAddCurrentView(id = %s, viewIdentifier = %s)", String.valueOf(System.identityHashCode(this)),
                 viewIdentifier);
         var oldCurrentView = getCurrentView();
         // Ensure that reloading the page will not duplicate history entries
@@ -194,7 +194,7 @@ class HistoryManagerImpl implements HistoryManager {
         if (null == emptyToNull(fallback) && null != emptyToNull(fallbackOutcome)) {
             fallbackIdentifier = NavigationUtils.lookUpToViewIdentifierBy(FacesContext.getCurrentInstance(),
                     fallbackOutcome);
-            log.debug("fallback was calculated to : ['{}']", fallbackIdentifier);
+            LOGGER.debug("fallback was calculated to : ['%s']", fallbackIdentifier);
         }
         return fallbackIdentifier;
     }

@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -47,7 +47,7 @@ public class OauthMessagePhaseListener implements PhaseListener {
     @Serial
     private static final long serialVersionUID = 837984685534479200L;
 
-    private static final CuiLogger log = new CuiLogger(OauthMessagePhaseListener.class);
+    private static final CuiLogger LOGGER = new CuiLogger(OauthMessagePhaseListener.class);
 
     @Override
     public void afterPhase(PhaseEvent event) {
@@ -58,19 +58,18 @@ public class OauthMessagePhaseListener implements PhaseListener {
     public void beforePhase(PhaseEvent event) {
         var context = event.getFacesContext();
         final var response = getResponse(context);
-        if (log.isTraceEnabled()) {
-            log.trace("currentView: {}", getCurrentView(context));
-            log.trace("responseComplete: {}", context.getResponseComplete());
-            log.trace("released: {}", context.isReleased());
-            log.trace("postback: {}", context.isPostback());
-            log.trace("committed: {}", response.isCommitted());
+        if (LOGGER.isTraceEnabled()) {
+            LOGGER.trace("currentView: %s", getCurrentView(context));
+            LOGGER.trace("responseComplete: %s", context.getResponseComplete());
+            LOGGER.trace("released: %s", context.isReleased());
+            LOGGER.trace("postback: %s", context.isPostback());
+            LOGGER.trace("committed: %s", response.isCommitted());
         }
         var session = ServletAdapterUtil.getSession(event.getFacesContext());
         if (CheckContextState.isResponseNotComplete(context) && !response.isCommitted() && session.isPresent()
                 && null != session.get().getAttribute(MESSAGES_IDENTIFIER)) {
-            @SuppressWarnings("unchecked")
-            var messages = (List<FacesMessage>) session.get().getAttribute(MESSAGES_IDENTIFIER);
-            log.trace("restore messages: {}", messages);
+            @SuppressWarnings("unchecked") var messages = (List<FacesMessage>) session.get().getAttribute(MESSAGES_IDENTIFIER);
+            LOGGER.trace("restore messages: %s", messages);
             messages.forEach(message -> event.getFacesContext().addMessage(null,
                     // because the old message may already be rendered (and the rendered flag was
                     // set) we need to reset it

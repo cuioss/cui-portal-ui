@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,13 +22,15 @@ import lombok.Getter;
 
 import java.util.Map;
 
+import static de.cuioss.portal.ui.api.PortalUiApiLogMessages.WARN;
+
 /**
  * Abstract class to implement {@link NavigationMenuItem#getOrder()} and
  * {@link NavigationMenuItem#isRendered()} using a configuration map.
  */
 public abstract class PortalNavigationMenuConfigParser {
 
-    private static final CuiLogger log = new CuiLogger(PortalNavigationMenuConfigParser.class);
+    private static final CuiLogger LOGGER = new CuiLogger(PortalNavigationMenuConfigParser.class);
 
     private static final String ENABLED_SUFFIX = ".enabled";
 
@@ -55,9 +57,7 @@ public abstract class PortalNavigationMenuConfigParser {
         try {
             return Integer.parseInt(getMenuConfig().get(getId() + ORDER_SUFFIX));
         } catch (NumberFormatException e) {
-            log.warn("Portal-138: Invalid menu configuration: Order property '"
-                    + getMenuConfig().get(getId() + ORDER_SUFFIX) + "' for menu item '" + getId()
-                    + "' can not be parsed", e);
+            LOGGER.warn(e, WARN.PORTAL_138_INVALID_MENU_ORDER, getMenuConfig().get(getId() + ORDER_SUFFIX), getId());
             return -1;
         }
     }

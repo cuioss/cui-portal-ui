@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,6 +29,7 @@ import lombok.ToString;
 import java.io.Serial;
 import java.io.Serializable;
 
+import static de.cuioss.portal.ui.errorpages.PortalUiErrorPagesLogMessages.WARN;
 import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
 /**
@@ -39,7 +40,7 @@ import static de.cuioss.tools.string.MoreStrings.isEmpty;
 public abstract class AbstractHttpErrorPage implements Serializable {
 
     static final String JAKARTA_SERVLET_ERROR_REQUEST_URI = "jakarta.servlet.error.request_uri";
-    private static final CuiLogger log = new CuiLogger(AbstractHttpErrorPage.class);
+    private static final CuiLogger LOGGER = new CuiLogger(AbstractHttpErrorPage.class);
     private static final String UNKNOWN = "?";
     @Serial
     private static final long serialVersionUID = -6617663225820801072L;
@@ -62,7 +63,7 @@ public abstract class AbstractHttpErrorPage implements Serializable {
         var request = ServletAdapterUtil.getRequest(context);
         requestUri = determineRequestUri(request);
         ServletAdapterUtil.getResponse(context).setStatus(getErrorCode());
-        log.warn("Portal-137: Http-Error '{}' for requested-uri '{}' was raised", getErrorCode(), requestUri);
+        LOGGER.warn(WARN.PORTAL_137_HTTP_ERROR, getErrorCode(), requestUri);
         return null;
     }
 

@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,6 +39,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static de.cuioss.portal.ui.api.PortalCoreBeanNames.MULTI_VIEW_MAPPER_BEAN_NAME;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
@@ -96,21 +97,21 @@ public class PortalViewMapper implements MultiViewMapper {
         try {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getViewPath() + '/' + resourceName).getURL();
             if (null == url) {
-                LOGGER.warn("Portal-127: View %s with path %s from descriptor %s was not found", resourceName,
+                LOGGER.warn(WARN.PORTAL_127_VIEW_NOT_FOUND, resourceName,
                         descriptor.getViewPath(), descriptor.toString());
             } else {
                 LOGGER.debug("adding view %s", resourceName);
                 builderMap.put(resourceName, url);
             }
         } catch (final IllegalArgumentException e) {
-            LOGGER.warn("Portal-144: Configured view/template resource '%s' can not be resolved, skipped", resourceName);
+            LOGGER.warn(WARN.PORTAL_144_RESOURCE_NOT_RESOLVED, resourceName);
         }
     }
 
     @Override
     public Optional<URL> resolveViewPath(final String requestedResource) {
         if (!PATH_VALIDATOR.isValidPath(requestedResource)) {
-            LOGGER.warn("Portal-150: Rejected invalid view path: '%s'", requestedResource);
+            LOGGER.warn(WARN.PORTAL_150_INVALID_VIEW_PATH, requestedResource);
             return Optional.empty();
         }
         return Optional.ofNullable(viewMap.computeIfAbsent(requestedResource,

@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,7 +22,6 @@ import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import org.apache.myfaces.test.mock.MockHttpServletRequest;
@@ -32,8 +31,6 @@ import org.jboss.weld.junit5.auto.AddBeanClasses;
 import org.jboss.weld.junit5.auto.EnableAutoWeld;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -62,7 +59,7 @@ class HeaderServletFilterTest implements ShouldBeNotNull<HeaderServletFilter> {
 
     @Test
     @SuppressWarnings("UastIncorrectHttpHeaderInspection")
-    void shouldDoFilter() throws ServletException, IOException {
+    void shouldDoFilter() throws Exception {
         HttpHeaderFilterImplTest.configureFilter(configuration);
 
         HttpServletResponse response = new MockHttpServletResponse();

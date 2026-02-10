@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,10 +39,7 @@ import org.junit.jupiter.api.Test;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_BASE;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.MENU_TOP_IDENTIFIER;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
 @AddBeanClasses({AccountMenuItem.class, AboutMenuItem.class, LogoutMenuItem.class, EmptyNavigationContainer.class,
@@ -71,16 +68,16 @@ class NavigationMenuProviderImplTest
     void shouldProvideDefaultConfiguration() {
         var topLevelElements = underTest.getNavigationMenuRoots();
         assertEquals(2, topLevelElements.size());
-        assertEquals(UserMenuItem.MENU_ID, topLevelElements.get(0).getId());
+        assertEquals(UserMenuItem.MENU_ID, topLevelElements.getFirst().getId());
         assertEquals(LogoutMenuItem.MENU_ID, topLevelElements.get(1).getId());
 
         // Check UserMenu
-        var userMenu = topLevelElements.get(0);
+        var userMenu = topLevelElements.getFirst();
         assertEquals(PortalAuthenticationFacadeMock.USER, ((NavigationMenuItemContainer) userMenu).getResolvedLabel());
         assertEquals(3, ((NavigationMenuItemContainer) userMenu).getChildren().size());
 
         assertEquals(PreferencesMenuItem.MENU_ID,
-                ((NavigationMenuItemContainer) userMenu).getChildren().get(0).getId());
+                ((NavigationMenuItemContainer) userMenu).getChildren().getFirst().getId());
         assertEquals(AccountMenuItem.MENU_ID, ((NavigationMenuItemContainer) userMenu).getChildren().get(1).getId());
         assertEquals(AboutMenuItem.MENU_ID, ((NavigationMenuItemContainer) userMenu).getChildren().get(2).getId());
     }
@@ -93,7 +90,7 @@ class NavigationMenuProviderImplTest
 
         var topLevelElements = underTest.getNavigationMenuRoots();
         assertEquals(2, topLevelElements.size());
-        assertEquals(UserMenuItem.MENU_ID, topLevelElements.get(0).getId());
+        assertEquals(UserMenuItem.MENU_ID, topLevelElements.getFirst().getId());
         assertEquals(LogoutMenuItem.MENU_ID, topLevelElements.get(1).getId());
     }
 
@@ -171,7 +168,7 @@ class NavigationMenuProviderImplTest
 
         assertNotNull(underTest.getMenuItemsByParentId("application"));
         assertEquals(1, underTest.getMenuItemsByParentId("application").size());
-        assertEquals("A", underTest.getMenuItemsByParentId("application").get(0).getId());
+        assertEquals("A", underTest.getMenuItemsByParentId("application").getFirst().getId());
     }
 
     @Test
@@ -183,7 +180,7 @@ class NavigationMenuProviderImplTest
 
         assertNotNull(underTest.getMenuItemsByParentId("application"));
         assertEquals(2, underTest.getMenuItemsByParentId("application").size());
-        assertEquals("A", underTest.getMenuItemsByParentId("application").get(0).getId());
+        assertEquals("A", underTest.getMenuItemsByParentId("application").getFirst().getId());
         assertEquals("B", underTest.getMenuItemsByParentId("application").get(1).getId());
     }
 }

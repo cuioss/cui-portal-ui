@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,6 +39,9 @@ import java.io.Serializable;
 import java.util.Optional;
 import java.util.UUID;
 
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.ERROR;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
+
 /**
  * Defines the last line of defense, saying displaying the error page with the
  * general message An exception occurred. "Should" not happen often. Every time
@@ -52,16 +55,10 @@ import java.util.UUID;
 @RequestScoped
 public class FallBackExceptionHandler implements Serializable {
 
-    static final String UNSPECIFIED_EXCEPTION_WITHOUT_VIEW = "Portal-112: An unspecified exception has been caught and handled by fallback strategy";
-    static final String PORTAL_130_ERROR_ON_ERROR_PAGE = "Portal-130: Previous error occurs on error page. This will lead to damaged output and is a sign of corrupted deployment";
     private static final CuiLogger LOGGER = new CuiLogger(FallBackExceptionHandler.class);
     @Serial
     private static final long serialVersionUID = -1197300817644970750L;
     private static final String SYSTEM_ERROR = "System error";
-    private static final String UNSPECIFIED_EXCEPTION = "Portal-111: An unspecified exception has been caught and handled by fallback strategy while trying to access view ";
-    private static final String UNSPECIFIED_EXCEPTION_SUFFIX = ", errorTicket=";
-    private static final String EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_SESSION = "Portal-113: Detected an invalidated session, trying to recreate, reason={}";
-    private static final String EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_NEW_SESSION = "Portal-502: Unable to recreate session, reason={}";
     @Inject
     @PortalSessionStorage
     private Provider<MapStorage<Serializable, Serializable>> sessionStorageProvider;
@@ -100,7 +97,7 @@ public class FallBackExceptionHandler implements Serializable {
         if (CheckContextState.isResponseNotComplete(facesContext)
                 && !facesContext.getExternalContext().isResponseCommitted()) {
             var errorTicket = UUID.randomUUID().toString();
-            LOGGER.error(UNSPECIFIED_EXCEPTION + currentView + UNSPECIFIED_EXCEPTION_SUFFIX + errorTicket, throwable);
+            LOGGER.error(throwable, ERROR.PORTAL_111_UNSPECIFIED_EXCEPTION, currentView, errorTicket);
             exceptionEvent.handled(HandleOutcome.LOGGED);
             final var errorMessage = new DefaultErrorMessage(SYSTEM_ERROR, errorTicket,
                     throwable.getClass().getCanonicalName() + ": " + msg, "");
@@ -113,11 +110,11 @@ public class FallBackExceptionHandler implements Serializable {
                 navigationHandler.handleNavigation(facesContext, null, ErrorPage.OUTCOME);
                 exceptionEvent.handled(HandleOutcome.REDIRECT);
             } else {
-                LOGGER.error(PORTAL_130_ERROR_ON_ERROR_PAGE);
+                LOGGER.error(throwable, ERROR.PORTAL_130_ERROR_ON_ERROR_PAGE);
             }
 
         } else {
-            LOGGER.error(throwable, UNSPECIFIED_EXCEPTION_WITHOUT_VIEW);
+            LOGGER.error(throwable, ERROR.PORTAL_112_UNSPECIFIED_EXCEPTION_NO_VIEW);
             exceptionEvent.handled(HandleOutcome.LOGGED);
         }
     }
@@ -133,16 +130,18 @@ public class FallBackExceptionHandler implements Serializable {
             var sessionStorage = sessionStorageProvider.get();
             sessionStorage.containsKey("testKey");
             return Optional.of(sessionStorage);
+            // cui-rewrite:disable InvalidExceptionUsageRecipe
         } catch (RuntimeException e) {
-            LOGGER.warn(EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_SESSION, e.getMessage());
+            LOGGER.warn(WARN.EXCEPTION_HANDLING_INVALID_SESSION, e.getMessage());
             facesContext.getExternalContext().getSession(true);
             MapStorage<Serializable, Serializable> sessionStorage;
             try {
                 sessionStorage = sessionStorageProvider.get();
                 sessionStorage.containsKey("testKey");
                 return Optional.of(sessionStorage);
+                // cui-rewrite:disable InvalidExceptionUsageRecipe
             } catch (RuntimeException e1) {
-                LOGGER.error(EXCEPTION_HANDLING_FAILED_DUE_TO_INVALID_NEW_SESSION, e1.getMessage());
+                LOGGER.error(e1, ERROR.PORTAL_502_SESSION_RECREATE_FAILED, e1.getMessage());
             }
             return Optional.empty();
         }

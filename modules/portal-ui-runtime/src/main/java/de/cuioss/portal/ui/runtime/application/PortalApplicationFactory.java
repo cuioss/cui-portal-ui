@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -68,15 +68,15 @@ public class PortalApplicationFactory extends ApplicationFactory {
      */
     private Application createPortalApplication(final Application application) {
         synchronized (PortalApplicationFactory.class) {
-            LOGGER.debug("Initializing with given application", application.getClass().getName());
+            LOGGER.debug("Initializing with given application: %s", application.getClass().getName());
             var toBeWrapped = application;
             while (!(toBeWrapped instanceof PortalApplication) && toBeWrapped instanceof ApplicationWrapper) {
-                LOGGER.debug("Found wrapped application", toBeWrapped.getClass().getName());
+                LOGGER.debug("Found wrapped application: %s", toBeWrapped.getClass().getName());
                 toBeWrapped = ((ApplicationWrapper) toBeWrapped).getWrapped();
             }
 
             if (!(toBeWrapped instanceof PortalApplication)) {
-                LOGGER.debug("Wrapping application", application.getClass().getName());
+                LOGGER.debug("Wrapping application: %s", application.getClass().getName());
                 toBeWrapped = new PortalApplication(application);
             }
             this.application = toBeWrapped;

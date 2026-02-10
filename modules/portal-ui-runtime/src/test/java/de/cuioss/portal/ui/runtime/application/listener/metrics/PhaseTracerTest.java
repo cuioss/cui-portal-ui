@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +15,9 @@
  */
 package de.cuioss.portal.ui.runtime.application.listener.metrics;
 
+import de.cuioss.test.juli.LogAsserts;
+import de.cuioss.test.juli.TestLogLevel;
+import de.cuioss.test.juli.junit5.EnableTestLogger;
 import de.cuioss.test.valueobjects.ValueObjectTest;
 import de.cuioss.test.valueobjects.api.contracts.VerifyConstructor;
 import de.cuioss.test.valueobjects.api.property.PropertyConfig;
@@ -28,15 +31,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @PropertyConfig(name = "phaseId", propertyClass = PhaseId.class, propertyReadWrite = PropertyReadWrite.WRITE_ONLY)
 @VerifyConstructor(of = {"phaseId"}, allRequired = true)
 @PropertyReflectionConfig(skip = true)
+@EnableTestLogger
 class PhaseTracerTest extends ValueObjectTest<PhaseTracer> {
 
     @Test
@@ -65,24 +65,28 @@ class PhaseTracerTest extends ValueObjectTest<PhaseTracer> {
         underTest.start();
         assertTrue(underTest.isDidRun());
         assertNotNull(underTest.toString());
+        // stop() called without prior start() triggers PHASE_ALREADY_STOPPED
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-RT-119");
+        // start() called while already running triggers PHASE_ALREADY_STARTED
+        LogAsserts.assertLogMessagePresentContaining(TestLogLevel.WARN, "PORTAL-UI-RT-118");
     }
 
     @Test
-    void shouldAugmentToTimerList() throws InterruptedException {
+    void shouldAugmentToTimerList() throws Exception {
         var phase = PhaseId.PROCESS_VALIDATIONS;
         var outputPrefix = phase.getOrdinal() + "-" + phase.getName() + ": ";
         var underTest = new PhaseTracer(phase);
         List<String> result = mutableList();
         underTest.addTimeToList(result);
         assertEquals(1, result.size());
-        assertEquals(outputPrefix + "-1", result.get(0));
+        assertEquals(outputPrefix + "-1", result.getFirst());
 
         result.clear();
         underTest.start();
         TimeUnit.MILLISECONDS.sleep(10);
         underTest.stop();
         underTest.addTimeToList(result);
-        assertNotEquals(outputPrefix + "-1", result.get(0));
+        assertNotEquals(outputPrefix + "-1", result.getFirst());
     }
 
     @Test
@@ -94,7 +98,7 @@ class PhaseTracerTest extends ValueObjectTest<PhaseTracer> {
         List<PhaseTracer> list = mutableList(apply, validation, response);
         Collections.shuffle(list);
         Collections.sort(list);
-        assertEquals(apply, list.get(0));
+        assertEquals(apply, list.getFirst());
         assertEquals(validation, list.get(1));
         assertEquals(response, list.get(2));
     }

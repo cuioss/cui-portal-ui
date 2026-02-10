@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 import static de.cuioss.portal.ui.api.PortalCoreBeanNames.MULTI_TEMPLATING_MAPPER_BEAN_NAME;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 import static de.cuioss.tools.collect.CollectionLiterals.mutableList;
 
 /**
@@ -98,15 +99,13 @@ public class PortalTemplateMapper implements MultiTemplatingMapper {
             final var url = FileLoaderUtility.getLoaderForPath(descriptor.getTemplatePath() + '/' + resourceName)
                     .getURL();
             if (null == url) {
-                LOGGER.warn("Portal-126: Template %s with path %s from descriptor %s was not found", resourceName,
+                LOGGER.warn(WARN.PORTAL_126_TEMPLATE_NOT_FOUND, resourceName,
                         descriptor.getTemplatePath(), descriptor.toString());
             } else {
                 builderMap.put(resourceName, url);
             }
         } catch (final IllegalArgumentException e) {
-            LOGGER.warn(e,
-                    "Portal-144: Configured view/template resource '%s' can not be resolved, skipped",
-                    resourceName);
+            LOGGER.warn(e, WARN.PORTAL_144_RESOURCE_NOT_RESOLVED, resourceName);
         }
     }
 

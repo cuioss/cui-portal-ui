@@ -1,12 +1,12 @@
 /*
- * Copyright 2023 the original author or authors.
- * <p>
+ * Copyright © 2025 CUI-OpenSource-Software (info@cuioss.de)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,6 +43,8 @@ import java.util.Map.Entry;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.HTTP_HEADER_BASE;
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.HTTP_HEADER_ENABLED;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.ERROR;
+import static de.cuioss.portal.ui.runtime.PortalUiRuntimeLogMessages.WARN;
 import static de.cuioss.tools.string.MoreStrings.isEmpty;
 
 /**
@@ -54,10 +56,6 @@ import static de.cuioss.tools.string.MoreStrings.isEmpty;
 public class HttpHeaderFilterImpl {
 
     private static final CuiLogger LOGGER = new CuiLogger(HttpHeaderFilterImpl.class);
-
-    private static final String INVALID_KEY = "Portal-128: Invalid configuration key '{}'";
-
-    private static final String INVALID_VALUE = "Portal-129: Invalid configuration value '{}' for key '{}'";
 
     @Inject
     @ConfigAsFilteredMap(startsWith = HTTP_HEADER_BASE, stripPrefix = true)
@@ -94,29 +92,29 @@ public class HttpHeaderFilterImpl {
         for (final Entry<String, String> entry : headerConfigurationMap.entrySet()) {
             final var split = Splitter.on('.').splitToList(entry.getKey());
             if (split.size() != 2) {
-                LOGGER.error(INVALID_KEY, entry.getKey());
+                LOGGER.error(ERROR.PORTAL_128_INVALID_KEY, entry.getKey());
             } else {
                 switch (split.get(1).toLowerCase(Locale.ROOT)) {
                     case "enabled":
-                        getOrCreateHeader(split.get(0), headerMap)
+                        getOrCreateHeader(split.getFirst(), headerMap)
                                 .setEnabled(Boolean.parseBoolean(entry.getValue().trim()));
                         break;
                     case "views":
-                        getOrCreateHeader(split.get(0), headerMap).setViewMatcher(createViewMatcher(entry.getValue()));
+                        getOrCreateHeader(split.getFirst(), headerMap).setViewMatcher(createViewMatcher(entry.getValue()));
                         break;
                     case "content":
-                        final var header = getOrCreateHeader(split.get(0), headerMap);
+                        final var header = getOrCreateHeader(split.getFirst(), headerMap);
                         final var value = entry.getValue().trim();
                         final var splitValues = Splitter.on(": ").splitToList(value);
                         if (splitValues.size() < 2) {
-                            LOGGER.warn(INVALID_VALUE, entry.getValue(), entry.getKey());
+                            LOGGER.warn(WARN.PORTAL_129_INVALID_VALUE, entry.getValue(), entry.getKey());
                             break;
                         }
-                        header.setKey(splitValues.get(0).trim());
+                        header.setKey(splitValues.getFirst().trim());
                         header.setValue(value.substring(value.indexOf(": ") + 2));
                         break;
                     default:
-                        LOGGER.warn(INVALID_KEY, entry.getKey());
+                        LOGGER.warn(WARN.PORTAL_128_INVALID_KEY, entry.getKey());
                 }
             }
         }
