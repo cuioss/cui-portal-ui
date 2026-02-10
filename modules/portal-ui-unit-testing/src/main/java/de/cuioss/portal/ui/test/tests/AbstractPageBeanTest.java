@@ -77,7 +77,8 @@ public abstract class AbstractPageBeanTest<T extends Serializable>
         implements JsfEnvironmentConsumer, ShouldBeNotNull<T>, GeneratorRegistry {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractPageBeanTest.class);
-    @SuppressWarnings("java:S6813") // Weld JUnit 5 injects fields via reflection; constructor injection not applicable
+    @SuppressWarnings("java:S6813")
+    // Weld JUnit 5 injects fields via reflection; constructor injection not applicable
     @Inject
     protected PortalTestConfiguration configuration;
     @Setter
