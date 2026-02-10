@@ -58,7 +58,6 @@ class HeaderServletFilterTest implements ShouldBeNotNull<HeaderServletFilter> {
     }
 
     @Test
-    @SuppressWarnings("UastIncorrectHttpHeaderInspection")
     void shouldDoFilter() throws Exception {
         HttpHeaderFilterImplTest.configureFilter(configuration);
 
