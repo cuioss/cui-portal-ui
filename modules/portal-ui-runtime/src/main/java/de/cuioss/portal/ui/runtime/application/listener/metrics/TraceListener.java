@@ -46,12 +46,20 @@ public class TraceListener implements PhaseListener {
 
     private static final CuiLogger LOGGER = new CuiLogger(TraceListener.class);
 
-    @Inject
-    @ConfigProperty(name = PORTAL_LISTENER_TRACE_ENABLED)
     private boolean enabled;
 
-    @Inject
     private RequestTracer requestTracer;
+
+    protected TraceListener() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public TraceListener(@ConfigProperty(name = PORTAL_LISTENER_TRACE_ENABLED) boolean enabled,
+            RequestTracer requestTracer) {
+        this.enabled = enabled;
+        this.requestTracer = requestTracer;
+    }
 
     @Override
     public void beforePhase(PhaseEvent event) {

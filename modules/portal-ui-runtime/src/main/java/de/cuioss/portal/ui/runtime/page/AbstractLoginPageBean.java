@@ -46,6 +46,7 @@ import static de.cuioss.portal.configuration.PortalConfigurationKeys.PORTAL_SESS
  *
  * @author Matthias Walliczek
  */
+@SuppressWarnings("java:S6813") // Field injection required: abstract base class with subclasses in other modules
 public abstract class AbstractLoginPageBean implements Serializable {
 
     private static final CuiLogger LOGGER = new CuiLogger(AbstractLoginPageBean.class);

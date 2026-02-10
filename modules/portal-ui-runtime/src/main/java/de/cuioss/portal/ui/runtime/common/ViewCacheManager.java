@@ -50,11 +50,19 @@ public class ViewCacheManager implements Serializable {
 
     private static final CuiLogger LOGGER = new CuiLogger(ViewCacheManager.class);
 
+    private boolean enabled;
+    private Provider<FacesContext> contextProvider;
+
+    protected ViewCacheManager() {
+        // for CDI proxy
+    }
+
     @Inject
-    @ConfigProperty(name = ENABLE_CACHE)
-    boolean enabled;
-    @Inject
-    Provider<FacesContext> contextProvider;
+    public ViewCacheManager(@ConfigProperty(name = ENABLE_CACHE) boolean enabled,
+            Provider<FacesContext> contextProvider) {
+        this.enabled = enabled;
+        this.contextProvider = contextProvider;
+    }
 
     /**
      * @return boolean indicating whether the cache is disabled by configuration

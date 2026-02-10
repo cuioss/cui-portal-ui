@@ -57,20 +57,28 @@ public class RequestTracer implements Serializable {
     private static final String METRIC_ID_TOTAL = "jsf.view.total";
     private final Map<Integer, PhaseTracer> tracerMap = new HashMap<>();
     private final PhaseTracer complete = new PhaseTracer(PhaseId.ANY_PHASE);
-    @Inject
-    @CuiCurrentView
     private Provider<ViewDescriptor> currentViewProvider;
 
     /**
      * The default value is explicitly set here, because the actual configuration of
      * that value is set by the "portal-metrics" module, which is optional.
      */
-    @Inject
-    @ConfigProperty(name = PORTAL_METRICS_ENABLED, defaultValue = "false")
     private boolean metricsEnabled;
 
-    @Inject
     private Provider<MetricRegistry> metricRegistry;
+
+    protected RequestTracer() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public RequestTracer(@CuiCurrentView Provider<ViewDescriptor> currentViewProvider,
+            @ConfigProperty(name = PORTAL_METRICS_ENABLED, defaultValue = "false") boolean metricsEnabled,
+            Provider<MetricRegistry> metricRegistry) {
+        this.currentViewProvider = currentViewProvider;
+        this.metricsEnabled = metricsEnabled;
+        this.metricRegistry = metricRegistry;
+    }
 
     /**
      * Starts the tracing of a certain phase.

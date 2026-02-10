@@ -49,10 +49,18 @@ public class ThreadManager {
 
     private static final CuiLogger LOGGER = new CuiLogger(ThreadManager.class);
     private final Map<String, FutureHandle> registry = new HashMap<>();
-    @Inject
-    @ConfigProperty(name = PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT)
     private Provider<Integer> requestHandleTimeoutProvider;
     private int requestHandleTimeout;
+
+    protected ThreadManager() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public ThreadManager(
+            @ConfigProperty(name = PORTAL_LAZY_LOADING_REQUEST_HANDLE_TIMEOUT) Provider<Integer> requestHandleTimeoutProvider) {
+        this.requestHandleTimeoutProvider = requestHandleTimeoutProvider;
+    }
     private ExecutorService executorService;
     /**
      * To stop the cleanup worker thread.

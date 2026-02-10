@@ -66,14 +66,23 @@ public class PortalLocaleManagerBean implements Serializable {
     @Serial
     private static final long serialVersionUID = -3555387539352353982L;
 
-    @Inject
-    LocaleResolverService resolverService;
-    @Inject
-    @LocaleChangeEvent
-    Event<Locale> localeChangeEvent;
-    @Inject
-    Provider<FacesContext> facesContextProvider;
+    private LocaleResolverService resolverService;
+    private Event<Locale> localeChangeEvent;
+    private Provider<FacesContext> facesContextProvider;
     private Locale locale;
+
+    protected PortalLocaleManagerBean() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PortalLocaleManagerBean(LocaleResolverService resolverService,
+            @LocaleChangeEvent Event<Locale> localeChangeEvent,
+            Provider<FacesContext> facesContextProvider) {
+        this.resolverService = resolverService;
+        this.localeChangeEvent = localeChangeEvent;
+        this.facesContextProvider = facesContextProvider;
+    }
 
     /**
      * Producer method for {@link Locale} identified by {@link PortalLocale}

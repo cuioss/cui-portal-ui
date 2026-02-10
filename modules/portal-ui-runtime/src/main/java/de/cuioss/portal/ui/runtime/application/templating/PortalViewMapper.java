@@ -62,9 +62,16 @@ public class PortalViewMapper implements MultiViewMapper {
 
     private Map<String, URL> viewMap;
 
-    @Inject
-    @PortalViewDescriptor
     private Instance<StaticViewDescriptor> descriptors;
+
+    protected PortalViewMapper() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PortalViewMapper(@PortalViewDescriptor Instance<StaticViewDescriptor> descriptors) {
+        this.descriptors = descriptors;
+    }
 
     /**
      * Sorts the descriptors according to Priority annotation and creates the

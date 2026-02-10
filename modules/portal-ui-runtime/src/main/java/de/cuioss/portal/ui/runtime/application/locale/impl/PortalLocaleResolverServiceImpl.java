@@ -56,14 +56,23 @@ public class PortalLocaleResolverServiceImpl implements LocaleResolverService, S
 
     @Serial
     private static final long serialVersionUID = 2745227675026232302L;
-    @Inject
-    Provider<FacesContext> facesContextProvider;
-    @Inject
-    LocaleConfiguration localeConfiguration;
-    @Inject
-    @PortalClientStorage
-    ClientStorage clientStorage;
+    private Provider<FacesContext> facesContextProvider;
+    private LocaleConfiguration localeConfiguration;
+    private ClientStorage clientStorage;
     private Locale locale;
+
+    protected PortalLocaleResolverServiceImpl() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PortalLocaleResolverServiceImpl(Provider<FacesContext> facesContextProvider,
+            LocaleConfiguration localeConfiguration,
+            @PortalClientStorage ClientStorage clientStorage) {
+        this.facesContextProvider = facesContextProvider;
+        this.localeConfiguration = localeConfiguration;
+        this.clientStorage = clientStorage;
+    }
     @Getter
     private List<Locale> availableLocales;
 

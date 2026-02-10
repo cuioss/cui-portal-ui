@@ -76,14 +76,22 @@ public class NavigationMenuProviderImpl implements NavigationMenuProvider {
     private static final long serialVersionUID = 8780699386708876208L;
     private static final CuiLogger LOGGER = new CuiLogger(NavigationMenuProviderImpl.class);
     private final Map<String, List<NavigationMenuItem>> virtualParentContainer = new HashMap<>();
-    @Inject
-    @PortalMenuItem
-    Instance<NavigationMenuItem> injectedItems;
-    @Inject
-    @ConfigAsFilteredMap(startsWith = MENU_BASE, stripPrefix = true)
-    Map<String, String> menuConfig;
+    private Instance<NavigationMenuItem> injectedItems;
+    private Map<String, String> menuConfig;
     @Getter
     private List<NavigationMenuItem> navigationMenuRoots = new ArrayList<>();
+
+    protected NavigationMenuProviderImpl() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public NavigationMenuProviderImpl(
+            @PortalMenuItem Instance<NavigationMenuItem> injectedItems,
+            @ConfigAsFilteredMap(startsWith = MENU_BASE, stripPrefix = true) Map<String, String> menuConfig) {
+        this.injectedItems = injectedItems;
+        this.menuConfig = menuConfig;
+    }
     /**
      * Defines all elements that are rendered.
      */

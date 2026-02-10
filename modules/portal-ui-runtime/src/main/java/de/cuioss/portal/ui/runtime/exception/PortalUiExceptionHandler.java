@@ -37,11 +37,20 @@ public class PortalUiExceptionHandler {
 
     private static final CuiLogger LOGGER = new CuiLogger(PortalUiExceptionHandler.class);
 
-    @Inject
     private Instance<PortalExceptionHandler> handler;
 
-    @Inject
     private FallBackExceptionHandler fallBackExceptionHandler;
+
+    protected PortalUiExceptionHandler() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PortalUiExceptionHandler(Instance<PortalExceptionHandler> handler,
+            FallBackExceptionHandler fallBackExceptionHandler) {
+        this.handler = handler;
+        this.fallBackExceptionHandler = fallBackExceptionHandler;
+    }
 
     /**
      * @param exceptionEvent the exception that may be handled. If this Handler

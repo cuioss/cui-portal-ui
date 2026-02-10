@@ -69,17 +69,23 @@ public class LazyLoadingViewModelImpl<T> implements LazyLoadingThreadModel<T>, E
     private static final CuiLogger LOGGER = new CuiLogger(LazyLoadingViewModelImpl.class);
     @Getter
     private final String requestId = UUID.randomUUID().toString();
-    @Inject
-    ThreadManager threadManager;
-    @Inject
-    @ConfigProperty(name = PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT)
-    int requestRetrieveTimeout;
-    @Inject
-    Provider<DisplayNameMessageProducer> displayNameMessageProducer;
-    @Inject
-    StickyMessageProducer stickyMessageProducer;
+    private final ThreadManager threadManager;
+    private final int requestRetrieveTimeout;
+    private final Provider<DisplayNameMessageProducer> displayNameMessageProducer;
+    private final StickyMessageProducer stickyMessageProducer;
     @Getter
     private IDisplayNameProvider<?> notificationBoxValue;
+
+    @Inject
+    public LazyLoadingViewModelImpl(ThreadManager threadManager,
+            @ConfigProperty(name = PORTAL_LAZY_LOADING_REQUEST_RETRIEVE_TIMEOUT) int requestRetrieveTimeout,
+            Provider<DisplayNameMessageProducer> displayNameMessageProducer,
+            StickyMessageProducer stickyMessageProducer) {
+        this.threadManager = threadManager;
+        this.requestRetrieveTimeout = requestRetrieveTimeout;
+        this.displayNameMessageProducer = displayNameMessageProducer;
+        this.stickyMessageProducer = stickyMessageProducer;
+    }
     @Getter
     private ContextState notificationBoxState;
     @Getter

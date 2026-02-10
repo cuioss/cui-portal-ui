@@ -68,13 +68,21 @@ public class DefaultHistoryConfiguration implements Serializable {
     @Getter
     private String fallback;
     @Getter
-    @Inject
-    @ConfigProperty(name = HISTORY_EXCLUDE_PARAMETER)
     private List<String> excludeParameter;
 
     @Getter
-    @Inject
-    @ConfigAsViewMatcher(name = HISTORY_VIEW_EXCLUDE_PARAMETER)
     private ViewMatcher excludeFromHistoryMatcher;
+
+    protected DefaultHistoryConfiguration() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public DefaultHistoryConfiguration(
+            @ConfigProperty(name = HISTORY_EXCLUDE_PARAMETER) List<String> excludeParameter,
+            @ConfigAsViewMatcher(name = HISTORY_VIEW_EXCLUDE_PARAMETER) ViewMatcher excludeFromHistoryMatcher) {
+        this.excludeParameter = excludeParameter;
+        this.excludeFromHistoryMatcher = excludeFromHistoryMatcher;
+    }
 
 }

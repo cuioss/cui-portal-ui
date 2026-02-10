@@ -54,16 +54,24 @@ public class HistoryManagerListener implements ViewListener {
     @Serial
     private static final long serialVersionUID = 6342018758236517336L;
 
-    @Inject
     private HistoryManager historyManager;
 
-    @Inject
     private Event<PageRefreshEvent> event;
 
     @Getter
-    @Inject
-    @ConfigProperty(name = PORTAL_LISTENER_HISTORY_MANAGER)
     private boolean enabled;
+
+    protected HistoryManagerListener() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public HistoryManagerListener(HistoryManager historyManager, Event<PageRefreshEvent> event,
+            @ConfigProperty(name = PORTAL_LISTENER_HISTORY_MANAGER) boolean enabled) {
+        this.historyManager = historyManager;
+        this.event = event;
+        this.enabled = enabled;
+    }
 
     @Override
     public void handleView(final ViewDescriptor viewDescriptor) {

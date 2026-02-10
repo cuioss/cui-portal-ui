@@ -40,8 +40,12 @@ public class LazyLoadingViewControllerImpl implements LazyLoadingViewController,
 
     private static final CuiLogger LOGGER = new CuiLogger(LazyLoadingViewControllerImpl.class);
 
+    private final ThreadManager threadManager;
+
     @Inject
-    ThreadManager threadManager;
+    public LazyLoadingViewControllerImpl(ThreadManager threadManager) {
+        this.threadManager = threadManager;
+    }
 
     @Override
     public void startRequest(LazyLoadingRequest<?> request) {

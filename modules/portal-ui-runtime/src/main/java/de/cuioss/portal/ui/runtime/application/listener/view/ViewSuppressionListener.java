@@ -53,16 +53,24 @@ public class ViewSuppressionListener implements ViewListener {
     @Serial
     private static final long serialVersionUID = -1757867591272259164L;
 
-    @Inject
     private ViewConfiguration viewConfiguration;
 
-    @Inject
     private Event<ExceptionAsEvent> catchEvent;
 
     @Getter
-    @Inject
-    @ConfigProperty(name = PORTAL_LISTENER_VIEW_SUPPRESSION)
     private boolean enabled;
+
+    protected ViewSuppressionListener() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public ViewSuppressionListener(ViewConfiguration viewConfiguration, Event<ExceptionAsEvent> catchEvent,
+            @ConfigProperty(name = PORTAL_LISTENER_VIEW_SUPPRESSION) boolean enabled) {
+        this.viewConfiguration = viewConfiguration;
+        this.catchEvent = catchEvent;
+        this.enabled = enabled;
+    }
 
     @Override
     public void handleView(final ViewDescriptor viewDescriptor) {

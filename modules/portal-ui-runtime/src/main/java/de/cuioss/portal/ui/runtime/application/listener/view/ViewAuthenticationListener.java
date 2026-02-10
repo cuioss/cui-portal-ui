@@ -58,19 +58,28 @@ public class ViewAuthenticationListener implements ViewListener {
 
     private static final CuiLogger LOGGER = new CuiLogger(ViewAuthenticationListener.class);
 
-    @Inject
-    ViewConfiguration viewConfiguration;
+    private ViewConfiguration viewConfiguration;
 
-    @Inject
-    Event<ExceptionAsEvent> catchEvent;
+    private Event<ExceptionAsEvent> catchEvent;
 
-    @Inject
-    AuthenticatedUserInfo userInfo;
+    private AuthenticatedUserInfo userInfo;
 
     @Getter
+    private boolean enabled;
+
+    protected ViewAuthenticationListener() {
+        // for CDI proxy
+    }
+
     @Inject
-    @ConfigProperty(name = PORTAL_LISTENER_AUTHENTICATION)
-    boolean enabled;
+    public ViewAuthenticationListener(ViewConfiguration viewConfiguration, Event<ExceptionAsEvent> catchEvent,
+            AuthenticatedUserInfo userInfo,
+            @ConfigProperty(name = PORTAL_LISTENER_AUTHENTICATION) boolean enabled) {
+        this.viewConfiguration = viewConfiguration;
+        this.catchEvent = catchEvent;
+        this.userInfo = userInfo;
+        this.enabled = enabled;
+    }
 
     @Override
     public void handleView(final ViewDescriptor viewDescriptor) {

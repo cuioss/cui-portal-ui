@@ -50,19 +50,27 @@ public class PortalResourceConfiguration implements Serializable {
     @Serial
     private static final long serialVersionUID = -4555046242472132960L;
 
-    @Inject
-    @ConfigProperty(name = RESOURCE_VERSION)
     @Getter
     private String version;
 
     @Getter
-    @Inject
-    @ConfigAsList(name = RESOURCE_HANDLED_LIBRARIES)
     private List<String> handledLibraries;
 
     @Getter
-    @Inject
-    @ConfigAsList(name = RESOURCE_HANDLED_SUFFIXES)
     private List<String> handledSuffixes;
+
+    protected PortalResourceConfiguration() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PortalResourceConfiguration(
+            @ConfigProperty(name = RESOURCE_VERSION) String version,
+            @ConfigAsList(name = RESOURCE_HANDLED_LIBRARIES) List<String> handledLibraries,
+            @ConfigAsList(name = RESOURCE_HANDLED_SUFFIXES) List<String> handledSuffixes) {
+        this.version = version;
+        this.handledLibraries = handledLibraries;
+        this.handledSuffixes = handledSuffixes;
+    }
 
 }

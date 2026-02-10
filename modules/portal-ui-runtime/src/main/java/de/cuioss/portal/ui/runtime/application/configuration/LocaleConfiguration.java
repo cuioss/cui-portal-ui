@@ -60,16 +60,24 @@ public class LocaleConfiguration implements Serializable {
 
     private static final CuiLogger LOGGER = new CuiLogger(LocaleConfiguration.class);
 
-    @Inject
-    @ConfigAsLocale(name = LOCALE_DEFAULT, defaultToSystem = false)
     private Provider<Locale> localeDefaultProvider;
 
-    @Inject
-    @ConfigAsLocaleList(name = LOCALES_AVAILABLE, defaultToSystem = false)
     private Provider<List<Locale>> localesAvailableProvider;
 
     @Getter
     private Locale defaultLocale;
+
+    protected LocaleConfiguration() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public LocaleConfiguration(
+            @ConfigAsLocale(name = LOCALE_DEFAULT, defaultToSystem = false) Provider<Locale> localeDefaultProvider,
+            @ConfigAsLocaleList(name = LOCALES_AVAILABLE, defaultToSystem = false) Provider<List<Locale>> localesAvailableProvider) {
+        this.localeDefaultProvider = localeDefaultProvider;
+        this.localesAvailableProvider = localesAvailableProvider;
+    }
 
     @Getter
     private List<Locale> availableLocales;
