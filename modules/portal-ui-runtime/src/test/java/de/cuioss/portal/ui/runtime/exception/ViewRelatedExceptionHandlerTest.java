@@ -40,11 +40,11 @@ import jakarta.faces.application.ViewExpiredException;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.lifecycle.ClientWindowScoped;
 import jakarta.inject.Inject;
-import org.junit.jupiter.api.BeforeEach;
 import lombok.Getter;
 import org.apache.myfaces.test.mock.MockHttpServletResponse;
 import org.jboss.weld.junit5.auto.ActivateScopes;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;

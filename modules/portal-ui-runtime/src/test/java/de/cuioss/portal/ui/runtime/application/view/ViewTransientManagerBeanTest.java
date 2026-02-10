@@ -22,9 +22,9 @@ import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldHandleObjectContracts;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
-import org.junit.jupiter.api.BeforeEach;
 import lombok.Getter;
 import org.jboss.weld.junit5.auto.AddBeanClasses;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static de.cuioss.portal.ui.test.configuration.PortalNavigationConfiguration.VIEW_HOME_LOGICAL_VIEW_ID;
