@@ -51,13 +51,21 @@ public class DashboardWidgetRegistration implements Serializable {
     @Getter
     private List<DashboardWidgetModel> widgets;
 
-    @Inject
-    @PortalDashboardWidget
     private Instance<DashboardWidgetModel> widgetsInstances;
 
-    @Inject
-    @ConfigAsFilteredMap(startsWith = DASHBOARD_WIDGET, stripPrefix = true)
     private Map<String, String> widgetConfig;
+
+    protected DashboardWidgetRegistration() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public DashboardWidgetRegistration(
+            @PortalDashboardWidget Instance<DashboardWidgetModel> widgetsInstances,
+            @ConfigAsFilteredMap(startsWith = DASHBOARD_WIDGET, stripPrefix = true) Map<String, String> widgetConfig) {
+        this.widgetsInstances = widgetsInstances;
+        this.widgetConfig = widgetConfig;
+    }
 
     @PostConstruct
     public void init() {

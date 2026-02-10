@@ -59,6 +59,7 @@ public class TestLoginPage extends AbstractLoginPageBean {
 
     @Override
     protected void handleLoginFailed(final IDisplayNameProvider<?> errorMessage) {
+        // No-op: test stub implementation
     }
 
     String doLogin() {

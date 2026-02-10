@@ -48,9 +48,17 @@ public class PortalPagesConfiguration implements Serializable {
 
     private static final CuiLogger LOGGER = new CuiLogger(PortalPagesConfiguration.class);
 
-    @Inject
-    @ConfigProperty(name = PAGES_LOGIN_ENTER_STRATEGY)
     private Provider<String> loginPageStrategyProvider;
+
+    protected PortalPagesConfiguration() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PortalPagesConfiguration(
+            @ConfigProperty(name = PAGES_LOGIN_ENTER_STRATEGY) Provider<String> loginPageStrategyProvider) {
+        this.loginPageStrategyProvider = loginPageStrategyProvider;
+    }
 
     @Getter
     private LoginPageStrategy loginPageStrategy;

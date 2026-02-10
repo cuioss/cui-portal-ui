@@ -57,13 +57,21 @@ public class PortalClientStorageImpl implements ClientStorage {
 
     private final Map<String, String> cache = new HashMap<>();
 
-    @Inject
-    @ConfigProperty(name = CLIENT_STORAGE_COOKIE_MAX_AGE)
     private String cookieMaxAge;
 
-    @Inject
-    @CuiContextPath
     private Provider<String> contextPathProvider;
+
+    protected PortalClientStorageImpl() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PortalClientStorageImpl(
+            @ConfigProperty(name = CLIENT_STORAGE_COOKIE_MAX_AGE) String cookieMaxAge,
+            @CuiContextPath Provider<String> contextPathProvider) {
+        this.cookieMaxAge = cookieMaxAge;
+        this.contextPathProvider = contextPathProvider;
+    }
 
     @Override
     public String get(final String key) {

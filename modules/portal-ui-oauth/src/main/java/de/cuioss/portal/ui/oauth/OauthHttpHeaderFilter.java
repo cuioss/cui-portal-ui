@@ -16,6 +16,7 @@
 package de.cuioss.portal.ui.oauth;
 
 import de.cuioss.tools.string.MoreStrings;
+
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

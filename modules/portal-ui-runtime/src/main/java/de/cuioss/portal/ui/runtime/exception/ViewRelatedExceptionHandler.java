@@ -70,29 +70,38 @@ public class ViewRelatedExceptionHandler implements PortalExceptionHandler {
     private static final String HANDLING_S_AS_S = "Handling '%s' as '%s'";
     private static final CuiLogger LOGGER = new CuiLogger(ViewRelatedExceptionHandler.class);
 
-    @Inject
-    @CuiNavigationHandler
-    NavigationHandler navigationHandler;
+    private NavigationHandler navigationHandler;
+
+    private FacesContext facesContext;
+
+    private MessageProducer messageProducer;
+
+    private AuthenticatedUserInfo authenticatedUserInfo;
+
+    private HistoryManager historyManager;
+
+    private ViewDescriptor currentView;
+
+    private ViewRestrictionManager viewRestrictionManager;
+
+    protected ViewRelatedExceptionHandler() {
+        // for CDI proxy
+    }
 
     @Inject
-    FacesContext facesContext;
-
-    @Inject
-    MessageProducer messageProducer;
-
-    @Inject
-    AuthenticatedUserInfo authenticatedUserInfo;
-
-    @Inject
-    HistoryManager historyManager;
-
-    @Inject
-    @CuiCurrentView
-    ViewDescriptor currentView;
-
-    @Inject
-    @PortalViewRestrictionManager
-    ViewRestrictionManager viewRestrictionManager;
+    public ViewRelatedExceptionHandler(@CuiNavigationHandler NavigationHandler navigationHandler,
+            FacesContext facesContext, MessageProducer messageProducer,
+            AuthenticatedUserInfo authenticatedUserInfo, HistoryManager historyManager,
+            @CuiCurrentView ViewDescriptor currentView,
+            @PortalViewRestrictionManager ViewRestrictionManager viewRestrictionManager) {
+        this.navigationHandler = navigationHandler;
+        this.facesContext = facesContext;
+        this.messageProducer = messageProducer;
+        this.authenticatedUserInfo = authenticatedUserInfo;
+        this.historyManager = historyManager;
+        this.currentView = currentView;
+        this.viewRestrictionManager = viewRestrictionManager;
+    }
 
     @Override
     public void handle(ExceptionAsEvent exceptionEvent) {

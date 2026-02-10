@@ -27,9 +27,10 @@ import de.cuioss.portal.ui.api.exception.ExceptionAsEvent;
 import de.cuioss.portal.ui.api.exception.HandleOutcome;
 import de.cuioss.portal.ui.api.exception.PortalExceptionHandler;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+
 import jakarta.faces.application.NavigationHandler;
 import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 
 import java.io.Serializable;
 
@@ -41,26 +42,40 @@ public class OauthExceptionHandler implements PortalExceptionHandler {
 
     private static final String OAUTH_ERROR_OUTCOME = "oauth-error";
 
-    @Inject
-    private MessageProducer messageProducer;
+    private final MessageProducer messageProducer;
+
+    private final ViewDescriptor currentView;
+
+    private final FacesContext facesContext;
+
+    private final NavigationHandler navigationHandler;
+
+    private final MapStorage<Serializable, Serializable> sessionStorage;
+
+    private final ResourceBundleWrapper resourceBundle;
+
+    protected OauthExceptionHandler() {
+        // for CDI proxy
+        this.messageProducer = null;
+        this.currentView = null;
+        this.facesContext = null;
+        this.navigationHandler = null;
+        this.sessionStorage = null;
+        this.resourceBundle = null;
+    }
 
     @Inject
-    @CuiCurrentView
-    private ViewDescriptor currentView;
-
-    @Inject
-    private FacesContext facesContext;
-
-    @Inject
-    @CuiNavigationHandler
-    private NavigationHandler navigationHandler;
-
-    @Inject
-    @PortalSessionStorage
-    private MapStorage<Serializable, Serializable> sessionStorage;
-
-    @Inject
-    private ResourceBundleWrapper resourceBundle;
+    public OauthExceptionHandler(MessageProducer messageProducer, @CuiCurrentView ViewDescriptor currentView,
+            FacesContext facesContext, @CuiNavigationHandler NavigationHandler navigationHandler,
+            @PortalSessionStorage MapStorage<Serializable, Serializable> sessionStorage,
+            ResourceBundleWrapper resourceBundle) {
+        this.messageProducer = messageProducer;
+        this.currentView = currentView;
+        this.facesContext = facesContext;
+        this.navigationHandler = navigationHandler;
+        this.sessionStorage = sessionStorage;
+        this.resourceBundle = resourceBundle;
+    }
 
     protected DefaultErrorMessage createErrorMessage(final String messageKey) {
         return new DefaultErrorMessage("", "", resourceBundle.getString(messageKey), currentView.getViewId());

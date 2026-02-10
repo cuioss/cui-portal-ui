@@ -24,9 +24,10 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -46,19 +47,31 @@ public class OauthIFrameLogoutPageBean implements Serializable {
     @Serial
     private static final long serialVersionUID = 7139554877749164888L;
 
-    @Inject
-    @PortalAuthenticationFacade
-    AuthenticationFacade authenticationFacade;
+    private final AuthenticationFacade authenticationFacade;
+
+    private final HttpServletRequest servletRequest;
+
+    private final AuthenticatedUserInfo authenticatedUserInfo;
+
+    private final Event<LoginEvent> preLougoutEvent;
+
+    protected OauthIFrameLogoutPageBean() {
+        // for CDI proxy
+        this.authenticationFacade = null;
+        this.servletRequest = null;
+        this.authenticatedUserInfo = null;
+        this.preLougoutEvent = null;
+    }
 
     @Inject
-    HttpServletRequest servletRequest;
-
-    @Inject
-    AuthenticatedUserInfo authenticatedUserInfo;
-
-    @Inject
-    @PortalLoginEvent
-    Event<LoginEvent> preLougoutEvent;
+    public OauthIFrameLogoutPageBean(@PortalAuthenticationFacade AuthenticationFacade authenticationFacade,
+            HttpServletRequest servletRequest, AuthenticatedUserInfo authenticatedUserInfo,
+            @PortalLoginEvent Event<LoginEvent> preLougoutEvent) {
+        this.authenticationFacade = authenticationFacade;
+        this.servletRequest = servletRequest;
+        this.authenticatedUserInfo = authenticatedUserInfo;
+        this.preLougoutEvent = preLougoutEvent;
+    }
 
     public String logoutViewAction() {
         if (authenticatedUserInfo.isAuthenticated()) {

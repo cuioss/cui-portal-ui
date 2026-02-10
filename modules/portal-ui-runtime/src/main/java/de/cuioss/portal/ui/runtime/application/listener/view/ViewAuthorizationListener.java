@@ -59,23 +59,32 @@ public class ViewAuthorizationListener implements ViewListener {
     @Serial
     private static final long serialVersionUID = 8427405526881056257L;
 
-    @Inject
-    ViewConfiguration viewConfiguration;
+    private ViewConfiguration viewConfiguration;
 
-    @Inject
-    @PortalViewRestrictionManager
-    ViewRestrictionManager viewRestrictionManager;
+    private ViewRestrictionManager viewRestrictionManager;
 
-    @Inject
-    Event<ExceptionAsEvent> catchEvent;
+    private Event<ExceptionAsEvent> catchEvent;
 
-    @Inject
-    AuthenticatedUserInfo userInfo;
+    private AuthenticatedUserInfo userInfo;
 
     @Getter
+    private boolean enabled;
+
+    protected ViewAuthorizationListener() {
+        // for CDI proxy
+    }
+
     @Inject
-    @ConfigProperty(name = PORTAL_LISTENER_AUTHORIZATION)
-    boolean enabled;
+    public ViewAuthorizationListener(ViewConfiguration viewConfiguration,
+            @PortalViewRestrictionManager ViewRestrictionManager viewRestrictionManager,
+            Event<ExceptionAsEvent> catchEvent, AuthenticatedUserInfo userInfo,
+            @ConfigProperty(name = PORTAL_LISTENER_AUTHORIZATION) boolean enabled) {
+        this.viewConfiguration = viewConfiguration;
+        this.viewRestrictionManager = viewRestrictionManager;
+        this.catchEvent = catchEvent;
+        this.userInfo = userInfo;
+        this.enabled = enabled;
+    }
 
     @Override
     public void handleView(final ViewDescriptor viewDescriptor) {

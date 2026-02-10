@@ -57,25 +57,33 @@ public class PortalCDIViewListener implements PhaseListener {
 
     private static final CuiLogger LOGGER = new CuiLogger(PortalCDIViewListener.class);
 
-    @Inject
-    @PortalRestoreViewListener(PhaseExecution.BEFORE_PHASE)
     private Instance<ViewListener> beforeListeners;
 
-    @Inject
-    @CuiCurrentView
     private Provider<ViewDescriptor> currentViewProvider;
 
     private List<ViewListener> sortedBeforeListeners;
 
-    @Inject
-    @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE)
     private Instance<ViewListener> afterListeners;
 
     private List<ViewListener> sortedAfterListeners;
 
-    @Inject
-    @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE_EXCLUDE_POSTBACK)
     private Instance<ViewListener> afterListenersNonPostback;
+
+    protected PortalCDIViewListener() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public PortalCDIViewListener(
+            @PortalRestoreViewListener(PhaseExecution.BEFORE_PHASE) Instance<ViewListener> beforeListeners,
+            @CuiCurrentView Provider<ViewDescriptor> currentViewProvider,
+            @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE) Instance<ViewListener> afterListeners,
+            @PortalRestoreViewListener(PhaseExecution.AFTER_PHASE_EXCLUDE_POSTBACK) Instance<ViewListener> afterListenersNonPostback) {
+        this.beforeListeners = beforeListeners;
+        this.currentViewProvider = currentViewProvider;
+        this.afterListeners = afterListeners;
+        this.afterListenersNonPostback = afterListenersNonPostback;
+    }
 
     private List<ViewListener> sortedAfterNonPostbackListeners;
 

@@ -18,7 +18,6 @@ package de.cuioss.portal.ui.errorpages;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.tools.logging.CuiLogger;
 import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
@@ -45,9 +44,22 @@ public abstract class AbstractHttpErrorPage implements Serializable {
     @Serial
     private static final long serialVersionUID = -6617663225820801072L;
 
-    @Inject
     @Getter(AccessLevel.PROTECTED)
-    private Provider<FacesContext> facesContextProvider;
+    private final Provider<FacesContext> facesContextProvider;
+
+    /**
+     * Constructor for CDI proxy creation.
+     */
+    protected AbstractHttpErrorPage() {
+        this.facesContextProvider = null;
+    }
+
+    /**
+     * @param facesContextProvider the provider for the current FacesContext
+     */
+    protected AbstractHttpErrorPage(Provider<FacesContext> facesContextProvider) {
+        this.facesContextProvider = facesContextProvider;
+    }
 
     @Getter
     private String requestUri;

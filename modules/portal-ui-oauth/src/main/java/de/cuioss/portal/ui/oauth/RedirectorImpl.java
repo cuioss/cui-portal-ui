@@ -18,9 +18,10 @@ package de.cuioss.portal.ui.oauth;
 import de.cuioss.jsf.api.application.navigation.NavigationUtils;
 import de.cuioss.portal.authentication.oauth.OauthRedirector;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
+
+import jakarta.faces.context.FacesContext;
 
 /**
  * Implementation of the {@link OauthRedirector} interface using
@@ -29,8 +30,17 @@ import jakarta.inject.Provider;
 @ApplicationScoped
 public class RedirectorImpl implements OauthRedirector {
 
+    private final Provider<FacesContext> facesContextProvider;
+
+    protected RedirectorImpl() {
+        // for CDI proxy
+        this.facesContextProvider = null;
+    }
+
     @Inject
-    private Provider<FacesContext> facesContextProvider;
+    public RedirectorImpl(Provider<FacesContext> facesContextProvider) {
+        this.facesContextProvider = facesContextProvider;
+    }
 
     @Override
     public void sendRedirect(String url) throws IllegalStateException {

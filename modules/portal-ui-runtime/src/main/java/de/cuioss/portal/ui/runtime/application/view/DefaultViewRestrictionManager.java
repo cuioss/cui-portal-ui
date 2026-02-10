@@ -60,14 +60,23 @@ public class DefaultViewRestrictionManager implements ViewRestrictionManager {
     @Serial
     private static final long serialVersionUID = -3987276415425723519L;
 
-    @Inject
-    @ConfigAsFilteredMap(startsWith = VIEW_ROLE_RESTRICTION_PREFIX, stripPrefix = true)
-    Provider<Map<String, String>> viewRestrictions;
-    @Inject
-    AuthenticatedUserInfo userInfo;
-    @Inject
-    Provider<FacesContext> facesContextProvider;
+    private Provider<Map<String, String>> viewRestrictions;
+    private AuthenticatedUserInfo userInfo;
+    private Provider<FacesContext> facesContextProvider;
     private Map<String, ViewMatcher> roleMatcherMap;
+
+    protected DefaultViewRestrictionManager() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public DefaultViewRestrictionManager(
+            @ConfigAsFilteredMap(startsWith = VIEW_ROLE_RESTRICTION_PREFIX, stripPrefix = true) Provider<Map<String, String>> viewRestrictions,
+            AuthenticatedUserInfo userInfo, Provider<FacesContext> facesContextProvider) {
+        this.viewRestrictions = viewRestrictions;
+        this.userInfo = userInfo;
+        this.facesContextProvider = facesContextProvider;
+    }
 
     /**
      * Initializes the configured view Matcher

@@ -49,12 +49,21 @@ public class HistoryManagerBean implements HistoryManager {
     @Serial
     private static final long serialVersionUID = 8385906931652178190L;
 
-    @Inject
-    DefaultHistoryConfiguration historyConfiguration;
-    @Inject
-    Provider<FacesContext> facesContextProvider;
+    private DefaultHistoryConfiguration historyConfiguration;
+    private Provider<FacesContext> facesContextProvider;
     @Delegate(types = HistoryManager.class)
     private HistoryManager delegate;
+
+    protected HistoryManagerBean() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public HistoryManagerBean(DefaultHistoryConfiguration historyConfiguration,
+            Provider<FacesContext> facesContextProvider) {
+        this.historyConfiguration = historyConfiguration;
+        this.facesContextProvider = facesContextProvider;
+    }
 
     /**
      * Initializes the bean. See class documentation for expected result.

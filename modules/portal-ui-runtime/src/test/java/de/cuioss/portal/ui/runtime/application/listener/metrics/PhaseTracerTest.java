@@ -72,6 +72,7 @@ class PhaseTracerTest extends ValueObjectTest<PhaseTracer> {
     }
 
     @Test
+    @SuppressWarnings("java:S2925")
     void shouldAugmentToTimerList() throws Exception {
         var phase = PhaseId.PROCESS_VALIDATIONS;
         var outputPrefix = phase.getOrdinal() + "-" + phase.getName() + ": ";

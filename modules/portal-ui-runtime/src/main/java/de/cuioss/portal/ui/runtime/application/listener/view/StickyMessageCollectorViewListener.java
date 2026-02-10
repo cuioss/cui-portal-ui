@@ -56,16 +56,25 @@ public class StickyMessageCollectorViewListener implements ViewListener {
     @Serial
     private static final long serialVersionUID = 1106398052992964929L;
 
-    @Inject
     private Instance<StickyMessageProvider> providers;
 
-    @Inject
     private StickyMessageProducer stickyMessageProducer;
 
     @Getter
-    @Inject
-    @ConfigProperty(name = PORTAL_LISTENER_STICKY_MESSAGES)
     private boolean enabled;
+
+    protected StickyMessageCollectorViewListener() {
+        // for CDI proxy
+    }
+
+    @Inject
+    public StickyMessageCollectorViewListener(Instance<StickyMessageProvider> providers,
+            StickyMessageProducer stickyMessageProducer,
+            @ConfigProperty(name = PORTAL_LISTENER_STICKY_MESSAGES) boolean enabled) {
+        this.providers = providers;
+        this.stickyMessageProducer = stickyMessageProducer;
+        this.enabled = enabled;
+    }
 
     @Override
     public void handleView(final ViewDescriptor viewDescriptor) {
