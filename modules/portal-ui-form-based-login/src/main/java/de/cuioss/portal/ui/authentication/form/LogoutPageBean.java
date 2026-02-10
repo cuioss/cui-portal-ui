@@ -48,19 +48,27 @@ public class LogoutPageBean implements LogoutPage {
     @Serial
     private static final long serialVersionUID = -3588577094632702649L;
 
-    @Inject
-    @PortalAuthenticationFacade
-    AuthenticationFacade authenticationFacade;
+    private AuthenticationFacade authenticationFacade;
+
+    private FacesContext facesContext;
+
+    private Event<LoginEvent> preLogoutEvent;
+
+    private AuthenticatedUserInfo authenticatedUserInfo;
+
+    protected LogoutPageBean() {
+        // for CDI proxy
+    }
 
     @Inject
-    FacesContext facesContext;
-
-    @Inject
-    @PortalLoginEvent
-    Event<LoginEvent> preLogoutEvent;
-
-    @Inject
-    AuthenticatedUserInfo authenticatedUserInfo;
+    public LogoutPageBean(@PortalAuthenticationFacade AuthenticationFacade authenticationFacade,
+            FacesContext facesContext, @PortalLoginEvent Event<LoginEvent> preLogoutEvent,
+            AuthenticatedUserInfo authenticatedUserInfo) {
+        this.authenticationFacade = authenticationFacade;
+        this.facesContext = facesContext;
+        this.preLogoutEvent = preLogoutEvent;
+        this.authenticatedUserInfo = authenticatedUserInfo;
+    }
 
     /**
      * Logs out and redirects to login page.
