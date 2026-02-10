@@ -17,7 +17,6 @@ package de.cuioss.portal.ui.oauth;
 
 import de.cuioss.tools.logging.CuiLogger;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serial;
 
@@ -32,8 +31,7 @@ public class MissingScopesException extends RuntimeException {
     private static final CuiLogger LOGGER = new CuiLogger(MissingScopesException.class);
 
     @Getter
-    @Setter
-    private String missingScopes;
+    private final String missingScopes;
 
     public MissingScopesException(String missingScopes) {
         this.missingScopes = missingScopes;

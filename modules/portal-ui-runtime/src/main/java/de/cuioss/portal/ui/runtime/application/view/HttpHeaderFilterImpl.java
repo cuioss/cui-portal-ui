@@ -88,7 +88,7 @@ public class HttpHeaderFilterImpl {
             return;
         }
         final var headerConfigurationMap = headerMapProvider.get();
-        final Map<String, HttpHeader> headerMap = new HashMap<>(0);
+        final Map<String, HttpHeader> headerMap = HashMap.newHashMap(0);
         for (final Entry<String, String> entry : headerConfigurationMap.entrySet()) {
             final var split = Splitter.on('.').splitToList(entry.getKey());
             if (split.size() != 2) {
