@@ -22,7 +22,6 @@ import de.cuioss.tools.logging.CuiLogger;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
-
 import jakarta.faces.context.FacesContext;
 
 @RequestScoped

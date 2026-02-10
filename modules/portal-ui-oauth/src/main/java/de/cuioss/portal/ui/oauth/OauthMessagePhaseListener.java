@@ -18,13 +18,12 @@ package de.cuioss.portal.ui.oauth;
 import de.cuioss.jsf.api.common.util.CheckContextState;
 import de.cuioss.jsf.api.servlet.ServletAdapterUtil;
 import de.cuioss.tools.logging.CuiLogger;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.event.PhaseEvent;
 import jakarta.faces.event.PhaseId;
 import jakarta.faces.event.PhaseListener;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.util.List;

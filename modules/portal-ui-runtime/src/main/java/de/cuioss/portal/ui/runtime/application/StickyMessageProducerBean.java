@@ -52,8 +52,19 @@ public class StickyMessageProducerBean implements Serializable, StickyMessagePro
 
     private final Set<StickyMessage> messageSet = new HashSet<>();
 
+    private final ResourceBundleWrapper resourceBundle;
+
+    /**
+     * CDI proxy constructor.
+     */
+    protected StickyMessageProducerBean() {
+        this.resourceBundle = null;
+    }
+
     @Inject
-    private ResourceBundleWrapper resourceBundle;
+    public StickyMessageProducerBean(ResourceBundleWrapper resourceBundle) {
+        this.resourceBundle = resourceBundle;
+    }
 
     /**
      * @return the sticky messages as list.

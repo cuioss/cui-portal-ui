@@ -20,9 +20,6 @@ import de.cuioss.test.jsf.mocks.CuiMockHttpServletRequest;
 import de.cuioss.test.valueobjects.junit5.contracts.ShouldBeNotNull;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import org.apache.myfaces.test.mock.MockExternalContext;
 import org.easymock.EasyMock;
@@ -30,6 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ACCESS_CONTROL_ALLOW_ORIGIN;
 import static de.cuioss.portal.ui.oauth.OauthHttpHeaderFilter.ORIGIN;
