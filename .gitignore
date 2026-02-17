@@ -10,3 +10,4 @@
 .DS_Store
 .asciidoctorconfig.adoc
 /.vscode/*
+**.factorypath

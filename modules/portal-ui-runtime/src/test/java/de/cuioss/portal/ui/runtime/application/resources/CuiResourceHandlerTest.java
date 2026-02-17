@@ -19,7 +19,6 @@ import de.cuioss.portal.configuration.PortalConfigurationKeys;
 import de.cuioss.portal.core.test.junit5.EnablePortalConfiguration;
 import de.cuioss.portal.core.test.mocks.configuration.PortalTestConfiguration;
 import de.cuioss.portal.ui.test.junit5.EnablePortalUiEnvironment;
-import de.cuioss.test.generator.internal.net.java.quickcheck.generator.support.IntegerGenerator;
 import de.cuioss.test.jsf.mocks.CuiMockResource;
 import de.cuioss.test.jsf.mocks.CuiMockResourceHandler;
 import de.cuioss.tools.string.MoreStrings;
@@ -32,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static de.cuioss.portal.configuration.PortalConfigurationKeys.RESOURCE_VERSION;
+import static de.cuioss.test.generator.Generators.integers;
 import static org.junit.jupiter.api.Assertions.*;
 
 @EnablePortalUiEnvironment
@@ -108,7 +108,7 @@ class CuiResourceHandlerTest {
 
     @Test
     void shouldUpdateVersionInformation() {
-        var version = new IntegerGenerator(1, 100).next().toString();
+        var version = String.valueOf(integers().next());
         configuration.update(PortalConfigurationKeys.RESOURCE_VERSION, version);
         var expectedVersionInfo = "&v=" + version;
         var resource = underTest.createResource(STYLE_CSS, CSS_LIBRARY);
