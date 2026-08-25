@@ -85,6 +85,18 @@
             <groupId>jakarta.websocket</groupId>
             <artifactId>jakarta.websocket-api</artifactId>
         </dependency>
+        <!-- Since Jakarta WebSocket 2.1 the API is split: jakarta.websocket-api
+             carries only jakarta.websocket.server.*, while CloseReason, Session,
+             Endpoint et al. live in jakarta.websocket-client-api. websocket-api
+             declares that half with scope "provided", and Maven does not resolve
+             provided-scope dependencies transitively, so it must be declared
+             explicitly - OmniFaces' SocketSessionManager references CloseReason. -->
+        <dependency>
+            <groupId>jakarta.websocket</groupId>
+            <artifactId>jakarta.websocket-client-api</artifactId>
+            <version>${version.jakarta.websocket-api}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
